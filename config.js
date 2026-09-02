@@ -107,7 +107,7 @@ const config = {
     antimedia: "⚠ *AntiMedia* — Archivo de @%user% borrado.",
     antibot: "🤖 *AntiBot* — @%user% detectado como bot y expulsado.",
     notAdmin: "⚠ No soy admin, no puedo borrar mensajes.",
-},,
+},
 
   errorTemplate: `☢ Parece que el comando {prefix}{command} está teniendo un problema\nIntenta de nuevo más tarde, {pushName}\n\n_Si el problema continúa, contacta al owner del bot_`,
   features: {
