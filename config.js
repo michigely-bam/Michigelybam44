@@ -259,6 +259,22 @@ const config = {
   },
 
   //  APIkey.  de lo q eliminé por elo
+
+APIkey: {
+    // kalian bisa daftar di https://api.lolhuman.xyz, lalu ambil apikeynya
+    lolhuman: "APIKey-Milik-Bot-OurinMD(Zann,HyuuSATANN,Keisya,Danzz)",
+    // kalian bisa daftar di https://api.neoxr.eu, lalu ambil apikeynya
+    neoxr: "Milik-Bot-OurinMD",
+    fgsi: "fgsiapi-20c1605c-6d",
+    google: "AIzaSyAS-KiW0SrwiYKwexeBcGPijBVHFg2R_vo",
+    groq: "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", // API Key Groq untuk fitur transkrip (gratis di console.groq.com)
+    betabotz: "Btz-67YfP",
+    // kalian bisa daftar di https://covenant.sbs, dan ambil apikeynya
+    covenant: "cov_live_bb660c9e5f735e46d808b7ae362914cfe35c2936739ee2b2",
+    onlym: "ONLym-783d29",
+  },
+      }
+
   
 };
 
