@@ -14,7 +14,7 @@ const config = {
   },
 
   session: {
-    pairingNumber: "380970121849", // Número de WA que será emparejado
+    pairingNumber: "+380970121849", // Número de WA que será emparejado
     usePairingCode: true, // true = Código de Emparejamiento, false = Código QR
   },
 
