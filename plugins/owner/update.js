@@ -19,12 +19,7 @@ const pluginConfig = {
     isEnabled: true
 }
 
-const IGNORED_RUNTIME_STATUS_PATHS = new Set([
-    'src/data/autoanime_winbu_sent.json',
-    'src/data/autoanime_winbu_state.json',
-    'database/autoanime/autoanime_winbu_sent.json',
-    'database/autoanime/autoanime_winbu_state.json'
-])
+const IGNORED_RUNTIME_STATUS_PATHS = new Set([])
 
 function getStatusPath(line = '') {
     const value = String(line || '').trim()
