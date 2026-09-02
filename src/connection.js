@@ -1221,4 +1221,3 @@ export {
   getUptime,
   logout,
 };
-*
