@@ -19,6 +19,11 @@ const pluginConfig = {
     isEnabled: true
 }
 
+
+const IGNORED_RUNTIME_STATUS_PATHS = new Set([//utilizar esta función si tiene algo para q ignero oara hacer update
+])
+
+
 function getStatusPath(line = '') {
     const value = String(line || '').trim()
     if (!value) return ''
