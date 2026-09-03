@@ -293,7 +293,7 @@ const usePairingCode = config.session?.usePairingCode === true;
 const pairingNumber = config.session?.pairingNumber || "";
 
 const sock = makeWASocket({
-version: [2, 3000, 1033105955],
+version: version,
 logger,
 printQRInTerminal:
 !usePairingCode && (config.session?.printQRInTerminal ?? true),
