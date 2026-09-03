@@ -284,7 +284,7 @@ async function startConnection(options = {}) {
   connectionState.sock = sock;
   extendSocket(sock);
 
-  if (usePairingCode && !sock.authState.creds.registered) {
+  if (usePairingCode && !state.creds.registered) {
     let phoneNumber = pairingNumber;
 
     if (!phoneNumber || phoneNumber === "") {
