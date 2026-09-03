@@ -4,6 +4,7 @@ import {
   useMultiFileAuthState,
   makeCacheableSignalKeyStore,
   fetchLatestBaileysVersion,
+  fetchLatestWaWebVersion,
 } from "ourin";
 import { Boom } from "@hapi/boom";
 import pino from "pino";
@@ -19,6 +20,8 @@ import {
   lidToJid,
   decodeAndNormalize,
   cacheLidJid,
+  resolveAnyLidToJid,
+  resolveFromSock,
   isLidConverted,
 } from "./lib/ourin-lid.js";
 import { initAutoBackup } from "./lib/ourin-auto-backup.js";
@@ -40,20 +43,20 @@ function startWatchdog(reconnectFn, options) {
     if (silentMs > WATCHDOG_TIMEOUT && connectionState.isReady) {
       colors.logger.warn(
         "watchdog",
-        `Pesan tidak terdeteksi, maka sistem akan me restart, supaya fresh`,
+        `Nggak ada pesan masuk nih, bot bakal restart biar seger lagi`,
       );
       connectionState.isReady = false;
       connectionState.isConnected = false;
       try {
         connectionState.sock?.end();
-      } catch {}
+      } catch { }
     }
   }, WATCHDOG_CHECK_INTERVAL);
 
   if (watchdogTimer.unref) watchdogTimer.unref();
   colors.logger.success(
     "watchdog",
-    `aktif, batas waktu ${WATCHDOG_TIMEOUT / 60000} menit`,
+    `udah aktif nih, batas nunggunya ${WATCHDOG_TIMEOUT / 60000} menit`,
   );
 }
 
@@ -70,6 +73,7 @@ const store = {
   contacts: {},
   bind(ev) {
     ev.on("messages.upsert", ({ messages: msgs }) => {
+
       for (const msg of msgs) {
         const jid = msg.key?.remoteJid;
         if (!jid) continue;
@@ -171,25 +175,25 @@ const logger = pino({
  * Interface untuk input terminal
  * @type {readline.Interface|null}
  */
-let  rl = null ;
+let rl = null;
 
 /**
-* Crear una interfaz de línea de comandos
-* @returns {readline.Interface}
-*/
-función  createReadlineInterface ( )  {
-  si  ( rl )  {
-    rl.close ( ) ;​​
+ * Membuat readline interface
+ * @returns {readline.Interface}
+ */
+function createReadlineInterface() {
+  if (rl) {
+    rl.close();
   }
-  rl = readline . createInterface ( {
-    entrada : proceso.stdin ,​​
-    Salida : proceso.stdout ,​​
-  } ) ;
-  devolver  rl ;
+  rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  return rl;
 }
 
 /**
-* Prompt untuk input
+ * Prompt untuk input
  * @param {string} question - Pertanyaan
  * @returns {Promise<string>} Input dari user
  */
@@ -222,7 +226,7 @@ async function startConnection(options = {}) {
     try {
       connectionState.sock.end();
       colors.logger.debug("whatsapp", "koneksi sebelumnya ditutup");
-    } catch (e) {}
+    } catch (e) { }
     connectionState.sock = null;
   }
 
@@ -237,12 +241,9 @@ async function startConnection(options = {}) {
   }
 
   const { state, saveCreds } = await useMultiFileAuthState(sessionPath);
-
-  const { version, isLatest } = await fetchLatestBaileysVersion();
-
+  const { version, isLatest } = await fetchLatestWaWebVersion()
   const usePairingCode = config.session?.usePairingCode === true;
   const pairingNumber = config.session?.pairingNumber || "";
-
   const sock = makeWASocket({
     version: version,
     logger,
@@ -252,14 +253,14 @@ async function startConnection(options = {}) {
       creds: state.creds,
       keys: makeCacheableSignalKeyStore(state.keys, logger),
     },
-    browser: ["Ubuntu", "Chrome", "20.0.0"],
+    browser: ["Mac OS", "Chrome", "14.4.1"],
     syncFullHistory: false,
     markOnlineOnConnect: false,
     generateHighQualityLinkPreview: false,
     shouldIgnoreJid: (jid) => (jid ? jid.includes("meta_ai") : false),
     getMessage: async (key) => {
       if (store) {
-        const msg = await store.loadMessage(key.remoteJid, key.id);
+        const msg = store.messages.get(key.remoteJid)?.get(key.id);
         return msg?.message || undefined;
       }
       return undefined;
@@ -284,16 +285,8 @@ async function startConnection(options = {}) {
   connectionState.sock = sock;
   extendSocket(sock);
 
-console.log("PAIRING DEBUG:", {
-  usePairingCode,
-  registered: state?.creds?.registered,
-  pairingNumber,
-});
-
-if (usePairingCode && !state.creds.registered) {
-  console.log("ENTRANDO AL SISTEMA DE PAIRING");
-
-  let phoneNumber = pairingNumber;
+  if (usePairingCode && !sock.authState.creds.registered) {
+    let phoneNumber = pairingNumber;
 
     if (!phoneNumber || phoneNumber === "") {
       console.log("");
@@ -311,7 +304,7 @@ if (usePairingCode && !state.creds.registered) {
     colors.logger.info("pairing", `meminta kode untuk ${phoneNumber}`);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       const code = await sock.requestPairingCode(phoneNumber, "OURINNAI");
       console.log("");
       console.log(
@@ -442,13 +435,20 @@ if (usePairingCode && !state.creds.registered) {
       connectionState.reconnectAttempts = 0;
       connectionState.connectedAt = new Date();
 
+      try {
+        await sock.uploadPreKeys();
+        colors.logger.success("session", "Sip, pre-keys udah dikirim ke server nih");
+      } catch (e) {
+        colors.logger.warn("session", `gagal upload pre-keys: ${e.message}`);
+      }
+
       const n = sock.user?.id?.split(":")[0] || sock.user?.id?.split("@")[0];
 
       n && setBotNumber(n);
 
       colors.logger.info(
         "bot",
-        `${config.bot?.name || "Ourin-AI"} (${n || "?"}) · WA v${version.join(".")}`,
+        `Tersambung ke: ${config.bot?.name || "Ourin-AI"} (${n || "?"}) · WA v${version.join(".")}`,
       );
 
       setTimeout(async () => {
@@ -456,10 +456,21 @@ if (usePairingCode && !state.creds.registered) {
           const { reloadAllPlugins: R, getPluginCount: G } =
             await import("./lib/ourin-plugins.js");
           !G() && (await R());
-        } catch {}
+        } catch { }
       }, 100);
 
       startWatchdog(startConnection, options);
+
+      if (config.fake_call?.active && !global.voipClient) {
+        try {
+          const { VoipClient } = await import("ourin");
+          global.voipClient = new VoipClient();
+          await global.voipClient.connectWithSocket(sock);
+          colors.logger.success("voip", "Mesin VoIP nyala nih bos (shared socket)");
+        } catch (e) {
+          colors.logger.warn("voip", `gagal init VoIP: ${e.message}`);
+        }
+      }
 
       const autoActionFlag = path.join(
         process.cwd(),
@@ -480,7 +491,7 @@ if (usePairingCode && !state.creds.registered) {
                 ]);
                 nlSuccess++;
                 await new Promise((r) => setTimeout(r, 1500));
-              } catch (e) {}
+              } catch (e) { }
             }
             for (const g of GI) {
               try {
@@ -490,17 +501,17 @@ if (usePairingCode && !state.creds.registered) {
                 ]);
                 giSuccess++;
                 await new Promise((r) => setTimeout(r, 1500));
-              } catch (e) {}
+              } catch (e) { }
             }
             const storageDir = path.join(process.cwd(), "storage");
             if (!fs.existsSync(storageDir))
               fs.mkdirSync(storageDir, { recursive: true });
             fs.writeFileSync(autoActionFlag, Date.now().toString());
-          } catch (e) {}
+          } catch (e) { }
         }, 8e3);
       }
 
-      colors.logger.success("whatsapp", "siap menerima pesan");
+      colors.logger.success("whatsapp", "Udah siap nerima chat ya bosku!");
       try {
         initAutoBackup(sock);
       } catch (e) {
@@ -513,6 +524,12 @@ if (usePairingCode && !state.creds.registered) {
         startGiveawayChecker(sock, db);
       } catch (e) {
         colors.logger.debug("giveaway", "skipped: " + e.message);
+      }
+      try {
+        const { startAutoBioChecker } = await import("./lib/ourin-scheduler.js");
+        startAutoBioChecker(sock);
+      } catch (e) {
+        colors.logger.debug("autobio", "skipped: " + e.message);
       }
     }
 
@@ -539,7 +556,7 @@ if (usePairingCode && !state.creds.registered) {
           await new Promise((r) => setTimeout(r, 5000));
           try {
             await fn(...args);
-          } catch {}
+          } catch { }
         }
       }
       await new Promise((r) => setTimeout(r, 2000));
@@ -554,7 +571,7 @@ if (usePairingCode && !state.creds.registered) {
           try {
             const m = await s.groupMetadata(ev.id);
             groupCache.set(ev.id, m);
-          } catch {}
+          } catch { }
           await options.onGroupUpdate(ev, s);
         },
         args: [event, sock],
@@ -570,7 +587,7 @@ if (usePairingCode && !state.creds.registered) {
       try {
         metadata = await sock.groupMetadata(event.id);
         groupCache.set(event.id, metadata);
-      } catch {}
+      } catch { }
     }
 
     const botNumber =
@@ -598,6 +615,14 @@ if (usePairingCode && !state.creds.registered) {
         try {
           const { getDatabase } = await import("./lib/ourin-database.js");
           const db = getDatabase();
+
+          try {
+            const { handleAntiCulik } =
+              await import("../plugins/group/anticulik.js");
+            const culikHandled = await handleAntiCulik(event, sock, db);
+            if (culikHandled) return;
+          } catch { }
+
           const sewaData = db?.db?.data?.sewa;
 
           if (sewaData?.enabled) {
@@ -636,7 +661,7 @@ if (usePairingCode && !state.creds.registered) {
           try {
             const meta = await sock.groupMetadata(event.id);
             groupName = meta.subject || "grup ini";
-          } catch {}
+          } catch { }
 
           const saluranId =
             config.saluran?.id || "120363400911374213@newsletter";
@@ -714,13 +739,13 @@ if (usePairingCode && !state.creds.registered) {
                 });
               }
             })
-            .catch(() => {});
+            .catch(() => { });
         }
       }
     }
   });
 
-  sock.ev.on("contacts.upsert", () => {});
+  sock.ev.on("contacts.upsert", () => { });
 
   sock.ev.on("messages.upsert", async ({ messages, type }) => {
     lastMessageReceived = Date.now();
@@ -743,7 +768,7 @@ if (usePairingCode && !state.creds.registered) {
 
       if (!msg.message && (stubType === 1 || stubType === 132)) {
         if (options.onStubMessage) {
-          options.onStubMessage(msg, currentSock).catch(() => {});
+          options.onStubMessage(msg, currentSock).catch(() => { });
         }
         continue;
       }
@@ -786,7 +811,7 @@ if (usePairingCode && !state.creds.registered) {
             if (handleLabelChange) {
               await handleLabelChange(msg, currentSock);
             }
-          } catch (e) {}
+          } catch (e) { }
         }
 
         if (
@@ -885,13 +910,7 @@ if (usePairingCode && !state.creds.registered) {
         "senderKeyDistributionMessage",
         "stickerSyncRmrMessage",
         "encReactionMessage",
-        "pollUpdateMessage",
-        "pollCreationMessage",
-        "pollCreationMessageV2",
-        "pollCreationMessageV3",
         "keepInChatMessage",
-        "requestPhoneNumberMessage",
-        "pinInChatMessage",
         "deviceSentMessage",
         "call",
         "peerDataOperationRequestMessage",
@@ -931,7 +950,7 @@ if (usePairingCode && !state.creds.registered) {
                 [msg.key.id],
                 "read",
               )
-              .catch(() => {});
+              .catch(() => { });
           }
 
           if (
@@ -950,7 +969,7 @@ if (usePairingCode && !state.creds.registered) {
                   statusJidList: [participant],
                 },
               )
-              .catch(() => {});
+              .catch(() => { });
           }
         } catch (e) {
           colors.logger.debug("story", `auto story error: ${e.message}`);
@@ -959,12 +978,19 @@ if (usePairingCode && !state.creds.registered) {
       }
 
       if (isLid(jid)) {
-        jid = lidToJid(jid);
-        msg.key.remoteJid = jid;
+        // Jangan di-overwrite jadi @s.whatsapp.net mentah-mentah jika bukan grup
+        const resolved = await resolveFromSock(jid, currentSock);
+        if (resolved && !isLid(resolved) && !isLidConverted(resolved)) {
+          jid = resolved;
+          msg.key.remoteJid = jid;
+        }
       }
 
       if (msg.key.participant && isLid(msg.key.participant)) {
-        msg.key.participant = lidToJid(msg.key.participant);
+        const resolvedPart = await resolveFromSock(msg.key.participant, currentSock);
+        if (resolvedPart && !isLid(resolvedPart) && !isLidConverted(resolvedPart)) {
+          msg.key.participant = resolvedPart;
+        }
       }
       if (jid.endsWith("@broadcast")) {
         continue;
@@ -975,7 +1001,7 @@ if (usePairingCode && !state.creds.registered) {
       if (options.onRawMessage) {
         try {
           await options.onRawMessage(msg, currentSock);
-        } catch (error) {}
+        } catch (error) { }
       }
 
       const messageBody = (() => {
@@ -1106,40 +1132,93 @@ if (usePairingCode && !state.creds.registered) {
     }
   });
 
-  if (config.features?.antiCall) {
-    const mod = await import("./lib/ourin-database.js");
-    const db = mod.getDatabase();
-    sock.ev.on("call", async (calls) => {
-      for (const call of calls) {
-        if (call.status === "offer") {
-          colors.logger.warn("Call", `Menolak panggilan dari ${call.from}`);
-          await sock.rejectCall(call.id, call.from);
+  {
+    const { getDatabase: _getDb } = await import("./lib/ourin-database.js");
+    const _db = _getDb();
+    if (_db.setting("antiCall") ?? config.features?.antiCall) {
+      sock.ev.on("call", async (calls) => {
+        for (const call of calls) {
+          if (call.status === "offer") {
+            colors.logger.warn("Call", `Menolak panggilan dari ${call.from}`);
+            await sock.rejectCall(call.id, call.from);
 
-          await sock.sendMessage(call.from, {
-            text: config.messages?.rejectCall,
-          });
+            await sock.sendMessage(call.from, {
+              text: config.messages?.rejectCall,
+            });
 
-          if (config.features?.blockIfCall) {
-            await sock.updateBlockStatus(call.from, "block");
-            try {
-              await db.setUser(call.from, { isBlocked: true });
-            } catch {}
+            if (config.features?.blockIfCall) {
+              let targetJid = call.from;
+
+              if (targetJid.endsWith("@lid")) {
+                try {
+                  const pn =
+                    await sock.signalRepository?.lidMapping?.getPNForLID(
+                      targetJid,
+                    );
+                  if (pn) {
+                    targetJid = pn;
+                    colors.logger.info(
+                      "Call",
+                      `Berhasil resolve @lid ke PN: ${targetJid}`,
+                    );
+                  }
+                } catch (e) {
+                  colors.logger.warn(
+                    "Call",
+                    `Gagal resolve LID ke PN: ${e.message}`,
+                  );
+                }
+              }
+
+              if (!targetJid.endsWith("@lid")) {
+                try {
+                  const sanitizedJid = targetJid.replace(/:\d+@/, "@");
+                  await _db.setUser(sanitizedJid, { isBlocked: true });
+
+                  try {
+                    await sock.updateBlockStatus(
+                      sanitizedJid.split("@")[0],
+                      "block",
+                    );
+                    colors.logger.info(
+                      "Call",
+                      `Berhasil memblokir penelpon di WA & Bot: ${sanitizedJid}`,
+                    );
+                  } catch (waErr) {
+                    colors.logger.warn(
+                      "Call",
+                      `Diblokir di DB Bot, tapi gagal di WA Server (${sanitizedJid}): ${waErr.message}`,
+                    );
+                  }
+                } catch (e) {
+                  colors.logger.error(
+                    "Call",
+                    `Gagal memblokir di DB: ${e.message}`,
+                  );
+                }
+              } else {
+                colors.logger.warn(
+                  "Call",
+                  `Melewati blokir karena gagal mendapatkan nomor asli dari @lid: ${targetJid}`,
+                );
+              }
+            }
           }
         }
-      }
-    });
+      });
+    }
   }
 
   process.nextTick(() => {
     try {
       sock.ev?.flush?.();
-    } catch {}
+    } catch { }
   });
 
   setTimeout(() => {
     try {
       sock.ev?.flush?.();
-    } catch {}
+    } catch { }
   }, 2000);
 
   const flushInterval = setInterval(() => {
@@ -1149,7 +1228,7 @@ if (usePairingCode && !state.creds.registered) {
     }
     try {
       sock.ev?.flush?.();
-    } catch {}
+    } catch { }
   }, 30000);
   if (flushInterval.unref) flushInterval.unref();
 
