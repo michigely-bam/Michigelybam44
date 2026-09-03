@@ -171,25 +171,25 @@ const logger = pino({
  * Interface untuk input terminal
  * @type {readline.Interface|null}
  */
-let rl = null;
+let  rl = null ;
 
 /**
- * Membuat readline interface
- * @returns {readline.Interface}
- */
-function createReadlineInterface() {
-  if (rl) {
-    rl.close();
+* Crear una interfaz de línea de comandos
+* @returns {readline.Interface}
+*/
+función  createReadlineInterface ( )  {
+  si  ( rl )  {
+    rl.close ( ) ;​​
   }
-  rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-  return rl;
+  rl = readline . createInterface ( {
+    entrada : proceso.stdin ,​​
+    Salida : proceso.stdout ,​​
+  } ) ;
+  devolver  rl ;
 }
 
 /**
- * Prompt untuk input
+* Prompt untuk input
  * @param {string} question - Pertanyaan
  * @returns {Promise<string>} Input dari user
  */
@@ -284,8 +284,16 @@ async function startConnection(options = {}) {
   connectionState.sock = sock;
   extendSocket(sock);
 
-  if (usePairingCode && !state.creds.registered) {
-    let phoneNumber = pairingNumber;
+console.log("PAIRING DEBUG:", {
+  usePairingCode,
+  registered: state?.creds?.registered,
+  pairingNumber,
+});
+
+if (usePairingCode && !state.creds.registered) {
+  console.log("ENTRANDO AL SISTEMA DE PAIRING");
+
+  let phoneNumber = pairingNumber;
 
     if (!phoneNumber || phoneNumber === "") {
       console.log("");
