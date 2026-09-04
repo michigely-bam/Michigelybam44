@@ -239,102 +239,106 @@ async function buildMenuText(
 const uptimeFormatted = formatUptime(uptime);
 const totalUsers = db.getUserCount();
 
-let txt = "Hola *@${m.pushName || "Usuario"}* 🪸 Soy ${botConfig.bot?.name || "Ourin-AI"}, un bot de WhatsApp listo para ayudarte. Puedes usarme para buscar información, obtener datos o ayudarte con tareas sencillas directamente desde WhatsApp — práctico y sin complicaciones.";
+let txt = `Hola *@${m.pushName || "Usuario"}* 🪸
+Soy ${botConfig.bot?.name || "Ourin-AI"}, un bot de WhatsApp listo para ayudarte.
+Puedes usarme para buscar información, obtener datos o ayudarte con tareas sencillas directamente desde WhatsApp — práctico y sin complicaciones.`;
 
 const botInfoLines = [
-"🖐 ɴᴏᴍʙʀᴇ     : ${botConfig.bot?.name || "Ourin-AI"}",
-"🔑 ᴠᴇʀsɪᴏ́ɴ    : v${botConfig.bot?.version || "1.2.0"}",
-"⚙️ ᴍᴏᴅᴏ       : ${(botConfig.mode || "public").toUpperCase()}",
-"🧶 ᴘʀᴇꜰɪᴊᴏ     : [ ${prefix} ]",
-"⏱ ᴛɪᴇᴍᴘᴏ ᴀᴄᴛɪᴠᴏ : ${uptimeFormatted}",
-"👥 ᴛᴏᴛᴀʟ      : ${totalUsers} Usuarios",
-"🏷 ɢʀᴜᴘᴏ      : ${botMode.toUpperCase()}",
-"👑 ᴘʀᴏᴘɪᴇᴛᴀʀɪᴏ : ${botConfig.owner?.name || "Ourin-AI"}",
+  `🖐 ɴᴏᴍʙʀᴇ     : ${botConfig.bot?.name || "Ourin-AI"}`,
+  `🔑 ᴠᴇʀsɪᴏ́ɴ    : v${botConfig.bot?.version || "1.2.0"}`,
+  `⚙️ ᴍᴏᴅᴏ       : ${(botConfig.mode || "public").toUpperCase()}`,
+  `🧶 ᴘʀᴇꜰɪᴊᴏ     : [ ${prefix} ]`,
+  `⏱ ᴛɪᴇᴍᴘᴏ     : ${uptimeFormatted}`,
+  `👥 ᴛᴏᴛᴀʟ      : ${totalUsers} Usuarios`,
+  `🏷 ɢʀᴜᴘᴏ      : ${botMode.toUpperCase()}`,
+  `👑 ᴅᴜᴇɴ̃ᴏ      : ${botConfig.owner?.name || "Ourin-AI"}`,
 ];
 
 const userInfoLines = [
-"🙋 ɴᴏᴍʙʀᴇ     : ${m.pushName}",
-"🎭 ʀᴏʟ         : ${roleEmoji} ${userRole}",
-"🎟 ᴇɴᴇʀɢɪ́ᴀ    : ${m.isOwner || m.isPremium ? "∞ Ilimitada" : (user?.energi ?? 25)}",
-"⚡ ɴɪᴠᴇʟ       : ${Math.floor((user?.exp || 0) / 20000) + 1}",
-"✨ ᴇxᴘ         : ${(user?.exp ?? 0).toLocaleString()}",
-"💰 ᴍᴏɴᴇᴅᴀs     : ${(user?.koin ?? 0).toLocaleString()}",
+  `🙋 ɴᴏᴍʙʀᴇ     : ${m.pushName}`,
+  `🎭 ʀᴏʟ         : ${roleEmoji} ${userRole}`,
+  `🎟 ᴇɴᴇʀɢɪ́ᴀ    : ${m.isOwner || m.isPremium ? "∞ Ilimitada" : (user?.energi ?? 25)}`,
+  `⚡ ɴɪᴠᴇʟ       : ${Math.floor((user?.exp || 0) / 20000) + 1}`,
+  `✨ ᴇxᴘ         : ${(user?.exp ?? 0).toLocaleString()}`,
+  `💰 ᴍᴏɴᴇᴅᴀs     : ${(user?.koin ?? 0).toLocaleString()}`,
 ];
 
 const rpg = user?.rpg || {};
 
 if (rpg.health !== undefined) {
-userInfoLines.push(
-"❤️ ᴠɪᴅᴀ        : ${rpg.health}/${rpg.maxHealth || rpg.health}",
-);
+  userInfoLines.push(
+    `❤️ ᴠɪᴅᴀ        : ${rpg.health}/${rpg.maxHealth || rpg.health}`,
+  );
 
-userInfoLines.push(
-"🔮 ᴍᴀɴᴀ        : ${rpg.mana}/${rpg.maxMana || rpg.mana}",
-);
+  userInfoLines.push(
+    `🔮 ᴍᴀɴᴀ        : ${rpg.mana}/${rpg.maxMana || rpg.mana}`,
+  );
 
-userInfoLines.push(
-"🏃 ʀᴇsɪsᴛᴇɴᴄɪᴀ : ${rpg.stamina}/${rpg.maxStamina || rpg.stamina}",
-);
+  userInfoLines.push(
+    `🏃 sᴛᴀᴍɪɴᴀ     : ${rpg.stamina}/${rpg.maxStamina || rpg.stamina}`,
+  );
 }
 
 const inv = user?.inventory || {};
 
 const invCount = Object.values(inv).reduce(
-(a, b) => a + (typeof b === "number" ? b : 0),
-0,
+  (a, b) => a + (typeof b === "number" ? b : 0),
+  0,
 );
 
 if (invCount > 0) {
-userInfoLines.push("🎒 ɪɴᴠᴇɴᴛᴀʀɪᴏ : ${invCount} objetos");
+  userInfoLines.push(`🎒 ɪɴᴠᴇɴᴛᴀʀɪᴏ : ${invCount} objetos`);
 }
 
-userInfoLines.push("🕒 ʜᴏʀᴀ        : ${timeStr} WIB");
-userInfoLines.push("📅 ꜰᴇᴄʜᴀ       : ${dateStr}");
+userInfoLines.push(`🕒 ʜᴏʀᴀ        : ${timeStr} WIB`);
+userInfoLines.push(`📅 ꜰᴇᴄʜᴀ       : ${dateStr}`);
 
 if (useBracketBoxStyle) {
-txt += "\n\n";
-txt += createBracketBox("INFORMACIÓN DEL BOT", botInfoLines);
-txt += createBracketBox("INFORMACIÓN DEL USUARIO", userInfoLines);
+  txt += `\n\n`;
+
+  txt += createBracketBox("INFORMACIÓN DEL BOT", botInfoLines);
+  txt += createBracketBox("INFORMACIÓN DEL USUARIO", userInfoLines);
+
 } else {
-txt += "\n\n╭─〔 🤖 *ɪɴꜰᴏʀᴍᴀᴄɪᴏ́ɴ ᴅᴇʟ ʙᴏᴛ* 〕\n";
+  txt += `\n\n╭─〔 🤖 *ɪɴꜰᴏ ᴅᴇʟ ʙᴏᴛ* 〕\n`;
 
-txt += "*│* 🖐 ɴᴏᴍʙʀᴇ     : *${botConfig.bot?.name || "Ourin-AI"}*\n";
-txt += "*│* 🔑 ᴠᴇʀsɪᴏ́ɴ    : *v${botConfig.bot?.version || "1.2.0"}*\n";
-txt += "*│* ⚙️ ᴍᴏᴅᴏ       : *${(botConfig.mode || "public").toUpperCase()}*\n";
-txt += "*│* 🧶 ᴘʀᴇꜰɪᴊᴏ     : *[ ${prefix} ]*\n";
-txt += "*│* ⏱ ᴛɪᴇᴍᴘᴏ ᴀᴄᴛɪᴠᴏ : *${uptimeFormatted}*\n";
-txt += "*│* 👥 ᴛᴏᴛᴀʟ      : *${totalUsers} Usuarios*\n";
-txt += "*│* 🏷 ɢʀᴜᴘᴏ      : *${botMode.toUpperCase()}*\n";
-txt += "*│* 👑 ᴘʀᴏᴘɪᴇᴛᴀʀɪᴏ : *${botConfig.owner?.name || "Ourin-AI"}*\n";
+  txt += `*│* 🖐 ɴᴏᴍʙʀᴇ     : *${botConfig.bot?.name || "Ourin-AI"}*\n`;
+  txt += `*│* 🔑 ᴠᴇʀsɪᴏ́ɴ    : *v${botConfig.bot?.version || "1.2.0"}*\n`;
+  txt += `*│* ⚙️ ᴍᴏᴅᴏ       : *${(botConfig.mode || "public").toUpperCase()}*\n`;
+  txt += `*│* 🧶 ᴘʀᴇꜰɪᴊᴏ     : *[ ${prefix} ]*\n`;
+  txt += `*│* ⏱ ᴛɪᴇᴍᴘᴏ     : *${uptimeFormatted}*\n`;
+  txt += `*│* 👥 ᴛᴏᴛᴀʟ      : *${totalUsers} Usuarios*\n`;
+  txt += `*│* 🏷 ɢʀᴜᴘᴏ      : *${botMode.toUpperCase()}*\n`;
+  txt += `*│* 👑 ᴅᴜᴇɴ̃ᴏ      : *${botConfig.owner?.name || "Ourin-AI"}*\n`;
 
-txt += "╰────────────────⬣\n\n";
+  txt += `╰────────────────⬣\n\n`;
 
-txt += "╭─〔 👤 *ɪɴꜰᴏʀᴍᴀᴄɪᴏ́ɴ ᴅᴇʟ ᴜsᴜᴀʀɪᴏ* 〕\n";
+  txt += `╭─〔 👤 *ɪɴꜰᴏ ᴅᴇʟ ᴜsᴜᴀʀɪᴏ* 〕\n`;
 
-txt += "*│* 🙋 ɴᴏᴍʙʀᴇ     : *${m.pushName}*\n";
-txt += "*│* 🎭 ʀᴏʟ         : *${roleEmoji} ${userRole}*\n";
-txt += "*│* 🎟 ᴇɴᴇʀɢɪ́ᴀ    : *${m.isOwner || m.isPremium ? "∞ Ilimitada" : (user?.energi ?? 25)}*\n";
-txt += "*│* ⚡ ɴɪᴠᴇʟ       : *${Math.floor((user?.exp || 0) / 20000) + 1}*\n";
-txt += "*│* ✨ ᴇxᴘ         : *${(user?.exp ?? 0).toLocaleString()}*\n";
-txt += "*│* 💰 ᴍᴏɴᴇᴅᴀs     : *${(user?.koin ?? 0).toLocaleString()}*\n";
+  txt += `*│* 🙋 ɴᴏᴍʙʀᴇ     : *${m.pushName}*\n`;
+  txt += `*│* 🎭 ʀᴏʟ         : *${roleEmoji} ${userRole}*\n`;
+  txt += `*│* 🎟 ᴇɴᴇʀɢɪ́ᴀ    : *${m.isOwner || m.isPremium ? "∞ Ilimitada" : (user?.energi ?? 25)}*\n`;
+  txt += `*│* ⚡ ɴɪᴠᴇʟ       : *${Math.floor((user?.exp || 0) / 20000) + 1}*\n`;
+  txt += `*│* ✨ ᴇxᴘ         : *${(user?.exp ?? 0).toLocaleString()}*\n`;
+  txt += `*│* 💰 ᴍᴏɴᴇᴅᴀs     : *${(user?.koin ?? 0).toLocaleString()}*\n`;
 
-if (rpg.health !== undefined) {
-txt += "*│* ❤️ ᴠɪᴅᴀ        : *${rpg.health}/${rpg.maxHealth || rpg.health}*\n";
-txt += "*│* 🔮 ᴍᴀɴᴀ        : *${rpg.mana}/${rpg.maxMana || rpg.mana}*\n";
-txt += "*│* 🏃 ʀᴇsɪsᴛᴇɴᴄɪᴀ : *${rpg.stamina}/${rpg.maxStamina || rpg.stamina}*\n";
-}
+  if (rpg.health !== undefined) {
+    txt += `*│* ❤️ ᴠɪᴅᴀ        : *${rpg.health}/${rpg.maxHealth || rpg.health}*\n`;
+    txt += `*│* 🔮 ᴍᴀɴᴀ        : *${rpg.mana}/${rpg.maxMana || rpg.mana}*\n`;
+    txt += `*│* 🏃 sᴛᴀᴍɪɴᴀ     : *${rpg.stamina}/${rpg.maxStamina || rpg.stamina}*\n`;
+  }
 
-if (invCount > 0) {
-txt += "*│* 🎒 ɪɴᴠᴇɴᴛᴀʀɪᴏ : *${invCount} objetos*\n";
-}
+  if (invCount > 0) {
+    txt += `*│* 🎒 ɪɴᴠᴇɴᴛᴀʀɪᴏ : *${invCount} objetos*\n`;
+  }
 
-txt += "*│* 🕒 ʜᴏʀᴀ        : *${timeStr} WIB*\n";
-txt += "*│* 📅 ꜰᴇᴄʜᴀ       : *${dateStr}*\n";
+  txt += `*│* 🕒 ʜᴏʀᴀ        : *${timeStr} WIB*\n`;
+  txt += `*│* 📅 ꜰᴇᴄʜᴀ       : *${dateStr}*\n`;
 
-txt += "╰────────────────⬣\n\n";
+  txt += `╰────────────────⬣\n\n`;
 }
   
-  ///yfhfjfjfhf
+  ///
   const categoryOrder = [
     "owner",
     "main",
