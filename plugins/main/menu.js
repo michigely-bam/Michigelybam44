@@ -311,26 +311,6 @@ if (useBracketBoxStyle) {
   txt += `*│* 🏷 ɢʀᴜᴘᴏ      : *${botMode.toUpperCase()}*\n`;
   txt += `*│* 👑 ᴅᴜᴇɴ̃ᴏ      : *${botConfig.owner?.name || "Ourin-AI"}*\n`;
 
-  txt += `╰────────────────⬣\n\n`;
-
-  txt += `╭─〔 👤 *ɪɴꜰᴏ ᴅᴇʟ ᴜsᴜᴀʀɪᴏ* 〕\n`;
-
-  txt += `*│* 🙋 ɴᴏᴍʙʀᴇ     : *${m.pushName}*\n`;
-  txt += `*│* 🎭 ʀᴏʟ         : *${roleEmoji} ${userRole}*\n`;
-  txt += `*│* 🎟 ᴇɴᴇʀɢɪ́ᴀ    : *${m.isOwner || m.isPremium ? "∞ Ilimitada" : (user?.energi ?? 25)}*\n`;
-  txt += `*│* ⚡ ɴɪᴠᴇʟ       : *${Math.floor((user?.exp || 0) / 20000) + 1}*\n`;
-  txt += `*│* ✨ ᴇxᴘ         : *${(user?.exp ?? 0).toLocaleString()}*\n`;
-  txt += `*│* 💰 ᴍᴏɴᴇᴅᴀs     : *${(user?.koin ?? 0).toLocaleString()}*\n`;
-
-  if (rpg.health !== undefined) {
-    txt += `*│* ❤️ ᴠɪᴅᴀ        : *${rpg.health}/${rpg.maxHealth || rpg.health}*\n`;
-    txt += `*│* 🔮 ᴍᴀɴᴀ        : *${rpg.mana}/${rpg.maxMana || rpg.mana}*\n`;
-    txt += `*│* 🏃 sᴛᴀᴍɪɴᴀ     : *${rpg.stamina}/${rpg.maxStamina || rpg.stamina}*\n`;
-  }
-
-  if (invCount > 0) {
-    txt += `*│* 🎒 ɪɴᴠᴇɴᴛᴀʀɪᴏ : *${invCount} objetos*\n`;
-  }
 
   txt += `*│* 🕒 ʜᴏʀᴀ        : *${timeStr} WIB*\n`;
   txt += `*│* 📅 ꜰᴇᴄʜᴀ       : *${dateStr}*\n`;
