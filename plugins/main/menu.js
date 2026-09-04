@@ -234,8 +234,8 @@ async function buildMenuText(
     userRole = "Premium";
     roleEmoji = "💎";
   }
-  const greeting = getTimeGreeting();
-const greeting = getTimeGreeting();
+  //-$+$+$+$
+ const greeting = getTimeGreeting();
 const uptimeFormatted = formatUptime(uptime);
 const totalUsers = db.getUserCount();
 
@@ -249,7 +249,7 @@ const botInfoLines = [
 "⏱ ᴛɪᴇᴍᴘᴏ ᴀᴄᴛɪᴠᴏ : ${uptimeFormatted}",
 "👥 ᴛᴏᴛᴀʟ      : ${totalUsers} Usuarios",
 "🏷 ɢʀᴜᴘᴏ      : ${botMode.toUpperCase()}",
-"👑 ᴄʀᴇᴀᴅᴏʀ    : ${botConfig.owner?.name || "Ourin-AI"}",
+"👑 ᴘʀᴏᴘɪᴇᴛᴀʀɪᴏ : ${botConfig.owner?.name || "Ourin-AI"}",
 ];
 
 const userInfoLines = [
@@ -295,7 +295,6 @@ if (useBracketBoxStyle) {
 txt += "\n\n";
 txt += createBracketBox("INFORMACIÓN DEL BOT", botInfoLines);
 txt += createBracketBox("INFORMACIÓN DEL USUARIO", userInfoLines);
-
 } else {
 txt += "\n\n╭─〔 🤖 *ɪɴꜰᴏʀᴍᴀᴄɪᴏ́ɴ ᴅᴇʟ ʙᴏᴛ* 〕\n";
 
@@ -306,7 +305,7 @@ txt += "*│* 🧶 ᴘʀᴇꜰɪᴊᴏ     : *[ ${prefix} ]*\n";
 txt += "*│* ⏱ ᴛɪᴇᴍᴘᴏ ᴀᴄᴛɪᴠᴏ : *${uptimeFormatted}*\n";
 txt += "*│* 👥 ᴛᴏᴛᴀʟ      : *${totalUsers} Usuarios*\n";
 txt += "*│* 🏷 ɢʀᴜᴘᴏ      : *${botMode.toUpperCase()}*\n";
-txt += "*│* 👑 ᴄʀᴇᴀᴅᴏʀ    : *${botConfig.owner?.name || "Ourin-AI"}*\n";
+txt += "*│* 👑 ᴘʀᴏᴘɪᴇᴛᴀʀɪᴏ : *${botConfig.owner?.name || "Ourin-AI"}*\n";
 
 txt += "╰────────────────⬣\n\n";
 
@@ -314,22 +313,15 @@ txt += "╭─〔 👤 *ɪɴꜰᴏʀᴍᴀᴄɪᴏ́ɴ ᴅᴇʟ ᴜsᴜᴀʀɪ�
 
 txt += "*│* 🙋 ɴᴏᴍʙʀᴇ     : *${m.pushName}*\n";
 txt += "*│* 🎭 ʀᴏʟ         : *${roleEmoji} ${userRole}*\n";
-
 txt += "*│* 🎟 ᴇɴᴇʀɢɪ́ᴀ    : *${m.isOwner || m.isPremium ? "∞ Ilimitada" : (user?.energi ?? 25)}*\n";
-
 txt += "*│* ⚡ ɴɪᴠᴇʟ       : *${Math.floor((user?.exp || 0) / 20000) + 1}*\n";
-
 txt += "*│* ✨ ᴇxᴘ         : *${(user?.exp ?? 0).toLocaleString()}*\n";
-
 txt += "*│* 💰 ᴍᴏɴᴇᴅᴀs     : *${(user?.koin ?? 0).toLocaleString()}*\n";
 
 if (rpg.health !== undefined) {
 txt += "*│* ❤️ ᴠɪᴅᴀ        : *${rpg.health}/${rpg.maxHealth || rpg.health}*\n";
-
-txt += `*│* 🔮 ᴍᴀɴᴀ        : *${rpg.mana}/${rpg.maxMana || rpg.mana}*\n`;
-
-txt += `*│* 🏃 ʀᴇsɪsᴛᴇɴᴄɪᴀ : *${rpg.stamina}/${rpg.maxStamina || rpg.stamina}*\n`;
-
+txt += "*│* 🔮 ᴍᴀɴᴀ        : *${rpg.mana}/${rpg.maxMana || rpg.mana}*\n";
+txt += "*│* 🏃 ʀᴇsɪsᴛᴇɴᴄɪᴀ : *${rpg.stamina}/${rpg.maxStamina || rpg.stamina}*\n";
 }
 
 if (invCount > 0) {
@@ -341,6 +333,8 @@ txt += "*│* 📅 ꜰᴇᴄʜᴀ       : *${dateStr}*\n";
 
 txt += "╰────────────────⬣\n\n";
 }
+  
+  ///yfhfjfjfhf
   const categoryOrder = [
     "owner",
     "main",
