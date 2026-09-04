@@ -239,7 +239,7 @@ async function buildMenuText(
 const uptimeFormatted = formatUptime(uptime);
 const totalUsers = db.getUserCount();
 
-let txt = `Hola *@${m.pushName || "Usuario"}* 🪸
+let txt = `Hola *@${m.pushName || "Usuario"}* :3
 Soy ${botConfig.bot?.name || "Ourin-AI"}, un bot de WhatsApp listo para ayudarte.
 Puedes usarme para buscar información, obtener datos o ayudarte con tareas sencillas directamente desde WhatsApp — práctico y sin complicaciones.`;
 
@@ -247,20 +247,11 @@ const botInfoLines = [
   `🖐 ɴᴏᴍʙʀᴇ     : ${botConfig.bot?.name || "Ourin-AI"}`,
   `🔑 ᴠᴇʀsɪᴏ́ɴ    : v${botConfig.bot?.version || "1.2.0"}`,
   `⚙️ ᴍᴏᴅᴏ       : ${(botConfig.mode || "public").toUpperCase()}`,
-  `🧶 ᴘʀᴇꜰɪᴊᴏ     : [ ${prefix} ]`,
+  `🧶 ᴘʀᴇꜰɪᴊᴏ     : => ${prefix} <=`,
   `⏱ ᴛɪᴇᴍᴘᴏ     : ${uptimeFormatted}`,
   `👥 ᴛᴏᴛᴀʟ      : ${totalUsers} Usuarios`,
   `🏷 ɢʀᴜᴘᴏ      : ${botMode.toUpperCase()}`,
   `👑 ᴅᴜᴇɴ̃ᴏ      : ${botConfig.owner?.name || "Ourin-AI"}`,
-];
-
-const userInfoLines = [
-  `🙋 ɴᴏᴍʙʀᴇ     : ${m.pushName}`,
-  `🎭 ʀᴏʟ         : ${roleEmoji} ${userRole}`,
-  `🎟 ᴇɴᴇʀɢɪ́ᴀ    : ${m.isOwner || m.isPremium ? "∞ Ilimitada" : (user?.energi ?? 25)}`,
-  `⚡ ɴɪᴠᴇʟ       : ${Math.floor((user?.exp || 0) / 20000) + 1}`,
-  `✨ ᴇxᴘ         : ${(user?.exp ?? 0).toLocaleString()}`,
-  `💰 ᴍᴏɴᴇᴅᴀs     : ${(user?.koin ?? 0).toLocaleString()}`,
 ];
 
 const rpg = user?.rpg || {};
