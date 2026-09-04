@@ -244,7 +244,7 @@ const config = {
 
   // NOTA: esto no está en la versión gratis, solo está en el sc pt
 // Obtén la apikey en: https://ditznesia.id -> Regístrate -> Entra a Perfil -> Toma la Apikey
-  geminiApiKey: "",
+  geminiApiKey: "AIzaSyD4LFiYxckIphbpPrAId-9oL0desQORCSU",
 
   autoaiPersonas: {
     Bell409: `- Nama kamu adalah Bella Clarissa, lebih suka dipanggil Bella.
