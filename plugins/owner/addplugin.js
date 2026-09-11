@@ -7,8 +7,8 @@ const pluginConfig = {
   name: "addplugin",
   alias: ["addpl", "tambahplugin"],
   category: "owner",
-  description: "Tambah plugin baru dari code yang di-reply",
-  usage: ".addplugin [namafile] [folder]",
+  description: "Añade un plugin nuevo desde el código respondido",
+  usage: ".addplugin [nombrearchivo] [carpeta]",
   example: ".addplugin bliblidl downloader",
   isOwner: true,
   isPremium: false,
@@ -33,11 +33,11 @@ async function handler(m, { sock }) {
 
   if (!quoted) {
     return m.reply(
-      `📦 *ADD PLUGIN*\n\n` +
-        `Reply code plugin dengan caption:\n` +
-        `\`${m.prefix}addplugin\` - Auto detect\n` +
-        `\`${m.prefix}addplugin namafile\` - Custom nama\n` +
-        `\`${m.prefix}addplugin namafile folder\` - Custom nama + folder`,
+      `📦 *AÑADIR PLUGIN*\n\n` +
+        `Responde al código del plugin con un caption:\n` +
+        `\`${m.prefix}addplugin\` - Detectar automáticamente\n` +
+        `\`${m.prefix}addplugin nombrearchivo\` - Nombre personalizado\n` +
+        `\`${m.prefix}addplugin nombrearchivo carpeta\` - Nombre + carpeta personalizados`,
     );
   }
 
@@ -50,19 +50,19 @@ async function handler(m, { sock }) {
     try {
       code = (await quoted.download()).toString();
     } catch (e) {
-      return m.reply(`❌ *GAGAL*\n\nGagal download file`);
+      return m.reply(`❌ *ERROR*\n\nNo se pudo descargar el archivo`);
     }
   }
 
   if (!code || code.length < 50) {
-    return m.reply(`❌ *GAGAL*\n\nCode terlalu pendek atau tidak valid`);
+    return m.reply(`❌ *ERROR*\n\nEl código es demasiado corto o no es válido`);
   }
 
   const hasExport = code.includes("module.exports") || code.includes("export ");
   const hasConfig = code.includes("pluginConfig") || code.includes("config");
   if (!hasExport || !hasConfig) {
     return m.reply(
-      `❌ *GAGAL*\n\nCode bukan format plugin yang valid\nHarus ada export dan config`,
+      `❌ *ERROR*\n\nEl código no tiene un formato de plugin válido\nDebe contener export y config`,
     );
   }
 
@@ -74,7 +74,7 @@ async function handler(m, { sock }) {
 
   if (!fileName) {
     return m.reply(
-      `❌ *GAGAL*\n\nTidak bisa mendeteksi nama plugin\nGunakan \`${m.prefix}addplugin <namafile>\``,
+      `❌ *ERROR*\n\nNo se pudo detectar el nombre del plugin\nUsa \`${m.prefix}addplugin <nombrearchivo>\``,
     );
   }
 
@@ -84,7 +84,7 @@ async function handler(m, { sock }) {
   folderName = folderName.toLowerCase().replace(/[^a-z0-9\-_]/g, "");
 
   if (!fileName) {
-    return m.reply(`❌ *GAGAL*\n\nNama file tidak valid`);
+    return m.reply(`❌ *ERROR*\n\nEl nombre del archivo no es válido`);
   }
 
   await m.react("🕕");
@@ -101,9 +101,9 @@ async function handler(m, { sock }) {
     if (fs.existsSync(filePath)) {
       await m.react("❌");
       return m.reply(
-        `❌ *GAGAL*\n\n` +
-          `File \`${fileName}.js\` sudah ada di folder \`${folderName}\`\n\n` +
-          `💡 Gunakan \`${m.prefix}ganticode ${fileName} ${folderName}\` untuk mengganti code yang sudah ada`,
+        `❌ *ERROR*\n\n` +
+          `El archivo \`${fileName}.js\` ya existe en la carpeta \`${folderName}\`\n\n` +
+          `💡 Usa \`${m.prefix}ganticode ${fileName} ${folderName}\` para reemplazar el código existente`,
       );
     }
 
@@ -116,14 +116,14 @@ async function handler(m, { sock }) {
 
     await m.react("✅");
     return m.reply(
-      `✅ *PLUGIN DITAMBAH*\n\n` +
-        `╭─〔 *DETAIL* 〕───⬣\n` +
-        `│ File: \`${fileName}.js\`\n` +
-        `│ Folder: \`${folderName}\`\n` +
-        `│ Size: \`${code.length} bytes\`\n` +
-        `│ Hot Reload: ${reloadResult.success ? "✅ Sukses" : "⚠️ Pending"}\n` +
+      `✅ *PLUGIN AÑADIDO*\n\n` +
+        `╭─〔 *DETALLES* 〕───⬣\n` +
+        `│ Archivo: \`${fileName}.js\`\n` +
+        `│ Carpeta: \`${folderName}\`\n` +
+        `│ Tamaño: \`${code.length} bytes\`\n` +
+        `│ Hot Reload: ${reloadResult.success ? "✅ Éxito" : "⚠️ Pendiente"}\n` +
         `╰───────⬣\n\n` +
-        `Plugin sudah aktif dan siap digunakan!`,
+        `¡El plugin ya está activo y listo para usarse!`,
     );
   } catch (error) {
     await m.react("☢");
