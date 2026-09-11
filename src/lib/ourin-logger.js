@@ -461,7 +461,7 @@ function printBanner(mini = false) {
     return;
   }
   console.log("");
-  const ascii = figlet.textSync("OURIN", {
+  const ascii = figlet.textSync("MIKU NAKANO", {
     font: "ANSI Shadow",
     horizontalLayout: "fitted",
   });
