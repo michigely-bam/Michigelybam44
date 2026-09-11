@@ -1,11 +1,12 @@
 import { getDatabase } from '../../src/lib/ourin-database.js'
+
 const pluginConfig = {
     name: 'addkoin',
     alias: ['tambahkoin', 'givekoin', 'addcoin', 'adddcoin'],
     category: 'owner',
-    description: 'Tambah koin user (max 9 Triliun)',
-    usage: '.addkoin <jumlah> @user',
-    example: '.addkoin 100000 @user',
+    description: 'Añade monedas al usuario (máximo 9 billones)',
+    usage: '.addkoin <cantidad> @usuario',
+    example: '.addkoin 100000 @usuario',
     isOwner: true,
     isPremium: false,
     isGroup: false,
@@ -17,7 +18,7 @@ const pluginConfig = {
 
 const MAX_KOIN = 9000000000000
 function formatKoin(num) {
-    if (num === -1) return '∞ Unlimited'
+    if (num === -1) return '∞ Ilimitadas'
     if (num >= 1000000000000) return (num / 1000000000000).toFixed(2) + 'T'
     if (num >= 1000000000) return (num / 1000000000).toFixed(2) + 'B'
     if (num >= 1000000) return (num / 1000000).toFixed(2) + 'M'
@@ -45,11 +46,11 @@ async function handler(m, { sock }) {
 
     if (!targetJid || amount <= 0) {
         return m.reply(
-            `💰 *ᴀᴅᴅ ᴋᴏɪɴ*\n\n` +
-            `> \`.addkoin <jumlah>\` - ke diri sendiri\n` +
-            `> \`.addkoin <jumlah> @user\` - ke orang lain\n` +
-            `> Max: 9.000.000.000.000 (9T)\n\n` +
-            `\`Contoh: ${m.prefix}addkoin 100000\``
+            `💰 *AÑADIR MONEDAS*\n\n` +
+            `> \`.addkoin <cantidad>\` - a ti mismo\n` +
+            `> \`.addkoin <cantidad> @usuario\` - a otro usuario\n` +
+            `> Máximo: 9.000.000.000.000 (9T)\n\n` +
+            `\`Ejemplo: ${m.prefix}addkoin 100000\``
         )
     }
 
@@ -59,9 +60,9 @@ async function handler(m, { sock }) {
 
     if (user.koin === -1) {
         return m.reply(
-            `💰 *INFORMATION*\n` +
-            `@${targetJid.split('@')[0]} sudah memiliki koin *∞ Unlimited*\n` +
-            `Tidak perlu menambahkan koin lagi`,
+            `💰 *INFORMACIÓN*\n` +
+            `@${targetJid.split('@')[0]} ya tiene monedas *∞ Ilimitadas*\n` +
+            `No es necesario añadir más monedas`,
             { mentions: [targetJid] }
         )
     }
@@ -70,7 +71,7 @@ async function handler(m, { sock }) {
 
     await m.react('✅')
     await m.reply(
-        `✅ Berhasil menambahkan koin *@${targetJid.split('@')[0]}* sebanyak *${formatKoin(amount)}*`,
+        `✅ Se añadieron correctamente *${formatKoin(amount)}* monedas a *@${targetJid.split('@')[0]}*`,
         { mentions: [targetJid] }
     )
 }
