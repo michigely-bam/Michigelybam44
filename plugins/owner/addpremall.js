@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'addpremall',
     alias: ['addpremiumall', 'setpremall'],
     category: 'owner',
-    description: 'Menambahkan semua member grup ke premium',
+    description: 'Añade a todos los miembros del grupo como premium',
     usage: '.addprem all',
     example: '.addprem all',
     isOwner: true,
@@ -23,7 +23,7 @@ async function handler(m, { sock }) {
         const participants = groupMeta.participants || []
         
         if (participants.length === 0) {
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak ada member di grup ini`)
+            return m.reply(`❌ *ᴇʀʀᴏʀ*\n\n> No hay miembros en este grupo`)
         }
         
         await m.react('🕕')
@@ -62,14 +62,14 @@ async function handler(m, { sock }) {
         
         await m.react('💎')
         await m.reply(
-            `💎 *ᴀᴅᴅ ᴘʀᴇᴍɪᴜᴍ ᴀʟʟ*\n\n` +
-            `╭┈┈⬡「 📋 *ʜᴀsɪʟ* 」\n` +
-            `┃ 👥 ᴛᴏᴛᴀʟ ᴍᴇᴍʙᴇʀ: \`${participants.length}\`\n` +
-            `┃ ✅ ᴅɪᴛᴀᴍʙᴀʜᴋᴀɴ: \`${addedCount}\`\n` +
-            `┃ ⏭️ sᴜᴅᴀʜ ᴘʀᴇᴍɪᴜᴍ: \`${alreadyPremCount}\`\n` +
+            `💎 *ᴀÑᴀᴅɪʀ ᴘʀᴇᴍɪᴜᴍ ᴀ ᴛᴏᴅᴏs*\n\n` +
+            `╭┈┈⬡「 📋 *ʀᴇsᴜʟᴛᴀᴅᴏ* 」\n` +
+            `┃ 👥 ᴛᴏᴛᴀʟ ᴅᴇ ᴍɪᴇᴍʙʀᴏs: \`${participants.length}\`\n` +
+            `┃ ✅ ᴀÑᴀᴅɪᴅᴏs: \`${addedCount}\`\n` +
+            `┃ ⏭️ ʏᴀ ᴇʀᴀɴ ᴘʀᴇᴍɪᴜᴍ: \`${alreadyPremCount}\`\n` +
             `┃ 💎 ᴛᴏᴛᴀʟ ᴘʀᴇᴍɪᴜᴍ: \`${db.data.premium.length}\`\n` +
             `╰┈┈⬡\n\n` +
-            `> Grup: ${groupMeta.subject}`
+            `> Grupo: ${groupMeta.subject}`
         )
         
     } catch (error) {
