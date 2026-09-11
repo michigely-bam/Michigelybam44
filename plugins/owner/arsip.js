@@ -2,8 +2,8 @@ const pluginConfig = {
   name: ["arsip", "archive"],
   alias: [],
   category: "owner",
-  description: "Arsipkan/buka arsip chat",
-  usage: ".arsip <nomor/reply> atau .arsip buka <nomor>",
+  description: "Archivar/abrir chats archivados",
+  usage: ".arsip <número/reply> o .arsip abrir <número>",
   example: ".arsip 628xxx",
   isOwner: true,
   cooldown: 3,
@@ -16,7 +16,7 @@ async function handler(m, { sock }) {
   let targetJid = null;
   let archive = true;
 
-  if (action === "buka" || action === "unarchive") {
+  if (action === "abrir" || action === "unarchive") {
     archive = false;
     const num = (m.args[1] || "").replace(/[^0-9]/g, "");
     if (num) {
@@ -26,7 +26,7 @@ async function handler(m, { sock }) {
     } else if (!m.isGroup) {
       targetJid = m.chat;
     }
-  } else if (action === "semua") {
+  } else if (action === "todos") {
     try {
       await m.react("🕕");
       global.isFetchingGroups = true;
@@ -42,11 +42,11 @@ async function handler(m, { sock }) {
       }
       await m.react("✅");
       return m.reply(
-        `📁 *${count} grup diarsipkan*\n\n> Private chat tidak bisa diarsipkan sekaligus (tidak ada daftar chat)`,
+        `📁 *${count} grupos archivados*\n\n> Los chats privados no se pueden archivar todos a la vez (no hay una lista de chats)`,
       );
     } catch (err) {
       global.isFetchingGroups = false;
-      return m.reply(`❌ Gagal: ${err.message}`);
+      return m.reply(`❌ Error: ${err.message}`);
     }
   } else {
     if (m.mentionedJid?.length > 0) {
@@ -63,12 +63,12 @@ async function handler(m, { sock }) {
 
   if (!targetJid) {
     return m.reply(
-      "📁 *ᴀʀsɪᴘ ᴄʜᴀᴛ*\n\n" +
-        "> `.arsip 628xxx` — Arsipkan chat\n" +
-        "> `.arsip` (di private chat) — Arsipkan chat ini\n" +
-        "> `.arsip` (reply pesan) — Arsipkan chat pengirim\n" +
-        "> `.arsip buka 628xxx` — Buka arsip chat\n" +
-        "> `.arsip semua` — Arsipkan semua chat",
+      "📁 *ᴀʀᴄʜɪᴠᴀʀ ᴄʜᴀᴛ*\n\n" +
+        "> `.arsip 628xxx` — Archivar chat\n" +
+        "> `.arsip` (en chat privado) — Archivar este chat\n" +
+        "> `.arsip` (respondiendo a un mensaje) — Archivar el chat del remitente\n" +
+        "> `.arsip abrir 628xxx` — Abrir chat archivado\n" +
+        "> `.arsip todos` — Archivar todos los chats",
     );
   }
 
@@ -78,11 +78,11 @@ async function handler(m, { sock }) {
     const target = targetJid.split("@")[0];
     return m.reply(
       archive
-        ? `📁 *ᴄʜᴀᴛ ᴅɪᴀʀsɪᴘᴋᴀɴ*\n\n> Target: ${target}\n> Gunakan \`.arsip buka ${target}\` untuk membuka`
-        : `📂 *ᴀʀsɪᴘ ᴅɪʙᴜᴋᴀ*\n\n> Target: ${target}`,
+        ? `📁 *ᴄʜᴀᴛ ᴀʀᴄʜɪᴠᴀᴅᴏ*\n\n> Objetivo: ${target}\n> Usa \`.arsip abrir ${target}\` para abrirlo`
+        : `📂 *ᴄʜᴀᴛ ᴅᴇsᴀʀᴄʜɪᴠᴀᴅᴏ*\n\n> Objetivo: ${target}`,
     );
   } catch (err) {
-    return m.reply(`❌ Gagal: ${err.message}`);
+    return m.reply(`❌ Error: ${err.message}`);
   }
 }
 
