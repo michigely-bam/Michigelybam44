@@ -460,9 +460,9 @@ function printBanner(mini = false) {
   }
   console.log("");
   const ascii = figlet.textSync("MIKU NAKANO UWU", {
-    font: "michigelybam",
-    horizontalLayout: "fitted",
-  });
+  font: "ANSI Shadow",
+  horizontalLayout: "fitted",
+});
   console.log(g(ascii));
   console.log(
     `  ${borderFx("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")}`,
