@@ -459,8 +459,8 @@ function printBanner(mini = false) {
     return;
   }
   console.log("");
-  const ascii = figlet.textSync("OURIN", {
-    font: "ANSI Shadow",
+  const ascii = figlet.textSync("MIKU NAKANO UWU", {
+    font: "michigelybam",
     horizontalLayout: "fitted",
   });
   console.log(g(ascii));
