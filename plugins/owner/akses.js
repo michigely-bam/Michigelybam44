@@ -11,8 +11,8 @@ const pluginConfig = {
     "listaccess",
   ],
   category: "owner",
-  description: "Grant temporary/permanent command access to users",
-  usage: ".addakses <cmd> <duration> <user>",
+  description: "Concede acceso temporal o permanente a comandos para usuarios",
+  usage: ".addakses <cmd> <duración> <usuario>",
   example: ".addakses addowner 30d @user",
   isOwner: true,
   isPremium: false,
@@ -47,19 +47,19 @@ async function handler(m, { sock, plugins }) {
   if (isAdd) {
     if (!target)
       return m.reply(
-        `❌ *Target Invalid*\n\nTag user / Reply chat / Tulis nomor target`,
+        `❌ *Objetivo no válido*\n\nEtiqueta al usuario / Responde al chat / Escribe el número del objetivo`,
       );
     const cleanArgs = m.args.filter(
       (a) => !a.includes("@") && !/^\d{10,}$/.test(a),
     );
     if (cleanArgs.length < 2) {
       return m.reply(
-        `⚠️ *Format Salah*\n\n` +
-          `Format: \`${m.prefix}addakses <command> <durasi> <target>\`\n\n` +
-          `*Contoh:*\n` +
-          `> \`${m.prefix}addakses addowner 30d @user\` (30 Hari)\n` +
-          `> \`${m.prefix}addakses unban permanent @user\` (Selamanya)\n\n` +
-          `*Durasi Support:* 1h, 1d, 30d, 1y`,
+        `⚠️ *Formato incorrecto*\n\n` +
+          `Formato: \`${m.prefix}addakses <comando> <duración> <objetivo>\`\n\n` +
+          `*Ejemplo:*\n` +
+          `> \`${m.prefix}addakses addowner 30d @user\` (30 días)\n` +
+          `> \`${m.prefix}addakses unban permanent @user\` (Para siempre)\n\n` +
+          `*Duraciones compatibles:* 1h, 1d, 30d, 1y`,
       );
     }
     commandTarget = cleanArgs[0].toLowerCase();
@@ -83,26 +83,26 @@ async function handler(m, { sock, plugins }) {
 
     if (activeAccess.length === 0) {
       return m.reply(
-        `📊 *ᴜsᴇʀ ᴀᴄᴄᴇss*\n\nTarget: @${target.split("@")[0]}\nStatus: *Tidak punya akses khusus*`,
+        `📊 *ACCESO DEL USUARIO*\n\nObjetivo: @${target.split("@")[0]}\nEstado: *No tiene accesos especiales*`,
         {
           mentions: sock.parseMention(`@${target.split("@")[0]}`),
         },
       );
     }
 
-    let txt = `📊 *ᴜsᴇʀ ᴀᴄᴄᴇss*\n\n`;
-    txt += `Target: @${target.split("@")[0]}\n`;
-    txt += `Total: *${activeAccess.length}* commands\n`;
+    let txt = `📊 *ACCESO DEL USUARIO*\n\n`;
+    txt += `Objetivo: @${target.split("@")[0]}\n`;
+    txt += `Total: *${activeAccess.length}* comandos\n`;
     txt += `━━━━━━━━━━━━━━━\n\n`;
 
     activeAccess.forEach((acc, i) => {
-      let expiredTxt = "♾️ Permanent";
+      let expiredTxt = "♾️ Permanente";
       if (acc.expired) {
         const timeLeft = acc.expired - now;
         if (timeLeft > 0) {
           expiredTxt = "🕕 " + ms(timeLeft, { long: true });
         } else {
-          expiredTxt = "🔴 Expired";
+          expiredTxt = "🔴 Expirado";
         }
       }
 
@@ -118,10 +118,10 @@ async function handler(m, { sock, plugins }) {
       try {
         const durationMs = ms(durationTarget);
         if (!durationMs)
-          return m.reply(`❌ Format durasi salah! Gunakan: 1h, 1d, 30d`);
+          return m.reply(`❌ Formato de duración incorrecto. Usa: 1h, 1d, 30d`);
         expiredTime = Date.now() + durationMs;
       } catch {
-        return m.reply(`❌ Format durasi tidak dikenali!`);
+        return m.reply(`❌ No se reconoce el formato de duración`);
       }
     }
 
@@ -130,10 +130,10 @@ async function handler(m, { sock, plugins }) {
       user.access[existingIdx].expired = expiredTime;
       db.setUser(target, user);
       return m.reply(
-        `✅ *ᴀᴋsᴇs ᴅɪᴘᴇʀʙᴀʀᴜɪ*\n\n` +
-          `Command: \`${commandTarget}\`\n` +
-          `Durasi: *${durationTarget}*\n` +
-          `Target: @${target.split("@")[0]}`,
+        `✅ *ACCESO ACTUALIZADO*\n\n` +
+          `Comando: \`${commandTarget}\`\n` +
+          `Duración: *${durationTarget}*\n` +
+          `Objetivo: @${target.split("@")[0]}`,
       );
     }
     user.access.push({
@@ -146,15 +146,15 @@ async function handler(m, { sock, plugins }) {
     // console.log('[DEBUG AddAccess] After save:', JSON.stringify(db.getUser(target)?.access))
 
     await m.reply(
-      `✅ *ᴀᴋsᴇs ᴅɪʙᴇʀɪᴋᴀɴ*\n\n` +
+      `✅ *ACCESO CONCEDIDO*\n\n` +
         `┃ 🔑 ᴄᴍᴅ: \`${commandTarget}\`\n` +
-        `┃ ⏱️ ᴅᴜʀᴀsɪ: *${durationTarget}*\n` +
-        `┃ 👤 ᴛᴀʀɢᴇᴛ: @${target.split("@")[0]}\n`,
+        `┃ ⏱️ ᴅᴜʀᴀᴄɪóɴ: *${durationTarget}*\n` +
+        `┃ 👤 ᴏʙᴊᴇᴛɪᴠᴏ: @${target.split("@")[0]}\n`,
       { mentions: [target] },
     );
   }
   if (isDel) {
-    if (!target) return m.reply(`❌ Tag user yang mau dihapus aksesnya!`);
+    if (!target) return m.reply(`❌ Etiqueta al usuario al que quieres quitarle el acceso`);
     const now = Date.now();
     const activeAccess = user.access.filter(
       (a) => a.expired === null || a.expired > now,
@@ -164,33 +164,33 @@ async function handler(m, { sock, plugins }) {
       specificCmd = specificCmd.toLowerCase();
       const idx = user.access.findIndex((a) => a.cmd === specificCmd);
       if (idx === -1)
-        return m.reply(`❌ User tidak punya akses command \`${specificCmd}\``);
+        return m.reply(`❌ El usuario no tiene acceso al comando \`${specificCmd}\``);
 
       user.access.splice(idx, 1);
       db.setUser(target, user);
       return m.reply(
-        `✅ Akses \`${specificCmd}\` berhasil dicabut dari @${target.split("@")[0]}`,
+        `✅ El acceso a \`${specificCmd}\` se ha revocado correctamente para @${target.split("@")[0]}`,
       );
     }
 
     if (activeAccess.length === 0) {
-      return m.reply(`⚠️ User ini tidak memiliki akses command apapun.`);
+      return m.reply(`⚠️ Este usuario no tiene acceso a ningún comando.`);
     }
     const rows = activeAccess.map((acc) => {
-      const exp = acc.expired ? ms(acc.expired - now) : "Permanent";
+      const exp = acc.expired ? ms(acc.expired - now) : "Permanente";
       return {
-        title: `Hapus: ${acc.cmd}`,
-        description: `Sisa durasi: ${exp}`,
+        title: `Eliminar: ${acc.cmd}`,
+        description: `Duración restante: ${exp}`,
         id: `${m.prefix}delakses ${acc.cmd} ${target}`,
       };
     });
     const listMessage = {
-      text: `🔓 *CABUT AKSES*\n\nPilih akses command yang ingin dihapus dari @${target.split("@")[0]}`,
-      title: "Manage Access",
-      buttonText: "PILIH COMMAND",
+      text: `🔓 *REVOCAR ACCESO*\n\nSelecciona el acceso al comando que deseas eliminar de @${target.split("@")[0]}`,
+      title: "Gestionar acceso",
+      buttonText: "SELECCIONAR COMANDO",
       sections: [
         {
-          title: "Active Access List",
+          title: "Lista de accesos activos",
           rows: rows,
         },
       ],
