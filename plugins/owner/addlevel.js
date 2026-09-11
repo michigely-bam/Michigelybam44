@@ -1,12 +1,13 @@
 import { getDatabase } from '../../src/lib/ourin-database.js'
 import { calculateLevel, getRole, addExpWithLevelCheck } from './../../src/lib/ourin-level.js'
+
 const pluginConfig = {
     name: 'addlevel',
     alias: ['tambahlevel', 'givelevel', 'addlvl'],
     category: 'owner',
-    description: 'Tambah level user (via exp)',
-    usage: '.addlevel <jumlah> @user',
-    example: '.addlevel 5 @user',
+    description: 'Añade niveles al usuario (mediante EXP)',
+    usage: '.addlevel <cantidad> @usuario',
+    example: '.addlevel 5 @usuario',
     isOwner: true,
     isPremium: false,
     isGroup: false,
@@ -37,17 +38,17 @@ async function handler(m, { sock }) {
     
     if (!targetJid || levels <= 0) {
         return m.reply(
-            `📊 *ᴀᴅᴅ ʟᴇᴠᴇʟ*\n\n` +
-            `╭┈┈⬡「 📋 *ᴜsᴀɢᴇ* 」\n` +
-            `┃ > \`.addlevel <jumlah>\` - ke diri sendiri\n` +
-            `┃ > \`.addlevel <jumlah> @user\` - ke orang lain\n` +
+            `📊 *AÑADIR NIVEL*\n\n` +
+            `╭┈┈⬡「 📋 *USO* 」\n` +
+            `┃ > \`.addlevel <cantidad>\` - a ti mismo\n` +
+            `┃ > \`.addlevel <cantidad> @usuario\` - a otro usuario\n` +
             `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-            `> Contoh: \`${m.prefix}addlevel 5\``
+            `> Ejemplo: \`${m.prefix}addlevel 5\``
         )
     }
     
     if (levels <= 0) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Jumlah level harus lebih dari 0`)
+        return m.reply(`❌ *ERROR*\n\n> La cantidad de niveles debe ser mayor que 0`)
     }
     
     const user = db.getUser(targetJid) || db.setUser(targetJid)
@@ -60,7 +61,7 @@ async function handler(m, { sock }) {
     await m.react('✅')
     
     await m.reply(
-        `✅ Berhasil menambahkan level *@${targetJid.split('@')[0]}* sebanyak *${levels} Level*\n\nKini dia mempunyai *${addResult.newLevel || calculateLevel(user.exp)}* level. dan memiliki role *${getRole(addResult.newLevel || calculateLevel(user.exp))}*`,
+        `✅ Se añadieron correctamente *${levels} niveles* a *@${targetJid.split('@')[0]}*\n\nAhora tiene *${addResult.newLevel || calculateLevel(user.exp)}* niveles y posee el rol *${getRole(addResult.newLevel || calculateLevel(user.exp))}*`,
         { mentions: [targetJid] }
     )
 }
