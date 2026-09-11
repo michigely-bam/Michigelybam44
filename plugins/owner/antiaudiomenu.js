@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['audiomenu', 'setantiaudio', 'toggleantiaudio'],
     category: 'owner',
     description: 'Activa o desactiva el audio al mostrar el menú',
-    usage: '.antiaudiomenu ya/gak',
+    usage: '.antiaudiomenu si/no',
     example: '.antiaudiomenu ya',
     isOwner: true,
     isPremium: false,
@@ -27,12 +27,12 @@ async function handler(m, { sock, db }) {
             `🔊 *ᴄᴏɴғɪɢᴜʀᴀᴄɪóɴ ᴅᴇʟ ᴀᴜᴅɪᴏ ᴅᴇʟ ᴍᴇɴú*\n\n` +
             `> Estado: *${current ? '✅ Activo' : '❌ Inactivo'}*\n\n` +
             `*Modo de uso:*\n` +
-            `> \`${m.prefix}antiaudiomenu ya\` - Activar audio\n` +
-            `> \`${m.prefix}antiaudiomenu gak\` - Desactivar audio`
+            `> \`${m.prefix}antiaudiomenu si\` - Activar audio\n` +
+            `> \`${m.prefix}antiaudiomenu no\` - Desactivar audio`
         )
     }
 
-    if (option === 'ya' || option === 'on' || option === '1' || option === 'aktif') {
+    if (option === 'si' || option === 'on' || option === '1' || option === 'aktif') {
         if (current) {
             return m.reply(`⚠️ ¡El audio del menú ya está activo!`)
         }
@@ -42,7 +42,7 @@ async function handler(m, { sock, db }) {
         return m.reply(`✅ ¡Audio del menú *activado*!\n\n> Ahora, cuando alguien escriba \`.menu\`, aparecerá el audio.`)
     }
 
-    if (option === 'gak' || option === 'off' || option === '0' || option === 'nonaktif') {
+    if (option === 'no' || option === 'off' || option === '0' || option === 'nonaktif') {
         if (!current) {
             return m.reply(`⚠️ ¡El audio del menú ya está inactivo!`)
         }
@@ -52,7 +52,7 @@ async function handler(m, { sock, db }) {
         return m.reply(`❌ ¡Audio del menú *desactivado*!\n\n> Ahora \`.menu\` no tendrá audio.`)
     }
 
-    return m.reply(`❌ ¡Opción no válida!\n\nUsa: \`ya\` o \`gak\``)
+    return m.reply(`❌ ¡Opción no válida!\n\nUsa: \`si\` o \`no\``)
 }
 
 export { pluginConfig as config, handler }
