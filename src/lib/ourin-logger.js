@@ -3,21 +3,21 @@ import gradient from "gradient-string";
 import figlet from "figlet";
 import * as timeHelper from "./ourin-time.js";
 import { getCachedJid, isLidConverted } from "./ourin-lid.js";
-const g = gradient(["#283A63", "#4F78B8", "#6FA9C9", "#B9DCE8"]);
-const borderFx = gradient(["#283A63", "#355C9A", "#6FA9C9", "#B9DCE8"]);
-const mintFx = gradient(["#6FA9C9", "#9AAA70", "#B9DCE8"]);
-const warmFx = gradient(["#C98291", "#B97886", "#283A63"]);
+const g = gradient(["#4A5878", "#789FC4", "#A9C7DD", "#D4E5F0"]);
+const borderFx = gradient(["#4A5878", "#789FC4", "#A9C7DD", "#D4E5F0"]);
+const mintFx = gradient(["#789FC4", "#A9B68A", "#D4E5F0"]);
+const warmFx = gradient(["#C99AA5", "#E0B7BE", "#789FC4"]);
 
 const CATEGORY_PALETTE = [
-  chalk.hex("#283A63"),
-  chalk.hex("#355C9A"),
-  chalk.hex("#4F78B8"),
-  chalk.hex("#6FA9C9"),
-  chalk.hex("#B9DCE8"),
-  chalk.hex("#9AAA70"),
-  chalk.hex("#C98291"),
-  chalk.hex("#B97886"),
-  chalk.hex("#E8F4F7"),
+  chalk.hex("#4A5878"),
+  chalk.hex("#789FC4"),
+  chalk.hex("#8DB2D0"),
+  chalk.hex("#A9C7DD"),
+  chalk.hex("#D4E5F0"),
+  chalk.hex("#A9B68A"),
+  chalk.hex("#C99AA5"),
+  chalk.hex("#E0B7BE"),
+  chalk.hex("#B7CFE1"),
 ];
 
 const SPINNER_FRAMES = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
@@ -29,23 +29,23 @@ const ANSI = {
 };
 
 const k = {
-  p: chalk.hex("#283A63"),
-  s: chalk.hex("#6FA9C9"),
-  a: chalk.hex("#C98291"),
-  t: chalk.hex("#E8F4F7"),
-  d: chalk.hex("#B9DCE8"),
-  m: chalk.hex("#6F8FA8"),
-  ok: chalk.hex("#9AAA70"),
-  no: chalk.hex("#C98291"),
-  wn: chalk.hex("#C98291"),
-  in: chalk.hex("#4F78B8"),
-  db: chalk.hex("#B9DCE8"),
-  bd: chalk.hex("#355C9A"),
-  tg: chalk.hex("#6FA9C9"),
-  cy: chalk.hex("#6FA9C9"),
-  pk: chalk.hex("#C98291"),
-  or: chalk.hex("#B97886"),
-  lm: chalk.hex("#9AAA70"),
+  p: chalk.hex("#4A5878"),
+  s: chalk.hex("#789FC4"),
+  a: chalk.hex("#C99AA5"),
+  t: chalk.hex("#F4F8FA"),
+  d: chalk.hex("#A9C7DD"),
+  m: chalk.hex("#71849E"),
+  ok: chalk.hex("#A9B68A"),
+  no: chalk.hex("#C99AA5"),
+  wn: chalk.hex("#E0B7BE"),
+  in: chalk.hex("#8DB2D0"),
+  db: chalk.hex("#A9C7DD"),
+  bd: chalk.hex("#4A5878"),
+  tg: chalk.hex("#789FC4"),
+  cy: chalk.hex("#A9C7DD"),
+  pk: chalk.hex("#E0B7BE"),
+  or: chalk.hex("#C99AA5"),
+  lm: chalk.hex("#A9B68A"),
 };
 
 const SYM = {
