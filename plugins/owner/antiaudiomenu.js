@@ -1,11 +1,12 @@
 import { getDatabase } from '../../src/lib/ourin-database.js'
+
 const pluginConfig = {
-    name: 'aktifaudiomenu',
-    alias: ['audiomenu', 'setaudiomenu', 'toggleaudiomenu'],
+    name: 'antiaudiomenu',
+    alias: ['audiomenu', 'setantiaudio', 'toggleantiaudio'],
     category: 'owner',
     description: 'Activa o desactiva el audio al mostrar el menú',
-    usage: '.aktifaudiomenu ya/gak',
-    example: '.aktifaudiomenu ya',
+    usage: '.antiaudiomenu ya/gak',
+    example: '.antiaudiomenu ya',
     isOwner: true,
     isPremium: false,
     isGroup: false,
@@ -26,8 +27,8 @@ async function handler(m, { sock, db }) {
             `🔊 *ᴄᴏɴғɪɢᴜʀᴀᴄɪóɴ ᴅᴇʟ ᴀᴜᴅɪᴏ ᴅᴇʟ ᴍᴇɴú*\n\n` +
             `> Estado: *${current ? '✅ Activo' : '❌ Inactivo'}*\n\n` +
             `*Modo de uso:*\n` +
-            `> \`${m.prefix}aktifaudiomenu ya\` - Activar audio\n` +
-            `> \`${m.prefix}aktifaudiomenu gak\` - Desactivar audio`
+            `> \`${m.prefix}antiaudiomenu ya\` - Activar audio\n` +
+            `> \`${m.prefix}antiaudiomenu gak\` - Desactivar audio`
         )
     }
 
