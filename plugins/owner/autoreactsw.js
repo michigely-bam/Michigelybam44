@@ -4,9 +4,9 @@ const pluginConfig = {
     name: 'autoreactsw',
     alias: ['autoreaksi', 'reactsw', 'autoreactstory'],
     category: 'owner',
-    description: 'Auto react semua status/story WA',
-    usage: '.autoreactsw on/off [emoji]',
-    example: '.autoreactsw on 🔥',
+    description: 'Reacciona automáticamente a todos los estados/historias de WA',
+    usage: '.autoreactsw activar/desactivar [emoji]',
+    example: '.autoreactsw activar 🔥',
     isOwner: true,
     isPremium: false,
     isGroup: false,
@@ -26,35 +26,35 @@ async function handler(m) {
 
     if (!action) {
         return m.reply(
-            `👁️ *ᴀᴜᴛᴏ ʀᴇᴀᴄᴛ sᴛᴏʀʏ*\n\n` +
-            `> Status: *${current.enabled ? '✅ ON' : '❌ OFF'}*\n` +
+            `👁️ *ʀᴇᴀᴄᴄɪóɴ ᴀᴜᴛᴏᴍáᴛɪᴄᴀ ᴀ ᴇsᴛᴀᴅᴏs*\n\n` +
+            `> Estado: *${current.enabled ? '✅ ACTIVADO' : '❌ DESACTIVADO'}*\n` +
             `> Emoji: *${current.emoji}*\n\n` +
-            `*ᴄᴀʀᴀ ᴘᴀᴋᴀɪ:*\n` +
-            `> \`${m.prefix}autoreactsw on\` — Aktifkan (emoji default 🔥)\n` +
-            `> \`${m.prefix}autoreactsw on 😍\` — Aktifkan dengan emoji\n` +
-            `> \`${m.prefix}autoreactsw off\` — Matikan`
+            `*ᴍᴏᴅᴏ ᴅᴇ ᴜsᴏ:*\n` +
+            `> \`${m.prefix}autoreactsw activar\` — Activar (emoji predeterminado 🔥)\n` +
+            `> \`${m.prefix}autoreactsw activar 😍\` — Activar con un emoji\n` +
+            `> \`${m.prefix}autoreactsw desactivar\` — Desactivar`
         )
     }
 
-    if (action === 'on') {
+    if (action === 'activar') {
         db.setting('autoReactSW', { enabled: true, emoji })
         db.save()
         await m.react('✅')
         return m.reply(
-            `✅ *ᴀᴜᴛᴏ ʀᴇᴀᴄᴛ sᴛᴏʀʏ ᴀᴋᴛɪꜰ*\n\n` +
+            `✅ *ʀᴇᴀᴄᴄɪóɴ ᴀᴜᴛᴏᴍáᴛɪᴄᴀ ᴀ ᴇsᴛᴀᴅᴏs ᴀᴄᴛɪᴠᴀᴅᴀ*\n\n` +
             `> Emoji: *${emoji}*\n` +
-            `> Bot akan otomatis react semua story WA`
+            `> El bot reaccionará automáticamente a todos los estados de WA`
         )
     }
 
-    if (action === 'off') {
+    if (action === 'desactivar') {
         db.setting('autoReactSW', { enabled: false, emoji: current.emoji })
         db.save()
         await m.react('✅')
-        return m.reply(`❌ *ᴀᴜᴛᴏ ʀᴇᴀᴄᴛ sᴛᴏʀʏ ᴅɪᴍᴀᴛɪᴋᴀɴ*`)
+        return m.reply(`❌ *ʀᴇᴀᴄᴄɪóɴ ᴀᴜᴛᴏᴍáᴛɪᴄᴀ ᴀ ᴇsᴛᴀᴅᴏs ᴅᴇsᴀᴄᴛɪᴠᴀᴅᴀ*`)
     }
 
-    return m.reply(`❌ Gunakan \`on\` atau \`off\``)
+    return m.reply(`❌ Usa \`activar\` o \`desactivar\``)
 }
 
 export { pluginConfig as config, handler }
