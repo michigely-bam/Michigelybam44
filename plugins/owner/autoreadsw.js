@@ -4,9 +4,9 @@ const pluginConfig = {
     name: 'autoreadsw',
     alias: ['autoreadstory', 'readstory', 'bacasw'],
     category: 'owner',
-    description: 'Auto read semua status/story WA',
-    usage: '.autoreadsw on/off',
-    example: '.autoreadsw on',
+    description: 'Lee automáticamente todos los estados/historias de WA',
+    usage: '.autoreadsw activar/desactivar',
+    example: '.autoreadsw activar',
     isOwner: true,
     isPremium: false,
     isGroup: false,
@@ -23,32 +23,32 @@ async function handler(m) {
 
     if (!action) {
         return m.reply(
-            `👁️ *ᴀᴜᴛᴏ ʀᴇᴀᴅ sᴛᴏʀʏ*\n\n` +
-            `> Status: *${current.enabled ? '✅ ON' : '❌ OFF'}*\n\n` +
-            `*ᴄᴀʀᴀ ᴘᴀᴋᴀɪ:*\n` +
-            `> \`${m.prefix}autoreadsw on\` — Aktifkan\n` +
-            `> \`${m.prefix}autoreadsw off\` — Matikan`
+            `👁️ *ʟᴇᴄᴛᴜʀᴀ ᴀᴜᴛᴏᴍáᴛɪᴄᴀ ᴅᴇ ᴇsᴛᴀᴅᴏs*\n\n` +
+            `> Estado: *${current.enabled ? '✅ ACTIVADO' : '❌ DESACTIVADO'}*\n\n` +
+            `*ᴍᴏᴅᴏ ᴅᴇ ᴜsᴏ:*\n` +
+            `> \`${m.prefix}autoreadsw activar\` — Activar\n` +
+            `> \`${m.prefix}autoreadsw desactivar\` — Desactivar`
         )
     }
 
-    if (action === 'on') {
+    if (action === 'activar') {
         db.setting('autoReadSW', { enabled: true })
         db.save()
         await m.react('✅')
         return m.reply(
-            `✅ *ᴀᴜᴛᴏ ʀᴇᴀᴅ sᴛᴏʀʏ ᴀᴋᴛɪꜰ*\n\n` +
-            `> Bot akan otomatis membaca semua story WA`
+            `✅ *ʟᴇᴄᴛᴜʀᴀ ᴀᴜᴛᴏᴍáᴛɪᴄᴀ ᴀᴄᴛɪᴠᴀᴅᴀ*\n\n` +
+            `> El bot leerá automáticamente todos los estados de WA`
         )
     }
 
-    if (action === 'off') {
+    if (action === 'desactivar') {
         db.setting('autoReadSW', { enabled: false })
         db.save()
         await m.react('✅')
-        return m.reply(`❌ *ᴀᴜᴛᴏ ʀᴇᴀᴅ sᴛᴏʀʏ ᴅɪᴍᴀᴛɪᴋᴀɴ*`)
+        return m.reply(`❌ *ʟᴇᴄᴛᴜʀᴀ ᴀᴜᴛᴏᴍáᴛɪᴄᴀ ᴅᴇsᴀᴄᴛɪᴠᴀᴅᴀ*`)
     }
 
-    return m.reply(`❌ Gunakan \`on\` atau \`off\``)
+    return m.reply(`❌ Usa \`activar\` o \`desactivar\``)
 }
 
 export { pluginConfig as config, handler }
