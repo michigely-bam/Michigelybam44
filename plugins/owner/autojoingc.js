@@ -5,9 +5,9 @@ const pluginConfig = {
     name: 'autojoingc',
     alias: ['autojoin', 'autojoingroup'],
     category: 'owner',
-    description: 'Auto join grup dari link yang terdeteksi di chat',
-    usage: '.autojoingc on/off',
-    example: '.autojoingc on',
+    description: 'Se une automáticamente a grupos mediante enlaces detectados en el chat',
+    usage: '.autojoingc activar/desactivar',
+    example: '.autojoingc activar',
     isOwner: true,
     isPremium: false,
     isGroup: false,
@@ -20,14 +20,14 @@ const GROUP_LINK_REGEX = /chat\.whatsapp\.com\/([a-zA-Z0-9]{18,24})/gi
 async function handler(m) {
     const db = getDatabase()
     const arg = (m.args?.[0] || '').toLowerCase()
-    if (!arg || !['on', 'off'].includes(arg)) {
+    if (!arg || !['activar', 'desactivar'].includes(arg)) {
         const current = db.setting('autoJoinGc') || false
-        return m.reply(`🔗 *AUTO JOIN GROUP*\n\nStatus: *${current ? 'ON ✅' : 'OFF ❌'}*\n\n\`${m.prefix}autojoingc on\` — aktifkan\n\`${m.prefix}autojoingc off\` — nonaktifkan`)
+        return m.reply(`🔗 *UNIÓN AUTOMÁTICA A GRUPOS*\n\nEstado: *${current ? 'ACTIVADO ✅' : 'DESACTIVADO ❌'}*\n\n\`${m.prefix}autojoingc activar\` — activar\n\`${m.prefix}autojoingc desactivar\` — desactivar`)
     }
-    const enabled = arg === 'on'
+    const enabled = arg === 'activar'
     db.setting('autoJoinGc', enabled)
     await db.save()
-    m.reply(`${enabled ? '✅' : '❌'} Auto join group *${enabled ? 'diaktifkan' : 'dinonaktifkan'}*`)
+    m.reply(`${enabled ? '✅' : '❌'} Unión automática a grupos *${enabled ? 'activada' : 'desactivada'}*`)
 }
 async function autoJoinDetector(m, sock) {
     const db = getDatabase()
@@ -43,14 +43,14 @@ async function autoJoinDetector(m, sock) {
             const result = await sock.groupAcceptInvite(code)
             if (result) {
                 joined++
-                await m.reply(`✅ Berhasil join grup dari link *${match[0]}*`)
+                await m.reply(`✅ Se unió correctamente al grupo mediante el enlace *${match[0]}*`)
             }
         } catch (e) {
             const msg = e.message || String(e)
             if (msg.includes('already') || msg.includes('participant')) {
-                await m.reply(`⚠️ Sudah ada di grup tersebut`)
+                await m.reply(`⚠️ Ya está en ese grupo`)
             } else if (msg.includes('expired') || msg.includes('revoked')) {
-                await m.reply(`❌ Link grup sudah expired/revoked`)
+                await m.reply(`❌ El enlace del grupo ha expirado o ha sido revocado`)
             } else {
                 await m.reply(te(m.prefix, m.command, m.pushName))
             }
