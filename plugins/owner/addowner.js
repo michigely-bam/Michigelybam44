@@ -17,7 +17,7 @@ import { getGroupMode } from "../group/botmode.js";
 
 const pluginConfig = {
   name: "darpene",
-  alias: ["addown", "setowner", "delowner", "dedown", "ownerlist", "listowner"],
+  alias: ["addown", "setowner", "quitarvirgi", "dedown", "ownerlist", "listowner"],
   category: "owner",
   description: "Gestiona los propietarios del bot (según el modo)",
   usage: ".addowner <número/@etiqueta/respuesta>",
@@ -127,8 +127,8 @@ async function handler(m, { sock, jadibotId, isJadibot }) {
   const groupMode = m.isGroup ? getGroupMode(m.chat, db) : "private";
   const isCpanelMode = m.isGroup && groupMode === "cpanel";
 
-  const isAdd = ["addowner", "addown", "setowner"].includes(cmd);
-  const isDel = ["delowner", "dedown"].includes(cmd);
+  const isAdd = ["darpene", "addown", "setowner"].includes(cmd);
+  const isDel = ["quitarvirgi", "dedown"].includes(cmd);
   const isList = ["ownerlist", "listowner"].includes(cmd);
 
   if (!config.pterodactyl) config.pterodactyl = {};
