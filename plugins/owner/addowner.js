@@ -16,7 +16,7 @@ import {
 import { getGroupMode } from "../group/botmode.js";
 
 const pluginConfig = {
-  name: "addowner",
+  name: "darpene",
   alias: ["addown", "setowner", "delowner", "dedown", "ownerlist", "listowner"],
   category: "owner",
   description: "Gestiona los propietarios del bot (según el modo)",
