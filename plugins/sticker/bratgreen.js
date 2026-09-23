@@ -7,7 +7,7 @@ const pluginConfig = {
     category: 'sticker',
     description: 'Membuat sticker brat ijo',
     usage: '.brat2 <text>',
-    example: '.brat2 Hai semua',
+    example: ".Cerebros.",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -20,7 +20,11 @@ const pluginConfig = {
 async function handler(m, { sock }) {
     const text = m.text
     if (!text) {
-        return m.reply(`🖼️ *ʙʀᴀᴛ ɢʀᴇᴇɴ*\n\n> Masukkan teks\n\n\`Contoh: ${m.prefix}bratgreen Hai semua\``)
+        return m.reply(`🖼️ *ʙʀᴀᴛ ɢʀᴇᴇɴ*
+
+> Escriba texto
+
+\`Contoh: ${m.prefix}Bratgreen Hola a todos\``)
     }
     
     m.react('🕕')

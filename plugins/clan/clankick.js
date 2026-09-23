@@ -19,12 +19,12 @@ async function handler(m) {
     const db = getDatabase()
     const user = db.getUser(m.sender)
 
-    if (!user?.clanId) return m.reply(`❌ Kamu belum punya clan`)
+    if (!user?.clanId) return m.reply(`❌ Aún no tienes un clan.`)
     if (!db.db.data.clans) db.db.data.clans = {}
 
     const clan = db.db.data.clans[user.clanId]
-    if (!clan) return m.reply(`❌ Clan tidak ditemukan`)
-    if (clan.leader !== m.sender) return m.reply(`❌ Hanya leader yang bisa kick`)
+    if (!clan) return m.reply(`❌ Clan not found`)
+    if (clan.leader !== m.sender) return m.reply(`❌ Sólo el líder puede patear`)
 
     const target = m.mentionedJid?.[0] || m.quoted?.sender
     if (!target) {
@@ -35,8 +35,8 @@ async function handler(m) {
         )
     }
 
-    if (target === m.sender) return m.reply(`❌ Tidak bisa kick diri sendiri`)
-    if (!clan.members.includes(target)) return m.reply(`❌ User bukan member clan ini`)
+    if (target === m.sender) return m.reply(`❌ No puedes patearte.`)
+    if (!clan.members.includes(target)) return m.reply(`❌ El usuario no es miembro de este clan`)
 
     clan.members = clan.members.filter(jid => jid !== target)
     db.setUser(target, { clanId: null })

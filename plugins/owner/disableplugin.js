@@ -6,7 +6,7 @@ const pluginConfig = {
   alias: ["dplugin", "plugindisable", "offplugin"],
   category: "owner",
   description: "Menonaktifkan plugin tertentu",
-  usage: ".disableplugin <nama_plugin>",
+  usage: ".disasseplugin_plugin>",
   example: ".disableplugin sticker",
   isOwner: true,
   isPremium: false,
@@ -67,13 +67,13 @@ async function handler(m, { sock }) {
   const found = await findPluginFile(pluginName);
 
   if (!found) {
-    return m.reply(`❌ Plugin *${pluginName}* tidak ditemukan!`);
+    return m.reply(`❌ Plugin *${pluginName}* ¡No lo encontraron!`);
   }
 
   const { filePath, plugin, category, file } = found;
 
   if (plugin.config.isEnabled === false) {
-    return m.reply(`⚠️ Plugin *${pluginName}* sudah dinonaktifkan!`);
+    return m.reply(`⚠️ Plugin *${pluginName}* ¡Se ha desactivado!`);
   }
 
   try {

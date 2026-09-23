@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'addantilink',
     alias: ['addalink', 'addblocklink'],
     category: 'group',
-    description: 'Menambah link ke daftar antilink',
+    description: "Agregar enlaces a la lista de antilinks",
     usage: '.addantilink <domain/pattern>',
     example: '.addantilink tiktok.com',
     isOwner: false,
@@ -35,7 +35,7 @@ function handler(m) {
     const antilinkList = groupData.antilinkList || []
     
     if (antilinkList.includes(link)) {
-        return m.reply(`⚠️ Link \`${link}\` sudah ada di daftar antilink!`)
+        return m.reply(`⚠️ Link \`${link}\` ¡Está en la lista de antivínculos!`)
     }
     
     antilinkList.push(link)

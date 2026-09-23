@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "listproduk",
   alias: ["produk", "katalog", "catalog"],
   category: "store",
-  description: "🛍️ Lihat daftar produk yang tersedia",
+  description: "🛍️ Ver lista de productos disponibles",
   usage: ".listproduk",
   example: ".listproduk",
   isOwner: false,
@@ -34,9 +34,14 @@ async function handler(m, { sock }) {
     );
   }
 
-  let txt = `🛍️ *DAFTAR PRODUK*\n\n`;
-  txt += `Berikut adalah produk yang tersedia saat ini 🎉\n`;
-  txt += `Untuk pembelian, ketik \`${m.prefix}beli <nomor>\`\n\n`;
+  let txt = `🛍️ *LÍNEA DE PRODUCCIÓN*
+
+`;
+  txt += `Aquí están los productos disponibles hoy 🎉
+`;
+  txt += `Para compras, tipo \`${m.prefix}comprar el número de contacto\`
+
+`;
 
   for (let i = 0; i < products.length; i++) {
     const p = products[i];
@@ -72,7 +77,7 @@ async function handler(m, { sock }) {
     txt += `\n`;
   }
 
-  txt += `💡 _Ketik \`${m.prefix}beli <nomor>\` untuk memesan produk_`;
+  txt += `💡 _Ketik \`${m.prefix}comprar el número de contacto\` para ordenar productos_`;
 
   if (m.isGroup) {
     const saluranId = config.saluran?.id || "120363400911374213@newsletter";

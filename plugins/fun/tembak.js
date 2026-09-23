@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "tembak",
   alias: ["nembak", "propose"],
   category: "fun",
-  description: "Menembak seseorang untuk pacaran",
+  description: "Dispara a alguien para un novio",
   usage: ".tembak @tag",
   example: ".tembak @628xxx",
   isOwner: false,
@@ -22,16 +22,16 @@ if (!global.tembakSessions) global.tembakSessions = {};
 
 const SESSION_TIMEOUT = 3600000;
 const romanticQuotes = [
-  "Aku bukan pilot, tapi aku bisa buat hatimu terbang tinggi bersamaku 💕",
-  "Kamu tau kenapa aku suka hujan? Karena hujan itu seperti kamu, sejuk di hati 🌧️",
-  "Kamu adalah alasan kenapa aku senyum tanpa sebab 😊",
-  "Kalau kamu bintang, aku mau jadi langit yang selalu nemenin kamu ✨",
-  "Aku gak butuh GPS, karena hatiku udah nunjuk ke arahmu 💘",
-  "Kamu tau bedanya kamu sama kopi? Kopi bikin melek, kamu bikin aku nggak bisa tidur mikirin kamu ☕",
+  "No soy piloto, pero puedo hacer volar tu corazón conmigo. 💕",
+  "¿Sabes por qué amo la lluvia? Porque es como tú, fresco en el corazón. 🌧️",
+  "Eres la razón por la que estoy sonriendo sin razón. 😊",
+  "Si eres una estrella, quiero ser el cielo que siempre te encuentra. ✨",
+  "No necesito un GPS, porque mi corazón te señala. 💘",
+  "¿Sabes la diferencia entre tú y el café? ☕",
   "Boleh pinjam hatimu? Janji bakal dijaga selamanya 💖",
-  "Kalau cinta itu adalah lagu, kamu adalah melodi terindahnya 🎵",
-  "Aku butuh 3 hal: Matahari, Bulan, dan Kamu. Matahari untuk siang, Bulan untuk malam, Kamu untuk selamanya 🌙",
-  "Kamu adalah puzzle terakhir yang kubutuhkan untuk melengkapi hidupku 🧩",
+  "Si el amor es la canción, eres la melodía más hermosa 🎵",
+  "Necesito 3 cosas: sol, luna y tú. 🌙",
+  "Eres el último rompecabezas que necesito para completar mi vida. 🧩",
 ];
 
 let thumbFun = null;
@@ -101,11 +101,11 @@ async function handler(m, { sock }) {
   }
 
   if (targetJid === m.sender) {
-    return m.reply(`Tidak bisa menembak diri sendiri!`);
+    return m.reply(`¡No puedes dispararte!`);
   }
 
   if (targetJid === m.botNumber) {
-    return m.reply(`Bot tidak bisa pacaran!`);
+    return m.reply(`¡Bot no puede salir!`);
   }
 
   let senderData = db.getUser(m.sender) || {};

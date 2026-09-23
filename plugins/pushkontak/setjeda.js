@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'setjeda',
     alias: ['setdelay', 'jeda'],
     category: 'pushkontak',
-    description: 'Atur delay untuk pushkontak/jpm',
+    description: "Establecer el retraso para pushcontact / jpm",
     usage: '.setjeda <push/jpm> <ms>',
     example: '.setjeda push 5000',
     isOwner: true,
@@ -44,11 +44,15 @@ function handler(m, { sock }) {
     }
     
     if (isNaN(value) || value < 1000) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Masukkan angka minimal 1000 (1 detik)`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Ingrese el número mínimo 1000 (1 segundo)`)
     }
     
     if (value > 60000) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Maksimal 60000 (1 menit)`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Máximo 60000 (1 minuto)`)
     }
     
     if (target === 'push') {

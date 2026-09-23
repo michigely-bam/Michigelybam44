@@ -6,8 +6,8 @@ const pluginConfig = {
     name: 'unban',
     alias: ['delban', 'unblock'],
     category: 'owner',
-    description: 'Menghapus user dari daftar banned',
-    usage: '.unban <nomor/@tag>',
+    description: "Eliminar usuario de la lista prohibida",
+    usage: ".unban , número de@tag>",
     example: '.unban 6281234567890',
     isOwner: true,
     isPremium: false,
@@ -59,7 +59,7 @@ async function handler(m, { sock }) {
     })
 
     if (index === -1) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Nomor \`${targetNumber}\` tidak dalam daftar banned`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Nomor \`${targetNumber}\` no en la lista prohibida`)
     }
 
     bannedList.splice(index, 1)

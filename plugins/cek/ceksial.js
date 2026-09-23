@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'ceksial',
     alias: ['sial', 'apes'],
     category: 'cek',
-    description: 'Cek seberapa sial kamu',
-    usage: '.ceksial <nama>',
+    description: "Mira lo desafortunado que eres.",
+    usage: ".cckal < nombre",
     example: '.ceksial Budi',
     isOwner: false,
     isPremium: false,
@@ -22,7 +22,7 @@ async function handler(m) {
     if (percent >= 90) {
         desc = 'SIAL BANGET! Mending di rumah aja! 😭'
     } else if (percent >= 70) {
-        desc = 'Lagi apes nih~ 😢'
+        desc = "Estoy muy caliente.~ 😢"
     } else if (percent >= 50) {
         desc = 'Lumayan sial 😓'
     } else if (percent >= 30) {
@@ -33,8 +33,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kesialan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kesialan @${mentioned.split('@')[0]} yak? 
+Tu nivel de mala suerte. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar los niveles desafortunados @${mentioned.split('@')[0]} yak? 
     
 Tingkat kesialan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

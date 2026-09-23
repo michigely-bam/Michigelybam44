@@ -11,7 +11,7 @@ const pluginConfig = {
   category: "tools",
   description: "Generate tulisan tangan di kertas",
   usage: ".nulis <teks>",
-  example: ".nulis Aku cinta kamu selamanya",
+  example: ".Escribir Te amo para siempre",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -94,7 +94,9 @@ async function handler(m, { sock }) {
   );
   if (!fs.existsSync(inputPath)) {
     return m.reply(
-      `❌ *ᴛᴇᴍᴘʟᴀᴛᴇ ᴛɪᴅᴀᴋ ᴀᴅᴀ*\n\n> File \`assets/kertas/magernulis1.jpg\` tidak ditemukan`,
+      `❌ *ᴛᴇᴍᴘʟᴀᴛᴇ ᴛɪᴅᴀᴋ ᴀᴅᴀ*
+
+> File \`assets/kertas/magernulis1.jpg\` no encontrado`,
     );
   }
   await m.react("🕕");

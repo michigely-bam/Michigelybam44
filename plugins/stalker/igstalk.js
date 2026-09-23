@@ -56,7 +56,7 @@ async function handler(m, { sock }) {
         const d = res.data
         if (!d?.username) {
             m.react('❌')
-            return m.reply(`❌ Akun *@${username}* tidak ditemukan`)
+            return m.reply(`❌ Akun *@${username}* no encontrado`)
         }
         
         const caption = `📸 *ɪɴsᴛᴀɢʀᴀᴍ sᴛᴀʟᴋ*\n\n` +

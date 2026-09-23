@@ -4,8 +4,8 @@ const pluginConfig = {
     name: 'transfer',
     alias: ['tf', 'kirim'],
     category: 'rpg',
-    description: 'Transfer uang atau item ke user lain',
-    usage: '.transfer <money/nama_item> <jumlah> @user',
+    description: "Transferir dinero o artículos a otro usuario",
+    usage: ".transferencia de dinero / nombre_item> <jumlah> @user",
     example: '.transfer money 10000 @tag',
     isOwner: false,
     isPremium: false,
@@ -40,7 +40,9 @@ function handler(m, { sock }) {
     }
     
     if (target === m.sender) {
-        return m.reply(`❌ *ᴇʀʀᴏʀ*\n\n> Tidak bisa transfer ke diri sendiri!`)
+        return m.reply(`❌ *ᴇʀʀᴏʀ*
+
+> ¡No puedes transferirte a ti mismo!`)
     }
     
     if (!amount || amount <= 0) {
@@ -64,7 +66,9 @@ function handler(m, { sock }) {
         db.setUser(m.sender, sender)
         db.setUser(target, recipient)
         db.save()
-        return m.reply(`✅ *ᴛʀᴀɴsꜰᴇʀ sᴜᴋsᴇs*\n\n> 💸 Dikirim: Rp ${amount.toLocaleString('id-ID')}\n> 👤 Penerima: @${target.split('@')[0]}`, { mentions: [target] })
+        return m.reply(`✅ *ᴛʀᴀɴsꜰᴇʀ sᴜᴋsᴇs*
+
+> 💸 Enviado: Rp ${amount.toLocaleString('id-ID')}\n> 👤 Penerima: @${target.split('@')[0]}`, { mentions: [target] })
     } else {
         sender.inventory = sender.inventory || {}
         recipient.inventory = recipient.inventory || {}

@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'intro',
     alias: ['perkenalan', 'selamatdatang'],
     category: 'group',
-    description: 'Tampilkan pesan intro grup',
+    description: "Mostrar mensajes de intro en grupo",
     usage: '.intro',
     example: '.intro',
     isOwner: false,
@@ -26,10 +26,10 @@ Kenalan dulu yukk
 - Hobi : 
 - Status : 
 
-Semoga betah yahh, di grup @group
+Que tengas una buena estadía. @group
 
-> Untuk Owner:
-ganti intro bawaan dengan .setintro <text>`
+> Para el propietario:
+sustitución de intro incorporado por .setintro <text>`
  function parsePlaceholders(text, m, groupMeta) {
     const now = moment().tz('Asia/Jakarta')
     const dateStr = now.format('D MMMM YYYY')

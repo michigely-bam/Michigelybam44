@@ -11,7 +11,7 @@ const pluginConfig = {
   alias: [],
   category: "canvas",
   description: "Membuat fake developer profile card",
-  usage: ".fakedev2 <nama> (reply/kirim foto)",
+  usage: ".fakedev2 < nombre √ (reply / enviar fotos)",
   example: ".fakedev2 Misaki",
   isOwner: false,
   isPremium: false,
@@ -60,7 +60,7 @@ async function handler(m, { sock }) {
     }
   }
   if (!buffer) {
-    return m.reply(`❌ Kirim/reply gambar untuk dijadikan avatar!`);
+    return m.reply(`❌ Enviar / responder una foto para usar como avatar!`);
   }
   m.react("🕕");
   try {
@@ -80,7 +80,7 @@ async function handler(m, { sock }) {
     m.react("✅");
   } catch (error) {
     m.react("❌");
-    m.reply(`Coba lagi`);
+    m.reply(`Inténtalo de nuevo.`);
   }
 }
 export { pluginConfig as config, handler };

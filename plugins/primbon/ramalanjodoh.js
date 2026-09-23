@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['jodoh', 'cekjodoh'],
     category: 'primbon',
     description: 'Ramalan jodoh berdasarkan primbon Jawa',
-    usage: '.ramalanjodoh nama1 tgl1 bln1 thn1 nama2 tgl2 bln2 thn2',
+    usage: ".Rahljandohaname 1 tgl1 bln1 thn",
     example: '.ramalanjodoh putu 16 11 2007 keyla 1 1 2008',
     isOwner: false,
     isPremium: false,
@@ -18,7 +18,13 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     if (m.args.length < 8) {
-        return m.reply(`💑 *ʀᴀᴍᴀʟᴀɴ ᴊᴏᴅᴏʜ*\n\n> Format:\nrama1 tgl1 bln1 thn1 nama2 tgl2 bln2 thn2\n\n\`Contoh:\n${m.prefix}ramalanjodoh putu 16 11 2007 keyla 1 1 2008\``)
+        return m.reply(`💑 *ʀᴀᴍᴀʟᴀɴ ᴊᴏᴅᴏʜ*
+
+> Format:
+rama1 tgl1 bln1 thn1 nombre 2 tgl2 bl2 thn2
+
+\`Contoh:
+${m.prefix}ramalanjodoh putu 16 11 2007 keyla 1 1 2008\``)
     }
     
     const [nama1, tgl1, bln1, thn1, nama2, tgl2, bln2, thn2] = m.args
@@ -31,7 +37,9 @@ async function handler(m, { sock }) {
         
         if (!data?.status || !data?.data?.result) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Gagal meramal`)
+            return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No se había previsto`)
         }
         
         const r = data.data.result

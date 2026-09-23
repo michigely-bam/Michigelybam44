@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'treasure',
     alias: ['chest', 'peti', 'openbox'],
     category: 'rpg',
-    description: 'Buka treasure chest untuk hadiah random',
+    description: "Tacón de tesoro abierto para regalos aleatorios",
     usage: '.treasure',
     example: '.treasure',
     isOwner: false,
@@ -74,8 +74,11 @@ async function handler(m, { sock }) {
         let txt = `🎁 *ᴛʀᴇᴀsᴜʀᴇ ᴄʜᴇsᴛ*\n\n`
         
         if (availableChests.length === 0) {
-            txt += `> ❌ Kamu tidak punya chest!\n\n`
-            txt += `💡 *Cara dapat chest:*\n`
+            txt += `> ❌ ¡No tienes pecho!
+
+`
+            txt += `💡 *¿Cómo se puede Chest:*
+`
             txt += `> • Dungeon\n`
             txt += `> • Boss\n`
             txt += `> • Daily/Weekly\n`
@@ -93,11 +96,11 @@ async function handler(m, { sock }) {
     
     const chest = CHEST_TYPES[chestType]
     if (!chest) {
-        return m.reply(`❌ Chest tidak ditemukan!`)
+        return m.reply(`❌ ¡El pecho no se encuentra!`)
     }
     
     if ((user.inventory[chestType] || 0) < 1) {
-        return m.reply(`❌ Kamu tidak punya ${chest.name}!`)
+        return m.reply(`❌ No tienes. ${chest.name}!`)
     }
     
     user.inventory[chestType]--

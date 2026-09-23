@@ -17,7 +17,7 @@ const pluginConfig = {
   name: "goodbye",
   alias: ["bye", "leave"],
   category: "group",
-  description: "Mengatur goodbye message untuk grup",
+  description: "Establecer el mensaje de despedida para el grupo",
   usage: ".goodbye <on/off>",
   example: ".goodbye on",
   isOwner: false,
@@ -41,7 +41,7 @@ async function buildGoodbyeMessage(
 ) {
   const farewells = [
     `Sayonara`,
-    `Sampai jumpa`,
+    `Adiós.`,
     `Bye bye`,
     `Dadah`,
     `See you`,
@@ -49,27 +49,27 @@ async function buildGoodbyeMessage(
     `Oyasumi~`,
   ];
   const quotes = [
-    `Semoga langkahmu selalu dimudahkan ke depannya.`,
-    `Terima kasih sudah jadi bagian dari grup ini.`,
-    `Semoga kita bisa bertemu lagi di lain waktu.`,
-    `Pintu selalu terbuka kalau suatu saat mau kembali.`,
+    `Que tus pasos siempre sean rebajados delante de él.`,
+    `Gracias por ser parte de este grupo.`,
+    `Espero que nos veamos otra vez.`,
+    `La puerta siempre está abierta cuando vuelve.`,
     `Jaga diri baik-baik ya, tomodachi.`,
     `Kenangan di sini bakal tetap ada.`,
   ];
   const emojis = ["🌙", "👋", "🥀", "💫", "😢", "🤍"];
   const headers = [
     `🌙 Oyasumi~ minna-san...
-Hari ini satu tomodachi harus berpamitan.
+Hoy un tomodachi debe despedirse.
 Semoga perjalanan barunya penuh kebaikan.`,
     `🥀 Minna-san...
-Ada perpisahan kecil hari ini.
-Terima kasih sudah pernah berjalan bersama.`,
+Hoy hay un pequeño adiós.
+Gracias por caminar conmigo.`,
     `💫 Sayonara~
-Bukan akhir, hanya sampai jumpa.
-Semoga hari-harimu selalu hangat.`,
+No al final, nos vemos luego.
+Que sus días estén calientes.`,
     `🌌 Minna-san...
-Satu bintang berpindah langit malam ini.
-Doakan yang terbaik untuknya ya.`,
+Una estrella se mueve por el cielo esta noche.
+Deséale suerte.`,
   ];
   const farewell = farewells[Math.floor(Math.random() * farewells.length)];
   const quote = quotes[Math.floor(Math.random() * quotes.length)];
@@ -111,7 +111,7 @@ ${emoji} ${farewell}, *@${username}* 🤍
 ╰──────────────────────✦
 💌 *Pesan*
 「 ${quote} 」
-🌸 _Sampai jumpa lagi, tomodachi._ 🤍
+🌸 _Hasta luego, Tomodachi._ 🤍
 `;
 }
 async function sendGoodbyeMessage(sock, groupJid, participant, groupMeta) {
@@ -164,7 +164,7 @@ async function sendGoodbyeMessage(sock, groupJid, participant, groupMeta) {
     const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
     if (goodbyeType === 2) {
       await sock.sendMessage(groupJid, {
-        text: "Sampai Jumpa!",
+        text: "¡Nos vemos!",
         title: `Goodbye ${userName}`,
         subtitle: groupName,
         footer: `Sisa ${memberCount} Member`,
@@ -172,13 +172,13 @@ async function sendGoodbyeMessage(sock, groupJid, participant, groupMeta) {
           {
             image: { url: ppUrl },
             title: `Sayonara ${userName}!`,
-            body: `Terima kasih sudah bergabung di ${groupName}`,
+            body: `Gracias por acompañarnos. ${groupName}`,
             footer: "Semoga sukses selalu~",
             buttons: [
               {
                 name: "quick_reply",
                 buttonParamsJson: JSON.stringify({
-                  display_text: "👋 Selamat Tinggal",
+                  display_text: "👋 Adiós.",
                   id: "bye",
                 }),
               },
@@ -225,8 +225,8 @@ async function sendGoodbyeMessage(sock, groupJid, participant, groupMeta) {
             newsletterJid: config?.saluran?.id,
           },
           externalAdReply: {
-            title: `SELAMAT TINGGAL 👋`,
-            body: `Member ke-${memberCount}`,
+            title: `WELCOME 👋`,
+            body: `Miembro...${memberCount}`,
             thumbnailUrl: ppUrl,
             sourceUrl: config.info?.grupwa || "",
             mediaUrl: config.info?.grupwa || "",
@@ -244,7 +244,7 @@ async function sendGoodbyeMessage(sock, groupJid, participant, groupMeta) {
           isForwarded: true,
           externalAdReply: {
             title: `Goodbye 👋`,
-            body: `Member ke-${memberCount}`,
+            body: `Miembro...${memberCount}`,
             thumbnailUrl: ppUrl,
             sourceUrl: null,
             mediaType: 1,
@@ -304,7 +304,7 @@ async function handler(m, { sock }) {
   const currentStatus = groupData.goodbye === true;
   if (sub === "on" && sub2 === "all") {
     if (!m.isOwner) {
-      return m.reply(`❌ Hanya owner yang bisa menggunakan fitur ini!`);
+      return m.reply(`❌ ¡Sólo el propietario podría usar esta característica!`);
     }
     m.react("🕕");
     try {
@@ -327,7 +327,7 @@ async function handler(m, { sock }) {
   }
   if (sub === "off" && sub2 === "all") {
     if (!m.isOwner) {
-      return m.reply(`❌ Hanya owner yang bisa menggunakan fitur ini!`);
+      return m.reply(`❌ ¡Sólo el propietario podría usar esta característica!`);
     }
     m.react("🕕");
     try {

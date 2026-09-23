@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'hunt',
     alias: ['berburu', 'hunting'],
     category: 'rpg',
-    description: 'Berburu hewan untuk mendapatkan daging dan kulit',
+    description: "Caza animales para conseguir carne y piel",
     usage: '.hunt',
     example: '.hunt',
     isOwner: false,

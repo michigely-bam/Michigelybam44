@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'listantilink',
     alias: ['antilinklist', 'cekantilink'],
     category: 'group',
-    description: 'Melihat daftar link yang diblokir',
+    description: "Ver lista de enlaces bloqueados",
     usage: '.listantilink',
     example: '.listantilink',
     isOwner: false,
@@ -49,8 +49,9 @@ function handler(m) {
     
     txt += `> Default: *${DEFAULT_BLOCKED_LINKS.length}* link\n`
     txt += `> Custom: *${customList.length}* link\n\n`
-    txt += `\`${m.prefix}addantilink <link>\` untuk tambah\n`
-    txt += `\`${m.prefix}delantilink <link>\` untuk hapus`
+    txt += `\`${m.prefix}addantilink <link>\` para añadir
+`
+    txt += `\`${m.prefix}delantilink <link>\` para eliminar`
     
     m.reply(txt)
 }

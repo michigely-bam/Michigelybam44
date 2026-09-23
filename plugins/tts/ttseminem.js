@@ -7,7 +7,7 @@ const pluginConfig = {
     name: 'ttseminem',
     alias: ['eminemtts'],
     category: 'tts',
-    description: 'Text to Speech dengan suara Eminem',
+    description: "Texto para hablar con voz de Eminem",
     usage: '.ttseminem <text>',
     example: '.ttseminem Rap God!',
     isOwner: false,
@@ -38,7 +38,7 @@ async function handler(m, { sock }) {
         const voice = res.data?.result?.find(v => v.eminem && !v.error)
         if (!voice) {
             m.react('❌')
-            return m.reply(`❌ Eminem voice error. Coba TTS lain.`)
+            return m.reply(`❌ Error de voz de Eminem.`)
         }
         
         const tempDir = path.join(process.cwd(), 'temp')

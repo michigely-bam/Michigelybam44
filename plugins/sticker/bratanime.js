@@ -7,7 +7,7 @@ const pluginConfig = {
   category: "sticker",
   description: "Membuat sticker brat anime",
   usage: ".bratanime <text>",
-  example: ".bratanime Hai semua",
+  example: ".Bratanime Hola a todos",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -21,7 +21,11 @@ async function handler(m, { sock }) {
   const text = m.args.join(" ");
   if (!text) {
     return m.reply(
-      `🖼️ *BRAT ANIME*\n\n> Masukkan teks\n\n\`Contoh: ${m.prefix}bratanime Hai semua\``,
+      `🖼️ *BRAT ANIME*
+
+> Escriba texto
+
+\`Contoh: ${m.prefix}Bratanime Hola a todos\``,
     );
   }
 

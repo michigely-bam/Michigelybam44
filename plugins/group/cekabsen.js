@@ -4,7 +4,7 @@ const pluginConfig = {
   name: "cekabsen",
   alias: ["listabsen", "daftarabsen", "lihathadir"],
   category: "group",
-  description: "Lihat daftar peserta yang sudah absen",
+  description: "Ver la lista de ausencias ya ausentes",
   usage: ".cekabsen",
   example: ".cekabsen",
   isOwner: false,
@@ -31,7 +31,7 @@ async function handler(m, { sock }) {
   const dateStr = now.format("D MMMM YYYY");
   const createdDate = moment(absen.createdAt).tz("Asia/Jakarta");
   const timeStr = createdDate.format("HH:mm");
-  let list = "┃ _Belum ada yang absen_";
+  let list = "┃ _Nadie está ausente._";
   if (absen.peserta.length > 0) {
     list = absen.peserta
       .map((jid, i) => `┃ ${i + 1}. @${jid.split("@")[0]}`)

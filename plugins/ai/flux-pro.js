@@ -6,9 +6,9 @@ const pluginConfig = {
   name: "flux-pro",
   alias: ["fluxpro", "flux"],
   category: "ai",
-  description: "Generate atau edit gambar dengan Covenant Flux",
+  description: "Generar o editar imágenes con Covenant Flux",
   usage: ".flux-pro <prompt> --model=flux-dev --ratio=1:1",
-  example: ".flux-pro buat gambar anime --model=flux-dev --ratio=1:1",
+  example: ".flux-pro crear imagen anime --model=flux-dev --ratio=1:1",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -95,7 +95,7 @@ async function handler(m, { sock }) {
   }
 
   if (!config.APIkey?.covenant) {
-    return m.reply("❌ API key covenant tidak dikonfigurasi!");
+    return m.reply("❌ ¡A API de coven clave no configurada!");
   }
 
   m.react("🕕");
@@ -116,7 +116,7 @@ async function handler(m, { sock }) {
       const mediaBuffer = await getImageBuffer(m);
       if (!mediaBuffer || !Buffer.isBuffer(mediaBuffer)) {
         m.react("❌");
-        return m.reply("❌ Gagal mengunduh gambar referensi");
+        return m.reply("❌ No se pudo descargar imagen de referencia");
       }
       files.push({
         name: "file",
@@ -138,7 +138,7 @@ async function handler(m, { sock }) {
     );
 
     if (!data?.status || !data?.data?.url) {
-      throw new Error(data?.message || "Gagal memproses Flux Pro");
+      throw new Error(data?.message || "No se pudo process Pro Flux");
     }
 
     m.react("✅");

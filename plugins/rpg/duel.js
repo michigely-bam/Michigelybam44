@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'duel',
     alias: ['pvp', 'fight'],
     category: 'rpg',
-    description: 'Duel PvP dengan player lain',
+    description: "PvP duel con otro jugador",
     usage: '.duel @user <bet>',
     example: '.duel @user 5000',
     isOwner: false,
@@ -35,7 +35,9 @@ async function handler(m, { sock }) {
     }
     
     if (target === m.sender) {
-        return m.reply(`❌ *ᴇʀʀᴏʀ*\n\n> Tidak bisa duel diri sendiri!`)
+        return m.reply(`❌ *ᴇʀʀᴏʀ*
+
+> ¡No puedes dársela!`)
     }
     
     if (bet < 1000) {

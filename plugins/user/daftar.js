@@ -13,7 +13,7 @@ const pluginConfig = {
   name: "daftar",
   alias: ["register", "reg"],
   category: "user",
-  description: "Daftar sebagai user bot melalui sesi reply interaktif",
+  description: "Lista como usuario bot a través de la sesión de respuesta interactiva",
   usage: ".daftar",
   example: ".daftar",
   isOwner: false,
@@ -178,17 +178,23 @@ function buildRewardPreview(user) {
   const rewards = getRegistrationRewards();
 
   if (user?.hasClaimedRegisterReward) {
-    return `🎁 *Status Bonus*\n> Bonus daftar pertama sudah pernah kamu klaim\n> Daftar ulang tidak mendapat reward lagi`;
+    return `🎁 *Status Bonus*
+> Primera lista de bonificación que nunca has reclamado
+> Las listas ya no reciben resorts.`;
   }
 
-  return `🎁 *Bonus Daftar Pertama*\n> 💰 +${rewards.koin.toLocaleString("id-ID")} Koin\n> ⚡ +${rewards.energi} Energi\n> ⭐ +${rewards.exp.toLocaleString("id-ID")} EXP`;
+  return `🎁 *Bono de primera lista*
+> 💰 +${rewards.koin.toLocaleString("id-ID")} Koin\n> ⚡ +${rewards.energi} Energi\n> ⭐ +${rewards.exp.toLocaleString("id-ID")} EXP`;
 }
 
 function buildConfirmationRewardBlock(user) {
   const rewards = getRegistrationRewards();
 
   if (user?.hasClaimedRegisterReward) {
-    return `╭┈┈⬡「 🎁 *ʙᴏɴᴜs* 」\n┃ Bonus daftar pertama sudah pernah diambil\n┃ Daftar ulang tidak mendapat reward lagi\n╰┈┈┈┈┈┈┈┈⬡`;
+    return `╭┈┈⬡「 🎁 *ʙᴏɴᴜs* 」
+┃ El bono de la primera lista ya ha sido tomado
+┃ Las listas ya no reciben resorts.
+╰┈┈┈┈┈┈┈┈⬡`;
   }
 
   return `╭┈┈⬡「 🎁 *ʀᴇᴡᴀʀᴅs* 」\n┃ 💰 +${rewards.koin.toLocaleString("id-ID")} Koin\n┃ ⚡ +${rewards.energi} Energi\n┃ ⭐ +${rewards.exp.toLocaleString("id-ID")} EXP\n╰┈┈┈┈┈┈┈┈⬡`;
@@ -198,7 +204,10 @@ function buildSuccessRewardBlock(alreadyClaimedReward) {
   const rewards = getRegistrationRewards();
 
   if (alreadyClaimedReward) {
-    return `╭┈┈⬡「 🎁 *ʙᴏɴᴜs* 」\n┃ Bonus daftar sudah pernah diklaim\n┃ Tidak ada reward tambahan kali ini\n╰┈┈┈┈┈┈┈┈⬡`;
+    return `╭┈┈⬡「 🎁 *ʙᴏɴᴜs* 」
+┃ Lista de bonos ya se ha reclamado
+┃ No hay recompensa extra esta vez
+╰┈┈┈┈┈┈┈┈⬡`;
   }
 
   return `╭┈┈⬡「 🎁 *ʀᴇᴡᴀʀᴅs* 」\n┃ 💰 +${rewards.koin.toLocaleString("id-ID")} Koin\n┃ ⚡ +${rewards.energi} Energi\n┃ ⭐ +${rewards.exp.toLocaleString("id-ID")} EXP\n╰┈┈┈┈┈┈┈┈⬡`;
@@ -216,7 +225,7 @@ function buildUserDataBlock(name, age, gender) {
 
 function buildWelcomeMessage(user, registrationRequired, prefix) {
   const benefits = [
-    `🗂️ Data akun kamu tersimpan lebih rapi`,
+    `🗂️ Los datos de su cuenta se almacenan con más facilidad`,
     `${buildRewardPreview(user)}`,
   ];
 
@@ -224,7 +233,7 @@ function buildWelcomeMessage(user, registrationRequired, prefix) {
     benefits.splice(
       1,
       0,
-      `🔓 Setelah daftar kamu bisa mengakses semua command`,
+      `🔓 Una vez que la lista puede acceder a todos los comandos`,
     );
   }
 
@@ -304,7 +313,9 @@ async function registrationAnswerHandler(m, sock) {
   if (["batal", "cancel", "batalkan"].includes(lowText)) {
     clearRegistrationSession(m.sender);
     await m.reply(
-      `❌ Pendaftaran dibatalkan.\n\n> Mulai lagi dengan: \`${m.prefix}daftar\``,
+      `❌ Pendaftaran dibatalkan.
+
+> Comienza de nuevo con: \`${m.prefix}daftar\``,
     );
     return true;
   }
@@ -313,7 +324,7 @@ async function registrationAnswerHandler(m, sock) {
     const name = normalizeRegistrationName(text);
 
     if (name.length < 2 || name.length > 30) {
-      await m.reply(`❌ Nama harus 2-30 karakter!`);
+      await m.reply(`❌ ¡El nombre debe ser de 2-30 caracteres!`);
       return true;
     }
 
@@ -340,7 +351,9 @@ async function registrationAnswerHandler(m, sock) {
 
     if (!/^\d+$/.test(text) || Number.isNaN(age) || age < 1 || age > 100) {
       await m.reply(
-        `❌ Umur tidak valid!\n\n> Masukkan angka umur dari *1 - 100* tahun`,
+        `❌ ¡Envejecimiento inválido!
+
+> Introduzca el número de edad *1 - 100* tahun`,
       );
       return true;
     }
@@ -398,7 +411,7 @@ async function registrationAnswerHandler(m, sock) {
     const name = normalizeRegistrationName(text);
 
     if (name.length < 2 || name.length > 30) {
-      await m.reply(`❌ Nama harus 2-30 karakter!`);
+      await m.reply(`❌ ¡El nombre debe ser de 2-30 caracteres!`);
       return true;
     }
 
@@ -421,7 +434,9 @@ async function registrationAnswerHandler(m, sock) {
 
     if (!/^\d+$/.test(text) || Number.isNaN(age) || age < 1 || age > 100) {
       await m.reply(
-        `❌ Umur tidak valid!\n\n> Masukkan angka umur dari *1 - 100* tahun`,
+        `❌ ¡Envejecimiento inválido!
+
+> Introduzca el número de edad *1 - 100* tahun`,
       );
       return true;
     }
@@ -539,7 +554,9 @@ async function registrationAnswerHandler(m, sock) {
 
     if (!["ya", "y", "iya", "yes", "lanjut", "confirm"].includes(lowText)) {
       await m.reply(
-        `❌ Balasan tidak valid!\n\n> Reply: \`ya\`, \`revisi nama\`, \`revisi umur\`, \`revisi gender\`, atau \`batal\``,
+        `❌ ¡Respuesta inválida!
+
+> Reply: \`ya\`, \`revisi nama\`, \`revisi umur\`, \`revisi gender\`, atau \`batal\``,
       );
       return true;
     }

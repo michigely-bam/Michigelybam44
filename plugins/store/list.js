@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "list",
   alias: ["liststore", "daftar", "info"],
   category: "store",
-  description: "📋 Lihat daftar informasi toko",
+  description: "📋 Ver la lista de información de la tienda",
   usage: ".list atau .list <nomor>",
   example: ".list 1",
   isOwner: false,
@@ -56,9 +56,14 @@ async function handler(m, { sock }) {
     return m.reply(txt);
   }
 
-  let txt = `📋 *DAFTAR INFORMASI TOKO*\n\n`;
-  txt += `Berikut informasi yang tersedia saat ini 📝\n`;
-  txt += `Ketik \`${m.prefix}list <nomor>\` untuk melihat detail.\n\n`;
+  let txt = `📋 *INFORMACIÓN TICO LAND*
+
+`;
+  txt += `Aquí está la información disponible 📝
+`;
+  txt += `Ketik \`${m.prefix}lista de datos\` para ver los detalles.
+
+`;
 
   for (let i = 0; i < lists.length; i++) {
     const l = lists[i];
@@ -67,7 +72,7 @@ async function handler(m, { sock }) {
   }
   txt += "\n";
 
-  txt += `💡 _Ketik \`${m.prefix}list <nomor>\` untuk membaca detail informasi_`;
+  txt += `💡 _Ketik \`${m.prefix}lista de datos\` para leer detalles de información_`;
 
   await m.reply(txt);
 }

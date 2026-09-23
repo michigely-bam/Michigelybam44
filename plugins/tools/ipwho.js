@@ -83,7 +83,7 @@ async function handler(m, { sock }) {
 
     if (!data.success) {
       await m.react("❌");
-      return m.reply(`❌ *ɪᴘ ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n> IP ${ip} tidak valid`);
+      return m.reply(`❌ *ɪᴘ ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n> IP ${ip} inválido`);
     }
 
     if (data.latitude && data.longitude) {

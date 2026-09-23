@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'cekonline',
     alias: ['checkonline', 'online', 'siapayangonline', 'whosonline'],
     category: 'group',
-    description: 'Cek member yang online di grup',
+    description: "Chequeo de miembro en línea en grupo",
     usage: '.cekonline',
     example: '.cekonline',
     isOwner: false,
@@ -24,10 +24,13 @@ async function handler(m, { sock }) {
         
         if (participants.length === 0) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak bisa mendapatkan data member grup`)
+            return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No podría obtener datos de miembros del grupo`)
         }
         
-        await m.reply(`🔍 *ᴍᴇɴᴄᴀʀɪ ᴍᴇᴍʙᴇʀ ᴏɴʟɪɴᴇ...*\n\n> Menunggu response dari ${participants.length} member\n> Estimasi: 5-10 detik`)
+        await m.reply(`🔍 *ᴍᴇɴᴄᴀʀɪ ᴍᴇᴍʙᴇʀ ᴏɴʟɪɴᴇ...*\n\n> Menunggu response dari ${participants.length} member
+> Estimación: 5 a 10 segundos`)
         
         const presences = {}
         
@@ -69,7 +72,8 @@ async function handler(m, { sock }) {
         text += `╰┈┈⬡\n\n`
         
         if (onlineMembers.length === 0) {
-            text += `> _Tidak ada member yang terdeteksi online_\n`
+            text += `> _No hay miembros detectados en línea_
+`
             text += `> _Pastikan member telah membuka WA_`
         } else {
             text += `╭┈┈⬡「 🟢 *ᴍᴇᴍʙᴇʀ ᴏɴʟɪɴᴇ* 」\n`

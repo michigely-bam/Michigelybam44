@@ -3,8 +3,8 @@ const pluginConfig = {
     name: 'jedacreate',
     alias: ['setjeda', 'paneljeda', 'jedapanel'],
     category: 'panel',
-    description: 'Set jeda waktu untuk semua panel create command',
-    usage: '.jedacreate <waktu>',
+    description: "Establece un tiempo para todos crear paneles de comandos",
+    usage: ".jedacreate − Tiempo asignado",
     example: '.jedacreate 5m',
     isOwner: true,
     isPremium: false,
@@ -71,7 +71,9 @@ function handler(m, { sock }) {
     const jedaMs = parseTime(input)
     
     if (jedaMs === null) {
-        return m.reply(`❌ Format waktu tidak valid!\n\n> Contoh: 30s, 5m, 1h`)
+        return m.reply(`❌ ¡Formato de tiempo inválido!
+
+> Contoh: 30s, 5m, 1h`)
     }
     
     db.setting('panelCreateJeda', jedaMs)

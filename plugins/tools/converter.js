@@ -8,7 +8,7 @@ const pluginConfig = {
   name: "converter",
   alias: ["convert", "konversi"],
   category: "tools",
-  description: "Convert file ke format lain",
+  description: "Convertir archivos en otro formato",
   usage: ".converter <format> (reply file)",
   example: ".converter mp3",
   isOwner: false,
@@ -41,7 +41,9 @@ async function handler(m, { sock }) {
 
   if (!targetFormat) {
     return m.reply(
-      `❌ Masukkan format tujuan!\n\n> Contoh: \`${m.prefix}converter mp3\``,
+      `❌ ¡Introduzca el formato de destino!
+
+> Contoh: \`${m.prefix}converter mp3\``,
     );
   }
 
@@ -58,7 +60,7 @@ async function handler(m, { sock }) {
   }
 
   if (!mediaMessage) {
-    return m.reply(`❌ Reply file yang mau diconvert!`);
+    return m.reply(`❌ Responder archivo para convertir!`);
   }
 
   m.react("🕕");

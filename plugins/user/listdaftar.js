@@ -113,8 +113,8 @@ const pluginConfig = {
   alias: ["listuser", "registeredusers", "daftarlist"],
   category: "user",
   description:
-    "Lihat daftar user yang sudah terdaftar dengan filter dan pagination",
-  usage: ".listdaftar [page <nomor>] [search <nama>] [sort terbaru]",
+    "Ver lista de usuarios ya listados con filtros y paginación",
+  usage: ".lista [página 1] [búsqueda] [nombre de búsqueda] [tipo más bajo]",
   example: ".listdaftar search zann sort terbaru page 2",
   isOwner: true,
   isPremium: false,
@@ -132,7 +132,7 @@ async function handler(m, { sock }) {
   let registeredUsers = Object.values(allUsers).filter((u) => u.isRegistered);
 
   if (registeredUsers.length === 0) {
-    return m.reply(`❌ Belum ada user yang terdaftar!`);
+    return m.reply(`❌ ¡No se han registrado todavía usuarios!`);
   }
 
   if (options.search) {
@@ -152,7 +152,7 @@ async function handler(m, { sock }) {
 
   if (registeredUsers.length === 0) {
     return m.reply(
-      `❌ Tidak ada user yang cocok dengan pencarian: *${options.search}*`,
+      `❌ No hay búsqueda de coincidencia de usuarios: *${options.search}*`,
     );
   }
 
@@ -165,7 +165,7 @@ async function handler(m, { sock }) {
   );
 
   let text = `📋 *ᴅᴀꜰᴛᴀʀ ᴜsᴇʀ ᴛᴇʀᴅᴀꜰᴛᴀʀ*\n\n`;
-  text += `> Total hasil: *${registeredUsers.length}* user\n`;
+  text += `> Resultados totales: *${registeredUsers.length}* user\n`;
   text += `> Halaman: *${page}/${totalPages}*\n`;
   text += `> Urut: *${options.sort === "terbaru" ? "Terbaru" : "Default"}*\n`;
   if (options.search) {
@@ -189,7 +189,7 @@ async function handler(m, { sock }) {
   });
 
   if (totalPages > 1) {
-    text += `\n> Gunakan \`${m.prefix}listdaftar page ${page + 1 > totalPages ? totalPages : page + 1}\` untuk halaman lain`;
+    text += `\n> Gunakan \`${m.prefix}listdaftar page ${page + 1 > totalPages ? totalPages : page + 1}\` para otra página`;
   }
 
   const mentions = displayUsers.map((u) => u.jid + "@s.whatsapp.net");

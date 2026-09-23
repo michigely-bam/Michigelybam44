@@ -41,7 +41,7 @@ async function handler(m, { sock }) {
   }
 
   if (!url.match(/mediafire\.com/i)) {
-    return m.reply(`❌ *URL tidak valid. Gunakan link MediaFire.*`);
+    return m.reply(`❌ *URL inválida. Utilice el enlace MediaFire.*`);
   }
   await m.react("🕕");
 

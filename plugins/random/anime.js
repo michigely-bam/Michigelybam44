@@ -35,7 +35,7 @@ const pluginConfig = {
     alias: Object.keys(SOURCES),
     category: 'random',
     description: 'Random gambar anime/wallpaper (Leoo7z Source)',
-    usage: '.<nama> (lihat daftar di bawah)',
+    usage: ".<nombre √≥ (ver la lista abajo)",
     example: '.naruto',
     isOwner: false,
     isPremium: false,
@@ -71,14 +71,14 @@ async function handler(m, { sock }) {
     const source = SOURCES[cmd]
     
     if (!source) {
-        return m.reply(`❌ Source tidak ditemukan.`)
+        return m.reply(`❌ Fuente no encontrada.`)
     }
     
     try {
         const images = await getImages(source)
         
         if (!images || images.length === 0) {
-            return m.reply(`❌ Gagal mengambil data ${cmd}.`)
+            return m.reply(`❌ Fallado para recuperar datos ${cmd}.`)
         }
 
         if(m.command === 'loli') {

@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekkpopers',
     alias: ['kpopers', 'kpop'],
     category: 'cek',
-    description: 'Cek tingkat kpopers kamu',
-    usage: '.cekkpopers <nama>',
+    description: "Compruebe su nivel de kpopers",
+    usage: ".checkkpopers - nombre identificado",
     example: '.cekkpopers Budi',
     isOwner: false,
     isPremium: false,
@@ -23,12 +23,12 @@ async function handler(m) {
     else if (percent >= 70) desc = 'Stan berat nih! 🎤'
     else if (percent >= 50) desc = 'Casual listener~ 🎵'
     else if (percent >= 30) desc = 'Tau dikit-dikit aja 😅'
-    else desc = 'Bukan kpopers 🤷'
+    else desc = "No kpopers. 🤷"
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kekpopersan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kekpopersan @${mentioned.split('@')[0]} yak? 
+Tus niveles de rigidez *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar la tasa de estreñimiento @${mentioned.split('@')[0]} yak? 
     
 Tingkat kekpopersan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

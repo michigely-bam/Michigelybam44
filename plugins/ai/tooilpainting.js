@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['oilpainting', 'tooil', 'oil'],
     category: 'ai',
     description: 'Ubah foto menjadi gaya lukisan minyak (oil painting)',
-    usage: '.tooilpainting (reply/kirim gambar)',
+    usage: ".tooilpainting (reply / enviar imagen)",
     example: '.tooilpainting',
     isOwner: false,
     isPremium: true,
@@ -44,7 +44,7 @@ async function handler(m, { sock }) {
         
         if (!buffer) {
             m.react('❌')
-            return m.reply(`❌ Gagal mendownload gambar`)
+            return m.reply(`❌ No se pudo download image`)
         }
         
         const result = await nanoBanana(buffer, PROMPT)

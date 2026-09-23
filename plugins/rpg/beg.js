@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'beg',
     alias: ['ngemis', 'minta'],
     category: 'rpg',
-    description: 'Mengemis untuk mendapatkan uang receh',
+    description: "Begging for change",
     usage: '.beg',
     example: '.beg',
     isOwner: false,
@@ -28,12 +28,12 @@ async function handler(m, { sock }) {
     
     const responses = [
         { success: true, money: 500, exp: 10, msg: 'Seorang dermawan memberikanmu uang!' },
-        { success: true, money: 1000, exp: 20, msg: 'Kamu dapat tips dari orang baik!' },
-        { success: true, money: 2000, exp: 50, msg: 'WOW! Ada sultan yang kasihan!' },
-        { success: false, money: 0, exp: 0, msg: 'Tidak ada yang peduli...' },
+        { success: true, money: 1000, exp: 20, msg: "¡Tienes consejos de un buen hombre!" },
+        { success: true, money: 2000, exp: 50, msg: "¡Hay un pobre sultán!" },
+        { success: false, money: 0, exp: 0, msg: "A nadie le importa..." },
         { success: false, money: 0, exp: 0, msg: 'Orang-orang mengabaikanmu...' },
-        { success: true, money: 100, exp: 5, msg: 'Dapat receh dari kantong orang!' },
-        { success: false, money: -500, exp: 0, msg: 'Kamu malah dirampok pengemis lain!' }
+        { success: true, money: 100, exp: 5, msg: "¡Saca un centavo del bolsillo de alguien!" },
+        { success: false, money: -500, exp: 0, msg: "¡Te robaron otro mendigo!" }
     ]
     
     const result = responses[Math.floor(Math.random() * responses.length)]

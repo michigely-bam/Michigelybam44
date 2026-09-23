@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "hdvid",
   alias: ["hdvideo", "enhancevid", "hdv"],
   category: "tools",
-  description: "Meningkatkan kualitas video menjadi HD dengan AI",
+  description: "Aumentar la calidad de vídeo a HD con IA",
   usage: ".hdvid (reply video)",
   example: ".hdvid",
   isOwner: false,
@@ -39,7 +39,9 @@ async function handler(m, { sock }) {
 
     if (!videoBuffer || videoBuffer.length === 0) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Gagal mengunduh video!`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> ¡No se pudo download video!`);
     }
 
     if (videoBuffer.length > 50 * 1024 * 1024) {
@@ -48,7 +50,10 @@ async function handler(m, { sock }) {
     }
 
     await m.reply(
-      `🎞️ *ʜᴅ ᴠɪᴅᴇᴏ ᴇɴʜᴀɴᴄᴇʀ*\n\n> Video sedang diupload dan diproses\n> Estimasi 30-120 detik tergantung durasi video`,
+      `🎞️ *ʜᴅ ᴠɪᴅᴇᴏ ᴇɴʜᴀɴᴄᴇʀ*
+
+> El vídeo se está subiendo y procesando
+> 30-120 segundos de estimación dependiendo de la duración del vídeo`,
     );
 
     const result = await videoenhancer(videoBuffer, {

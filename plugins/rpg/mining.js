@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'mining',
     alias: ['mine', 'tambang'],
     category: 'rpg',
-    description: 'Menambang untuk mendapatkan ores dan gems',
+    description: "Bending para conseguir ores y gemas",
     usage: '.mining',
     example: '.mining',
     isOwner: false,

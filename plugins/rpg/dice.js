@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'dice',
     alias: ['dadu', 'roll'],
     category: 'rpg',
-    description: 'Lempar dadu untuk gambling',
+    description: "Rodar los dados para el rodaje",
     usage: '.dice <1-6> <bet>',
     example: '.dice 6 5000',
     isOwner: false,

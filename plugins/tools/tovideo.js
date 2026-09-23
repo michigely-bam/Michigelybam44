@@ -128,7 +128,9 @@ async function handler(m, { sock }) {
 
         if (!buffer || buffer.length === 0) {
             await m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak dapat mengunduh sticker.`)
+            return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Incapaz de descargar pegatinas.`)
         }
 
         const animated = isAnimatedWebp(buffer)
@@ -146,14 +148,18 @@ async function handler(m, { sock }) {
         const gifBuffer = await webpToGif(buffer)
         if (!gifBuffer) {
             await m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Sticker tidak bisa dikonversi (tidak animated)`)
+            return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Las pegatinas no pueden ser convertidas (no animadas)`)
         }
 
         const mp4Buffer = await gifToMp4(gifBuffer)
 
         if (!mp4Buffer || mp4Buffer.length < 100) {
             await m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Video output kosong`)
+            return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> La salida de vídeo está vacía`)
         }
 
         await sock.sendMedia(m.chat, mp4Buffer, null, m, {

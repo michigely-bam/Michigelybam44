@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'meditation',
     alias: ['rest', 'istirahat', 'tidur', 'sleep'],
     category: 'rpg',
-    description: 'Istirahat untuk pulihkan HP dan stamina',
+    description: "Descanso para restaurar la resistencia móvil y",
     usage: '.meditation',
     example: '.meditation',
     isOwner: false,

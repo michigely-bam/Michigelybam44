@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'kick',
     alias: ['remove', 'tendang'],
     category: 'group',
-    description: 'Kick member dari grup',
+    description: "Miembro del grupo de patas",
     usage: '.kick @user',
     example: '.kick @user',
     isOwner: false,
@@ -40,12 +40,16 @@ async function handler(m, { sock }) {
     const targetNumber = targetJid.replace(/@.*$/, '')
 
     if (targetJid === botNumber || targetNumber === botNumber.replace(/@.*$/, '')) {
-        await m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak bisa kick bot sendiri!`)
+        await m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> ¡No puedes patear tu propio bot!`)
         return
     }
 
     if (targetJid === m.sender) {
-        await m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak bisa kick diri sendiri!`)
+        await m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> ¡No puedes patearte!`)
         return
     }
 
@@ -54,18 +58,22 @@ async function handler(m, { sock }) {
         const targetParticipant = findParticipantByNumber(groupMeta.participants, targetJid)
         
         if (!targetParticipant) {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> User tidak ditemukan dalam grup!`)
+            await m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> ¡Usuario no encontrado en grupo!`)
             return
         }
         
         if (targetParticipant.admin) {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak bisa kick admin grup!`)
+            await m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> ¡No puedo patear a un grupo de administradores!`)
             return
         }
         
         await sock.groupParticipantsUpdate(m.chat, [targetParticipant.id], 'remove')
 
-        await m.reply(`✅ @${targetNumber} telah dikeluarkan dari grup ini.`, { mentions: [targetJid] })
+        await m.reply(`✅ @${targetNumber} ha sido expulsado de este grupo.`, { mentions: [targetJid] })
 
     } catch (error) {
         m.reply(te(m.prefix, m.command, m.pushName))

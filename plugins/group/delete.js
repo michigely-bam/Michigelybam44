@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'delete',
     alias: ['del', 'hapus', 'd'],
     category: 'group',
-    description: 'Hapus pesan dengan reply',
-    usage: '.delete (reply pesan)',
+    description: "Suprímase el mensaje con respuesta",
+    usage: ".eliminar (reprobar mensajes)",
     example: '.delete',
     isOwner: false,
     isPremium: false,
@@ -18,7 +18,7 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     if (!m.quoted) {
-        return m.reply('⚠️ *Reply pesan yang ingin dihapus!*')
+        return m.reply("⚠️ *Responder el mensaje para eliminar!*")
     }
     
     const quotedSender = m.quoted.sender || m.quoted.key?.participant
@@ -28,10 +28,10 @@ async function handler(m, { sock }) {
     
     if (!isOwnMessage && !isBotMessage) {
         if (!m.isBotAdmin) {
-            return m.reply('⚠️ *Bot harus jadi admin untuk hapus pesan orang lain!*')
+            return m.reply("⚠️ *Bot debe ser un administrador para eliminar los mensajes de otras personas!*")
         }
         if (!m.isAdmin && !m.isOwner) {
-            return m.reply('⚠️ *Hanya admin yang bisa hapus pesan orang lain!*')
+            return m.reply("⚠️ *¡Sólo el administrador puede borrar el mensaje de alguien más!*")
         }
     }
     
@@ -48,7 +48,7 @@ async function handler(m, { sock }) {
         
     } catch (err) {
         if (err.message?.includes('not found') || err.message?.includes('forbidden')) {
-            await m.reply('❌ *Gagal menghapus!*\n> Pesan mungkin sudah dihapus atau terlalu lama.')
+            await m.reply("❌ *¡No se pudo delete!*\n> El mensaje puede haber sido borrado o hace demasiado tiempo.")
         } else {
             await m.react('❌')
         }

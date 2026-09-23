@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekjahat',
     alias: ['jahat', 'evil'],
     category: 'cek',
-    description: 'Cek seberapa jahat kamu',
-    usage: '.cekjahat <nama>',
+    description: "Mira lo mal que estás.",
+    usage: ".mal cheque < nombre",
     example: '.cekjahat Budi',
     isOwner: false,
     isPremium: false,
@@ -33,8 +33,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kejahatan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kejahatan @${mentioned.split('@')[0]} yak? 
+Tu tasa de criminalidad. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar la tasa de criminalidad @${mentioned.split('@')[0]} yak? 
     
 Tingkat kejahatan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

@@ -29,10 +29,14 @@ function handler(m, { sock }) {
     
     if (!action || !['create', 'join', 'leave', 'info', 'list', 'members', 'deposit'].includes(action)) {
         let txt = `🏰 *ɢᴜɪʟᴅ sʏsᴛᴇᴍ*\n\n`
-        txt += `> Bergabung/buat guild untuk bonus!\n\n`
+        txt += `> ¡Únete al gremio por el bono!
+
+`
         txt += `╭┈┈⬡「 📋 *ᴄᴏᴍᴍᴀɴᴅ* 」\n`
-        txt += `┃ ${m.prefix}guild create <nama>\n`
-        txt += `┃ ${m.prefix}guild join <nama>\n`
+        txt += `┃ ${m.prefix}guild create  gui nombre
+`
+        txt += `┃ ${m.prefix}gremio ensamblar  gui nombre 
+`
         txt += `┃ ${m.prefix}guild leave\n`
         txt += `┃ ${m.prefix}guild info\n`
         txt += `┃ ${m.prefix}guild list\n`
@@ -42,9 +46,9 @@ function handler(m, { sock }) {
         
         if (user.rpg.guildId) {
             const myGuild = guilds[user.rpg.guildId]
-            txt += `> 🏰 Guild kamu: *${myGuild?.name || 'Unknown'}*`
+            txt += `> 🏰 Sus invitados: *${myGuild?.name || 'Unknown'}*`
         } else {
-            txt += `> ⚠️ Kamu belum bergabung guild`
+            txt += `> ⚠️ Aún no te has unido al gremio.`
         }
         return m.reply(txt)
     }
@@ -52,7 +56,7 @@ function handler(m, { sock }) {
     if (action === 'list') {
         const guildList = Object.values(guilds)
         if (guildList.length === 0) {
-            return m.reply(`❌ Belum ada guild! Buat dengan \`${m.prefix}guild create <nama>\``)
+            return m.reply(`❌ ¡No hay ningún gremio todavía! \`${m.prefix}guild create  gui nombre\``)
         }
         
         let txt = `🏰 *ᴅᴀꜰᴛᴀʀ ɢᴜɪʟᴅ*\n\n`
@@ -69,25 +73,25 @@ function handler(m, { sock }) {
     
     if (action === 'create') {
         if (user.rpg.guildId) {
-            return m.reply(`❌ Kamu sudah punya guild! Leave dulu.`)
+            return m.reply(`❌ ¡Ya tienes un gremio!`)
         }
         
         if (!guildName || guildName.length < 3) {
-            return m.reply(`❌ Nama guild minimal 3 karakter!`)
+            return m.reply(`❌ ¡Nombre de un mínimo de 3 caracteres de gremio!`)
         }
         
         if (guildName.length > 20) {
-            return m.reply(`❌ Nama guild maksimal 20 karakter!`)
+            return m.reply(`❌ ¡Máximo nombre de gremio 20 caracteres!`)
         }
         
         const existingGuild = Object.values(guilds).find(g => g.name.toLowerCase() === guildName.toLowerCase())
         if (existingGuild) {
-            return m.reply(`❌ Nama guild sudah digunakan!`)
+            return m.reply(`❌ ¡El nombre del gremio ya está en uso!`)
         }
         
         const createCost = 10000
         if ((user.koin || 0) < createCost) {
-            return m.reply(`❌ Butuh ${createCost.toLocaleString()} balance untuk membuat guild!`)
+            return m.reply(`❌ Butuh ${createCost.toLocaleString()} equilibrio para hacer el gremio!`)
         }
         
         user.koin -= createCost
@@ -121,20 +125,22 @@ function handler(m, { sock }) {
     
     if (action === 'join') {
         if (user.rpg.guildId) {
-            return m.reply(`❌ Kamu sudah punya guild! Leave dulu.`)
+            return m.reply(`❌ ¡Ya tienes un gremio!`)
         }
         
         if (!guildName) {
-            return m.reply(`❌ Tentukan nama guild!\n\n> Contoh: \`${m.prefix}guild join DragonSlayers\``)
+            return m.reply(`❌ ¡Configura un nombre de gremio!
+
+> Contoh: \`${m.prefix}guild join DragonSlayers\``)
         }
         
         const targetGuild = Object.values(guilds).find(g => g.name.toLowerCase() === guildName.toLowerCase())
         if (!targetGuild) {
-            return m.reply(`❌ Guild tidak ditemukan!`)
+            return m.reply(`❌ ¡Los huéspedes no encontrados!`)
         }
         
         if (targetGuild.members?.length >= 50) {
-            return m.reply(`❌ Guild sudah penuh! (Max 50 member)`)
+            return m.reply(`❌ ¡Los huéspedes están llenos!`)
         }
         
         targetGuild.members = targetGuild.members || []
@@ -150,18 +156,18 @@ function handler(m, { sock }) {
     
     if (action === 'leave') {
         if (!user.rpg.guildId) {
-            return m.reply(`❌ Kamu tidak dalam guild!`)
+            return m.reply(`❌ ¡No estás en un gremio!`)
         }
         
         const myGuild = guilds[user.rpg.guildId]
         if (!myGuild) {
             user.rpg.guildId = null
             db.save()
-            return m.reply(`❌ Guild tidak ditemukan, data dibersihkan.`)
+            return m.reply(`❌ Los huéspedes no encontrados, los datos despejados.`)
         }
         
         if (myGuild.leader === m.sender && myGuild.members?.length > 1) {
-            return m.reply(`❌ Kamu adalah leader! Transfer kepemimpinan dulu atau kick semua member.`)
+            return m.reply(`❌ Tú eres el líder, transfieres el liderazgo primero o pateas a todos los miembros.`)
         }
         
         myGuild.members = (myGuild.members || []).filter(m => m !== m.sender)
@@ -174,17 +180,17 @@ function handler(m, { sock }) {
         user.rpg.guildId = null
         db.save()
         
-        return m.reply(`✅ Keluar dari guild *${guildName}*`)
+        return m.reply(`✅ Fuera del gremio *${guildName}*`)
     }
     
     if (action === 'info') {
         if (!user.rpg.guildId) {
-            return m.reply(`❌ Kamu tidak dalam guild!`)
+            return m.reply(`❌ ¡No estás en un gremio!`)
         }
         
         const myGuild = guilds[user.rpg.guildId]
         if (!myGuild) {
-            return m.reply(`❌ Guild tidak ditemukan!`)
+            return m.reply(`❌ ¡Los huéspedes no encontrados!`)
         }
         
         return m.reply(
@@ -201,12 +207,12 @@ function handler(m, { sock }) {
     
     if (action === 'members') {
         if (!user.rpg.guildId) {
-            return m.reply(`❌ Kamu tidak dalam guild!`)
+            return m.reply(`❌ ¡No estás en un gremio!`)
         }
         
         const myGuild = guilds[user.rpg.guildId]
         if (!myGuild) {
-            return m.reply(`❌ Guild tidak ditemukan!`)
+            return m.reply(`❌ ¡Los huéspedes no encontrados!`)
         }
         
         const memberList = (myGuild.members || []).map((m, i) => {
@@ -224,12 +230,12 @@ function handler(m, { sock }) {
     
     if (action === 'deposit') {
         if (!user.rpg.guildId) {
-            return m.reply(`❌ Kamu tidak dalam guild!`)
+            return m.reply(`❌ ¡No estás en un gremio!`)
         }
         
         const myGuild = guilds[user.rpg.guildId]
         if (!myGuild) {
-            return m.reply(`❌ Guild tidak ditemukan!`)
+            return m.reply(`❌ ¡Los huéspedes no encontrados!`)
         }
         
         const amount = parseInt(args[1]) || 0

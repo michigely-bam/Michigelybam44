@@ -58,7 +58,9 @@ async function handler(m, { sock }) {
     const user = db.getUser(targetJid)
     
     if (!user) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> User tidak ditemukan di database`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Usuario no encontrado en la base de datos`)
     }
     
     const newKoin = db.updateKoin(targetJid, -amount)

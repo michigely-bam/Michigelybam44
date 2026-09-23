@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'qc',
     alias: ['qcstc', 'stcqc', 'qcstic', 'qcstick', 'quotesticker'],
     category: 'sticker',
-    description: 'Membuat sticker quote chat dengan warna custom',
+    description: "Crear una pegatina de chat de color personalizado",
     usage: '.qc <warna> <text>',
     example: '.qc pink Hai semuanya!',
     isOwner: false,
@@ -98,7 +98,8 @@ async function handler(m, { sock }) {
     const backgroundColor = COLORS[color]
     
     if (!backgroundColor) {
-        return m.reply(`❌ *ᴇʀʀᴏʀ*\n\n> Warna \`${color}\` tidak ditemukan!\n> Gunakan salah satu warna yang tersedia.`)
+        return m.reply(`❌ *ᴇʀʀᴏʀ*\n\n> Warna \`${color}\` ¡No lo encontraron!
+> Use uno de los colores disponibles.`)
     }
     
     let message = args.slice(1).join(' ')
@@ -108,11 +109,15 @@ async function handler(m, { sock }) {
     }
     
     if (!message) {
-        return m.reply(`❌ *ᴇʀʀᴏʀ*\n\n> Masukkan text untuk quote!`)
+        return m.reply(`❌ *ᴇʀʀᴏʀ*
+
+> ¡Introdúzcase texto para cotizar!`)
     }
     
     if (message.length > 80) {
-        return m.reply(`❌ *ᴇʀʀᴏʀ*\n\n> Maksimal 80 karakter! (Saat ini: ${message.length})`)
+        return m.reply(`❌ *ᴇʀʀᴏʀ*
+
+> Máximo 80 caracteres! (Actualmente: ${message.length})`)
     }
     
     m.react('🕕')

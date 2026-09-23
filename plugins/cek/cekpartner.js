@@ -41,7 +41,7 @@ async function handler(m) {
     const jid = targetNumber + '@s.whatsapp.net'
 
     if (!info) {
-        return m.reply(`❌ @${targetNumber} bukan partner`, { mentions: [jid] })
+        return m.reply(`❌ @${targetNumber} Sin pareja.`, { mentions: [jid] })
     }
 
     const now = Date.now()

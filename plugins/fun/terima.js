@@ -31,12 +31,12 @@ try {
 } catch (e) {}
 
 const celebrationQuotes = [
-  "Semoga langgeng sampai ke pelaminan! 💍",
+  "¡Tanto tiempo puede llegar al palanquín! 💍",
   "Dari teman jadi cinta, indahnya! 💕",
   "Love is in the air! 💖",
   "Couple goals detected! 💑",
-  "Jangan lupa undang pas nikah ya! 💒",
-  "Selamat menempuh hidup berduaan! 🥰",
+  "¡No olvides invitarme cuando te cases! 💒",
+  "¡Que tengan una vida agradable juntos! 🥰",
   "Chemistry-nya kuat banget! 🔥",
   "Match made in heaven! ✨",
 ];
@@ -100,11 +100,15 @@ async function handler(m, { sock }) {
   }
 
   if (shooterJid === m.sender) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak bisa menerima diri sendiri!`);
+    return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> ¡No puedes aceptarte!`);
   }
 
   if (shooterJid === m.botNumber) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Bot tidak bisa pacaran!`);
+    return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> ¡Bot no puede salir!`);
   }
 
   let shooterData = db.getUser(shooterJid) || {};

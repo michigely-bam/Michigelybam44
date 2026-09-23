@@ -3,8 +3,8 @@ const pluginConfig = {
     name: 'clancreate',
     alias: ['createclan', 'guildcreate'],
     category: 'clan',
-    description: 'Buat clan baru',
-    usage: '.clancreate <nama>',
+    description: "Crear un nuevo clan",
+    usage: ".clancrear te nombre",
     example: '.clancreate DragonSlayer',
     isOwner: false,
     isPremium: false,
@@ -48,22 +48,23 @@ async function handler(m) {
     }
 
     if (clanName.length > MAX_CLAN_NAME) {
-        return m.reply(`❌ Nama clan maksimal ${MAX_CLAN_NAME} karakter`)
+        return m.reply(`❌ Nombre del clan máximo ${MAX_CLAN_NAME} karakter`)
     }
 
     if (!/^[a-zA-Z0-9\s]+$/.test(clanName)) {
-        return m.reply(`❌ Nama clan hanya boleh huruf, angka, dan spasi`)
+        return m.reply(`❌ El nombre del clan sólo puede ser letras, números y espacios`)
     }
 
     if (!db.db.data.clans) db.db.data.clans = {}
 
     if (user.clanId) {
-        return m.reply(`❌ Kamu sudah punya clan\nKeluar dulu: *.clanleave*`)
+        return m.reply(`❌ Ya tienes un clan.
+Sal primero: *.clanleave*`)
     }
 
     const existingClan = Object.values(db.db.data.clans).find(c => c.name.toLowerCase() === clanName.toLowerCase())
     if (existingClan) {
-        return m.reply(`❌ Nama *${clanName}* sudah dipakai`)
+        return m.reply(`❌ Nama *${clanName}* ya utilizado`)
     }
 
     if ((user.koin || 0) < CLAN_CREATE_COST) {
@@ -87,7 +88,7 @@ async function handler(m) {
         wins: 0,
         losses: 0,
         createdAt: new Date().toISOString(),
-        description: 'Belum ada deskripsi',
+        description: "Aún no hay descripción.",
         isOpen: true
     }
 

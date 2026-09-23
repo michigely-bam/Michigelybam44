@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'resetrules',
     alias: ['resetbotrules'],
     category: 'owner',
-    description: 'Reset rules bot ke default',
+    description: "Reiniciar las reglas del bot por defecto",
     usage: '.resetrules',
     example: '.resetrules',
     isOwner: true,

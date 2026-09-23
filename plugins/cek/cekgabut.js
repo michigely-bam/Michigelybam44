@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekgabut',
     alias: ['gabut', 'bored'],
     category: 'cek',
-    description: 'Cek tingkat keGabutan kamu',
-    usage: '.cekgabut <nama>',
+    description: "Comprueba tu nivel de violencia.",
+    usage: ".ccgabit Identificar nombre",
     example: '.cekgabut Budi',
     isOwner: false,
     isPremium: false,
@@ -27,8 +27,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kegabutan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kegabutan @${mentioned.split('@')[0]} yak? 
+Tu nivel de emoción. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de emoción @${mentioned.split('@')[0]} yak? 
     
 Tingkat kegabutan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

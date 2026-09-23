@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'hapusabsen',
     alias: ['deleteabsen', 'tutupabsen', 'closeabsen', 'resetabsen'],
     category: 'group',
-    description: 'Hapus/tutup sesi absen (admin only)',
+    description: "Eliminar / Cerrar sesión ausente (sólo personal)",
     usage: '.hapusabsen',
     example: '.hapusabsen',
     isOwner: false,

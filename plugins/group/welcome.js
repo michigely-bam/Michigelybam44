@@ -11,7 +11,7 @@ const pluginConfig = {
   name: "welcome",
   alias: ["wc"],
   category: "group",
-  description: "Mengatur welcome message untuk grup",
+  description: "Establecer mensaje de bienvenida para el grupo",
   usage: ".welcome <on/off>",
   example: ".welcome on",
   isOwner: false,
@@ -35,7 +35,7 @@ async function buildWelcomeMessage(
 ) {
   const greetings = [
     `Akhirnya datang juga`,
-    `Selamat datang`,
+    `Bienvenido.`,
     `Welcome`,
     `Halo`,
     `Hai`,
@@ -43,26 +43,26 @@ async function buildWelcomeMessage(
     `Ohayou~`,
   ];
   const quotes = [
-    `Jangan jadi silent reader ya!`,
+    `¡No seas un lector silencioso!`,
     `Santai aja, anggap rumah sendiri!`,
-    `Yuk langsung gas ngobrol!`,
+    `¡Vamos a hablar de gas!`,
     `Siap-siap rame bareng!`,
-    `Jangan malu-malu, kita semua temen!`,
-    `Kalau bingung mulai, nyapa aja dulu 😄`,
+    `¡No seas tímido, todos somos amigos!`,
+    `Si estás confundido, di algo primero. 😄`,
   ];
   const emojis = ["🎐", "🌸", "✨", "💫", "🪸", "🔥", "💖"];
   const headers = [
     `🎐 Ohayou~ minna-san!
-Hari ini kita kedatangan tomodachi baru 🌱
+Hoy tenemos una nueva tomodachi 🌱
 Yuk sambut bareng-bareng~`,
     `🌸 Ohayou minna-san!
-Satu teman baru akhirnya join ✨
-Semoga betah dan langsung nimbrung ya~`,
+Un nuevo amigo finalmente unirse ✨
+Que te quedes bien y siéntate.~`,
     `✨ Ohayou~!
-Tomodachi baru datang bawa vibes baru 💫
+Tomodachi acaba de venir con una nueva vibración. 💫
 Yoroshiku ne~ mari seru-seruan bareng!`,
     `🪸 Ohayou minna-san!
-Grup ini nambah satu keluarga lagi 🤍
+Este grupo tiene una familia más 🤍
 Tanoshii jikan o issho ni sugoso ne~`,
   ];
   const greeting = greetings[Math.floor(Math.random() * greetings.length)];
@@ -111,7 +111,7 @@ ${emoji} ${greeting}, *@${username}* 💫
 `;
   }
   msg += `
-✨ *Tips Hari Ini*
+✨ *Consejos actuales*
 「 ${quote} 」
 🌸 _Yoroshiku ne~ semoga betah ya!_ 🤍
 `;
@@ -149,14 +149,14 @@ async function sendWelcomeMessage(sock, groupJid, participant, groupMeta) {
     if (welcomeType === 2) {
       await sock.sendMessage(groupJid, {
         text: `Welcome *${userName}* 
-Selamat Datang! di grup *${groupName}*`,
+Bienvenido al grupo. *${groupName}*`,
         title: ``,
         subtitle: groupName,
-        footer: `Member ke-${memberCount}`,
+        footer: `Miembro...${memberCount}`,
         cards: [
           {
             image: { url: ppUrl },
-            body: `Selamat datang di ${groupName}`,
+            body: `Bienvenido a ${groupName}`,
             footer: "Semoga betah ya~",
             buttons: [
               {
@@ -181,7 +181,7 @@ Selamat Datang! di grup *${groupName}*`,
           isForwarded: true,
           externalAdReply: {
             title: `Welcome ${userName}`,
-            body: `Member ke-${memberCount}`,
+            body: `Miembro...${memberCount}`,
             thumbnailUrl: ppUrl,
             sourceUrl:
               config.saluran?.link ||
@@ -194,7 +194,7 @@ Selamat Datang! di grup *${groupName}*`,
     } else if (welcomeType === 4) {
       await sock.sendMessage(groupJid, {
         text: `*Halo* @${userName} 👋
-Selamat datang di grup *${groupName}* 🌸`,
+Bienvenido al grupo *${groupName}* 🌸`,
         contextInfo: {
           mentionedJid: [realParticipant],
           forwardingScore: 9,
@@ -204,8 +204,8 @@ Selamat datang di grup *${groupName}* 🌸`,
             newsletterJid: config?.saluran?.id,
           },
           externalAdReply: {
-            title: `SELAMAT DATANG 👋`,
-            body: `Member ke-${memberCount}`,
+            title: `Bienvenido. 👋`,
+            body: `Miembro...${memberCount}`,
             thumbnailUrl: ppUrl,
             sourceUrl: config.info?.grupwa || "",
             mediaUrl: config.info?.grupwa || "",
@@ -222,8 +222,8 @@ Selamat datang di grup *${groupName}* 🌸`,
           forwardingScore: 9,
           isForwarded: true,
           externalAdReply: {
-            title: `SELAMAT DATANG 👋`,
-            body: `Member ke-${memberCount}`,
+            title: `Bienvenido. 👋`,
+            body: `Miembro...${memberCount}`,
             thumbnailUrl: ppUrl,
             sourceUrl: null,
             mediaType: 1,

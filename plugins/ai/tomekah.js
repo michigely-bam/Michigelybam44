@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'tomekah',
     alias: ['mekah', 'mecca', 'tomecca'],
     category: 'ai',
-    description: 'Ubah background gambar ke Mekah',
+    description: "Cambiar el fondo de la imagen a Mecca",
     usage: '.tomekah (reply gambar)',
     example: '.tomekah',
     isOwner: false,
@@ -22,7 +22,11 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
     
     if (!isImage) {
-        return m.reply(`🕋 *ᴍᴇᴋᴀʜ sᴛʏʟᴇ*\n\n> Kirim/reply gambar\n\n\`${m.prefix}tomekah\``)
+        return m.reply(`🕋 *ᴍᴇᴋᴀʜ sᴛʏʟᴇ*
+
+> Enviar / responder imágenes
+
+\`${m.prefix}tomekah\``)
     }
     
     m.react('🕕')
@@ -37,7 +41,7 @@ async function handler(m, { sock }) {
         
         if (!buffer) {
             m.react('❌')
-            return m.reply(`❌ Gagal mendownload gambar`)
+            return m.reply(`❌ No se pudo download image`)
         }
         
         const imageUrl = await uploadImage(buffer, 'image.jpg')

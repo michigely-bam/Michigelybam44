@@ -21,7 +21,11 @@ async function handler(m, { sock }) {
   let text = m.args?.join(" ")
   if (!text) {
     return m.reply(
-      `📚 *BUILD ML*\n\n> Masukan nama karakter\n\nContoh: ${m.prefix}buildml gusion`
+      `📚 *BUILD ML*
+
+> Insertar nombre de personaje
+
+Contoh: ${m.prefix}buildml gusion`
     )
   }
 
@@ -34,7 +38,7 @@ async function handler(m, { sock }) {
 
     const heroes = data.builds
     if (!heroes || !heroes.length) {
-      return m.reply("❌ Build tidak ditemukan")
+      return m.reply("❌ Construido no encontrado")
     }
 
     const pickRandom = heroes[Math.floor(Math.random() * heroes.length)]

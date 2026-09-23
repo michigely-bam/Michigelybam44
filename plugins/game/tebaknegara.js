@@ -4,7 +4,7 @@ games.register('tebaknegara', {
     alias: ['tn', 'guesscountry'],
     emoji: '🌍',
     title: 'TEBAK NEGARA',
-    description: 'Tebak nama negara'
+    description: "Adivina el nombre del país."
 })
 
 const { config: pluginConfig, handler, answerHandler } = games.createPlugin('tebaknegara')

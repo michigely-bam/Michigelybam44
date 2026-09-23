@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'similarity',
     alias: ['setsimilarity', 'sim'],
     category: 'owner',
-    description: 'Mengaktifkan/menonaktifkan fitur similarity (saran typo)',
+    description: "Funciones de similitud deshabilitado / (sugerencias de los polis)",
     usage: '.similarity <on/off>',
     example: '.similarity on',
     isOwner: true,
@@ -28,11 +28,15 @@ async function handler(m, { sock }) {
     if (mode === 'on') {
         db.setting('similarity', true)
         await m.react('✅')
-        await m.reply(`✅ *sᴜᴋsᴇs*\n\n> Fitur similarity command *DIAKTIFKAN*`)
+        await m.reply(`✅ *sᴜᴋsᴇs*
+
+> Función de comando de firmas *DIAKTIFKAN*`)
     } else if (mode === 'off') {
         db.setting('similarity', false)
         await m.react('✅')
-        await m.reply(`✅ *sᴜᴋsᴇs*\n\n> Fitur similarity command *DIMATIKAN*`)
+        await m.reply(`✅ *sᴜᴋsᴇs*
+
+> Función de comando de firmas *DIMATIKAN*`)
     } else {
         return m.reply(`⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n> \`.similarity on\` - Aktifkan\n> \`.similarity off\` - Matikan`)
     }

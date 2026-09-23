@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'removebg',
     alias: ['rmbg', 'nobg', 'hapusbg'],
     category: 'tools',
-    description: 'Menghapus background gambar',
+    description: "Eliminación de fondo de imagen",
     usage: '.removebg (reply gambar)',
     example: '.removebg',
     isOwner: false,
@@ -22,7 +22,7 @@ async function handler(m, { sock }) {
     try {
         const isImage = m.isImage || (m.quoted && m.quoted.isImage);
         if (!isImage) {
-            return await m.reply('❌ *ɢᴀᴍʙᴀʀ ᴅɪʙᴜᴛᴜʜᴋᴀɴ*\n\n> Reply atau kirim gambar dengan caption .removebg');
+            return await m.reply("❌ *ɢᴀᴍʙᴀʀ ᴅɪʙᴜᴛᴜʜᴋᴀɴ*\n\n> Responder o enviar una imagen con descripción .removebg");
         }
         
         await m.react('🕕')
@@ -33,11 +33,11 @@ async function handler(m, { sock }) {
         } else if (m.quoted && m.quoted.isImage && m.quoted.download) {
             mediaBuffer = await m.quoted.download();
         } else {
-            return await m.reply('❌ Gagal mengunduh gambar');
+            return await m.reply("❌ No se pudo download image");
         }
         
         if (!mediaBuffer || !Buffer.isBuffer(mediaBuffer)) {
-            return await m.reply('❌ Buffer gambar tidak valid');
+            return await m.reply("❌ Buffer de imagen inválida");
         }
         const pathnya = path.join(process.cwd(), 'temp', `rmbg_${Date.now()}.jpg`);
         fs.writeFileSync(pathnya, mediaBuffer);
@@ -45,7 +45,9 @@ async function handler(m, { sock }) {
         
         await sock.sendMessage(m.chat, {
             image: result,
-            caption: `✅ *ʙᴀᴄᴋɢʀᴏᴜɴᴅ ᴅɪʜᴀᴘᴜs*\n\n> Background gambar berhasil dihapus`
+            caption: `✅ *ʙᴀᴄᴋɢʀᴏᴜɴᴅ ᴅɪʜᴀᴘᴜs*
+
+> Imagen de fondo eliminada con éxito`
         }, { quoted: m });
         try {
             fs.unlinkSync(pathnya);

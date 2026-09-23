@@ -3,7 +3,7 @@ const pluginConfig = {
     name: ['clearchat', 'cc', 'cleangc', 'deletechat', 'delchat'],
     alias: [],
     category: 'group',
-    description: 'Membersihkan chat grup',
+    description: "Limpieza de chat grupal",
     usage: '.clearchat',
     example: '.clearchat',
     isOwner: false,
@@ -31,7 +31,9 @@ async function handler(m, { sock }) {
             }] 
         }, m.chat)
         
-        await m.reply(`✅ *ᴄʜᴀᴛ ᴅɪʙᴇʀsɪʜᴋᴀɴ*\n\n> Chat grup telah dibersihkan oleh @${m.sender.split('@')[0]}`, { mentions: [m.sender] })
+        await m.reply(`✅ *ᴄʜᴀᴛ ᴅɪʙᴇʀsɪʜᴋᴀɴ*
+
+> El grupo de chat ha sido aclarado por @${m.sender.split('@')[0]}`, { mentions: [m.sender] })
         
     } catch (error) {
         try {
@@ -45,7 +47,10 @@ async function handler(m, { sock }) {
                 } 
             }, m.chat)
             
-            await m.reply(`✅ *ᴄʜᴀᴛ ᴅɪʙᴇʀsɪʜᴋᴀɴ*\n\nChat grup di wa bot telah dibersihkan oleh @${m.sender.split('@')[0]}\nSilahkan lihat sendiri di wa bot kamu`, { mentions: [m.sender] })
+            await m.reply(`✅ *ᴄʜᴀᴛ ᴅɪʙᴇʀsɪʜᴋᴀɴ*
+
+Grupo de chat en wa bot ha sido aclarado por @${m.sender.split('@')[0]}
+Por favor, ve por ti mismo en tu coche.`, { mentions: [m.sender] })
         } catch (e) {
             m.react('☢')
             m.reply(te(m.prefix, m.command, m.pushName))

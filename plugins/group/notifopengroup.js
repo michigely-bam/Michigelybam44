@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'notifopengroup',
     alias: ['notifopen'],
     category: 'group',
-    description: 'Toggle notifikasi saat grup dibuka',
+    description: "Notificaciones de toggle cuando se abre el grupo",
     usage: '.notifopengroup on/off',
     example: '.notifopengroup on',
     isOwner: false,
@@ -16,7 +16,7 @@ const pluginConfig = {
 
 function handler(m, { sock, db }) {
     if (!m.isAdmin && !m.isOwner) {
-        return m.reply(`❌ Hanya admin grup yang bisa menggunakan fitur ini`)
+        return m.reply(`❌ Sólo administración de grupo puede utilizar esta característica`)
     }
     
     const args = m.args[0]?.toLowerCase()

@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'hapusdata',
     alias: ['resetdata', 'cleardata', 'wipedata'],
     category: 'owner',
-    description: 'Reset semua data database ke default',
+    description: "Reiniciar todos los datos de la base de datos por defecto",
     usage: '.hapusdata',
     example: '.hapusdata',
     isOwner: true,
@@ -24,7 +24,9 @@ async function handler(m, { sock }) {
         const pending = pendingReset.get(m.sender)
         if (!pending || Date.now() - pending > 60000) {
             pendingReset.delete(m.sender)
-            return m.reply(`❌ Tidak ada permintaan reset yang aktif.\n\n> Ketik \`${m.prefix}hapusdata\` terlebih dahulu`)
+            return m.reply(`❌ No hay solicitud de reinicio activado.
+
+> Ketik \`${m.prefix}hapusdata\` terlebih dahulu`)
         }
 
         pendingReset.delete(m.sender)
@@ -72,21 +74,25 @@ async function handler(m, { sock }) {
     }
 
     if (existing.length === 0) {
-        return m.reply(`❌ Tidak ada data database yang ditemukan`)
+        return m.reply(`❌ No se han encontrado datos`)
     }
 
     pendingReset.set(m.sender, Date.now())
 
     let txt = `⚠️ *ᴘᴇʀɪɴɢᴀᴛᴀɴ — ʜᴀᴘᴜs ᴅᴀᴛᴀ*\n\n`
-    txt += `Aksi ini akan menghapus *SEMUA* data berikut:\n\n`
+    txt += `Esta acción eliminará *SEMUA* siguientes datos:
+
+`
 
     for (const { label, entries, size } of existing) {
         txt += `> ${label}: *${entries}* data (${size})\n`
     }
 
     txt += `\n> 📦 Total: *${(totalSize / 1024).toFixed(1)} KB*\n`
-    txt += `> 💾 Backup otomatis dibuat sebelum reset\n\n`
-    txt += `Ketik \`${m.prefix}hapusdata ya\` dalam 60 detik untuk melanjutkan.`
+    txt += `> 💾 Autosave copia de seguridad creada antes de reiniciar
+
+`
+    txt += `Ketik \`${m.prefix}hapusdata ya\` En 60 segundos para proceder.`
 
     await sock.sendMessage(m.chat, {
         text: txt,
@@ -94,7 +100,7 @@ async function handler(m, { sock }) {
             {
                 name: 'quick_reply',
                 buttonParamsJson: JSON.stringify({
-                    display_text: '✅ Ya, Hapus Semua',
+                    display_text: "✅ Sí, Quita todo.",
                     id: `${m.prefix}hapusdata ya`
                 })
             },

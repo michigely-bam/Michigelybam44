@@ -4,7 +4,7 @@ const pluginConfig = {
   name: "join",
   alias: ["joingrup", "joingroup", "gabung"],
   category: "owner",
-  description: "Bot join ke grup via link invite",
+  description: "Bot únete a grupo a través de enlace invitar",
   usage: ".join <link>",
   example: ".join https://chat.whatsapp.com/xxx",
   isOwner: true,
@@ -48,7 +48,9 @@ async function handler(m, { sock }) {
   const inviteCode = extractInviteCode(input);
 
   if (!inviteCode) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Link invite tidak valid`);
+    return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Enlace de invitación inválido`);
   }
 
   await m.react("🕕");
@@ -58,7 +60,9 @@ async function handler(m, { sock }) {
 
     if (!groupInfo) {
       await m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak dapat mengambil info grup`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No se puede recuperar información del grupo`);
     }
 
     const botJid = sock.user?.id?.replace(/:.*@/, "@") || "";
@@ -68,7 +72,9 @@ async function handler(m, { sock }) {
 
     if (isMember) {
       await m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Bot sudah menjadi member di grup ini`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> El Bot ya es miembro de este grupo`);
     }
 
     await sock.groupAcceptInvite(inviteCode);
@@ -101,11 +107,11 @@ async function handler(m, { sock }) {
 
     let errorMsg = error.message;
     if (errorMsg.includes("not-authorized")) {
-      errorMsg = "Link sudah tidak valid atau expired";
+      errorMsg = "El vínculo es nulo o expirado";
     } else if (errorMsg.includes("gone")) {
-      errorMsg = "Grup sudah tidak ada";
+      errorMsg = "El grupo no existe";
     } else if (errorMsg.includes("conflict")) {
-      errorMsg = "Bot sudah menjadi member";
+      errorMsg = "Bot se ha convertido en miembro";
     }
 
     await m.reply(te(m.prefix, m.command, m.pushName));

@@ -47,7 +47,7 @@ async function getDiskUsage() {
             return `💿 *Disk Usage*\nTotal: ${parts[1]}\nUsed: ${parts[2]}\nFree: ${parts[3]}\nUse%: ${parts[4]}`;
         }
     } catch (e) {
-        return '❌ Gagal mengambil info disk';
+        return "❌ No se pudo recuperar la información del disco";
     }
 }
 
@@ -111,7 +111,7 @@ async function handler(m, { sock }) {
         }
     } catch (e) {
         console.error('System Plugin Error:', e);
-        m.reply('❌ Terjadi kesalahan mengambil data sistem.');
+        m.reply("❌ Hubo un error que retuvo los datos del sistema.");
     }
 }
 

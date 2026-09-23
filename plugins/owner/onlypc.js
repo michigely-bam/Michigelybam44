@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'onlypc',
     alias: ['onlyprivate', 'privateonly'],
     category: 'owner',
-    description: 'Toggle mode bot hanya di private chat',
+    description: "Toggle modo bot sólo en chat privado",
     usage: '.onlypc',
     example: '.onlypc',
     isOwner: true,
@@ -22,12 +22,16 @@ async function handler(m, { sock }) {
     if (currentMode) {
         db.setting('onlyPc', false)
         await m.react('❌')
-        return m.reply(`❌ *ᴏɴʟʏ ᴘʀɪᴠᴀᴛᴇ ᴍᴏᴅᴇ ɴᴏɴᴀᴋᴛɪꜰ*\n\n> Bot bisa diakses di mana saja`)
+        return m.reply(`❌ *ᴏɴʟʏ ᴘʀɪᴠᴀᴛᴇ ᴍᴏᴅᴇ ɴᴏɴᴀᴋᴛɪꜰ*
+
+> Bot se puede acceder a cualquier lugar`)
     } else {
         db.setting('onlyPc', true)
         db.setting('onlyGc', false)
         await m.react('✅')
-        return m.reply(`✅ *ᴏɴʟʏ ᴘʀɪᴠᴀᴛᴇ ᴍᴏᴅᴇ ᴀᴋᴛɪꜰ*\n\n> Bot hanya bisa diakses di private chat!`)
+        return m.reply(`✅ *ᴏɴʟʏ ᴘʀɪᴠᴀᴛᴇ ᴍᴏᴅᴇ ᴀᴋᴛɪꜰ*
+
+> Bot sólo se puede acceder en chat privado!`)
     }
 }
 

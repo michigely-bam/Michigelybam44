@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'tqto',
     alias: ['thanksto', 'credits', 'kredit'],
     category: 'main',
-    description: 'Menampilkan daftar kontributor bot',
+    description: "Mostrar lista de los contribuyentes de bot",
     usage: '.tqto',
     example: '.tqto',
     isOwner: false,
@@ -80,8 +80,11 @@ async function handler(m, { sock }) {
     const rows = credits.map((c, i) => [i + 1, c.name, c.role])
     
     await sock.sendTable(m.chat, "OURIN TEAM", headers, rows, m, { 
-        headerText: `${config.bot?.name}\n\n- Dibawah ini adalah list orang yang sudah membantu kami dalam pembuatan bot ini dan sudah men support kami\n`, 
-        footer: '\n*Terima kasih yak sudah mendukung kami sampai sejauh ini :b*' 
+        headerText: `${config.bot?.name}
+
+- A continuación está la lista de personas que nos han ayudado con la fabricación de estos bots y nos han apoyado.
+`, 
+        footer: "\n*Gracias por apoyarnos hasta ahora: b*" 
     })
 }
 

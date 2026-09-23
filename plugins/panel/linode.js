@@ -45,7 +45,14 @@ async function handler(m, { sock, command, args }) {
     const linodeToken = config.APIkey?.linode
     
     if (!linodeToken) {
-        return m.reply(`❌ Linode API Token tidak dikonfigurasi!\n\nTambahkan di config.js:\n\`\`\`\nAPIkey: {\n  linode: 'YOUR_LINODE_TOKEN'\n}\n\`\`\``)
+        return m.reply(`❌ Linode API Token no configurado!
+
+Tambahkan di config.js:
+\`\`\`
+APIkey: {
+  linode: 'YOUR_LINODE_TOKEN'
+}
+\`\`\``)
     }
     
     const cmd = command.toLowerCase()
@@ -54,7 +61,9 @@ async function handler(m, { sock, command, args }) {
         if (LINODE_TYPES[cmd]) {
             const label = args[0]
             if (!label) {
-                return m.reply(`❌ Masukkan label untuk VPS!\n\nContoh: ${m.prefix}${cmd} myserver`)
+                return m.reply(`❌ ¡Introdúzcase la etiqueta para VPS!
+
+Contoh: ${m.prefix}${cmd} myserver`)
             }
             
             const spec = LINODE_TYPES[cmd]
@@ -85,11 +94,11 @@ async function handler(m, { sock, command, args }) {
             const createData = await createRes.json()
             
             if (!createRes.ok) {
-                throw new Error(createData.errors?.[0]?.reason || 'Gagal membuat Linode')
+                throw new Error(createData.errors?.[0]?.reason || "No se pudo create Linode")
             }
             
             const linodeId = createData.id
-            await m.reply(`🕕 Linode sedang dibuat... Tunggu 60 detik.`)
+            await m.reply(`🕕 Linode está siendo creado... espera 60 segundos.`)
             
             await new Promise(resolve => setTimeout(resolve, 60000))
             
@@ -130,10 +139,12 @@ async function handler(m, { sock, command, args }) {
             
             const data = await res.json()
             
-            if (!res.ok) throw new Error('Gagal mendapatkan daftar Linode')
+            if (!res.ok) throw new Error("No se pudo get Linode list")
             
             if (!data.data || data.data.length === 0) {
-                return m.reply(`📋 *ᴅᴀғᴛᴀʀ ʟɪɴᴏᴅᴇ*\n\n> Tidak ada VPS aktif.`)
+                return m.reply(`📋 *ᴅᴀғᴛᴀʀ ʟɪɴᴏᴅᴇ*
+
+> No hay VPS activa.`)
             }
             
             let msg = `📋 *ᴅᴀғᴛᴀʀ ʟɪɴᴏᴅᴇ ᴠᴘs*\n\n`
@@ -151,7 +162,9 @@ async function handler(m, { sock, command, args }) {
         
         if (cmd === 'onlinode') {
             const linodeId = args[0]
-            if (!linodeId) return m.reply(`❌ Masukkan ID Linode!\n\nContoh: ${m.prefix}onlinode 12345`)
+            if (!linodeId) return m.reply(`❌ ¡Introdúzcase el ID de Linode!
+
+Contoh: ${m.prefix}onlinode 12345`)
             
             m.react('🔌')
             
@@ -164,18 +177,20 @@ async function handler(m, { sock, command, args }) {
             })
             
             if (res.ok) {
-                await m.reply(`✅ Linode ID \`${linodeId}\` berhasil dihidupkan!`)
+                await m.reply(`✅ Linode ID \`${linodeId}\` fontcolor = "# FFFF00" con éxito encendido!`)
                 m.react('✅')
             } else {
                 const data = await res.json()
-                throw new Error(data.errors?.[0]?.reason || 'Gagal menghidupkan')
+                throw new Error(data.errors?.[0]?.reason || "No se pudo turn on")
             }
             return
         }
         
         if (cmd === 'offlinode') {
             const linodeId = args[0]
-            if (!linodeId) return m.reply(`❌ Masukkan ID Linode!\n\nContoh: ${m.prefix}offlinode 12345`)
+            if (!linodeId) return m.reply(`❌ ¡Introdúzcase el ID de Linode!
+
+Contoh: ${m.prefix}offlinode 12345`)
             
             m.react('🔌')
             
@@ -188,18 +203,20 @@ async function handler(m, { sock, command, args }) {
             })
             
             if (res.ok) {
-                await m.reply(`✅ Linode ID \`${linodeId}\` berhasil dimatikan!`)
+                await m.reply(`✅ Linode ID \`${linodeId}\` fontcolor = "# FFFF00" con éxito deshabilitado!`)
                 m.react('✅')
             } else {
                 const data = await res.json()
-                throw new Error(data.errors?.[0]?.reason || 'Gagal mematikan')
+                throw new Error(data.errors?.[0]?.reason || "Desactivar falló")
             }
             return
         }
         
         if (cmd === 'rebootlinode') {
             const linodeId = args[0]
-            if (!linodeId) return m.reply(`❌ Masukkan ID Linode!\n\nContoh: ${m.prefix}rebootlinode 12345`)
+            if (!linodeId) return m.reply(`❌ ¡Introdúzcase el ID de Linode!
+
+Contoh: ${m.prefix}rebootlinode 12345`)
             
             m.react('🔄')
             
@@ -212,11 +229,11 @@ async function handler(m, { sock, command, args }) {
             })
             
             if (res.ok) {
-                await m.reply(`✅ Linode ID \`${linodeId}\` berhasil di-reboot!`)
+                await m.reply(`✅ Linode ID \`${linodeId}\` ¡Reiniciar exitosamente!`)
                 m.react('✅')
             } else {
                 const data = await res.json()
-                throw new Error(data.errors?.[0]?.reason || 'Gagal reboot')
+                throw new Error(data.errors?.[0]?.reason || "No se reiniciará.")
             }
             return
         }
@@ -224,7 +241,9 @@ async function handler(m, { sock, command, args }) {
         if (cmd === 'rebuildlinode') {
             const linodeId = args[0]
             const image = args[1] || 'linode/ubuntu20.04'
-            if (!linodeId) return m.reply(`❌ Masukkan ID Linode!\n\nContoh: ${m.prefix}rebuildlinode 12345 linode/ubuntu20.04`)
+            if (!linodeId) return m.reply(`❌ ¡Introdúzcase el ID de Linode!
+
+Contoh: ${m.prefix}rebuildlinode 12345 linode/ubuntu20.04`)
             
             const rootPass = randomKarakter(4) + randomNomor(3)
             
@@ -243,18 +262,22 @@ async function handler(m, { sock, command, args }) {
             })
             
             if (res.ok) {
-                await m.reply(`✅ Linode ID \`${linodeId}\` berhasil di-rebuild!\n\n> 🔑 Password baru: \`${rootPass}\`\n> 🖼️ Image: ${image}`)
+                await m.reply(`✅ Linode ID \`${linodeId}\` reconstruido exitosamente!
+
+> 🔑 Nueva contraseña: \`${rootPass}\`\n> 🖼️ Image: ${image}`)
                 m.react('✅')
             } else {
                 const data = await res.json()
-                throw new Error(data.errors?.[0]?.reason || 'Gagal rebuild')
+                throw new Error(data.errors?.[0]?.reason || "Rebuild falló")
             }
             return
         }
         
         if (cmd === 'delinode') {
             const linodeId = args[0]
-            if (!linodeId) return m.reply(`❌ Masukkan ID Linode!\n\nContoh: ${m.prefix}delinode 12345`)
+            if (!linodeId) return m.reply(`❌ ¡Introdúzcase el ID de Linode!
+
+Contoh: ${m.prefix}delinode 12345`)
             
             m.react('🗑️')
             
@@ -267,11 +290,11 @@ async function handler(m, { sock, command, args }) {
             })
             
             if (res.ok) {
-                await m.reply(`✅ Linode ID \`${linodeId}\` berhasil dihapus!`)
+                await m.reply(`✅ Linode ID \`${linodeId}\` ¡Se ha borrado!`)
                 m.react('✅')
             } else {
                 const data = await res.json()
-                throw new Error(data.errors?.[0]?.reason || 'Gagal menghapus')
+                throw new Error(data.errors?.[0]?.reason || "Fallado para eliminar")
             }
             return
         }
@@ -289,7 +312,7 @@ async function handler(m, { sock, command, args }) {
             
             const data = await res.json()
             
-            if (!res.ok) throw new Error('Gagal mendapatkan saldo')
+            if (!res.ok) throw new Error("Fallado para conseguir el equilibrio")
             
             const balance = (data.koin || 0) / 100
             const credit = (data.credit_remaining || 0) / 100
@@ -316,7 +339,7 @@ async function handler(m, { sock, command, args }) {
             
             const data = await res.json()
             
-            if (!res.ok) throw new Error('Gagal mendapatkan data')
+            if (!res.ok) throw new Error("Fallado para obtener datos")
             
             const total = data.data?.length || 0
             await m.reply(`📊 *ᴛᴏᴛᴀʟ ʟɪɴᴏᴅᴇ ᴀᴋᴛɪғ*\n\n> ${total} VPS`)
@@ -326,7 +349,9 @@ async function handler(m, { sock, command, args }) {
         
         if (cmd === 'cekvpslinode') {
             const linodeId = args[0]
-            if (!linodeId) return m.reply(`❌ Masukkan ID Linode!\n\nContoh: ${m.prefix}cekvpslinode 12345`)
+            if (!linodeId) return m.reply(`❌ ¡Introdúzcase el ID de Linode!
+
+Contoh: ${m.prefix}cekvpslinode 12345`)
             
             m.react('🔍')
             
@@ -340,7 +365,7 @@ async function handler(m, { sock, command, args }) {
             
             const l = await res.json()
             
-            if (!res.ok) throw new Error('Gagal mendapatkan detail')
+            if (!res.ok) throw new Error("No se pudo get details")
             
             const msg = `🔍 *ᴅᴇᴛᴀɪʟ ʟɪɴᴏᴅᴇ*\n\n` +
                 `> 🆔 ID: \`${l.id}\`\n` +

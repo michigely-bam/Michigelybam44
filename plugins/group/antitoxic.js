@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'antitoxic',
     alias: ['toxic', 'antitoxik'],
     category: 'group',
-    description: 'Mengatur antitoxic di grup',
+    description: "Establece antitóxico en grupo",
     usage: '.antitoxic <on/off/warn/metode>',
     example: '.antitoxic on',
     isOwner: false,
@@ -49,8 +49,8 @@ function isToxic(text, toxicList) {
 
 function gpMsg(key, replacements = {}) {
     const defaults = {
-        antitoxicWarn: '⚠ @%user% berkata kasar.\nPeringatan ke %warn% dari %max%, pelanggaran berikutnya bisa di-%method%.',
-        antitoxicAction: '🚫 @%user% di-%method% karena toxic. (%warn%/%max%)',
+        antitoxicWarn: "⚠ @%user% berkata kasar.\nAdvertencias %warn% dari %max%, la siguiente brecha puede ser...%method%.",
+        antitoxicAction: "🚫 @%user% di-%method% Es tóxico.%warn%/%max%)",
     }
     let text = config.groupProtection?.[key] || defaults[key] || ''
     for (const [k, v] of Object.entries(replacements)) {
@@ -156,26 +156,29 @@ async function handler(m, { sock }) {
     if (subCommand === 'warn') {
         const count = parseInt(args[1])
         if (!count || count < 1 || count > 10) {
-            return m.reply(`❌ Masukkan angka 1-10\n> Contoh: \`.antitoxic warn 5\``)
+            return m.reply(`❌ Entrar 1 -10
+> Contoh: \`.antitoxic warn 5\``)
         }
         db.setGroup(m.chat, { toxicMaxWarn: count })
         m.react('✅')
-        await m.reply(`✅ Max peringatan diubah ke *${count}*`)
+        await m.reply(`✅ La advertencia de Max cambió *${count}*`)
         return
     }
 
     if (subCommand === 'metode' || subCommand === 'method' || subCommand === 'mode') {
         const method = args[1]?.toLowerCase()
         if (!method || !['kick', 'delete'].includes(method)) {
-            return m.reply(`❌ Pilih metode: *kick* atau *delete*\n> Contoh: \`.antitoxic metode kick\``)
+            return m.reply(`❌ Seleccionar método: *kick* atau *delete*
+> Contoh: \`.antitoxic metode kick\``)
         }
         db.setGroup(m.chat, { toxicMethod: method })
         m.react('✅')
-        await m.reply(`✅ Metode diubah ke *${method}*`)
+        await m.reply(`✅ El método cambió *${method}*`)
         return
     }
 
-    await m.reply(`❌ Sub-command tidak dikenal.\n> Ketik \`.antitoxic\` untuk melihat daftar command.`)
+    await m.reply(`❌ Subcomandante desconocido.
+> Ketik \`.antitoxic\` para ver la lista de comandos.`)
 }
 
 export { pluginConfig as config, handler, isToxic, handleToxicMessage, DEFAULT_TOXIC_WORDS }

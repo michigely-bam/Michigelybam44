@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekbucin',
     alias: ['bucin'],
     category: 'cek',
-    description: 'Cek seberapa bucin kamu',
-    usage: '.cekbucin <nama>',
+    description: "Comprueba qué tan tonto eres.",
+    usage: ".ckbucin Identificado nombre",
     example: '.cekbucin Budi',
     isOwner: false,
     isPremium: false,
@@ -33,8 +33,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kebucinan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kebucinan @${mentioned.split('@')[0]} yak? 
+Tu nivel malo. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de travesura @${mentioned.split('@')[0]} yak? 
     
 Tingkat kebucinan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

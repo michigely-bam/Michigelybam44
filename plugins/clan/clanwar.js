@@ -68,7 +68,7 @@ async function handler(m) {
     const user = db.getUser(m.sender)
     const targetClanId = m.text?.trim()
 
-    if (!user?.clanId) return m.reply(`❌ Kamu belum punya clan`)
+    if (!user?.clanId) return m.reply(`❌ Aún no tienes un clan.`)
 
     if (!targetClanId) {
         return m.reply(
@@ -88,10 +88,10 @@ async function handler(m) {
         || Object.values(db.db.data.clans).find(c => c.name.toLowerCase() === targetClanId.toLowerCase())
         || Object.values(db.db.data.clans).find(c => c.id.toLowerCase() === targetClanId.toLowerCase())
 
-    if (!myClan) return m.reply(`❌ Clan kamu tidak ditemukan`)
-    if (!enemyClan) return m.reply(`❌ Clan lawan tidak ditemukan`)
-    if (user.clanId === targetClanId) return m.reply(`❌ Tidak bisa war melawan clan sendiri`)
-    if (myClan.members.length < 3) return m.reply(`❌ Clan kamu butuh minimal 3 member`)
+    if (!myClan) return m.reply(`❌ Tu clan no fue encontrado.`)
+    if (!enemyClan) return m.reply(`❌ El clan del oponente no fue encontrado`)
+    if (user.clanId === targetClanId) return m.reply(`❌ No puedes pelear contra el clan por ti mismo.`)
+    if (myClan.members.length < 3) return m.reply(`❌ Clan, necesitas al menos tres miembros.`)
     if (enemyClan.members.length < 3) return m.reply(`❌ Clan lawan butuh minimal 3 member`)
 
     const myPower = calculatePower(db, myClan)

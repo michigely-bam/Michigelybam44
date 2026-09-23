@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'antijudol',
     alias: ['antijudi', 'nojudi', 'antislot'],
     category: 'group',
-    description: 'Deteksi konten judol di grup',
+    description: "Detectar el contenido de chadol en el grupo",
     usage: '.antijudol <on/off/metode> [kick/remove]',
     example: '.antijudol on',
     isOwner: false,
@@ -58,7 +58,7 @@ function handler(m) {
             db.setGroup(m.chat, { antijudol: 'on', antijudolMode: 'remove' })
             return m.reply('✅ *AntiJudol mode DELETE diaktifkan*')
         }
-        return m.reply(`❌ Metode tidak valid! Gunakan: \`kick\` atau \`remove\``)
+        return m.reply(`❌ ¡Método inválido! \`kick\` atau \`remove\``)
     }
 
     if (option === 'kick') {
@@ -71,7 +71,7 @@ function handler(m) {
         return m.reply('✅ *AntiJudol mode DELETE diaktifkan*')
     }
 
-    return m.reply('❌ Opsi tidak valid! Gunakan: `on`, `off`, `metode kick`, `metode remove`')
+    return m.reply("❌ Opción inválida! Uso: `on`, `off`, `metode kick`, `metode remove`")
 }
 
 export { pluginConfig as config, handler }

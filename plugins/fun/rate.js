@@ -19,12 +19,12 @@ const ratings = [
     { score: '9/10', comment: 'Hampir sempurna! Keren banget!' },
     { score: '8/10', comment: 'Bagus banget! Mantap!' },
     { score: '7/10', comment: 'Cukup bagus, di atas rata-rata!' },
-    { score: '6/10', comment: 'Lumayan, bisa lebih baik lagi.' },
+    { score: '6/10', comment: "No está mal, podría ser mejor." },
     { score: '5/10', comment: 'Biasa aja sih, standar.' },
     { score: '4/10', comment: 'Hmm, kurang sedikit.' },
     { score: '3/10', comment: 'Perlu banyak perbaikan.' },
-    { score: '2/10', comment: 'Aduh, masih jauh dari bagus.' },
-    { score: '1/10', comment: 'Maaf, tapi ini parah.' },
+    { score: '2/10', comment: "Bueno, está lejos del bien." },
+    { score: '1/10', comment: "Lo siento, pero esto es terrible." },
     { score: '100/10', comment: 'LEGEND! Beyond perfect!' },
     { score: '11/10', comment: 'Melebihi ekspektasi!' },
     { score: '69/100', comment: 'Nice...' },
@@ -41,7 +41,12 @@ async function handler(m) {
     const text = m.text?.trim();
     
     if (!text) {
-        return m.reply(`⭐ *ʀᴀᴛᴇ*\n\n> Masukkan sesuatu untuk dinilai!\n\n*Contoh:*\n> .rate wajahku`);
+        return m.reply(`⭐ *ʀᴀᴛᴇ*
+
+> ¡Introdúzcase algo para ser juzgado!
+
+*Contoh:*
+> .rate wajahku`);
     }
     
     const rating = ratings[Math.floor(Math.random() * ratings.length)];

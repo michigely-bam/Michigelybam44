@@ -21,7 +21,7 @@ const pluginConfig = {
 async function handler(m, { sock }) {
   const nama = m.text;
   if (!nama) {
-    return m.reply(`*FAKE FF*\n\n> Contoh: ${m.prefix}fakeff nama1`);
+    return m.reply(`*FAKE FF*\n\n> Contoh: ${m.prefix}nombre de marisma 1`);
   }
   m.react("🕕");
 

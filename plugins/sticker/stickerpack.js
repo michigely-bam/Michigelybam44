@@ -13,7 +13,7 @@ const pluginConfig = {
   name: "stickerpack",
   alias: ["sp", "stickersearch", "searchsticker"],
   category: "sticker",
-  description: "Cari dan kirim sticker pack",
+  description: "Buscar y enviar paquetes de pegatinas",
   usage: ".stickerpack <query>",
   example: ".stickerpack anime",
   isOwner: false,
@@ -28,7 +28,7 @@ const pluginConfig = {
 class StickerAPI {
   async search(query, page = 1) {
     try {
-      if (!query) throw new Error("Query kosong");
+      if (!query) throw new Error("Pregunta vacía");
       const res = await axios
         .post("https://getstickerpack.com/api/v1/stickerdb/search", {
           query,
@@ -114,7 +114,9 @@ async function handler(m, { sock }) {
     if (!search.status || !search.data?.length) {
       await m.react("✘");
       return m.reply(
-        `── .✦ ──\n\n> Tidak ada sticker pack untuk: *${query}* .☘︎ ݁˖`,
+        `── .✦ ──
+
+> No hay paquete de pegatinas para: *${query}* .☘︎ ݁˖`,
       );
     }
 
@@ -124,7 +126,9 @@ async function handler(m, { sock }) {
 
     if (!detail.status || !detail.stickers?.length) {
       await m.react("✘");
-      return m.reply(`── .✦ ──\n\n> Gagal mengambil detail sticker pack .☘︎ ݁˖`);
+      return m.reply(`── .✦ ──
+
+> Fallado para recuperar detalles del paquete de pegatinas.☘︎ ݁˖`);
     }
 
     await m.reply(
@@ -147,7 +151,9 @@ async function handler(m, { sock }) {
 
     if (!stickerBuffers.length) {
       await m.react("✘");
-      return m.reply(`── .✦ ──\n\n> Gagal mendownload sticker .☘︎ ݁˖`);
+      return m.reply(`── .✦ ──
+
+> No se puede descargar pegatinas.☘︎ ݁˖`);
     }
 
     const packname = randPick.name || config.sticker?.packname || "Ourin-AI";
@@ -166,7 +172,9 @@ async function handler(m, { sock }) {
     } catch (packErr) {
       console.error("[StickerPack] Pack send failed:", packErr.message);
       await m.reply(
-        `── .✦ ──\n\n> Pack gagal, mengirim satu per satu... .☘︎ ݁˖`,
+        `── .✦ ──
+
+> El paquete falló, enviando uno por uno...☘︎ ݁˖`,
       );
 
       let sent = 0;
@@ -198,11 +206,15 @@ async function handler(m, { sock }) {
       if (sent > 0) {
         await m.react("✓");
         await m.reply(
-          `── .✦ ──\n\n> Berhasil kirim *${sent}* sticker dari *${packname}* .☘︎ ݁˖`,
+          `── .✦ ──
+
+> Enviado con éxito *${sent}* sticker dari *${packname}* .☘︎ ݁˖`,
         );
       } else {
         await m.react("✘");
-        await m.reply(`── .✦ ──\n\n> Gagal mengirim sticker .☘︎ ݁˖`);
+        await m.reply(`── .✦ ──
+
+> Falló en enviar pegatinas.☘︎ ݁˖`);
       }
     }
   } catch (error) {

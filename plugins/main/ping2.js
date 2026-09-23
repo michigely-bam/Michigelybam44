@@ -9,7 +9,7 @@ const pluginConfig = {
     name: 'ping2',
     alias: ['speed2', 'p2', 'latency2', 'sys2', 'status2'],
     category: 'main',
-    description: 'Cek performa dan status sistem bot secara real-time',
+    description: "Compruebe el rendimiento y el estado del sistema de bot en tiempo real",
     usage: '.ping2',
     example: '.ping2',
     isOwner: false,
@@ -133,7 +133,9 @@ async function handler(m, { sock }) {
             tableData,
             m,
             {
-                headerText: `${config.bot?.name || 'Ourin-AI'} *STATUS*\n\n- 🎄 Dibawah ini adalah statistik bot kita`,
+                headerText: `${config.bot?.name || 'Ourin-AI'} *STATUS*
+
+- 🎄 A continuación se presentan nuestras estadísticas de bot.`,
                 footer: '🍃 Realtime Monitoring'
             }
         )

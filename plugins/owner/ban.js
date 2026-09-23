@@ -6,8 +6,8 @@ const pluginConfig = {
     name: 'ban',
     alias: ['addban', 'block'],
     category: 'owner',
-    description: 'Memblokir user dari menggunakan bot',
-    usage: '.ban <nomor/@tag>',
+    description: "Bloquear al usuario de usar el bot",
+    usage: ".neumáticos@tag>",
     example: '.ban 6281234567890',
     isOwner: true,
     isPremium: false,
@@ -51,7 +51,9 @@ async function handler(m, { sock }) {
     }
 
     if (config.isOwner(targetNumber)) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak dapat ban owner`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No puedo conseguir un dueño de neumáticos`)
     }
 
     const db = getDatabase()
@@ -63,7 +65,7 @@ async function handler(m, { sock }) {
     })
 
     if (alreadyBanned) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Nomor \`${targetNumber}\` sudah dibanned`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Nomor \`${targetNumber}\` Se ha cruzado.`)
     }
 
     bannedList.push(targetNumber)

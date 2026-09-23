@@ -4,8 +4,8 @@ const pluginConfig = {
     name: 'liststok',
     alias: ['liststock', 'stok', 'stock'],
     category: 'store',
-    description: '📋 Lihat daftar stok item produk',
-    usage: '.liststok <nomor_produk>',
+    description: "📋 Ver la lista de productos de stock",
+    usage: ".liststock − número_produk>",
     example: '.liststok 1',
     isOwner: true,
     isPremium: false,
@@ -21,13 +21,19 @@ async function handler(m, { sock }) {
     const products = db.setting('storeProducts') || []
 
     if (products.length === 0) {
-        return m.reply(`📭 *Belum ada produk.*\n\nTambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
+        return m.reply(`📭 *Aún no hay producto.*
+
+Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
     }
 
     const idx = parseInt(m.text?.trim()) - 1
 
     if (isNaN(idx) || idx < 0 || idx >= products.length) {
-        let txt = `📋 *DAFTAR STOK PRODUK*\n\nPilih produk untuk melihat stok:\n\n`
+        let txt = `📋 *PRODUCCIÓN STOK LAND*
+
+Seleccione un producto para ver el stock:
+
+`
         for (let i = 0; i < products.length; i++) {
             const p = products[i]
             const typeIcon = p.type === 'fisik' ? '📦' : '🔑'
@@ -37,7 +43,7 @@ async function handler(m, { sock }) {
             const icon = (p.type === 'fisik' ? (p.stock > 0 || p.stock === -1) : (p.stockItems?.length > 0 || p.stock === -1)) ? '✅' : '⚠️'
             txt += `${typeIcon} *${i + 1}.* ${p.name} — ${stockDisplay} ${icon}\n`
         }
-        txt += `\nKetik \`${m.prefix}liststok <nomor>\` untuk melihat detail stok 📊`
+        txt += `\nKetik \`${m.prefix}liststock - Número de contacto\` para ver los detalles del stock 📊`
         return m.reply(txt)
     }
 

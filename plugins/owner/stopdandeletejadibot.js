@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'stopdandeletejadibot',
     alias: ['deletejadibot', 'removejadibot', 'hapusjadibot'],
     category: 'owner',
-    description: 'Stop dan hapus session jadibot user secara permanen',
+    description: "Parar y eliminar sesión para que el usuario permanente",
     usage: '.stopdandeletejadibot @user',
     example: '.stopdandeletejadibot @628xxx',
     isOwner: true,
@@ -32,11 +32,13 @@ async function handler(m, { sock }) {
         const sessions = getAllJadibotSessions()
 
         if (sessions.length === 0) {
-            return m.reply(`❌ Tidak ada session jadibot tersimpan`)
+            return m.reply(`❌ No hay sesión por lo que la bota se salva`)
         }
 
         let txt = `🗑️ *sᴛᴏᴘ & ᴅᴇʟᴇᴛᴇ ᴊᴀᴅɪʙᴏᴛ*\n\n`
-        txt += `Pilih target dengan mention atau reply:\n\n`
+        txt += `Seleccione el objetivo con mención o respuesta:
+
+`
 
         sessions.forEach((s, i) => {
             const status = s.isActive ? '🟢' : '⚫'
@@ -56,7 +58,7 @@ async function handler(m, { sock }) {
     const session = sessions.find(s => s.id === id)
 
     if (!session) {
-        return m.reply(`❌ Session jadibot untuk *@${id}* tidak ditemukan`, { mentions: [target] })
+        return m.reply(`❌ La sesión fue el embrión para *@${id}* no encontrado`, { mentions: [target] })
     }
 
     await m.react('🕕')

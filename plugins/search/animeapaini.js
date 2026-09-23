@@ -34,7 +34,7 @@ async function uploadToTempfiles(buffer) {
     if (response.data?.files?.[0]?.url) {
         return response.data
     }
-    throw new Error('Upload gagal')
+    throw new Error("Error al subir")
 }
 
 
@@ -53,7 +53,12 @@ async function handler(m, { sock }) {
     }
     
     if (m.isVideo || m.quoted?.isVideo) {
-        return m.reply(`❌ *ᴛɪᴅᴀᴋ ᴅɪᴅᴜᴋᴜɴɢ*\n\n> Hanya gambar/screenshot yang didukung\n> Video tidak bisa diproses\n\n\`Reply atau kirim gambar dengan caption ${m.prefix}animeapaini\``)
+        return m.reply(`❌ *ᴛɪᴅᴀᴋ ᴅɪᴅᴜᴋᴜɴɢ*
+
+> Solo la imagen / captura de pantalla soportada
+> El vídeo no puede ser procesado
+
+\`Responder o enviar una imagen con descripción ${m.prefix}animeapaini\``)
     }
     
     if (!imageMsg && !imageBuffer) {
@@ -81,7 +86,7 @@ async function handler(m, { sock }) {
         
         if (!imageBuffer || imageBuffer.length < 100) {
             m.react('❌')
-            return m.reply(`❌ Gagal mengambil gambar. Coba kirim ulang.`)
+            return m.reply(`❌ Falló en tomar una foto.`)
         }
         
         await m.react('🕕')
@@ -94,7 +99,7 @@ async function handler(m, { sock }) {
         
         if (!res.data?.status || !res.data?.data) {
             m.react('❌')
-            return m.reply(`❌ Anime tidak ditemukan. Coba dengan screenshot yang lebih jelas.`)
+            return m.reply(`❌ Anime no se encuentra. Prueba con una captura de pantalla más clara.`)
         }
         
         const d = res.data.data

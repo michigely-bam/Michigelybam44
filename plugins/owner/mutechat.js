@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: [],
     category: 'owner',
     description: 'Mute/unmute chat',
-    usage: '.mutechat <nomor/reply> atau .mutechat buka <nomor>',
+    usage: ".mutechat − número de contacto / respuesta .mutechat abierto , número de contacto",
     example: '.mutechat 628xxx',
     isOwner: true,
     cooldown: 3,

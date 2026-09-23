@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'buyenergi',
     alias: ['belienergi', 'purchaseenergi', 'buyenergy'],
     category: 'user',
-    description: 'Beli energi dengan koin (1 energi = 100 koin)',
+    description: "Comprar energía con una moneda (1 energía = 100 monedas)",
     usage: '.buyenergi <jumlah>',
     example: '.buyenergi 10',
     isOwner: false,

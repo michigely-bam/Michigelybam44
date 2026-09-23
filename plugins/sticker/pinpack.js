@@ -71,11 +71,14 @@ async function handler(m, { sock }) {
 
     if (!results || results.length === 0) {
       await m.react("✘");
-      return m.reply(`── .✦ ──\n\n> Tidak ditemukan hasil untuk: *${query}* .☘︎ ݁˖`);
+      return m.reply(`── .✦ ──
+
+> No se han encontrado resultados para: *${query}* .☘︎ ݁˖`);
     }
 
     await m.reply(
-      `── .✦ ──\n\n> Mengunduh *${results.length}* gambar dari Pinterest\n> Lalu dikonversi ke sticker pack... .☘︎ ݁˖`,
+      `── .✦ ──\n\n> Mengunduh *${results.length}* gambar dari Pinterest
+> Luego se convirtió en las pegatinas de la manada...☘︎ ݁˖`,
     );
 
     const stickerBuffers = [];
@@ -96,7 +99,9 @@ async function handler(m, { sock }) {
 
     if (!stickerBuffers.length) {
       await m.react("✘");
-      return m.reply(`── .✦ ──\n\n> Gagal mendownload gambar .☘︎ ݁˖`);
+      return m.reply(`── .✦ ──
+
+> Fallado para descargar la imagen.☘︎ ݁˖`);
     }
 
     const packname = `Pinterest: ${query}`;
@@ -115,7 +120,9 @@ async function handler(m, { sock }) {
     } catch (packErr) {
       console.error("[PinPack] Pack send failed:", packErr.message);
       await m.reply(
-        `── .✦ ──\n\n> Pack gagal, mengirim satu per satu... .☘︎ ݁˖`,
+        `── .✦ ──
+
+> El paquete falló, enviando uno por uno...☘︎ ݁˖`,
       );
 
       let sent = 0;
@@ -147,11 +154,15 @@ async function handler(m, { sock }) {
       if (sent > 0) {
         await m.react("✓");
         await m.reply(
-          `── .✦ ──\n\n> Berhasil kirim *${sent}* sticker dari *${packname}* .☘︎ ݁˖`,
+          `── .✦ ──
+
+> Enviado con éxito *${sent}* sticker dari *${packname}* .☘︎ ݁˖`,
         );
       } else {
         await m.react("✘");
-        await m.reply(`── .✦ ──\n\n> Gagal mengirim sticker .☘︎ ݁˖`);
+        await m.reply(`── .✦ ──
+
+> Falló en enviar pegatinas.☘︎ ݁˖`);
       }
     }
   } catch (error) {

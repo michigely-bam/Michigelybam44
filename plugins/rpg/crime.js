@@ -40,7 +40,8 @@ async function handler(m, { sock }) {
         db.save()
         
         let txt = `✅ *ᴄʀɪᴍᴇ sᴜᴋsᴇs*\n\n`
-        txt += `> 🦹 Kamu berhasil mencuri!\n`
+        txt += `> 🦹 ¡Lo robaste!
+`
         txt += `> 💰 Hasil: *+Rp ${stolen.toLocaleString('id-ID')}*\n`
         txt += `> 🚄 Exp: *+${expGain}*`
         
@@ -55,7 +56,8 @@ async function handler(m, { sock }) {
         db.save()
         
         let txt = `❌ *ᴄʀɪᴍᴇ ɢᴀɢᴀʟ*\n\n`
-        txt += `> 🚔 Kamu tertangkap polisi!\n`
+        txt += `> 🚔 ¡Te atraparon la policía!
+`
         txt += `> 💸 Denda: *-Rp ${actualFine.toLocaleString('id-ID')}*\n`
         txt += `> ❤️ Health: *-15* (dipukuli)`
         

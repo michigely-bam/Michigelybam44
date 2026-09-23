@@ -28,7 +28,7 @@ async function handler(m, { sock }) {
         
         if (!res.status || !res.data?.text) {
             m.react('❌')
-            return m.reply(`❌ Gagal mengambil puisi`)
+            return m.reply(`❌ No se pudo recuperar el poema`)
         }
         
         const text = res.data.text

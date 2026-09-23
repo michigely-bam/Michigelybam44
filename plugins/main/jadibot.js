@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'jadibot',
     alias: ['jadibotqr', 'becomebot', 'bot'],
     category: 'main',
-    description: 'Jadikan nomor kamu menjadi bot (Pairing Code / QR)',
+    description: "Haga su número un bot (Código de pago / QR)",
     usage: '.jadibot atau .jadibot qr',
     example: '.jadibot',
     isOwner: false,
@@ -18,7 +18,7 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     const sender = m.sender
-    if (!sender) return m.reply('❌ Gagal mengidentifikasi nomor kamu')
+    if (!sender) return m.reply("❌ Fallado para identificar su número")
 
     if (isJadibotActive(sender)) {
         return m.reply(

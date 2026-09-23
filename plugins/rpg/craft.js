@@ -80,12 +80,14 @@ async function handler(m, { sock }) {
     
     const recipe = RECIPES[itemKey]
     if (!recipe) {
-        return m.reply(`❌ Recipe tidak ditemukan!\nLihat list: \`.craft\``)
+        return m.reply(`❌ ¡Receta no encontrada!
+Ver lista: \`.craft\``)
     }
     
     for (const [mat, qty] of Object.entries(recipe.materials)) {
         if ((user.inventory[mat] || 0) < qty) {
-            return m.reply(`❌ Material tidak cukup!\n> ${mat}: ${user.inventory[mat] || 0}/${qty}`)
+            return m.reply(`❌ ¡No es suficiente material!
+> ${mat}: ${user.inventory[mat] || 0}/${qty}`)
         }
     }
     
@@ -103,7 +105,7 @@ async function handler(m, { sock }) {
     }
     
     let txt = `🔨 *ᴄʀᴀꜰᴛ sᴜᴋsᴇs*\n\n`
-    txt += `> ✅ Berhasil membuat ${recipe.name} x${resultQty}!`
+    txt += `> ✅ Creado con éxito ${recipe.name} x${resultQty}!`
     
     if (recipe.bonus) {
         txt += `\n> 📈 Stat bonus applied!`

@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekimut',
     alias: ['imut', 'cute'],
     category: 'cek',
-    description: 'Cek seberapa imut kamu',
-    usage: '.cekimut <nama>',
+    description: "Mira lo lindo que eres.",
+    usage: ".moss , nombre de usuario",
     example: '.cekimut Ani',
     isOwner: false,
     isPremium: false,
@@ -28,13 +28,13 @@ async function handler(m) {
     } else if (percent >= 30) {
         desc = 'Ada imutnya dikit 😊'
     } else {
-        desc = 'Mungkin cool bukan imut? 😎'
+        desc = "¿Tal vez genial no es lindo? 😎"
     }
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat keimutan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat keimutan @${mentioned.split('@')[0]} yak? 
+Tu nivel de imitación *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de la imitación @${mentioned.split('@')[0]} yak? 
     
 Tingkat keimutan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

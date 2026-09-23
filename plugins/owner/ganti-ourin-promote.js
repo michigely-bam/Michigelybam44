@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['gantiourinpromote', 'setourinpromote'],
     category: 'owner',
     description: 'Ganti gambar ourin-promote.jpg',
-    usage: '.ganti-ourin-promote.jpg (reply/kirim gambar)',
+    usage: ".reemplazar -ourin-prompte.jpg (reply / enviar imagen)",
     example: '.ganti-ourin-promote.jpg',
     isOwner: true,
     isPremium: false,
@@ -19,10 +19,13 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
-    if (!isImage) return m.reply(`🖼️ *ɢᴀɴᴛɪ OURIN-PROMOTE.JPG*\n\n> Kirim/reply gambar untuk mengganti\n> File: assets/images/ourin-promote.jpg`)
+    if (!isImage) return m.reply(`🖼️ *ɢᴀɴᴛɪ OURIN-PROMOTE.JPG*
+
+> Enviar / respuesta imágenes para reemplazar
+> File: assets/images/ourin-promote.jpg`)
     try {
         let buffer = m.quoted && m.quoted.isMedia ? await m.quoted.download() : await m.download()
-        if (!buffer) return m.reply('❌ Gagal mendownload gambar')
+        if (!buffer) return m.reply("❌ No se pudo download image")
         const targetPath = path.join(process.cwd(), 'assets', 'images', 'ourin-promote.jpg')
         fs.writeFileSync(targetPath, buffer)
         m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*\n\n> Gambar ourin-promote.jpg telah diganti`)

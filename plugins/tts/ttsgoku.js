@@ -7,7 +7,7 @@ const pluginConfig = {
     name: 'ttsgoku',
     alias: ['gokutts'],
     category: 'tts',
-    description: 'Text to Speech dengan suara Goku',
+    description: "Texto para hablar con la voz de Goku",
     usage: '.ttsgoku <text>',
     example: '.ttsgoku Kamehameha!',
     isOwner: false,
@@ -38,7 +38,7 @@ async function handler(m, { sock }) {
         const voice = res.data?.result?.find(v => v.goku && !v.error)
         if (!voice) {
             m.react('❌')
-            return m.reply(`❌ Goku voice error. Coba TTS lain.`)
+            return m.reply(`❌ Error de voz de Goku.`)
         }
         
         const tempDir = path.join(process.cwd(), 'temp')

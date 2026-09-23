@@ -7,8 +7,8 @@ const pluginConfig = {
   name: "delplugin",
   alias: ["delpl", "hapusplugin", "removeplugin"],
   category: "owner",
-  description: "Hapus plugin berdasarkan nama",
-  usage: ".delplugin <nama>",
+  description: "Eliminar plugins por nombre",
+  usage: ".delplugin < nombre",
   example: ".delplugin bliblidl",
   isOwner: true,
   isPremium: false,
@@ -60,7 +60,7 @@ async function handler(m, { sock }) {
 
     if (!found) {
       await m.react("❌");
-      return m.reply(`❌ *GAGAL*\n\nPlugin \`${name}\` tidak ditemukan`);
+      return m.reply(`❌ *GAGAL*\n\nPlugin \`${name}\` no encontrado`);
     }
 
     let unloadResult = { success: false };

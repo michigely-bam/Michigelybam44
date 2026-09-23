@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'pin',
     alias: ['pinmsg', 'pinpesan'],
     category: 'group',
-    description: 'Pin pesan penting di grup',
-    usage: '.pin (reply pesan)',
+    description: "Pin mensaje importante en grupo",
+    usage: ".pin (mensaje de respuesta)",
     example: '.pin',
     isOwner: false,
     isPremium: false,
@@ -54,7 +54,7 @@ async function handler(m, { sock, args }) {
             ? `${Math.floor(duration / 86400)} hari` 
             : `${Math.floor(duration / 3600)} jam`;
         
-        const successMsg = `✅ Success pin pesan ini`;
+        const successMsg = `✅ El éxito marca este mensaje`;
         await m.reply(successMsg, { mentions: [m.sender] })
         
     } catch (error) {

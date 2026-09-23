@@ -10,7 +10,7 @@ const pluginConfig = {
     name: 'swgcall',
     alias: ['swgcsemua', 'swgcbroadcast', 'swgcbc', 'groupstoryall'],
     category: 'owner',
-    description: 'Post Group Status/Story ke SEMUA grup sekaligus (border hijau)',
+    description: "Post Group Status / Story to ALL group at once (border green)",
     usage: '.swgcall <teks> atau reply media',
     example: '.swgcall Pengumuman penting!',
     isOwner: true,
@@ -33,7 +33,7 @@ async function handler(m, { sock, db }) {
     if (args[0] === '--yes') {
         const pending = global._swgcallPending?.get(m.sender)
         if (!pending) {
-            return m.reply(`⚠️ *Tidak ada data pending. Kirim ulang media + .swgcall*`)
+            return m.reply(`⚠️ *No hay datos pendientes. Reenviar medios + .swgcall*`)
         }
 
         const { rawContent, groups, tempFile } = pending
@@ -102,7 +102,7 @@ async function handler(m, { sock, db }) {
     if (source) {
         try {
             buffer = await source.download()
-            if (!buffer) return m.reply(`❌ Gagal mengambil media.`)
+            if (!buffer) return m.reply(`❌ No pude recuperar los medios.`)
 
             const fileType = await fileTypeFromBuffer(buffer)
             ext = fileType?.ext || 'bin'
@@ -148,7 +148,7 @@ async function handler(m, { sock, db }) {
         const groupList = Object.entries(groups)
 
         if (groupList.length === 0) {
-            return m.reply(`⚠️ *Bot tidak berada di grup manapun.*`)
+            return m.reply(`⚠️ *Bot no está en ningún grupo.*`)
         }
 
         if (!global._swgcallPending) global._swgcallPending = new Map()
@@ -198,7 +198,7 @@ async function handler(m, { sock, db }) {
                 {
                     name: 'quick_reply',
                     buttonParamsJson: JSON.stringify({
-                        display_text: `✅ Kirim ke ${groupList.length} Grup`,
+                        display_text: `✅ Enviar a ${groupList.length} Grup`,
                         id: `${m.prefix}swgcall --yes`
                     })
                 },
@@ -212,7 +212,10 @@ async function handler(m, { sock, db }) {
             ]
         })
     } catch (error) {
-        await m.reply(`❌ *ᴇʀʀᴏʀ*\n\n> Gagal mengambil daftar grup.\n> _${error.message}_`)
+        await m.reply(`❌ *ᴇʀʀᴏʀ*
+
+> Fallado para recuperar la lista de grupos.
+> _${error.message}_`)
         if (tempFile && fs.existsSync(tempFile)) {
             try { fs.unlinkSync(tempFile) } catch {}
         }

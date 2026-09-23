@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'jadwalgroup',
     alias: ['schedulegroup', 'jdwlgrup', 'autoopenclose'],
     category: 'group',
-    description: 'Jadwal buka/tutup grup otomatis',
+    description: "Grupo automático abierto / horario cerrado",
     usage: '.jadwalgroup <open/close> <HH:MM>',
     example: '.jadwalgroup open 06:00',
     isOwner: false,
@@ -55,14 +55,14 @@ async function handler(m, { sock, db }) {
         let scheduleInfo = `⏰ *ᴊᴀᴅᴡᴀʟ ɢʀᴜᴘ*
 
 「 📋 *sᴛᴀᴛᴜs* 」
-🔓 ᴏᴘᴇɴ: *${openTime || 'Tidak aktif'}*
-🔒 ᴄʟᴏsᴇ: *${closeTime || 'Tidak aktif'}*
+🔓 ᴏᴘᴇɴ: *${openTime || "Inactivo"}*
+🔒 ᴄʟᴏsᴇ: *${closeTime || "Inactivo"}*
 
 *Cara Penggunaan:*
 \`.jadwalgroup open 06:00\`
 \`.jadwalgroup close 22:00\`
-\`.jadwalgroup hapus open\`
-\`.jadwalgroup hapus close\``;
+\`.Grupo de promoción eliminar abierto\`
+\`.Promotes\``;
         
         await m.reply(scheduleInfo);
         return;
@@ -156,8 +156,8 @@ async function handler(m, { sock, db }) {
 ┃ ㊗ 📡 sᴛᴀᴛᴜs: *🟢 Aktif*
 ╰┈┈⬡
 
-> _Grup akan otomatis ${action === 'open' ? 'dibuka' : 'ditutup'}_
-> _setiap hari pada jam *${formattedTime}* WIB._`;
+> _El grupo automáticamente ${action === 'open' ? 'dibuka' : 'ditutup'}_
+> _Todos los días en el reloj *${formattedTime}* WIB._`;
     
     await m.reply(successMsg);
 }

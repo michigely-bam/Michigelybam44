@@ -5,7 +5,7 @@ const pluginConfig = {
     name: ['qrcustom', 'qrcode', 'qr'],
     alias: [],
     category: 'tools',
-    description: 'Generate QR code custom dengan logo',
+    description: "Generar código QR personalizado con logo",
     usage: '.qrcustom <url>',
     example: '.qrcustom https://wa.me/628xxx',
     isOwner: false,

@@ -9,7 +9,7 @@ const pluginConfig = {
   name: "emojitoimage",
   alias: ["emoji2img", "emojiimg", "e2i"],
   category: "tools",
-  description: "Konversi emoji ke gambar HD (style Apple)",
+  description: "Conversión de emoji a imagen HD (estilo de aplicación)",
   usage: ".emojitoimage <emoji> [style]",
   example: ".emojitoimage 😳 apple",
   cooldown: 5,
@@ -89,7 +89,7 @@ async function handler(m, { sock }) {
 
     if (!data?.status || !data?.data?.url) {
       m.react("❌");
-      return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> Emoji tidak ditemukan atau API error");
+      return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> Emoji no se encuentra o error de API");
     }
 
     const imgUrl = data.data.url;

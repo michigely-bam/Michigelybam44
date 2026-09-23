@@ -35,7 +35,9 @@ async function handler(m) {
     );
     const results = res.data;
     if (!results.status) {
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak ditemukan hasil untuk *${query}*`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No se han encontrado resultados *${query}*`);
     }
 
     const tracks = results.data;

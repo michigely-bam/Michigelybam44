@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'birthday',
     alias: ['bday', 'ultah', 'ulangtahun'],
     category: 'user',
-    description: 'Lihat ulang tahun member',
+    description: "Mira el cumpleaños del miembro",
     usage: '.birthday [@user]',
     example: '.birthday @user',
     isOwner: false,
@@ -30,7 +30,7 @@ async function handler(m, { sock }) {
                 `> Contoh: ${m.prefix}setbirthday 25-12`
             )
         }
-        return m.reply(`❌ User belum set birthday!`)
+        return m.reply(`❌ ¡El usuario aún no ha fijado el cumpleaños!`)
     }
     
     const [day, month] = user.birthday.split('-').map(Number)
@@ -55,16 +55,19 @@ async function handler(m, { sock }) {
     text += `┃ 📅 ${day} ${months[month - 1]}\n`
     
     if (isToday) {
-        text += `┃ 🎉 *HARI INI ULTAH!*\n`
+        text += `┃ 🎉 *¡Hoy es un gran día!*
+`
     } else {
-        text += `┃ 🕕 ${diffDays} hari lagi\n`
+        text += `┃ 🕕 ${diffDays} Más días
+`
     }
     
     text += `╰┈┈┈┈┈┈┈┈⬡`
     
     if (isToday) {
         text += `\n\n🎊 *HAPPY BIRTHDAY!* 🎊\n`
-        text += `> Semoga panjang umur dan\n`
+        text += `> Viva y viva mucho tiempo.
+`
         text += `> sukses selalu! 🎉🎂`
     }
     

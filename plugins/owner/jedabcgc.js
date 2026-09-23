@@ -4,8 +4,8 @@ const pluginConfig = {
   name: 'jedabcgc',
   alias: ['delaybcgc', 'setjedabcgc'],
   category: 'owner',
-  description: 'Atur jeda broadcast grup',
-  usage: '.jedabcgc <waktu> (contoh: 5s, 2m, 1h)',
+  description: "Establecer una pausa de grupo de difusión",
+  usage: ".jadabcgc se realizó tiempo √≥ (ejemplo: 5s, 2m, 1h)",
   isOwner: true,
   isPremium: false,
   isGroup: false,
@@ -59,7 +59,7 @@ async function handler(m) {
 
   const ms = parseDelay(input)
   if (!ms || ms < 1000) {
-    return m.reply('❌ Format salah. Contoh: `5s`, `2m`, `1h`, `1d`')
+    return m.reply("❌ Formato inválido. `5s`, `2m`, `1h`, `1d`")
   }
 
   const prev = current

@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'sampah',
     alias: ['clearsampah', 'cleartemp', 'deltemp'],
     category: 'owner',
-    description: 'Menghapus semua sampah di temp',
+    description: "Borrar toda basura en tiempo",
     usage: '.sampah',
     example: '.sampah',
     isOwner: true,
@@ -21,7 +21,7 @@ async function handler(m) {
     const tempPath = path.join(process.cwd(), 'temp')
 
     if (!fs.existsSync(tempPath)) {
-        return m.reply('❌ Folder temp tidak ditemukan!')
+        return m.reply("❌ ¡Carpeta de temperatura no encontrada!")
     }
 
     await m.react('🗑️')
@@ -30,7 +30,7 @@ async function handler(m) {
         const files = fs.readdirSync(tempPath)
 
         if (!files.length) {
-            return m.reply('📁 Folder temp sudah kosong!')
+            return m.reply("📁 ¡La carpeta temporal está vacía!")
         }
 
         let deleted = 0

@@ -4,7 +4,7 @@ const pluginConfig = {
     category: 'tools',
     description: 'Membuat teks baca selengkapnya (spoiler)',
     usage: '.readmore <text_awal>|<text_akhir>',
-    example: '.readmore Hai|Ini adalah pesan rahasia',
+    example: ".Este es un mensaje secreto",
     isGroup: false,
     isBotAdmin: false,
     isAdmin: false,
@@ -17,7 +17,7 @@ function handler(m, { sock }) {
     const text = m.text;
     
     if (!text) {
-        return m.reply(`⚠️ Masukan text!\nContoh: \`${m.prefix}${m.command} Halo|Ini teks tersembunyi\``);
+        return m.reply(`⚠️ Masukan text!\nContoh: \`${m.prefix}${m.command} Hola. 124; Es texto escondido\``);
     }
     
     let [l, r] = text.split('|');

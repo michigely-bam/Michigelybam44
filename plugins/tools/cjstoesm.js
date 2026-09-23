@@ -10,7 +10,7 @@ const pluginConfig = {
     name: 'cjstoesm',
     alias: ['cjs2esm', 'cjsconvert'],
     category: 'tools',
-    description: 'Convert CommonJS ke ESM (ES Modules)',
+    description: "Convertir CommonJS en ESM (S Modules)",
     usage: '.cjstoesm <reply kode>',
     example: '.cjstoesm',
     isOwner: false,

@@ -5,8 +5,8 @@ const pluginConfig = {
   name: "beli",
   alias: ["order", "pesan", "buy"],
   category: "store",
-  description: "🛒 Pesan produk dan dapatkan nomor transaksi",
-  usage: ".beli <nomor_produk>",
+  description: "🛒 Mensaje del producto y obtener números de transacción",
+  usage: ".comprar el número de_produk>",
   example: ".beli 1",
   isOwner: false,
   isPremium: false,
@@ -27,7 +27,9 @@ async function handler(m, { sock }) {
 
   if (products.length === 0) {
     return m.reply(
-      `📭 *Belum ada produk tersedia.*\n\nKetik \`${m.prefix}listproduk\` untuk melihat daftar produk 🛍️`,
+      `📭 *Todavía no hay producto disponible.*
+
+Ketik \`${m.prefix}listproduk\` para ver la lista de productos 🛍️`,
     );
   }
 
@@ -35,7 +37,11 @@ async function handler(m, { sock }) {
   const idx = parseInt(args[0]) - 1;
 
   if (isNaN(idx) || idx < 0 || idx >= products.length) {
-    let txt = `🛒 *Pilih Produk*\n\nKetik \`${m.prefix}beli <nomor>\` untuk memesan.\n\n`;
+    let txt = `🛒 *Seleccione el producto*
+
+Ketik \`${m.prefix}comprar el número de contacto\` para ordenar.
+
+`;
     for (let i = 0; i < products.length; i++) {
       const p = products[i];
       const typeIcon = p.type === "fisik" ? "📦" : "🔑";
@@ -94,8 +100,10 @@ async function handler(m, { sock }) {
       ? `${String(ownerNumbers[0]).replace(/[^0-9]/g, "")}@s.whatsapp.net`
       : null;
 
-  let txt = `🛒 *PESANAN DIBUAT*\n\n`;
-  txt += `🧾 Nomor Transaksi: \`${trxId}\`\n\n`;
+  let txt = `🛒 *PROGRAMA DE MENÚ*
+
+`;
+  txt += `🧾 Número de transacción: \`${trxId}\`\n\n`;
   txt += `📦 *Detail Pesanan:*\n`;
   txt += `${typeIcon} Produk: *${product.name}*\n`;
   txt += `🏷️ Tipe: *${typeLabel}*\n`;
@@ -122,7 +130,8 @@ async function handler(m, { sock }) {
   }
 
   let paymentTxt = `💳 *INSTRUKSI PEMBAYARAN*\n\n`;
-  paymentTxt += `1️⃣ Transfer sebesar *${formatPrice(product.price)}* ke nomor admin 💰\n`;
+  paymentTxt += `1️⃣ Transfer sebesar *${formatPrice(product.price)}* al número de administración 💰
+`;
 
   if (config.store?.payment?.length) {
     for (const p of config.store.payment) {
@@ -130,16 +139,23 @@ async function handler(m, { sock }) {
     }
   }
   if (config.store?.qris) {
-    paymentTxt += `   📱 QRIS: Tersedia\n`;
+    paymentTxt += `   📱 QRIS: Disponible
+`;
   }
 
-  paymentTxt += `\n2️⃣ Setelah transfer, kirim *bukti pembayaran* ke admin 📸\n`;
-  paymentTxt += `3️⃣ Admin akan memverifikasi dan mengirim data produk ke Anda ✅\n\n`;
-  paymentTxt += `🧾 Nomor Transaksi Anda: \`${trxId}\`\n`;
-  paymentTxt += `_Simpan nomor ini untuk referensi_ 📌`;
+  paymentTxt += `
+Dos, después de la transferencia, envía. *bukti pembayaran* a admin 📸
+`;
+  paymentTxt += `3 para Admin verificará y enviará datos de producto a usted ✅
+
+`;
+  paymentTxt += `🧾 Su número de transacción: \`${trxId}\`\n`;
+  paymentTxt += `_Guardar este número de referencia_ 📌`;
 
   if (ownerJid) {
-    paymentTxt += `\n\n📞 Hubungi admin: wa.me/${ownerJid.split("@")[0]}`;
+    paymentTxt += `
+
+📞 Administrador de contacto: wa.me /${ownerJid.split("@")[0]}`;
   }
 
   await m.reply(paymentTxt);

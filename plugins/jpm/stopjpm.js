@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'stopjpm',
     alias: ['stopjasher', 'stopjaser'],
     category: 'jpm',
-    description: 'Hentikan proses JPM',
+    description: "Stop JPM process",
     usage: '.stopjpm',
     example: '.stopjpm',
     isOwner: true,
@@ -16,13 +16,16 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     if (!global.statusjpm) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak ada JPM yang sedang berjalan`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No JPM running`)
     }
     
     global.stopjpm = true
     
     m.react('⏹️')
-    await m.reply(`⏹️ *sᴛᴏᴘ ᴊᴘᴍ*\nMenghentikan proses JPM...`)
+    await m.reply(`⏹️ *sᴛᴏᴘ ᴊᴘᴍ*
+Detener el proceso de JPM...`)
 }
 
 export { pluginConfig as config, handler }

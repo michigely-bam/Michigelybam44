@@ -43,7 +43,7 @@ async function handler(m, { sock }) {
     const results = data?.data?.slice(0, 10);
     if (!results || results.length === 0) {
       m.react("❌");
-      return m.reply(`❌ Tidak ditemukan hasil untuk: ${query}`);
+      return m.reply(`❌ No se han encontrado resultados para: ${query}`);
     }
 
     const mediaList = [];
@@ -69,7 +69,7 @@ async function handler(m, { sock }) {
 
     if (mediaList.length === 0) {
       m.react("❌");
-      return m.reply("❌ Gagal memuat gambar");
+      return m.reply("❌ No se pudo load image");
     }
 
     try {
@@ -113,7 +113,7 @@ async function handler(m, { sock }) {
 
       m.react("✅");
     } catch (albumErr) {
-      console.log("[Pins] Album gagal, kirim satu-satu:", albumErr.message);
+      console.log("[Album falló, envía uno-uno:", albumErr.message);
 
       const saluranId = config.saluran?.id || "120363400911374213@newsletter";
       const saluranName =

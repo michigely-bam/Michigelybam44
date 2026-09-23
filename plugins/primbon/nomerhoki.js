@@ -4,8 +4,8 @@ const pluginConfig = {
     name: 'nomerhoki',
     alias: ['nomorhoki', 'ceknomor'],
     category: 'primbon',
-    description: 'Cek keberuntungan nomor HP',
-    usage: '.nomerhoki <nomor>',
+    description: "Control de suerte de HP",
+    usage: ".Número",
     example: '.nomerhoki 6281234567890',
     isOwner: false,
     isPremium: false,
@@ -19,7 +19,11 @@ const pluginConfig = {
 async function handler(m, { sock }) {
     let nomor = m.args.join('').replace(/[^0-9]/g, '')
     if (!nomor) {
-        return m.reply(`🍀 *ɴᴏᴍᴏʀ ʜᴏᴋɪ*\n\n> Masukkan nomor HP\n\n\`Contoh: ${m.prefix}nomerhoki 6281234567890\``)
+        return m.reply(`🍀 *ɴᴏᴍᴏʀ ʜᴏᴋɪ*
+
+> Introduzca el número de HP
+
+\`Contoh: ${m.prefix}nomerhoki 6281234567890\``)
     }
     
     m.react('🍀')
@@ -30,7 +34,9 @@ async function handler(m, { sock }) {
         
         if (!data?.status || !data?.data) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Gagal menganalisa nomor`)
+            return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Fallado para analizar número`)
         }
         
         const r = data.data

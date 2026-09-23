@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekkepribadian',
     alias: ['kepribadian', 'personality'],
     category: 'cek',
-    description: 'Cek kepribadian kamu',
-    usage: '.cekkepribadian <nama>',
+    description: "Verifica tu personalidad",
+    usage: ".% s",
     example: '.cekkepribadian Budi',
     isOwner: false,
     isPremium: false,
@@ -15,22 +15,22 @@ const pluginConfig = {
 }
 
 const personalities = [
-    { type: 'INTJ', title: 'The Architect', desc: 'Visioner, strategis, dan independen' },
-    { type: 'INTP', title: 'The Logician', desc: 'Analitis, inovatif, dan ingin tahu' },
-    { type: 'ENTJ', title: 'The Commander', desc: 'Tegas, ambisius, dan pemimpin alami' },
-    { type: 'ENTP', title: 'The Debater', desc: 'Cerdas, penasaran, dan suka tantangan' },
-    { type: 'INFJ', title: 'The Advocate', desc: 'Idealis, bijaksana, dan penuh empati' },
-    { type: 'INFP', title: 'The Mediator', desc: 'Kreatif, idealis, dan setia' },
-    { type: 'ENFJ', title: 'The Protagonist', desc: 'Karismatik, inspiratif, dan peduli' },
-    { type: 'ENFP', title: 'The Campaigner', desc: 'Antusias, kreatif, dan sosial' },
-    { type: 'ISTJ', title: 'The Logistician', desc: 'Bertanggung jawab, praktis, dan teliti' },
-    { type: 'ISFJ', title: 'The Defender', desc: 'Setia, suportif, dan reliable' },
-    { type: 'ESTJ', title: 'The Executive', desc: 'Terorganisir, tegas, dan tradisional' },
-    { type: 'ESFJ', title: 'The Consul', desc: 'Peduli, sosial, dan loyal' },
-    { type: 'ISTP', title: 'The Virtuoso', desc: 'Fleksibel, observan, dan praktis' },
-    { type: 'ISFP', title: 'The Adventurer', desc: 'Artistik, sensitif, dan spontan' },
-    { type: 'ESTP', title: 'The Entrepreneur', desc: 'Energik, perceptive, dan berani' },
-    { type: 'ESFP', title: 'The Entertainer', desc: 'Spontan, energik, dan fun' }
+    { type: 'INTJ', title: 'The Architect', desc: "Visionarios, estratégicos e independientes" },
+    { type: 'INTP', title: 'The Logician', desc: "Analista, innovador, curioso" },
+    { type: 'ENTJ', title: 'The Commander', desc: "líderes firmes, ambiciosos y naturales" },
+    { type: 'ENTP', title: 'The Debater', desc: "Inteligente, curioso y ama los desafíos" },
+    { type: 'INFJ', title: 'The Advocate', desc: "Idolistas, sabias y empáticas" },
+    { type: 'INFP', title: 'The Mediator', desc: "Creativo, idealista, leal" },
+    { type: 'ENFJ', title: 'The Protagonist', desc: "Carismático, inspirador, cariñoso" },
+    { type: 'ENFP', title: 'The Campaigner', desc: "Antusias, creativas y sociales" },
+    { type: 'ISTJ', title: 'The Logistician', desc: "Responsable, práctico y meticuloso" },
+    { type: 'ISFJ', title: 'The Defender', desc: "Préstamo, apoyo y religión" },
+    { type: 'ESTJ', title: 'The Executive', desc: "Organizado, firme y tradicional" },
+    { type: 'ESFJ', title: 'The Consul', desc: "Caring, social, y leal" },
+    { type: 'ISTP', title: 'The Virtuoso', desc: "Flexible, observatorio y práctico" },
+    { type: 'ISFP', title: 'The Adventurer', desc: "Artístico, sensible, espontáneo" },
+    { type: 'ESTP', title: 'The Entrepreneur', desc: "Energética, perceptiva y valiente" },
+    { type: 'ESFP', title: 'The Entertainer', desc: "Espontáneo, energético y divertido" }
 ]
 
 async function handler(m) {
@@ -40,8 +40,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kepribadian kamu *${p.type} - ${p.title}*
-\`\`\`${p.desc}\`\`\`` : `Kamu ingin ngecek kepribadian @${mentioned.split('@')[0]} yak? 
+Tu nivel de personalidad *${p.type} - ${p.title}*
+\`\`\`${p.desc}\`\`\`` : `Usted quiere comprobar la personalidad @${mentioned.split('@')[0]} yak? 
     
 Kepribadian dia adalah *${p.type} - ${p.title}*
 \`\`\`${p.desc}\`\`\``

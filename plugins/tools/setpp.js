@@ -20,14 +20,14 @@ async function handler(m, { sock }) {
         try {
             buffer = await m.quoted.download()
         } catch (e) {
-            await m.reply(`❌ Gagal mengambil gambar.`)
+            await m.reply(`❌ Falló en tomar una foto.`)
             return
         }
     } else if (m.isImage) {
         try {
             buffer = await m.download()
         } catch (e) {
-            await m.reply(`❌ Gagal mengambil gambar.`)
+            await m.reply(`❌ Falló en tomar una foto.`)
             return
         }
     }
@@ -43,7 +43,7 @@ async function handler(m, { sock }) {
     try {
         const botJid = sock.user?.id
         if (!botJid) {
-            await m.reply(`❌ Bot JID tidak ditemukan.`)
+            await m.reply(`❌ La bota JID no se encontró.`)
             return
         }
         

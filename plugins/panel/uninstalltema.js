@@ -31,7 +31,7 @@ async function handler(m) {
     
     const parts = text.split('|')
     if (parts.length < 2) {
-        return m.reply(`❌ Format salah! Gunakan: \`ip|password\``)
+        return m.reply(`❌ ¡Formato inválido! \`ip|password\``)
     }
     
     const ipvps = parts[0].trim()
@@ -50,7 +50,9 @@ async function handler(m) {
     const ress = new Client()
     
     m.react('🕕')
-    await m.reply(`🕕 *ᴍᴇᴍᴘʀᴏsᴇs ᴜɴɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ...*\n\n> Tunggu 1-10 menit hingga proses selesai`)
+    await m.reply(`🕕 *ᴍᴇᴍᴘʀᴏsᴇs ᴜɴɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ...*
+
+> Espera 1 -10 minutos hasta que termine el proceso`)
     
     ress.on('ready', () => {
         ress.exec(command, (err, stream) => {
@@ -67,7 +69,7 @@ async function handler(m) {
 ┃ ㊗ ɪᴘ: ${ipvps}
 ╰┈┈⬡
 
-> _Tema berhasil diuninstall!_`
+> _Theme con éxito desinstalado!_`
                 )
                 ress.end()
             }).on('data', (data) => {
@@ -83,7 +85,9 @@ async function handler(m) {
     }).on('error', (err) => {
         console.log('[SSH Error]', err)
         m.react('❌')
-        m.reply(`❌ Koneksi gagal!\n\n> IP atau Password tidak valid.`)
+        m.reply(`❌ ¡La conexión falló!
+
+> IP o contraseña inválida.`)
     }).connect(connSettings)
 }
 

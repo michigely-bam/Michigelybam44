@@ -6,9 +6,9 @@ const pluginConfig = {
     name: 'addlist',
     alias: ['addinfo'],
     category: 'store',
-    description: '➕ Tambah informasi toko baru (hanya di private chat)',
-    usage: '.addlist <nama>|<isi>',
-    example: '.addlist Syarat & Ketentuan|1. Pembelian tidak bisa dibatalkan;;2. Garansi 7 hari',
+    description: "➕ Añada nueva información de la tienda (sólo chat privado)",
+    usage: ".addlist > nombre >ol; > content ",
+    example: ".addlist &quot; set of 124; 1. Las compras no pueden ser canceladas; 2. Warrants 7 days",
     isOwner: true,
     isPremium: false,
     isGroup: false,
@@ -69,7 +69,9 @@ async function handler(m, { sock }) {
     const content = text.substring(pipeIdx + 1).trim().replace(/;;/g, '\n')
 
     if (!name || name.length < 2) {
-        return m.reply(`❌ *Nama terlalu pendek.*\n\nMinimal 2 karakter diperlukan agar mudah dikenali 📝`)
+        return m.reply(`❌ *El nombre es demasiado corto.*
+
+Minimal 2 karakter diperlukan agar mudah dikenali 📝`)
     }
     if (!content || content.length < 3) {
         return m.reply(`❌ *Isi informasi terlalu pendek.*\n\nMinimal 3 karakter diperlukan ✍️`)
@@ -120,7 +122,7 @@ async function handler(m, { sock }) {
     if (imageUrl) reply += `🖼️ Media: ✅ Gambar\n`
     if (videoUrl) reply += `🎬 Media: ✅ Video\n`
     reply += `📝 Isi:\n${content}\n\n`
-    reply += `📋 _Lihat daftar: \`${m.prefix}list\`_\n`
+    reply += `📋 _Ver lista: \`${m.prefix}list\`_\n`
     reply += `✏️ _Edit: \`${m.prefix}editlist ${lists.length}\`_`
 
     return m.reply(reply)

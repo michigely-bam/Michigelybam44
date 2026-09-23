@@ -55,7 +55,7 @@ function capitalize(str) {
 function handler(m, { sock }) {
     const parsed = parseCommand(m.command)
     if (!parsed) {
-        return m.reply(`❌ Command tidak valid.`)
+        return m.reply(`❌ Comando inválido.`)
     }
     
     const { action, role, server } = parsed
@@ -65,7 +65,9 @@ function handler(m, { sock }) {
     if (action === 'list') {
         const list = listByRole(server, role)
         if (list.length === 0) {
-            return m.reply(`📋 *ᴅᴀꜰᴛᴀʀ ${roleLabel.toUpperCase()} ${serverLabel}*\n\n> Belum ada ${role} terdaftar.`)
+            return m.reply(`📋 *ᴅᴀꜰᴛᴀʀ ${roleLabel.toUpperCase()} ${serverLabel}*
+
+> Nada todavía. ${role} terdaftar.`)
         }
         
         let txt = `📋 *ᴅᴀꜰᴛᴀʀ ${roleLabel.toUpperCase()} ${serverLabel}*\n\n`

@@ -50,7 +50,7 @@ const pluginConfig = {
     ],
     alias: ['ephoto'],
     category: 'ephoto',
-    description: 'Buat efek text keren dengan berbagai style',
+    description: "Crear un efecto de texto fresco con varios estilos",
     usage: '.<effect> <text>',
     example: '.glitchtext Ourin-AI',
     isOwner: false,
@@ -125,12 +125,15 @@ async function handler(m, { sock }) {
     }
     
     if (!text) {
-        return m.reply(`❌ *ᴇʀʀᴏʀ*\n\n> Masukkan text!\n> *Contoh:* ${m.prefix}${command} Ourin-AI`)
+        return m.reply(`❌ *ᴇʀʀᴏʀ*
+
+> ¡Entra el texto!
+> *Contoh:* ${m.prefix}${command} Ourin-AI`)
     }
     
     const effectUrl = EFFECT_URLS[command]
     if (!effectUrl) {
-        return m.reply(`❌ Efek tidak ditemukan`)
+        return m.reply(`❌ Efecto no encontrado`)
     }
     
     await m.react('🕕')

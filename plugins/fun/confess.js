@@ -4,9 +4,9 @@ const pluginConfig = {
   name: "confess",
   alias: ["confession", "menfess", "anonim"],
   category: "fun",
-  description: "Kirim pesan anonim ke seseorang",
-  usage: ".confess nomor|pesan",
-  example: ".confess 6281234567890|Hai, aku suka kamu!",
+  description: "Enviar un mensaje anónimo a alguien",
+  usage: ".Número confesado Az 124; mensaje",
+  example: ".Confesses 6281234567890 Hola, me gustas!",
   isOwner: false,
   isPremium: true,
   isGroup: false,
@@ -41,7 +41,9 @@ async function handler(m, { sock }) {
 
   if (!rawNumber || !message) {
     return m.reply(
-      `❌ Format salah!\n\n> Gunakan: \`${m.prefix}confess nomor|pesan\``,
+      `❌ ¡Formato equivocado!
+
+> Gunakan: \`${m.prefix}Número confesado Az 124; mensaje\``,
     );
   }
 
@@ -52,31 +54,31 @@ async function handler(m, { sock }) {
   }
 
   if (targetNumber.length < 10 || targetNumber.length > 15) {
-    return m.reply(`❌ Nomor tidak valid!`);
+    return m.reply(`❌ ¡Número inválido!`);
   }
 
   const targetJid = targetNumber + "@s.whatsapp.net";
 
   const senderNumber = m.sender.split("@")[0];
   if (targetNumber === senderNumber) {
-    return m.reply(`❌ Tidak bisa mengirim confess ke diri sendiri!`);
+    return m.reply(`❌ ¡No puedes enviarte una confesión!`);
   }
 
   try {
     const [onWa] = await sock.onWhatsApp(targetNumber);
     if (!onWa?.exists) {
       return m.reply(
-        `❌ Nomor \`${targetNumber}\` tidak terdaftar di WhatsApp!`,
+        `❌ Nomor \`${targetNumber}\` ¡No está registrado en WhatsApp!`,
       );
     }
   } catch (e) {}
 
   if (message.length < 5) {
-    return m.reply(`❌ Pesan terlalu pendek! Minimal 5 karakter.`);
+    return m.reply(`❌ ¡El mensaje es demasiado corto! Mínimo 5 caracteres.`);
   }
 
   if (message.length > 1000) {
-    return m.reply(`❌ Pesan terlalu panjang! Maksimal 1000 karakter.`);
+    return m.reply(`❌ Mensaje demasiado largo! Máximo 1000 caracteres.`);
   }
 
   const confessText =

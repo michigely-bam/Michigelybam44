@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'updatescript',
     alias: ['updatebot', 'updatesc'],
     category: 'owner',
-    description: 'Update script otomatis dari GitHub dengan backup data penting',
+    description: "Actualizar el script automático de GitHub con una copia de seguridad de datos importante",
     usage: '.updatescript',
     example: '.updatescript',
     isOwner: true,

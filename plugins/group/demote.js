@@ -41,24 +41,30 @@ async function handler(m, { sock }) {
         const participant = groupMeta.participants.find(p => getParticipantJid(p) === target)
 
         if (!participant) {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> User tidak ditemukan di grup!`)
+            await m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> ¡Usuario no encontrado en grupo!`)
             return
         }
 
         if (!participant.admin) {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> User bukan admin!`)
+            await m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> ¡El usuario no es un administrador!`)
             return
         }
 
         if (participant.admin === 'superadmin') {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak bisa demote owner grup!`)
+            await m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> ¡No puede demoler el grupo de dueños!`)
             return
         }
 
         await sock.groupParticipantsUpdate(m.chat, [target], 'demote')
 
         await m.reply(
-            `@${target.split('@')[0]} sekarang bukan admin lagi.`,
+            `@${target.split('@')[0]} Ya no es un administrador.`,
             { mentions: [target] }
         )
 

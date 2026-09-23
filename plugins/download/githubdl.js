@@ -46,7 +46,9 @@ async function handler(m, { sock }) {
     }
     
     if (!repo) {
-        return m.reply(`❌ *ʀᴇᴘᴏ ᴅɪʙᴜᴛᴜʜᴋᴀɴ*\n\n> Masukkan nama repository`)
+        return m.reply(`❌ *ʀᴇᴘᴏ ᴅɪʙᴜᴛᴜʜᴋᴀɴ*
+
+> Introduzca el nombre del repositorio`)
     }
     
     await m.react('🕕')
@@ -56,7 +58,7 @@ async function handler(m, { sock }) {
         
         if (!repoInfo.ok) {
             await m.react('❌')
-            return m.reply(`❌ *ʀᴇᴘᴏ ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n> \`${username}/${repo}\` tidak ada`)
+            return m.reply(`❌ *ʀᴇᴘᴏ ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n> \`${username}/${repo}\` ninguno`)
         }
         
         const repoData = await repoInfo.json()
@@ -68,7 +70,8 @@ async function handler(m, { sock }) {
         const checkRes = await fetch(zipUrl, { method: 'HEAD' })
         if (!checkRes.ok) {
             await m.react('❌')
-            return m.reply(`❌ *ʙʀᴀɴᴄʜ ᴛɪᴅᴀᴋ ᴀᴅᴀ*\n\n> Branch \`${branch}\` tidak ditemukan\n> Default: \`${defaultBranch}\``)
+            return m.reply(`❌ *ʙʀᴀɴᴄʜ ᴛɪᴅᴀᴋ ᴀᴅᴀ*\n\n> Branch \`${branch}\` no encontrado
+> Default: \`${defaultBranch}\``)
         }
         
         await sock.sendMedia(m.chat, zipUrl, null, m, {

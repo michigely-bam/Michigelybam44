@@ -19,9 +19,9 @@ const pluginConfig = {
 }
 
 const VARIANTS = {
-    1: { name: 'Current Design', desc: 'Tampilan default saat ini' },
-    2: { name: 'Carousel Cards', desc: 'Kartu carousel dengan foto owner' },
-    3: { name: 'Multiple Contact', desc: 'Kirim contact card semua owner' }
+    1: { name: 'Current Design', desc: "Pantalla predeterminada actual" },
+    2: { name: 'Carousel Cards', desc: "Tarjeta Carousel con la foto del propietario." },
+    3: { name: 'Multiple Contact', desc: "Enviar tarjeta de contacto de todos los propietarios" }
 }
 
 async function handler(m, { sock, db }) {
@@ -55,7 +55,11 @@ async function handler(m, { sock, db }) {
     }
     
     await sock.sendMessage(m.chat, {
-        text: `🎨 *sᴇᴛ ᴏᴡɴᴇʀ ᴛʏᴘᴇ*\n\n> Type saat ini: *V${current}*\n> _${VARIANTS[current].name}_\n\n> Pilih variant owner:`,
+        text: `🎨 *sᴇᴛ ᴏᴡɴᴇʀ ᴛʏᴘᴇ*
+
+> Tipo actual: *V${current}*\n> _${VARIANTS[current].name}_
+
+> Seleccione el propietario de la variante:`,
         footer: config.bot?.name || 'Ourin-AI',
         contextInfo: {
             mentionedJid: [m.sender],

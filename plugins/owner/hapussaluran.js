@@ -2,7 +2,7 @@ const pluginConfig = {
     name: ['hapussaluran', 'deletesaluran', 'deletenewsletter'],
     alias: [],
     category: 'owner',
-    description: 'Hapus saluran/newsletter',
+    description: "Eliminar el canal / nuevo",
     usage: '.hapussaluran <id_saluran>',
     example: '.hapussaluran 120363xxx@newsletter',
     isOwner: true,
@@ -32,9 +32,11 @@ async function handler(m, { sock }) {
     try {
         await sock.newsletterDelete(targetJid)
         await m.react('✅')
-        return m.reply(`🗑️ *Saluran dihapus*\n\n> ID: ${targetJid}`)
+        return m.reply(`🗑️ *Canal eliminado*
+
+> ID: ${targetJid}`)
     } catch (err) {
-        return m.reply(`❌ Gagal menghapus saluran: ${err.message}`)
+        return m.reply(`❌ No se pudo delete channel: ${err.message}`)
     }
 }
 

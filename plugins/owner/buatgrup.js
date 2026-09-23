@@ -2,9 +2,9 @@ const pluginConfig = {
     name: ['buatgrup', 'creategroup', 'newgroup'],
     alias: [],
     category: 'owner',
-    description: 'Buat grup baru',
-    usage: '.buatgrup <nama>|<nomor1,nomor2,...>',
-    example: '.buatgrup Grup Baru|628xxx,628yyy',
+    description: "Crear un nuevo grupo",
+    usage: ".Crear un grupo < nombre √≥ x124; √Īo número 1, número 2,...",
+    example: ".Crear un nuevo grupo de 124; 628xx, 628yyy",
     isOwner: true,
     cooldown: 5,
     energi: 0,
@@ -31,7 +31,7 @@ async function handler(m, { sock }) {
     const participantsStr = text.substring(pipeIdx + 1).trim()
 
     if (!name || name.length < 2) {
-        return m.reply('❌ Nama grup minimal 2 karakter.')
+        return m.reply("❌ El nombre del grupo es por lo menos 2 caracteres.")
     }
 
     const participants = participantsStr
@@ -41,7 +41,7 @@ async function handler(m, { sock }) {
         .map(n => n + '@s.whatsapp.net')
 
     if (participants.length === 0) {
-        return m.reply('❌ Masukkan minimal 1 nomor peserta.')
+        return m.reply("❌ Introduzca al menos un número de participante.")
     }
 
     try {
@@ -55,7 +55,7 @@ async function handler(m, { sock }) {
             `_Bot otomatis menjadi admin_`
         )
     } catch (err) {
-        return m.reply(`❌ Gagal membuat grup: ${err.message}`)
+        return m.reply(`❌ No se pudo create group: ${err.message}`)
     }
 }
 

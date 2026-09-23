@@ -95,19 +95,21 @@ async function handler(m) {
             for (const [key, val] of Object.entries(NEWS_SOURCES)) {
                 txt += `> ${val.emoji} \`${m.prefix}${key}\` - ${val.name}\n`
             }
-            txt += `\n_Atau gunakan: \`${m.prefix}berita <sumber>\`_`
+            txt += `
+_O uso: \`${m.prefix}berita <sumber>\`_`
             return m.reply(txt)
         }
         
         if (!NEWS_SOURCES[arg]) {
-            return m.reply(`❌ Sumber berita tidak ditemukan.\n> Gunakan: \`${m.prefix}berita\` untuk melihat daftar.`)
+            return m.reply(`❌ No se encontró la fuente de las noticias.
+> Gunakan: \`${m.prefix}berita\` para ver la lista.`)
         }
         source = arg
     }
     
     const newsSource = NEWS_SOURCES[source]
     if (!newsSource) {
-        return m.reply(`❌ Sumber berita tidak valid.`)
+        return m.reply(`❌ Fuente inválida de noticias.`)
     }
     
     await m.react('🕕')
@@ -116,7 +118,7 @@ async function handler(m) {
         const articles = await fetchRSS(newsSource.url)
         
         if (articles.length === 0) {
-            return m.reply(`❌ Tidak ada berita ditemukan.`)
+            return m.reply(`❌ No hay noticias encontradas.`)
         }
         
         let txt = `${newsSource.emoji} *${newsSource.name.toUpperCase()}*\n`
@@ -136,7 +138,7 @@ async function handler(m) {
         }
         
         txt += `━━━━━━━━━━━━━━━\n`
-        txt += `_Total: ${articles.length} artikel tersedia_`
+        txt += `_Total: ${articles.length} artículos disponibles_`
         
         await m.reply(txt)
         m.react('📰')

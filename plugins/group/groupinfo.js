@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'groupinfo',
     alias: ['infogroup', 'gcinfo', 'infogc', 'gc'],
     category: 'group',
-    description: 'Menampilkan informasi lengkap grup',
+    description: "Mostrar información completa del grupo",
     usage: '.groupinfo',
     example: '.groupinfo',
     isOwner: false,
@@ -46,12 +46,12 @@ async function handler(m, { sock, db }) {
 
         const createdDate = groupMeta.creation
             ? timeHelper.fromTimestamp(groupMeta.creation * 1000, 'D MMMM YYYY')
-            : 'Tidak diketahui'
+            : "Desconocida"
 
         const ownerNumber = ownerJid ? ownerJid.split('@')[0] : null
         const ownerDisplay = ownerNumber && !ownerNumber.includes(':')
             ? `@${ownerNumber}`
-            : 'Tidak diketahui'
+            : "Desconocida"
 
         let ppUrl = null
         try {
@@ -72,7 +72,8 @@ async function handler(m, { sock, db }) {
         text += `Admin: ${admins.length}\n`
         text += `Member: ${participants.length - admins.length}\n\n`
 
-        text += `🔧 *FITUR AKTIF*\n`
+        text += `🔧 *FATURE ACTIVE*
+`
         text += `Welcome: ${featureStatus(group.welcome)}\n`
         text += `Goodbye: ${featureStatus(group.goodbye)}\n`
         text += `Autoreply: ${featureStatus(group.autoreply)}\n`

@@ -2,8 +2,8 @@ const pluginConfig = {
   name: ["buatsaluran", "createsaluran", "createnewsletter"],
   alias: [],
   category: "owner",
-  description: "Buat saluran/newsletter baru",
-  usage: ".buatsaluran <nama>|<deskripsi>",
+  description: "Crear un nuevo canal / nuevo",
+  usage: ".Crear canal < nombre",
   example: ".buatsaluran Info Bot|Update terbaru bot kami",
   isOwner: true,
   cooldown: 5,
@@ -49,7 +49,7 @@ async function handler(m, { sock }) {
         `_Saluran ini bisa dikonfigurasi di config.saluran.id_`,
     );
   } catch (err) {
-    return m.reply(`❌ Gagal membuat saluran: ${err.message}`);
+    return m.reply(`❌ No se pudo create channel: ${err.message}`);
   }
 }
 

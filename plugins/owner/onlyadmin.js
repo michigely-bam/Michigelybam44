@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'onlyadmin',
     alias: ['selfadmin', 'publicadmin', 'adminonly'],
     category: 'owner',
-    description: 'Hanya admin grup yang bisa akses command bot',
+    description: "Sólo el administrador del grupo puede acceder al comando bot",
     usage: '.onlyadmin on/off',
     example: '.onlyadmin on',
     isOwner: true,
@@ -22,7 +22,7 @@ async function handler(m) {
         if (current) {
             db.setting('onlyAdmin', false)
             await m.react('❌')
-            return m.reply('❌ *ᴏɴʟʏᴀᴅᴍɪɴ ɴᴏɴᴀᴋᴛɪꜰ*\n\n> Bot bisa diakses semua orang')
+            return m.reply("❌ *ᴏɴʟʏᴀᴅᴍɪɴ ɴᴏɴᴀᴋᴛɪꜰ*\n\n> Bot es accesible para todos")
         }
         db.setting('onlyAdmin', true)
         db.setting('selfAdmin', false)
@@ -43,7 +43,7 @@ async function handler(m) {
         if (current) {
             db.setting('onlyAdmin', false)
             await m.react('❌')
-            return m.reply('❌ *ᴏɴʟʏᴀᴅᴍɪɴ ɴᴏɴᴀᴋᴛɪꜰ*\n\n> Bot bisa diakses semua orang')
+            return m.reply("❌ *ᴏɴʟʏᴀᴅᴍɪɴ ɴᴏɴᴀᴋᴛɪꜰ*\n\n> Bot es accesible para todos")
         }
         db.setting('onlyAdmin', true)
         db.setting('selfAdmin', false)
@@ -73,7 +73,7 @@ async function handler(m) {
     }
 
     if (args === 'on') {
-        if (current) return m.reply('⚠️ OnlyAdmin sudah aktif.')
+        if (current) return m.reply("⚠️ Sólo Admin está activo.")
         db.setting('onlyAdmin', true)
         db.setting('selfAdmin', false)
         db.setting('publicAdmin', false)
@@ -90,13 +90,13 @@ async function handler(m) {
     }
 
     if (args === 'off') {
-        if (!current) return m.reply('⚠️ OnlyAdmin sudah nonaktif.')
+        if (!current) return m.reply("⚠️ Sólo Admin está deshabilitado.")
         db.setting('onlyAdmin', false)
         await m.react('❌')
-        return m.reply('❌ *ᴏɴʟʏᴀᴅᴍɪɴ ɴᴏɴᴀᴋᴛɪꜰ*\n\n> Bot bisa diakses semua orang')
+        return m.reply("❌ *ᴏɴʟʏᴀᴅᴍɪɴ ɴᴏɴᴀᴋᴛɪꜰ*\n\n> Bot es accesible para todos")
     }
 
-    return m.reply('❌ Argumen tidak valid. Gunakan: `on` atau `off`')
+    return m.reply("❌ Discusión inválida. `on` atau `off`")
 }
 
 export { pluginConfig as config, handler }

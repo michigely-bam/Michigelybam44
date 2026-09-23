@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'clanmembers',
     alias: ['clanmember', 'guildmembers'],
     category: 'clan',
-    description: 'Lihat daftar member clan',
+    description: "Ver una lista de miembros del clan",
     usage: '.clanmembers',
     example: '.clanmembers',
     isOwner: false,
@@ -19,11 +19,11 @@ async function handler(m) {
     const db = getDatabase()
     const user = db.getUser(m.sender)
 
-    if (!user?.clanId) return m.reply(`❌ Kamu belum punya clan`)
+    if (!user?.clanId) return m.reply(`❌ Aún no tienes un clan.`)
     if (!db.db.data.clans) db.db.data.clans = {}
 
     const clan = db.db.data.clans[user.clanId]
-    if (!clan) return m.reply(`❌ Clan tidak ditemukan`)
+    if (!clan) return m.reply(`❌ Clan not found`)
 
     const emblem = clan.emblem || '🏰'
     const mentions = []

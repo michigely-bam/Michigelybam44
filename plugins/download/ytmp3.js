@@ -29,7 +29,7 @@ async function getAudioDownload(url) {
     return { download: fallback.dl, title: fallback.title, isFallback: true };
   }
 
-  throw new Error(fallback?.mess || "Gagal mendapatkan audio download URL");
+  throw new Error(fallback?.mess || "Fallado para obtener la URL de descarga de audio");
 }
 
 async function handler(m, { sock }) {
@@ -68,7 +68,7 @@ async function handler(m, { sock }) {
   } catch (err) {
     console.error("[YTMP4]", err);
     m.react("❌");
-    m.reply("Gagal mengunduh video.");
+    m.reply("Fallado para descargar vídeo.");
   }
 }
 

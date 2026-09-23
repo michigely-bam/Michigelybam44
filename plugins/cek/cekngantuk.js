@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekngantuk',
     alias: ['ngantuk', 'sleepy'],
     category: 'cek',
-    description: 'Cek tingkat ngantuk kamu',
-    usage: '.cekngantuk <nama>',
+    description: "Comprueba tus niveles de sueño.",
+    usage: ".ckngankk se hizo el nombre",
     example: '.cekngantuk Budi',
     isOwner: false,
     isPremium: false,
@@ -22,13 +22,13 @@ async function handler(m) {
     if (percent >= 90) desc = 'ZZZZZ... Tidur sana! 😴💤'
     else if (percent >= 70) desc = 'Mata 5 watt nih~ 😪'
     else if (percent >= 50) desc = 'Agak ngantuk dikit 🥱'
-    else if (percent >= 30) desc = 'Masih fresh! ☕'
+    else if (percent >= 30) desc = "¡Todavía fresco! ☕"
     else desc = 'Melek banget! Insomnia? 👀'
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kengantukan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kengantukan @${mentioned.split('@')[0]} yak? 
+Tu nivel de control *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel @${mentioned.split('@')[0]} yak? 
     
 Tingkat kengantukan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

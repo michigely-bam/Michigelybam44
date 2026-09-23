@@ -7,7 +7,7 @@ const pluginConfig = {
     name: 'cekschedule',
     alias: ['cekscheduler', 'schedulerstatus', 'schedstatus'],
     category: 'owner',
-    description: 'Melihat status semua scheduler bot',
+    description: "Ver el estado de todos los horarios de arranque",
     usage: '.cekschedule',
     example: '.cekschedule',
     isOwner: true,
@@ -51,7 +51,8 @@ async function handler(m, { sock }) {
         const sholatIcon = sholatEnabled ? '✅' : '❌';
         text += `${sholatIcon} *Sholat Scheduler*\n`;
         text += `   └ Key: \`sholat\`\n`;
-        text += `   └ Notifikasi waktu sholat (real-time)\n`;
+        text += `   └ Notificación del tiempo de oración (hora de la realidad)
+`;
 
         if (sholatEnabled) {
             const kotaSetting = db.setting('autoSholatKota') || { id: '1301', nama: 'KOTA JAKARTA' };
@@ -81,7 +82,8 @@ async function handler(m, { sock }) {
 
                 text += `   └ Next: ${nextSholat} (${nextTime} WIB)\n`;
             } catch {
-                text += `   └ _Gagal memuat jadwal_\n`;
+                text += `   └ _No se pudo load schedule_
+`;
             }
         }
 
@@ -90,8 +92,9 @@ async function handler(m, { sock }) {
         text += `✅ Aktif: ${status.summary.totalActive + (sholatEnabled ? 1 : 0)}\n`;
         text += `❌ Nonaktif: ${status.summary.totalInactive + (!sholatEnabled ? 1 : 0)}\n\n`;
 
-        text += `> Gunakan \`.stopschedule <key>\` untuk stop\n`;
-        text += `> Gunakan \`.startschedule <key>\` untuk start`;
+        text += `> Gunakan \`.stopschedule <key>\` Parar
+`;
+        text += `> Gunakan \`.startschedule <key>\` para empezar`;
 
         await m.reply(text);
     } catch (error) {

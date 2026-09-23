@@ -12,7 +12,7 @@ const pluginConfig = {
   name: allCommands,
   alias: allAliases,
   category: "panel",
-  description: "Buat admin panel baru (v1-v5)",
+  description: "Crear un nuevo administrador de panel (v1-v5)",
   usage: ".cadminv1 username atau .cadminv2 username,628xxx",
   example: ".cadminv1 adminku,628xxx",
   isOwner: false,
@@ -93,7 +93,7 @@ async function handler(m, { sock }) {
     const available = getAvailableServers(pteroConfig);
     let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`;
     if (available.length > 0) {
-      txt += `> Server tersedia: *${available.join(", ")}*\n`;
+      txt += `> Servidor disponible: *${available.join(", ")}*\n`;
       txt += `> Contoh: \`${m.prefix}cadmin${available[0]} username\``;
     } else {
       txt += `> Isi di \`config.js\` bagian \`pterodactyl.server1\``;
@@ -127,7 +127,7 @@ async function handler(m, { sock }) {
 
   if (!/^[a-z0-9_]{3,16}$/.test(username)) {
     return m.reply(
-      `❌ Username hanya boleh huruf kecil, angka, underscore (3-16 karakter).`,
+      `❌ El nombre de usuario sólo puede ser letras minúsculas, números, subrayar (3-16 caracteres).`,
     );
   }
 
@@ -142,14 +142,14 @@ async function handler(m, { sock }) {
   }
 
   if (!targetUser) {
-    return m.reply(`❌ Tidak dapat menentukan nomor target.`);
+    return m.reply(`❌ Incapaz de determinar el número de destino.`);
   }
 
   try {
     const [onWa] = await sock.onWhatsApp(targetUser.split("@")[0]);
     if (!onWa?.exists) {
       return m.reply(
-        `❌ Nomor \`${targetUser.split("@")[0]}\` tidak terdaftar di WhatsApp!`,
+        `❌ Nomor \`${targetUser.split("@")[0]}\` ¡No está registrado en WhatsApp!`,
       );
     }
   } catch (e) {}
@@ -195,14 +195,16 @@ async function handler(m, { sock }) {
     detailTxt += `┃ 🗓️ \`ᴛᴀɴɢɢᴀʟ\`: *${formatDate()}*\n`;
     detailTxt += `╰───────────────\n\n`;
     detailTxt += `🌐 *ʟᴏɢɪɴ ᴘᴀɴᴇʟ:* ${serverConfig.domain}\n\n`;
-    detailTxt += `> ⚠️ Akun ini memiliki akses penuh!\n`;
-    detailTxt += `> ⚠️ Jangan bagikan ke siapapun!`;
+    detailTxt += `> ⚠️ ¡Esta cuenta tiene acceso completo!
+`;
+    detailTxt += `> ⚠️ ¡No lo compartas con nadie!`;
 
     await sock.sendMessage(targetUser, { text: detailTxt });
 
     if (targetUser !== m.sender) {
       await m.reply(
-        `✅ *ᴀᴅᴍɪɴ ᴘᴀɴᴇʟ ʙᴇʀʜᴀsɪʟ ᴅɪʙᴜᴀᴛ*\n\n> Server: *${serverLabel}*\n> Data telah dikirim ke \`${targetUser.split("@")[0]}\``,
+        `✅ *ᴀᴅᴍɪɴ ᴘᴀɴᴇʟ ʙᴇʀʜᴀsɪʟ ᴅɪʙᴜᴀᴛ*\n\n> Server: *${serverLabel}*
+> Los datos se han enviado a \`${targetUser.split("@")[0]}\``,
       );
     }
   } catch (err) {

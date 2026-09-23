@@ -14,7 +14,7 @@ const pluginConfig = {
   name: "hd2",
   alias: ["enhance2", "upscale2", "aienhancer"],
   category: "tools",
-  description: "Enhance gambar menjadi HD dengan AI (V3)",
+  description: "Mejorar la imagen a HD con IA (V3)",
   usage: ".hd2 (reply gambar)",
   example: ".hd2",
   isOwner: false,
@@ -29,7 +29,13 @@ async function handler(m, { sock }) {
   const isImage = m.isImage || (m.quoted && m.quoted.type === "imageMessage");
   if (!isImage) {
     return m.reply(
-      `✨ *ʜᴅ ᴇɴʜᴀɴᴄᴇ ᴠ2*\n\n> Kirim/reply gambar untuk di-enhance\n\n\`${m.prefix}hd2\`\n\n> 🕕 Proses membutuhkan waktu ±1 menit`,
+      `✨ *ʜᴅ ᴇɴʜᴀɴᴄᴇ ᴠ2*
+
+> Enviar / responder imágenes a -enhance
+
+\`${m.prefix}hd2\`
+
+> 🕕 El proceso toma un minuto.`,
     );
   }
   m.react("🕕");
@@ -42,10 +48,13 @@ async function handler(m, { sock }) {
     }
     if (!buffer) {
       m.react("❌");
-      return m.reply(`❌ Gagal mendownload gambar`);
+      return m.reply(`❌ No se pudo download image`);
     }
     await m.reply(
-      `🕕 *ᴍᴇᴍᴘʀᴏsᴇs ɢᴀᴍʙᴀʀ...*\n\n> Estimasi waktu: ±1 menit\n> Mohon tunggu...`,
+      `🕕 *ᴍᴇᴍᴘʀᴏsᴇs ɢᴀᴍʙᴀʀ...*
+
+> Tiempo estimado: 0,1 minutos
+> Por favor, espera...`,
     );
     const temp = path.join(process.cwd(), "temp", "hd.jpg");
     fs.writeFileSync(temp, buffer);
@@ -60,7 +69,7 @@ async function handler(m, { sock }) {
     }
     if (!result) {
       m.react("❌");
-      return m.reply(`❌ Gagal enhance gambar. Coba lagi nanti.`);
+      return m.reply(`❌ Fallado para entrar en la imagen. Inténtalo de nuevo más tarde.`);
     }
     m.react("✅");
     await sock.sendMessage(

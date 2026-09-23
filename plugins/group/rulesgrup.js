@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "rulesgrup",
   alias: ["grouprules", "aturangrup", "grules"],
   category: "group",
-  description: "Menampilkan rules/aturan grup",
+  description: "Mostrar reglas de grupo / reglas",
   usage: ".rulesgrup",
   example: ".rulesgrup",
   isOwner: false,
@@ -24,7 +24,7 @@ const DEFAULT_GROUP_RULES = `📜 *ᴀᴛᴜʀᴀɴ ɢʀᴜᴘ*
 ┃ 2️⃣ Dilarang promosi tanpa izin
 ┃ 3️⃣ Dilarang konten SARA/Porn
 ┃ 4️⃣ Hormati sesama member
-┃ 5️⃣ Gunakan bahasa yang sopan
+┃ Usar un lenguaje educado
 ┃ 6️⃣ Dilarang share link tanpa izin
 ┃ 7️⃣ Patuhi instruksi admin
 ┃ 8️⃣ No toxic & bullying

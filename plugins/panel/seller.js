@@ -70,11 +70,13 @@ function handler(m, { sock }) {
     const pteroConfig = config.pterodactyl
     
     if (!hasAccess(m.sender, m.isOwner, pteroConfig)) {
-        return m.reply(`❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n> Fitur ini hanya untuk Owner atau Owner Panel.`)
+        return m.reply(`❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*
+
+> Esta característica es sólo para el Propietario o Panel de Propietario.`)
     }
     
     if (!pteroConfig) {
-        return m.reply(`❌ Konfigurasi pterodactyl tidak ditemukan di config.js`)
+        return m.reply(`❌ Configuración de pterodactilo no encontrada en config.js`)
     }
     
     if (!pteroConfig.sellers) {
@@ -87,7 +89,9 @@ function handler(m, { sock }) {
     
     if (isList) {
         if (pteroConfig.sellers.length === 0) {
-            return m.reply(`📋 *ᴅᴀꜰᴛᴀʀ sᴇʟʟᴇʀ/ʀᴇsᴇʟʟᴇʀ*\n\n> Belum ada seller terdaftar.`)
+            return m.reply(`📋 *ᴅᴀꜰᴛᴀʀ sᴇʟʟᴇʀ/ʀᴇsᴇʟʟᴇʀ*
+
+> Todavía no hay vendedores registrados.`)
         }
         
         let txt = `📋 *ᴅᴀꜰᴛᴀʀ sᴇʟʟᴇʀ/ʀᴇsᴇʟʟᴇʀ*\n\n`
@@ -95,7 +99,8 @@ function handler(m, { sock }) {
         pteroConfig.sellers.forEach((s, i) => {
             txt += `${i + 1}. \`${s}\`\n`
         })
-        txt += `\n> _Seller bisa create server (1gb-10gb v1/v2/v3)_`
+        txt += `
+> _Vendedor podría crear servidor (1gb-10gb v1 / v2 / v3)_`
         return m.reply(txt)
     }
     
@@ -121,14 +126,15 @@ function handler(m, { sock }) {
     
     if (isAdd) {
         if (pteroConfig.sellers.includes(targetUser)) {
-            return m.reply(`❌ \`${targetUser}\` sudah menjadi seller.`)
+            return m.reply(`❌ \`${targetUser}\` Ya es un vendedor.`)
         }
         
         let roleChanged = ''
         const ownerIdx = (pteroConfig.ownerPanels || []).indexOf(targetUser)
         if (ownerIdx !== -1) {
             pteroConfig.ownerPanels.splice(ownerIdx, 1)
-            roleChanged = `\n> ⚡ Auto-downgrade dari Owner Panel ke Seller`
+            roleChanged = `
+> ⚡ Auto-downgrade del Panel de Oferta al Vendedor`
         }
         
         pteroConfig.sellers.push(targetUser)
@@ -146,13 +152,13 @@ function handler(m, { sock }) {
             )
         } else {
             pteroConfig.sellers = pteroConfig.sellers.filter(s => s !== targetUser)
-            return m.reply(`❌ Gagal menyimpan ke config.js`)
+            return m.reply(`❌ Falló para salvar a config.js`)
         }
     }
     
     if (isDel) {
         if (!pteroConfig.sellers.includes(targetUser)) {
-            return m.reply(`❌ \`${targetUser}\` bukan seller.`)
+            return m.reply(`❌ \`${targetUser}\` No un vendedor.`)
         }
         
         pteroConfig.sellers = pteroConfig.sellers.filter(s => s !== targetUser)
@@ -165,7 +171,7 @@ function handler(m, { sock }) {
                 `> Total: *${pteroConfig.sellers.length}* seller`
             )
         } else {
-            return m.reply(`❌ Gagal menyimpan ke config.js`)
+            return m.reply(`❌ Falló para salvar a config.js`)
         }
     }
 }

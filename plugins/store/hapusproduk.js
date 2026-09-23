@@ -4,8 +4,8 @@ const pluginConfig = {
   name: "hapusproduk",
   alias: ["delproduk", "delproduct", "deleteproduk"],
   category: "store",
-  description: "🗑️ Hapus produk dari toko",
-  usage: ".hapusproduk <nomor>",
+  description: "🗑️ Quitar el producto de la tienda",
+  usage: ".Eliminar el producto  Delete número",
   example: ".hapusproduk 1",
   isOwner: true,
   isPremium: false,
@@ -22,14 +22,20 @@ async function handler(m, { sock }) {
 
   if (products.length === 0) {
     return m.reply(
-      `📭 *Belum ada produk.*\n\nTambahkan produk terlebih dahulu dengan \`${m.prefix}addproduk\` ➕`,
+      `📭 *Aún no hay producto.*
+
+Añadir el producto primero con \`${m.prefix}addproduk\` ➕`,
     );
   }
 
   const idx = parseInt(m.text?.trim()) - 1;
 
   if (isNaN(idx) || idx < 0 || idx >= products.length) {
-    let txt = `🗑️ *Pilih Produk yang Dihapus*\n\nKetik \`${m.prefix}hapusproduk <nomor>\`\n\n`;
+    let txt = `🗑️ *Seleccione el producto eliminado*
+
+Ketik \`${m.prefix}Eliminar el producto  Delete número\`
+
+`;
     for (let i = 0; i < products.length; i++) {
       const p = products[i];
       const typeIcon = p.type === "fisik" ? "📦" : "🔑";

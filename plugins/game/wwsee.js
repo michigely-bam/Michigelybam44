@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['seer', 'vision', 'wse'],
     category: 'game',
     description: 'Seer night action - See target role',
-    usage: '.wwsee <nomor>',
+    usage: ".w ver , número de contacto",
     example: '.wwsee 1',
     isOwner: false,
     isPremium: false,

@@ -37,12 +37,12 @@ async function handler(m, { sock }) {
     }
     
     if (mentioned === m.sender) {
-        return m.reply(`❌ Tidak bisa bertarung dengan diri sendiri!`)
+        return m.reply(`❌ ¡No puedes luchar contigo mismo!`)
     }
     
     const opponent = db.getUser(mentioned)
     if (!opponent) {
-        return m.reply(`❌ Lawan belum terdaftar di database!`)
+        return m.reply(`❌ ¡El oponente no ha sido listado en la base de datos!`)
     }
     
     if (!opponent.rpg) opponent.rpg = {}
@@ -69,7 +69,7 @@ async function handler(m, { sock }) {
         
         const myDmg = Math.max(5, myAttack - oppDefense + Math.floor(Math.random() * 10))
         oppHp -= myDmg
-        battleLog.push(`🔥 Kamu menyerang: *-${myDmg} HP*`)
+        battleLog.push(`🔥 Atacan: *-${myDmg} HP*`)
         
         if (oppHp <= 0) break
         

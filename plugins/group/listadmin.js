@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'listadmin',
     alias: ['admins', 'adminlist'],
     category: 'group',
-    description: 'Menampilkan daftar admin grup',
+    description: "Mostrar lista de administración de grupo",
     usage: '.listadmin',
     example: '.listadmin',
     isOwner: false,
@@ -25,7 +25,9 @@ async function handler(m, { sock }) {
         const admins = participants.filter(p => p.admin)
 
         if (admins.length === 0) {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak ada admin di grup ini.`)
+            await m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No hay administración en este grupo.`)
             return
         }
 

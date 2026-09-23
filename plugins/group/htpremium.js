@@ -3,9 +3,9 @@ import te from '../../src/lib/ourin-error.js'
 const pluginConfig = {
     name: ['htpremium', 'hidetagpremium', 'htprem'],
     category: 'group',
-    description: 'Hidetag dengan support reply pesan (teks/media)',
-    usage: '.htprem [pesan] atau reply pesan',
-    example: '.htprem atau reply pesan lalu .htprem',
+    description: "Hidetag con soporte de respuesta de mensaje (texto / medios)",
+    usage: ".htprem [message] o mensaje de respuesta",
+    example: ".htprem o respuesta último mensaje .htprem",
     isOwner: false,
     isPremium: false,
     isGroup: true,
@@ -106,7 +106,7 @@ async function handler(m, { sock }) {
             const finalText = text || quotedText
 
             if (!finalText) {
-                return m.reply('❌ *Pesan kosong*')
+                return m.reply("❌ *El mensaje está vacío*")
             }
 
             return sock.sendMessage(m.chat, {

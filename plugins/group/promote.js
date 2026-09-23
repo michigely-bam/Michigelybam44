@@ -41,12 +41,16 @@ async function handler(m, { sock }) {
         const participant = groupMeta.participants.find(p => getParticipantJid(p) === target)
 
         if (!participant) {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> User tidak ditemukan di grup!`)
+            await m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> ¡Usuario no encontrado en grupo!`)
             return
         }
 
         if (participant.admin) {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> User sudah menjadi admin!`)
+            await m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> ¡El usuario se ha convertido en un administrador!`)
             return
         }
 

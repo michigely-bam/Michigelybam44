@@ -8,8 +8,8 @@ const pluginConfig = {
   name: "fakestory2",
   alias: ["fstory2", "igstory2"],
   category: "canvas",
-  description: "Fake Instagram story dengan 1 gambar full",
-  usage: ".fakestory2 <nama>",
+  description: "Fake Instagram historia con 1 imagen completa",
+  usage: ".falsificación2 Identificar el nombre",
   example: ".fakestory2 Misaki (reply gambar)",
   isOwner: false,
   isPremium: false,
@@ -168,7 +168,7 @@ async function getAvatarBuffer(sock, jid) {
   if (fs.existsSync(DEFAULT_PP_PATH)) {
     return fs.readFileSync(DEFAULT_PP_PATH);
   }
-  throw new Error("Tidak dapat mengambil foto profil");
+  throw new Error("Incapaz de tomar la foto de perfil");
 }
 async function handler(m, { sock }) {
   const username = m.args.join(" ").trim() || m.pushName || "User";
@@ -193,7 +193,9 @@ async function handler(m, { sock }) {
     }
     if (!imageBuffer) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak bisa download gambar`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No se puede descargar imagen`);
     }
     const resultBuffer = await createFakeStory(
       username,

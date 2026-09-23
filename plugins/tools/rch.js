@@ -4,7 +4,7 @@ const pluginConfig = {
   name: "rch",
   alias: ["frch", "reactch", "fakereactch", "fakerch"],
   category: "tools",
-  description: "Kirim react ke post channel WhatsApp",
+  description: "Enviar reacciona al canal de correo WhatsApp",
   usage: ".rch <link_post> <emoji>",
   example: ".rch https://whatsapp.com/channel/xxx/123 😂😍",
   isOwner: false,
@@ -41,7 +41,9 @@ async function handler(m, { sock }) {
   }
 
   if (!emoji) {
-    return m.reply(`❌ *ᴇᴍᴏᴊɪ ᴋᴏsᴏɴɢ*\n\n> Masukkan emoji untuk react!`);
+    return m.reply(`❌ *ᴇᴍᴏᴊɪ ᴋᴏsᴏɴɢ*
+
+> ¡Introdúzcase emoji para reaccionar!`);
   }
 
   m.react("🕕");
@@ -65,7 +67,7 @@ async function handler(m, { sock }) {
           `╰┈┈⬡`,
       );
     } else {
-      throw new Error(data?.message || "Gagal mengirim reaksi");
+      throw new Error(data?.message || "No se pudo send reaction");
     }
   } catch (err) {
     m.react("❌");

@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'inventory',
     alias: ['inv', 'tas', 'bag'],
     category: 'rpg',
-    description: 'Melihat isi inventory RPG',
+    description: "Vea el contenido del inventario del RPG",
     usage: '.inventory',
     example: '.inventory',
     isOwner: false,
@@ -76,10 +76,11 @@ async function handler(m, { sock }) {
     }
     
     if (!hasItem) {
-        invText += `> *Inventory Kosong!*\n`
-        invText += `> Gunakan command RPG untuk mendapatkan item.`
+        invText += `> *¡Inventario vacío!*
+`
+        invText += `> Utilice un comando RPG para obtener elementos.`
     } else {
-        invText += `> Gunakan \`.use <item>\` untuk memakai item.`
+        invText += `> Gunakan \`.use <item>\` para usar artículos.`
     }
     
     await m.reply(invText)

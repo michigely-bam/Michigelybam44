@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'delpanel',
     alias: ['hapuspanel', 'deletepanel'],
     category: 'panel',
-    description: 'Hapus panel (server + user)',
+    description: "Borrar el panel (servidor + usuario)",
     usage: '.delpanel [s1/s2/s3] serverid [full]',
     example: '.delpanel 5 atau .delpanel s2 5 full',
     isOwner: true,
@@ -60,7 +60,7 @@ async function handler(m, { sock }) {
         const available = getAvailableServers(pteroConfig)
         let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverKey.toUpperCase()} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`
         if (available.length > 0) {
-            txt += `> Server tersedia: *${available.join(', ')}*`
+            txt += `> Servidor disponible: *${available.join(', ')}*`
         }
         return m.reply(txt)
     }
@@ -132,10 +132,12 @@ async function handler(m, { sock }) {
                 result += `> Username: \`${userInfo.username}\`\n`
                 result += `> ID: \`${userId}\``
             } catch (userErr) {
-                result += `\n⚠️ User gagal dihapus (mungkin masih punya server lain)`
+                result += `
+⚠️ El usuario no ha eliminado (puede tener otro servidor)`
             }
         } else if (option === 'full' && isUserAdmin) {
-            result += `\n⚠️ User adalah Admin, tidak dihapus`
+            result += `
+⚠️ El usuario es Admin, no se elimina`
         }
         
         return m.reply(result)

@@ -7,7 +7,7 @@ const pluginConfig = {
     name: 'ttsmickey',
     alias: ['mickeytts', 'ttsmickeymouse'],
     category: 'tts',
-    description: 'Text to Speech dengan suara Mickey Mouse',
+    description: "Texto para hablar con el sonido de Mickey Mouse",
     usage: '.ttsmickey <text>',
     example: '.ttsmickey Oh boy!',
     isOwner: false,
@@ -38,7 +38,7 @@ async function handler(m, { sock }) {
         const voice = res.data?.result?.find(v => v.mickey_mouse && !v.error)
         if (!voice) {
             m.react('❌')
-            return m.reply(`❌ Mickey Mouse voice error. Coba TTS lain.`)
+            return m.reply(`❌ Error de voz Mickey Mouse.`)
         }
         
         const tempDir = path.join(process.cwd(), 'temp')

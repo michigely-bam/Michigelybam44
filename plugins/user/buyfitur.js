@@ -4,8 +4,8 @@ const pluginConfig = {
     name: 'buyfitur',
     alias: ['belifitur', 'purchasefeature', 'buyfeature'],
     category: 'user',
-    description: 'Beli fitur premium (1 fitur = 3000 koin)',
-    usage: '.buyfitur [nama_fitur]',
+    description: "Comprar características premium (1 función = 3000 monedas)",
+    usage: ".fuente de alimentación [nombre_fitur]",
     example: '.buyfitur',
     isOwner: false,
     isPremium: false,
@@ -21,7 +21,7 @@ const PRICE_PER_FEATURE = 3000
 const PREMIUM_FEATURES = [
     { id: 'sticker', name: 'Sticker Unlimited', desc: 'Unlimited sticker commands' },
     { id: 'downloader', name: 'Downloader Pro', desc: 'Download tanpa limit' },
-    { id: 'ai', name: 'AI Access', desc: 'Akses fitur AI premium' },
+    { id: 'ai', name: 'AI Access', desc: "Acceso de alta calidad IA" },
     { id: 'tools', name: 'Advanced Tools', desc: 'Tools eksklusif' },
     { id: 'game', name: 'Game Bonus', desc: '2x rewards game' }
 ]
@@ -66,7 +66,7 @@ async function handler(m, { sock }) {
         
         text += `╰┈┈┈┈┈┈┈┈⬡\n\n`
         text += `> Gunakan: \`.buyfitur <id>\`\n`
-        text += `> Atau jadi *Premium* unlock semua!`
+        text += `> Atau jadi *Premium* ¡Todos desbloqueen!`
         
         await m.reply(text)
         return
@@ -85,7 +85,7 @@ async function handler(m, { sock }) {
     const unlockedFeatures = user.unlockedFeatures || []
     
     if (unlockedFeatures.includes(feature.id)) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Fitur \`${feature.name}\` sudah ter-unlock!`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Fitur \`${feature.name}\` ¡Está desbloqueado!`)
     }
     
     if ((user.koin || 0) < PRICE_PER_FEATURE) {

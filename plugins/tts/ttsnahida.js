@@ -7,7 +7,7 @@ const pluginConfig = {
     name: 'ttsnahida',
     alias: ['nahidatts'],
     category: 'tts',
-    description: 'Text to Speech dengan suara Nahida',
+    description: "Texto para hablar con la voz de Nahida",
     usage: '.ttsnahida <text>',
     example: '.ttsnahida Halo traveler!',
     isOwner: false,
@@ -50,7 +50,7 @@ async function handler(m, { sock }) {
         const voice = res.data?.result?.find(v => v.nahida && !v.error)
         if (!voice) {
             m.react('❌')
-            return m.reply(`❌ Nahida voice error. Coba \`${m.prefix}ttsgoku\` atau \`${m.prefix}ttsnami\``)
+            return m.reply(`❌ Error de voz de Nahida. \`${m.prefix}ttsgoku\` atau \`${m.prefix}ttsnami\``)
         }
         
         const tempDir = path.join(process.cwd(), 'temp')

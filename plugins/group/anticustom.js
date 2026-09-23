@@ -66,20 +66,20 @@ function normalizeAction(action, fallback = "remove") {
 }
 
 function formatAction(action) {
-  return action === "kick" ? "kick member" : "hapus pesan";
+  return action === "kick" ? "kick member" : "Borrar el mensaje";
 }
 
 function parsePatternAnswer(text) {
   const raw = String(text || "").trim();
-  if (!raw) return { error: "Jawabannya masih kosong." };
+  if (!raw) return { error: "La respuesta sigue vacía." };
 
   if (/^regex\s*:/i.test(raw)) {
     const pattern = raw.replace(/^regex\s*:/i, "").trim();
-    if (!pattern) return { error: "Regex kosong. Isi setelah `regex:` ya." };
+    if (!pattern) return { error: "Regex está vacío. `regex:` ya." };
     try {
       new RegExp(pattern, "i");
     } catch {
-      return { error: "Regex tidak valid. Coba cek lagi polanya." };
+      return { error: "Regex inválido. Revise el patrón de nuevo." };
     }
     return {
       type: "regex",
@@ -98,7 +98,7 @@ function parsePatternAnswer(text) {
   ];
 
   if (patterns.length === 0) {
-    return { error: "Aku belum dapat kata yang ingin dideteksi." };
+    return { error: "Aún no tengo ni una palabra para ello." };
   }
 
   return {
@@ -158,7 +158,9 @@ async function startWizard(m, sock, mode, isFirstSetup = false) {
       `2. Isi kata atau pattern yang ingin dideteksi\n` +
       `3. Pilih action saat terdeteksi\n` +
       `4. Konfirmasi detail akhir\n\n`
-    : `🛡️ *Yuk tambah rule AntiCustom baru*\n\n`;
+    : `🛡️ *Agreguemos una nueva regla de AntiCutom*
+
+`;
 
   session.promptId = await sendPrompt(
     sock,
@@ -218,7 +220,7 @@ async function handler(m, { sock }) {
 
   if (sub === "cancel" || sub === "batal") {
     if (!global.anticustomSessions.has(sessionKey)) {
-      await m.reply("⚠️ Tidak ada sesi AntiCustom yang sedang berjalan.");
+      await m.reply("⚠️ No hay sesión de AntiCustom funcionando.");
       return;
     }
     clearSession(sessionKey);
@@ -255,7 +257,7 @@ async function handler(m, { sock }) {
 
   if (sub === "list") {
     if (rules.length === 0) {
-      await m.reply("📋 Belum ada rule AntiCustom di grup ini.");
+      await m.reply("📋 No hay ninguna regla de AntiCumpt en este grupo.");
       return;
     }
     await m.reply(
@@ -282,17 +284,17 @@ async function handler(m, { sock }) {
     });
 
     if (nextRules.length === rules.length) {
-      await m.reply(`❌ Rule dengan judul \`${name}\` tidak ditemukan.`);
+      await m.reply(`❌ Regla con título \`${name}\` No se encuentra.`);
       return;
     }
 
     db.setGroup(m.chat, { anticustomRules: nextRules });
-    await m.reply(`✅ Rule dengan judul \`${name}\` berhasil dihapus.`);
+    await m.reply(`✅ Regla con título \`${name}\` borrado con éxito.`);
     return;
   }
 
   await m.reply(
-    "❌ Subcommand tidak valid. Gunakan: on, off, list, add, del, metode, cancel",
+    "❌ Subcomando inválido. Uso: en, apagado, lista, añadir, del, método, cancelar",
   );
 }
 
@@ -365,7 +367,7 @@ async function replyHandler(m, { sock }) {
   if (session.step === "action") {
     const action = normalizeAction(text, "");
     if (!action) {
-      await m.reply("❌ Balas dengan `hapus` atau `kick` ya.");
+      await m.reply("❌ Responder con `hapus` atau `kick` ya.");
       return true;
     }
 
@@ -387,14 +389,14 @@ async function replyHandler(m, { sock }) {
     if (/^(batal|cancel|tidak|nggak|ga|gak|no)$/i.test(text)) {
       clearSession(sessionKey);
       await m.reply(
-        "✅ Oke, sesi AntiCustom dibatalkan. Kalau mau mulai lagi, ketik `.anticustom add`.",
+        "✅ Bien, la sesión AntiCutom se cancela. Si quieres empezar de nuevo, escribe `.anticustom add`.",
       );
       return true;
     }
 
     if (!/^(ya|iya|y|yes|oke|ok|setuju|gas|lanjut|sip|siap)$/i.test(text)) {
       await m.reply(
-        "❌ Balas dengan `ya` untuk simpan atau `batal` untuk membatalkan.",
+        "❌ Responder con `ya` para salvar o `batal` Para cancelar.",
       );
       return true;
     }

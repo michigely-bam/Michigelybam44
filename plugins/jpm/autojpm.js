@@ -9,8 +9,8 @@ const pluginConfig = {
   name: "autojpm",
   alias: ["autojasher", "autojaserm", "autojasabroadcast"],
   category: "jpm",
-  description: "Jadwalkan JPM otomatis dengan interval dan media",
-  usage: ".autojpm on <interval> <pesan>",
+  description: "Programar JPM automático con intervalo y medios",
+  usage: ".autojpm en el intervalo de instrucciones",
   example: ".autojpm on 1h Halo semuanya!",
   isOwner: true,
   isPremium: false,
@@ -133,7 +133,7 @@ async function handler(m, { sock }) {
   if (["off", "stop", "disable"].includes(action)) {
     const current = getAutoJpmConfig();
     if (!current.enabled) {
-      return m.reply(`ℹ️ AutoJPM sudah nonaktif.`);
+      return m.reply(`ℹEl AutoJPM ha sido deshabilitado.`);
     }
     setAutoJpmConfig({ ...current, enabled: false });
     stopAutoJpmScheduler();
@@ -143,7 +143,7 @@ async function handler(m, { sock }) {
   if (["status", "info"].includes(action)) {
     const current = getAutoJpmConfig();
     if (!current?.message) {
-      return m.reply(`ℹ️ AutoJPM belum dikonfigurasi.`);
+      return m.reply(`ℹEKG AutoJPM no está configurado todavía.`);
     }
     const statusText =
       `📢 *STATUS AUTO JPM*\n\n` +
@@ -159,22 +159,22 @@ async function handler(m, { sock }) {
   }
 
   if (!["on", "start", "enable"].includes(action)) {
-    return m.reply(`❌ Format salah. Gunakan ${prefix}autojpm on/off/status.`);
+    return m.reply(`❌ Formato inválido. ${prefix}autojpm on/off/status.`);
   }
 
   if (!intervalRaw) {
     return m.reply(
-      `❌ Interval wajib diisi. Contoh: ${prefix}autojpm on 1h Pesan.`,
+      `❌ Interval wajib diisi. Contoh: ${prefix}autojpm en 1h Mensaje.`,
     );
   }
 
   const intervalMs = parseInterval(intervalRaw);
   if (!intervalMs) {
-    return m.reply(`❌ Interval tidak valid. Contoh: 10m, 1h, 2h30m, 1d.`);
+    return m.reply(`❌ Intervalo inválido. Ejemplo: 10m, 1h, 2h30m, 1d.`);
   }
 
   if (intervalMs < 15 * 60 * 1000) {
-    return m.reply(`❌ Interval minimal 15 menit untuk mencegah spam.`);
+    return m.reply(`❌ Intervalo mínimo de 15 minutos para prevenir el spam.`);
   }
 
   const existing = getAutoJpmConfig();
@@ -190,7 +190,7 @@ async function handler(m, { sock }) {
   if (mediaInfo) {
     const buffer = await quoted.download();
     if (!buffer) {
-      return m.reply(`❌ Gagal mengambil media.`);
+      return m.reply(`❌ No pude recuperar los medios.`);
     }
     const mimetype = mediaInfo.mimetype || getMimeType(buffer);
     const extension = getExtension(mimetype);
@@ -213,7 +213,7 @@ async function handler(m, { sock }) {
     !existing?.message?.text &&
     !existing?.message?.media
   ) {
-    return m.reply(`❌ Pesan atau media wajib diisi.`);
+    return m.reply(`❌ Mensaje o medios necesarios para ser rellenados.`);
   }
 
   const updatedConfig = {

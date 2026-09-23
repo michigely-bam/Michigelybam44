@@ -7,8 +7,8 @@ const pluginConfig = {
     name: 'mimpi',
     alias: ['dream', 'dreamworld'],
     category: 'fun',
-    description: 'Jelajahi dunia mimpimu berdasarkan nama',
-    usage: '.mimpi <nama>',
+    description: "Explora el mundo de tus sueños por nombre",
+    usage: ".sueño  dream nombre >",
     example: '.mimpi Keisya',
     isOwner: false,
     isPremium: false,
@@ -51,14 +51,14 @@ const ENCOUNTERS = [
     '🧝‍♀️ Peri Pembawa Mimpi',
     '🦁 Singa Kristal',
     '🐋 Paus Terbang Mistis',
-    '🦅 Burung Phoenix Waktu',
+    "🦅 Tiempo Fénix",
     '🐢 Kura-kura Pembawa Dunia',
     '🦄 Unicorn Dimensi'
 ]
 
 const POWERS = [
-    '✨ Mengendalikan Waktu',
-    '🌊 Berbicara dengan Elemen',
+    "✨ Control de tiempo",
+    "🌊 Hablando con Elemento",
     '🎭 Shapeshifting',
     '🌈 Manipulasi Realitas',
     '👁️ Penglihatan Masa Depan',
@@ -68,14 +68,14 @@ const POWERS = [
 ]
 
 const MESSAGES = [
-    'Perjalananmu akan membawa perubahan besar',
-    'Rahasia kuno akan terungkap dalam waktu dekat',
-    'Kekuatan tersembunyi akan segera bangkit',
-    'Takdir baru menanti di horizon',
-    'Koneksi spiritual akan menguat',
-    'Transformasi besar akan terjadi',
-    'Pencerahan akan datang dari arah tak terduga',
-    'Misi penting akan segera dimulai'
+    "Tu viaje traerá un gran cambio.",
+    "Los antiguos secretos serán revelados en un futuro cercano",
+    "Las fuerzas ocultas se levantarán pronto.",
+    "El nuevo destino espera en el horizonte.",
+    "Las conexiones espirituales serán fuertes",
+    "Una transformación enorme está a punto de ocurrir.",
+    "La iluminación vendrá de la dirección inesperada",
+    "La misión importante comenzará pronto."
 ]
 
 function generateDream(seed) {

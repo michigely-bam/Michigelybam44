@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "adventure",
   alias: ["adv", "petualangan"],
   category: "rpg",
-  description: "Berpetualang untuk mendapat Exp dan hadiah",
+  description: "Adventurero para obtener Exp y regalos",
   usage: ".adventure",
   example: ".adventure",
   isOwner: false,
@@ -70,7 +70,8 @@ async function handler(m, { sock }) {
 
     let msg = `❌ *ᴘᴇᴛᴜᴀʟᴀɴɢᴀɴ ɢᴀɢᴀʟ*\n\n`;
     msg += `> 📍 ${location}\n\n`;
-    msg += `> Kamu diserang monster!\n`;
+    msg += `> ¡Fuiste atacado por un monstruo!
+`;
     msg += `> ❤️ Health: *-${healthLoss}*`;
 
     if (user.rpg.health <= 0) {

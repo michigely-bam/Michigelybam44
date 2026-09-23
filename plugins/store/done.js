@@ -6,8 +6,8 @@ const pluginConfig = {
   alias: ["selesai", "kirim", "confirm"],
   category: "store",
   description:
-    "✅ Konfirmasi transaksi selesai dan kirim data ke pembeli (reply pesan pembeli)",
-  usage: ".done <nomor_trx> (reply pesan pembeli)",
+    "✅ Confirme la transacción completada y envíe los datos al comprador (replique el mensaje del comprador)",
+  usage: ".Número de_trx √≥ (mensaje del comprador)",
   example: ".done TRX-001",
   isOwner: true,
   isPremium: false,
@@ -50,8 +50,12 @@ async function handler(m, { sock }) {
     const pending = allTrx.filter((t) => t.status === "pending");
 
     if (pending.length > 0) {
-      let txt = `❌ *Transaksi \`${trxId}\` tidak ditemukan.*\n\n`;
-      txt += `⏳ *Transaksi pending saat ini:*\n\n`;
+      let txt = `❌ *Transaksi \`${trxId}\` No se encuentra.*
+
+`;
+      txt += `⏳ *Transacciones pendientes actuales:*
+
+`;
       for (const t of pending) {
         const typeIcon = t.productType === "fisik" ? "📦" : "🔑";
         const time = new Date(t.createdAt).toLocaleString("id-ID", {
@@ -60,7 +64,7 @@ async function handler(m, { sock }) {
         txt += `• 🧾 \`${t.trxId}\` — ${typeIcon} ${t.productName} (${formatPrice(t.price)}) oleh ${t.buyerName}\n`;
         txt += `  🕐 _${time}_\n\n`;
       }
-      txt += `📌 Reply pesan pembeli lalu ketik: \`${m.prefix}done <nomor_trx>\``;
+      txt += `📌 Responder mensaje el comprador y el tipo: \`${m.prefix}Número de_trx>\``;
       return m.reply(txt);
     }
 
@@ -93,7 +97,9 @@ async function handler(m, { sock }) {
 
   if (!buyerJid) {
     return m.reply(
-      `❌ *Tidak dapat menemukan nomor pembeli.*\n\nTransaksi ini tidak memiliki data pembeli yang valid 📱`,
+      `❌ *No pude encontrar el número del comprador.*
+
+Esta transacción no tiene datos de comprador válidos 📱`,
     );
   }
 
@@ -145,7 +151,9 @@ async function handler(m, { sock }) {
   const typeIcon = trx.productType === "fisik" ? "📦" : "🔑";
   const typeLabel = trx.productType === "fisik" ? "Fisik" : "Digital";
 
-  let invoiceTxt = `🎉 *TRANSAKSI BERHASIL*\n\n`;
+  let invoiceTxt = `🎉 *DEVICE TRANSLATICO*
+
+`;
   invoiceTxt += `🕐 Waktu: \`${timeStr}\`\n`;
   invoiceTxt += `✅ Status: *Berhasil*\n\n`;
   invoiceTxt += `📦 *Detail Pesanan:*\n`;
@@ -155,9 +163,13 @@ async function handler(m, { sock }) {
 
   if (stockItemDetail) {
     invoiceTxt += `🔑 *Data Produk:*\n\`\`\`\n${stockItemDetail}\n\`\`\`\n\n`;
-    invoiceTxt += `⚠️ _Simpan data di atas dengan baik. Jangan bagikan ke siapapun_ 🔒\n\n`;
+    invoiceTxt += `⚠️ _Guarde los datos arriba correctamente. No comparta con nadie_ 🔒
+
+`;
   } else if (trx.productType === "fisik") {
-    invoiceTxt += `📦 _Produk fisik akan dikirim oleh admin. Silakan konfirmasi alamat pengiriman._\n\n`;
+    invoiceTxt += `📦 _El producto físico será enviado por admin. Por favor, confirme la dirección de entrega._
+
+`;
   }
 
   invoiceTxt += `🙏 Terima kasih telah berbelanja! _Next order ya_ ✨`;
@@ -178,7 +190,13 @@ async function handler(m, { sock }) {
   } catch (e) {
     console.error("[Done] Failed to send to buyer:", buyerJid, e.message);
     await m.reply(
-      `❌ *Gagal mengirim ke pembeli.*\n\n📱 Nomor: \`${buyerNum}\`\n\n_Kemungkinan pembeli belum menyimpan nomor bot. Kirim manual data berikut:_\n\n${invoiceTxt}`,
+      `❌ *Falló en enviar al comprador.*
+
+📱 Nomor: \`${buyerNum}\`
+
+_Los posibles compradores no han guardado el número del bot. Envíe el siguiente manual de datos:_
+
+${invoiceTxt}`,
     );
   }
 
@@ -218,7 +236,8 @@ async function handler(m, { sock }) {
         : `${product.stockItems?.length || 0} akun`;
     confirmTxt += `📊 Sisa stok: *${stockDisplay}*\n`;
   }
-  confirmTxt += `\n📤 _Data telah dikirim ke nomor pembeli_ ✅`;
+  confirmTxt += `
+📤 _Los datos han sido enviados al número del comprador_ ✅`;
 
   return m.reply(confirmTxt);
 }

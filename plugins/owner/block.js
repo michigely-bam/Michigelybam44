@@ -4,8 +4,8 @@ const pluginConfig = {
     name: ['block', 'blokir'],
     alias: [],
     category: 'owner',
-    description: 'Blokir nomor WhatsApp',
-    usage: '.block <nomor/reply/mention>',
+    description: "Número de bloque WhatsApp",
+    usage: ".bloques Número de contacto / respuesta / mención",
     example: '.block 628xxx',
     isOwner: true,
     cooldown: 5,
@@ -22,7 +22,7 @@ async function handler(m, { sock }) {
         targetJid = m.quoted.sender || m.quoted.participant
     } else if (m.args[0]) {
         let num = m.args[0].replace(/[^0-9]/g, '')
-        if (!num) return m.reply('❌ Nomor tidak valid.')
+        if (!num) return m.reply("❌ Número inválido.")
         targetJid = num + '@s.whatsapp.net'
     } else if (!m.isGroup) {
         targetJid = m.chat
@@ -40,7 +40,7 @@ async function handler(m, { sock }) {
 
     const botJid = sock.user?.id?.split(':')[0] + '@s.whatsapp.net'
     if (targetJid === botJid) {
-        return m.reply('❌ Tidak bisa blokir nomor bot sendiri.')
+        return m.reply("❌ No puedo bloquear el número del bot.")
     }
 
     try {

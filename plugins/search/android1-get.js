@@ -23,7 +23,7 @@ async function handler(m, { sock }) {
   const url = m.text?.trim();
 
   if (!url || !url.includes("an1.com")) {
-    return m.reply(`❌ URL tidak valid! Harus URL dari an1.com`);
+    return m.reply(`❌ URL inválida! Debe ser la URL de an1.com`);
   }
 
   m.react("🕕");
@@ -37,7 +37,7 @@ async function handler(m, { sock }) {
     );
 
     if (!data?.status || !data?.data) {
-      throw new Error("Gagal mengambil detail APK");
+      throw new Error("Fallado para recuperar detalles de APK");
     }
 
     const app = data.data;
@@ -60,7 +60,7 @@ async function handler(m, { sock }) {
 
       m.react("✅");
     } else {
-      let caption = `> ⚠️ Download URL tidak tersedia`;
+      let caption = `> ⚠️ Descargar URL no disponible`;
 
       await sock.sendMessage(
         m.chat,
@@ -79,7 +79,7 @@ async function handler(m, { sock }) {
             {
               name: "cta_url",
               buttonParamsJson: JSON.stringify({
-                display_text: "🌐 Buka di Browser",
+                display_text: "🌐 Abrir en Navegador",
                 url: url,
               }),
             },

@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'ceksetia',
     alias: ['setia', 'loyal'],
     category: 'cek',
-    description: 'Cek tingkat kesetiaan kamu',
-    usage: '.ceksetia <nama>',
+    description: "Revisa tu nivel de lealtad.",
+    usage: ".lista de verificación de nombre",
     example: '.ceksetia Budi',
     isOwner: false,
     isPremium: false,
@@ -19,16 +19,16 @@ async function handler(m) {
     const mentioned = m.mentionedJid[0] || m.sender
                     
     let desc = ''
-    if (percent >= 90) desc = 'Setia sampai mati! 💍💕'
-    else if (percent >= 70) desc = 'Sangat setia dan tulus! ❤️'
+    if (percent >= 90) desc = "¡Cariño a muerte! 💍💕"
+    else if (percent >= 70) desc = "¡Muy leal y sincero! ❤️"
     else if (percent >= 50) desc = 'Cukup setia~ 😊'
     else if (percent >= 30) desc = 'Hmm... kadang goyah 😅'
     else desc = 'Playboy/Playgirl mode? 😏'
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kesetiaan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kesetiaan @${mentioned.split('@')[0]} yak? 
+Tu nivel de lealtad. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de lealtad @${mentioned.split('@')[0]} yak? 
     
 Tingkat kesetiaan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

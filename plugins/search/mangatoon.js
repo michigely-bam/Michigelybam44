@@ -37,7 +37,7 @@ async function fetchMangatoon(query) {
     })
 
     if (!data?.status || !data?.data?.results) {
-        throw new Error(data?.message || 'Hasil Mangatoon tidak ditemukan')
+        throw new Error(data?.message || "Resultados de Mangatoon no encontrados")
     }
 
     return data.data
@@ -59,7 +59,7 @@ async function handler(m, { sock }) {
 
         if (items.length === 0) {
             m.react('❌')
-            return m.reply(`❌ Tidak ditemukan komik Mangatoon untuk: ${query}`)
+            return m.reply(`❌ No se encontraron cómics de Mangatoon para: ${query}`)
         }
 
         let caption = '📚 *MANGATOON SEARCH*\n\n'

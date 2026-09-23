@@ -792,7 +792,7 @@ async function sendNightPrompts(chatId, sock, prefix) {
           mentions,
           contextInfo: getWWContextInfo(
             "🌙 NIGHT",
-            "Gunakan skillmu!",
+            "¡Usa tus habilidades!",
             thumbNight,
             mentions,
           ),
@@ -812,7 +812,7 @@ async function processNightActions(chatId, sock, db, prefix) {
   let killTarget = ww[chatId].nightActions.kill;
   const protectTarget = ww[chatId].nightActions.protect;
 
-  let nightReport = `☀️ *PAGI HARI KE-${ww[chatId].day}*\n\n`;
+  let nightReport = `☀️ *- ¿Qué?${ww[chatId].day}*\n\n`;
 
   // Process kill if not protected
   if (killTarget && killTarget !== protectTarget) {
@@ -820,15 +820,22 @@ async function processNightActions(chatId, sock, db, prefix) {
     if (victim && victim.alive) {
       victim.alive = false;
       ww[chatId].dead.push(victim);
-      nightReport += `☠️ @${victim.id.split("@")[0]} ditemukan tewas!\n`;
+      nightReport += `☠️ @${victim.id.split("@")[0]} ¡Encontrado muerto!
+`;
       nightReport += `> Role: ${ROLES[victim.role].emoji} ${ROLES[victim.role].name}\n\n`;
     }
   } else if (killTarget && killTarget === protectTarget) {
-    nightReport += `🛡️ Guardian berhasil melindungi target!\n`;
-    nightReport += `> Tidak ada korban malam ini.\n\n`;
+    nightReport += `🛡️ ¡El guardián cubre con éxito el objetivo!
+`;
+    nightReport += `> No hay bajas esta noche.
+
+`;
   } else {
-    nightReport += `🌅 Malam yang tenang...\n`;
-    nightReport += `> Tidak ada korban.\n\n`;
+    nightReport += `🌅 Una noche tranquila...
+`;
+    nightReport += `> Sin bajas.
+
+`;
   }
 
   // Check win condition
@@ -874,7 +881,8 @@ async function processNightActions(chatId, sock, db, prefix) {
     .join("\n")}\n`;
   nightReport += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
   nightReport += `> 🗳️ Waktunya voting!\n`;
-  nightReport += `> Ketik \`${prefix}ww vote <nomor>\`\n`;
+  nightReport += `> Ketik \`${prefix}ww vote , número de contacto\`
+`;
   nightReport += `> ⏱️ Waktu: ${PHASE_DURATION.day / 1000} detik`;
 
   await sock.sendMessage(chatId, {
@@ -912,11 +920,14 @@ async function executeVote(chatId, sock, db, prefix) {
     }
   }
 
-  let resultText = `⚖️ *HASIL VOTING*\n\n`;
+  let resultText = `⚖️ *VOICE VOICE*
+
+`;
 
   if (isTie || maxVotes === 0) {
-    resultText += `🤷 Tidak ada yang tereliminasi!\n`;
-    resultText += `> ${isTie ? "Vote seri!" : "Tidak ada yang vote."}\n\n`;
+    resultText += `🤷 ¡Nada ha sido eliminado!
+`;
+    resultText += `> ${isTie ? "Vote seri!" : "No hay nada de voto."}\n\n`;
   } else if (eliminated) {
     const player = ww[chatId].players.find((p) => p.id === eliminated);
     if (player) {
@@ -935,7 +946,7 @@ async function executeVote(chatId, sock, db, prefix) {
     await sock.sendMessage(chatId, {
       text: resultText,
       mentions: eliminated ? [eliminated] : [],
-      contextInfo: getWWContextInfo("⚖️ VOTING", "Hasil voting", thumbDay),
+      contextInfo: getWWContextInfo("⚖️ VOTING", "Resultados de la votación", thumbDay),
     });
     await endGame(chatId, sock, db, winner);
     return;
@@ -955,9 +966,10 @@ async function executeVote(chatId, sock, db, prefix) {
     p.skillUsed = false;
   });
 
-  resultText += `🌙 *MALAM HARI KE-${ww[chatId].day}*\n\n`;
+  resultText += `🌙 *- ¿Qué?${ww[chatId].day}*\n\n`;
   resultText += `> Werewolf berburu...\n`;
-  resultText += `> Special roles, gunakan skill kalian di PM!\n`;
+  resultText += `> Funciones especiales, ¡utiliza tus habilidades en el PM!
+`;
   resultText += `> ⏱️ Waktu: ${PHASE_DURATION.night / 1000} detik`;
 
   await sock.sendMessage(chatId, {
@@ -1070,39 +1082,39 @@ async function nightActionHandler(m, { sock }) {
 
   if (!chatId) {
     return m.reply(
-      `❌ Kamu tidak sedang dalam game werewolf atau bukan fase malam!`,
+      `❌ ¡No estás en un juego de hombres lobo o en una fase nocturna!`,
     );
   }
 
   const game = ww[chatId];
   const player = game.players.find((p) => p.id === m.sender);
   if (!player || !player.alive) {
-    return m.reply(`❌ Kamu sudah mati atau bukan player!`);
+    return m.reply(`❌ ¡Estás muerto o no eres un jugador!`);
   }
 
   // Check if skill already used
   if (player.skillUsed) {
-    return m.reply(`❌ Kamu sudah menggunakan skill malam ini!`);
+    return m.reply(`❌ ¡Has estado usando habilidades esta noche!`);
   }
 
   const cmd = m.command?.toLowerCase();
   const targetNum = parseInt(m.args?.[0]);
 
   if (isNaN(targetNum)) {
-    return m.reply(`❌ Masukkan nomor target! Contoh: \`${prefix}${cmd} 2\``);
+    return m.reply(`❌ ¡Introdúzcase el número de destino! \`${prefix}${cmd} 2\``);
   }
 
   const targetPlayer = game.players.find(
     (p) => p.number === targetNum && p.alive,
   );
   if (!targetPlayer) {
-    return m.reply(`❌ Target tidak valid atau sudah mati!`);
+    return m.reply(`❌ ¡El objetivo es inválido o muerto!`);
   }
 
   // Process based on command and role
   if (cmd === "wwkill" && player.role === "werewolf") {
     if (targetPlayer.role === "werewolf" || targetPlayer.role === "sorcerer") {
-      return m.reply(`❌ Tidak bisa membunuh sesama team!`);
+      return m.reply(`❌ ¡No puedo matar a un compañero!`);
     }
     game.nightActions.kill = targetPlayer.id;
     player.skillUsed = true;
@@ -1155,7 +1167,8 @@ async function nightActionHandler(m, { sock }) {
 
   // Wrong role for command
   return m.reply(
-    `❌ Kamu tidak memiliki kemampuan ini!\n> Role kamu: ${ROLES[player.role]?.name || "Unknown"}`,
+    `❌ ¡No tienes esta habilidad!
+> Papel que usted: ${ROLES[player.role]?.name || "Unknown"}`,
   );
 }
 

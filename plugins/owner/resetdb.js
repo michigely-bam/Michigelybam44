@@ -7,7 +7,7 @@ const pluginConfig = {
     name: 'resetdb',
     alias: ['cleardb', 'wipedb'],
     category: 'owner',
-    description: 'Reset semua data database',
+    description: "Restablecer todos los datos de la base de datos",
     usage: '.resetdb [confirm]',
     example: '.resetdb confirm',
     isOwner: true,
@@ -49,7 +49,7 @@ async function handler(m, { sock }) {
     const pending = global.resetDbPending[m.sender]
     if (!pending || (Date.now() - pending) > 60000) {
         delete global.resetDbPending[m.sender]
-        return m.reply(`❌ Timeout! Ketik *.resetdb* ulang untuk memulai.`)
+        return m.reply(`❌ Timeout! Ketik *.resetdb* Repita el lanzamiento.`)
     }
     
     delete global.resetDbPending[m.sender]

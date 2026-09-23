@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'goodbyeall',
     alias: ['gball', 'globalgoodbye', 'leaveall'],
     category: 'owner',
-    description: 'Aktifkan/nonaktifkan goodbye di semua grup',
+    description: "Activar / desactivar el adiós en todos los grupos",
     usage: '.goodbyeall <on/off>',
     example: '.goodbyeall on',
     isOwner: true,

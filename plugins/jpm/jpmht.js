@@ -15,8 +15,8 @@ const pluginConfig = {
     name: 'jpmht',
     alias: ['jpmhidetag'],
     category: 'jpm',
-    description: 'Kirim pesan ke semua grup dengan hidetag',
-    usage: '.jpmht <pesan>',
+    description: "Enviar mensajes a todos los grupos con escondite",
+    usage: ".jpmht − Mensaje hecho",
     example: '.jpmht Halo semuanya!',
     isOwner: true,
     isPremium: false,
@@ -33,7 +33,11 @@ async function handler(m, { sock }) {
     if (m.isGroup) {
         const groupMode = getGroupMode(m.chat, db)
         if (groupMode !== 'md' && groupMode !== 'all') {
-            return m.reply(`❌ *ᴍᴏᴅᴇ ᴛɪᴅᴀᴋ sᴇsᴜᴀɪ*\n\n> JPM hanya tersedia di mode MD\n\n\`${m.prefix}botmode md\``)
+            return m.reply(`❌ *ᴍᴏᴅᴇ ᴛɪᴅᴀᴋ sᴇsᴜᴀɪ*
+
+> JPM sólo está disponible en modo MD
+
+\`${m.prefix}botmode md\``)
         }
     }
     
@@ -51,7 +55,9 @@ async function handler(m, { sock }) {
     }
     
     if (global.statusjpm) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> JPM sedang berjalan. Ketik \`${m.prefix}stopjpm\` untuk menghentikan.`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> JPM corriendo. \`${m.prefix}stopjpm\` Parar.`)
     }
     
     m.react('📢')
@@ -82,7 +88,9 @@ async function handler(m, { sock }) {
         
         if (groupIds.length === 0) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak ada grup yang ditemukan${blacklistedCount > 0 ? ` (${blacklistedCount} grup di-blacklist)` : ''}`)
+            return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No se encontró ningún grupo${blacklistedCount > 0 ? ` (${blacklistedCount} grupo sobre -lista negra` : ''}`)
         }
         
         const jedaJpm = db.setting('jedaJpm') || 5000
@@ -129,7 +137,7 @@ async function handler(m, { sock }) {
                     },
                     externalAdReply: cachedThumb ? {
                                 title: '📢 JPM HIDETAG',
-                                body: 'Pesan Massal dengan Hidetag',
+                                body: "Mensaje de masas con Hidetag",
                                 thumbnail: cachedThumb,
                                 sourceUrl: config.saluran?.link || '',
                                 mediaType: 1,

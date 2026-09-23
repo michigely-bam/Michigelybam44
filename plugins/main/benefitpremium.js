@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'benefitpremium',
     alias: ['premiumbenefits', 'premiumfitur', 'benefitprem'],
     category: 'main',
-    description: 'Lihat penjelasan dan daftar fitur khusus Premium',
+    description: "Ver características y explicaciones especiales Premium",
     usage: '.benefitpremium',
     isOwner: false,
     isGroup: false,

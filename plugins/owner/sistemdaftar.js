@@ -47,7 +47,7 @@ const pluginConfig = {
   name: "sistemdaftar",
   alias: ["regmode", "wajibdaftar", "togglereg"],
   category: "owner",
-  description: "Kelola sistem wajib daftar dan statistik pendaftaran",
+  description: "Gestionar la lista obligatoria del sistema y las estadísticas de registro",
   usage: ".sistemdaftar <on/off/stats>",
   example: ".sistemdaftar stats",
   isOwner: true,
@@ -156,7 +156,9 @@ async function handler(m, { sock }) {
   }
 
   return m.reply(
-    `❌ Option tidak valid!\n\n> Gunakan: \`on\`, \`off\`, atau \`stats\``,
+    `❌ Opción inválida!
+
+> Gunakan: \`on\`, \`off\`, atau \`stats\``,
   );
 }
 

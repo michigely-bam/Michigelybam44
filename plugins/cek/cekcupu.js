@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekcupu',
     alias: ['cupu', 'noob'],
     category: 'cek',
-    description: 'Cek tingkat kecupuan kamu',
-    usage: '.cekcupu <nama>',
+    description: "Revisa tu nivel de beso",
+    usage: ".ckcupu − Nombre",
     example: '.cekcupu Budi',
     isOwner: false,
     isPremium: false,
@@ -20,15 +20,15 @@ async function handler(m) {
                     
     let desc = ''
     if (percent >= 90) desc = 'CUPU PARAH! NOOB DETECTED! 🤡'
-    else if (percent >= 70) desc = 'Masih newbie nih~ 😅'
+    else if (percent >= 70) desc = "Aún no es nuevo.~ 😅"
     else if (percent >= 50) desc = 'Biasa aja lah 🤔'
     else if (percent >= 30) desc = 'Cukup jago! 💪'
     else desc = 'PRO PLAYER! GG! 🏆'
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kecupuan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kecupuan @${mentioned.split('@')[0]} yak? 
+Tu nivel de beso *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de beso @${mentioned.split('@')[0]} yak? 
     
 Tingkat kecupuan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

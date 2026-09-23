@@ -25,7 +25,7 @@ const pluginConfig = {
   name: "allmenu",
   alias: ["fullmenu", "am", "allcommand", "semua"],
   category: "main",
-  description: "Menampilkan semua command lengkap per kategori",
+  description: "Mostrar todos los comandos completos por categoría",
   usage: ".allmenu",
   example: ".allmenu",
   isOwner: false,
@@ -128,8 +128,8 @@ async function handler(m, { sock, config: botConfig, db, uptime }) {
   }
   const greeting = getTimeGreeting();
   let txt = `Hai *@${m.pushName || "User"}* 🪸
-Aku ${botConfig.bot?.name || "Ourin-AI"}, bot WhatsApp yang siap bantu kamu.  
-Kamu bisa pakai aku buat cari info, ambil data, atau bantu hal-hal sederhana langsung lewat WhatsApp — praktis tanpa ribet.
+Aku ${botConfig.bot?.name || "Ourin-AI"}, Botas WhatsApp listas para ayudarte.  
+Puedes utilizarme para obtener información, obtener datos o ayudar a que las cosas simples pasen directamente por WhatsApp - prácticamente sin costillas.
 `;
   txt += createBracketBox("🤖", "KETERANGAN", [
     "Ⓞ = Owner Only",

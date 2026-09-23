@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekjomblo',
     alias: ['jomblo', 'single'],
     category: 'cek',
-    description: 'Cek tingkat kejombloan kamu',
-    usage: '.cekjomblo <nama>',
+    description: "Comprueba tus niveles de conmutación.",
+    usage: ".ckjsingle - Nombre",
     example: '.cekjomblo Budi',
     isOwner: false,
     isPremium: false,
@@ -22,13 +22,13 @@ async function handler(m) {
     if (percent >= 90) desc = 'Jomblo abadi! Single is happiness~ 💔😎'
     else if (percent >= 70) desc = 'Strong independent person! 💪'
     else if (percent >= 50) desc = 'MasihPDKT mode ON 😍'
-    else if (percent >= 30) desc = 'Ada yang naksir kayaknya~ 👀'
+    else if (percent >= 30) desc = "Alguien está enamorado de él.~ 👀"
     else desc = 'Soon taken! 💕'
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kejombloan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kejombloan @${mentioned.split('@')[0]} yak? 
+El nivel de tu complacencia *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de obscenidad @${mentioned.split('@')[0]} yak? 
     
 Tingkat kejombloan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

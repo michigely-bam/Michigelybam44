@@ -6,7 +6,7 @@ const pluginConfig = {
   alias: ["gp", "getcode", "plugincode", "sourcecode"],
   category: "owner",
   description: "Dapatkan source code plugin",
-  usage: ".getplugin <nama plugin>",
+  usage: ".getplugin − Nombre del plugin",
   example: ".getplugin menu",
   isOwner: true,
   isPremium: false,
@@ -139,10 +139,13 @@ async function handler(m, { sock }) {
   if (!pluginInfo) {
     const similar = getSimilarPlugins(pluginName, pluginsDir);
     let text = `❌ *ᴘʟᴜɢɪɴ ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n`;
-    text += `> Plugin \`${pluginName}\` tidak ditemukan\n\n`;
+    text += `> Plugin \`${pluginName}\` no encontrado
+
+`;
 
     if (similar.length > 0) {
-      text += `*Mungkin maksud kamu:*\n`;
+      text += `*Tal vez quieras decir:*
+`;
       similar.forEach((s) => {
         text += `> - \`${s}\`\n`;
       });
@@ -154,13 +157,14 @@ async function handler(m, { sock }) {
   const code = fs.readFileSync(pluginInfo.path, "utf-8");
 
   await sock.sendCodeBlockV2(m.chat, code, m, {
-    title: `📦 *PLUGIN DITEMUKAN*`,
+    title: `📦 *PLUGIN FOUND*`,
     language: "javascript",
     text:
       `Hallo Ownerku ${m.pushName}, berikut ini adalah source code dari plugin yang kamu minta\n\n` +
       `- 🌾 *Plugin:* \`${pluginInfo.file}\`\n` +
       `- 🍃 *Category:* \`${pluginInfo.category}\``,
-    footer: `\n_Note_: *Kamu bisa langsung copy code di atas*`,
+    footer: `
+_Note_: *Puede copiar directamente el código anterior*`,
   });
 }
 

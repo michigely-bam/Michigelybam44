@@ -4,9 +4,9 @@ const pluginConfig = {
     name: 'editstok',
     alias: ['editstock'],
     category: 'store',
-    description: '✏️ Edit stok item produk (hanya di private chat)',
-    usage: '.editstok <nomor_produk> <nomor_item>|<detail_baru>',
-    example: '.editstok 1 3|Email: baru@mail.com;;Password: newpass',
+    description: "✏️ Editar productos de artículo de stock (sólo en chat privado)",
+    usage: ".editstock - Número de referencia_producto √≥n_item>|<detail_baru>",
+    example: ".Editor 1 3@mail.com;;Password: newpass",
     isOwner: true,
     isPremium: false,
     isGroup: false,
@@ -29,7 +29,9 @@ async function handler(m, { sock }) {
     const products = db.setting('storeProducts') || []
 
     if (products.length === 0) {
-        return m.reply(`📭 *Belum ada produk.*\n\nTambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
+        return m.reply(`📭 *Aún no hay producto.*
+
+Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
     }
 
     const text = m.text?.trim() || ''
@@ -55,7 +57,9 @@ async function handler(m, { sock }) {
     const itemNo = parseInt(parts[1]) - 1
 
     if (isNaN(productNo) || productNo < 0 || productNo >= products.length) {
-        return m.reply(`❌ *Nomor produk tidak valid.*\n\nRentang: 1-${products.length} 📋`)
+        return m.reply(`❌ *Número de producto no válido.*
+
+Rentang: 1-${products.length} 📋`)
     }
 
     const product = products[productNo]
@@ -72,7 +76,11 @@ async function handler(m, { sock }) {
     const stockItems = product.stockItems || []
 
     if (isNaN(itemNo) || itemNo < 0 || itemNo >= stockItems.length) {
-        return m.reply(`❌ *Nomor item tidak valid.*\n\nRentang: 1-${stockItems.length}\n\n📋 Lihat daftar: \`${m.prefix}liststok ${productNo + 1}\``)
+        return m.reply(`❌ *Número de artículo inválido.*
+
+Rentang: 1-${stockItems.length}
+
+📋 Ver lista: \`${m.prefix}liststok ${productNo + 1}\``)
     }
 
     if (!newDetail || newDetail.length < 3) {

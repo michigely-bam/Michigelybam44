@@ -22,7 +22,7 @@ async function handler(m, { sock }) {
   const nama = m.text?.split("|");
   if (!nama || nama.length < 2) {
     return m.reply(
-      `*FAKE FF DUO*\n\n> Contoh: ${m.prefix}fakeffduo nama1|nama2`,
+      `*FAKE FF DUO*\n\n> Contoh: ${m.prefix}nombre falso 1`,
     );
   }
   m.react("🕕");

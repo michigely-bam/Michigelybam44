@@ -4,8 +4,8 @@ const pluginConfig = {
     name: 'hapusstok',
     alias: ['delstok', 'delstock', 'deletestok'],
     category: 'store',
-    description: '🗑️ Hapus stok item dari produk',
-    usage: '.hapusstok <nomor_produk> <nomor_item>',
+    description: "🗑️ Eliminar los artículos de stock del producto",
+    usage: ".Eliminar el stock − número_producto √≥n_item>",
     example: '.hapusstok 1 3',
     isOwner: true,
     isPremium: false,
@@ -21,7 +21,9 @@ async function handler(m, { sock }) {
     const products = db.setting('storeProducts') || []
 
     if (products.length === 0) {
-        return m.reply(`📭 *Belum ada produk.*\n\nTambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
+        return m.reply(`📭 *Aún no hay producto.*
+
+Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
     }
 
     const args = m.text?.trim().split(/\s+/) || []
@@ -39,7 +41,9 @@ async function handler(m, { sock }) {
     }
 
     if (productNo < 0 || productNo >= products.length) {
-        return m.reply(`❌ *Nomor produk tidak valid.*\n\nRentang: 1-${products.length} 📋`)
+        return m.reply(`❌ *Número de producto no válido.*
+
+Rentang: 1-${products.length} 📋`)
     }
 
     const product = products[productNo]
@@ -65,13 +69,19 @@ async function handler(m, { sock }) {
                 `📊 Sisa stok: *${product.stock} pcs*`
             )
         }
-        return m.reply(`♾️ *Stok unlimited tidak bisa dikurangi.*\n\nUbah tipe stok terlebih dahulu: \`${m.prefix}editproduk ${productNo + 1} stok <jumlah>\``)
+        return m.reply(`♾️ *No se puede reducir el stock ilimitado.*
+
+Ubah tipe stok terlebih dahulu: \`${m.prefix}editproduk ${productNo + 1} stok <jumlah>\``)
     }
 
     const stockItems = product.stockItems || []
 
     if (itemNo < 0 || itemNo >= stockItems.length) {
-        return m.reply(`❌ *Nomor item tidak valid.*\n\nRentang: 1-${stockItems.length}\n\n📋 Lihat daftar: \`${m.prefix}liststok ${productNo + 1}\``)
+        return m.reply(`❌ *Número de artículo inválido.*
+
+Rentang: 1-${stockItems.length}
+
+📋 Ver lista: \`${m.prefix}liststok ${productNo + 1}\``)
     }
 
     const deleted = stockItems.splice(itemNo, 1)[0]

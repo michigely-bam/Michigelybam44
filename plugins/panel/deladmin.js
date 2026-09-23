@@ -9,7 +9,7 @@ const pluginConfig = {
     name: allCommands,
     alias: allAliases,
     category: 'panel',
-    description: 'Hapus admin panel (v1-v5)',
+    description: "Borrar administración de panel (v1-v5)",
     usage: '.deladminv1 userid',
     example: '.deladminv2 5',
     isOwner: false,
@@ -76,7 +76,7 @@ async function handler(m, { sock }) {
         const available = getAvailableServers(pteroConfig)
         let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`
         if (available.length > 0) {
-            txt += `> Server tersedia: *${available.join(', ')}*`
+            txt += `> Servidor disponible: *${available.join(', ')}*`
         } else {
             txt += `> Isi di \`config.js\` bagian \`pterodactyl.server1\``
         }

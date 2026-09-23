@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'mute',
     alias: ['bisukan'],
     category: 'group',
-    description: 'Bisukan seluruh grup (hanya admin yang bisa kirim pesan)',
+    description: "Insertar todos los grupos (sólo administración puede enviar mensajes)",
     usage: '.mute',
     example: '.mute',
     isOwner: false,
@@ -22,10 +22,13 @@ function handler(m, { sock }) {
     const group = db.getGroup(m.chat) || {}
     const groupName = m.groupMetadata.subject
 
-    if (group.mute) return m.reply('❌ Grup sudah dalam keadaan mute.')
+    if (group.mute) return m.reply("❌ El grupo ya está en un estado mudo.")
 
     db.setGroup(m.chat, { ...group, mute: true })
-    m.reply(`✅ Grup *${groupName}* berhasil di-mute oleh @${m.sender.split('@')[0]}\n\nHanya admin yang bisa mengirim pesan.\nKetik *${m.prefix}unmute* untuk membuka kembali.`, { mentions: [m.sender] })
+    m.reply(`✅ Grup *${groupName}* con éxito mudo por @${m.sender.split('@')[0]}
+
+Sólo el administrador puede enviar un mensaje.
+Ketik *${m.prefix}unmute* Para reabrir.`, { mentions: [m.sender] })
 }
 
 function isMuted(groupJid, db) {

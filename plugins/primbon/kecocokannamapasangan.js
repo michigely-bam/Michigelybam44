@@ -4,8 +4,8 @@ const pluginConfig = {
     name: 'kecocokannamapasangan',
     alias: ['cocoknama', 'matchname'],
     category: 'primbon',
-    description: 'Cek kecocokan nama pasangan',
-    usage: '.kecocokannamapasangan <nama1> <nama2>',
+    description: "Comprobación para nombres de coincidencia",
+    usage: ".nombre del par de coincidencias",
     example: '.kecocokannamapasangan putu keyla',
     isOwner: false,
     isPremium: false,
@@ -18,7 +18,11 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     if (m.args.length < 2) {
-        return m.reply(`💕 *ᴋᴇᴄᴏᴄᴏᴋᴀɴ ɴᴀᴍᴀ*\n\n> Format: nama1 nama2\n\n\`Contoh: ${m.prefix}kecocokannamapasangan putu keyla\``)
+        return m.reply(`💕 *ᴋᴇᴄᴏᴄᴏᴋᴀɴ ɴᴀᴍᴀ*
+
+> Formato: nombre 1 nombre 2
+
+\`Contoh: ${m.prefix}kecocokannamapasangan putu keyla\``)
     }
     
     const [nama1, nama2] = m.args
@@ -31,7 +35,9 @@ async function handler(m, { sock }) {
         
         if (!data?.status || !data?.data) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Gagal menganalisa`)
+            return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No se pudo analyse`)
         }
         
         const result = data.data

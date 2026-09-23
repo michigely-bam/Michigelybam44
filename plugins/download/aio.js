@@ -40,7 +40,7 @@ async function handler(m, { sock }) {
   }
 
   if (!url.startsWith("http")) {
-    return m.reply(`❌ URL tidak valid! Harus dimulai dengan http/https`);
+    return m.reply(`❌ URL inválida! Debe comenzar con http / https`);
   }
 
   await m.react("🕕");
@@ -50,7 +50,7 @@ async function handler(m, { sock }) {
 
     if (!result?.media?.length) {
       await m.react("❌");
-      return m.reply(`❌ Gagal mengambil media. Pastikan URL valid.`);
+      return m.reply(`❌ Fallado para recuperar los medios. Asegúrese de que la URL es válida.`);
     }
 
     const ctxInfo = {

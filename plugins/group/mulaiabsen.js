@@ -3,7 +3,7 @@ const pluginConfig = {
   name: "mulaiabsen",
   alias: ["startabsen", "bukaabsen", "openabsen"],
   category: "group",
-  description: "Mulai sesi absen di grup (admin only)",
+  description: "Iniciar sesión ausente en grupo (sólo personal)",
   usage: ".mulaiabsen [keterangan]",
   example: ".mulaiabsen Rapat Mingguan",
   isOwner: false,

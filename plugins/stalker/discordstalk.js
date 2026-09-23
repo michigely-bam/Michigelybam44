@@ -47,7 +47,7 @@ async function handler(m, { sock }) {
 
     if (!res.data?.status || !res.data?.data) {
       m.react("❌");
-      return m.reply(`❌ User ID *${userId}* tidak ditemukan`);
+      return m.reply(`❌ User ID *${userId}* no encontrado`);
     }
 
     const d = res.data.data;

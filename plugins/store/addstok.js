@@ -4,9 +4,9 @@ const pluginConfig = {
   name: "addstok",
   alias: ["addstock", "importstok", "importstock"],
   category: "store",
-  description: "📦 Tambah stok item ke produk (hanya di private chat)",
+  description: "📦 Añadir artículo de stock al producto (sólo chat privado)",
   usage:
-    ".addstok <nomor_produk>|<detail> atau .addstok <nomor> <jumlah> (fisik)",
+    ".addstock − número_produk>|<detail> atau .addstok No. No.",
   example: ".addstok 1|Email: user@mail.com;;Password: pass123",
   isOwner: true,
   isPremium: false,
@@ -31,7 +31,9 @@ async function handler(m, { sock }) {
 
   if (products.length === 0) {
     return m.reply(
-      `📭 *Belum ada produk.*\n\nTambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`,
+      `📭 *Aún no hay producto.*
+
+Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`,
     );
   }
 
@@ -80,17 +82,19 @@ async function handler(m, { sock }) {
           "";
 
         if (isDocument && fileName.toLowerCase().endsWith(".txt")) {
-          await m.reply(`⏳ _Memproses file..._`);
+          await m.reply(`⏳ _Procesando archivo ..._`);
           let fileBuffer;
           try {
             fileBuffer = await m.quoted.download();
           } catch {
             return m.reply(
-              `❌ *Gagal membaca file.*\n\nPastikan file tidak kosong dan dapat diunduh 📄`,
+              `❌ *No podía leer el archivo.*
+
+Asegúrese de que los archivos no están vacíos y descargados 📄`,
             );
           }
           if (!fileBuffer || fileBuffer.length === 0)
-            return m.reply(`❌ *File kosong.* 📄`);
+            return m.reply(`❌ *Un archivo vacío.* 📄`);
 
           const fileContent = fileBuffer.toString("utf-8").trim();
           const lines = [];
@@ -115,7 +119,7 @@ async function handler(m, { sock }) {
             lines.push(...tokens);
           }
           if (lines.length === 0)
-            return m.reply(`❌ *File tidak berisi data valid.* 📄`);
+            return m.reply(`❌ *El archivo no contiene datos válidos.* 📄`);
           if (lines.length > 1000)
             return m.reply(
               `❌ *Terlalu banyak item.* Maksimal 1.000 per import 📄`,
@@ -186,7 +190,9 @@ async function handler(m, { sock }) {
 
   if (isNaN(productNo) || productNo < 0 || productNo >= products.length) {
     return m.reply(
-      `❌ *Nomor produk tidak valid.*\n\nLihat daftar produk: \`${m.prefix}liststok\` 📋`,
+      `❌ *Número de producto no válido.*
+
+Ver lista de productos: \`${m.prefix}liststok\` 📋`,
     );
   }
 
@@ -214,7 +220,9 @@ async function handler(m, { sock }) {
 
   if (!detail || detail.length < 3) {
     return m.reply(
-      `❌ *Detail stok terlalu pendek.*\n\nMinimal 3 karakter diperlukan agar data stok dapat digunakan 🔑`,
+      `❌ *Detail stok terlalu pendek.*
+
+Se requieren 3 caracteres mínimos para utilizar datos de stock 🔑`,
     );
   }
 
@@ -223,7 +231,9 @@ async function handler(m, { sock }) {
   const isDuplicate = product.stockItems.some((item) => item.detail === detail);
   if (isDuplicate) {
     return m.reply(
-      `⚠️ *Data stok sudah ada.*\n\nItem dengan detail yang sama sudah terdaftar di produk *${product.name}* 🔑`,
+      `⚠️ *Los datos de stock están dentro.*
+
+El mismo artículo en el mismo detalle ya está listado en el producto *${product.name}* 🔑`,
     );
   }
 

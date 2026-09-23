@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'onlygc',
     alias: ['onlygroup', 'grouponly'],
     category: 'owner',
-    description: 'Toggle mode bot hanya di grup',
+    description: "Toggle modo bot sólo en grupo",
     usage: '.onlygc',
     example: '.onlygc',
     isOwner: true,
@@ -22,12 +22,16 @@ async function handler(m, { sock }) {
     if (currentMode) {
         db.setting('onlyGc', false)
         await m.react('❌')
-        return m.reply(`❌ *ᴏɴʟʏ ɢʀᴏᴜᴘ ᴍᴏᴅᴇ ɴᴏɴᴀᴋᴛɪꜰ*\n\n> Bot bisa diakses di mana saja`)
+        return m.reply(`❌ *ᴏɴʟʏ ɢʀᴏᴜᴘ ᴍᴏᴅᴇ ɴᴏɴᴀᴋᴛɪꜰ*
+
+> Bot se puede acceder a cualquier lugar`)
     } else {
         db.setting('onlyGc', true)
         db.setting('onlyPc', false)
         await m.react('✅')
-        return m.reply(`✅ *ᴏɴʟʏ ɢʀᴏᴜᴘ ᴍᴏᴅᴇ ᴀᴋᴛɪꜰ*\n\n> Bot hanya bisa diakses di grup!`)
+        return m.reply(`✅ *ᴏɴʟʏ ɢʀᴏᴜᴘ ᴍᴏᴅᴇ ᴀᴋᴛɪꜰ*
+
+> Bot es accesible en el grupo!`)
     }
 }
 

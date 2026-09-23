@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'delpp',
     alias: ['delprofilebot', 'delppbot', 'hapusppbot'],
     category: 'tools',
-    description: 'Menghapus foto profil bot',
+    description: "Remoción de fotos de perfil de bot",
     usage: '.delpp',
     example: '.delpp',
     isOwner: true,
@@ -18,7 +18,7 @@ async function handler(m, { sock }) {
     try {
         const botJid = sock.user?.id
         if (!botJid) {
-            await m.reply(`❌ Bot JID tidak ditemukan.`)
+            await m.reply(`❌ La bota JID no se encontró.`)
             return
         }
         

@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'matematika',
     alias: ['mathgpt', 'math', 'mathsolver'],
     category: 'ai',
-    description: 'AI untuk menyelesaikan soal matematika',
+    description: "IA para resolver problemas de matemáticas",
     usage: '.matematika <soal> atau reply gambar soal',
     example: '.matematika 2+2 berapa?',
     isOwner: false,
@@ -22,7 +22,11 @@ async function handler(m, { sock }) {
     const text = m.args.join(' ')
 
     if (!text) {
-        return m.reply(`📐 *ᴍᴀᴛʜ ɢᴘᴛ*\n\n> Masukkan soal matematika\n\n\`Contoh: ${m.prefix}matematika 2+2 berapa?\``)
+        return m.reply(`📐 *ᴍᴀᴛʜ ɢᴘᴛ*
+
+> Poner en un problema de matemáticas
+
+\`Contoh: ${m.prefix}matematika 2+2 berapa?\``)
     }
     
     m.react('🕕')

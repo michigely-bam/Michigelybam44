@@ -6,8 +6,8 @@ const pluginConfig = {
   name: "searchplugin",
   alias: ["splugin", "findplugin", "infoplugin"],
   category: "owner",
-  description: "Cari dan tampilkan info plugin",
-  usage: ".splugin <nama>",
+  description: "Buscar y mostrar información del plugin",
+  usage: ".splugin &gt; Nombre &gt;",
   example: ".splugin sticker",
   isOwner: true,
   isPremium: false,
@@ -106,7 +106,7 @@ async function handler(m, { sock }) {
     if (!info) {
       await m.react("❌");
       return m.reply(
-        `❌ *ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n> Plugin \`${name}\` tidak ditemukan`,
+        `❌ *ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n> Plugin \`${name}\` no encontrado`,
       );
     }
 

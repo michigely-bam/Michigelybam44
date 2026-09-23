@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'totalfitur',
     alias: ['totalfeature', 'totalcmd', 'countplugin', 'distribusi'],
     category: 'main',
-    description: 'Lihat total fitur/command bot',
+    description: "Ver las características totales / comando bot",
     usage: '.totalfitur',
     example: '.totalfitur',
     isOwner: false,
@@ -62,13 +62,13 @@ async function handler(m, { sock }) {
 
         await sock.sendTable(
             m.chat,
-            'Distribusi Fitur',
+            "Distribución de las características",
             ['Kategori', 'Jumlah', 'Persen'],
             tableData,
             m,
             {
                 headerText: `Total: ${total} | Aktif: ${enabled} | Kategori: ${sorted.length}`,
-                footer: `Total ${total} fitur tersedia`
+                footer: `Total ${total} Características disponibles`
             }
         )
 

@@ -10,8 +10,8 @@ const pluginConfig = {
   name: "tourl",
   alias: ["upload", "catbox", "url"],
   category: "tools",
-  description: "Upload media ke multiple host dan dapatkan URL",
-  usage: ".tourl (reply/kirim media)",
+  description: "Subir los medios a múltiples hosts y obtener URLs",
+  usage: ".tourl (reply / enviar medios)",
   example: ".tourl",
   cooldown: 10,
   energi: 1,
@@ -45,7 +45,7 @@ async function uploadToCatbox(buffer, filename) {
     timeout: 30000,
   });
 
-  if (!res.ok) throw new Error("Catbox gagal");
+  if (!res.ok) throw new Error("Catbox falló");
   const url = await res.text();
   if (!url.startsWith("http")) throw new Error("Invalid response");
   return { host: "Catbox", url, expires: "Permanent" };
@@ -70,7 +70,7 @@ async function uploadToLitterbox(buffer, filename) {
     },
   );
 
-  if (!res.ok) throw new Error("Litterbox gagal");
+  if (!res.ok) throw new Error("Litterbox falló");
   const url = await res.text();
   if (!url.startsWith("http")) throw new Error("Invalid response");
   return { host: "Litterbox", url, expires: "72 jam" };
@@ -90,7 +90,7 @@ async function uploadTo0x0_alt(buffer, filename) {
     timeout: 30000,
   });
 
-  if (!res.ok) throw new Error("Uguu gagal");
+  if (!res.ok) throw new Error("Uguu falló");
   const data = await res.json();
   if (!data?.data?.url) throw new Error("Invalid response");
 
@@ -111,7 +111,7 @@ async function uploadToGofile(buffer, filename) {
   });
   const serverData = await serverRes.json();
   if (!serverData?.data?.servers?.[0]?.name)
-    throw new Error("Gofile server gagal");
+    throw new Error("servidor Gofile falló");
 
   const server = serverData.data.servers[0].name;
   const form = new FormData();
@@ -127,7 +127,7 @@ async function uploadToGofile(buffer, filename) {
     timeout: 60000,
   });
 
-  if (!res.ok) throw new Error("Gofile upload gagal");
+  if (!res.ok) throw new Error("La subida de Google no ha fallado.");
   const data = await res.json();
   if (!data?.data?.downloadPage) throw new Error("Invalid response");
   return { host: "Gofile", url: data.data.downloadPage, expires: "Permanent" };
@@ -147,7 +147,7 @@ async function uploadToQuax(buffer, filename) {
     timeout: 60000,
   });
 
-  if (!res.ok) throw new Error("Qu.ax gagal");
+  if (!res.ok) throw new Error("Qu.ax falló");
   const data = await res.json();
 
   if (!data?.success || !Array.isArray(data.files) || !data.files[0]?.url) {
@@ -174,7 +174,7 @@ async function uploadToYpnk(buffer, filename) {
     timeout: 120000,
   });
 
-  if (!res.ok) throw new Error("YPNK gagal");
+  if (!res.ok) throw new Error("YPNK falló");
   const data = await res.json();
 
   if (!data?.success || !data?.files?.[0]?.url) {
@@ -199,7 +199,7 @@ async function uploadToPutIcu(buffer, filename) {
     timeout: 120000,
   });
 
-  if (!res.ok) throw new Error("Put.icu gagal");
+  if (!res.ok) throw new Error("Put.Trigger falló");
   const data = await res.json();
 
   if (data?.direct_url) {
@@ -225,7 +225,7 @@ async function uploadToTermai(buffer) {
     timeout: 120000,
   });
 
-  if (!res.ok) throw new Error("Termai gagal");
+  if (!res.ok) throw new Error("Nombrado fallido");
   const data = await res.json();
 
   if (!data?.status || !data?.path) {
@@ -291,7 +291,7 @@ async function handler(m, { sock }) {
   } else if (m.message) {
     const type = getContentType(m.message);
     if (!type || type === "conversation" || type === "extendedTextMessage") {
-      return m.reply("⚠️ Kirim media + caption `.tourl` atau reply media");
+      return m.reply("⚠️ Enviar medios + leyenda `.tourl` atau reply media");
     }
 
     try {
@@ -309,7 +309,7 @@ async function handler(m, { sock }) {
   }
 
   if (!media || media.length === 0) {
-    return m.reply("⚠️ Media tidak ditemukan!");
+    return m.reply("⚠️ ¡Los medios no encontrados!");
   }
 
   m.react("🕕");
@@ -328,15 +328,20 @@ async function handler(m, { sock }) {
 
   if (results.length === 0) {
     m.react("❌");
-    return m.reply(`❌ Semua upload gagal!\n\n> Failed: ${failed.join(", ")}`);
+    return m.reply(`❌ ¡Todas las cargas fallaron!
+
+> Failed: ${failed.join(", ")}`);
   }
 
-  let text = `*UPLOADER*\n\n- 🌿 kalian bisa pilih yang kalian suka :b`;
+  let text = `*UPLOADER*
+
+- 🌿 Usted puede elegir a quién le gusta: b`;
   const links = [];
 
   results.forEach((r, i) => {
     const status = r.expires === "Permanent" ? "∞ Non-Expired" : r.expires;
-    text += `${i + 1} *${r.host}*\n⏳ *Berakhir pada:* ${status}\n🔗 Linknya: {{IE_${i}}}link disini{{/IE_${i}}}\n\n`;
+    text += `${i + 1} *${r.host}*
+⏳ *Finales en:* ${status}\n🔗 Linknya: {{IE_${i}}}link disini{{/IE_${i}}}\n\n`;
     links.push({
       url: r.url,
       displayName: config.bot.name,

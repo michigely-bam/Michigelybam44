@@ -33,18 +33,24 @@ async function handler(m, { sock }) {
     }
     
     if (target === m.sender) {
-        return m.reply(`❌ *ᴇʀʀᴏʀ*\n\n> Tidak bisa rampok diri sendiri!`)
+        return m.reply(`❌ *ᴇʀʀᴏʀ*
+
+> ¡No puedes robarte!`)
     }
     
     const robber = db.getUser(m.sender)
     const victim = db.getUser(target)
     
     if (!victim) {
-        return m.reply(`❌ *ᴛᴀʀɢᴇᴛ ɴᴏᴛ ꜰᴏᴜɴᴅ*\n\n> Target tidak ditemukan di database!`)
+        return m.reply(`❌ *ᴛᴀʀɢᴇᴛ ɴᴏᴛ ꜰᴏᴜɴᴅ*
+
+> ¡Objetivo no encontrado en la base de datos!`)
     }
     
     if ((victim.koin || 0) < 1000) {
-        return m.reply(`❌ *ᴛᴀʀɢᴇᴛ ᴍɪsᴋɪɴ*\n\n> Target terlalu miskin untuk dirampok!`)
+        return m.reply(`❌ *ᴛᴀʀɢᴇᴛ ᴍɪsᴋɪɴ*
+
+> ¡El objetivo es demasiado pobre para ser robado!`)
     }
     
     if (!robber.rpg) robber.rpg = {}
@@ -77,7 +83,7 @@ async function handler(m, { sock }) {
         db.save()
         
         let txt = `✅ *ʀᴏʙ sᴜᴋsᴇs*\n\n`
-        txt += `> 🦹 Kamu berhasil merampok @${target.split('@')[0]}!\n`
+        txt += `> 🦹 Te las arreglaste para robar @${target.split('@')[0]}!\n`
         txt += `> 💰 Curian: *+Rp ${stolen.toLocaleString('id-ID')}*\n`
         txt += `> 🚄 Exp: *+${expGain}*`
         
@@ -93,7 +99,8 @@ async function handler(m, { sock }) {
         db.save()
         
         let txt = `❌ *ʀᴏʙ ɢᴀɢᴀʟ*\n\n`
-        txt += `> 🚨 Kamu ketahuan dan dipukuli!\n`
+        txt += `> 🚨 ¡Te atraparon y te golpearon!
+`
         txt += `> 💸 Denda: *-Rp ${actualFine.toLocaleString('id-ID')}*\n`
         txt += `> ❤️ Health: *-${healthLoss}*`
         

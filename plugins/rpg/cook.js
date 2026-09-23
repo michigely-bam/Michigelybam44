@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'cook',
     alias: ['masak', 'cooking'],
     category: 'rpg',
-    description: 'Memasak makanan untuk menambah health',
+    description: "Cocinar alimentos para añadir salud",
     usage: '.cook',
     example: '.cook',
     isOwner: false,
@@ -34,7 +34,7 @@ async function handler(m, { sock }) {
     user.rpg.maxHealth = user.rpg.maxHealth || 100
     
     if (user.rpg.health >= user.rpg.maxHealth) {
-        return m.reply(`❤️ Health sudah penuh!`)
+        return m.reply(`❤️ ¡La salud está llena!`)
     }
     
     let cooked = null

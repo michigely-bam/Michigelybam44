@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'expedition',
     alias: ['ekspedisi', 'exp', 'explore'],
     category: 'rpg',
-    description: 'Kirim ekspedisi otomatis untuk item',
+    description: "Enviar expediciones automáticas para artículos",
     usage: '.expedition <start/claim/status>',
     example: '.expedition start forest',
     isOwner: false,
@@ -48,7 +48,9 @@ async function handler(m, { sock }) {
     
     if (!action || !['start', 'claim', 'status', 'list'].includes(action)) {
         let txt = `🗺️ *ᴇxᴘᴇᴅɪᴛɪᴏɴ sʏsᴛᴇᴍ*\n\n`
-        txt += `> Kirim ekspedisi untuk farming otomatis!\n\n`
+        txt += `> ¡Envíe expediciones a la agricultura automática!
+
+`
         txt += `╭┈┈⬡「 📋 *ᴄᴏᴍᴍᴀɴᴅ* 」\n`
         txt += `┃ ${m.prefix}expedition list\n`
         txt += `┃ ${m.prefix}expedition start <area>\n`
@@ -82,12 +84,14 @@ async function handler(m, { sock }) {
         }
         
         if (!expType) {
-            return m.reply(`❌ Pilih area!\n\n> Contoh: \`${m.prefix}expedition start forest\``)
+            return m.reply(`❌ ¡Elija un área!
+
+> Contoh: \`${m.prefix}expedition start forest\``)
         }
         
         const exp = EXPEDITIONS[expType]
         if (!exp) {
-            return m.reply(`❌ Area tidak ditemukan!`)
+            return m.reply(`❌ ¡La zona no se encuentra!`)
         }
         
         if ((user.level || 1) < exp.minLevel) {
@@ -111,7 +115,7 @@ async function handler(m, { sock }) {
     
     if (action === 'status') {
         if (user.rpg.expeditions.length === 0) {
-            return m.reply(`❌ Tidak ada ekspedisi aktif!`)
+            return m.reply(`❌ ¡No hay expediciones activas!`)
         }
         
         let txt = `🗺️ *sᴛᴀᴛᴜs ᴇxᴘᴇᴅɪsɪ*\n\n`
@@ -138,7 +142,7 @@ async function handler(m, { sock }) {
         })
         
         if (completedExps.length === 0) {
-            return m.reply(`❌ Belum ada ekspedisi selesai!`)
+            return m.reply(`❌ ¡Todavía no se ha completado ninguna expedición!`)
         }
         
         let totalExp = 0

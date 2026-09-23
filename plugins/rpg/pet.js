@@ -110,15 +110,15 @@ function handler(m, { sock }) {
         
         const food = FOOD_ITEMS[foodKey]
         if (!food) {
-            return m.reply(`❌ Makanan tidak ditemukan!`)
+            return m.reply(`❌ ¡Comida no encontrada!`)
         }
         
         if ((user.inventory[foodKey] || 0) < 1) {
-            return m.reply(`❌ Kamu tidak punya ${food.name}!`)
+            return m.reply(`❌ No tienes. ${food.name}!`)
         }
         
         if (pet.hunger >= 100) {
-            return m.reply(`❌ Pet sudah kenyang!`)
+            return m.reply(`❌ ¡La mascota está llena!`)
         }
         
         user.inventory[foodKey]--
@@ -151,7 +151,7 @@ function handler(m, { sock }) {
     
     if (action === 'train') {
         if (pet.hunger < 20) {
-            return m.reply(`❌ Pet terlalu lapar untuk latihan! Beri makan dulu.`)
+            return m.reply(`❌ ¡La mascota está muy hambrienta para practicar!`)
         }
         
         pet.hunger = Math.max(0, pet.hunger - 15)
@@ -188,7 +188,7 @@ function handler(m, { sock }) {
     if (action === 'rename') {
         const newName = args.slice(1).join(' ')
         if (!newName || newName.length < 2 || newName.length > 15) {
-            return m.reply(`❌ Nama harus 2-15 karakter!`)
+            return m.reply(`❌ ¡El nombre debe ser de 2-15 caracteres!`)
         }
         
         pet.name = newName
@@ -199,11 +199,11 @@ function handler(m, { sock }) {
     
     if (action === 'evolve') {
         if (!petInfo.evolve) {
-            return m.reply(`❌ Pet ini tidak bisa evolve lagi!`)
+            return m.reply(`❌ ¡Esta mascota ya no puede evolucionar!`)
         }
         
         if ((pet.level || 1) < 10) {
-            return m.reply(`❌ Pet harus level 10+ untuk evolve! (Current: ${pet.level || 1})`)
+            return m.reply(`❌ Mascotas deben ser nivel 10 + para evolucionar! (Current: ${pet.level || 1})`)
         }
         
         const evolvedPet = PET_TYPES[petInfo.evolve]

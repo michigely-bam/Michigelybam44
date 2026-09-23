@@ -10,7 +10,7 @@ const pluginConfig = {
     name: allCommands,
     alias: allAliases,
     category: 'panel',
-    description: 'List semua server di panel (v1-v5)',
+    description: "Listar todos los servidores en el panel (v1-v5)",
     usage: '.listserverv1 atau .listserverv2',
     example: '.listserverv1',
     isOwner: false,
@@ -111,7 +111,7 @@ async function handler(m, { sock }) {
         const available = getAvailableServers(pteroConfig)
         let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`
         if (available.length > 0) {
-            txt += `> Server tersedia: *${available.join(', ')}*\n`
+            txt += `> Servidor disponible: *${available.join(', ')}*\n`
             txt += `> Contoh: \`${m.prefix}listserver${available[0]}\``
         } else {
             txt += `> Isi config pterodactyl di \`config.js\``
@@ -120,12 +120,14 @@ async function handler(m, { sock }) {
     }
     
     try {
-        await m.reply(`🕕 Mengambil daftar server dari *${serverLabel}*...`)
+        await m.reply(`🕕 Recuperar lista de servidores *${serverLabel}*...`)
         
         const servers = await fetchAllServers(serverConfig)
         
         if (servers.length === 0) {
-            return m.reply(`📋 *ᴅᴀꜰᴛᴀʀ sᴇʀᴠᴇʀ [${serverLabel}]*\n\n> Tidak ada server terdaftar.`)
+            return m.reply(`📋 *ᴅᴀꜰᴛᴀʀ sᴇʀᴠᴇʀ [${serverLabel}]*
+
+> No hay servidores registrados.`)
         }
         
         let txt = `📋 *ᴅᴀꜰᴛᴀʀ sᴇʀᴠᴇʀ [${serverLabel}]*\n\n`

@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'addtoxic',
     alias: ['tambahtoxic', 'addkata'],
     category: 'group',
-    description: 'Tambah kata toxic ke daftar',
+    description: "Añadir una palabra tóxica a la lista",
     usage: '.addtoxic <kata>',
     example: '.addtoxic kata_kasar',
     isOwner: false,
@@ -40,7 +40,7 @@ async function handler(m, { sock }) {
     const toxicWords = groupData.toxicWords || []
     
     if (toxicWords.includes(word)) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Kata \`${word}\` sudah ada di daftar`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Kata \`${word}\` Ya está en la lista.`)
     }
     
     toxicWords.push(word)

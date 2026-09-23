@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'stopjadibot',
     alias: ['berhentijadibot', 'stopbot', 'unjadibot'],
     category: 'main',
-    description: 'Hentikan sesi jadibot kamu',
+    description: "Detenga su sesión de compromiso.",
     usage: '.stopjadibot',
     example: '.stopjadibot',
     isOwner: false,
@@ -27,7 +27,7 @@ function formatUptime(ms) {
 
 async function handler(m, { sock }) {
     const sender = m.sender
-    if (!sender) return m.reply('❌ Gagal mengidentifikasi nomor kamu')
+    if (!sender) return m.reply("❌ Fallado para identificar su número")
 
     if (!isJadibotActive(sender)) {
         return m.reply(
@@ -55,7 +55,7 @@ async function handler(m, { sock }) {
         )
     } catch (e) {
         await m.react('☢')
-        await m.reply(`❌ Gagal menghentikan jadibot: ${e.message}`)
+        await m.reply(`❌ No se pudo stop jabots: ${e.message}`)
     }
 }
 

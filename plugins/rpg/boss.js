@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'boss',
     alias: ['raidboss', 'bigboss'],
     category: 'rpg',
-    description: 'Lawan boss untuk hadiah besar',
+    description: "Lucha contra el jefe por el gran premio",
     usage: '.boss',
     example: '.boss',
     isOwner: false,
@@ -85,7 +85,7 @@ async function handler(m, { sock }) {
         if (critChance > 0.9) {
             battleLog.push(`💥 *CRITICAL!* Kamu: -${finalPlayerDmg} HP`)
         } else {
-            battleLog.push(`⚔️ Kamu menyerang: -${finalPlayerDmg} HP`)
+            battleLog.push(`⚔️ Ataque:${finalPlayerDmg} HP`)
         }
         
         if (bossHp <= 0) break
@@ -141,7 +141,7 @@ async function handler(m, { sock }) {
         txt += `┃ 💸 Gold: *-${goldLoss.toLocaleString()}*\n`
         txt += `┃ ❤️ HP: *-50*\n`
         txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`
-        txt += `💡 *Tips:* Level up dan upgrade equipment!`
+        txt += `💡 *Tips:* ¡Equipos de nivel y actualización!`
         
         await m.react('💀')
     }

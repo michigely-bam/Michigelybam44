@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "donasi",
   alias: ["donate", "donation", "support", "saweria", "trakteer"],
   category: "main",
-  description: "Informasi donasi untuk mendukung bot dengan QRIS",
+  description: "Donar información para apoyar el bot con QRIS",
   usage: ".donasi",
   example: ".donasi",
   isOwner: false,
@@ -31,11 +31,11 @@ async function handler(m, { sock }) {
   const benefits = donasiConfig.benefits || [
     "Mendukung development",
     "Server lebih stabil",
-    "Fitur baru lebih cepat",
+    "Las nuevas características son más rápidas",
     "Priority support",
   ];
 
-  let text = `DONASI KE OWNER ${botName} 🙏`;
+  let text = `LA DONACIÓN A OVER ${botName} 🙏`;
 
   if (payments.length > 0 || links.length > 0) {
     text += `Pembayaran\n`;
@@ -62,7 +62,8 @@ async function handler(m, { sock }) {
   } else {
     text += `╭┈┈⬡「 💳 *ᴘᴀʏᴍᴇɴᴛ* 」\n`;
     text += `┃\n`;
-    text += `┃ > Belum dikonfigurasi\n`;
+    text += `┃ > Desconfigurado
+`;
     text += `┃ > Edit config.donasi\n`;
     text += `┃\n`;
     text += `╰┈┈┈┈┈┈┈┈⬡\n\n`;

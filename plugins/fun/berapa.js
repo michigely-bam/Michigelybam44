@@ -34,7 +34,7 @@ const answers = [
     'Cuma sedikit.',
     'Tak terhitung!',
     'Hmm, sekitar 10-an.',
-    'Lebih dari yang kamu kira!',
+    "¡Más de lo que piensas!",
     'Gak tau ah, males'
 ];
 
@@ -42,7 +42,12 @@ async function handler(m) {
     const text = m.text?.trim();
     
     if (!text) {
-        return m.reply(`🔢 *ʙᴇʀᴀᴘᴀ*\n\n> Masukkan pertanyaan!\n\n*Contoh:*\n> .berapa umur jodohku?`);
+        return m.reply(`🔢 *ʙᴇʀᴀᴘᴀ*
+
+> ¡Póngase en una pregunta!
+
+*Contoh:*
+> .berapa umur jodohku?`);
     }
     
     const answer = answers[Math.floor(Math.random() * answers.length)];

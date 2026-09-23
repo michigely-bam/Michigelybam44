@@ -20,7 +20,11 @@ async function handler(m, { sock }) {
     const text = m.args.join(' ')
     
     if (!text) {
-        return m.reply(`📱 *ᴛᴇxᴛ ᴛᴏ Qʀ*\n\n> Masukkan teks/URL\n\n\`Contoh: ${m.prefix}txt2qr https://google.com\``)
+        return m.reply(`📱 *ᴛᴇxᴛ ᴛᴏ Qʀ*
+
+> Introduzca texto / URL
+
+\`Contoh: ${m.prefix}txt2qr https://google.com\``)
     }
     
     m.react('📱')

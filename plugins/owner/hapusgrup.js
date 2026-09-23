@@ -2,8 +2,8 @@ const pluginConfig = {
     name: ['hapusgrup', 'deletegrup', 'delgrup'],
     alias: [],
     category: 'owner',
-    description: 'Keluar dari grup / hapus grup',
-    usage: '.hapusgrup (di dalam grup) atau .hapusgrup <jid>',
+    description: "Quit group / remove group",
+    usage: ".Quitar grupo (grupo interno) o .hapusgrup <jid>",
     example: '.hapusgrup',
     isOwner: true,
     cooldown: 5,
@@ -42,7 +42,7 @@ async function handler(m, { sock }) {
             `> ID: ${targetJid}`
         )
     } catch (err) {
-        return m.reply(`❌ Gagal keluar dari grup: ${err.message}`)
+        return m.reply(`❌ Fallado para dejar el grupo: ${err.message}`)
     }
 }
 

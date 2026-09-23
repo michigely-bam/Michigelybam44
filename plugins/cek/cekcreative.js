@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekcreative',
     alias: ['creative', 'kreatif'],
     category: 'cek',
-    description: 'Cek tingkat kreativitas kamu',
-    usage: '.cekcreative <nama>',
+    description: "Comprueba tu nivel de creatividad.",
+    usage: ".cekcreative < nombre >",
     example: '.cekcreative Budi',
     isOwner: false,
     isPremium: false,
@@ -27,8 +27,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kecreativean kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kecreativean @${mentioned.split('@')[0]} yak? 
+Tus niveles de ansiedad. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de ansiedad @${mentioned.split('@')[0]} yak? 
     
 Tingkat kecreativean dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

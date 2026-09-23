@@ -29,7 +29,7 @@ async function handler(m, { sock }) {
     );
 
   if (!/open\.spotify\.com\/track/i.test(url))
-    return m.reply("❌ URL tidak valid");
+    return m.reply("❌ URL inválida");
 
   m.react("🕕");
 
@@ -45,7 +45,7 @@ async function handler(m, { sock }) {
     );
 
     if (!data?.status || !data?.downloadLink) {
-      throw new Error(data?.message || "Gagal mengambil lagu Spotify");
+      throw new Error(data?.message || "No se pudo recuperar la canción de Spotify");
     }
 
     const artist = formatArtists(data.author);

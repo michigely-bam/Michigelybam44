@@ -2,8 +2,8 @@ const pluginConfig = {
   name: "cekmesum",
   alias: ["mesum"],
   category: "cek",
-  description: "Cek seberapa mesum kamu",
-  usage: ".cekmesum <nama>",
+  description: "Mira lo sucio que estás.",
+  usage: ".cekperg - nombre identificado",
   example: ".cekmesum Budi",
   isOwner: false,
   isPremium: false,
@@ -28,16 +28,16 @@ async function handler(m) {
   } else if (percent >= 30) {
     desc = "Sedikit mesum 🙈";
   } else {
-    desc = "Polos dan suci! 😇";
+    desc = "¡Llanta y santa! 😇";
   }
 
   let txt =
     mentioned === m.sender
       ? `Hai @${mentioned.split("@")[0]}
     
-Tingkat kemesuman kamu *${percent}%*
+Tus pretendientes nivel. *${percent}%*
 \`\`\`${desc}\`\`\``
-      : `Kamu ingin ngecek tingkat kemesuman @${mentioned.split("@")[0]} yak? 
+      : `Usted quiere comprobar el nivel de succión${mentioned.split("@")[0]} yak? 
     
 Tingkat kemesuman dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``;

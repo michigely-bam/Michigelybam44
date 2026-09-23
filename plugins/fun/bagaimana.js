@@ -16,32 +16,37 @@ const pluginConfig = {
 
 const answers = [
     'Caranya gampang, ya tinggal dilakuin aja!',
-    'Hmm, susah dijelasin sih. Coba aja dulu!',
-    'Dengan usaha dan doa pastinya.',
+    "Es difícil de explicar.",
+    "Con esfuerzo y oración, por supuesto.",
     'Ya begitulah caranya.',
-    'Aku kurang tau sih, coba cari referensi lain.',
-    'Pelan-pelan aja, nanti juga bisa.',
-    'Dengan kerja keras dan pantang menyerah!',
+    "No lo sé, trata de encontrar otra referencia.",
+    "Pelan-pelan Puedes hacerlo más tarde.",
+    "¡Con trabajo duro y sin rendición!",
     'Pertama, percaya sama diri sendiri dulu.',
     'Hmm, tiap orang beda-beda sih caranya.',
     'Ikutin kata hatimu aja.',
-    'Belajar dari yang sudah berpengalaman.',
-    'Step by step, jangan terburu-buru.',
-    'Dengan tekad yang kuat!',
-    'Mulai dari yang kecil dulu.',
-    'Konsisten aja, nanti juga bisa.',
-    'Jangan overthinking, langsung action!',
-    'Gampang! Tinggal mulai aja!',
+    "Aprende de la experiencia.",
+    "Paso a paso, no te apresures.",
+    "¡Con firme determinación!",
+    "Primero empieza pequeña.",
+    "Constante, más tarde.",
+    "¡No pienses demasiado, acción!",
+    "¡Es fácil, sólo empieza!",
     'Caranya? Ya dicoba dulu!',
-    'Dengan strategi yang tepat.',
-    'Hmm, aku juga masih belajar sih.'
+    "Con la estrategia correcta.",
+    "Todavía estoy aprendiendo."
 ];
 
 async function handler(m) {
     const text = m.text?.trim();
     
     if (!text) {
-        return m.reply(`📋 *ʙᴀɢᴀɪᴍᴀɴᴀ*\n\n> Masukkan pertanyaan!\n\n*Contoh:*\n> .bagaimana cara jadi sukses?`);
+        return m.reply(`📋 *ʙᴀɢᴀɪᴍᴀɴᴀ*
+
+> ¡Póngase en una pregunta!
+
+*Contoh:*
+> .bagaimana cara jadi sukses?`);
     }
     
     const answer = answers[Math.floor(Math.random() * answers.length)];

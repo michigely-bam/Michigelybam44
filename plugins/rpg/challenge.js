@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'challenge',
     alias: ['daily', 'dailychallenge', 'tantangan'],
     category: 'rpg',
-    description: 'Daily challenge untuk hadiah spesial',
+    description: "Desafío diario para un regalo especial",
     usage: '.challenge',
     example: '.challenge',
     isOwner: false,
@@ -56,11 +56,11 @@ async function handler(m, { sock }) {
     
     if (action === 'claim') {
         if (!isComplete) {
-            return m.reply(`❌ Challenge belum selesai! Progress: ${challenge.progress}/${challenge.target}`)
+            return m.reply(`❌ ¡El desafío no está terminado! ${challenge.progress}/${challenge.target}`)
         }
         
         if (challenge.claimed) {
-            return m.reply(`❌ Reward sudah di-claim! Tunggu challenge baru besok.`)
+            return m.reply(`❌ ¡La recompensa ha sido reclamada!`)
         }
         
         user.koin = (user.koin || 0) + challenge.reward.gold
@@ -84,7 +84,7 @@ async function handler(m, { sock }) {
     txt += `╭┈┈⬡「 🎯 *ᴛᴏᴅᴀʏ* 」\n`
     txt += `┃ 📝 ${challenge.name}\n`
     txt += `┃ 📊 Progress: *${challenge.progress}/${challenge.target}*\n`
-    txt += `┃ ${isComplete ? '✅ SELESAI!' : '🕕 Dalam progress...'}\n`
+    txt += `┃ ${isComplete ? '✅ SELESAI!' : "🕕 En progreso..."}\n`
     txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`
     
     txt += `╭┈┈⬡「 🎁 *ʀᴇᴡᴀʀᴅ* 」\n`
@@ -93,11 +93,11 @@ async function handler(m, { sock }) {
     txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`
     
     if (isComplete && !challenge.claimed) {
-        txt += `> Ketik \`${m.prefix}challenge claim\` untuk klaim reward!`
+        txt += `> Ketik \`${m.prefix}challenge claim\` ¡Por un reclamo de recompensa!`
     } else if (challenge.claimed) {
-        txt += `> ✅ Reward sudah di-claim. Besok ada challenge baru!`
+        txt += `> ✅ La recompensa ha sido reclamada, mañana hay un nuevo desafío!`
     } else {
-        txt += `> Selesaikan challenge untuk mendapat reward!`
+        txt += `> ¡Termina el desafío para obtener recompensa!`
     }
     
     return m.reply(txt)

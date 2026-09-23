@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['procrastinator', 'nunda'],
     category: 'cek',
     description: 'Cek tingkat suka menunda',
-    usage: '.cekprocastinator <nama>',
+    usage: ".ckprocinstator",
     example: '.cekprocastinator Budi',
     isOwner: false,
     isPremium: false,
@@ -27,8 +27,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat keprocastinatoran kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat keprocastinatoran @${mentioned.split('@')[0]} yak? 
+Tu nivel de procinstinación. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de procinstinatorship @${mentioned.split('@')[0]} yak? 
     
 Tingkat keprocastinatoran dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

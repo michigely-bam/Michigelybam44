@@ -4,8 +4,8 @@ const pluginConfig = {
     name: 'totag',
     alias: ['tagall2', 'mentionall'],
     category: 'group',
-    description: 'Tag semua member dengan reply pesan',
-    usage: '.totag (reply pesan)',
+    description: "Tag all member with message reply",
+    usage: ".totag (reply messages)",
     example: '.totag',
     isOwner: false,
     isPremium: false,
@@ -33,7 +33,7 @@ async function handler(m, { sock }) {
         const participants = m.groupMembers || []
         
         if (!participants || participants.length === 0) {
-            return m.reply(`❌ Gagal mendapatkan data member grup`)
+            return m.reply(`❌ No se obtienen datos de los miembros del grupo`)
         }
         
         const users = participants

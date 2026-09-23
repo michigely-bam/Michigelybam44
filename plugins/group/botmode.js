@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'botmode',
     alias: ['setmode', 'mode'],
     category: 'group',
-    description: 'Atur mode bot untuk grup ini',
+    description: "Establecer modo de arranque para este grupo",
     usage: '.botmode <md/cpanel/pushkontak/store/otp/all>',
     example: '.botmode store',
     isOwner: false,
@@ -90,7 +90,7 @@ function handler(m, { sock }) {
     }
 
     if (!Object.keys(MODES).includes(mode)) {
-        return m.reply(`❌ Mode tidak valid. Pilihan: \`${Object.keys(MODES).join(', ')}\``)
+        return m.reply(`❌ modo inválido. Opciones: \`${Object.keys(MODES).join(', ')}\``)
     }
 
     const isAutoorder = false

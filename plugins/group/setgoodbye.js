@@ -4,8 +4,8 @@ const pluginConfig = {
   alias: ["customgoodbye"],
   category: "group",
   description: "Set custom goodbye message",
-  usage: ".setgoodbye <pesan>",
-  example: ".setgoodbye Bye {user}, sampai jumpa lagi!",
+  usage: ".setgoodbye − Mensaje",
+  example: ".Adiós, adiós, nos vemos más tarde.",
   isOwner: false,
   isPremium: false,
   isGroup: true,
@@ -48,7 +48,7 @@ async function handler(m, { sock }) {
   m.react("✅");
 
   await m.reply(
-    `✅ Goodbye berhasil di set menjadi *${text}*\nMau reset? ketik ${m.prefix}resetgoodbye`,
+    `✅ Adiós con éxito. *${text}*\nMau reset? ketik ${m.prefix}resetgoodbye`,
   );
 }
 

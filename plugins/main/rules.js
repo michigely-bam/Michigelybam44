@@ -18,13 +18,13 @@ const pluginConfig = {
 }
 
 const DEFAULT_BOT_RULES = [
-    'Jangan spam command',
-    'Gunakan fitur dengan bijak',
+    "No el comando de spam",
+    "Usar características sabiamente",
     'Dilarang menyalahgunakan bot',
     'Hormati sesama pengguna',
-    'Report bug ke owner',
-    'Jangan request fitur aneh',
-    'Bot bukan 24/7, ada maintenance'
+    "Reportar errores al propietario",
+    "No solicite características extrañas",
+    "Bot no es 24 / 7, hay mantenimiento"
 ]
 
 async function handler(m, { sock, config: botConfig }) {
@@ -54,11 +54,11 @@ async function handler(m, { sock, config: botConfig }) {
             m,
             {
                 headerText: `${botConfig.bot?.name || 'Ourin-AI'} *RULES*`,
-                footer: 'Pelanggaran dapat mengakibatkan banned / kick!'
+                footer: "Foul puede resultar en prohibida / patada!"
             }
         )
     } catch (e) {
-        m.reply('Terjadi kesalahan saat mengambil rules')
+        m.reply("Se produjo un error al tomar las reglas")
     }
 }
 

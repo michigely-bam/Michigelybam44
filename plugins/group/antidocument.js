@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'antidocument',
     alias: ['antidoc', 'nodocument', 'nodoc'],
     category: 'group',
-    description: 'Mengatur antidocument di grup',
+    description: "Establecer antidocumentos en grupo",
     usage: '.antidocument <on/off>',
     example: '.antidocument on',
     isOwner: false,

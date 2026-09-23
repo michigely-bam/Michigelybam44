@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'mcpedl',
     alias: ['mcpe', 'mcpesearch', 'searchmcpe'],
     category: 'search',
-    description: 'Cari map dan addon Minecraft PE dari MCPEDL',
+    description: "Mapa de búsqueda y addon Minecraft PE de MCPEDL",
     usage: '.mcpe <query>',
     example: '.mcpe survival',
     isOwner: false,
@@ -37,7 +37,7 @@ async function fetchMcpe(query) {
     })
 
     if (!data?.status || !Array.isArray(data?.data?.results)) {
-        throw new Error(data?.message || 'Hasil MCPEDL tidak ditemukan')
+        throw new Error(data?.message || "MCPEDL result not found")
     }
 
     return data.data
@@ -58,7 +58,7 @@ async function handler(m, { sock }) {
 
         if (items.length === 0) {
             m.react('❌')
-            return m.reply(`❌ Tidak ditemukan hasil MCPEDL untuk: ${query}`)
+            return m.reply(`❌ No MCPEDL results found for: ${query}`)
         }
 
         let caption = '🧱 *MCPEDL SEARCH*\n\n'

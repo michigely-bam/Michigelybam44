@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'setlimitdefault',
     alias: ['setdefaultlimit', 'limitdefault'],
     category: 'owner',
-    description: 'Set default limit untuk user baru',
+    description: "Establecer límite predeterminado para el nuevo usuario",
     usage: '.setlimitdefault <jumlah>',
     example: '.setlimitdefault 50',
     isOwner: true,

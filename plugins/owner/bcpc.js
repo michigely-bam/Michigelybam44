@@ -6,8 +6,8 @@ const pluginConfig = {
   name: "bcpc",
   alias: ["broadcastpc", "bcprivate"],
   category: "owner",
-  description: "Broadcast pesan ke semua kontak private chat",
-  usage: ".bcpc <pesan>",
+  description: "Transmisión de mensajes a todos los contactos de chat privados",
+  usage: ".bcpc",
   isOwner: true,
   isPremium: false,
   isGroup: false,
@@ -53,7 +53,8 @@ async function handler(m, { sock }) {
 
   if (global.statusBcpc) {
     return m.reply(
-      `❌ Broadcast private sedang berjalan.\nKetik \`${m.prefix}stopbcpc\` untuk menghentikan.`,
+      `❌ Broadcast privado está corriendo.
+Ketik \`${m.prefix}stopbcpc\` Parar.`,
     );
   }
 
@@ -115,7 +116,7 @@ async function handler(m, { sock }) {
     if (privateJids.size === 0) {
       m.react("❌");
       return m.reply(
-        "❌ Tidak ada kontak ditemukan.\n\nPastikan bot sudah pernah menerima pesan dari kontak tersebut.",
+        "❌ No hay contacto encontrado.\n\nAsegúrese de que el bot ha recibido un mensaje de ese contacto.",
       );
     }
 

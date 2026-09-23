@@ -11,7 +11,7 @@ const pluginConfig = {
   name: "savekontak",
   alias: ["svkontak", "savecontact"],
   category: "pushkontak",
-  description: "Simpan semua kontak grup ke file VCF",
+  description: "Guardar todos los contactos de grupo a archivos VCF",
   usage: ".savekontak <namakontak>",
   example: ".savekontak CustomerList",
   isOwner: true,
@@ -36,7 +36,11 @@ async function handler(m, { sock }) {
   const namaKontak = m.text?.trim();
   if (!namaKontak) {
     return m.reply(
-      `📥 *sᴀᴠᴇ ᴋᴏɴᴛᴀᴋ*\n\n> Masukkan nama untuk kontak\n\n\`Contoh: ${m.prefix}savekontak CustomerList\``,
+      `📥 *sᴀᴠᴇ ᴋᴏɴᴛᴀᴋ*
+
+> Escriba nombre para contacto
+
+\`Contoh: ${m.prefix}savekontak CustomerList\``,
     );
   }
 
@@ -65,7 +69,9 @@ async function handler(m, { sock }) {
 
     if (participants.length === 0) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak ada kontak untuk disimpan`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No hay contactos para salvar`);
     }
 
     const vcards = participants.map((contact, index) => {
@@ -103,7 +109,8 @@ async function handler(m, { sock }) {
 
     if (m.chat !== m.sender) {
       await m.reply(
-        `✅ *ᴋᴏɴᴛᴀᴋ ᴅɪsɪᴍᴘᴀɴ*\n\n> ${participants.length} kontak berhasil di dapetyn\ndari Grup: \`${metadata.subject}\``,
+        `✅ *ᴋᴏɴᴛᴀᴋ ᴅɪsɪᴍᴘᴀɴ*\n\n> ${participants.length} contacto con éxito en dappetyn
+del Grupo: \`${metadata.subject}\``,
       );
     }
   } catch (error) {

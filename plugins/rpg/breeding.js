@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'breeding',
     alias: ['breed', 'kawin', 'petbreed'],
     category: 'rpg',
-    description: 'Breeding pets untuk mendapat pet baru',
+    description: "Alimentar mascotas para conseguir una nueva mascota",
     usage: '.breeding @user',
     example: '.breeding @user',
     isOwner: false,
@@ -65,16 +65,16 @@ async function handler(m, { sock }) {
     }
     
     if (mentioned === m.sender) {
-        return m.reply(`❌ Tidak bisa breeding dengan diri sendiri!`)
+        return m.reply(`❌ ¡No puedes respirar contigo mismo!`)
     }
     
     if (!user.rpg.pet) {
-        return m.reply(`❌ Kamu belum punya pet! Beli di \`${m.prefix}petshop\``)
+        return m.reply(`❌ ¡No tienes una mascota! \`${m.prefix}petshop\``)
     }
     
     const partner = db.getUser(mentioned)
     if (!partner?.rpg?.pet) {
-        return m.reply(`❌ Partner belum punya pet!`)
+        return m.reply(`❌ ¡Los socios no tienen mascota!`)
     }
     
     const myPet = user.rpg.pet

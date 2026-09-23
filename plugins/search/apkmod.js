@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "apkmod",
   alias: ["modapk2", "apkpremium"],
   category: "search",
-  description: "Cari dan download APK MOD Premium",
+  description: "Buscar y descargar MOD Premium APK",
   usage: ".apkmod <query>",
   example: ".apkmod vpn",
   isOwner: false,
@@ -44,7 +44,7 @@ async function handler(m, { sock }) {
 
     if (!data?.status || !data?.data?.length) {
       m.react("❌");
-      return m.reply(`❌ Tidak ditemukan hasil untuk: \`${text}\``);
+      return m.reply(`❌ No se han encontrado resultados para: \`${text}\``);
     }
 
     const apps = data.data.slice(0, 15);
@@ -52,7 +52,7 @@ async function handler(m, { sock }) {
     const saluranId = config.saluran?.id || "120363400911374213@newsletter";
     const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
-    let caption = `📱 *Hasil pencarian dari ${text}*\n\n`;
+    let caption = `📱 *Resultados de la búsqueda ${text}*\n\n`;
 
     apps.forEach((app, i) => {
       caption += `*${i + 1}.* ${app.name}\n`;
@@ -85,10 +85,10 @@ async function handler(m, { sock }) {
           {
             name: "single_select",
             buttonParamsJson: JSON.stringify({
-              title: "📱 Pilih APK MOD",
+              title: "📱 Seleccione MOD APK",
               sections: [
                 {
-                  title: `Hasil untuk "${text}"`,
+                  title: `Resultados para "${text}"`,
                   rows: buttons,
                 },
               ],

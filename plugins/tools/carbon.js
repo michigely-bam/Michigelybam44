@@ -4,7 +4,7 @@ const pluginConfig = {
     name: ['carbon', 'carbonify', 'carboncode'],
     alias: [],
     category: 'tools',
-    description: 'Membuat gambar kode dengan tampilan carbon style',
+    description: "Crear una imagen de código con una vista al estilo de carbono",
     usage: '.carbon <kode>',
     example: '.carbon console.log("Hello World")',
     isOwner: false,

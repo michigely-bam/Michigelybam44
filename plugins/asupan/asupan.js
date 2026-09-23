@@ -44,7 +44,7 @@ async function handler(m, { sock }) {
         
         if (urls.length === 0) {
             m.react('❌')
-            return m.reply(`❌ Data asupan tidak tersedia`)
+            return m.reply(`❌ Datos de alimentación no disponibles`)
         }
         
         const url = urls[Math.floor(Math.random() * urls.length)]
@@ -59,7 +59,9 @@ async function handler(m, { sock }) {
         
     } catch (error) {
         m.react('❌')
-        m.reply(`❌ *ᴇʀʀᴏʀ*\n\n> Video asupan tidak ditemukan`)
+        m.reply(`❌ *ᴇʀʀᴏʀ*
+
+> Vídeo de alimentación no encontrado`)
     }
 }
 

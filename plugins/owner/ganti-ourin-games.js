@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['gantigames', 'setouringames'],
     category: 'owner',
     description: 'Ganti gambar ourin-games.jpg (thumbnail games)',
-    usage: '.ganti-ourin-games.jpg (reply/kirim gambar)',
+    usage: ".Swap -ourin -games.jpg (reply / enviar imagen)",
     example: '.ganti-ourin-games.jpg',
     isOwner: true,
     isPremium: false,
@@ -21,7 +21,10 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
     
     if (!isImage) {
-        return m.reply(`🖼️ *ɢᴀɴᴛɪ ᴏᴜʀɪɴ-ɢᴀᴍᴇs.ᴊᴘɢ*\n\n> Kirim/reply gambar untuk mengganti\n> File: assets/images/ourin-games.jpg`)
+        return m.reply(`🖼️ *ɢᴀɴᴛɪ ᴏᴜʀɪɴ-ɢᴀᴍᴇs.ᴊᴘɢ*
+
+> Enviar / respuesta imágenes para reemplazar
+> File: assets/images/ourin-games.jpg`)
     }
     
     try {
@@ -33,7 +36,7 @@ async function handler(m, { sock }) {
         }
         
         if (!buffer) {
-            return m.reply(`❌ Gagal mendownload gambar`)
+            return m.reply(`❌ No se pudo download image`)
         }
         
         const targetPath = path.join(process.cwd(), 'assets', 'images', 'ourin-games.jpg')

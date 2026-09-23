@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'gura',
     alias: ['gawr'],
     category: 'canvas',
-    description: 'Apply efek Gawr Gura ke gambar',
+    description: "Aplicar efecto Gawr Gura en la imagen",
     usage: '.gura (reply/caption gambar)',
     example: '.gura',
     isOwner: false,
@@ -30,7 +30,9 @@ async function handler(m, { sock }) {
     }
     
     if (!mediaMsg) {
-        return m.reply(`🦈 *ɢᴜʀᴀ ᴇғғᴇᴄᴛ*\n\n> Kirim/reply gambar dengan command ini`)
+        return m.reply(`🦈 *ɢᴜʀᴀ ᴇғғᴇᴄᴛ*
+
+> Enviar / responder imágenes con este comando`)
     }
     
     m.react('🕕')

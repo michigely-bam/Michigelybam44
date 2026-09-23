@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "getpaste",
   alias: ["pastebin", "getpb"],
   category: "tools",
-  description: "Ambil konten dari Pastebin",
+  description: "Obtener contenido de Pastebin",
   usage: ".getpaste <link pastebin>",
   example: ".getpaste https://pastebin.com/Gu8RZaqv",
   isOwner: false,
@@ -35,7 +35,7 @@ async function handler(m, { sock }) {
     const { data } = await axios.get(apiUrl, { timeout: 15000 });
 
     if (!data.status || !data.content) {
-      throw new Error("Gagal mengambil konten dari link tersebut.");
+      throw new Error("Fallado para recuperar contenido del enlace.");
     }
 
     const lineCount = data.content.split("\n").length;

@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'txt2img',
     alias: ['texttoimage', 't2i', 'imagine'],
     category: 'ai',
-    description: 'Generate gambar dari teks dengan AI',
+    description: "Generar imágenes de texto con IA",
     usage: '.txt2img <prompt> | <style>',
     example: '.txt2img beautiful sunset | anime',
     isOwner: false,

@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'resetrulesgrup',
     alias: ['resetgrouprules'],
     category: 'group',
-    description: 'Reset rules grup ke default (admin only)',
+    description: "Reiniciar las reglas del grupo por defecto (sólo a la memoria)",
     usage: '.resetrulesgrup',
     example: '.resetrulesgrup',
     isOwner: false,

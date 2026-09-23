@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'getpp',
     alias: ['pp', 'profilepic', 'avatar'],
     category: 'group',
-    description: 'Ambil foto profil target (mention/reply)',
+    description: "Tome la foto del perfil de destino (mención / respuesta)",
     usage: '.getpp @user',
     example: '.getpp @628xxx',
     isOwner: false,

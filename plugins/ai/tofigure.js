@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'tofigure',
     alias: ['figure', 'figurestyle'],
     category: 'ai',
-    description: 'Ubah gambar ke style Figure/Action',
+    description: "Convertir imágenes en Figura / Estilo de acción",
     usage: '.tofigure (reply gambar)',
     example: '.tofigure',
     isOwner: false,
@@ -22,7 +22,11 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
     
     if (!isImage) {
-        return m.reply(`🎭 *ꜰɪɢᴜʀᴇ sᴛʏʟᴇ*\n\n> Kirim/reply gambar untuk diubah ke style Figure\n\n\`${m.prefix}tofigure\``)
+        return m.reply(`🎭 *ꜰɪɢᴜʀᴇ sᴛʏʟᴇ*
+
+> Enviar / responder imágenes para cambiar al estilo de la figura
+
+\`${m.prefix}tofigure\``)
     }
     
     m.react('🕕')
@@ -36,7 +40,7 @@ async function handler(m, { sock }) {
         
         if (!buffer) {
             m.react('❌')
-            return m.reply(`❌ Gagal mendownload gambar`)
+            return m.reply(`❌ No se pudo download image`)
         }
         
         const imageUrl = await uploadImage(buffer, 'image.jpg')

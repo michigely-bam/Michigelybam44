@@ -16,32 +16,37 @@ const pluginConfig = {
 
 const answers = [
     'Ya, harus!',
-    'Tidak usah.',
-    'Hmm, terserah kamu sih.',
-    'Harus banget! Jangan ragu!',
+    "No, estoy bien.",
+    "Lo que tú digas.",
+    "¡Tienes que hacerlo, no lo dudes!",
     'Nggak harus juga.',
     'Kalau menurutmu perlu, lakukan!',
     'Pikir dulu baik-baik.',
     'Harus! Sekarang!',
-    'Jangan, mending tunggu dulu.',
+    "No, espera un minuto.",
     'Harus, tapi hati-hati.',
     'Nggak harus, tapi boleh.',
     'Wajib!',
     'Hmm, skip aja deh.',
-    'Lakukan kalau sudah yakin.',
+    "Hazlo cuando estés seguro.",
     'Harus, demi masa depanmu!',
     'Nggak harus, santai aja.',
     'Go for it!',
-    'Jangan buru-buru, pikir lagi.',
+    "No te apresures, piensa de nuevo.",
     'Tentu harus!',
-    'Lihat situasinya dulu.'
+    "Mira la situación primero."
 ];
 
 async function handler(m) {
     const text = m.text?.trim();
     
     if (!text) {
-        return m.reply(`⚖️ *ʜᴀʀᴜsᴋᴀʜ*\n\n> Masukkan pertanyaan!\n\n*Contoh:*\n> .haruskah aku menyatakan cinta?`);
+        return m.reply(`⚖️ *ʜᴀʀᴜsᴋᴀʜ*
+
+> ¡Póngase en una pregunta!
+
+*Contoh:*
+> .haruskah aku menyatakan cinta?`);
     }
     
     const answer = answers[Math.floor(Math.random() * answers.length)];

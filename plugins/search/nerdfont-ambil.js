@@ -51,8 +51,8 @@ const pluginConfig = {
   alias: ["dafont-ambil", "fontambil"],
   category: "search",
   description: "Cari font di DaFont",
-  usage: ".nerdfont-ambil <query>",
-  example: ".nerdfont-ambil Coolvetica",
+  usage: ".nerdfont-grab",
+  example: ".nerdfont... coge Coolvetica",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -72,7 +72,9 @@ function formatNumber(num) {
 async function handler(m, { sock }) {
   const query = m.text?.trim()?.toLowerCase();
   if (!query)
-    return m.reply(`*NERD FONT*\n\n> Masukan nama font yang ingin didownload`);
+    return m.reply(`*NERD FONT*
+
+> Introduzca el nombre de la fuente para descargar`);
   try {
     const res = await nerdfonts();
     const data = res.find(
@@ -92,7 +94,7 @@ async function handler(m, { sock }) {
         .resize(50, 50)
         .toBuffer(),
       caption: `*Done*
-Jika kamu ingin mendownload lagi, ketik ${m.prefix}nerdfont lagi`,
+Si desea descargar de nuevo, escriba ${m.prefix}Otro nerdfont`,
     });
   } catch (err) {
     return m.reply(te(m.prefix, m.command, m.pushName));

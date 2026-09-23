@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'birthdaylist',
     alias: ['bdaylist', 'listultah', 'ultahlist'],
     category: 'user',
-    description: 'Lihat daftar ulang tahun member',
+    description: "Ver la lista de cumpleaños del miembro",
     usage: '.birthdaylist',
     example: '.birthdaylist',
     isOwner: false,
@@ -70,7 +70,7 @@ async function handler(m, { sock }) {
     for (const b of birthdays.slice(0, 15)) {
         const isToday = b.day === currentDay && b.month === currentMonth
         const emoji = isToday ? '🎉' : '🎂'
-        text += `┃ ${emoji} ${b.day} ${months[b.month - 1]} - @${b.jid.split('@')[0]}${isToday ? ' *HARI INI!*' : ''}\n`
+        text += `┃ ${emoji} ${b.day} ${months[b.month - 1]} - @${b.jid.split('@')[0]}${isToday ? " *¡Hoy!*" : ''}\n`
         mentions.push(b.jid)
     }
     

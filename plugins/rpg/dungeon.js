@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'dungeon',
     alias: ['dg', 'explore', 'labirin'],
     category: 'rpg',
-    description: 'Jelajahi dungeon dan lawan monster',
+    description: "Explora la mazmorra y lucha contra los monstruos",
     usage: '.dungeon',
     example: '.dungeon',
     isOwner: false,
@@ -57,7 +57,7 @@ async function handler(m, { sock }) {
     const availableDungeons = DUNGEONS.filter(d => userLevel >= d.difficulty * 5)
     
     if (availableDungeons.length === 0) {
-        return m.reply(`❌ Level kamu terlalu rendah! Minimal level 5 untuk dungeon.`)
+        return m.reply(`❌ ¡Tu nivel es demasiado bajo! Nivel mínimo 5 para la mazmorra.`)
     }
     
     const dungeon = availableDungeons[Math.floor(Math.random() * availableDungeons.length)]
@@ -69,7 +69,9 @@ async function handler(m, { sock }) {
     await m.reply(`🚪 *ᴍᴀsᴜᴋ ${dungeon.name.toUpperCase()}...*\n\n> Stamina: -${staminaCost}`)
     await new Promise(r => setTimeout(r, 1500))
     
-    await m.reply(`👹 *ᴍᴇɴᴇᴍᴜᴋᴀɴ* ${monster}!\n\n> Bersiap untuk bertarung...`)
+    await m.reply(`👹 *ᴍᴇɴᴇᴍᴜᴋᴀɴ* ${monster}!
+
+> Prepárense para luchar...`)
     await new Promise(r => setTimeout(r, 2000))
     
     const userPower = (user.rpg.attack || 10) + userLevel * 3 + Math.floor(Math.random() * 20)
@@ -96,7 +98,7 @@ async function handler(m, { sock }) {
         await addExpWithLevelCheck(sock, m, db, user, expReward)
         
         txt = `🎉 *ᴋᴇᴍᴇɴᴀɴɢᴀɴ!*\n\n`
-        txt += `> Berhasil mengalahkan ${monster} di ${dungeon.name}!\n\n`
+        txt += `> Con éxito derrotado ${monster} di ${dungeon.name}!\n\n`
         txt += `╭┈┈⬡「 🎁 *ʀᴇᴡᴀʀᴅ* 」\n`
         txt += `┃ ✨ EXP: *+${expReward}*\n`
         txt += `┃ 💰 Gold: *+${goldReward.toLocaleString()}*\n`
@@ -117,7 +119,7 @@ async function handler(m, { sock }) {
         txt += `┃ 💸 Gold: *-${goldLoss.toLocaleString()}*\n`
         txt += `┃ ❤️ HP: *-30*\n`
         txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`
-        txt += `💡 *Tips:* Tingkatkan level dan equipment`
+        txt += `💡 *Tips:* Aumento de los niveles y el equipo`
         
         await m.react('💀')
     }

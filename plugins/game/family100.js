@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'family100',
     alias: ['f100', 'survei'],
     category: 'game',
-    description: 'Survey says! Tebak jawaban teratas survei',
+    description: "La encuesta dice, ¿adivina la respuesta principal a la encuesta?",
     usage: '.family100',
     example: '.family100',
     isOwner: false,
@@ -30,7 +30,7 @@ async function handler(m, { sock }) {
             
             let text = `⚠️ *Eh ada game jalan nih!*\n\n`;
             text += `📋 *${session.question.soal}*\n\n`;
-            text += `Jawaban tertebak (${answered.length}/${total})\n`;
+            text += `La respuesta es adivinar (${answered.length}/${total})\n`;
             answered.forEach((ans, i) => {
                 text += `${i + 1}. ✅ ${ans}\n`;
             });
@@ -45,7 +45,7 @@ async function handler(m, { sock }) {
     
     const question = getRandomItem('family100.json');
     if (!question) {
-        await m.reply('❌ Data game tidak tersedia!');
+        await m.reply("❌ ¡Los juegos de datos no están disponibles!");
         return;
     }
     
@@ -58,8 +58,10 @@ async function handler(m, { sock }) {
         text += `${i + 1}. ❓ ???\n`;
     }
     text += `\n⏱️ Waktu: *120 detik*\n`;
-    text += `🎁 Hadiah per jawaban: *EXP + Koin (random)*\n\n`;
-    text += `_Ketik jawabanmu langsung atau reply "nyerah"_`;
+    text += `🎁 Un regalo por respuesta: *EXP + Koin (random)*
+
+`;
+    text += `_Escribe tu respuesta directamente o contesta "renunciar"_`;
     
     const sentMsg = await sock.sendMessage(chatId, { text, contextInfo: getGameContextInfo('📊 FAMILY 100', 'Survey says!') }, { quoted: m });
     
@@ -72,10 +74,13 @@ async function handler(m, { sock }) {
         const answered = sess?.answered || [];
         const remaining = question.jawaban.filter(j => !answered.includes(j.toLowerCase()));
         
-        let timeoutText = `⏱️ *Yah telat, waktu habis!*\n\n`;
+        let timeoutText = `⏱️ *Bueno, es tarde, ¡se acabó el tiempo!*
+
+`;
         timeoutText += `Tertebak: *${answered.length}/${question.jawaban.length}*\n\n`;
         if (remaining.length > 0) {
-            timeoutText += `Jawaban tersisa:\n`;
+            timeoutText += `respuestas restantes:
+`;
             remaining.forEach(ans => {
                 timeoutText += `• ${ans}\n`;
             });
@@ -102,7 +107,8 @@ async function answerHandler(m, sock) {
         let text = `🏳️ *Yahhh nyerah deh...*\n\n`;
         text += `Tertebak: *${answered.length}/${session.question.jawaban.length}*\n\n`;
         if (remaining.length > 0) {
-            text += `Jawaban tersisa:\n`;
+            text += `respuestas restantes:
+`;
             remaining.forEach(ans => {
                 text += `• ${ans}\n`;
             });
@@ -117,7 +123,7 @@ async function answerHandler(m, sock) {
     const answered = session.answered || [];
     
     if (answered.includes(userAnswer)) {
-        await m.reply(`⚠️ Jawaban "${userAnswer}" sudah ditebak!`);
+        await m.reply(`⚠️ Jawaban "${userAnswer}" ¡Es predecible!`);
         return true;
     }
     
@@ -148,13 +154,16 @@ async function answerHandler(m, sock) {
                 const participants = Object.values(session.answeredBy);
                 const uniqueParticipants = [...new Set(participants)];
                 
-                let text = `🎉 *MANTAP! Semua terjawab cuy!*\n\n`;
+                let text = `🎉 *¡Todo perdido, hombre!*
+
+`;
                 text += `> 📋 *${session.question.soal}*\n\n`;
                 session.question.jawaban.forEach((ans, i) => {
                     const who = session.answeredBy[ans.toLowerCase()];
                     text += `${i + 1}. ✅ ${ans} - @${who?.split('@')[0] || '?'}\n`;
                 });
-                text += `\n🎊 Selamat kepada ${uniqueParticipants.length} pemenang!`;
+                text += `
+🎊 Felicitaciones ${uniqueParticipants.length} pemenang!`;
                 
                 await m.reply(text, { mentions: uniqueParticipants });
                 return true;
@@ -171,14 +180,14 @@ async function answerHandler(m, sock) {
                     text += `${i + 1}. ❓ ???\n`;
                 }
             });
-            text += `\nSisa ${total - session.answered.length} jawaban lagi!`;
+            text += `\nSisa ${total - session.answered.length} ¡Responde otra vez!`;
             
             await m.reply(text, { mentions: [m.sender] });
             return true;
         }
     }
     
-    await m.reply(`❌ Salah! Coba lagi...`);
+    await m.reply(`❌ Incorrecto, inténtalo de nuevo.`);
     return true;
 }
 

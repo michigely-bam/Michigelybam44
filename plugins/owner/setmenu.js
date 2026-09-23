@@ -75,7 +75,9 @@ async function handler(m, { sock, db }) {
   if (variant) {
     const selected = VARIANTS[variant];
     if (!selected) {
-      await m.reply(`❌ Variant tidak valid!\n\nGunakan: v1 s/d v15`);
+      await m.reply(`❌ Variedad inválida!
+
+Uso: v1 s / d v15`);
       return;
     }
 
@@ -138,7 +140,7 @@ async function handler(m, { sock, db }) {
               }),
               header: proto.Message.InteractiveMessage.Header.fromObject({
                 title: "🎨 Menu Variant",
-                subtitle: `${Object.keys(VARIANTS).length} variant tersedia`,
+                subtitle: `${Object.keys(VARIANTS).length} variantes disponibles`,
                 hasMediaAttachment: false,
               }),
               nativeFlowMessage:
@@ -167,7 +169,7 @@ async function handler(m, { sock, db }) {
     await sock.relayMessage(m.chat, msg.message, { messageId: msg.key.id });
   } catch {
     let txt = `🎨 *sᴇᴛ ᴍᴇɴᴜ ᴠᴀʀɪᴀɴᴛ*\n\n`;
-    txt += `> Variant saat ini: *V${current}*\n\n`;
+    txt += `> Variante actual: *V${current}*\n\n`;
     for (const [key, val] of Object.entries(VARIANTS)) {
       const mark = val.id === current ? " ✓" : "";
       txt += `> *${key.toUpperCase()}*${mark} — _${val.desc}_\n`;

@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'stopalljadibot',
     alias: ['stopsemuajadibot', 'killalljadibots'],
     category: 'owner',
-    description: 'Hentikan semua jadibot yang aktif',
+    description: "Detengan todos los jabots activos",
     usage: '.stopalljadibot',
     example: '.stopalljadibot',
     isOwner: true,
@@ -20,7 +20,7 @@ async function handler(m, { sock }) {
     const active = getActiveJadibots()
 
     if (active.length === 0) {
-        return m.reply(`❌ Tidak ada jadibot yang aktif`)
+        return m.reply(`❌ No hay jabots activos`)
     }
 
     await m.react('🕕')

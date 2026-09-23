@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'notifsholat',
     alias: ['notifsolat'],
     category: 'group',
-    description: 'Toggle notifikasi sholat untuk grup ini',
+    description: "Reducir las notificaciones de oración para este grupo",
     usage: '.notifsholat on/off',
     example: '.notifsholat on',
     isOwner: false,
@@ -17,7 +17,7 @@ const pluginConfig = {
 
 function handler(m, { sock, db }) {
     if (!m.isAdmin && !m.isOwner) {
-        return m.reply(`❌ Hanya admin grup yang bisa menggunakan fitur ini`);
+        return m.reply(`❌ Sólo administración de grupo puede utilizar esta característica`);
     }
 
     const args = m.args[0]?.toLowerCase();
@@ -49,7 +49,10 @@ function handler(m, { sock, db }) {
     if (args === 'on') {
         group.notifSholat = true;
         db.setGroup(m.chat, group);
-        return m.reply(`✅ *ɴᴏᴛɪꜰ sʜᴏʟᴀᴛ ᴅɪᴀᴋᴛɪꜰᴋᴀɴ*\n\n> Grup ini akan menerima pengingat waktu sholat\n> Lokasi: ${kotaSetting.nama}`);
+        return m.reply(`✅ *ɴᴏᴛɪꜰ sʜᴏʟᴀᴛ ᴅɪᴀᴋᴛɪꜰᴋᴀɴ*
+
+> Este grupo recibirá un recordatorio de tiempo de oración
+> Lokasi: ${kotaSetting.nama}`);
     }
 
     if (args === 'off') {

@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'installtemanebula',
     alias: ['installthemanebula', 'temanebula', 'nebulatheme'],
     category: 'panel',
-    description: 'Install tema Nebula (AtasBawahCantik) untuk panel Pterodactyl via SSH',
+    description: "Instala el tema Nebula (Bottom de Belleza) para paneles de Pterodactilo a través de SSH",
     usage: '.installtemanebula <ip>|<password>',
     example: '.installtemanebula 192.168.1.1|secretpass',
     isOwner: true,
@@ -75,7 +75,7 @@ function handler(m) {
 
     const parts = text.split('|')
     if (parts.length < 2) {
-        return m.reply(`❌ Format salah! Gunakan: \`ip|password\``)
+        return m.reply(`❌ ¡Formato inválido! \`ip|password\``)
     }
 
     const ipvps = parts[0].trim()
@@ -95,7 +95,9 @@ function handler(m) {
 
     conn.on('ready', async () => {
         try {
-            await m.reply(`🕕 *[1/3] ᴘʀᴇᴘᴀʀɪɴɢ ᴇɴᴠɪʀᴏɴᴍᴇɴᴛ...*\n\n> Menginstall Node.js 22, Yarn, dan dependencies...`)
+            await m.reply(`🕕 *[1/3] ᴘʀᴇᴘᴀʀɪɴɢ ᴇɴᴠɪʀᴏɴᴍᴇɴᴛ...*
+
+> Instala Node.js 22, Yarn y dependientes...`)
             await execSSH(conn, CMD_DEPS)
 
             await m.reply(`🕕 *[2/3] ɪɴsᴛᴀʟʟ ʙʟᴜᴇᴘʀɪɴᴛ...*\n\n> Mendownload & konfigurasi Blueprint Framework...`)
@@ -106,7 +108,10 @@ function handler(m) {
 
             m.react('✅')
             await m.reply(
-                `╭┈┈⬡「 ✅ *ᴛᴇᴍᴀ ɴᴇʙᴜʟᴀ* 」\n┃ ㊗ sᴛᴀᴛᴜs: *Terinstall*\n┃ ㊗ ɪᴘ: ${ipvps}\n╰┈┈⬡\n\n> _Tema Nebula berhasil diinstall!_`
+                `╭┈┈⬡「 ✅ *ᴛᴇᴍᴀ ɴᴇʙᴜʟᴀ* 」\n┃ ㊗ sᴛᴀᴛᴜs: *Terinstall*\n┃ ㊗ ɪᴘ: ${ipvps}
+╰┈┈⬡
+
+> _Nebula tema instalado con éxito!_`
             )
         } catch (err) {
             console.error('[Nebula Install Error]', err)
@@ -118,7 +123,9 @@ function handler(m) {
     }).on('error', (err) => {
         console.error('[SSH Error]', err)
         m.react('❌')
-        m.reply(`❌ Koneksi gagal!\n\n> IP atau Password tidak valid / VPS down.`)
+        m.reply(`❌ ¡La conexión falló!
+
+> IP inválida o contraseña / VPS abajo.`)
     }).connect(connSettings)
 }
 

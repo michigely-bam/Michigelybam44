@@ -33,7 +33,10 @@ async function handler(m, { sock }) {
       (remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
     );
     return m.reply(
-      `🕕 *ᴡᴇᴇᴋʟʏ ᴄᴏᴏʟᴅᴏᴡɴ*\n\n> Kamu sudah klaim minggu ini.\n> Tunggu: *${days} hari ${hours} jam* lagi.`,
+      `🕕 *ᴡᴇᴇᴋʟʏ ᴄᴏᴏʟᴅᴏᴡɴ*
+
+> Has estado reclamando esta semana.
+> Tunggu: *${days} hari ${hours} jam* lagi.`,
     );
   }
 
@@ -57,7 +60,7 @@ async function handler(m, { sock }) {
   txt += `┃ 🪙 Money: *+Rp ${moneyReward.toLocaleString("id-ID")}*\n`;
   txt += `┃ 🛍️ Uncommon Crate: *+${crateReward}*\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
-  txt += `> Claim lagi minggu depan!`;
+  txt += `> ¡Reclamen otra vez la semana que viene!`;
 
   await m.reply(txt);
 }

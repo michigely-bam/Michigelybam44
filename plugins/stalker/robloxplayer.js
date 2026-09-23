@@ -39,7 +39,7 @@ async function handler(m, { sock }) {
         
         if (!res.data?.status || !res.data?.data?.length) {
             m.react('❌')
-            return m.reply(`❌ Tidak ditemukan player dengan username: ${query}`)
+            return m.reply(`❌ No hay jugador con nombre de usuario encontrado: ${query}`)
         }
         
         const players = res.data.data.slice(0, 10)
@@ -60,7 +60,7 @@ async function handler(m, { sock }) {
             text += `╰┈┈⬡\n\n`
         })
         
-        text += `> _Gunakan \`.robloxstalk <username>\` untuk info detail_`
+        text += `> _Gunakan \`.robloxstalk <username>\` para más detalles_`
         
         await m.reply(text)
         m.react('✅')

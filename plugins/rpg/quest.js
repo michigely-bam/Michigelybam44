@@ -4,7 +4,7 @@ const pluginConfig = {
   name: "quest",
   alias: ["misi", "mission"],
   category: "rpg",
-  description: "Ambil quest harian untuk reward bonus",
+  description: "Tome la búsqueda diaria de la recompensa de bonos",
   usage: ".quest",
   example: ".quest",
   isOwner: false,
@@ -68,13 +68,17 @@ async function handler(m, { sock }) {
     const questId = args[1];
     if (!questId || !user.quest[questId]) {
       return m.reply(
-        `❌ *ǫᴜᴇsᴛ ɴᴏᴛ ꜰᴏᴜɴᴅ*\n\n> Quest tidak ditemukan atau belum diambil!`,
+        `❌ *ǫᴜᴇsᴛ ɴᴏᴛ ꜰᴏᴜɴᴅ*
+
+> Quest no encontrado o aún tomado!`,
       );
     }
 
     const quest = QUESTS.find((q) => q.id === questId);
     if (!quest) {
-      return m.reply(`❌ *ɪɴᴠᴀʟɪᴅ ǫᴜᴇsᴛ*\n\n> Quest ID tidak valid!`);
+      return m.reply(`❌ *ɪɴᴠᴀʟɪᴅ ǫᴜᴇsᴛ*
+
+> ¡ ID de búsqueda inválida!`);
     }
 
     if (user.quest[questId].progress < quest.target) {
@@ -85,7 +89,9 @@ async function handler(m, { sock }) {
     }
 
     if (user.quest[questId].claimed) {
-      return m.reply(`❌ *sᴜᴅᴀʜ ᴅɪᴋʟᴀɪᴍ*\n\n> Quest ini sudah diklaim!`);
+      return m.reply(`❌ *sᴜᴅᴀʜ ᴅɪᴋʟᴀɪᴍ*
+
+> ¡Esta búsqueda ha sido reclamada!`);
     }
 
     user.koin = (user.koin || 0) + quest.reward.money;
@@ -102,11 +108,15 @@ async function handler(m, { sock }) {
     const questId = args[1];
     const quest = QUESTS.find((q) => q.id === questId);
     if (!quest) {
-      return m.reply(`❌ *ǫᴜᴇsᴛ ɴᴏᴛ ꜰᴏᴜɴᴅ*\n\n> Lihat list: \`.quest\``);
+      return m.reply(`❌ *ǫᴜᴇsᴛ ɴᴏᴛ ꜰᴏᴜɴᴅ*
+
+> Ver lista: \`.quest\``);
     }
 
     if (user.quest[questId]) {
-      return m.reply(`❌ *sᴜᴅᴀʜ ᴅɪᴀᴍʙɪʟ*\n\n> Quest ini sudah diambil!`);
+      return m.reply(`❌ *sᴜᴅᴀʜ ᴅɪᴀᴍʙɪʟ*
+
+> ¡Esta búsqueda ha sido tomada!`);
     }
 
     user.quest[questId] = { progress: 0, claimed: false, takenAt: Date.now() };
@@ -125,7 +135,7 @@ async function handler(m, { sock }) {
       if (userQuest.claimed) {
         status = "✅ Selesai";
       } else if (userQuest.progress >= quest.target) {
-        status = "🎁 Bisa diklaim";
+        status = "🎁 Se puede reclamar";
       } else {
         status = `🔄 ${userQuest.progress}/${quest.target}`;
       }

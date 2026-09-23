@@ -41,7 +41,7 @@ async function handler(m, { sock }) {
         
         if (!data?.status || !data?.data?.chord) {
             m.react('❌')
-            return m.reply(`❌ Chord tidak ditemukan untuk: \`${text}\``)
+            return m.reply(`❌ No se encontró el Cordón para: \`${text}\``)
         }
         
         const chord = data.data.chord

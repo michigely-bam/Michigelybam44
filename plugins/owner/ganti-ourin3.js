@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['gantiourin3', 'setourin3'],
     category: 'owner',
     description: 'Ganti gambar ourin3.jpg',
-    usage: '.ganti-ourin3.jpg (reply/kirim gambar)',
+    usage: ".reemplazar -ourin3.jpg (reply / enviar imagen)",
     example: '.ganti-ourin3.jpg',
     isOwner: true,
     isPremium: false,
@@ -21,7 +21,10 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
     
     if (!isImage) {
-        return m.reply(`🖼️ *ɢᴀɴᴛɪ ᴏᴜʀɪɴ3.ᴊᴘɢ*\n\n> Kirim/reply gambar untuk mengganti\n> File: assets/images/ourin3.jpg`)
+        return m.reply(`🖼️ *ɢᴀɴᴛɪ ᴏᴜʀɪɴ3.ᴊᴘɢ*
+
+> Enviar / respuesta imágenes para reemplazar
+> File: assets/images/ourin3.jpg`)
     }
     
     try {
@@ -33,7 +36,7 @@ async function handler(m, { sock }) {
         }
         
         if (!buffer) {
-            return m.reply(`❌ Gagal mendownload gambar`)
+            return m.reply(`❌ No se pudo download image`)
         }
         
         const targetPath = path.join(process.cwd(), 'assets', 'images', 'ourin3.jpg')

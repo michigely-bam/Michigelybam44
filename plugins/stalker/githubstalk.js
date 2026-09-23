@@ -20,7 +20,11 @@ async function handler(m, { sock }) {
     const username = m.args[0]
     
     if (!username) {
-        return m.reply(`🐙 *ɢɪᴛʜᴜʙ sᴛᴀʟᴋ*\n\n> Masukkan username GitHub\n\n\`Contoh: ${m.prefix}githubstalk torvalds\``)
+        return m.reply(`🐙 *ɢɪᴛʜᴜʙ sᴛᴀʟᴋ*
+
+> Introduzca el nombre de usuario GitHub
+
+\`Contoh: ${m.prefix}githubstalk torvalds\``)
     }
     
     m.react('🔍')
@@ -32,7 +36,7 @@ async function handler(m, { sock }) {
         
         if (!res.data?.status) {
             m.react('❌')
-            return m.reply(`❌ Username *${username}* tidak ditemukan`)
+            return m.reply(`❌ Username *${username}* no encontrado`)
         }
         
         const d = res.data

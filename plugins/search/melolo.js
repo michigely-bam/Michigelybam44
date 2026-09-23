@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "melolo",
   alias: ["melolodrama", "dramamelolo"],
   category: "search",
-  description: "Cari daftar drama pendek berdasarkan kategori dari Melolo",
+  description: "Buscar una lista corta de dramas basado en la categoría de Melolo",
   usage: ".melolo <category>",
   example: ".melolo fantasy",
   isOwner: false,
@@ -53,7 +53,7 @@ async function fetchMelolo(category) {
   });
 
   if (!data?.status || !data?.data) {
-    throw new Error(data?.message || "Hasil Melolo tidak ditemukan");
+    throw new Error(data?.message || "Resultados de Melolo no encontrados");
   }
 
   return data;
@@ -69,7 +69,7 @@ async function handler(m, { sock }) {
   }
 
   if (!config.APIkey?.covenant) {
-    return m.reply("❌ API key covenant tidak dikonfigurasi!");
+    return m.reply("❌ ¡A API de coven clave no configurada!");
   }
 
   m.react("🔍");
@@ -81,7 +81,7 @@ async function handler(m, { sock }) {
     if (items.length === 0) {
       m.react("❌");
       return m.reply(
-        `❌ Tidak ditemukan hasil Melolo untuk kategori: ${category}`,
+        `❌ No melololo resultados encontrados para categorías: ${category}`,
       );
     }
 

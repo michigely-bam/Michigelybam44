@@ -20,7 +20,11 @@ async function handler(m, { sock }) {
     const username = m.args[0]
     
     if (!username) {
-        return m.reply(`📌 *ᴘɪɴᴛᴇʀᴇsᴛ sᴛᴀʟᴋ*\n\n> Masukkan username Pinterest\n\n\`Contoh: ${m.prefix}pintereststalk shiroko\``)
+        return m.reply(`📌 *ᴘɪɴᴛᴇʀᴇsᴛ sᴛᴀʟᴋ*
+
+> Insertar Pinterest nombre de usuario
+
+\`Contoh: ${m.prefix}pintereststalk shiroko\``)
     }
     
     m.react('🔍')
@@ -32,7 +36,7 @@ async function handler(m, { sock }) {
         
         if (!res.data?.status || !res.data?.user) {
             m.react('❌')
-            return m.reply(`❌ Username *${username}* tidak ditemukan`)
+            return m.reply(`❌ Username *${username}* no encontrado`)
         }
         
         const u = res.data.user

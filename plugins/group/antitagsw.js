@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'antitagsw',
     alias: ['antitag', 'antistatustag'],
     category: 'group',
-    description: 'Mengaktifkan/menonaktifkan anti tag status di grup',
+    description: "Activar / deshabilitar el estado anti-tag en grupo",
     usage: '.antitagsw <on/off>',
     example: '.antitagsw on',
     isOwner: false,

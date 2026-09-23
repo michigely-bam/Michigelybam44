@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'claninvite',
     alias: ['inviteclan'],
     category: 'clan',
-    description: 'Invite & langsung tambahkan user ke clan',
+    description: "Invitar &quot; agregue directamente el usuario al clan",
     usage: '.claninvite @user',
     example: '.claninvite @user',
     isOwner: false,
@@ -19,11 +19,11 @@ async function handler(m) {
     const db = getDatabase()
     const user = db.getUser(m.sender)
 
-    if (!user?.clanId) return m.reply(`❌ Kamu belum punya clan`)
+    if (!user?.clanId) return m.reply(`❌ Aún no tienes un clan.`)
     if (!db.db.data.clans) db.db.data.clans = {}
 
     const clan = db.db.data.clans[user.clanId]
-    if (!clan) return m.reply(`❌ Clan tidak ditemukan`)
+    if (!clan) return m.reply(`❌ Clan not found`)
 
     const target = m.mentionedJid?.[0] || m.quoted?.sender
     if (!target) {
@@ -34,11 +34,11 @@ async function handler(m) {
         )
     }
 
-    if (target === m.sender) return m.reply(`❌ Tidak bisa invite diri sendiri`)
+    if (target === m.sender) return m.reply(`❌ No puedes invitarte.`)
 
     const targetUser = db.getUser(target)
-    if (targetUser?.clanId) return m.reply(`❌ User tersebut sudah punya clan`)
-    if (clan.members.length >= 50) return m.reply(`❌ Clan sudah penuh (50/50)`)
+    if (targetUser?.clanId) return m.reply(`❌ El usuario ya tiene un clan`)
+    if (clan.members.length >= 50) return m.reply(`❌ El clan está lleno (50 / 50)`)
 
     clan.members.push(target)
     db.setUser(target, { clanId: user.clanId })

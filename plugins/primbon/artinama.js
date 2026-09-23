@@ -4,8 +4,8 @@ const pluginConfig = {
     name: 'artinama',
     alias: ['namameaning', 'artinamaku'],
     category: 'primbon',
-    description: 'Cek arti nama menurut primbon',
-    usage: '.artinama <nama>',
+    description: "Compruebe el significado de nombres por primbon",
+    usage: ".artinama &gt; nombre &gt;",
     example: '.artinama putu',
     isOwner: false,
     isPremium: false,
@@ -19,7 +19,11 @@ const pluginConfig = {
 async function handler(m, { sock }) {
     const nama = m.args.join(' ')
     if (!nama) {
-        return m.reply(`📛 *ᴀʀᴛɪ ɴᴀᴍᴀ*\n\n> Masukkan nama\n\n\`Contoh: ${m.prefix}artinama putu\``)
+        return m.reply(`📛 *ᴀʀᴛɪ ɴᴀᴍᴀ*
+
+> Nombre
+
+\`Contoh: ${m.prefix}artinama putu\``)
     }
     
     m.react('📛')
@@ -30,7 +34,9 @@ async function handler(m, { sock }) {
         
         if (!data?.status || !data?.data) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak dapat menganalisa nama`)
+            return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No podía analizar el nombre.`)
         }
         
         const result = data.data

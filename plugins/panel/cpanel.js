@@ -35,7 +35,7 @@ async function handler(m, { sock }) {
     
     let txt = `🖥️ *ᴄᴘᴀɴᴇʟ ᴍᴇɴᴜ v2.0*\n\n`
     txt += `> V1: ${serverStatuses.v1} | V2: ${serverStatuses.v2} | V3: ${serverStatuses.v3} | V4: ${serverStatuses.v4} | V5: ${serverStatuses.v5}\n`
-    txt += `> Role kamu: *${m.isOwner ? 'Bot Owner' : userRoleList}*\n\n`
+    txt += `> Papel que usted: *${m.isOwner ? 'Bot Owner' : userRoleList}*\n\n`
     
     txt += `╭─「 📦 *ᴄʀᴇᴀᴛᴇ sᴇʀᴠᴇʀ* 」\n`
     for (const ver of VALID_SERVERS) {

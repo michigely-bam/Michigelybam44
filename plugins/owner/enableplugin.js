@@ -5,8 +5,8 @@ const pluginConfig = {
   name: "enableplugin",
   alias: ["eplugin", "pluginenable", "onplugin"],
   category: "owner",
-  description: "Mengaktifkan kembali plugin yang dinonaktifkan",
-  usage: ".enableplugin <nama_plugin>",
+  description: "plugins deshabilitados de nuevo",
+  usage: ".nombre habilitado_plugin>",
   example: ".enableplugin sticker",
   isOwner: true,
   isPremium: false,
@@ -67,13 +67,13 @@ async function handler(m, { sock }) {
   const found = await findPluginFile(pluginName);
 
   if (!found) {
-    return m.reply(`❌ Plugin *${pluginName}* tidak ditemukan!`);
+    return m.reply(`❌ Plugin *${pluginName}* ¡No lo encontraron!`);
   }
 
   const { filePath, plugin, category, file } = found;
 
   if (plugin.config.isEnabled !== false) {
-    return m.reply(`⚠️ Plugin *${pluginName}* sudah aktif!`);
+    return m.reply(`⚠️ Plugin *${pluginName}* ¡Ya está!`);
   }
 
   try {

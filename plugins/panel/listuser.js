@@ -12,7 +12,7 @@ const pluginConfig = {
     name: allCommands,
     alias: allAliases,
     category: 'panel',
-    description: 'List semua user di panel (v1-v5)',
+    description: "Listar todos los usuarios en el panel (v1-v5)",
     usage: '.listuserv1 atau .listuserv2',
     example: '.listuserv1',
     isOwner: false,
@@ -79,7 +79,7 @@ async function handler(m, { sock }) {
         const available = getAvailableServers(pteroConfig)
         let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`
         if (available.length > 0) {
-            txt += `> Server tersedia: *${available.join(', ')}*\n`
+            txt += `> Servidor disponible: *${available.join(', ')}*\n`
             txt += `> Contoh: \`${m.prefix}listuser${available[0]}\``
         } else {
             txt += `> Isi config pterodactyl di \`config.js\``
@@ -99,7 +99,9 @@ async function handler(m, { sock }) {
         const users = res.data.data || []
         
         if (users.length === 0) {
-            return m.reply(`📋 *ᴅᴀꜰᴛᴀʀ ᴜsᴇʀ [${serverLabel}]*\n\n> Tidak ada user terdaftar.`)
+            return m.reply(`📋 *ᴅᴀꜰᴛᴀʀ ᴜsᴇʀ [${serverLabel}]*
+
+> No hay usuarios registrados.`)
         }
         
         let txt = `📋 *ᴅᴀꜰᴛᴀʀ ᴜsᴇʀ [${serverLabel}]*\n\n`

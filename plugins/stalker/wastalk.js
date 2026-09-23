@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['whatsappstalk', 'stalkwa'],
     category: 'stalker',
     description: 'Stalk profile WhatsApp',
-    usage: '.wastalk <nomor/tag>',
+    usage: ".Preck , número de contacto / tag √",
     example: '.wastalk 6281234567890',
     isGroup: false,
     isBotAdmin: false,

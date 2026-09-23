@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: [],
     category: 'canvas',
     description: 'Membuat gambar fake call WhatsApp',
-    usage: '.fakecall <nama> | <durasi>',
+    usage: ".finge todo < nombre",
     example: '.fakecall Zann | 19.00',
     isOwner: false,
     isPremium: false,
@@ -52,7 +52,7 @@ async function handler(m, { sock }) {
     const [nama, durasi] = text.split('|').map(s => s.trim())
     
     if (!nama) {
-        return m.reply(`❌ Nama tidak boleh kosong!`)
+        return m.reply(`❌ ¡Ningún nombre debería estar vacío!`)
     }
     
     await m.react('🕕')

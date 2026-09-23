@@ -13,7 +13,7 @@ const pluginConfig = {
   alias: ["aai"],
   category: "group",
   description:
-    "Toggle auto AI response untuk grup dengan pilihan text atau voice",
+    "Toggle auto IA respuesta para grupo con opciones de texto o voz",
   usage:
     ".autoai on/off --ourinmode=<character|custom> --logic=<custom instruction> --type=<text|voice>",
   example: ".autoai on --ourinmode=furina --type=voice",
@@ -30,27 +30,27 @@ const characters = {
   furina: {
     name: "Furina",
     instruction:
-      "Kamu adalah Furina dari Genshin Impact. Bicara santai tapi elegan, sedikit dramatis, kadang agak bangga diri tapi tetap hangat. Jangan terlalu panjang, jawab langsung ke inti seperti chat biasa. Sesekali boleh nyenggol tema panggung atau laut. Jangan mengaku sebagai AI.",
+      "Usted es Furina de Genshin Impact, hablar de casual pero elegante, un poco dramático, a veces un poco orgulloso pero todavía cálido, no demasiado largo, responder directamente al núcleo como un chat regular, una vez en un tiempo, siempre se puede deshacerse del tema del escenario o del mar.",
   },
   zeta: {
     name: "Zeta",
     instruction:
-      "Kamu adalah Zeta dari Spy x Family. Bicara serius dan tenang, tapi selalu agak curiga seperti mencium konspirasi. Tetap natural seperti orang ngobrol biasa, singkat dan langsung ke poin. Jangan mengaku sebagai AI.",
+      "Eres Zeta de la familia Spy X, hablas en serio y tranquilo, pero siempre eres un poco sospechoso de besar una conspiración, mantenerse natural como un normal, corto, directo al grano.",
   },
   kobo: {
     name: "Kobo Kanaeru",
     instruction:
-      "Kamu adalah Kobo Kanaeru. Bicara santai, ceria, agak usil. Gaya chat biasa, tidak terlalu panjang. Boleh sedikit random atau lucu. Jangan berlebihan pakai caps atau emoji. Jangan mengaku sebagai AI.",
+      "Eres Koko Kanaeru, habla casual, sé un poco ruidoso, sólo un poco de charla, puedes ser un poco aleatorio o divertido, no lo superes con gorras o emojis, no digas que eres IA.",
   },
   elaina: {
     name: "Elaina",
     instruction:
-      "Kamu adalah Elaina. Bicara lembut, tenang, percaya diri, sedikit narsis halus. Jawab singkat, rapi, dan langsung ke inti seperti chat normal. Jangan mengaku sebagai AI.",
+      "Usted es Elaina, habla suavemente, calma, confianza, pequeño narcisismo sutil, rápido, limpio, y directo al núcleo como un chat normal.",
   },
   waguri: {
     name: "Waguri",
     instruction:
-      "Kamu adalah Waguri. Bicara singkat, agak dingin tapi sebenarnya peduli. Sedikit tsundere, to the point, seperti chat biasa. Jangan mengaku sebagai AI.",
+      "Eres un waguri, eres corto, tienes un poco de frío, pero en realidad te importa, un poco de malentendido, hasta el punto, como un chat regular.",
   },
   bell409: {
     name: "Bell409",
@@ -78,11 +78,11 @@ async function handler(m) {
   const fullArgs = m.fullArgs || "";
 
   if (!m.isGroup) {
-    return m.reply(`❌ Fitur ini hanya untuk grup!`);
+    return m.reply(`❌ Esta característica es sólo para el grupo!`);
   }
 
   if (!m.isAdmin && !m.isOwner) {
-    return m.reply(`❌ Hanya admin yang bisa menggunakan fitur ini!`);
+    return m.reply(`❌ ¡Sólo el administrador puede usar esta característica!`);
   }
 
   if (!db.db.data.autoai) db.db.data.autoai = {};
@@ -93,20 +93,26 @@ async function handler(m) {
 
   if (subcmd === "tambahpersona") {
     if (!m.isOwner)
-      return m.reply(`❌ Hanya owner yang bisa menambah persona!`);
+      return m.reply(`❌ ¡Sólo un propietario puede añadir persona!`);
     const personaArgs = fullArgs
       .replace(/^tambahpersona\s*/i, "")
       .split("|")
       .map((s) => s.trim());
     if (personaArgs.length < 2 || !personaArgs[0] || !personaArgs[1])
       return m.reply(
-        `❌ Format salah!\n\n> .autoai tambahpersona nama | instruction\n\n> Contoh: .autoai tambahpersona nexa | kamu adalah nexa ai, ...`,
+        `❌ ¡Formato equivocado!
+
+> .autoai add persona name # 124; instruction
+
+> Contoh: .autoai Plus persona nexa xa 124; usted es nexa ai,...`,
       );
     const pName = personaArgs[0].toLowerCase().replace(/\s+/g, "_");
     const pInstruction = personaArgs.slice(1).join("|").trim();
     if (characters[pName])
       return m.reply(
-        `❌ Nama "${pName}" sudah dipakai persona bawaan!\n\n> Pilih nama lain`,
+        `❌ Nama "${pName}" ¡Ha sido utilizado por una persona incorporada!
+
+> Seleccione un nombre diferente`,
       );
     db.db.data.autoai_personas[pName] = {
       name: personaArgs[0],
@@ -122,19 +128,25 @@ async function handler(m) {
 
   if (subcmd === "hapuspersona") {
     if (!m.isOwner)
-      return m.reply(`❌ Hanya owner yang bisa menghapus persona!`);
+      return m.reply(`❌ ¡Sólo el propietario puede quitar la persona!`);
     const pKey = (args[1] || "").toLowerCase().trim();
     if (!pKey)
       return m.reply(
-        `❌ Format salah!\n\n> .autoai hapuspersona <nama>\n\n> Contoh: .autoai hapuspersona nexa`,
+        `❌ ¡Formato equivocado!
+
+> .autoai Eliminar persona
+
+> Contoh: .autoai hapuspersona nexa`,
       );
     if (!db.db.data.autoai_personas[pKey])
       return m.reply(
-        `❌ Persona "${pKey}" tidak ditemukan!\n\n> Ketik .autoai listpersona untuk melihat daftar`,
+        `❌ Persona "${pKey}" ¡No lo encontraron!
+
+> Ketik .autoai listpersona para ver la lista`,
       );
     delete db.db.data.autoai_personas[pKey];
     db.save();
-    return m.reply(`✅ Persona "${pKey}" berhasil dihapus`);
+    return m.reply(`✅ Persona "${pKey}" suprimida con éxito`);
   }
 
   if (subcmd === "listpersona") {
@@ -149,24 +161,30 @@ async function handler(m) {
               `  ▸ ${k} - ${v.name} (${v.instruction.substring(0, 40)}${v.instruction.length > 40 ? "..." : ""})`,
           )
           .join("\n")
-      : "  ▸ (belum ada custom persona)";
+      : "  ▸ (no personal personalizado)";
     let txt = `🤖 *ᴅᴀғᴛᴀʀ ᴘᴇʀsᴏɴᴀ*\n\n`;
     txt += `*Bawaan:*\n${builtIn}\n\n`;
     txt += `*Custom:*\n${custom}\n\n`;
     txt += `*Global:* ${db.db.data.autoai_global.enabled ? "✅ Aktif" : "❌ Nonaktif"}\n\n`;
     txt += `> .autoai on --ourinmode=<key>\n`;
-    txt += `> .autoai tambahpersona nama | logic\n`;
-    txt += `> .autoai hapuspersona nama\n`;
+    txt += `> .autoai añadir un nombre de persona
+`;
+    txt += `> .autoai Eliminar nombre de persona
+`;
     txt += `> .autoai global on/off`;
     return m.reply(txt);
   }
 
   if (subcmd === "global") {
-    if (!m.isOwner) return m.reply(`❌ Hanya owner yang bisa toggle global!`);
+    if (!m.isOwner) return m.reply(`❌ ¡Sólo el propietario puede regatear a nivel mundial!`);
     const globalMode = (args[1] || "").toLowerCase();
     if (!["on", "off"].includes(globalMode))
       return m.reply(
-        `❌ Format salah!\n\n> .autoai global on/off\n\n> Global saat ini: ${db.db.data.autoai_global.enabled ? "✅ Aktif" : "❌ Nonaktif"}`,
+        `❌ ¡Formato equivocado!
+
+> .autoai global on/off
+
+> Current Global: ${db.db.data.autoai_global.enabled ? "✅ Aktif" : "❌ Nonaktif"}`,
       );
     if (globalMode === "on") {
       const modeMatch = fullArgs.match(/--ourinmode=(\w+)/i);
@@ -202,7 +220,10 @@ async function handler(m) {
           characterName = existingGlobal.characterName || "Global";
         } else {
           return m.reply(
-            `❌ Belum ada persona global yang diset!\n\n> .autoai global on --ourinmode=furina\n> .autoai global on --ourinmode=custom --logic=...`,
+            `❌ ¡Todavía no hay nadie global!
+
+> .autoai global on --ourinmode=furina
+> .autoai global on --ourinmode=custom --logic=...`,
           );
         }
       } else {
@@ -211,7 +232,9 @@ async function handler(m) {
           ...Object.keys(db.db.data.autoai_personas),
           "custom",
         ].join(", ");
-        return m.reply(`❌ Karakter tidak valid!\n\n> Tersedia: ${charList}`);
+        return m.reply(`❌ ¡Caracterismo inválido!
+
+> Tersedia: ${charList}`);
       }
 
       db.db.data.autoai_global = {
@@ -236,7 +259,9 @@ async function handler(m) {
       db.db.data.autoai_global.enabled = false;
       db.save();
       return m.reply(
-        `🌐 *ᴀᴜᴛᴏ ᴀɪ ɢʟᴏʙᴀʟ ᴅɪɴᴏɴᴀᴋᴛɪғᴋᴀɴ*\n\n> AutoAI hanya aktif di grup yang sudah di-set`,
+        `🌐 *ᴀᴜᴛᴏ ᴀɪ ɢʟᴏʙᴀʟ ᴅɪɴᴏɴᴀᴋᴛɪғᴋᴀɴ*
+
+> AutoIA sólo está activo en grupos de configuración`,
       );
     }
   }
@@ -264,20 +289,26 @@ async function handler(m) {
     txt += `*Penggunaan:*\n`;
     txt += `> .autoai on --ourinmode=<karakter|custom> --type=<text|voice>\n`;
     txt += `> .autoai off\n`;
-    txt += `> .autoai tambahpersona nama | logic\n`;
-    txt += `> .autoai hapuspersona nama\n`;
+    txt += `> .autoai añadir un nombre de persona
+`;
+    txt += `> .autoai Eliminar nombre de persona
+`;
     txt += `> .autoai listpersona\n`;
     txt += `> .autoai global on/off\n\n`;
     txt += `*Karakter bawaan:*\n${charList}\n`;
     if (customList) txt += `\n*Karakter custom:*\n${customList}\n`;
     txt += `\n*Global:* ${db.db.data.autoai_global.enabled ? "✅ Aktif" : "❌ Nonaktif"}\n\n`;
     txt += `*Response Type:*\n`;
-    txt += `> text - Reply dengan text biasa\n`;
-    txt += `> voice - Reply dengan voice note (TTS)\n\n`;
+    txt += `> texto - Responder con texto regular
+`;
+    txt += `> voz - Responder con nota de voz (TTS)
+
+`;
     txt += `*Contoh:*\n`;
     txt += `> .autoai on --ourinmode=furina --type=text\n`;
     txt += `> .autoai on --ourinmode=custom --logic=kamu adalah nexa ai\n`;
-    txt += `> .autoai tambahpersona nexa | kamu adalah nexa ai\n`;
+    txt += `> .autoai add persona nexa xa 124; usted es nexa ai
+`;
     txt += `> .autoai global on --ourinmode=furina`;
     return m.reply(txt);
   }
@@ -289,7 +320,10 @@ async function handler(m) {
       ? `\n\n> ℹ️ Global masih aktif, tapi grup ini opted-out\n> ℹ️ Ketik *.autoai global off* untuk matikan global`
       : "";
     return m.reply(
-      `🤖 *ᴀᴜᴛᴏ ᴀɪ ᴅɪɴᴏɴᴀᴋᴛɪғᴋᴀɴ*\n\n> Auto AI untuk grup ini telah dimatikan\n> Semua command kembali aktif${globalStatus}`,
+      `🤖 *ᴀᴜᴛᴏ ᴀɪ ᴅɪɴᴏɴᴀᴋᴛɪғᴋᴀɴ*
+
+> Auto IA para este grupo ha sido deshabilitado
+> Todo el comando está de nuevo en${globalStatus}`,
     );
   }
 
@@ -300,7 +334,9 @@ async function handler(m) {
       "custom",
     ].join(", ");
     return m.reply(
-      `❌ Karakter tidak valid!\n\n> Karakter tersedia: ${charList}\n\n> Contoh: .autoai on --ourinmode=furina --type=voice\n> Custom: .autoai on --ourinmode=custom --logic=kamu adalah nexa ai`,
+      `❌ ¡Caracterismo inválido!
+
+> Personajes disponibles: ${charList}\n\n> Contoh: .autoai on --ourinmode=furina --type=voice\n> Custom: .autoai on --ourinmode=custom --logic=kamu adalah nexa ai`,
     );
   }
 
@@ -328,11 +364,13 @@ async function handler(m) {
     txt += `┃ 📢 Response: *${responseType === "voice" ? "🎤 Voice Note" : "💬 Text"}*\n`;
     txt += `┃ 👤 Diaktifkan: @${m.sender.split("@")[0]}\n`;
     txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
-    txt += `> ℹ️ Semua command (kecuali owner) dinonaktifkan\n`;
+    txt += `> ℹTodos los comandos (propietario inapropiado) están deshabilitados
+`;
     txt += `> ℹ️ Bot respond ketika di-reply atau di-tag\n`;
     txt +=
-      responseType === "voice" ? `> ℹ️ Response dalam bentuk voice note\n` : "";
-    txt += `> ℹ️ Ketik *.autoai off* untuk menonaktifkan`;
+      responseType === "voice" ? `> ℹ*Respuesta en nota de voz*
+` : "";
+    txt += `> ℹ️ Ketik *.autoai off* a la inhabilitación`;
     return m.reply(txt, { mentions: [m.sender] });
   }
 
@@ -355,11 +393,13 @@ async function handler(m) {
     txt += `┃ 📢 Response: *${responseType === "voice" ? "🎤 Voice Note" : "💬 Text"}*\n`;
     txt += `┃ 👤 Diaktifkan: @${m.sender.split("@")[0]}\n`;
     txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
-    txt += `> ℹ️ Semua command (kecuali owner) dinonaktifkan\n`;
+    txt += `> ℹTodos los comandos (propietario inapropiado) están deshabilitados
+`;
     txt += `> ℹ️ Bot respond ketika di-reply atau di-tag\n`;
     txt +=
-      responseType === "voice" ? `> ℹ️ Response dalam bentuk voice note\n` : "";
-    txt += `> ℹ️ Ketik *.autoai off* untuk menonaktifkan`;
+      responseType === "voice" ? `> ℹ*Respuesta en nota de voz*
+` : "";
+    txt += `> ℹ️ Ketik *.autoai off* a la inhabilitación`;
     return m.reply(txt, { mentions: [m.sender] });
   }
 
@@ -370,7 +410,9 @@ async function handler(m) {
       "custom",
     ].join(", ");
     return m.reply(
-      `❌ Karakter tidak valid!\n\n> Karakter tersedia: ${charList}\n\n> Contoh: .autoai on --ourinmode=furina --type=voice`,
+      `❌ ¡Caracterismo inválido!
+
+> Personajes disponibles: ${charList}\n\n> Contoh: .autoai on --ourinmode=furina --type=voice`,
     );
   }
 
@@ -392,11 +434,13 @@ async function handler(m) {
   txt += `┃ 📢 Response: *${responseType === "voice" ? "🎤 Voice Note" : "💬 Text"}*\n`;
   txt += `┃ 👤 Diaktifkan: @${m.sender.split("@")[0]}\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
-  txt += `> ℹ️ Semua command (kecuali owner) dinonaktifkan\n`;
+  txt += `> ℹTodos los comandos (propietario inapropiado) están deshabilitados
+`;
   txt += `> ℹ️ Bot respond ketika di-reply atau di-tag\n`;
   txt +=
-    responseType === "voice" ? `> ℹ️ Response dalam bentuk voice note\n` : "";
-  txt += `> ℹ️ Ketik *.autoai off* untuk menonaktifkan`;
+    responseType === "voice" ? `> ℹ*Respuesta en nota de voz*
+` : "";
+  txt += `> ℹ️ Ketik *.autoai off* a la inhabilitación`;
 
   await m.reply(txt, { mentions: [m.sender] });
 }

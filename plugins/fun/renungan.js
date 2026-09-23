@@ -25,7 +25,7 @@ async function handler(m, { sock }) {
         m.react('✅')
     } catch (error) {
         m.react('❌')
-        await m.reply('❌ Gagal mengambil gambar. Coba lagi!');
+        await m.reply("❌ ¡No se pudo take a picture. Try again!");
     }
 }
 

@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'clanjoin',
     alias: ['joinclan', 'guildjoin'],
     category: 'clan',
-    description: 'Gabung ke clan',
+    description: "Merge to clan",
     usage: '.clanjoin <clan_id>',
     example: '.clanjoin clan_123456',
     isOwner: false,
@@ -32,7 +32,8 @@ async function handler(m) {
     }
 
     if (user.clanId) {
-        return m.reply(`❌ Kamu sudah punya clan\nKeluar dulu: *.clanleave*`)
+        return m.reply(`❌ Ya tienes un clan.
+Sal primero: *.clanleave*`)
     }
 
     if (!db.db.data.clans) db.db.data.clans = {}
@@ -40,9 +41,9 @@ async function handler(m) {
     const clan = db.db.data.clans[clanId]
         || Object.values(db.db.data.clans).find(c => c.name.toLowerCase() === clanId.toLowerCase())
         || Object.values(db.db.data.clans).find(c => c.id.toLowerCase() === clanId.toLowerCase())
-    if (!clan) return m.reply(`❌ Clan tidak ditemukan`)
-    if (!clan.isOpen) return m.reply(`❌ *${clan.name}* sedang tertutup`)
-    if (clan.members.length >= MAX_MEMBERS) return m.reply(`❌ *${clan.name}* sudah penuh (${MAX_MEMBERS}/${MAX_MEMBERS})`)
+    if (!clan) return m.reply(`❌ Clan not found`)
+    if (!clan.isOpen) return m.reply(`❌ *${clan.name}* cerrado`)
+    if (clan.members.length >= MAX_MEMBERS) return m.reply(`❌ *${clan.name}* Está lleno.${MAX_MEMBERS}/${MAX_MEMBERS})`)
 
     clan.members.push(m.sender)
     db.setUser(m.sender, { clanId })

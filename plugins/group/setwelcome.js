@@ -4,8 +4,8 @@ const pluginConfig = {
   alias: ["customwelcome"],
   category: "group",
   description: "Set custom welcome message",
-  usage: ".setwelcome <pesan>",
-  example: ".setwelcome Halo {user}, selamat datang di {group}!",
+  usage: ".setwelcome > Mensaje",
+  example: ".setwelcome Hola, bienvenido a {group}!",
   isOwner: false,
   isPremium: false,
   isGroup: true,
@@ -48,7 +48,7 @@ async function handler(m, { sock }) {
   m.react("✅");
 
   await m.reply(
-    `✅ Welcome berhasil di set menjadi *${text}*\nMau reset? ketik ${m.prefix}resetwelcome`,
+    `✅ Bienvenida con éxito *${text}*\nMau reset? ketik ${m.prefix}resetwelcome`,
   );
 }
 

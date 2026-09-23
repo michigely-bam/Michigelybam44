@@ -5,8 +5,8 @@ const pluginConfig = {
   name: "bluearchive-char",
   alias: ["bachar"],
   category: "info",
-  description: "Lihat info character Blue Archive",
-  usage: ".bluearchive-char <nama>",
+  description: "Ver información de carácter del Archivo Azul",
+  usage: ".bluearchive-char",
   example: ".bluearchive-char shiroko",
   isOwner: false,
   isPremium: false,
@@ -55,7 +55,9 @@ class BluArchive {
         .filter((u) => u.includes(name.toLowerCase().split(" ")[0]))
         .slice(0, 5);
       throw new Error(
-        `Character "${name}" tidak ditemukan.\n\n> Mungkin maksud: ${suggestions.join(", ") || "tidak ada"}`,
+        `Character "${name}" No se encuentra.
+
+> Mungkin maksud: ${suggestions.join(", ") || "ninguno"}`,
       );
     }
 

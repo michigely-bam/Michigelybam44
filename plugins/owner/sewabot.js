@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'sewabot',
     alias: ['sewa'],
     category: 'owner',
-    description: 'Toggle dan kelola sistem sewa bot',
+    description: "Toggle and manage the rent-bot system",
     usage: '.sewabot <on/off/leave/status>',
     example: '.sewabot on',
     isOwner: true,
@@ -55,12 +55,17 @@ async function handler(m, { sock }) {
         db.db.data.sewa.enabled = false
         db.db.write()
         await m.react('✅')
-        return m.reply(`✅ Sistem sewa dinonaktifkan\n\nBot tidak akan meninggalkan grup manapun.`)
+        return m.reply(`✅ Sistem sewa dinonaktifkan
+
+El Bot no dejará ningún grupo.`)
     }
     if (args === 'on') {
         const pending = pendingConfirmations.get(m.sender)
         if (pending && pending.type === 'sewabot_on' && Date.now() - pending.timestamp < 60000) {
-            return m.reply(`🕕 Sudah ada permintaan pending\n\nKetik *${m.prefix}sewabot confirm* untuk lanjut\nKetik *${m.prefix}sewabot cancel* untuk batal`)
+            return m.reply(`🕕 Ha habido una solicitud de audiencia.
+
+Ketik *${m.prefix}sewabot confirm* para continuar
+Ketik *${m.prefix}sewabot cancel* para cancelar`)
         }
         pendingConfirmations.set(m.sender, { type: 'sewabot_on', timestamp: Date.now() })
         setTimeout(() => {
@@ -78,13 +83,14 @@ async function handler(m, { sock }) {
     if (args === 'confirm' || args === 'yes' || args === 'y') {
         const pending = pendingConfirmations.get(m.sender)
         if (!pending || pending.type !== 'sewabot_on') {
-            return m.reply(`❌ Tidak ada permintaan pending\nKetik *${m.prefix}sewabot on* dulu`)
+            return m.reply(`❌ No hay solicitud de impugnación
+Ketik *${m.prefix}sewabot on* dulu`)
         }
         pendingConfirmations.delete(m.sender)
         db.db.data.sewa.enabled = true
         db.db.write()
         await m.react('🕕')
-        await m.reply(`🕕 Sistem sewa diaktifkan, memproses auto-leave...`)
+        await m.reply(`🕕 El sistema de alquiler está activado, procesamiento de autoleave...`)
         try {
             global.isFetchingGroups = true
             const allGroups = await sock.groupFetchAllParticipating()
@@ -95,14 +101,17 @@ async function handler(m, { sock }) {
             let failedCount = 0
             for (const groupId of unlistedGroups) {
                 try {
-                    await sock.sendText(groupId, `⛔ Grup ini tidak terdaftar dalam sistem sewa.\nBot akan meninggalkan grup ini.\n\nHubungi owner untuk sewa bot.`, null, {
+                    await sock.sendText(groupId, `⛔ Este grupo no está incluido en el sistema de alquileres.
+Bot dejará este grupo.
+
+Llame al propietario para el bot de alquiler.`, null, {
                         contextInfo: {
                             forwardingScore: 99,
                             isForwarded: true,
                             externalAdReply: {
                                 mediaType: 1,
                                 title: 'SEWA BOT',
-                                body: 'Grup tidak terdaftar',
+                                body: "Grupo no incluido",
                                 thumbnail: fs.readFileSync('./assets/images/ourin.jpg'),
                                 renderLargerThumbnail: true
                             }
@@ -129,9 +138,9 @@ async function handler(m, { sock }) {
         }
     }
     if (args === 'leave') {
-        if (!currentStatus) return m.reply(`❌ Aktifkan sewabot dulu dengan *${m.prefix}sewabot on*`)
+        if (!currentStatus) return m.reply(`❌ Activar la primera carga con *${m.prefix}sewabot on*`)
         await m.react('🕕')
-        await m.reply(`🕕 Mengambil daftar grup...`)
+        await m.reply(`🕕 Lista de grupos de recuperación...`)
         global.sewaLeaving = true
         try {
             global.isFetchingGroups = true
@@ -142,21 +151,25 @@ async function handler(m, { sock }) {
             if (unlistedGroups.length === 0) {
                 delete global.sewaLeaving
                 await m.react('✅')
-                return m.reply(`✅ Tidak ada grup yang perlu ditinggalkan`)
+                return m.reply(`✅ Ningún grupo necesita ser dejado`)
             }
-            await m.reply(`📊 Total: ${allGroupIds.length} grup\nWhitelist: ${sewaGroups.length}\nAkan keluar dari: ${unlistedGroups.length} grup`)
+            await m.reply(`📊 Total: ${allGroupIds.length} grup\nWhitelist: ${sewaGroups.length}
+Saliendo de: ${unlistedGroups.length} grup`)
             let leftCount = 0
             let failedCount = 0
             for (const groupId of unlistedGroups) {
                 try {
-                    await sock.sendText(groupId, `👋 Grup ini tidak terdaftar dalam sistem sewa.\nBot akan meninggalkan grup ini.\n\nHubungi owner untuk sewa bot.`, null, {
+                    await sock.sendText(groupId, `👋 Este grupo no está incluido en el sistema de alquileres.
+Bot dejará este grupo.
+
+Llame al propietario para el bot de alquiler.`, null, {
                         contextInfo: {
                             forwardingScore: 99,
                             isForwarded: true,
                             externalAdReply: {
                                 mediaType: 1,
                                 title: 'SEWA BOT',
-                                body: 'Grup tidak terdaftar',
+                                body: "Grupo no incluido",
                                 thumbnail: fs.readFileSync('./assets/images/ourin.jpg'),
                                 renderLargerThumbnail: true
                             }
@@ -172,7 +185,9 @@ async function handler(m, { sock }) {
             }
             delete global.sewaLeaving
             await m.react('✅')
-            return m.reply(`✅ Selesai\n\nBerhasil keluar: *${leftCount}* grup\nGagal: *${failedCount}* grup`)
+            return m.reply(`✅ Selesai
+
+Salió: *${leftCount}* grup\nGagal: *${failedCount}* grup`)
         } catch (e) {
             delete global.sewaLeaving
             await m.react('☢')
@@ -181,11 +196,14 @@ async function handler(m, { sock }) {
     }
     if (args === 'cancel' || args === 'no' || args === 'n') {
         const pending = pendingConfirmations.get(m.sender)
-        if (!pending || pending.type !== 'sewabot_on') return m.reply(`❌ Tidak ada permintaan pending`)
+        if (!pending || pending.type !== 'sewabot_on') return m.reply(`❌ No hay solicitud de impugnación`)
         pendingConfirmations.delete(m.sender)
         await m.react('❌')
-        return m.reply(`❌ Aktivasi dibatalkan\nWhitelist grup dulu dengan *${m.prefix}addsewa*`)
+        return m.reply(`❌ Aktivasi dibatalkan
+Grupo blanco primero con *${m.prefix}addsewa*`)
     }
-    return m.reply(`❌ Perintah tidak valid\n\nKetik *${m.prefix}sewabot* untuk melihat panduan lengkap`)
+    return m.reply(`❌ Comando inválido
+
+Ketik *${m.prefix}sewabot* para ver la guía completa`)
 }
 export { pluginConfig as config, handler, pendingConfirmations }

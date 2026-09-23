@@ -24,7 +24,7 @@ async function Roblox(username) {
   const searchJson = await search.json();
 
   if (!searchJson.data || !searchJson.data.length) {
-    return { error: "User tidak ditemukan" };
+    return { error: "Usuario no encontrado" };
   }
 
   const user = searchJson.data[0];
@@ -97,7 +97,7 @@ async function Roblox(username) {
     groups: groups.data,
     games: games.data,
     badges: badges.data,
-    inventory: inventory?.data || "private / tidak tersedia",
+    inventory: inventory?.data || "privado / no disponible",
     presence,
   };
 }
@@ -127,7 +127,7 @@ async function handler(m, { sock }) {
 
     if (res.error) {
       m.react("❌");
-      return m.reply(`❌ Username *${username}* tidak ditemukan`);
+      return m.reply(`❌ Username *${username}* no encontrado`);
     }
 
     const topGroups =
@@ -137,7 +137,7 @@ async function handler(m, { sock }) {
           (v) =>
             `  ◦ ${v.group.name} (${v.group.memberCount} members) — ${v.role.name}`,
         )
-        .join("\n") || "  ◦ Tidak ada";
+        .join("\n") || "  ◦ No.";
 
     const topGames =
       res.games
@@ -146,7 +146,7 @@ async function handler(m, { sock }) {
           (v) =>
             `  ◦ ${v.name} (${(v.placeVisits || 0).toLocaleString()} visits)`,
         )
-        .join("\n") || "  ◦ Tidak ada";
+        .join("\n") || "  ◦ No.";
 
     const topBadges =
       res.badges
@@ -155,7 +155,7 @@ async function handler(m, { sock }) {
           (v) =>
             `  ◦ ${v.name} (${v.statistics?.awardedCount?.toLocaleString() || 0} awarded)`,
         )
-        .join("\n") || "  ◦ Tidak ada";
+        .join("\n") || "  ◦ No.";
 
     const topInventory = Array.isArray(res.inventory)
       ? res.inventory
@@ -169,7 +169,7 @@ async function handler(m, { sock }) {
 
     const presInfo = res.presence
       ? `Status: ${presenceType[res.presence.userPresenceType] || res.presence.userPresenceType}\n  Last Location: ${res.presence.lastLocation || "-"}\n  PlaceId: ${res.presence.placeId || "-"}\n  GameId: ${res.presence.gameId || "-"}`
-      : "tidak tersedia";
+      : "no disponible";
 
     const caption =
       `🎮 *ʀᴏʙʟᴏx sᴛᴀʟᴋ*\n\n` +

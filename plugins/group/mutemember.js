@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'mutemember',
     alias: ['mutmember', 'silentmember', 'bisukanmember'],
     category: 'group',
-    description: 'Bisukan member tertentu (pesan akan dihapus bot)',
+    description: "Un inserto miembro específico (el mensaje se eliminará del bot)",
     usage: '.mutemember <@tag/reply/nomor>',
     example: '.mutemember @user',
     isOwner: false,
@@ -61,7 +61,9 @@ async function handler(m, { sock }) {
             return pJid === targetNumber && (p.admin === 'admin' || p.admin === 'superadmin')
         })
         if (isTargetAdmin) {
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak dapat mute admin grup`)
+            return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No puede mute grupo admin`)
         }
     }
 
@@ -75,7 +77,7 @@ async function handler(m, { sock }) {
     })
 
     if (alreadyMuted) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Member @${targetNumber} sudah dimute`, { mentions: [targetJid] })
+        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Member @${targetNumber} Está cerrado.`, { mentions: [targetJid] })
     }
 
     mutedMembers.push(targetJid)

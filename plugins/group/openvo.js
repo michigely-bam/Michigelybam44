@@ -3,8 +3,8 @@ const pluginConfig = {
     name: 'rvo',
     alias: [],
     category: 'group',
-    description: 'Membuka pesan 1x lihat yang di-reply',
-    usage: '.rvo (reply pesan 1x lihat)',
+    description: "Mensaje abierto 1x ver la respuesta",
+    usage: ".rvo (reply message 1x see)",
     example: '.rvo',
     isOwner: false,
     isPremium: false,
@@ -70,7 +70,7 @@ async function handler(m, { sock }) {
 
         if (!mediaType) {
             await m.reply(
-                `Tipenya gak didukung, hanya support image, video, audio`
+                `Tipo sin soporte, solo admite imágenes, vídeos, audio`
             )
             return
         }

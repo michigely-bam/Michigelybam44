@@ -9,7 +9,7 @@ const pluginConfig = {
   name: "filmget",
   alias: ["getfilm", "filmdetail", "filminfo"],
   category: "search",
-  description: "Ambil detail film",
+  description: "Obtener los detalles de la película",
   usage: ".filmget <url>",
   example: ".filmget https://tv.neoxr.eu/film/civil-war-2024",
   cooldown: 10,
@@ -45,7 +45,7 @@ async function handler(m, { sock }) {
 
     if (!data?.status || !data?.data) {
       m.react("❌");
-      return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> Film tidak ditemukan");
+      return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> Película no encontrada");
     }
 
     const film = data.data;

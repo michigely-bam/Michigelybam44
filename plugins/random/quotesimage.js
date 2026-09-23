@@ -28,7 +28,7 @@ async function handler(m, { sock }) {
         
         if (!res.status || !res.data?.url) {
             m.react('❌')
-            return m.reply(`❌ Gagal mengambil quotes image`)
+            return m.reply(`❌ Fallado para recuperar citas de imagen`)
         }
         
         await sock.sendMedia(m.chat, res.data.url, null, m, {

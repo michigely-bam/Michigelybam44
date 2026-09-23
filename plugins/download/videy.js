@@ -32,7 +32,7 @@ async function handler(m, { sock }) {
     }
     
     if (!url.match(/videy\.co/i)) {
-        return m.reply(`❌ URL tidak valid. Gunakan link dari videy.co`)
+        return m.reply(`❌ URL inválida. Usar enlaces de videy.co`)
     }
     
     m.react('🕕')
@@ -42,7 +42,7 @@ async function handler(m, { sock }) {
         
         if (!data?.status || !data?.data?.url) {
             m.react('❌')
-            return m.reply(`❌ Gagal mengambil video. Link tidak valid atau sudah expired.`)
+            return m.reply(`❌ No se pudo retrieve video. Invalid or already expired link.`)
         }
         
         const videoUrl = data.data.url

@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekoverpower',
     alias: ['overpower', 'op'],
     category: 'cek',
-    description: 'Cek tingkat overpower kamu',
-    usage: '.cekoverpower <nama>',
+    description: "Comprueba tus niveles de potencia.",
+    usage: ".ccoverpower < nombre",
     example: '.cekoverpower Budi',
     isOwner: false,
     isPremium: false,
@@ -23,12 +23,12 @@ async function handler(m) {
     else if (percent >= 70) desc = 'Kuat banget nih! 💪'
     else if (percent >= 50) desc = 'Lumayan strong~ 😎'
     else if (percent >= 30) desc = 'Biasa aja sih 🤔'
-    else desc = 'Masih perlu latihan 📝'
+    else desc = "Todavía necesita practicar 📝"
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat keoverpoweran kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat keoverpoweran @${mentioned.split('@')[0]} yak? 
+Tu tasa de exceso. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Quieres revisar el nivel de exceso.${mentioned.split('@')[0]} yak? 
     
 Tingkat keoverpoweran dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

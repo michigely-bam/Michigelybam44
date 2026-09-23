@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekkarma',
     alias: ['karma'],
     category: 'cek',
-    description: 'Cek tingkat karma kamu',
-    usage: '.cekkarma <nama>',
+    description: "Revisa tus niveles de karma.",
+    usage: ".ceckarma &gt; nombre &gt;",
     example: '.cekkarma Budi',
     isOwner: false,
     isPremium: false,
@@ -22,13 +22,13 @@ async function handler(m) {
     if (percent >= 80) desc = 'Karma baik! Surga menantimu~ ✨'
     else if (percent >= 60) desc = 'Cukup baik, terus tingkatkan! 🙏'
     else if (percent >= 40) desc = 'Netral, perbanyak kebaikan~ ⚖️'
-    else if (percent >= 20) desc = 'Hati-hati dengan karma buruk! ⚠️'
+    else if (percent >= 20) desc = "Hati-hati ¡Con mal karma! ⚠️"
     else desc = 'Wah perlu banyak tobat nih... 😱'
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kekarmaan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kekarmaan @${mentioned.split('@')[0]} yak? 
+Tu nivel de decencia *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de descuido @${mentioned.split('@')[0]} yak? 
     
 Tingkat kekarmaan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

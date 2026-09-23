@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['gantiourinv8', 'setourinv8'],
     category: 'owner',
     description: 'Ganti gambar ourin-v8.jpg (thumbnail welcome)',
-    usage: '.ganti-ourin-v8.jpg (reply/kirim gambar)',
+    usage: ".reemplazar -ourin -v8.jpg (reply / enviar imagen)",
     example: '.ganti-ourin-welcome.jpg',
     isOwner: true,
     isPremium: false,
@@ -21,7 +21,10 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
     
     if (!isImage) {
-        return m.reply(`🖼️ *ɢᴀɴᴛɪ ᴏᴜʀɪɴ-ᴠ8.ᴊᴘɢ*\n\n> Kirim/reply gambar untuk mengganti\n> File: assets/images/ourin-v9.jpg`)
+        return m.reply(`🖼️ *ɢᴀɴᴛɪ ᴏᴜʀɪɴ-ᴠ8.ᴊᴘɢ*
+
+> Enviar / respuesta imágenes para reemplazar
+> File: assets/images/ourin-v9.jpg`)
     }
     
     try {
@@ -33,7 +36,7 @@ async function handler(m, { sock }) {
         }
         
         if (!buffer) {
-            return m.reply(`❌ Gagal mendownload gambar`)
+            return m.reply(`❌ No se pudo download image`)
         }
         
         const targetPath = path.join(process.cwd(), 'assets', 'images', 'ourin-v8.jpg')

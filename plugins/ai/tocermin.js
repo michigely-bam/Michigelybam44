@@ -7,7 +7,7 @@ const pluginConfig = {
     alias: ['mirror', 'tomirror'],
     category: 'ai',
     description: 'Ubah foto menjadi efek cermin (mirror reflection)',
-    usage: '.tocermin (reply/kirim gambar)',
+    usage: ".tomirror (reply / enviar imágenes)",
     example: '.tocermin',
     isOwner: false,
     isPremium: true,
@@ -46,7 +46,7 @@ async function handler(m, { sock }) {
         
         if (!buffer) {
             m.react('❌')
-            return m.reply(`❌ Gagal mendownload gambar`)
+            return m.reply(`❌ No se pudo download image`)
         }
         
         const result = await live3d(buffer, PROMPT)

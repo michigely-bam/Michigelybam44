@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'ceksisaumur',
     alias: ['sisaumur', 'umur'],
     category: 'cek',
-    description: 'Cek sisa umur kamu',
-    usage: '.ceksisaumur <nama>',
+    description: "Mira el resto de tu vida.",
+    usage: ".cexisaur Identificar nombre",
     example: '.ceksisaumur Budi',
     isOwner: false,
     isPremium: false,
@@ -36,8 +36,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Sisa umur kamu *${tahun} Tahun ${bulan} Bulan ${hari} Hari*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kesisaumuran @${mentioned.split('@')[0]} yak? 
+El resto de tu vida. *${tahun} Tahun ${bulan} Bulan ${hari} Hari*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar los niveles de bienestar @${mentioned.split('@')[0]} yak? 
     
 Sisa umur dia sebesar *${tahun} Tahun ${bulan} Bulan ${hari} Hari*
 \`\`\`${desc}\`\`\``

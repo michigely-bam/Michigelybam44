@@ -35,7 +35,7 @@ async function threadsdl(url) {
         }
     }
 
-    if (end === -1) throw new Error('JSON tidak valid')
+    if (end === -1) throw new Error("Inválido JSON")
 
     const parsed = JSON.parse(jsonString.slice(0, end))
     return parsed.v[0][1]
@@ -56,7 +56,7 @@ const pluginConfig = {
 async function handler(m, { sock }) {
     const url = m.text?.trim()
     if (!url || !/threads/i.test(url)) {
-        return m.reply(`❌ Gunakan URL Threads yang valid`)
+        return m.reply(`❌ Utilizar URL de los hilos válidos`)
     }
 
     m.react('🕕')
@@ -78,7 +78,7 @@ async function handler(m, { sock }) {
         }
 
         if (images.length === 0) {
-            throw new Error('Tidak ada gambar ditemukan')
+            throw new Error("No se encontró imagen")
         }
 
         const mediaList = []

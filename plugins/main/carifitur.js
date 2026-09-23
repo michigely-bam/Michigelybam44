@@ -10,7 +10,7 @@ const pluginConfig = {
   name: "carifitur",
   alias: ["searchcmd", "findcmd", "cari", "search", "cf"],
   category: "main",
-  description: "Mencari fitur berdasarkan keyword dengan detail lengkap",
+  description: "Características de la búsqueda basadas en detalles de la palabra clave",
   usage: ".carifitur <keyword>",
   example: ".carifitur sticker",
   isOwner: false,
@@ -87,7 +87,7 @@ async function loadAllPlugins() {
                 : plugin.config.name,
               alias: plugin.config.alias || [],
               category: plugin.config.category || category,
-              description: plugin.config.description || "Tidak ada deskripsi",
+              description: plugin.config.description || "No hay descripción",
               usage: plugin.config.usage || "",
               example: plugin.config.example || "",
               isEnabled: plugin.config.isEnabled !== false,
@@ -111,8 +111,8 @@ async function loadAllPlugins() {
     };
     const caseDescriptions = {
       cping: "Cek ping case system",
-      listallcase: "Lihat daftar semua case commands",
-      listallplugin: "Lihat daftar semua plugin commands",
+      listallcase: "Ver lista de todos los comandos de caso",
+      listallplugin: "Ver lista de todos los comandos de plugin",
     };
     for (const [category, commands] of Object.entries(caseCommands)) {
       for (const cmd of commands) {
@@ -200,14 +200,18 @@ async function handler(m, { sock }) {
     if (matches.length === 0) {
       m.react("❌");
       return m.reply(
-        `🔍 *ʜᴀsɪʟ ᴘᴇɴᴄᴀʀɪᴀɴ*\n\n> Tidak ditemukan fitur dengan keyword \`${keyword}\``,
+        `🔍 *ʜᴀsɪʟ ᴘᴇɴᴄᴀʀɪᴀɴ*
+
+> No hay características con la palabra clave encontrada \`${keyword}\``,
       );
     }
     const saluranId = config.saluran?.id || "120363400911374213@newsletter";
     const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
     let text = `🔍 *ʜᴀsɪʟ ᴘᴇɴᴄᴀʀɪᴀɴ: "${keyword}"*\n`;
     text += `> Ditemukan *${matches.length}* fitur\n`;
-    text += `> Pilih salah satu command di bawah:\n\n`;
+    text += `> Seleccione un comando a continuación:
+
+`;
     const topMatches = matches.slice(0, 15);
     for (let i = 0; i < Math.min(5, topMatches.length); i++) {
       const p = topMatches[i];
@@ -222,7 +226,7 @@ async function handler(m, { sock }) {
       text += `\n`;
     }
     if (topMatches.length > 5) {
-      text += `_+${topMatches.length - 5} hasil lainnya tersedia_`;
+      text += `_+${topMatches.length - 5} Otros resultados están disponibles_`;
     }
     const buttons = topMatches.slice(0, 10).map((p, i) => ({
       title: `${m.prefix}${p.name}`,
@@ -240,10 +244,10 @@ async function handler(m, { sock }) {
           {
             name: "single_select",
             buttonParamsJson: JSON.stringify({
-              title: "📋 Pilih Command",
+              title: "📋 Seleccione Comando",
               sections: [
                 {
-                  title: `Hasil untuk "${keyword}"`,
+                  title: `Resultados para "${keyword}"`,
                   rows: buttons,
                 },
               ],

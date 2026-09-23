@@ -7,7 +7,7 @@ const pluginConfig = {
   category: "sticker",
   description: "Membuat sticker brat white",
   usage: ".bratwhite <text>",
-  example: ".bratwhite Hai semua",
+  example: ".Hola a todos",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -21,7 +21,11 @@ async function handler(m, { sock }) {
   const text = m.args.join(" ");
   if (!text) {
     return m.reply(
-      `🖼️ *BRAT WHITE*\n\n> Masukkan teks\n\n\`Contoh: ${m.prefix}bratwhite Hai semua\``,
+      `🖼️ *BRAT WHITE*
+
+> Escriba texto
+
+\`Contoh: ${m.prefix}Hola a todos\``,
     );
   }
 

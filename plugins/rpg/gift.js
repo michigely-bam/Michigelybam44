@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'gift',
     alias: ['kasih', 'hadiah'],
     category: 'rpg',
-    description: 'Beri hadiah ke pasangan untuk meningkatkan love',
+    description: "Dar regalos a las parejas para mejorar el amor",
     usage: '.gift <item> <jumlah>',
     example: '.gift diamond 1',
     isOwner: false,
@@ -58,7 +58,9 @@ async function handler(m, { sock }) {
     const partner = db.getUser(spouseJid)
     
     if (!partner) {
-        return m.reply(`❌ *ᴘᴀsᴀɴɢᴀɴ ɴᴏᴛ ꜰᴏᴜɴᴅ*\n\n> Pasangan tidak ditemukan di database!`)
+        return m.reply(`❌ *ᴘᴀsᴀɴɢᴀɴ ɴᴏᴛ ꜰᴏᴜɴᴅ*
+
+> ¡Las parejas no se encuentran en la base de datos!`)
     }
     
     partner.inventory = partner.inventory || {}
@@ -72,7 +74,7 @@ async function handler(m, { sock }) {
     db.save()
     
     let txt = `🎁 *ɢɪꜰᴛ sᴜᴋsᴇs*\n\n`
-    txt += `> 💝 Kamu memberikan ${amount}x ${itemKey}\n`
+    txt += `> 💝 Te das ${amount}x ${itemKey}\n`
     txt += `> 👤 Untuk: @${spouseJid.split('@')[0]}\n`
     txt += `> 💕 Love: +${amount * 10}\n\n`
     txt += `> _So sweet! 💖_`

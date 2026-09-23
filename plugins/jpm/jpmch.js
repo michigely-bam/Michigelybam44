@@ -14,8 +14,8 @@ const pluginConfig = {
     name: 'jpmch',
     alias: ['jpmchannel'],
     category: 'jpm',
-    description: 'Kirim pesan ke semua channel WhatsApp',
-    usage: '.jpmch <pesan>',
+    description: "Enviar un mensaje a todos los canales de WhatsApp",
+    usage: ".jpmch &gt; Mensaje &gt;",
     example: '.jpmch Halo semuanya!',
     isOwner: true,
     isPremium: false,
@@ -93,7 +93,11 @@ async function handler(m, { sock }) {
     if (m.isGroup) {
         const groupMode = getGroupMode(m.chat, db)
         if (groupMode !== 'md' && groupMode !== 'all') {
-            return m.reply(`❌ *ᴍᴏᴅᴇ ᴛɪᴅᴀᴋ sᴇsᴜᴀɪ*\n\n> JPM hanya tersedia di mode MD\n\n\`${m.prefix}botmode md\``)
+            return m.reply(`❌ *ᴍᴏᴅᴇ ᴛɪᴅᴀᴋ sᴇsᴜᴀɪ*
+
+> JPM sólo está disponible en modo MD
+
+\`${m.prefix}botmode md\``)
         }
     }
     
@@ -111,7 +115,9 @@ async function handler(m, { sock }) {
     }
     
     if (global.statusjpm) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> JPM sedang berjalan. Ketik \`${m.prefix}stopjpm\` untuk menghentikan.`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> JPM corriendo. \`${m.prefix}stopjpm\` Parar.`)
     }
     
     m.react('📢')
@@ -145,7 +151,9 @@ async function handler(m, { sock }) {
         
         if (channelIds.length === 0) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak ada channel yang ditemukan atau bot belum subscribe channel apapun`)
+            return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No hay canal encontrado ni bot todavía subscribir ningún canal`)
         }
 
         const jedaJpm = db.setting('jedaJpm') || 5000
@@ -194,7 +202,7 @@ async function handler(m, { sock }) {
                 if (cachedThumb) {
                     contextInfo.externalAdReply = {
                         title: '📢 JPM CHANNEL',
-                        body: 'Pesan Broadcast',
+                        body: "Mensaje de radiodifusión",
                         thumbnail: cachedThumb,
                         mediaType: 1,
                         sourceUrl: config.saluran?.link || '',

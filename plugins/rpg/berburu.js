@@ -7,7 +7,7 @@ const pluginConfig = {
   name: "berburu",
   alias: ["huntanimal", "buru"],
   category: "rpg",
-  description: "Berburu hewan untuk mendapat item",
+  description: "Animales de caza para conseguir artículos",
   usage: ".berburu",
   example: ".berburu",
   isOwner: false,
@@ -30,7 +30,7 @@ try {
   if (fs.existsSync(thumbPath)) thumbRpg = fs.readFileSync(thumbPath);
 } catch (e) {}
 
-function getContextInfo(title = "🏹 *ʙᴇʀʙᴜʀᴜ*", body = "Hasil Buruan") {
+function getContextInfo(title = "🏹 *ʙᴇʀʙᴜʀᴜ*", body = "Resultados rápidos") {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 

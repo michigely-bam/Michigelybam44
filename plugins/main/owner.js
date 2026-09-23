@@ -37,12 +37,12 @@ async function handler(m, { sock, config: botConfig }) {
             
             cards.push({
                 image: { url: ppUrl },
-                body: `Owner ke ${ownerNumbers.indexOf(number) + 1}
+                body: `Propietario ${ownerNumbers.indexOf(number) + 1}
                 
 Rules:
-- Jangan spam
-- Jangan VidCall/Call Sembarangan
-- Jangan jadiin bahan bug/banned`,
+- No es spam
+- No VidCall / Call Sembaby
+- No hacer bug / material prohibido`,
                 footer: botName,
                 buttons: [
                     {
@@ -59,9 +59,9 @@ Rules:
         await sock.sendMessage(m.chat, {
             text: `Hallo *${m.pushName}*
                 
-Kamu ingin mengetahui owner dari bot ini yak?
+¿Quieres conocer al dueño de este bot yak?
 
-dibawah ini adalah owner dari bot kami: ${botName}`,
+Bajo este es el dueño de nuestro bot: ${botName}`,
             title: 'Owner Info',
             footer: botName,
             cards
@@ -98,8 +98,8 @@ END:VCARD`
 ┃ ㊗ sᴛᴀᴛᴜs: *🟢 Online*
 ╰┈┈⬡
 
-> _Jika ada pertanyaan atau kendala,_
-> _silakan hubungi owner di atas!_
+> _Si hay alguna pregunta o obstáculos,_
+> _¡Por favor llame al dueño arriba!_
 > _📞 Contact card di bawah._`
         
         await m.reply(ownerText)

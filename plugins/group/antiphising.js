@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'antiphising',
     alias: ['antiphishing', 'antiscamlink', 'nophising'],
     category: 'group',
-    description: 'Deteksi konten phising di grup',
+    description: "Detectar contenido de phising en grupo",
     usage: '.antiphising <on/off/metode> [kick/remove]',
     example: '.antiphising on',
     isOwner: false,
@@ -58,7 +58,7 @@ function handler(m) {
             db.setGroup(m.chat, { antiphising: 'on', antiphisingMode: 'remove' })
             return m.reply('✅ *AntiPhising mode DELETE diaktifkan*')
         }
-        return m.reply('❌ Metode tidak valid! Gunakan: `kick` atau `remove`')
+        return m.reply("❌ ¡Método inválido! `kick` atau `remove`")
     }
 
     if (option === 'kick') {
@@ -71,7 +71,7 @@ function handler(m) {
         return m.reply('✅ *AntiPhising mode DELETE diaktifkan*')
     }
 
-    return m.reply('❌ Opsi tidak valid! Gunakan: `on`, `off`, `metode kick`, `metode remove`')
+    return m.reply("❌ Opción inválida! Uso: `on`, `off`, `metode kick`, `metode remove`")
 }
 
 export { pluginConfig as config, handler }

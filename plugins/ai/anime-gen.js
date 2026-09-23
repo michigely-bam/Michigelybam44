@@ -46,7 +46,7 @@ async function handler(m, { sock }) {
         
         if (!data?.status || !data?.data?.url) {
             m.react('❌')
-            return m.reply('❌ *ɢᴀɢᴀʟ*\n\n> Gagal generate gambar. Coba lagi nanti!')
+            return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> No se pudo generate image. ¡Inténtalo de nuevo más tarde!")
         }
         
         const result = data.data  
@@ -57,7 +57,7 @@ async function handler(m, { sock }) {
     } catch (error) {
         m.react('☢')
         if (error.code === 'ECONNABORTED') {
-            m.reply('⏱️ *ᴛɪᴍᴇᴏᴜᴛ*\n\n> Request terlalu lama. Coba lagi!')
+            m.reply("⏱️ *ᴛɪᴍᴇᴏᴜᴛ*\n\n> Solicito mucho tiempo.")
         } else {
             m.reply(te(m.prefix, m.command, m.pushName))
         }

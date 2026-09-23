@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'gay',
     alias: ['howgay'],
     category: 'fun',
-    description: 'Menunjuk member paling gay di grup',
+    description: "Puntos el miembro más gay del grupo",
     usage: '.gay',
     isGroup: true,
     isBotAdmin: false,

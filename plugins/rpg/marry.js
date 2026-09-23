@@ -36,7 +36,9 @@ async function handler(m, { sock }) {
     }
     
     if (target === m.sender) {
-        return m.reply(`❌ *ᴇʀʀᴏʀ*\n\n> Tidak bisa menikahi diri sendiri!`)
+        return m.reply(`❌ *ᴇʀʀᴏʀ*
+
+> ¡No puedes casarte!`)
     }
     
     const partner = db.getUser(target) || db.setUser(target)

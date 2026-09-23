@@ -7,7 +7,7 @@ const pluginConfig = {
     name: 'putus',
     alias: ['breakup', 'cerai'],
     category: 'fun',
-    description: 'Memutuskan hubungan dengan pasangan',
+    description: "Rompe con la pareja.",
     usage: '.putus',
     example: '.putus',
     isOwner: false,

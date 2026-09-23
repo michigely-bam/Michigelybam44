@@ -6,8 +6,8 @@ const pluginConfig = {
   name: "quran",
   alias: ["surah", "alquran", "bacaquran"],
   category: "islamic",
-  description: "Baca ayat Al-Quran berdasarkan nama surah",
-  usage: ".quran <nama surah>",
+  description: "Lea Al-Quran por el nombre de la carta",
+  usage: ".cuarentena de nombre de correo",
   example: ".quran al fatihah",
   isOwner: false,
   isPremium: false,
@@ -80,7 +80,7 @@ async function handler(m, { sock }) {
 
     if (!data.ayat?.length) {
       m.react("❌");
-      return m.reply(`❌ Surah *${query}* tidak ditemukan`);
+      return m.reply(`❌ Surah *${query}* no encontrado`);
     }
 
     let teks = `📖 *${data.surah}*\n${data.info}\n\n`;

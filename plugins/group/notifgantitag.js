@@ -25,7 +25,7 @@ async function handler(m, { sock }) {
     const currentStatus = groupData.notifLabelChange === true
     if (sub === 'on' && sub2 === 'all') {
         if (!m.isOwner) {
-            return m.reply(`❌ Hanya owner yang bisa menggunakan fitur ini!`)
+            return m.reply(`❌ ¡Sólo el propietario podría usar esta característica!`)
         }
         m.react('🕕')
         try {
@@ -48,7 +48,7 @@ async function handler(m, { sock }) {
     }
     if (sub === 'off' && sub2 === 'all') {
         if (!m.isOwner) {
-            return m.reply(`❌ Hanya owner yang bisa menggunakan fitur ini!`)
+            return m.reply(`❌ ¡Sólo el propietario podría usar esta característica!`)
         }
         m.react('🕕')
         try {
@@ -133,7 +133,7 @@ async function handleLabelChange(msg, sock) {
                 const toxicWords = groupData.toxicWords || DEFAULT_TOXIC_WORDS
                 const toxicCheck = isToxic(label, toxicWords)
                 if (toxicCheck.toxic) {
-                    await sock.sendText(groupJid, `Hei @${participant.split('@')[0]}, Tag kamu mengandung kata toxic !`, null, {
+                    await sock.sendText(groupJid, `Hei @${participant.split('@')[0]}, ¡Tu etiqueta contiene la palabra tóxica!`, null, {
                         mentions: [participant],
                         contextInfo: {
                             mentionedJid: [participant],
@@ -163,7 +163,7 @@ async function handleLabelChange(msg, sock) {
         if (label && label.trim()) {
             notifText = `🎉 @${participant.split('@')[0]} telah mengubah label menjadi *${label}*`
         } else {
-            notifText = `🥗 @${participant.split('@')[0]} telah menghapus label`
+            notifText = `🥗 @${participant.split('@')[0]} ha eliminado la etiqueta`
         }
         console.log(notifText)
         await sock.sendText(groupJid, notifText, null, {

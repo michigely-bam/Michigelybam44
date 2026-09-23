@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'cooking',
     alias: ['masak', 'cook', 'chef'],
     category: 'rpg',
-    description: 'Masak makanan untuk stamina dan HP',
+    description: "Cocinar comida para la resistencia y el teléfono celular",
     usage: '.cooking <recipe>',
     example: '.cooking friedrice',
     isOwner: false,
@@ -41,7 +41,9 @@ async function handler(m, { sock }) {
     
     if (!recipeName) {
         let txt = `👨‍🍳 *ᴄᴏᴏᴋɪɴɢ - ᴍᴀsᴀᴋ*\n\n`
-        txt += `> Masak makanan untuk memulihkan stats!\n\n`
+        txt += `> ¡Cocine comida para recuperar los Stats!
+
+`
         txt += `╭┈┈⬡「 📜 *ʀᴇsᴇᴘ* 」\n`
         
         for (const [key, recipe] of Object.entries(RECIPES)) {
@@ -59,7 +61,9 @@ async function handler(m, { sock }) {
     
     const recipe = RECIPES[recipeName]
     if (!recipe) {
-        return m.reply(`❌ Resep tidak ditemukan!\n\n> Ketik \`${m.prefix}cooking\` untuk melihat daftar.`)
+        return m.reply(`❌ ¡La prescripción no se encuentra!
+
+> Ketik \`${m.prefix}cooking\` para ver la lista.`)
     }
     
     const missingMaterials = []

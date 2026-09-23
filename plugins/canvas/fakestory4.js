@@ -8,8 +8,8 @@ const pluginConfig = {
   name: "fakestory4",
   alias: ["fstory4", "igstory4", "albumstory"],
   category: "canvas",
-  description: "Fake Instagram story dengan 2 gambar berbeda",
-  usage: ".fakestory4 <nama>",
+  description: "Fake Instagram historia con 2 imágenes diferentes",
+  usage: ".factoriy4 - Nombre identificado",
   example: ".fakestory4 Misaki (reply album/2 gambar)",
   isOwner: false,
   isPremium: false,
@@ -191,7 +191,7 @@ async function getAvatarBuffer(sock, jid) {
   if (fs.existsSync(DEFAULT_PP_PATH)) {
     return fs.readFileSync(DEFAULT_PP_PATH);
   }
-  throw new Error("Tidak dapat mengambil foto profil");
+  throw new Error("Incapaz de tomar la foto de perfil");
 }
 async function handler(m, { sock }) {
   const username = m.args.join(" ").trim() || m.pushName || "User";

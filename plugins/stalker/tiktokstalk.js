@@ -29,7 +29,11 @@ async function handler(m, { sock }) {
     const username = m.args[0]?.replace('@', '')
     
     if (!username) {
-        return m.reply(`🎵 *ᴛɪᴋᴛᴏᴋ sᴛᴀʟᴋ*\n\n> Masukkan username TikTok\n\n\`Contoh: ${m.prefix}tiktokstalk mrbeast\``)
+        return m.reply(`🎵 *ᴛɪᴋᴛᴏᴋ sᴛᴀʟᴋ*
+
+> Introduzca el nombre de usuario Tickook
+
+\`Contoh: ${m.prefix}tiktokstalk mrbeast\``)
     }
     
     m.react('🔍')
@@ -41,7 +45,7 @@ async function handler(m, { sock }) {
         
         if (!res.data?.status || !res.data?.user?.user) {
             m.react('❌')
-            return m.reply(`❌ Username *@${username}* tidak ditemukan`)
+            return m.reply(`❌ Username *@${username}* no encontrado`)
         }
         
         const u = res.data.user.user

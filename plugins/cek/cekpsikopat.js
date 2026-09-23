@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekpsikopat',
     alias: ['psikopat', 'psycho'],
     category: 'cek',
-    description: 'Cek seberapa psikopat kamu',
-    usage: '.cekpsikopat <nama>',
+    description: "Mira lo psicópata que eres.",
+    usage: ".cecpsychopath - Nombre",
     example: '.cekpsikopat Budi',
     isOwner: false,
     isPremium: false,
@@ -22,19 +22,19 @@ async function handler(m) {
     if (percent >= 90) {
         desc = 'PSIKOPAT AKUT! Jauhi! 😈'
     } else if (percent >= 70) {
-        desc = 'Hati-hati sama orang ini 👀'
+        desc = "Hati-hati Con este tipo. 👀"
     } else if (percent >= 50) {
         desc = 'Ada sisi gelapnya 🌑'
     } else if (percent >= 30) {
         desc = 'Sedikit misterius 🤔'
     } else {
-        desc = 'Normal dan baik hati 😇'
+        desc = "Normal y amable 😇"
     }
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kepsikopatan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kepsikopatan @${mentioned.split('@')[0]} yak? 
+Tu nivel de psicosis. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de psico @${mentioned.split('@')[0]} yak? 
     
 Tingkat kepsikopatan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['protect', 'guardian', 'wpr'],
     category: 'game',
     description: 'Guardian night action - Protect target',
-    usage: '.wwprotect <nomor>',
+    usage: ".wsprotect , número de contacto",
     example: '.wwprotect 3',
     isOwner: false,
     isPremium: false,

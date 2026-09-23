@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'steal',
     alias: ['mencuri', 'curi', 'pickpocket'],
     category: 'rpg',
-    description: 'Mencuri dari NPC untuk gold',
+    description: "Sellado de NPC para oro",
     usage: '.steal',
     example: '.steal',
     isOwner: false,
@@ -50,7 +50,7 @@ async function handler(m, { sock }) {
     
     if (availableTargets.length === 0) {
         db.save()
-        return m.reply(`❌ Level terlalu rendah! Minimal level 3 untuk mencuri.`)
+        return m.reply(`❌ Nivel demasiado bajo, nivel mínimo 3 para robar.`)
     }
     
     const target = availableTargets[Math.floor(Math.random() * availableTargets.length)]

@@ -3,8 +3,8 @@ const pluginConfig = {
     name: 'slowmode',
     alias: ['slow', 'setslowmode'],
     category: 'group',
-    description: 'Slowmode grup — batasi kecepatan pesan member',
-    usage: '.slowmode <on/off/onlycommand> [detik]',
+    description: "Grupo de lento - limitar la velocidad de los mensajes de correo al miembro",
+    usage: ".lentomodo Identificado en / apagado / sólo comando √° [ segundos]",
     example: '.slowmode on 30',
     isOwner: false,
     isPremium: false,
@@ -96,7 +96,7 @@ async function handler(m, { sock }) {
     }
 
     if (delay < 5 || delay > 600) {
-        return m.reply(`❌ Delay harus antara 5–600 detik`)
+        return m.reply(`❌ El retraso debe ser entre 5-600 segundos`)
     }
 
     db.setGroup(m.chat, {

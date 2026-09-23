@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'ganti-namabot',
     alias: ['setnamabot', 'setnamebot', 'gantibot'],
     category: 'owner',
-    description: 'Ganti nama bot di config.js',
-    usage: '.ganti-namabot <nama baru>',
+    description: "Rename bot in config.js",
+    usage: ".cambio-nombre bot < nuevo nombre",
     example: '.ganti-namabot Ourin MD',
     isOwner: true,
     isPremium: false,
@@ -21,7 +21,9 @@ async function handler(m, { sock, config }) {
     const newName = m.args.join(' ')
     
     if (!newName) {
-        return m.reply(`🤖 *ɢᴀɴᴛɪ ɴᴀᴍᴀ ʙᴏᴛ*\n\n> Nama saat ini: *${config.bot?.name || '-'}*\n\n*Penggunaan:*\n\`${m.prefix}ganti-namabot <nama baru>\``)
+        return m.reply(`🤖 *ɢᴀɴᴛɪ ɴᴀᴍᴀ ʙᴏᴛ*
+
+> Nombre actual: *${config.bot?.name || '-'}*\n\n*Penggunaan:*\n\`${m.prefix}ganti-namabot Nuevo nombre\``)
     }
     
     try {
@@ -37,7 +39,9 @@ async function handler(m, { sock, config }) {
         
         config.bot.name = newName
         
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*\n\n> Nama bot diganti ke: *${newName}*`)
+        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*
+
+> El nombre del bot se sustituye a: *${newName}*`)
         
     } catch (error) {
         await m.reply(te(m.prefix, m.command, m.pushName))

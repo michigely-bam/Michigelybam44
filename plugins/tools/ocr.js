@@ -77,7 +77,9 @@ async function handler(m, { sock }) {
     }
     if (!buffer || buffer.length === 0) {
       await m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak dapat download gambar`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Incapaz de descargar la imagen`);
     }
     const Tesseract = await getTesseract();
     const {
@@ -87,7 +89,9 @@ async function handler(m, { sock }) {
     if (!extractedText || extractedText.length === 0) {
       await m.react("❌");
       return m.reply(
-        `❌ *ᴛɪᴅᴀᴋ ᴀᴅᴀ ᴛᴇᴋs*\n\n> Tidak ada teks yang terdeteksi di gambar`,
+        `❌ *ᴛɪᴅᴀᴋ ᴀᴅᴀ ᴛᴇᴋs*
+
+> Ningún texto detectado en la imagen`,
       );
     }
     await m.react("✅");

@@ -4,7 +4,7 @@ const pluginConfig = {
   name: 'custompayment',
   alias: ['setpayment', 'setpaytext'],
   category: 'owner',
-  description: 'Atur teks custom untuk .payment dengan placeholder',
+  description: "Establecer texto personalizado para .payment con accionistas",
   usage: '.custompayment <teks> / .custompayment reset',
   isOwner: true,
   isPremium: false,
@@ -38,7 +38,7 @@ async function handler(m) {
 
   if (input.toLowerCase() === 'reset') {
     db.setting('customPaymentText', '')
-    return m.reply('✅ Teks custom payment direset ke default.')
+    return m.reply("✅ Texto de correo electrónico personalizado reset a default.")
   }
 
   db.setting('customPaymentText', input)

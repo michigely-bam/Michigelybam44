@@ -4,9 +4,9 @@ const pluginConfig = {
     name: 'afk',
     alias: ['away', 'brb'],
     category: 'group',
-    description: 'Set status AFK dengan alasan',
+    description: "Estado del juego Abortar por una razón",
     usage: '.afk <alasan>',
-    example: '.afk lagi makan',
+    example: ".Estoy comiendo.",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -49,7 +49,7 @@ function formatDuration(ms) {
 }
 
 async function handler(m, { sock }) {
-    const reason = m.text || 'Tidak ada alasan'
+    const reason = m.text || "No hay razón"
     setAfkUser(m.sender, reason)
     await m.reply(
         `💤 *ᴀꜰᴋ ᴀᴋᴛɪꜰ*\n\n` +

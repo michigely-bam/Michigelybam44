@@ -4,8 +4,8 @@ const pluginConfig = {
     name: 'acc',
     alias: ['accall', 'joinrequest', 'reqjoin'],
     category: 'group',
-    description: 'Kelola permintaan masuk grup (accept/reject)',
-    usage: '.acc <list|approve|reject> [all|nomor]',
+    description: "Solicitud de entrada de grupo de gestión (aceptar / rechazar)",
+    usage: ".acc − lista",
     example: '.acc approve all',
     isOwner: false,
     isPremium: false,
@@ -54,7 +54,7 @@ async function handler(m, { sock }) {
 
         if (!pendingList?.length) {
             await m.react('📭')
-            return m.reply(`📭 Tidak ada permintaan masuk yang tertunda.`)
+            return m.reply(`📭 No hay solicitud de entrada pendiente.`)
         }
 
         if (sub === 'list') {

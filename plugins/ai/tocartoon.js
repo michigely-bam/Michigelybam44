@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['cartoon', 'cartoonify', 'tooncartoon'],
     category: 'ai',
     description: 'Ubah foto menjadi gaya kartun',
-    usage: '.tocartoon (reply/kirim gambar)',
+    usage: ".tocartoon (reply / enviar imágenes)",
     example: '.tocartoon',
     isOwner: false,
     isPremium: true,
@@ -45,7 +45,7 @@ async function handler(m, { sock }) {
         
         if (!buffer) {
             m.react('❌')
-            return m.reply(`❌ Gagal mendownload gambar`)
+            return m.reply(`❌ No se pudo download image`)
         }
         
         const result = await live3d(buffer, PROMPT)

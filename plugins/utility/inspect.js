@@ -3,8 +3,8 @@ const pluginConfig = {
     name: 'inspect',
     alias: ['cekgrup', 'ceksaluran', 'groupinfo', 'channelinfo'],
     category: 'utility',
-    description: 'Inspect info grup atau saluran WhatsApp via link',
-    usage: '.inspect <link grup/saluran>',
+    description: "Información del grupo de inspectores o canal WhatsApp vía enlace",
+    usage: ".referencia − grupo de enlace / canal",
     example: '.inspect https://chat.whatsapp.com/xxx',
     isOwner: false,
     isPremium: false,
@@ -106,7 +106,7 @@ async function handler(m, { sock }) {
             return m.reply(teks)
 
         } else {
-            return m.reply('❌ Hanya support URL Grup atau Saluran WhatsApp!')
+            return m.reply("❌ ¡Sólo URL del grupo de soporte o Canal de WhatsApp!")
         }
 
     } catch (error) {
@@ -114,13 +114,13 @@ async function handler(m, { sock }) {
         
         if (error.data) {
             if ([400, 406].includes(error.data)) {
-                return m.reply('❌ Grup/Saluran tidak ditemukan!')
+                return m.reply("❌ Grupo / Canal no encontrado!")
             }
             if (error.data === 401) {
-                return m.reply('❌ Bot di-kick dari grup tersebut!')
+                return m.reply("❌ ¡Bot salió del grupo!")
             }
             if (error.data === 410) {
-                return m.reply('❌ URL grup telah di-reset!')
+                return m.reply("❌ La URL del grupo ha sido -reinistro!")
             }
         }
         

@@ -43,7 +43,7 @@ async function handler(m, { sock }) {
     if (!data?.status || !data?.data) {
       m.react("❌");
       return m.reply(
-        "❌ *ɢᴀɢᴀʟ*\n\n> File tidak ditemukan atau link tidak valid",
+        "❌ *ɢᴀɢᴀʟ*\n\n> Archivo no encontrado o inválido",
       );
     }
 
@@ -72,7 +72,8 @@ async function handler(m, { sock }) {
       })
     } else if (sizeInMB > 100) {
       await m.reply(
-        `⚠️ *ꜰɪʟᴇ ᴛᴇʀʟᴀʟᴜ ʙᴇsᴀʀ*\n\n> File ${file.size} terlalu besar untuk dikirim\n> Gunakan link download di atas`,
+        `⚠️ *ꜰɪʟᴇ ᴛᴇʀʟᴀʟᴜ ʙᴇsᴀʀ*\n\n> File ${file.size} demasiado grande para enviar
+> Usar enlaces de descarga arriba`,
       );
     }
 

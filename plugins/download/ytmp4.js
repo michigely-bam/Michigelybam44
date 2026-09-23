@@ -28,7 +28,7 @@ async function getVideoDownloadUrl(url) {
     return fallback.dl;
   }
 
-  throw new Error(fallback?.mess || "Gagal mendapatkan video download URL");
+  throw new Error(fallback?.mess || "Fallado para obtener la URL de descarga de vídeo");
 }
 
 async function handler(m, { sock }) {
@@ -50,7 +50,7 @@ async function handler(m, { sock }) {
   } catch (err) {
     console.error("[YTMP4]", err);
     m.react("❌");
-    m.reply("Gagal mengunduh video.");
+    m.reply("Fallado para descargar vídeo.");
   }
 }
 

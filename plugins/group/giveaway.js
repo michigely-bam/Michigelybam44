@@ -74,7 +74,9 @@ async function handleSession(m, sock) {
     session.step = "q2";
 
     await m.reply(
-      `✅ Detail tersimpan!\n┃ 🎁 ${title}\n┃ ⏱️ ${formatDuration(duration)}\n┃ 👥 ${winners} pemenang\n\n_Mengambil daftar grup..._`,
+      `✅ Detail tersimpan!\n┃ 🎁 ${title}\n┃ ⏱️ ${formatDuration(duration)}\n┃ 👥 ${winners} pemenang
+
+_Lista de grupos de recuperación ..._`,
     );
 
     try {
@@ -89,7 +91,7 @@ async function handleSession(m, sock) {
         {
           name: "quick_reply",
           buttonParamsJson: JSON.stringify({
-            display_text: "📍 Di grup ini",
+            display_text: "📍 En este grupo",
             id: `.giveaway selectgroup ${currentGroup}`,
           }),
         },
@@ -98,7 +100,7 @@ async function handleSession(m, sock) {
       if (otherGroups.length > 0) {
         const sections = [
           {
-            title: "Pilih Grup",
+            title: "Seleccionar grupo",
             rows: otherGroups.slice(0, 10).map((g) => ({
               title: g.subject || g.id,
               id: `.giveaway selectgroup ${g.id}`,
@@ -108,7 +110,7 @@ async function handleSession(m, sock) {
         buttons.push({
           name: "single_select",
           buttonParamsJson: JSON.stringify({
-            title: "Pilih Grup Lain",
+            title: "Seleccionar otro grupo",
             sections,
           }),
         });
@@ -117,14 +119,14 @@ async function handleSession(m, sock) {
       await sock.sendButton(
         m.chat,
         null,
-        "🎁 *GIVEAWAY CREATOR*\n\nPertanyaan 2/3:\nMau jalankan giveaway di grup ini atau grup lain?",
+        "🎁 *GIVEAWAY CREATOR*\n\nPertanyaan 2/3:\n¿Quieres huir en este grupo o en cualquier otro grupo?",
         m,
-        { buttons, footer: "Pilih grup untuk giveaway" },
+        { buttons, footer: "Seleccionar grupo para el sorteo" },
       );
     } catch (e) {
       session.groupId = currentGroup;
       session.step = "q3";
-      await m.reply("⚠️ Gagal mengambil daftar grup. Menggunakan grup ini.");
+      await m.reply("⚠️ No se pudo retrieve group list. Usando este grupo.");
       await askPrizeDetails(m, sock, session);
     }
     return true;
@@ -164,7 +166,7 @@ async function askPrizeDetails(m, sock, session) {
       { quoted: m },
     );
   } catch (e) {
-    await m.reply("⚠️ Gagal mengirim PM. Silakan chat bot dulu lalu ulangi.");
+    await m.reply("⚠️ No se pudo send PM. Por favor, charla el bot primero y repetir.");
     createSessions.delete(session.adminJid);
   }
 }
@@ -230,7 +232,7 @@ async function createGiveaway(session, sock, m) {
       null,
       {
         buttons: joinButton,
-        footer: "Klik Join untuk berpartisipasi",
+        footer: "Click Join para participar",
         contextInfo: getCtx(),
       },
     );
@@ -247,7 +249,7 @@ async function createGiveaway(session, sock, m) {
   await sock.sendMessage(
     session.adminJid,
     {
-      text: "✅ Giveaway berhasil dibuat! Cek pesan giveaway di grup yang dipilih.",
+      text: "✅ Giveaway creado con éxito! Compruebe los mensajes de regalo en el grupo seleccionado.",
       contextInfo: getCtx(),
     },
     { quoted: m },
@@ -296,7 +298,7 @@ async function endGiveaway(giveawayId, sock, db) {
       fromMe: false,
     },
     message: {
-      conversation: "Yeyy aku menang",
+      conversation: "Yeyy gané",
     },
   };
 
@@ -330,7 +332,7 @@ async function endGiveaway(giveawayId, sock, db) {
           fromMe: false,
         },
         message: {
-          conversation: "Yeyy aku menang",
+          conversation: "Yeyy gané",
         },
       };
       const ctx = getCtx();
@@ -393,7 +395,7 @@ const plugin = {
   name: ["giveaway", ...createCmds, ...listCmds, ...deleteCmds, ...rerollCmds],
   alias: "ga",
   category: "group",
-  description: "Sistem giveaway dengan interactive buttons",
+  description: "Sistema de regalo con botones interactivos",
   admin: false,
 };
 
@@ -405,10 +407,10 @@ async function handler(m, { sock }) {
 
   if (createCmds.includes(cmd)) {
     if (!m.isAdmin && !m.isOwner)
-      return m.reply("⚠️ Hanya admin yang bisa membuat giveaway!");
-    if (!m.isGroup) return m.reply("⚠️ Gunakan di grup!");
+      return m.reply("⚠️ ¡Sólo el administrador puede hacer un regalo!");
+    if (!m.isGroup) return m.reply("⚠️ ¡Usadlo en el grupo!");
     if (createSessions.has(m.sender))
-      return m.reply("⚠️ Kamu masih punya sesi pembuatan aktif!");
+      return m.reply("⚠️ ¡Todavía tienes una sesión de creación activa!");
 
     createSessions.set(m.sender, {
       step: "q1",
@@ -444,7 +446,7 @@ async function handler(m, { sock }) {
     session.step = "q3";
 
     await m.reply(
-      "✅ Grup dipilih! Cek private chat untuk pertanyaan selanjutnya.",
+      "✅ Grupo seleccionado! Cheque de chat privado para la siguiente pregunta.",
     );
     await askPrizeDetails(m, sock, session);
     return;
@@ -456,31 +458,31 @@ async function handler(m, { sock }) {
 
     const giveaways = db.setting("giveaways") || {};
     const giveaway = giveaways[giveawayId];
-    if (!giveaway) return m.reply("⚠️ Giveaway tidak ditemukan!");
-    if (giveaway.ended) return m.reply("⚠️ Giveaway sudah berakhir!");
+    if (!giveaway) return m.reply("⚠️ ¡No se ha encontrado a nadie!");
+    if (giveaway.ended) return m.reply("⚠️ ¡El regalo ha terminado!");
     if (giveaway.participants.includes(m.sender))
-      return m.reply("⚠️ Kamu sudah join!");
+      return m.reply("⚠️ ¡Ya te has unido!");
 
     giveaway.participants.push(m.sender);
     db.setting("giveaways", giveaways);
 
     await m.react("✅");
     await m.reply(
-      `✅ @${m.sender.split("@")[0]} berhasil join giveaway! (${giveaway.participants.length} peserta)`,
+      `✅ @${m.sender.split("@")[0]} fontcolor = "# FFFF00" éxito únete a dar!${giveaway.participants.length} peserta)`,
     );
     return;
   }
 
   if (listCmds.includes(cmd)) {
-    if (!m.isAdmin && !m.isOwner) return m.reply("⚠️ Hanya admin!");
+    if (!m.isAdmin && !m.isOwner) return m.reply("⚠️ ¡Sólo admin!");
     const giveaways = db.setting("giveaways") || {};
     const entries = Object.values(giveaways);
-    if (entries.length === 0) return m.reply("📋 Tidak ada giveaway.");
+    if (entries.length === 0) return m.reply("📋 Sin regalar.");
 
     const active = entries.filter((g) => !g.ended);
     const ended = entries.filter((g) => g.ended);
 
-    let text = "📋 *DAFTAR GIVEAWAY*\n\n";
+    let text = "📋 *GIVEAWAY LIGHT*\n\n";
     if (active.length > 0) {
       text += "🟢 *Aktif:*\n";
       for (const g of active) {
@@ -501,30 +503,30 @@ async function handler(m, { sock }) {
   }
 
   if (deleteCmds.includes(cmd)) {
-    if (!m.isAdmin && !m.isOwner) return m.reply("⚠️ Hanya admin!");
+    if (!m.isAdmin && !m.isOwner) return m.reply("⚠️ ¡Sólo admin!");
     const giveawayId = args[0];
     if (!giveawayId) return m.reply(`⚠️ Format: ${prefix}${cmd} GA-XXXXXX`);
 
     const giveaways = db.setting("giveaways") || {};
-    if (!giveaways[giveawayId]) return m.reply("⚠️ Giveaway tidak ditemukan!");
+    if (!giveaways[giveawayId]) return m.reply("⚠️ ¡No se ha encontrado a nadie!");
 
     delete giveaways[giveawayId];
     db.setting("giveaways", giveaways);
-    await m.reply(`✅ Giveaway \`${giveawayId}\` berhasil dihapus!`);
+    await m.reply(`✅ Giveaway \`${giveawayId}\` ¡Se ha borrado!`);
     return;
   }
 
   if (rerollCmds.includes(cmd)) {
-    if (!m.isAdmin && !m.isOwner) return m.reply("⚠️ Hanya admin!");
+    if (!m.isAdmin && !m.isOwner) return m.reply("⚠️ ¡Sólo admin!");
     const giveawayId = args[0];
     if (!giveawayId) return m.reply(`⚠️ Format: ${prefix}${cmd} GA-XXXXXX`);
 
     const giveaways = db.setting("giveaways") || {};
     const giveaway = giveaways[giveawayId];
-    if (!giveaway) return m.reply("⚠️ Giveaway tidak ditemukan!");
-    if (!giveaway.ended) return m.reply("⚠️ Giveaway belum berakhir!");
+    if (!giveaway) return m.reply("⚠️ ¡No se ha encontrado a nadie!");
+    if (!giveaway.ended) return m.reply("⚠️ ¡Daraway no ha terminado!");
     if (giveaway.participants.length === 0)
-      return m.reply("⚠️ Tidak ada peserta!");
+      return m.reply("⚠️ ¡No hay participantes!");
 
     const winnerCount = Math.min(
       giveaway.winners,

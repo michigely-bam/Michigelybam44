@@ -42,7 +42,7 @@ async function handler(m, { sock }) {
     const targetName = targetUser.split('@')[0]
     
     if (!warnings[targetUser] || warnings[targetUser].length === 0) {
-        await m.reply(`✅ @${targetName} tidak memiliki warning.`, { mentions: [targetUser] })
+        await m.reply(`✅ @${targetName} no tiene advertencia.`, { mentions: [targetUser] })
         return
     }
     

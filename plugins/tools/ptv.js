@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'ptv',
     alias: ['pvideo', 'circlevideo'],
     category: 'tools',
-    description: 'Kirim video sebagai PTV (circle video)',
+    description: "Enviar un vídeo como un PTV (vídeo circular)",
     usage: '.ptv (reply video)',
     example: '.ptv',
     isOwner: false,
@@ -22,13 +22,13 @@ async function handler(m, { sock }) {
         try {
             video = await m.quoted.download()
         } catch (e) {
-            return m.reply(`❌ Gagal download video dari quoted.`)
+            return m.reply(`❌ No se puede descargar el video de citado.`)
         }
     } else if (m.isVideo) {
         try {
             video = await m.download()
         } catch (e) {
-            return m.reply(`❌ Gagal download video.`)
+            return m.reply(`❌ Fallado para descargar vídeo.`)
         }
     }
     

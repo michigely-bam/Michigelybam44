@@ -72,7 +72,7 @@ async function GoogleLyrics(judul) {
   return {
     title: $('div[data-attrid="title"]').text().trim(),
     subtitle: $('div[data-attrid="subtitle"]').text().trim(),
-    lyrics: lyrics || "Lirik kosong / tidak ketemu"
+    lyrics: lyrics || "Letra vacía / no encontrada"
   }
 }
 

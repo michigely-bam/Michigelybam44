@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'blacklistjpm',
     alias: ['bljpm', 'jpmbl', 'jpmblacklist', 'listblacklistjpm'],
     category: 'jpm',
-    description: 'Blacklist grup dari JPM menggunakan nomor urut',
-    usage: '.bljpm [nomor]',
+    description: "Grupo de lista negra de JPM con número de secuencia",
+    usage: ".bljpm [número]",
     example: '.bljpm 2 3 7',
     isOwner: true,
     isPremium: false,
@@ -24,18 +24,24 @@ async function handler(m, { sock }) {
     const groups = Object.values(allGroups).sort((a, b) => a.subject.localeCompare(b.subject))
     if (!m.text) {
         if (groups.length === 0) {
-            return m.reply(`❌ Bot belum tergabung di grup mana pun.`)
+            return m.reply(`❌ La bota aún no está en ningún grupo.`)
         }
-        let listText = `📋 *DAFTAR GRUP & JPM BLACKLIST*\n\n`
-        listText += `Di bawah ini adalah *${groups.length} grup* yang diikuti bot ${config.bot?.name}\n`
-        listText += `Tanda *(🚫)* berarti grup sedang di-blacklist.\n\n`
+        let listText = `📋 *LIGHT GRUPP &amp; JPM BLACKLIST*
+
+`
+        listText += `A continuación *${groups.length} grup* El que fue seguido por el bot ${config.bot?.name}\n`
+        listText += `Tanda *(🚫)* significa que el grupo está en lista negra.
+
+`
         for (let i = 0; i < groups.length; i++) {
             const isBlacklisted = blacklist.includes(groups[i].id)
             const icon = isBlacklisted ? ' 🚫' : ''
             listText += `*${i + 1}.* ${groups[i].subject}${icon}\n`
         }
         listText += `\n*CARA BLACKLIST / UN-BLACKLIST:*\n`
-        listText += `Ketik command diikuti dengan nomor grup yang ingin diubah (bisa lebih dari satu, pisahkan dengan spasi).\n\n`
+        listText += `Tipo comando seguido por número de grupo para cambiar (puede ser más de uno, separado por espacio).
+
+`
         listText += `*Contoh:*\n`
         listText += `> \`${m.prefix}bljpm 2 3 7\``
         return m.reply(listText)
@@ -58,7 +64,9 @@ async function handler(m, { sock }) {
     }
 
     if (toggled.length === 0) {
-        return m.reply(`❌ Tidak ada nomor grup yang valid.\n\nKetik *${m.prefix}bljpm* untuk melihat daftar nomor.`)
+        return m.reply(`❌ No hay número de grupo válido.
+
+Ketik *${m.prefix}bljpm* para ver la lista de números.`)
     }
 
     db.setting('jpmBlacklist', blacklist)

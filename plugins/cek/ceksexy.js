@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'ceksexy',
     alias: ['sexy', 'hot'],
     category: 'cek',
-    description: 'Cek seberapa sexy kamu',
-    usage: '.ceksexy <nama>',
+    description: "Mira lo sexy que eres.",
+    usage: ".ceksexy Identificar nombre",
     example: '.ceksexy Budi',
     isOwner: false,
     isPremium: false,
@@ -28,13 +28,13 @@ async function handler(m) {
     } else if (percent >= 30) {
         desc = 'Biasa aja sih 🙂'
     } else {
-        desc = 'Mungkin cute bukan sexy 😅'
+        desc = "Tal vez lindo no es sexy. 😅"
     }
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kesexyan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kesexyan @${mentioned.split('@')[0]} yak? 
+Tu nivel de sexo. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de sexiness @${mentioned.split('@')[0]} yak? 
     
 Tingkat kesexyan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

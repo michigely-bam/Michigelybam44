@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekintrovert',
     alias: ['introvert'],
     category: 'cek',
-    description: 'Cek tingkat introvert kamu',
-    usage: '.cekintrovert <nama>',
+    description: "Comprueba los niveles de introvertido.",
+    usage: ".cekintrovert   nombre >",
     example: '.cekintrovert Budi',
     isOwner: false,
     isPremium: false,
@@ -27,8 +27,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat keintrovertan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat keintrovertan @${mentioned.split('@')[0]} yak? 
+Tus niveles introvertidos. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de introversión @${mentioned.split('@')[0]} yak? 
     
 Tingkat keintrovertan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'installtemaenigma',
     alias: ['installthemaenigma', 'temaenigma'],
     category: 'panel',
-    description: 'Install tema Enigma untuk panel Pterodactyl via SSH',
+    description: "Instala el tema Enigma para el panel Pterodactyl a través de SSH",
     usage: '.installtemaenigma <ip>|<password>|<link_wa>|<link_group>|<link_channel>',
     example: '.installtemaenigma 192.168.1.1|secretpass|https://wa.me/628xxx|https://t.me/group|https://t.me/channel',
     isOwner: true,
@@ -71,7 +71,9 @@ function handler(m) {
 
     const parts = text.split('|')
     if (parts.length < 5) {
-        return m.reply(`❌ Format salah!\n\n> Gunakan: \`ip|password|link_wa|link_group|link_channel\``)
+        return m.reply(`❌ ¡Formato equivocado!
+
+> Gunakan: \`ip|password|link_wa|link_group|link_channel\``)
     }
 
     const ipvps = parts[0].trim()
@@ -99,9 +101,9 @@ function handler(m) {
 
             await m.reply(`🕕 *[2/3] ɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ...*\n\n> Mendownload & install tema Enigma...`)
             await execSSHInteractive(conn, THEME_CMD, [
-                { trigger: 'AKSES TOKEN', value: 'skyzodev' },
-                { trigger: 'Masukkan pilihan', value: '1' },
-                { trigger: 'Masukkan pilihan', value: '3' },
+                { trigger: "TOKEN ACCESS", value: 'skyzodev' },
+                { trigger: "Introduzca la opción", value: '1' },
+                { trigger: "Introduzca la opción", value: '3' },
                 { trigger: 'WhatsApp', value: linkWa },
                 { trigger: 'group', value: linkGroup },
                 { trigger: 'channel', value: linkChannel }
@@ -112,7 +114,10 @@ function handler(m) {
 
             m.react('✅')
             await m.reply(
-                `╭┈┈⬡「 ✅ *ᴛᴇᴍᴀ ᴇɴɪɢᴍᴀ* 」\n┃ ㊗ sᴛᴀᴛᴜs: *Terinstall*\n┃ ㊗ ɪᴘ: ${ipvps}\n╰┈┈⬡\n\n> _Tema Enigma + dependencies berhasil diinstall!_`
+                `╭┈┈⬡「 ✅ *ᴛᴇᴍᴀ ᴇɴɪɢᴍᴀ* 」\n┃ ㊗ sᴛᴀᴛᴜs: *Terinstall*\n┃ ㊗ ɪᴘ: ${ipvps}
+╰┈┈⬡
+
+> _Enigma + dependencias tema instalado con éxito!_`
             )
         } catch (err) {
             m.react('☢')
@@ -122,7 +127,9 @@ function handler(m) {
         }
     }).on('error', (err) => {
         m.react('❌')
-        m.reply(`❌ Koneksi gagal!\n\n> IP atau Password tidak valid.`)
+        m.reply(`❌ ¡La conexión falló!
+
+> IP o contraseña inválida.`)
     }).connect(connSettings)
 }
 

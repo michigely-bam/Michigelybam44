@@ -67,12 +67,12 @@ text += `*〔 ⚡ Energi 〕* ${energiDisplay}\n`
 text += `*〔 💎 Status 〕* ${userStatus}\n\n`
     
     if (!energiEnabled) {
-        text += `🔌 Sistem energi dinonaktifkan — semua command gratis`
+        text += `🔌 El sistema de energía está deshabilitado - todo el comando es gratuito`
     } else if (isSelf && !isUnlimited && finalEnergi < 10) {
         text += `⚠️ Energi hampir habis!\n`
-        text += `Gunakan \`.buyenergi\` untuk beli`
+        text += `Gunakan \`.buyenergi\` para comprar`
     } else if (isUnlimited) {
-        text += `✨ Energi unlimited aktif!`
+        text += `✨ Energía ilimitada activada!`
     }
     
     await m.reply(text)

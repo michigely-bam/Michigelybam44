@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "nanobanana",
   alias: ["nano", "imgedit"],
   category: "ai",
-  description: "Edit gambar dengan AI menggunakan prompt",
+  description: "Editar la imagen con IA utilizando prompt",
   usage: ".nanobanana <prompt>",
   example: ".nanobanana make it anime style",
   isOwner: false,
@@ -54,7 +54,9 @@ async function handler(m, { sock }) {
   const isImage = m.isImage || (m.quoted && m.quoted.isImage);
   if (!isImage) {
     return m.reply(
-      `🍌 *ɴᴀɴᴏ ʙᴀɴᴀɴᴀ*\n\n> Reply atau kirim gambar dengan caption`,
+      `🍌 *ɴᴀɴᴏ ʙᴀɴᴀɴᴀ*
+
+> Responder o enviar una imagen con descripción`,
     );
   }
 
@@ -69,7 +71,9 @@ async function handler(m, { sock }) {
 
     if (!mediaBuffer || !Buffer.isBuffer(mediaBuffer)) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Gagal mengunduh gambar`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No se pudo download image`);
     }
 
     const imageUrl = await uploadTmpfiles(mediaBuffer);
@@ -89,7 +93,9 @@ async function handler(m, { sock }) {
 
     if (!data.status) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak dapat mengedit gambar`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Incapaz de editar la imagen`);
     }
 
     m.react("✅");
@@ -100,8 +106,8 @@ async function handler(m, { sock }) {
   } catch (error) {
     console.log(error?.response?.data || error.message);
     m.react("❌");
-    m.reply(`🍀 *Waduhh, sepertinya ini ada kendala*
-Silahkan coba lagi nanti, dimohon jangan spam, atau coba Opsi lain: ${m.prefix}ourinbanana ${m.text} ( reply gambar )`);
+    m.reply(`🍀 *Waduhh, parece que hay un pinchazo.*
+Pruebe de nuevo más tarde, por favor no Spam, o pruebe otra opción: ${m.prefix}ourinbanana ${m.text} ( reply gambar )`);
   }
 }
 

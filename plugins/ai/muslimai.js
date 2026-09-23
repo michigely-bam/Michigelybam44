@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'muslimai',
     alias: ['islamai', 'quranai'],
     category: 'ai',
-    description: 'AI untuk bertanya tentang Islam dan Al-Quran',
+    description: "IA para preguntar sobre el Islam y el Corán",
     usage: '.muslimai <pertanyaan>',
     example: '.muslimai Apa itu sholat?',
     isOwner: false,
@@ -19,7 +19,11 @@ const pluginConfig = {
 async function handler(m, { sock }) {
     const text = m.args.join(' ')
     if (!text) {
-        return m.reply(`☪️ *ᴍᴜsʟɪᴍ ᴀɪ*\n\n> Masukkan pertanyaan tentang Islam\n\n\`Contoh: ${m.prefix}muslimai Apa itu sholat?\``)
+        return m.reply(`☪️ *ᴍᴜsʟɪᴍ ᴀɪ*
+
+> Introdúzcase la pregunta sobre el Islam
+
+\`Contoh: ${m.prefix}muslimai Apa itu sholat?\``)
     }
     
     m.react('🕕')

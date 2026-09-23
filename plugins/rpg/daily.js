@@ -104,7 +104,7 @@ async function handler(m, { sock }) {
   txt += `┃ 🚄 Exp: *+${expReward}*\n`;
   txt += `┃ ⚡ Energi: *+${energiReward}*\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
-  txt += `> ${isPremium ? "✨ Premium Bonus!" : "Upgrade ke Premium untuk reward lebih!"}`;
+  txt += `> ${isPremium ? "✨ Premium Bonus!" : "Actualizar a Premium para más recompensa!"}`;
 
   await sock.sendMessage(
     m.chat,

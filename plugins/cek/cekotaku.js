@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekotaku',
     alias: ['otaku'],
     category: 'cek',
-    description: 'Cek tingkat otaku kamu',
-    usage: '.cekotaku <nama>',
+    description: "Comprueba tus niveles de motor.",
+    usage: ".mi cliente",
     example: '.cekotaku Budi',
     isOwner: false,
     isPremium: false,
@@ -27,8 +27,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat keotakuan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat keotakuan @${mentioned.split('@')[0]} yak? 
+Tu nivel de despiadado *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de despiadado @${mentioned.split('@')[0]} yak? 
     
 Tingkat keotakuan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

@@ -5,7 +5,7 @@ const pluginConfig = {
     name: ['delvps', 'deldroplet', 'deletevps'],
     alias: [],
     category: 'vps',
-    description: 'Hapus VPS DigitalOcean',
+    description: "Eliminar el océano VPS digital",
     usage: '.delvps <id>',
     example: '.delvps 123456789',
     isOwner: false,
@@ -39,7 +39,7 @@ async function handler(m, { sock }) {
     
     const dropletId = m.text?.trim()
     if (!dropletId) {
-        return m.reply(`⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n> \`${m.prefix}delvps <droplet_id>\`\n\n> Gunakan \`${m.prefix}listvps\` untuk melihat ID`)
+        return m.reply(`⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n> \`${m.prefix}delvps <droplet_id>\`\n\n> Gunakan \`${m.prefix}listvps\` para ver la identificación`)
     }
     
     await m.reply(`🗑️ *ᴍᴇɴɢʜᴀᴘᴜs ᴠᴘs...*\n\n> ID: \`${dropletId}\``)

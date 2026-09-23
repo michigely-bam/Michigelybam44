@@ -45,7 +45,7 @@ async function handler(m) {
     const isConfigOwner = config.isOwner(targetNumber)
 
     if (!premData && !isConfigPrem && !isConfigOwner) {
-        return m.reply(`❌ @${targetNumber} bukan premium`, { mentions: [jid] })
+        return m.reply(`❌ @${targetNumber} No es una prima.`, { mentions: [jid] })
     }
 
     const user = db.getUser(jid)

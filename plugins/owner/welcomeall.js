@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'welcomeall',
     alias: ['wcall', 'globalwelcome'],
     category: 'owner',
-    description: 'Aktifkan/nonaktifkan welcome di semua grup',
+    description: "Activar / deshabilitar la bienvenida en todos los grupos",
     usage: '.welcomeall <on/off>',
     example: '.welcomeall on',
     isOwner: true,

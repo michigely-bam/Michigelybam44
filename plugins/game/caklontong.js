@@ -4,7 +4,7 @@ games.register('caklontong', {
     alias: ['cak', 'lontong'],
     emoji: '🤔',
     title: 'CAK LONTONG',
-    description: 'Game cak lontong - jawaban receh'
+    description: "El juego se llama putt - una respuesta de diez centavos"
 })
 
 const { config: pluginConfig, handler, answerHandler } = games.createPlugin('caklontong')

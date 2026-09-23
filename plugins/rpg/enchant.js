@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'enchant',
     alias: ['upgrade', 'enhance', 'tingkatkan'],
     category: 'rpg',
-    description: 'Upgrade equipment dengan enchantment',
+    description: "Equipos de actualización con encantamiento",
     usage: '.enchant <item>',
     example: '.enchant sword',
     isOwner: false,
@@ -39,7 +39,9 @@ async function handler(m, { sock }) {
     
     if (!itemName) {
         let txt = `✨ *ᴇɴᴄʜᴀɴᴛ - ᴜᴘɢʀᴀᴅᴇ ᴇǫᴜɪᴘ*\n\n`
-        txt += `> Tingkatkan equipment untuk bonus stats!\n\n`
+        txt += `> Aumentar equipos para estaciones de bonificación!
+
+`
         txt += `╭┈┈⬡「 📦 *ɪᴛᴇᴍ* 」\n`
         
         for (const [key, item] of Object.entries(ENCHANTABLE)) {
@@ -58,16 +60,18 @@ async function handler(m, { sock }) {
     
     const item = ENCHANTABLE[itemName]
     if (!item) {
-        return m.reply(`❌ Item tidak bisa di-enchant!\n\n> Ketik \`${m.prefix}enchant\` untuk melihat daftar.`)
+        return m.reply(`❌ ¡Los artículos no pueden ser introducidos!
+
+> Ketik \`${m.prefix}enchant\` para ver la lista.`)
     }
     
     if ((user.inventory[itemName] || 0) < 1) {
-        return m.reply(`❌ Kamu tidak punya ${item.name}!`)
+        return m.reply(`❌ No tienes. ${item.name}!`)
     }
     
     const currentLevel = user.rpg.enchants[itemName] || 0
     if (currentLevel >= 10) {
-        return m.reply(`❌ ${item.name} sudah level MAX (10)!`)
+        return m.reply(`❌ ${item.name} Nivel de MaX (10)!`)
     }
     
     const cost = item.cost * (currentLevel + 1)

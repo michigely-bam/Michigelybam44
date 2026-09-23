@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'deploy',
     alias: ['vercel'],
     category: 'owner',
-    description: 'Deploy HTML ke Vercel (reply code / file)',
+    description: "HTML Deploy to Vercel (reply code / file)",
     usage: '.deploy <namawebsite>',
     example: '.deploy mysite',
     isOwner: true,
@@ -22,7 +22,7 @@ async function handler(m, { sock }) {
         return m.reply(
 `🚀 *DEPLOY*
 
-> Masukkan nama website
+> Introduzca el nombre del sitio web
 > Reply kode HTML atau file .html
 
 Contoh:
@@ -32,16 +32,16 @@ Contoh:
 
     if (!m.quoted) {
         return m.reply(
-`❌ *HTML TIDAK DITEMUKAN*
+`❌ *HTML NO FOUND*
 
-> Reply pesan berisi HTML
+> Texto de la respuesta que contiene HTML
 > atau reply file .html`
         )
     }
 
     const token = config.vercel?.token
     if (!token) {
-        return m.reply('❌ *Vercel token belum diset*')
+        return m.reply("❌ *Vercel token no se fijó*")
     }
 
     m.react('🚀')
@@ -60,7 +60,7 @@ Contoh:
         } else {
             m.react('❌')
             return m.reply(
-`❌ *FORMAT TIDAK DIDUKUNG*
+`❌ *FORMAT UNUSED*
 
 > Reply teks HTML
 > atau file .html`
@@ -70,7 +70,7 @@ Contoh:
         if (!/<html|<!doctype html|<head|<body/i.test(htmlContent)) {
             m.react('❌')
             return m.reply(
-`❌ *BUKAN HTML VALID*
+`❌ *NUMBER HTML VALID*
 
 > Pastikan berisi struktur HTML`
             )

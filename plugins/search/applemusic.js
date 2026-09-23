@@ -32,7 +32,7 @@ async function handler(m, { sock }) {
         const res = await axios.get(`https://api.nexray.web.id/search/applemusic?q=${encodeURIComponent(query)}`)
         
         if (!res.data?.result?.length) {
-            return m.reply(`❌ Tidak ditemukan hasil untuk: ${query}`)
+            return m.reply(`❌ No se han encontrado resultados para: ${query}`)
         }
         
         const tracks = res.data.result.slice(0, 5)

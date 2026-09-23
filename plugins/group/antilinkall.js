@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'antilinkall',
     alias: ['alall', 'antialllink'],
     category: 'group',
-    description: 'Anti semua jenis link',
+    description: "Anti todo tipo de enlaces",
     usage: '.antilinkall <on/off/metode> [kick/remove]',
     example: '.antilinkall on',
     isOwner: false,
@@ -46,7 +46,9 @@ function handler(m, { sock }) {
     
     if (option === 'on') {
         db.setGroup(m.chat, { antilinkall: 'on' })
-        return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴀʟʟ* diaktifkan!\n\n> Semua link akan dihapus otomatis.`)
+        return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴀʟʟ* diaktifkan!
+
+> Todos los enlaces serán eliminados automáticamente.`)
     }
     
     if (option === 'off') {
@@ -58,26 +60,36 @@ function handler(m, { sock }) {
         const method = m.args?.[1]?.toLowerCase()
         if (method === 'kick') {
             db.setGroup(m.chat, { antilinkall: 'on', antilinkallMode: 'kick' })
-            return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴀʟʟ* mode KICK diaktifkan!\n\n> User yang kirim link akan di-kick.`)
+            return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴀʟʟ* mode KICK diaktifkan!
+
+> El usuario que envió el enlace será pateado.`)
         } else if (method === 'remove' || method === 'delete') {
             db.setGroup(m.chat, { antilinkall: 'on', antilinkallMode: 'remove' })
-            return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴀʟʟ* mode DELETE diaktifkan!\n\n> Pesan dengan link akan dihapus.`)
+            return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴀʟʟ* mode DELETE diaktifkan!
+
+> El mensaje con el enlace será eliminado.`)
         } else {
-            return m.reply(`❌ Metode tidak valid! Gunakan: \`kick\` atau \`remove\`\n\n> Contoh: \`${m.prefix}antilinkall metode kick\``)
+            return m.reply(`❌ ¡Método inválido! \`kick\` atau \`remove\`
+
+> Contoh: \`${m.prefix}antilinkall metode kick\``)
         }
     }
     
     if (option === 'kick') {
         db.setGroup(m.chat, { antilinkall: 'on', antilinkallMode: 'kick' })
-        return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴀʟʟ* mode KICK diaktifkan!\n\n> User yang kirim link akan di-kick.`)
+        return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴀʟʟ* mode KICK diaktifkan!
+
+> El usuario que envió el enlace será pateado.`)
     }
     
     if (option === 'remove' || option === 'delete') {
         db.setGroup(m.chat, { antilinkall: 'on', antilinkallMode: 'remove' })
-        return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴀʟʟ* mode DELETE diaktifkan!\n\n> Pesan dengan link akan dihapus.`)
+        return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴀʟʟ* mode DELETE diaktifkan!
+
+> El mensaje con el enlace será eliminado.`)
     }
     
-    return m.reply(`❌ Opsi tidak valid! Gunakan: \`on\`, \`off\`, \`metode kick\`, \`metode remove\``)
+    return m.reply(`❌ Opción inválida! Uso: \`on\`, \`off\`, \`metode kick\`, \`metode remove\``)
 }
 
 export { pluginConfig as config, handler }

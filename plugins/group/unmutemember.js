@@ -45,7 +45,9 @@ async function handler(m, { sock }) {
 
     if (m.command === 'listmutemember' || m.command === 'listmute') {
         if (mutedMembers.length === 0) {
-            return m.reply(`🔇 *LIST MUTED MEMBERS*\n\n> Tidak ada member yang dimute di grup ini`)
+            return m.reply(`🔇 *LIST MUTED MEMBERS*
+
+> No modificado miembro de este grupo`)
         }
 
         let txt = `🔇 *LIST MUTED MEMBERS*\n\n╭┈┈⬡「 📋 *ᴅᴀꜰᴛᴀʀ* 」\n`
@@ -79,7 +81,7 @@ async function handler(m, { sock }) {
     })
 
     if (index === -1) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Member @${targetNumber} tidak sedang dimute`, { mentions: [targetJid] })
+        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Member @${targetNumber} no se está reprimiendo`, { mentions: [targetJid] })
     }
 
     mutedMembers.splice(index, 1)

@@ -86,7 +86,7 @@ async function handler(m, { sock, db, uptime, config: botConfig }) {
     ];
 
     await sock.sendTableV2(m.chat, table, m, {
-      title: "📊 Berikut ini adalah statistik dari bot kami",
+      title: "📊 Aquí están las estadísticas de nuestro bot",
       footer: botConfig?.bot?.name,
     });
   } catch (error) {

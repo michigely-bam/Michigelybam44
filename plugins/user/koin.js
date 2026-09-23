@@ -56,7 +56,8 @@ if (isSelf) {
   text += `\n*〔 🛒 SHOP 〕*\n`
   text += `• \`.buyenergi <jml>\` (1 = 100 koin)\n`
   text += `• \`.buyfitur\` (1 = 3000 koin)\n`
-  text += `\n_🎮 Main game untuk dapat koin!_`
+  text += `
+_🎮 ¡Juega juegos para monedas!_`
 }
     
     await m.reply(text)

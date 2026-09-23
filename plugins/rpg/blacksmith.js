@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'blacksmith',
     alias: ['tempa', 'forge', 'pandai'],
     category: 'rpg',
-    description: 'Tempa senjata dan armor dari material',
+    description: "Forge weapons and armor from material",
     usage: '.blacksmith <item>',
     example: '.blacksmith sword',
     isOwner: false,
@@ -41,7 +41,9 @@ async function handler(m, { sock }) {
     
     if (!itemName) {
         let txt = `🔨 *ʙʟᴀᴄᴋsᴍɪᴛʜ - ᴛᴇᴍᴘᴀ ɪᴛᴇᴍ*\n\n`
-        txt += `> Tempa senjata dan armor dari material!\n\n`
+        txt += `> ¡Forjando armas y armaduras de materiales!
+
+`
         txt += `╭┈┈⬡「 📜 *ʀᴇsᴇᴘ* 」\n`
         
         for (const [key, recipe] of Object.entries(RECIPES)) {
@@ -60,7 +62,9 @@ async function handler(m, { sock }) {
     
     const recipe = RECIPES[itemName]
     if (!recipe) {
-        return m.reply(`❌ Resep tidak ditemukan!\n\n> Ketik \`${m.prefix}blacksmith\` untuk melihat daftar resep.`)
+        return m.reply(`❌ ¡La prescripción no se encuentra!
+
+> Ketik \`${m.prefix}blacksmith\` para ver la lista de recetas.`)
     }
     
     const missingMaterials = []

@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'close',
     alias: ['tutup', 'closegroup', 'tutupgroup'],
     category: 'group',
-    description: 'Menutup grup agar hanya admin yang bisa chat',
+    description: "Cerrar el grupo para que sólo admin pueda chatear",
     usage: '.close',
     example: '.close',
     isOwner: false,
@@ -33,7 +33,7 @@ async function handler(m, { sock }) {
         
         const senderNum = m.sender.split('@')[0];
         
-        const successMsg = `✅ @${senderNum} telah menutup grup ini`;
+        const successMsg = `✅ @${senderNum} ha cerrado este grupo`;
         
         await m.reply(successMsg, {mentions: [m.sender]})
         

@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'checksewa',
     alias: ['ceksewa', 'sisasewa'],
     category: 'group',
-    description: 'Cek sisa waktu sewa bot di grup ini',
+    description: "Compruebe el tiempo de alquiler de robot restante en este grupo",
     usage: '.checksewa',
     example: '.checksewa',
     isOwner: false,
@@ -38,13 +38,17 @@ function handler(m) {
     }
 
     if (!db.db.data.sewa.enabled) {
-        return m.reply(`ℹ️ Sistem sewa tidak aktif\n\nBot ini bisa digunakan di semua grup.`)
+        return m.reply(`ℹOlvídate del sistema de alquiler.
+
+Este bot se puede utilizar en todos los grupos.`)
     }
 
     const sewaData = db.db.data.sewa.groups[m.chat]
 
     if (!sewaData) {
-        return m.reply(`❌ Grup ini tidak terdaftar dalam sistem sewa\n\nHubungi owner bot untuk info sewa.`)
+        return m.reply(`❌ Este grupo no está incluido en el sistema de alquileres
+
+Llame al propietario para la información de alquiler.`)
     }
 
     const groupName = sewaData.name || m.chat.split('@')[0]
@@ -79,12 +83,14 @@ function handler(m) {
     m.react(isAlmostExpired ? '⚠️' : '⏱️')
     let text = `⏱️ *STATUS SEWA*\n\n`
     text += `Grup: *${groupName}*\n`
-    text += `Sisa waktu: *${countdown.text}*\n`
+    text += `Tiempo restante: *${countdown.text}*\n`
     text += `Berakhir: *${expiredStr}*\n`
     text += `Terdaftar sejak: *${addedDate}*`
 
     if (isAlmostExpired) {
-        text += `\n\n⚠️ Sewa hampir habis! Hubungi owner bot untuk perpanjang.`
+        text += `
+
+⚠️ Llame al dueño para extenderse.`
     }
 
     return m.reply(text)

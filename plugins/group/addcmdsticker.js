@@ -26,7 +26,9 @@ async function handler(m, { sock }) {
         const existingCmds = listStickerCommands()
         
         let txt = `🖼️ *sᴛɪᴄᴋᴇʀ ᴛᴏ ᴄᴏᴍᴍᴀɴᴅ*\n\n`
-        txt += `> Reply sticker + ketik command yang ingin dijadikan shortcut.\n\n`
+        txt += `> Responder sticker + tipo comando que quiere ser atajo.
+
+`
         txt += `*Contoh:*\n`
         txt += `> Reply sticker, lalu ketik:\n`
         txt += `> \`.addcmdsticker menu\`\n\n`
@@ -47,12 +49,12 @@ async function handler(m, { sock }) {
     
     // Validasi reply sticker
     if (!m.quoted) {
-        return m.reply('⚠️ *Reply sticker* yang ingin dijadikan command!')
+        return m.reply("⚠️ *Reply sticker* ¡Es un comando!")
     }
     
     const stickerHash = getQuotedStickerHash(m)
     if (!stickerHash) {
-        return m.reply('⚠️ Pesan yang di-reply bukan *sticker*!')
+        return m.reply("⚠️ Mensaje no devuelto *sticker*!")
     }
     
     // Validasi command exists
@@ -77,7 +79,7 @@ async function handler(m, { sock }) {
             `_Kirim sticker tersebut untuk menjalankan command!_`
         )
     } else {
-        await m.reply('❌ Gagal menyimpan sticker command!')
+        await m.reply("❌ ¡No se pudo save sticker command!")
     }
 }
 

@@ -4,7 +4,7 @@ const pluginConfig = {
   name: "tictactoe",
   alias: ["ttt", "xo"],
   category: "game",
-  description: "Main TicTacToe dengan player lain",
+  description: "Juega TicTacToe con otro jugador",
   usage: ".tictactoe [room name] atau .ttt",
   example: ".tictactoe",
   isOwner: false,
@@ -278,7 +278,7 @@ async function answerHandler(m, sock) {
 
   // Check if it's player's turn
   if (room.game.currentTurn !== m.sender) {
-    await safeReply(m, "❌ Bukan giliranmu!");
+    await safeReply(m, "❌ ¡No es tu turno!");
     return true;
   }
 
@@ -287,12 +287,12 @@ async function answerHandler(m, sock) {
   const result = room.game.turn(player, move - 1);
 
   if (result === 0) {
-    await safeReply(m, "❌ Posisi sudah terisi!");
+    await safeReply(m, "❌ ¡La posición está cargada!");
     return true;
   }
 
   if (result === -1) {
-    await safeReply(m, "❌ Posisi tidak valid!");
+    await safeReply(m, "❌ ¡Posición inválida!");
     return true;
   }
 

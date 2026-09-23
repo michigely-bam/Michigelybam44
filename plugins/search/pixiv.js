@@ -23,7 +23,9 @@ async function handler(m, { sock }) {
 
     if (!query) {
       return m.reply(
-        `❌ *Masukkan kata kunci pencarian!*\n\n> Contoh: .pixiv rem`,
+        `❌ *¡Introduzca la contraseña de búsqueda!*
+
+> Contoh: .pixiv rem`,
       );
     }
 
@@ -37,7 +39,7 @@ async function handler(m, { sock }) {
 
     if (!data.status || !data.data || data.data.length === 0) {
       await m.react("❌");
-      return m.reply(`❌ *Tidak ditemukan hasil untuk:* ${query}`);
+      return m.reply(`❌ *No se han encontrado resultados para:* ${query}`);
     }
 
     const results = data.data.slice(0, 10);
@@ -87,7 +89,7 @@ async function handler(m, { sock }) {
   } catch (error) {
     await m.react("☢");
     if (error.response?.status === 403) {
-      return m.reply(`❌ *API Key tidak valid atau limit tercapai*`);
+      return m.reply(`❌ *API de clave inválida o límite alcanzado*`);
     }
     m.reply(te(m.prefix, m.command, m.pushName));
   }

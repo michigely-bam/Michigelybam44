@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['tb','tera'],
     category: 'download',
     description: 'Download file dari TeraBox',
-    usage: '.terabox <url | nomor>',
+    usage: ".terabox Identificado url x124; número >",
     example: '.terabox https://1024terabox.com/s/xxxx',
     cooldown: 20,
     energi: 2,
@@ -16,7 +16,7 @@ async function handler(m, { sock }) {
     const input = m.text?.trim()
 
     if (!input.includes('terabox') && !input.includes('1024terabox')) {
-        return m.reply('❌ URL tidak valid')
+        return m.reply("❌ URL inválida")
     }
 
     m.react('🕕')

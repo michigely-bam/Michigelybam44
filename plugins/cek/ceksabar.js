@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'ceksabar',
     alias: ['sabar', 'patience'],
     category: 'cek',
-    description: 'Cek tingkat kesabaran kamu',
-    usage: '.ceksabar <nama>',
+    description: "Comprueba tu nivel de paciencia.",
+    usage: ".ejercicio < nombre >",
     example: '.ceksabar Budi',
     isOwner: false,
     isPremium: false,
@@ -27,8 +27,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kesabaran kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kesabaran @${mentioned.split('@')[0]} yak? 
+Tu nivel de paciencia. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de paciencia @${mentioned.split('@')[0]} yak? 
     
 Tingkat kesabaran dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

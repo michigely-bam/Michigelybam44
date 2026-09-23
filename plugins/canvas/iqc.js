@@ -21,7 +21,11 @@ const pluginConfig = {
 async function handler(m, { sock }) {
     const text = m.args.join(' ')
     if (!text) {
-        return m.reply(`📱 *ɪǫᴄ ᴄʜᴀᴛ*\n\n> Masukkan teks untuk chat\n\n\`Contoh: ${m.prefix}iqc Hai cantik\``)
+        return m.reply(`📱 *ɪǫᴄ ᴄʜᴀᴛ*
+
+> Escriba texto para chat
+
+\`Contoh: ${m.prefix}iqc Hai cantik\``)
     }
     
     m.react('🕕')

@@ -31,7 +31,9 @@ async function handler(m, { sock }) {
         
         if (!data?.status || !data?.data) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Gagal menganalisa`)
+            return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No se pudo analyse`)
         }
         
         const result = data.data

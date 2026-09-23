@@ -69,7 +69,7 @@ async function uploadTo0x0(buffer, filename) {
     },
   );
 
-  if (!res.data?.status ? res.data.path : "") throw new Error("Upload gagal");
+  if (!res.data?.status ? res.data.path : "") throw new Error("Error al subir");
   return res.data;
 }
 
@@ -120,7 +120,7 @@ async function handler(m, { sock }) {
 
     const audioUrl = await uploadTo0x0(audioBuffer, filename);
 
-    await m.reply("🔍 *ᴍᴇɴɢɪᴅᴇɴᴛɪꜰɪᴋᴀsɪ...*\n\n> Mencari info lagu...");
+    await m.reply("🔍 *ᴍᴇɴɢɪᴅᴇɴᴛɪꜰɪᴋᴀsɪ...*\n\n> Buscando información de la canción...");
 
     const data = await ourinApi.neoxr.whatMusic(
       {
@@ -134,7 +134,7 @@ async function handler(m, { sock }) {
 
     if (!data?.status || !data?.data) {
       m.react("❌");
-      return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> Lagu tidak dikenali atau API error");
+      return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> Error desconocido de la canción o API");
     }
 
     const music = data.data;
@@ -184,7 +184,7 @@ async function handler(m, { sock }) {
       text,
       footer: "🎵 Music Recognition",
       contextInfo: getContextInfo(
-        "🎵 MUSIK APA INI",
+        "🎵 ¿Qué música es esta?",
         music.title || "Music Found",
       ),
     };

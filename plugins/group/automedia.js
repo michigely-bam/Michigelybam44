@@ -39,20 +39,29 @@ async function handler(m, { sock }) {
     
     if (arg === 'on' || arg === '1' || arg === 'aktif') {
         if (current) {
-            return m.reply(`🎬 *ᴀᴜᴛᴏᴍᴇᴅɪᴀ*\n\n> Sudah aktif!`)
+            return m.reply(`🎬 *ᴀᴜᴛᴏᴍᴇᴅɪᴀ*
+
+> ¡Ya está!`)
         }
         db.setGroup(m.chat, { automedia: true })
         await db.save()
-        return m.reply(`🎬 *ᴀᴜᴛᴏᴍᴇᴅɪᴀ*\n\n> ✅ Berhasil diaktifkan!\n> Sticker akan otomatis jadi gambar/video`)
+        return m.reply(`🎬 *ᴀᴜᴛᴏᴍᴇᴅɪᴀ*
+
+> ✅ ¡Está activado!
+> Las pegatinas serán automáticamente imágenes / vídeos`)
     }
     
     if (arg === 'off' || arg === '0' || arg === 'nonaktif') {
         if (!current) {
-            return m.reply(`🎬 *ᴀᴜᴛᴏᴍᴇᴅɪᴀ*\n\n> Sudah nonaktif!`)
+            return m.reply(`🎬 *ᴀᴜᴛᴏᴍᴇᴅɪᴀ*
+
+> ¡Está deshabilitado!`)
         }
         db.setGroup(m.chat, { automedia: false })
         await db.save()
-        return m.reply(`🎬 *ᴀᴜᴛᴏᴍᴇᴅɪᴀ*\n\n> ❌ Berhasil dinonaktifkan!`)
+        return m.reply(`🎬 *ᴀᴜᴛᴏᴍᴇᴅɪᴀ*
+
+> ❌ ¡Se ha desactivado!`)
     }
     
     return m.reply(`❌ Gunakan: \`${m.prefix}automedia on/off\``)

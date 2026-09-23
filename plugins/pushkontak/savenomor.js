@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'savenomor',
     alias: ['sv', 'save', 'simpannomor'],
     category: 'pushkontak',
-    description: 'Simpan nomor ke kontak bot',
-    usage: '.savenomor <nama>',
+    description: "Guardar el número de contacto de arranque",
+    usage: ".saventosh   nombre",
     example: '.savenomor JohnDoe',
     isOwner: true,
     isPremium: false,
@@ -59,11 +59,15 @@ async function handler(m, { sock }) {
     }
     
     if (!nama) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Masukkan nama kontak`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Ingrese el nombre de contacto`)
     }
     
     if (!targetNumber) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak dapat menentukan nomor target`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Incapaz de determinar el número de destino`)
     }
     
     m.react('📱')

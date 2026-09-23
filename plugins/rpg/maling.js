@@ -48,28 +48,28 @@ async function handler(m, { sock }) {
       type: "big",
       money: 20000,
       exp: 500,
-      msg: "Berhasil copet dompet sultan!",
+      msg: "¡Lo hice!",
     },
     {
       success: true,
       type: "medium",
       money: 8000,
       exp: 200,
-      msg: "Dapat dompet tipis...",
+      msg: "Tengo una billetera delgada...",
     },
     {
       success: true,
       type: "small",
       money: 2000,
       exp: 50,
-      msg: "Cuma dapat receh.",
+      msg: "Sólo tengo un cambio.",
     },
     {
       success: false,
       type: "caught",
       fine: 15000,
       health: 30,
-      msg: "Ketangkap dan dipukuli massa!",
+      msg: "¡Atrapado y golpeado por una multitud!",
     },
     {
       success: false,
@@ -83,7 +83,7 @@ async function handler(m, { sock }) {
       type: "fail",
       fine: 0,
       health: 0,
-      msg: "Target kabur, gagal total.",
+      msg: "El objetivo escapó, completamente falló.",
     },
   ];
 

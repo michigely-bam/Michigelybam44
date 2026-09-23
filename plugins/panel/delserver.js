@@ -9,7 +9,7 @@ const pluginConfig = {
     name: allCommands,
     alias: allAliases,
     category: 'panel',
-    description: 'Hapus server dari panel (v1-v5)',
+    description: "Eliminar el servidor del panel (v1-v5)",
     usage: '.delserverv1 serverid',
     example: '.delserverv2 5',
     isOwner: false,
@@ -78,7 +78,7 @@ async function handler(m, { sock }) {
         const available = getAvailableServers(pteroConfig)
         let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`
         if (available.length > 0) {
-            txt += `> Server tersedia: *${available.join(', ')}*\n`
+            txt += `> Servidor disponible: *${available.join(', ')}*\n`
             txt += `> Contoh: \`${m.prefix}delserver${available[0]} serverid\``
         } else {
             txt += `> Isi config pterodactyl di \`config.js\``

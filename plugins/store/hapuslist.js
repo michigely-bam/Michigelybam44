@@ -4,8 +4,8 @@ const pluginConfig = {
     name: 'hapuslist',
     alias: ['dellist', 'deletelist'],
     category: 'store',
-    description: '🗑️ Hapus informasi toko',
-    usage: '.hapuslist <nomor>',
+    description: "🗑️ Eliminar la información de la tienda",
+    usage: ".Borrar la lista",
     example: '.hapuslist 1',
     isOwner: true,
     isPremium: false,
@@ -21,13 +21,19 @@ async function handler(m, { sock }) {
     const lists = db.setting('storeLists') || []
 
     if (lists.length === 0) {
-        return m.reply(`📭 *Belum ada informasi.*\n\nTambahkan informasi terlebih dahulu: \`${m.prefix}addlist\` ➕`)
+        return m.reply(`📭 *Aún no hay información.*
+
+Tambahkan informasi terlebih dahulu: \`${m.prefix}addlist\` ➕`)
     }
 
     const idx = parseInt(m.text?.trim()) - 1
 
     if (isNaN(idx) || idx < 0 || idx >= lists.length) {
-        let txt = `🗑️ *Pilih Informasi yang Dihapus*\n\nKetik \`${m.prefix}hapuslist <nomor>\`\n\n`
+        let txt = `🗑️ *Seleccionar información suprimida*
+
+Ketik \`${m.prefix}Borrar la lista\`
+
+`
         for (let i = 0; i < lists.length; i++) {
             const l = lists[i]
             const mediaIcon = l.image ? '🖼️' : l.video ? '🎬' : '📝'

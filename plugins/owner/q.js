@@ -4,8 +4,8 @@ const pluginConfig = {
     name: 'q',
     alias: ['quoted', 'inspect'],
     category: 'tools',
-    description: 'Ambil JSON message dari pesan yang direply',
-    usage: '.q (reply pesan)',
+    description: "Capturar mensaje JSON del mensaje redireccionado",
+    usage: ".q (mensaje de respuesta)",
     isOwner: true,
     cooldown: 3,
     isEnabled: true
@@ -13,7 +13,7 @@ const pluginConfig = {
 
 async function handler(m) {
     if (!m.quoted) {
-        return m.reply('❌ *Reply pesan yang ingin di-inspect*')
+        return m.reply("❌ *Responder el mensaje para incluir*")
     }
 
     try {

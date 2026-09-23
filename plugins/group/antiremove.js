@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'antiremove',
     alias: ['antidelete', 'antihapus', 'ar'],
     category: 'group',
-    description: 'Mengaktifkan/menonaktifkan anti hapus pesan di grup',
+    description: "Permitir / deshabilitar el mensaje anti-delete en grupo",
     usage: '.antiremove <on/off>',
     example: '.antiremove on',
     isOwner: false,
@@ -33,7 +33,8 @@ async function handler(m, { sock, db }) {
     if (action === 'on') {
         db.setGroup(m.chat, { ...group, antiremove: 'on' })
         m.react('✅')
-        await m.reply(`✅ *AntiRemove diaktifkan*\n> Pesan yang dihapus akan di-forward ulang.`)
+        await m.reply(`✅ *AntiRemove diaktifkan*
+> El mensaje eliminado será redireccionado.`)
         return
     }
 

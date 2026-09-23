@@ -31,7 +31,10 @@ async function handler(m, { sock }) {
     const hours = Math.floor(remaining / (1000 * 60 * 60));
     const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
     return m.reply(
-      `🕕 *ᴄᴏᴏʟᴅᴏᴡɴ*\n\n> Kamu sudah klaim hari ini.\n> Tunggu: *${hours} jam ${minutes} menit* lagi.`,
+      `🕕 *ᴄᴏᴏʟᴅᴏᴡɴ*
+
+> Has reclamado hoy.
+> Tunggu: *${hours} jam ${minutes} menit* lagi.`,
     );
   }
 
@@ -58,7 +61,7 @@ async function handler(m, { sock }) {
   txt += `┃ 💰 Koin: *+${moneyReward.toLocaleString("id-ID")}*\n`;
   txt += `┃ 🥤 Potion: *+${potionReward}*\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
-  txt += `> Jangan lupa claim lagi besok!`;
+  txt += `> ¡No olvides la reclamación mañana!`;
 
   await m.reply(txt, { mentions: [m.sender] });
 }

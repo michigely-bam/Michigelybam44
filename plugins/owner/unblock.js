@@ -4,8 +4,8 @@ const pluginConfig = {
     name: ['unblock', 'unblocknomor'],
     alias: [],
     category: 'owner',
-    description: 'Buka blokir nomor WhatsApp',
-    usage: '.unblock <nomor/reply/mention>',
+    description: "Desbloquear el número de WhatsApp",
+    usage: ".desbloqueo < número / respuesta / mención >",
     example: '.unblock 628xxx',
     isOwner: true,
     cooldown: 5,
@@ -22,7 +22,7 @@ async function handler(m, { sock }) {
         targetJid = m.quoted.sender || m.quoted.participant
     } else if (m.args[0]) {
         let num = m.args[0].replace(/[^0-9]/g, '')
-        if (!num) return m.reply('❌ Nomor tidak valid.')
+        if (!num) return m.reply("❌ Número inválido.")
         targetJid = num + '@s.whatsapp.net'
     } else if (!m.isGroup) {
         targetJid = m.chat

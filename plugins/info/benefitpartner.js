@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'benefitpartner',
     alias: ['partnerbenefits', 'keuntunganpartner'],
     category: 'info',
-    description: 'Lihat keuntungan menjadi partner bot',
+    description: "Mira los beneficios de ser un compañero bot",
     usage: '.benefitpartner',
     example: '.benefitpartner',
     isOwner: false,
@@ -22,35 +22,49 @@ async function handler(m) {
     let txt = `🤝 *BENEFIT PARTNER*\n\n`
     txt += `Keuntungan menjadi partner ${config.bot?.name || 'Bot'}:\n\n`
 
-    txt += `🔓 *Akses Fitur*\n`
-    txt += `├ Semua fitur premium terbuka\n`
+    txt += `🔓 *Acceso a la alimentación*
+`
+    txt += `├ Todas las características premium están abiertas
+`
     txt += `├ Energi & koin unlimited\n`
-    txt += `├ Akses command owner tertentu\n`
+    txt += `├ acceso específico del propietario del comando
+`
     txt += `└ Prioritas support\n\n`
 
     txt += `📦 *Panel Pterodactyl*\n`
-    txt += `├ Bisa create server sendiri\n`
-    txt += `├ Akses panel management\n`
-    txt += `└ Bisa jualan panel (reseller)\n\n`
+    txt += `├ Podría crear su propio servidor
+`
+    txt += `├ Placa de gestión de acceso
+`
+    txt += `└ Puede vender paneles.
+
+`
 
     txt += `💎 *Bonus*\n`
-    txt += `├ +200.000 EXP saat aktivasi\n`
-    txt += `├ +20.000 Koin saat aktivasi\n`
+    txt += `├ +200,000 EXP durante la activación
+`
+    txt += `├ +20.000 monedas durante la activación.
+`
     txt += `├ Badge partner di profil\n`
-    txt += `└ Akses early feature\n\n`
+    txt += `└ Acceso a la función temprana
+
+`
 
     txt += `💰 *Cara Jadi Partner*\n`
-    txt += `├ Hubungi owner: ${config.owner?.name || 'Owner'}\n`
-    txt += `├ Durasi: 30/60/90 hari\n`
+    txt += `├ Propietario de contacto: ${config.owner?.name || 'Owner'}\n`
+    txt += `├ Duración: 30 / 60 / 90 días
+`
     txt += `└ Command: \`${prefix}addpartner\` (owner only)\n\n`
 
     txt += `📋 *Command Partner*\n`
     txt += `├ \`${prefix}cekpartner\` — Cek status partner\n`
     txt += `├ \`${prefix}cekprem\` — Cek status premium\n`
     txt += `├ \`${prefix}cekowner\` — Cek role user\n`
-    txt += `└ \`${prefix}listpartner\` — Daftar partner\n\n`
+    txt += `└ \`${prefix}listpartner\` - Una lista de socios.
 
-    txt += `> _Hubungi owner untuk info lebih lanjut_`
+`
+
+    txt += `> _Llame al propietario para más información._`
 
     await m.reply(txt)
 }

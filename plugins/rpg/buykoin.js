@@ -80,7 +80,7 @@ async function handler(m, { sock }) {
     txt += `┃ 💰 Koin: * ${(user.koin || 0).toLocaleString("id-ID")}*\n`;
     txt += `╰┈┈⬡\n\n`;
     txt += `> Contoh: \`.buykoin 10000\`\n`;
-    txt += `> Akan menggunakan ${10000 * EXP_PER_KOIN} EXP untuk 10.000 Koin`;
+    txt += `> Uso de la voluntad ${10000 * EXP_PER_KOIN} EXP para 10.000 monedas`;
 
     return m.reply(txt);
   }
@@ -93,7 +93,7 @@ async function handler(m, { sock }) {
   }
 
   if (!koinAmount || koinAmount <= 0) {
-    return m.reply(`❌ Masukkan jumlah koin yang valid!`);
+    return m.reply(`❌ ¡Introdúzca un conteo válido de monedas!`);
   }
 
   const expNeeded = koinAmount * EXP_PER_KOIN;

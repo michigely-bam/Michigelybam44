@@ -43,7 +43,7 @@ async function getPlayAudioDownload(url) {
     return { download: fallback.dl, title: fallback.title, isFallback: true };
   }
 
-  throw new Error(fallback?.mess || "Gagal mendapatkan audio play URL");
+  throw new Error(fallback?.mess || "Fallado para obtener URL de audio de reproducción");
 }
 
 async function handler(m, { sock, text }) {
@@ -55,7 +55,7 @@ async function handler(m, { sock, text }) {
 
   try {
     const search = await yts(query);
-    if (!search.videos.length) throw "Video tidak ditemukan";
+    if (!search.videos.length) throw "Video no encontrado";
 
     const video = search.videos[0];
 
@@ -72,7 +72,7 @@ async function handler(m, { sock, text }) {
       info += `*Deskripsi:*\n_${desc}${video.description.length > 150 ? "..." : ""}_\n\n`;
     }
     info += `🔗 ${video.url}\n\n`;
-    info += `_⏳ mengirim audio, harap tunggu..._`;
+    info += `_⏳ Envía audio, por favor espera..._`;
 
     await sock.sendPreview(
       m.chat,
@@ -114,7 +114,7 @@ async function handler(m, { sock, text }) {
     console.error("[Play]", err);
     m.react("😭");
     m.reply(
-      `Wahhh, fitur putar musiknya lagi ada kendala kak, coba lagi nanti yak, jangan spam`,
+      `fontcolor = "# FFFF00" Wahh, theplaysofthemusic again fontcolor = "# FFFF00`,
     );
   }
 }

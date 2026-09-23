@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'listjadibot',
     alias: ['jadibotlist', 'alljadibot'],
     category: 'owner',
-    description: 'Lihat semua session jadibot yang tersimpan',
+    description: "Mira todas las sesiones depositarias.",
     usage: '.listjadibot',
     example: '.listjadibot',
     isOwner: true,
@@ -20,7 +20,7 @@ async function handler(m, { sock }) {
     const active = getActiveJadibots()
 
     if (sessions.length === 0) {
-        return m.reply(`❌ Tidak ada session jadibot tersimpan`)
+        return m.reply(`❌ No hay sesión por lo que la bota se salva`)
     }
 
     let txt = `🤖 *ᴅᴀꜰᴛᴀʀ ᴊᴀᴅɪʙᴏᴛ*\n\n`
@@ -34,9 +34,11 @@ async function handler(m, { sock }) {
         txt += `${status} *${i + 1}.* @${s.id} — _${label}_\n`
     })
 
-    txt += `\n> \`${m.prefix}listjadibotaktif\` — Detail aktif\n`
-    txt += `> \`${m.prefix}stopalljadibot\` — Stop semua\n`
-    txt += `> \`${m.prefix}stopdandeletejadibot @user\` — Hapus session`
+    txt += `\n> \`${m.prefix}listjadibotaktif\` - Detalles activos.
+`
+    txt += `> \`${m.prefix}stopalljadibot\` - Basta.
+`
+    txt += `> \`${m.prefix}stopdandeletejadibot @user\` - Retirar el período de sesiones`
 
     const mentions = sessions.map(s => s.jid)
 
@@ -47,14 +49,14 @@ async function handler(m, { sock }) {
             {
                 name: 'quick_reply',
                 buttonParamsJson: JSON.stringify({
-                    display_text: '🟢 Lihat Aktif',
+                    display_text: "🟢 Vista activa",
                     id: `${m.prefix}listjadibotaktif`
                 })
             },
             {
                 name: 'quick_reply',
                 buttonParamsJson: JSON.stringify({
-                    display_text: '🛑 Stop Semua',
+                    display_text: "🛑 Parad todos",
                     id: `${m.prefix}stopalljadibot`
                 })
             }

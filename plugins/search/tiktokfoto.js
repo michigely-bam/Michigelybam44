@@ -8,7 +8,7 @@ const pluginConfig = {
     name: 'tiktokfoto',
     alias: ['ttfoto', 'ttphotosearch', 'searchtiktokfoto'],
     category: 'search',
-    description: 'Cari foto TikTok dan kirim album gambar',
+    description: "Buscar fotos de Tickook y enviar un álbum de imagen",
     usage: '.tiktokfoto <query>',
     example: '.tiktokfoto cosplay',
     isOwner: false,
@@ -46,7 +46,7 @@ async function fetchTiktokFoto(query) {
     })
 
     if (!data?.success || !data?.data?.results?.length) {
-        throw new Error(data?.message || 'Foto TikTok tidak ditemukan')
+        throw new Error(data?.message || "No se encontraron fotos de Tickook")
     }
 
     return data.data
@@ -68,7 +68,7 @@ async function handler(m, { sock }) {
 
         if (!post || images.length === 0) {
             m.react('❌')
-            return m.reply(`❌ Tidak ditemukan foto TikTok untuk: ${query}`)
+            return m.reply(`❌ No se encontraron fotos de Tickook para: ${query}`)
         }
 
         let caption = '📸 *TIKTOK FOTO SEARCH*\n\n'
@@ -104,7 +104,7 @@ async function handler(m, { sock }) {
 
         if (mediaList.length === 0) {
             m.react('❌')
-            return m.reply('❌ Gagal memuat foto TikTok')
+            return m.reply("❌ No se pudo load Tickook photo")
         }
 
         try {

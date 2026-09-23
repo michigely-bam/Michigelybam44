@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "lookup",
   alias: ["dnslookup", "dns", "whois"],
   category: "tools",
-  description: "DNS Lookup untuk domain",
+  description: "DNS Lookup for domain",
   usage: ".lookup <domain>",
   example: ".lookup google.com",
   isOwner: false,
@@ -95,7 +95,9 @@ async function handler(m, { sock }) {
 
     if (!dnsData && !whoisData) {
       await m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak dapat memproses domain`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Incapaz de procesar el dominio`);
     }
 
     let text = `🔍 *ᴅɴs ʟᴏᴏᴋᴜᴘ*\n\n`;

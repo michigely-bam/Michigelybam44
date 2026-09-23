@@ -19,10 +19,10 @@ const pluginConfig = {
 if (!global.sulapSessions) global.sulapSessions = new Map()
 
 const successLines = [
-    '💨 *POOF!* Dan... dia menghilang!',
-    '🌟 Sulap berhasil! Sampai jumpa lagi~',
+    "💨 *POOF!* ¡Y... se ha ido!",
+    "🌟 ¡La magia está funcionando!~",
     '✨ Absen dulu ya, ditunggu berikutnya!',
-    '🎪 Pertunjukan selesai! 👏'
+    "🎪 ¡Se acabó el show! 👏"
 ]
 
 function sleep(ms) {
@@ -77,12 +77,12 @@ async function replyHandler(m, sock) {
     const senderNumber = m.sender.split('@')[0]
 
     if (targetNumber === botNumber) {
-        await sock.sendMessage(m.chat, { text: '🎭 Bot tidak bisa menghilangkan dirinya sendiri!' })
+        await sock.sendMessage(m.chat, { text: "🎭 ¡Bot no puede deshacerse de sí mismo!" })
         return true
     }
 
     if (targetJid === m.sender) {
-        await sock.sendMessage(m.chat, { text: '🎭 Tidak bisa menghilangkan diri sendiri!' })
+        await sock.sendMessage(m.chat, { text: "🎭 ¡No puedes perderte!" })
         return true
     }
 
@@ -93,7 +93,7 @@ async function replyHandler(m, sock) {
         )
 
         if (!target) {
-            await sock.sendMessage(m.chat, { text: '👻 Orang itu tidak ada di grup!' })
+            await sock.sendMessage(m.chat, { text: "👻 ¡Ese tipo no está en el grupo!" })
             return true
         }
 
@@ -121,7 +121,9 @@ async function replyHandler(m, sock) {
         })
 
     } catch (error) {
-        await sock.sendMessage(m.chat, { text: `😅 Sulapnya gagal...\n\n> ${error.message}` })
+        await sock.sendMessage(m.chat, { text: `😅 El ángulo está fallando...
+
+> ${error.message}` })
     }
 
     return true

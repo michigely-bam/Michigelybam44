@@ -27,21 +27,21 @@ async function handler(m, { sock }) {
     try {
         const isImage = m.isImage || (m.quoted && m.quoted.isImage);
         if (!isImage) {
-            return await m.reply('❌ *ɢᴀᴍʙᴀʀ ᴅɪʙᴜᴛᴜʜᴋᴀɴ*\n\n> Reply atau kirim gambar dengan caption .imgtoprompt');
+            return await m.reply("❌ *ɢᴀᴍʙᴀʀ ᴅɪʙᴜᴛᴜʜᴋᴀɴ*\n\n> Responder o enviar una imagen con descripción .imgtoprompt");
         }
         
-        await m.reply('🕕 *ᴍᴇᴍᴘʀᴏsᴇs ɢᴀᴍʙᴀʀ...*\n\n> Menganalisis gambar untuk menghasilkan prompt');
+        await m.reply("🕕 *ᴍᴇᴍᴘʀᴏsᴇs ɢᴀᴍʙᴀʀ...*\n\n> Analizar imágenes para producir prompt");
         let mediaBuffer;
         if (m.isImage && m.download) {
             mediaBuffer = await m.download();
         } else if (m.quoted && m.quoted.isImage && m.quoted.download) {
             mediaBuffer = await m.quoted.download();
         } else {
-            return await m.reply('❌ Gagal mengunduh gambar');
+            return await m.reply("❌ No se pudo download image");
         }
         
         if (!mediaBuffer || !Buffer.isBuffer(mediaBuffer)) {
-            return await m.reply('❌ Buffer gambar tidak valid');
+            return await m.reply("❌ Buffer de imagen inválida");
         }
         const tmpDir = path.join(process.cwd(), 'temp');
         if (!fs.existsSync(tmpDir)) {
@@ -55,7 +55,7 @@ async function handler(m, { sock }) {
             fs.unlinkSync(tmpFile);
         } catch (e) {}
         if (result.status === 'eror' || !result.prompt) {
-            return await m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> ${result.msg || 'Tidak dapat menghasilkan prompt dari gambar ini'}`);
+            return await m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> ${result.msg || "Incapaz de generar prompt de esta imagen"}`);
         }
         const responseText = `🎨 *ɪᴍᴀɢᴇ ᴛᴏ ᴘʀᴏᴍᴘᴛ*\n\n` +
             `\`\`\`${result.prompt}\`\`\`\n\n` +

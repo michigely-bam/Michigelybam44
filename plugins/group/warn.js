@@ -51,7 +51,9 @@ async function handler(m, { sock }) {
         }
         groupData.maxWarnings = newMax
         db.setGroup(m.chat, groupData)
-        return m.reply(`✅ *BATAS WARNING DIUBAH*\n\nMaksimal warning grup ini telah diupdate menjadi *${newMax} kali*.`)
+        return m.reply(`✅ *BATAS WARNING DIUBAH*
+
+La advertencia máxima de este grupo ha sido actualizada *${newMax} kali*.`)
     }
 
     let targetUser = null
@@ -73,7 +75,7 @@ async function handler(m, { sock }) {
         const groupMeta = m.groupMetadata
         const participant = groupMeta.participants.find(p => getParticipantJid(p) === targetUser)
         if (participant?.admin) {
-            await m.reply(`❌ Tidak bisa memberikan warning kepada admin grup.`)
+            await m.reply(`❌ No puedo dar aviso al administrador del grupo.`)
             return
         }
     } catch (e) {}
@@ -85,7 +87,7 @@ async function handler(m, { sock }) {
     }
     
     const reasonArg = m.quoted ? m.text?.trim() : m.text?.replace(/@\d+/g, '').replace(/^\s*warn\s*/i, '').trim()
-    const reason = reasonArg || 'Tidak ada alasan'
+    const reason = reasonArg || "No hay razón"
     
     let userWarnings = warnings[targetUser] || []
     userWarnings.push({

@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "jadwalbola",
   alias: ["bola", "football", "soccer", "jadwalsepakbola"],
   category: "info",
-  description: "Lihat jadwal pertandingan sepak bola",
+  description: "Mira el horario del partido de fútbol.",
   usage: ".jadwalbola [liga]",
   example: ".jadwalbola inggris",
   isOwner: false,
@@ -53,7 +53,7 @@ async function handler(m, { sock }) {
     );
 
     if (!data?.status || !data?.data || data.data.length === 0) {
-      throw new Error("Tidak ada jadwal tersedia");
+      throw new Error("No hay horarios disponibles");
     }
 
     let matches = data.data;
@@ -70,7 +70,7 @@ async function handler(m, { sock }) {
 
     if (matches.length === 0) {
       m.react("❌");
-      return m.reply(`❌ Tidak ditemukan jadwal untuk: \`${filter}\``);
+      return m.reply(`❌ No hay horarios encontrados para: \`${filter}\``);
     }
 
     const grouped = {};

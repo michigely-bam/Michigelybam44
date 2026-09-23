@@ -51,7 +51,7 @@ ${m.isGroup ? `┃ ㊗ ɢʀᴜᴘ: *${(groupMode || 'INHERIT').toUpperCase()}*\n
 > \`${m.prefix}botmode store\` - Manual order
 > \`${m.prefix}botmode store --autoorder\` - Auto payment
 > \`${m.prefix}botmode md\` → Mode default
-> \`${m.prefix}botmode all\` → Semua fitur`
+> \`${m.prefix}botmode all\` Todas las características`
         await m.reply(txt)
         return
     }
@@ -85,9 +85,15 @@ ${m.isGroup ? `┃ ㊗ ɢʀᴜᴘ: *${(groupMode || 'INHERIT').toUpperCase()}*\n
         if (isAutoorder) {
             try {
                 if (!pakasir.isEnabled()) {
-                    extraInfo = `\n\n⚠️ *Pakasir belum dikonfigurasi!*\n> Set di config.js: pakasir.slug & pakasir.apiKey`
+                    extraInfo = `
+
+⚠️ *¡No están configuradas las ropas todavía!*
+> Set di config.js: pakasir.slug & pakasir.apiKey`
                 } else {
-                    extraInfo = `\n\n✅ *Autoorder aktif!*\n> Pembayaran otomatis via Pakasir`
+                    extraInfo = `
+
+✅ *¡Autoorden activo!*
+> Pembayaran otomatis via Pakasir`
                 }
             } catch {
                 extraInfo = `\n\n⚠️ *Pakasir module not found*`

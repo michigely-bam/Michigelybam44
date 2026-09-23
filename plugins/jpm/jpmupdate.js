@@ -15,9 +15,9 @@ const pluginConfig = {
   name: "jpmupdate",
   alias: ["updatejpm", "broadcastupdate", "shareupdate"],
   category: "jpm",
-  description: "Kirim update/changelog ke semua grup",
+  description: "Enviar actualizaciones / cambio a todos los grupos",
   usage: ".jpmupdate <versi> | <changelog>",
-  example: ".jpmupdate v2.0 | Fitur baru:\\n- Quiz Battle\\n- Confession",
+  example: ".jpmupdate v2.0 -- 124; nuevas características:\\ n-Quiz Batalla",
   isOwner: true,
   isPremium: false,
   isGroup: false,
@@ -32,7 +32,9 @@ async function handler(m, { sock }) {
 
   if (global.statusjpm) {
     return m.reply(
-      `❌ *ɢᴀɢᴀʟ*\n\n> JPM sedang berjalan. Ketik \`${m.prefix}stopjpm\` untuk menghentikan.`,
+      `❌ *ɢᴀɢᴀʟ*
+
+> JPM corriendo. \`${m.prefix}stopjpm\` Parar.`,
     );
   }
 
@@ -60,7 +62,7 @@ async function handler(m, { sock }) {
   }
 
   if (!changelog) {
-    return m.reply(`❌ Changelog tidak boleh kosong!`);
+    return m.reply(`❌ ¡El cambio no debe estar vacío!`);
   }
 
   await m.react("🕕");
@@ -78,7 +80,9 @@ async function handler(m, { sock }) {
     if (groupIds.length === 0) {
       await m.react("❌");
       return m.reply(
-        `❌ *ɢᴀɢᴀʟ*\n\n> Tidak ada grup yang ditemukan${blacklistedCount > 0 ? ` (${blacklistedCount} grup di-blacklist)` : ""}`,
+        `❌ *ɢᴀɢᴀʟ*
+
+> No se encontró ningún grupo${blacklistedCount > 0 ? ` (${blacklistedCount} grupo sobre -lista negra` : ""}`,
       );
     }
 

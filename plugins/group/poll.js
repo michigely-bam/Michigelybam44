@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'poll',
     alias: ['voting', 'vote', 'survei'],
     category: 'group',
-    description: 'Buat polling/voting di grup',
+    description: "Crear votación / votación en grupo",
     usage: '.poll <pertanyaan> | <opsi1>, <opsi2>, ...',
     example: '.poll Makan apa? | Nasi Goreng, Mie Ayam, Bakso',
     isOwner: false,

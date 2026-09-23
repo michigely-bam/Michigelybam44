@@ -4,7 +4,7 @@ const pluginConfig = {
     category: 'fun',
     description: 'Tanya bot apakah sesuatu',
     usage: '.apakah <pertanyaan>',
-    example: '.apakah aku bisa kaya?',
+    example: ".¿Puedo ser rico?",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -16,32 +16,37 @@ const pluginConfig = {
 
 const answers = [
     'Ya, tentu saja!',
-    'Tidak, sepertinya tidak.',
-    'Mungkin saja, coba lagi nanti.',
+    "No, no lo creo.",
+    "Tal vez, intente de nuevo más tarde.",
     'Hmm... aku rasa iya.',
-    'Aku ragu, tapi bisa jadi.',
+    "Lo dudo, pero podría ser.",
     'Pasti! 100%!',
-    'Tidak mungkin.',
-    'Bisa jadi, siapa yang tau?',
+    "De ninguna manera.",
+    "Podría ser, ¿quién sabe?",
     'Menurutku sih iya.',
     'Wah, kayaknya nggak deh.',
-    'Tentu, kenapa tidak?',
-    'Aku nggak tau, coba tanya yang lain.',
+    "Claro, ¿por qué no?",
+    "No lo sé, pregúntame otra cosa.",
     'Ya ampun, pasti lah!',
-    'Hmm... sepertinya tidak.',
+    "No lo creo.",
     'Aku yakin iya!',
     'Nggak mungkin banget.',
-    'Mungkin, tapi jangan berharap terlalu tinggi.',
+    "Tal vez, pero no tengas esperanzas.",
     'Iya dong!',
     'Nggak, maaf ya.',
-    'Bisa! Semangat!'
+    "¡Puedo!"
 ];
 
 async function handler(m) {
     const text = m.text?.trim();
     
     if (!text) {
-        return m.reply(`❓ *ᴀᴘᴀᴋᴀʜ*\n\n> Masukkan pertanyaan!\n\n*Contoh:*\n> .apakah aku bisa jadi kaya?`);
+        return m.reply(`❓ *ᴀᴘᴀᴋᴀʜ*
+
+> ¡Póngase en una pregunta!
+
+*Contoh:*
+> .¿Puedo ser rico?`);
     }
     
     const answer = answers[Math.floor(Math.random() * answers.length)];

@@ -31,7 +31,8 @@ async function handler(m, { sock }) {
     if (!kota) {
       m.react("❌");
       return m.reply(
-        `❌ *ɢᴀɢᴀʟ*\n\n> Kota "${city}" tidak ditemukan\n> Coba nama kabupaten/kota lain`,
+        `❌ *ɢᴀɢᴀʟ*\n\n> Kota "${city}" no encontrado
+> Pruebe otro distrito / nombre de la ciudad`,
       );
     }
     const jadwalData = await getTodaySchedule(kota.id);
@@ -62,7 +63,7 @@ async function handler(m, { sock }) {
 ┃ 🌆 ᴍᴀɢʜʀɪʙ: \`${times.maghrib}\`
 ┃ 🌃 ɪsʏᴀ: \`${times.isya}\`
 ╰┈┈⬡
-> _Sumber: myquran.com | Jangan lupa sholat ya! 🤲_`;
+> _Fuente: myquran.com Dz124; ¡No te olvides de rezarte! 🤲_`;
     const adzanUrl = "https://files.catbox.moe/z2bj5s.mp3";
     let adzanBuffer;
     try {

@@ -17,15 +17,15 @@ const pluginConfig = {
 const answers = [
     'Besok mungkin?',
     'Tahun depan kayaknya.',
-    '3 hari lagi!',
-    'Hmm, masih lama sih.',
-    'Sebentar lagi kok!',
-    'Kalau sudah waktunya, pasti terjadi.',
+    "3 ¡Otro día!",
+    "Ha pasado un tiempo.",
+    "¡Estaré allí en un minuto!",
+    "Cuando el tiempo sea correcto, ocurrirá.",
     'Bulan depan!',
-    'Entah kapan, yang penting sabar.',
-    'Dalam waktu dekat!',
-    '10 tahun lagi mungkin?',
-    'Nggak lama lagi!',
+    "No sé cuándo, pero ten paciencia.",
+    "¡En un futuro próximo!",
+    "10 ¿Otro año quizá?",
+    "¡No por mucho tiempo!",
     'Kalau jodoh, pasti ketemu.',
     'Hmm, susah diprediksi.',
     'Minggu depan!',
@@ -33,15 +33,20 @@ const answers = [
     'Pas waktunya tepat.',
     'Secepatnya, tenang aja.',
     'Ntar kalo udah siap.',
-    'Dalam hitungan hari!',
-    'Saat kamu sudah siap menerimanya.'
+    "¡En cuestión de días!",
+    "Cuando estés listo para eso."
 ];
 
 async function handler(m) {
     const text = m.text?.trim();
     
     if (!text) {
-        return m.reply(`⏰ *ᴋᴀᴘᴀɴ*\n\n> Masukkan pertanyaan!\n\n*Contoh:*\n> .kapan aku nikah?`);
+        return m.reply(`⏰ *ᴋᴀᴘᴀɴ*
+
+> ¡Póngase en una pregunta!
+
+*Contoh:*
+> .kapan aku nikah?`);
     }
     
     const answer = answers[Math.floor(Math.random() * answers.length)];

@@ -6,8 +6,8 @@ const pluginConfig = {
     name: 'editproduk',
     alias: ['editproduct'],
     category: 'store',
-    description: '✏️ Edit produk toko (hanya di private chat)',
-    usage: '.editproduk <nomor> <field> <nilai>',
+    description: "✏️ Editar los productos de la tienda (sólo chat privado)",
+    usage: ".producto de edición < número de contacto > campo",
     example: '.editproduk 1 harga 30000',
     isOwner: true,
     isPremium: false,
@@ -46,7 +46,9 @@ async function handler(m, { sock }) {
     const products = db.setting('storeProducts') || []
 
     if (products.length === 0) {
-        return m.reply(`📭 *Belum ada produk.*\n\nTambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
+        return m.reply(`📭 *Aún no hay producto.*
+
+Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
     }
 
     const text = m.text?.trim() || ''
@@ -82,7 +84,9 @@ async function handler(m, { sock }) {
     let value = match[3]?.trim() || ''
 
     if (idx < 0 || idx >= products.length) {
-        return m.reply(`❌ *Nomor produk tidak valid.*\n\nRentang: 1-${products.length} 📋`)
+        return m.reply(`❌ *Número de producto no válido.*
+
+Rentang: 1-${products.length} 📋`)
     }
 
     const product = products[idx]
@@ -192,7 +196,8 @@ async function handler(m, { sock }) {
     reply += `📊 Stok: *${product.stock === -1 ? '♾️ Unlimited' : product.stock}*\n`
     if (field === 'gambar') reply += `🖼️ Gambar: ✅\n`
     if (field === 'video') reply += `🎬 Video: ✅\n`
-    reply += `\n👀 _Lihat perubahan: \`${m.prefix}listproduk\`_`
+    reply += `
+👀 _Ver cambios: \`${m.prefix}listproduk\`_`
 
     return m.reply(reply)
 }

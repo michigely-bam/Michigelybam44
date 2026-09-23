@@ -2,9 +2,9 @@ const pluginConfig = {
     name: 'setdeskgc',
     alias: ['setdesc', 'setdescgc', 'setdeskripsi', 'setdesk'],
     category: 'group',
-    description: 'Mengubah deskripsi grup',
-    usage: '.setdeskgc <deskripsi baru>',
-    example: '.setdeskgc Grup untuk diskusi',
+    description: "Cambiar la descripción del grupo",
+    usage: ".setdeskgc < nueva descripción",
+    example: ".setdeskgc Group for discussion",
     isOwner: false,
     isPremium: false,
     isGroup: true,
@@ -41,11 +41,11 @@ async function handler(m, { sock }) {
         
         if (descToSet) {
             await m.reply(
-                `✅ Deskripsi grup berhasil diperbarui!`
+                `✅ Descripción del grupo con éxito actualizada!`
             )
         } else {
             await m.reply(
-                `✅ Deskripsi grup berhasil dihapus!`
+                `✅ Descripción del grupo eliminado con éxito!`
             )
         }
     } catch (error) {

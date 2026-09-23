@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'clanleave',
     alias: ['leaveclan', 'guildleave'],
     category: 'clan',
-    description: 'Keluar dari clan',
+    description: "Fuera del clan",
     usage: '.clanleave',
     example: '.clanleave',
     isOwner: false,
@@ -19,14 +19,14 @@ async function handler(m) {
     const db = getDatabase()
     const user = db.getUser(m.sender)
 
-    if (!user?.clanId) return m.reply(`❌ Kamu belum punya clan`)
+    if (!user?.clanId) return m.reply(`❌ Aún no tienes un clan.`)
     if (!db.db.data.clans) db.db.data.clans = {}
 
     const clan = db.db.data.clans[user.clanId]
     if (!clan) {
         db.setUser(m.sender, { clanId: null })
         db.save()
-        return m.reply(`❌ Clan tidak ditemukan, data dibersihkan`)
+        return m.reply(`❌ Clan no encontrado, datos despejados`)
     }
 
     if (clan.leader === m.sender) {
@@ -49,7 +49,7 @@ async function handler(m) {
     db.setUser(m.sender, { clanId: null })
     db.save()
 
-    await m.reply(`👋 Kamu keluar dari *${clan.name}*`)
+    await m.reply(`👋 Estás fuera del camino. *${clan.name}*`)
 }
 
 export { pluginConfig as config, handler }

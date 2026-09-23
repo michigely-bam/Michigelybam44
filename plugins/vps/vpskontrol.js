@@ -51,7 +51,7 @@ async function handler(m, { sock }) {
     
     const action = actions[m.command]
     if (!action) {
-        return m.reply(`❌ Aksi tidak dikenali.`)
+        return m.reply(`❌ Acción no reconocida.`)
     }
     
     await m.reply(`${action.emoji} *sᴇᴅᴀɴɢ ${action.text.toUpperCase()} ᴠᴘs...*\n\n> ID: \`${dropletId}\``)
@@ -71,7 +71,7 @@ async function handler(m, { sock }) {
         const actionResult = response.data.action
         
         m.react('✅')
-        await m.reply(`✅ *ᴀᴋsɪ ʙᴇʀʜᴀsɪʟ*\n\n> ${action.emoji} VPS sedang di-${action.text}\n> Status: ${actionResult.status}`)
+        await m.reply(`✅ *ᴀᴋsɪ ʙᴇʀʜᴀsɪʟ*\n\n> ${action.emoji} VPS está siendo...${action.text}\n> Status: ${actionResult.status}`)
         
     } catch (err) {
         return m.reply(te(m.prefix, m.command, m.pushName))

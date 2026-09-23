@@ -39,7 +39,7 @@ async function handler(m, { sock }) {
 
         if (!data.url) {
             m.react('❌')
-            return m.reply(`❌ Gagal mendapatkan link download. File mungkin tidak tersedia.`)
+            return m.reply(`❌ No se puede obtener el enlace de descarga. El archivo puede no estar disponible.`)
         }
 
         await sock.sendMedia(m.chat, data.url, null, m, {

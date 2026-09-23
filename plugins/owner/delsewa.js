@@ -4,8 +4,8 @@ const pluginConfig = {
     name: 'delsewa',
     alias: ['sewadel', 'hapussewa', 'removesewa'],
     category: 'owner',
-    description: 'Hapus grup dari whitelist sewa',
-    usage: '.delsewa <link/id grup>',
+    description: "Quitar grupo de la lista blanca de alquiler",
+    usage: ".deltur - enlace / grupo id √",
     example: '.delsewa https://chat.whatsapp.com/xxx',
     isOwner: true,
     isPremium: false,
@@ -55,15 +55,17 @@ async function handler(m, { sock }) {
         groupId = m.chat
     } else {
         const result = await resolveGroupId(sock, input)
-        if (!result) return m.reply(`❌ Link tidak valid atau grup tidak ditemukan`)
+        if (!result) return m.reply(`❌ Enlace inválido o grupo no encontrado`)
         groupId = result.id
         groupName = result.name
     }
 
-    if (!groupId) return m.reply(`❌ Tidak dapat menentukan grup`)
+    if (!groupId) return m.reply(`❌ Incapaz de determinar el grupo`)
 
     const sewaData = db.db.data.sewa.groups[groupId]
-    if (!sewaData) return m.reply(`❌ Grup tidak terdaftar dalam sistem sewa\n\nLihat daftar: *${m.prefix}listsewa*`)
+    if (!sewaData) return m.reply(`❌ El grupo no figura en el sistema de alquileres
+
+Ver lista: *${m.prefix}listsewa*`)
 
     groupName = groupName || sewaData.name || groupId.split('@')[0]
 
@@ -71,18 +73,23 @@ async function handler(m, { sock }) {
     db.db.write()
 
     await m.react('✅')
-    await m.reply(`✅ *SEWA DIHAPUS*\n\nGrup: *${groupName}*\nID: ${groupId.split('@')[0]}`)
+    await m.reply(`✅ *MANAS DE RENT*
+
+Grup: *${groupName}*\nID: ${groupId.split('@')[0]}`)
 
     if (db.db.data.sewa.enabled) {
         try {
-            await sock.sendText(groupId, `⛔ Grup ini telah dihapus dari whitelist sewa.\nBot akan meninggalkan grup.\n\nHubungi owner untuk sewa ulang.`, null, {
+            await sock.sendText(groupId, `⛔ Este grupo ha sido eliminado de la lista blanca de alquiler.
+La bota dejará el grupo.
+
+Llame al dueño para un renombrado.`, null, {
                 contextInfo: {
                     forwardingScore: 99,
                     isForwarded: true,
                     externalAdReply: {
                         mediaType: 1,
-                        title: 'SEWA DIHAPUS',
-                        body: 'Grup dihapus dari whitelist',
+                        title: "MANAS DE RENT",
+                        body: "Grupo eliminado de la lista blanca",
                         thumbnail: fs.readFileSync('./assets/images/ourin.jpg'),
                         renderLargerThumbnail: true
                     }

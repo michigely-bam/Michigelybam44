@@ -7,7 +7,7 @@ const pluginConfig = {
   alias: ["murottal", "audioquran", "quraudio"],
   category: "islamic",
   description: "Dengarkan audio murottal Al-Quran berdasarkan surah",
-  usage: ".murrotal <nama surah>",
+  usage: ".murrotal < correspondencia > nombre",
   example: ".murrotal al fatihah",
   isOwner: false,
   isPremium: false,
@@ -54,7 +54,7 @@ async function handler(m, { sock }) {
 
     if (!find || !find.audio) {
       m.react("❌");
-      return m.reply(`❌ Surah *${query}* tidak ditemukan`);
+      return m.reply(`❌ Surah *${query}* no encontrado`);
     }
 
     m.react("✅");

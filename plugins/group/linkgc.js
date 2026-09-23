@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'linkgc',
     alias: ['linkgrup', 'getlink', 'gclink'],
     category: 'group',
-    description: 'Dapatkan link invite grup',
+    description: "Obtén grupos para invitar a enlaces",
     usage: '.linkgc',
     example: '.linkgc',
     isOwner: false,
@@ -24,7 +24,8 @@ async function handler(m, { sock }) {
     try {
         const code = await sock.groupInviteCode(m.chat)
         const urlGrup = `https://chat.whatsapp.com/${code}`
-        await m.reply(`Link grup grup ini\n${urlGrup}`)
+        await m.reply(`Enlace a este grupo
+${urlGrup}`)
         
         m.react('✅')
         

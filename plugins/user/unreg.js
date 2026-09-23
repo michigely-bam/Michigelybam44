@@ -4,7 +4,7 @@ const pluginConfig = {
   name: "unreg",
   alias: ["unregister", "hapusdaftar"],
   category: "user",
-  description: "Hapus data pendaftaran kamu dari bot",
+  description: "Retire los datos de registro del bot",
   usage: ".unreg",
   example: ".unreg",
   isOwner: false,

@@ -57,7 +57,7 @@ async function extractAudioFromVideo(videoUrl) {
   });
 
   if (!fs.existsSync(outputFile) || fs.statSync(outputFile).size <= 0) {
-    throw new Error("Gagal mengekstrak audio TikTok");
+    throw new Error("No se pudo extract Tickook audio");
   }
 
   return {
@@ -91,7 +91,7 @@ async function handler(m, { sock }) {
   }
 
   if (!url.match(/tiktok\.com|vt\.tiktok/i)) {
-    return m.reply("❌ URL tidak valid. Gunakan link TikTok.");
+    return m.reply("❌ URL inválida. Use enlaces de Tickook.");
   }
 
   m.react("🕕");
@@ -107,7 +107,7 @@ async function handler(m, { sock }) {
         result.downloads.find((d) => d.type === "nowatermark");
 
       if (!videoDownload?.url) {
-        throw new Error("Audio TikTok tidak ditemukan.");
+        throw new Error("No se encuentra el audio de Tickook.");
       }
 
       const extractedAudio = await extractAudioFromVideo(videoDownload.url);

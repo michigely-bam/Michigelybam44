@@ -4,7 +4,7 @@ const pluginConfig = {
   name: "listwarn",
   alias: ["warnings", "cekwarn", "warnlist"],
   category: "group",
-  description: "Melihat daftar warning member",
+  description: "Ver lista de advertencia de miembro",
   usage: ".listwarn atau .listwarn @user",
   example: ".listwarn @user",
   isOwner: false,
@@ -34,7 +34,7 @@ async function handler(m, { sock }) {
     const targetName = targetUser.split("@")[0];
 
     if (userWarnings.length === 0) {
-      await m.reply(`✅ @${targetName} tidak memiliki warning.`, {
+      await m.reply(`✅ @${targetName} no tiene advertencia.`, {
         mentions: [targetUser],
       });
       return;
@@ -57,7 +57,7 @@ async function handler(m, { sock }) {
     );
 
     if (usersWithWarnings.length === 0) {
-      await m.reply(`✅ Tidak ada member dengan warning di grup ini.`);
+      await m.reply(`✅ No hay miembros con advertencia en este grupo.`);
       return;
     }
 
@@ -69,7 +69,7 @@ async function handler(m, { sock }) {
       txt += `*${i + 1}.* @${name} - *${count}/${maxWarns}* warning\n`;
     });
 
-    txt += `\n> Ketik \`${m.prefix}listwarn @user\` untuk detail`;
+    txt += `\n> Ketik \`${m.prefix}listwarn @user\` Para más detalles.`;
 
     await m.reply(txt, { mentions: usersWithWarnings });
   }

@@ -84,17 +84,17 @@ async function handler(m, { sock }) {
     await sock.sendMessage(
       m.chat,
       {
-        text: "Silahkan pilih font yang ingin kamu download",
-        footer: "Click tombol di bawah ini",
+        text: "Por favor, seleccione la fuente que desea descargar",
+        footer: "Haga clic en el botón de abajo",
         interactiveButtons: [
           {
             name: "single_select",
             buttonParamsJson: JSON.stringify({
-              title: `Pilih Font Disini`,
+              title: `Seleccionar fuente aquí`,
               sections: [
                 {
-                  title: "Aku harap, font ini dapat membantu kamu",
-                  highlight_label: "Font Pilihan",
+                  title: "Espero que esta fuente pueda ayudarte.",
+                  highlight_label: "Opciones Fuente",
                   rows: rows,
                 },
               ],

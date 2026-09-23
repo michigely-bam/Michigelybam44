@@ -7,8 +7,8 @@ const pluginConfig = {
         'gislam'
     ],
     category: 'religi',
-    description: 'Kumpulan fitur Islami (Asmaul Husna, Niat Sholat, Surah, Doa, Artikel, Kata Mutiara)',
-    usage: '.islami <fitur>',
+    description: "Un montón de características islámicas (Asmaul Husna, Oración de Niat, Surah, Oraciones, Artículos, Palabras de perlas)",
+    usage: ".islami - función seleccionada",
     isGroup: false,
     isBotAdmin: false,
     isAdmin: false,
@@ -146,7 +146,7 @@ async function handler(m, { sock }) {
         }
     } catch (e) {
         console.error('Religi Plugin Error:', e)
-        m.reply('❌ Terjadi kesalahan pada sistem.')
+        m.reply("❌ Ha habido un error en el sistema.")
     }
 }
 

@@ -34,7 +34,10 @@ async function handler(m, { sock }) {
         }
         await m.react('✅')
         await sock.sendMessage(m.chat, {
-            text: `✅ *DONE*\n\nBerhasil mengirim spam NGL Message!\nTarget: ${link}\nPesan: ${kata} (${jumlah}x)`
+            text: `✅ *DONE*
+
+¡Envió exitosamente un mensaje de spam NGL!
+Target: ${link}\nPesan: ${kata} (${jumlah}x)`
         }, { quoted: m })
         
     } catch (error) {

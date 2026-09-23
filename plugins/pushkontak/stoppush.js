@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'stoppush',
     alias: ['stoppushkontak', 'stoppus'],
     category: 'pushkontak',
-    description: 'Hentikan proses pushkontak',
+    description: "Parar el proceso de pushcontact",
     usage: '.stoppush',
     example: '.stoppush',
     isOwner: true,
@@ -18,13 +18,17 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     if (!global.statuspush) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak ada pushkontak yang sedang berjalan`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No hay rompecabezas de contacto está funcionando`)
     }
     
     global.stoppush = true
     
     m.react('⏹️')
-    await m.reply(`⏹️ *sᴛᴏᴘ ᴘᴜsʜ*\n\n> Menghentikan proses pushkontak...`)
+    await m.reply(`⏹️ *sᴛᴏᴘ ᴘᴜsʜ*
+
+> Parar el proceso de contacto...`)
 }
 
 export { pluginConfig as config, handler }

@@ -45,7 +45,10 @@ async function handler(m, { sock }) {
     await sock.sendMessage(
       m.chat,
       {
-        text: `✅ *DONE*\n\nBerhasil mengirim pesan!\nTarget: ${link}\nPesan: ${kata}`,
+        text: `✅ *DONE*
+
+¡Ha sido un éxito enviando un mensaje!
+Target: ${link}\nPesan: ${kata}`,
       },
       { quoted: m },
     );

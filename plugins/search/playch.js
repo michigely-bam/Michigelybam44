@@ -19,7 +19,7 @@ const pluginConfig = {
   name: "playch",
   alias: ["pch", "playsaluran"],
   category: "search",
-  description: "Putar musik ke saluran (convert opus)",
+  description: "Juega música al canal (convert opus)",
   usage: ".playch <query> atau .playch --idch <id> <query>",
   example: ".playch komang",
   cooldown: 15,
@@ -54,7 +54,7 @@ async function getPlayChAudioDownload(url) {
     return { download: fallback.dl, title: fallback.title, isFallback: true };
   }
 
-  throw new Error(fallback?.mess || "Gagal mendapatkan audio saluran URL");
+  throw new Error(fallback?.mess || "No se pudo get URL channel audio");
 }
 
 async function toOggOpus(mp3Buf) {
@@ -95,14 +95,14 @@ async function handler(m, { sock }) {
     );
   if (!chId)
     return m.reply(
-      `❌ Saluran belum diatur. Gunakan \`--idch <id>\` atau atur di config.js`,
+      `❌ Canal no fijado. \`--idch <id>\` atau atur di config.js`,
     );
 
   m.react("🔎");
   try {
     const { videos } = await yts(q);
     const video = pickVideo({ videos });
-    if (!video) return m.reply(`❌ Video tidak ditemukan`);
+    if (!video) return m.reply(`❌ Video no encontrado`);
 
     const ytChannel = video.author?.name || video.author?.username || "Unknown";
 
@@ -120,7 +120,7 @@ async function handler(m, { sock }) {
     }
     info += `📡 Saluran: \`${chId}\`\n`;
     info += `🔗 ${video.url}\n\n`;
-    info += `_⏳ mengirim audio ke saluran, harap tunggu..._`;
+    info += `_⏳ enviar audio al canal, por favor espere..._`;
 
     await sock.sendMedia(m.chat, video.thumbnail, info, m, { type: "image" });
 
@@ -139,7 +139,7 @@ async function handler(m, { sock }) {
         );
     if (mp3Buf.length < 50000) throw new Error("Audio terlalu kecil");
     const opusBuf = await toOggOpus(mp3Buf);
-    if (opusBuf.length < 10000) throw new Error("Konversi opus gagal");
+    if (opusBuf.length < 10000) throw new Error("La conversión de Opus falló");
     const title = video.title;
 
     await sock.sendMessage(chId, {
@@ -165,7 +165,7 @@ async function handler(m, { sock }) {
       },
     });
     m.react("✅");
-    m.reply(`✅ *${title}* berhasil dikirim ke saluran`);
+    m.reply(`✅ *${title}* enviado exitosamente al canal`);
   } catch (e) {
     console.error("[PlayCh]", e);
     m.react("☢");

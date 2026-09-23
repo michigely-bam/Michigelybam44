@@ -41,7 +41,7 @@ async function upscaleWithOotaizumi(buffer) {
   );
 
   if (!res.data?.status || !res.data?.result?.imageUrl) {
-    throw new Error("Ootaizumi gagal enhance gambar");
+    throw new Error("Ootaizumi falló la entrada de la imagen");
   }
 
   return res.data.result.imageUrl;
@@ -59,7 +59,7 @@ async function upscaleWithAzbryHdimage(imageUrl) {
   );
 
   if (!res.data?.status || !res.data?.result?.url) {
-    throw new Error("Azbry hdimage gagal enhance gambar");
+    throw new Error("Azbry hdige falló imagen de entrada");
   }
 
   return res.data.result.url;
@@ -78,7 +78,7 @@ async function upscaleWithAzbryRemini(imageUrl) {
   );
 
   if (!res.data || !Buffer.isBuffer(Buffer.from(res.data))) {
-    throw new Error("Azbry remini gagal enhance gambar");
+    throw new Error("Azbrry remini falló imagen de entrada");
   }
 
   return Buffer.from(res.data);
@@ -100,7 +100,7 @@ async function upscaleWithImgLarger(buffer) {
       : resultData.download_url || resultData.img_url || null;
 
     if (!downloadUrl) {
-      throw new Error("ImgLarger gagal enhance gambar");
+      throw new Error("ImgLarger falló imagen de entrada");
     }
 
     return downloadUrl;
@@ -138,7 +138,11 @@ async function handler(m, { sock }) {
 
   if (!isImage) {
     return m.reply(
-      `✨ *REMINI ENHANCE*\n\nKirim/reply gambar untuk di-enhance\n\n\`${m.prefix}remini\``,
+      `✨ *REMINI ENHANCE*
+
+Enviar / responder imágenes a -enhance
+
+\`${m.prefix}remini\``,
     );
   }
 
@@ -154,7 +158,7 @@ async function handler(m, { sock }) {
 
     if (!buffer) {
       m.react("❌");
-      return m.reply(`❌ Gagal mendownload gambar`);
+      return m.reply(`❌ No se pudo download image`);
     }
 
     const enhanced = await enhanceImage(buffer);

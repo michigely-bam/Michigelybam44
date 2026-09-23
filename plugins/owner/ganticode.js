@@ -7,7 +7,7 @@ const pluginConfig = {
   name: "ganticode",
   alias: ["replaceplugin", "updateplugin", "gantiplugin"],
   category: "owner",
-  description: "Ganti code plugin yang sudah ada",
+  description: "Sustitúyase el código de plugin existente",
   usage: ".ganticode [namafile] [folder]",
   example: ".ganticode ping main",
   isOwner: true,
@@ -72,19 +72,26 @@ async function handler(m, { sock }) {
     try {
       code = (await quoted.download()).toString();
     } catch (e) {
-      return m.reply(`❌ *GAGAL*\n\nGagal download file`);
+      return m.reply(`❌ *GAGAL*
+
+No se pudo download file`);
     }
   }
 
   if (!code || code.length < 50) {
-    return m.reply(`❌ *GAGAL*\n\nCode terlalu pendek atau tidak valid`);
+    return m.reply(`❌ *GAGAL*
+
+Código demasiado corto o nulo`);
   }
 
   const hasExport = code.includes("module.exports") || code.includes("export ");
   const hasConfig = code.includes("pluginConfig") || code.includes("config");
   if (!hasExport || !hasConfig) {
     return m.reply(
-      `❌ *GAGAL*\n\nCode bukan format plugin yang valid\nHarus ada export dan config`,
+      `❌ *GAGAL*
+
+El código no es un formato de plugin válido
+Debe haber exportación y config`,
     );
   }
 
@@ -96,14 +103,19 @@ async function handler(m, { sock }) {
 
   if (!fileName) {
     return m.reply(
-      `❌ *GAGAL*\n\nTidak bisa mendeteksi nama plugin\nGunakan \`${m.prefix}ganticode <namafile>\``,
+      `❌ *GAGAL*
+
+Incapaz de detectar el nombre del plugin
+Gunakan \`${m.prefix}ganticode <namafile>\``,
     );
   }
 
   fileName = fileName.toLowerCase().replace(/[^a-z0-9\-_]/g, "");
 
   if (!fileName) {
-    return m.reply(`❌ *GAGAL*\n\nNama file tidak valid`);
+    return m.reply(`❌ *GAGAL*
+
+Nombre del archivo inválido`);
   }
 
   await m.react("🕕");
@@ -178,7 +190,7 @@ async function handler(m, { sock }) {
       replyText += `💾 *Backup:*\n\`${relBackup}\`\n\n`;
     }
 
-    replyText += `Plugin sudah aktif dan siap digunakan!`;
+    replyText += `Plugin es activo y listo para usar!`;
 
     return m.reply(replyText);
   } catch (error) {

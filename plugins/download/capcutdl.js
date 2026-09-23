@@ -29,7 +29,7 @@ async function handler(m, { sock }) {
     }
     
     if (!url.match(/capcut\.com/i)) {
-        return m.reply(`❌ URL tidak valid. Gunakan link CapCut.`)
+        return m.reply(`❌ URL inválida. Use enlaces CapCut.`)
     }
     
     await m.react('🕕')
@@ -38,7 +38,7 @@ async function handler(m, { sock }) {
         const data = await capcut(url)
         
         if (!data?.status || !data?.originalVideoUrl) {
-            return m.reply(`❌ Gagal mengambil video. Coba link lain.`)
+            return m.reply(`❌ Fallado para recuperar vídeo. Prueba otro enlace.`)
         }
         
         await sock.sendMedia(m.chat, data.originalVideoUrl, null, m, {

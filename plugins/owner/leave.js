@@ -4,7 +4,7 @@ const pluginConfig = {
   name: "leave",
   alias: ["leavegrup", "leavegroup", "keluar", "bye"],
   category: "owner",
-  description: "Bot keluar dari grup",
+  description: "Bot out of group",
   usage: ".leave [link]",
   example: ".leave",
   isOwner: true,
@@ -40,15 +40,17 @@ async function handler(m, { sock }) {
     targetGroupJid = m.chat;
     try {
       const meta = m.groupMetadata;
-      groupName = meta.subject || "Grup ini";
+      groupName = meta.subject || "Este grupo";
     } catch {
-      groupName = "Grup ini";
+      groupName = "Este grupo";
     }
   } else if (input) {
     const inviteCode = await extractInviteCode(input);
 
     if (!inviteCode) {
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Link invite tidak valid`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Enlace de invitación inválido`);
     }
 
     try {
@@ -57,7 +59,9 @@ async function handler(m, { sock }) {
       groupName = groupInfo.subject || "Unknown";
     } catch (error) {
       return m.reply(
-        `❌ *ɢᴀɢᴀʟ*\n\n> Tidak dapat mengambil info grup dari link`,
+        `❌ *ɢᴀɢᴀʟ*
+
+> No se puede recuperar información del grupo desde el enlace`,
       );
     }
   } else {
@@ -72,7 +76,9 @@ async function handler(m, { sock }) {
   }
 
   if (!targetGroupJid) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Grup tidak ditemukan`);
+    return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Grupo no encontrado`);
   }
 
   await m.react("🕕");

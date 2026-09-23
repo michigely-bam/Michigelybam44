@@ -22,7 +22,11 @@ async function handler(m, { sock }) {
     const text = m.text
     
     if (!text) {
-        return m.reply(`🖼️ *ʙʀᴀᴛ ʜᴅ sᴛɪᴄᴋᴇʀ*\n\n> Masukkan teks\n\n\`Contoh: ${m.prefix}brathd hello world\``)
+        return m.reply(`🖼️ *ʙʀᴀᴛ ʜᴅ sᴛɪᴄᴋᴇʀ*
+
+> Escriba texto
+
+\`Contoh: ${m.prefix}brathd hello world\``)
     }
     
     m.react('🕕')

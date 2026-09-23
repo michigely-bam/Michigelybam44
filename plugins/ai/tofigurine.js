@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['figurine3', 'tofigure3', 'bandai3', 'actionfigure3'],
     category: 'ai',
     description: 'Ubah foto menjadi action figure/figurine koleksi',
-    usage: '.tofigure3 (reply/kirim gambar)',
+    usage: ".tofigure 3 (reply / enviar imágenes)",
     example: '.tofigure3',
     isOwner: false,
     isPremium: true,
@@ -47,7 +47,7 @@ async function handler(m, { sock }) {
         
         if (!buffer) {
             m.react('❌')
-            return m.reply(`❌ Gagal mendownload gambar`)
+            return m.reply(`❌ No se pudo download image`)
         }
         
         

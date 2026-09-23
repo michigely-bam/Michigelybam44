@@ -36,7 +36,7 @@ async function handler(m, { sock }) {
 
     if (!res?.status || !res?.data) {
       m.react("❌");
-      return m.reply(`❌ ID *${id}* tidak ditemukan`);
+      return m.reply(`❌ ID *${id}* no encontrado`);
     }
 
     const r = res.data;

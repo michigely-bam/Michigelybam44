@@ -11,7 +11,7 @@ const pluginConfig = {
         'topenergi', 'topenergy'
     ],
     category: 'main',
-    description: 'Lihat leaderboard global (koin, exp, energi)',
+    description: "Mira la tabla de clasificación global (coins, exp, energy)",
     usage: '.leaderboard',
     example: '.topkoin',
     isOwner: false,
@@ -71,7 +71,9 @@ async function handler(m, { sock }) {
     }
     
     if (users.length === 0) {
-        return m.reply(`📊 *ʟᴇᴀᴅᴇʀʙᴏᴀʀᴅ*\n\n> Belum ada data user terdaftar di database.`)
+        return m.reply(`📊 *ʟᴇᴀᴅᴇʀʙᴏᴀʀᴅ*
+
+> Aún no hay datos de usuario en la base de datos.`)
     }
     
     const senderJid = m.sender.replace('@s.whatsapp.net', '')
@@ -147,7 +149,9 @@ async function handler(m, { sock }) {
     const totalField = users.reduce((sum, u) => sum + (u[field] || 0), 0)
     
     let text = `🏆 *${title}* 🏆\n\n`
-    text += `Peringkat para penguasa tertinggi saat ini!\n\n`
+    text += `¡Las filas de los gobernantes más altos hoy!
+
+`
     text += `╭┈┈⬡「 ${emoji} *RANKING* 」\n`
     
     const mentions = []
@@ -168,9 +172,9 @@ async function handler(m, { sock }) {
     
     const myRankIndex = users.findIndex(u => u.jid === senderJid)
     if (myRankIndex !== -1) {
-        text += `> Posisi kamu: *#${myRankIndex + 1}* dari *${formatNumber(users.length)}* user.`
+        text += `> Su posición: *#${myRankIndex + 1}* dari *${formatNumber(users.length)}* user.`
     } else {
-        text += `> Kamu belum terdaftar di database.`
+        text += `> No has estado en la base de datos.`
     }
     
     await m.reply(text, { mentions })

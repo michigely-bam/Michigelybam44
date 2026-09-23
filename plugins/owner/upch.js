@@ -13,7 +13,7 @@ const pluginConfig = {
     name: "upch",
     alias: ["uploadch", "uploadsaluran", "uch"],
     category: "owner",
-    description: "Upload gambar, audio, video, atau teks ke saluran",
+    description: "Subir imagen, audio, vídeo o texto a canal",
     usage: ".upch <id saluran> <teks opsional>",
     example: ".upch 12xxx@newsletter Halo!",
     cooldown: 10,
@@ -67,11 +67,11 @@ async function handler(m, { sock }) {
         if (!isMedia && caption) {
             await sock.sendMessage(chId, { text: caption })
             await m.react("✅")
-            return m.reply(`✅ Teks berhasil dikirim ke saluran`)
+            return m.reply(`✅ Texto enviado con éxito al canal`)
         }
 
         const mediaBuf = await downloadMediaMessage(quoted, "buffer", {})
-        if (!mediaBuf || mediaBuf.length < 1000) throw new Error("Media terlalu kecil atau gagal download")
+        if (!mediaBuf || mediaBuf.length < 1000) throw new Error("Los medios son demasiado pequeños o no se descargan")
 
         if (isImage) {
             await sock.sendMessage(chId, {
@@ -79,7 +79,7 @@ async function handler(m, { sock }) {
                 caption: caption || undefined
             })
             await m.react("✅")
-            return m.reply("✅ Gambar berhasil dikirim ke saluran")
+            return m.reply("✅ Imagen enviada con éxito al canal")
         }
 
         if (isVideo) {
@@ -88,22 +88,22 @@ async function handler(m, { sock }) {
                 caption: caption || undefined
             })
             await m.react("✅")
-            return m.reply("✅ Video berhasil dikirim ke saluran")
+            return m.reply("✅ Video enviado con éxito al canal")
         }
 
         if (isAudio) {
             const opusBuf = await toOggOpus(mediaBuf)
-            if (opusBuf.length < 5000) throw new Error("Konversi opus gagal")
+            if (opusBuf.length < 5000) throw new Error("La conversión de Opus falló")
             await sock.sendMessage(chId, {
                 audio: opusBuf,
                 mimetype: "audio/ogg; codecs=opus",
                 ptt: true
             })
             await m.react("✅")
-            return m.reply("✅ Audio berhasil dikirim ke saluran")
+            return m.reply("✅ Audio enviado con éxito al canal")
         }
 
-        m.reply("❌ Tipe media tidak didukung")
+        m.reply("❌ Tipo de medio no compatible")
     } catch (e) {
         console.error("[UpCh]", e)
         await m.react("☢")

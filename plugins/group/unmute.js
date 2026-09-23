@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'unmute',
     alias: ['unbisukan'],
     category: 'group',
-    description: 'Membuka mute grup',
+    description: "Grupo de apertura mute",
     usage: '.unmute',
     example: '.unmute',
     isOwner: false,
@@ -22,10 +22,12 @@ function handler(m, { sock }) {
     const group = db.getGroup(m.chat) || {}
     const groupName = m.groupMetadata.subject
 
-    if (!group.mute) return m.reply('❌ Grup tidak sedang di-mute.')
+    if (!group.mute) return m.reply("❌ El grupo no está siendo mudo.")
 
     db.setGroup(m.chat, { ...group, mute: false })
-    m.reply(`✅ Grup *${groupName}* berhasil di-unmute oleh @${m.sender.split('@')[0]}\n\nSemua member sekarang bisa mengirim pesan.`, { mentions: [m.sender] })
+    m.reply(`✅ Grup *${groupName}* exitosamente unmute por @${m.sender.split('@')[0]}
+
+Todos los miembros ahora pueden enviar un mensaje.`, { mentions: [m.sender] })
 }
 
 export { pluginConfig as config, handler }

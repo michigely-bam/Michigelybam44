@@ -2,8 +2,8 @@ const pluginConfig = {
     name: ['star', 'bintang'],
     alias: [],
     category: 'owner',
-    description: 'Beri/hapus bintang pada pesan',
-    usage: '.star (reply pesan) atau .star hapus (reply pesan)',
+    description: "Agregar / Eliminar estrellas a mensajes",
+    usage: ".estrella (mensaje de respuesta) o .star eliminar (reprobar mensajes)",
     example: '.star',
     isOwner: true,
     cooldown: 3,
@@ -34,8 +34,8 @@ async function handler(m, { sock }) {
         await m.react('⭐')
         return m.reply(
             unstar
-                ? '❌ *Bintang dihapus dari pesan*'
-                : '⭐ *Pesan ditandai bintang*'
+                ? "❌ *Estrellas eliminadas de mensajes*"
+                : "⭐ *Mensaje marcado por estrella*"
         )
     } catch (err) {
         return m.reply(`❌ Gagal: ${err.message}`)

@@ -8,9 +8,9 @@ const pluginConfig = {
   name: "fakestory3",
   alias: ["fstory3", "igstory3", "quotestory"],
   category: "canvas",
-  description: "Fake Instagram story dengan text overlay",
-  usage: ".fakestory3 <nama>|<text1>|<text2>",
-  example: ".fakestory3 Misaki|Tersenyumlah|untuk menutupi kesedihan",
+  description: "Fake Instagram historia con el texto superpuesto",
+  usage: ".facetory3 < nombre",
+  example: ".# Dale una sonrisa # 124 # para cubrir la tristeza #",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -238,7 +238,7 @@ async function getAvatarBuffer(sock, jid) {
   if (fs.existsSync(DEFAULT_PP_PATH)) {
     return fs.readFileSync(DEFAULT_PP_PATH);
   }
-  throw new Error("Tidak dapat mengambil foto profil");
+  throw new Error("Incapaz de tomar la foto de perfil");
 }
 async function handler(m, { sock }) {
   const input = m.args.join(" ");
@@ -261,7 +261,9 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.isImage);
     if (!isImage) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Reply gambar untuk membuat fake story!`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Responder foto para hacer una historia falsa!`);
     }
     let imageBuffer;
     if (m.isImage && m.download) {
@@ -271,7 +273,9 @@ async function handler(m, { sock }) {
     }
     if (!imageBuffer) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak bisa download gambar`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No se puede descargar imagen`);
     }
     const resultBuffer = await createFakeStory(
       username,

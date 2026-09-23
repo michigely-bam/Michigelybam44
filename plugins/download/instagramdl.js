@@ -32,7 +32,7 @@ async function handler(m, { sock }) {
 
   if (!IG_REGEX.test(url)) {
     return m.reply(
-      `❌ URL tidak valid. Gunakan link Instagram (reel/post/story).`,
+      `❌ URL inválida. Utilice enlaces de Instagram (reel / post / historia).`,
     );
   }
 
@@ -43,7 +43,7 @@ async function handler(m, { sock }) {
 
     if (!result?.media?.length) {
       await m.react("❌");
-      return m.reply(`❌ Gagal mengambil media. Coba link lain.`);
+      return m.reply(`❌ Fallado para recuperar los medios. Prueba otro enlace.`);
     }
 
     const isStory = url.includes("/stories/");

@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'bank',
     alias: ['atm', 'nabung', 'deposit', 'tarik', 'withdraw'],
     category: 'rpg',
-    description: 'Bank system untuk menyimpan uang aman dari rampok',
+    description: "Sistema bancario para ahorrar dinero seguro de ser robado",
     usage: '.bank <deposit/withdraw> <jumlah>',
     example: '.bank deposit 10000',
     isOwner: false,
@@ -47,8 +47,8 @@ async function handler(m, { sock }) {
             amount = parseInt(amountStr)
         }
         
-        if (!amount || amount <= 0) return m.reply(`❌ Masukkan jumlah valid!`)
-        if (currentBalance < amount) return m.reply(`❌ Uang cash tidak cukup! Cash: Rp ${currentBalance.toLocaleString('id-ID')}`)
+        if (!amount || amount <= 0) return m.reply(`❌ ¡Introdúzca un número válido!`)
+        if (currentBalance < amount) return m.reply(`❌ ¡El dinero no es suficiente! ${currentBalance.toLocaleString('id-ID')}`)
         
         db.db.data.users[cleanJid].koin = currentBalance - amount
         db.db.data.users[cleanJid].rpg.bank = currentBank + amount
@@ -56,7 +56,7 @@ async function handler(m, { sock }) {
         await db.save()
         
         const newBank = db.db.data.users[cleanJid].rpg.bank
-        return m.reply(`✅ Berhasil deposit: Rp ${amount.toLocaleString('id-ID')}\n🏦 Bank: Rp ${newBank.toLocaleString('id-ID')}`)
+        return m.reply(`✅ Depósito exitoso: Rp ${amount.toLocaleString('id-ID')}\n🏦 Bank: Rp ${newBank.toLocaleString('id-ID')}`)
     }
     
     if (action === 'withdraw' || action === 'tarik') {
@@ -67,8 +67,8 @@ async function handler(m, { sock }) {
             amount = parseInt(amountStr)
         }
         
-        if (!amount || amount <= 0) return m.reply(`❌ Masukkan jumlah valid!`)
-        if (currentBank < amount) return m.reply(`❌ Uang di bank tidak cukup! Bank: Rp ${currentBank.toLocaleString('id-ID')}`)
+        if (!amount || amount <= 0) return m.reply(`❌ ¡Introdúzca un número válido!`)
+        if (currentBank < amount) return m.reply(`❌ ¡El dinero en el banco no es suficiente! ${currentBank.toLocaleString('id-ID')}`)
         
         db.db.data.users[cleanJid].rpg.bank = currentBank - amount
         db.db.data.users[cleanJid].koin = currentBalance + amount
@@ -76,7 +76,7 @@ async function handler(m, { sock }) {
         await db.save()
         
         const newBalance = db.db.data.users[cleanJid].koin
-        return m.reply(`✅ Berhasil tarik: Rp ${amount.toLocaleString('id-ID')}\n💰 Cash: Rp ${newBalance.toLocaleString('id-ID')}`)
+        return m.reply(`✅ Atracción: Rp ${amount.toLocaleString('id-ID')}\n💰 Cash: Rp ${newBalance.toLocaleString('id-ID')}`)
     }
     
     let txt = `🏦 *ʙᴀɴᴋ sʏsᴛᴇᴍ*\n\n`
@@ -84,7 +84,7 @@ async function handler(m, { sock }) {
     txt += `> 🏦 Bank: Rp ${currentBank.toLocaleString('id-ID')}\n\n`
     txt += `> Gunakan: \`.bank deposit <jumlah>\`\n`
     txt += `> Gunakan: \`.bank withdraw <jumlah>\`\n`
-    txt += `> Tip: Gunakan 'all' untuk semua uang.`
+    txt += `> Consejo: Use 'all' para todo el dinero.`
     
     await m.reply(txt)
 }

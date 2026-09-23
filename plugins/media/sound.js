@@ -10,7 +10,7 @@ const pluginConfig = {
     name: soundCommands,
     alias: [],
     category: 'media',
-    description: 'Kirim sound effect (sound1 - sound250)',
+    description: "Enviar efecto de sonido (sonido 1 - sonido250)",
     usage: '.sound1 atau .sound250',
     example: '.sound1',
     isOwner: false,
@@ -35,7 +35,7 @@ async function handler(m, { sock }) {
     
     const num = parseInt(command.replace('sound', ''))
     if (isNaN(num) || num < 1 || num > 250) {
-        return m.reply(`❌ Pilihan tidak valid. Gunakan sound1 sampai sound250.`)
+        return m.reply(`❌ Opción inválida. Use sonido1 para sonar 250.`)
     }
     
     m.react('🕕')

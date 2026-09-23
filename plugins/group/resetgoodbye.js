@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'resetgoodbye',
     alias: ['delgoodbye', 'cleargoodbye'],
     category: 'group',
-    description: 'Reset goodbye message ke default',
+    description: "Reiniciar el mensaje de despedida por defecto",
     usage: '.resetgoodbye',
     example: '.resetgoodbye',
     isOwner: false,
@@ -21,14 +21,17 @@ async function handler(m, { sock }) {
     const groupData = db.getGroup(m.chat)
     
     if (!groupData?.goodbyeMsg) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Goodbye message sudah default`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Mensaje de adiós ya predeterminado`)
     }
     
     db.setGroup(m.chat, { goodbyeMsg: null })
     
     m.react('✅')
     
-    await m.reply(`✅ *ɢᴏᴏᴅʙʏᴇ ᴅɪʀᴇsᴇᴛ*\nKembali ke pesan default`)
+    await m.reply(`✅ *ɢᴏᴏᴅʙʏᴇ ᴅɪʀᴇsᴇᴛ*
+Volver al mensaje predeterminado`)
 }
 
 export { pluginConfig as config, handler }

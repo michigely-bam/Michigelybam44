@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'delstickercmd',
     alias: ['delcmdsticker', 'removesticker', 'unsticker'],
     category: 'group',
-    description: 'Hapus sticker command',
+    description: "Eliminar el comando sticker",
     usage: '.delstickercmd <command> atau reply sticker',
     example: '.delstickercmd menu',
     isOwner: false,
@@ -37,7 +37,8 @@ async function handler(m, { sock }) {
         }
         txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`
         
-        txt += `*Hapus dengan:*\n`
+        txt += `*Suprímase con:*
+`
         txt += `> \`.delstickercmd <command>\`\n`
         txt += `> atau reply sticker + \`.delstickercmd\``
         
@@ -52,7 +53,7 @@ async function handler(m, { sock }) {
             const success = deleteStickerCommand(stickerHash)
             if (success) {
                 deleted = true
-                deletedCmd = 'sticker yang di-reply'
+                deletedCmd = "adhesivos de repulsión"
             }
         }
     }

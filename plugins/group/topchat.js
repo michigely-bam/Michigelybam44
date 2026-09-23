@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'topchat',
     alias: ['chatstat', 'chatstats', 'totalchat', 'leaderboard'],
     category: 'group',
-    description: 'Lihat statistik chat member di grup',
+    description: "Mira las estadísticas sobre chat miembro del grupo",
     usage: '.topchat',
     example: '.topchat',
     isOwner: false,
@@ -33,13 +33,17 @@ async function handler(m, { sock }) {
             `> Data akan tercatat otomatis setelah member aktif chat.`
         )
     }
-    let txt = `📊 *TOTAL CHAT*\nBerikut ini adalah jumlah pesan yang dikirim oleh member di grup ini:\n\n`
+    let txt = `📊 *TOTAL CHAT*
+Aquí está el número de mensajes enviados por los miembros de este grupo:
+
+`
     for (let i = 0; i < sorted.length; i++) {
         const { jid, count } = sorted[i]
         const name = jid.split('@')[0]
         txt += `${i + 1}. @${name} - 💬 *${count.toLocaleString('id-ID')}* pesan\n`
     }
-    txt += `\n*Total Pesan: ${sorted.reduce((a, b) => a + b.count, 0).toLocaleString('id-ID')}*`
+    txt += `
+*Mensaje total: ${sorted.reduce((a, b) => a + b.count, 0).toLocaleString('id-ID')}*`
     const mentions = sorted.map(u => u.jid)
     await m.reply(txt, { mentions })
 }

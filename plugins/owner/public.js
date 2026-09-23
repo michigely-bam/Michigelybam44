@@ -9,7 +9,7 @@ const pluginConfig = {
     name: 'public',
     alias: ['publicmode', 'open'],
     category: 'owner',
-    description: 'Mengaktifkan mode public (semua user bisa akses)',
+    description: "Activar el modo público (todos los usuarios pueden acceder)",
     usage: '.public',
     example: '.public',
     isOwner: true,
@@ -28,11 +28,11 @@ async function handler(m, { sock }) {
     try {
         const isRealOwner = validateOwner(m);
         if (!isRealOwner) {
-            return await m.reply('🚫 *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n> Hanya owner yang bisa mengubah mode bot!');
+            return await m.reply("🚫 *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n> ¡Sólo el propietario puede cambiar el modo robot!");
         }
         const currentMode = config.mode;
         if (currentMode === 'public') {
-            return await m.reply('ℹ️ Bot sudah dalam mode *public*');
+            return await m.reply("ℹBot ya está en modo *public*");
         }
         config.mode = 'public';
         const db = getDatabase();

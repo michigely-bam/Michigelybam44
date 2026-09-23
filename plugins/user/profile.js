@@ -7,7 +7,7 @@ const pluginConfig = {
   name: "profile",
   alias: ["me", "profil", "myprofile", "my", "stats", "status"],
   category: "user",
-  description: "Melihat profil user dengan RPG stats",
+  description: "Ver los perfiles de usuario con estadísticas RPG",
   usage: ".profile [@user]",
   example: ".profile",
   isOwner: false,

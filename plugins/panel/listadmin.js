@@ -9,7 +9,7 @@ const pluginConfig = {
     name: allCommands,
     alias: allAliases,
     category: 'panel',
-    description: 'List semua admin panel (v1-v5)',
+    description: "Listar todos los administradores de panel (v1-v5)",
     usage: '.listadminv1 atau .listadminv2',
     example: '.listadminv1',
     isOwner: false,
@@ -76,7 +76,7 @@ async function handler(m, { sock }) {
         const available = getAvailableServers(pteroConfig)
         let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`
         if (available.length > 0) {
-            txt += `> Server tersedia: *${available.join(', ')}*`
+            txt += `> Servidor disponible: *${available.join(', ')}*`
         } else {
             txt += `> Isi di \`config.js\` bagian \`pterodactyl.server1\``
         }
@@ -96,7 +96,9 @@ async function handler(m, { sock }) {
         const admins = users.filter(u => u.attributes.root_admin)
         
         if (admins.length === 0) {
-            return m.reply(`📋 *ᴅᴀꜰᴛᴀʀ ᴀᴅᴍɪɴ [${serverLabel}]*\n\n> Tidak ada admin terdaftar.`)
+            return m.reply(`📋 *ᴅᴀꜰᴛᴀʀ ᴀᴅᴍɪɴ [${serverLabel}]*
+
+> No hay administrador registrado.`)
         }
         
         let txt = `📋 *ᴅᴀꜰᴛᴀʀ ᴀᴅᴍɪɴ [${serverLabel}]*\n\n`

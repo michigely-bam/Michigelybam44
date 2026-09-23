@@ -8,7 +8,7 @@ const pluginConfig = {
     alias: MUSIC_LIST,
     category: 'media',
     description: 'Koleksi musik 1-65',
-    usage: '.music1 sampai .music65',
+    usage: ".músicas 1 arriba .music65",
     example: '.music1',
     isOwner: false,
     isPremium: false,
@@ -41,7 +41,9 @@ async function handler(m, { sock, command }) {
         
     } catch (err) {
         m.react('❌')
-        m.reply(`❌ *ᴇʀʀᴏʀ*\n\n> Musik tidak ditemukan atau gagal diambil.`)
+        m.reply(`❌ *ᴇʀʀᴏʀ*
+
+> La música no fue encontrada ni falló en recuperarse.`)
     }
 }
 

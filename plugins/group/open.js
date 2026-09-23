@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'open',
     alias: ['buka', 'opengroup', 'bukagroup'],
     category: 'group',
-    description: 'Membuka grup agar semua member bisa chat',
+    description: "Abrir un grupo para que todos los miembros puedan chatear",
     usage: '.open',
     example: '.open',
     isOwner: false,
@@ -33,7 +33,8 @@ async function handler(m, { sock }) {
         
         const senderNum = m.sender.split('@')[0];
         
-        const successMsg = `✅ @${senderNum} telah membuka grup ini\n_Sekarang kalian bisa mengirim pesan_`;
+        const successMsg = `✅ @${senderNum} ha abierto este grupo
+_Ahora puedes enviar un mensaje._`;
         
         await m.reply(successMsg, { mentions: [m.sender] });
         

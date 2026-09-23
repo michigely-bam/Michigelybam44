@@ -53,7 +53,7 @@ async function handler(m, { sock }) {
     if (!nominal) {
         return m.reply(`*FAKE DANA*\n\n\`Contoh: ${m.prefix}fakedana 10000\``)
     }
-    if(isNaN(nominal)) return m.reply(`*HARAP MASUKKAN ANGKA*`)
+    if(isNaN(nominal)) return m.reply(`*Por favor, ingrese al NUMBER*`)
     m.react('🕕')
     
     try {

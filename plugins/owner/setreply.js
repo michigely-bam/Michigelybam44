@@ -28,7 +28,7 @@ const VARIANTS = {
   v2: {
     id: 2,
     name: "Context",
-    desc: "Reply dengan externalAdReply (thumbnail kecil)",
+    desc: "Responder con externamente AdReply (pequeña miniatura)",
     emoji: "🖼️",
   },
   v3: {
@@ -78,7 +78,9 @@ async function handler(m, { sock, db }) {
   if (variant) {
     const selected = VARIANTS[variant];
     if (!selected) {
-      await m.reply(`❌ Variant tidak valid!\n\nGunakan: v1 s/d v10`);
+      await m.reply(`❌ Variedad inválida!
+
+Uso: v1 s / d v10`);
       return;
     }
 
@@ -140,7 +142,7 @@ async function handler(m, { sock, db }) {
               }),
               header: proto.Message.InteractiveMessage.Header.fromObject({
                 title: "💬 Reply Variant",
-                subtitle: `${Object.keys(VARIANTS).length} variant tersedia`,
+                subtitle: `${Object.keys(VARIANTS).length} variantes disponibles`,
                 hasMediaAttachment: false,
               }),
               nativeFlowMessage:
@@ -169,7 +171,7 @@ async function handler(m, { sock, db }) {
     await sock.relayMessage(m.chat, msg.message, { messageId: msg.key.id });
   } catch {
     let txt = `💬 *sᴇᴛ ʀᴇᴘʟʏ ᴠᴀʀɪᴀɴᴛ*\n\n`;
-    txt += `> Variant saat ini: *V${current}*\n\n`;
+    txt += `> Variante actual: *V${current}*\n\n`;
     for (const [key, val] of Object.entries(VARIANTS)) {
       const mark = val.id === current ? " ✓" : "";
       txt += `> ${val.emoji} *${key.toUpperCase()}*${mark} — _${val.desc}_\n`;

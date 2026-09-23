@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['sosmed', 'medsos'],
     category: 'cek',
     description: 'Cek tingkat kecanduan sosmed',
-    usage: '.ceksocmed <nama>',
+    usage: ".cksocmed   nombre",
     example: '.ceksocmed Budi',
     isOwner: false,
     isPremium: false,
@@ -27,8 +27,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kesocmedan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kesocmedan @${mentioned.split('@')[0]} yak? 
+El nivel de tu sockfield *${percent}%*
+\`\`\`${desc}\`\`\`` : `Quieres comprobar el nivel de fútbol${mentioned.split('@')[0]} yak? 
     
 Tingkat kesocmedan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

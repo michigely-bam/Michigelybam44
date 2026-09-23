@@ -7,7 +7,7 @@ const pluginConfig = {
   name: "hourly",
   alias: ["jam", "perjam"],
   category: "rpg",
-  description: "Klaim hadiah per jam",
+  description: "Reclamación presentada por hora",
   usage: ".hourly",
   example: ".hourly",
   isOwner: false,
@@ -30,7 +30,7 @@ try {
   if (fs.existsSync(thumbPath)) thumbRpg = fs.readFileSync(thumbPath);
 } catch (e) {}
 
-function getContextInfo(title = "⏰ *ʜᴏᴜʀʟʏ*", body = "Hadiah Per Jam") {
+function getContextInfo(title = "⏰ *ʜᴏᴜʀʟʏ*", body = "Un regalo por hora") {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
@@ -100,7 +100,7 @@ async function handler(m, { sock }) {
   txt += `┃ 💵 Money: *+Rp ${moneyReward.toLocaleString("id-ID")}*\n`;
   txt += `┃ 🚄 Exp: *+${expReward}*\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
-  txt += `> Klaim lagi dalam 1 jam!`;
+  txt += `> ¡Reclamen de nuevo en una hora!`;
 
   await sock.sendMessage(
     m.chat,

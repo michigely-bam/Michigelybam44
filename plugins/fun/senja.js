@@ -27,7 +27,7 @@ async function handler(m, { sock }) {
         
         if (!res.status || !res.data?.text) {
             m.react('❌')
-            return m.reply(`❌ Gagal mengambil kata senja`)
+            return m.reply(`❌ No se pudo take the twilight word`)
         }
         await m.reply(res.data.text)
         m.react('✅')

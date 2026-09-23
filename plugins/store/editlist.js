@@ -6,9 +6,9 @@ const pluginConfig = {
     name: 'editlist',
     alias: ['editinfo'],
     category: 'store',
-    description: '✏️ Edit informasi toko (hanya di private chat)',
-    usage: '.editlist <nomor> <field> <nilai>',
-    example: '.editlist 1 isi Konten baru di sini',
+    description: "✏️ Editar información de la tienda (sólo chat privado)",
+    usage: ".editores √ n nÂomero de contacto > campo de referencia > valor",
+    example: ".Editor 1 nuevo contenido de contenido aquí",
     isOwner: true,
     isPremium: false,
     isGroup: false,
@@ -46,7 +46,9 @@ async function handler(m, { sock }) {
     const lists = db.setting('storeLists') || []
 
     if (lists.length === 0) {
-        return m.reply(`📭 *Belum ada informasi.*\n\nTambahkan informasi terlebih dahulu: \`${m.prefix}addlist\` ➕`)
+        return m.reply(`📭 *Aún no hay información.*
+
+Tambahkan informasi terlebih dahulu: \`${m.prefix}addlist\` ➕`)
     }
 
     const text = m.text?.trim() || ''
@@ -75,7 +77,9 @@ async function handler(m, { sock }) {
     let value = match[3]?.trim() || ''
 
     if (idx < 0 || idx >= lists.length) {
-        return m.reply(`❌ *Nomor tidak valid.*\n\nRentang: 1-${lists.length} 📋`)
+        return m.reply(`❌ *Número inválido.*
+
+Rentang: 1-${lists.length} 📋`)
     }
 
     const item = lists[idx]
@@ -142,7 +146,8 @@ async function handler(m, { sock }) {
     if (field === 'isi') reply += `📝 Isi:\n${item.content}\n\n`
     if (field === 'gambar') reply += `🖼️ Gambar: ✅\n`
     if (field === 'video') reply += `🎬 Video: ✅\n`
-    reply += `\n👀 _Lihat perubahan: \`${m.prefix}list\`_`
+    reply += `
+👀 _Ver cambios: \`${m.prefix}list\`_`
 
     return m.reply(reply)
 }

@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'antiswgc',
     alias: ['antiswgroup', 'antiswmentiongc', 'antiswtaggc'],
     category: 'group',
-    description: 'Deteksi tipe SW group mention atau status mention yang masuk ke grup',
+    description: "Detectar tipo de mención del grupo SW o mención del estado ingresado en grupo",
     usage: '.antiswgc <on/off>',
     example: '.antiswgc on',
     isOwner: false,
@@ -40,7 +40,7 @@ async function handler(m, { db }) {
 
     if (action === 'on') {
         db.setGroup(m.chat, { ...group, antiswgc: 'on' })
-        await m.reply('✅ *AntiSWGC aktif*\n\n> Tipe SW group mention akan dihapus otomatis.')
+        await m.reply("✅ *AntiSWC active*\n\n> La mención del grupo SW se eliminará automáticamente.")
         return
     }
 
@@ -50,7 +50,7 @@ async function handler(m, { db }) {
         return
     }
 
-    await m.reply('❌ Gunakan: on atau off')
+    await m.reply("❌ Uso: encendido o apagado")
 }
 
 export { pluginConfig as config, handler }

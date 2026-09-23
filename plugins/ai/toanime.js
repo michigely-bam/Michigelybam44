@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['anime', 'animefy', 'ghibli'],
     category: 'ai',
     description: 'Ubah foto menjadi gaya anime/Ghibli Studio',
-    usage: '.toanime (reply/kirim gambar)',
+    usage: ".toanime (reply / enviar imagen)",
     example: '.toanime',
     isOwner: false,
     isPremium: true,
@@ -44,7 +44,7 @@ async function handler(m, { sock }) {
         
         if (!buffer) {
             m.react('❌')
-            return m.reply(`❌ Gagal mendownload gambar`)
+            return m.reply(`❌ No se pudo download image`)
         }
         
         await m.react('🕕')

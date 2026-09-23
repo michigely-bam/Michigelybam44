@@ -29,7 +29,7 @@ async function handler(m) {
         let text = `🎂 *sᴇᴛ ʙɪʀᴛʜᴅᴀʏ*\n\n`
         
         if (currentBday) {
-            text += `> Birthday kamu: *${currentBday}*\n\n`
+            text += `> Cumpleaños para ti: *${currentBday}*\n\n`
         }
         
         text += `╭┈┈⬡「 📋 *ғᴏʀᴍᴀᴛ* 」\n`
@@ -46,19 +46,21 @@ async function handler(m) {
     const match = input.match(dateRegex)
     
     if (!match) {
-        return m.reply(`❌ Format salah! Gunakan: DD-MM\n\n> Contoh: ${m.prefix}setbirthday 25-12`)
+        return m.reply(`❌ Formato malformado! Uso: DD-MM
+
+> Contoh: ${m.prefix}setbirthday 25-12`)
     }
     
     const day = parseInt(match[1])
     const month = parseInt(match[2])
     
     if (month < 1 || month > 12) {
-        return m.reply(`❌ Bulan tidak valid! (1-12)`)
+        return m.reply(`❌ ¡Mes inválido! (1 -12)`)
     }
     
     const daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     if (day < 1 || day > daysInMonth[month - 1]) {
-        return m.reply(`❌ Tanggal tidak valid untuk bulan ${month}!`)
+        return m.reply(`❌ Fecha inválida del mes ${month}!`)
     }
     
     const formattedDate = `${day.toString().padStart(2, '0')}-${month.toString().padStart(2, '0')}`

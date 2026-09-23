@@ -31,13 +31,13 @@ async function handler(m, { sock }) {
     );
   }
   if (!url.includes("pinterest") && !url.includes("pin.it")) {
-    return m.reply("❌ URL tidak valid. Gunakan link Pinterest.");
+    return m.reply("❌ URL inválida. Use enlaces de Pinterest.");
   }
   m.react("🕕");
   try {
     const result = await pinterestdl(url);
     if (!result || !result.media || result.media.length === 0) {
-      throw new Error("Tidak ada media ditemukan");
+      throw new Error("No hay medios encontrados");
     }
     for (const media of result.media) {
       if (media.type === "video") {
@@ -58,12 +58,12 @@ async function handler(m, { sock }) {
           const mp4Path = path.join(tempPath, `pin-${id}.mp4`);
           try {
             const raw = await f(media.url, "buffer");
-            if (!raw) throw new Error("Gagal download GIF");
+            if (!raw) throw new Error("No se pudo download GIF");
             fs.writeFileSync(gifPath, raw);
             await queueFFmpeg(
               `ffmpeg -y -ignore_loop 0 -i "${gifPath}" -t 30 -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -c:v libx264 -pix_fmt yuv420p -movflags faststart -preset ultrafast -an "${mp4Path}"`,
             );
-            if (!fs.existsSync(mp4Path)) throw new Error("Gagal convert GIF");
+            if (!fs.existsSync(mp4Path)) throw new Error("GIF convert falló");
             await sock.sendMedia(m.chat, fs.readFileSync(mp4Path), null, m, {
               type: "video",
               gifPlayback: true,

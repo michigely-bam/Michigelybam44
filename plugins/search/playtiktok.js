@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "playtiktok",
   alias: ["ttplay", "tiktokplay"],
   category: "search",
-  description: "Cari dan kirim satu video TikTok terbaik",
+  description: "Buscar y enviar un video del mejor Ticktock",
   usage: ".playtiktok <query>",
   example: ".playtiktok cewe tiktok",
   isOwner: false,
@@ -39,7 +39,7 @@ async function handler(m, { sock }) {
     const videos = await tiktokSearchVideo(query);
     if (!videos || videos.length === 0) {
       m.react("❌");
-      return m.reply(`❌ Tidak ditemukan video untuk: ${query}`);
+      return m.reply(`❌ No se han encontrado videos para: ${query}`);
     }
 
     const video = videos[0];

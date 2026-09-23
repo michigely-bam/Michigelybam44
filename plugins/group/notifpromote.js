@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'notifpromote',
     alias: [],
     category: 'group',
-    description: 'Toggle notifikasi saat ada yang dijadikan admin',
+    description: "Actualizar las notificaciones cuando un administrador está presente",
     usage: '.notifpromote on/off',
     example: '.notifpromote on',
     isOwner: false,
@@ -16,7 +16,7 @@ const pluginConfig = {
 
 function handler(m, { sock, db }) {
     if (!m.isAdmin && !m.isOwner) {
-        return m.reply(`❌ Hanya admin grup yang bisa menggunakan fitur ini`)
+        return m.reply(`❌ Sólo administración de grupo puede utilizar esta característica`)
     }
     
     const args = m.args[0]?.toLowerCase()

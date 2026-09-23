@@ -59,7 +59,7 @@ async function handler(m, { sock }) {
 
     if (!res.data?.status || !res.data?.data?.length) {
       m.react("❌");
-      return m.reply(`❌ Tidak ditemukan video untuk: ${query}`);
+      return m.reply(`❌ No se han encontrado videos para: ${query}`);
     }
 
     const videos = res.data.data.slice(0, 5);
@@ -133,7 +133,7 @@ async function handler(m, { sock }) {
 
     if (mediaList.length === 0) {
       m.react("❌");
-      return m.reply(`❌ Gagal mengunduh video`);
+      return m.reply(`❌ No se pudo download video`);
     }
 
     m.react("📤");

@@ -17,31 +17,36 @@ const pluginConfig = {
 const answers = [
     'Di dekatmu!',
     'Jauh di sana.',
-    'Di tempat yang tidak kamu duga.',
+    "En un lugar que no esperabas.",
     'Di hatimu.',
     'Di sekitar sini.',
-    'Hmm, coba cari di kamar.',
+    "Prueba la habitación.",
     'Di luar sana, menunggumu.',
-    'Di tempat yang sama denganmu.',
-    'Di suatu tempat yang indah.',
+    "En el mismo lugar que tú.",
+    "En algún lugar hermoso.",
     'Di balik pintu.',
     'Di sebelah kirimu.',
     'Di depan matamu!',
     'Jauh banget, di luar negeri mungkin?',
-    'Di tempat yang penuh kenangan.',
+    "En un lugar de recuerdos.",
     'Di mana-mana!',
     'Di dunia maya.',
     'Di alam mimpi.',
     'Di tempat rahasia.',
     'Hmm, susah dijelaskan lokasinya.',
-    'Di tempat yang akan membuatmu bahagia.'
+    "En un lugar que te hará feliz."
 ];
 
 async function handler(m) {
     const text = m.text?.trim();
     
     if (!text) {
-        return m.reply(`📍 *ᴅɪᴍᴀɴᴀ*\n\n> Masukkan pertanyaan!\n\n*Contoh:*\n> .dimana jodohku berada?`);
+        return m.reply(`📍 *ᴅɪᴍᴀɴᴀ*
+
+> ¡Póngase en una pregunta!
+
+*Contoh:*
+> .dimana jodohku berada?`);
     }
     
     const answer = answers[Math.floor(Math.random() * answers.length)];

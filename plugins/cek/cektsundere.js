@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cektsundere',
     alias: ['tsundere'],
     category: 'cek',
-    description: 'Cek tingkat tsundere kamu',
-    usage: '.cektsundere <nama>',
+    description: "Comprueba tus niveles de Tsundere",
+    usage: ".cktsundere = nombre",
     example: '.cektsundere Budi',
     isOwner: false,
     isPremium: false,
@@ -19,16 +19,16 @@ async function handler(m) {
     const mentioned = m.mentionedJid[0] || m.sender
                     
     let desc = ''
-    if (percent >= 90) desc = 'BAKA! B-BUKAN BERARTI AKU SUKA! 😤💢'
-    else if (percent >= 70) desc = 'Hmph! Jangan salah paham ya! 😳'
-    else if (percent >= 50) desc = 'Y-yah terserah kamu deh... 👉👈'
+    if (percent >= 90) desc = "¡No puede significar que me gustes! 😤💢"
+    else if (percent >= 70) desc = "¡No me malinterpretes! 😳"
+    else if (percent >= 50) desc = "Y-yah Depende de ti. 👉👈"
     else if (percent >= 30) desc = 'Agak tsundere dikit~ 😊'
-    else desc = 'Bukan tsundere, jujur aja kok 💕'
+    else desc = "No estudiar, honestamente 💕"
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat ketsunderean kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat ketsunderean @${mentioned.split('@')[0]} yak? 
+Tu nivel de dexterean *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de la quidiidad @${mentioned.split('@')[0]} yak? 
     
 Tingkat ketsunderean dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

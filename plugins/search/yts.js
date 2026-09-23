@@ -33,7 +33,7 @@ async function handler(m, { sock }) {
         const videos = search.videos.slice(0, 5)
         
         if (videos.length === 0) {
-            return m.reply(`❌ Tidak ditemukan hasil untuk: ${query}`)
+            return m.reply(`❌ No se han encontrado resultados para: ${query}`)
         }
         
         let txt = `🔍 *ʏᴏᴜᴛᴜʙᴇ sᴇᴀʀᴄʜ*\n\n`

@@ -38,7 +38,9 @@ function handler(m, { sock }) {
   );
 
   if (!hasAccess && !m.isOwner) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Kamu tidak memiliki akses ke CPanel!`);
+    return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> ¡No tienes acceso al CPanel!`);
   }
 
   const db = getDatabase();
@@ -81,7 +83,7 @@ function handler(m, { sock }) {
   text += `╰┈┈⬡\n\n`;
 
   if (m.isOwner) {
-    text += `> _Owner: gunakan \`${m.prefix}jedacreate\` untuk setting_`;
+    text += `> _Propietario: uso \`${m.prefix}jedacreate\` para configuración_`;
   }
 
   return m.reply(text);

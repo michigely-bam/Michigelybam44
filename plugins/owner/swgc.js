@@ -79,9 +79,9 @@ const pluginConfig = {
   name: "swgc",
   alias: ["statusgrup", "swgroup", "groupstory", "toswgc"],
   category: "owner",
-  description: "Post Group Status/Story ke grup pilihan (border hijau)",
+  description: "Estado del grupo de correos / Historia a grupo seleccionado (verde transfronterizo)",
   usage: ".swgc <teks> atau reply media",
-  example: ".swgc Halo semua!",
+  example: ".¡Hola a todos!",
   isOwner: true,
   isPremium: false,
   isGroup: false,
@@ -107,7 +107,7 @@ async function handler(m, { sock, db }) {
 
     if (!pendingData) {
       await m.reply(
-        `⚠️ *Tidak ada data pending. Silakan kirim ulang media + .swgc*`,
+        `⚠️ *No hay datos pendientes. Por favor vuelva a enviar medios + .swgc*`,
       );
       return;
     }
@@ -165,7 +165,7 @@ async function handler(m, { sock, db }) {
               ? "Audio"
               : "Media";
 
-      const successMsg = `✅ Berhasil up sw ke grup ${groupName}`;
+      const successMsg = `✅ Sucesivamente, una rodaja para grupo ${groupName}`;
 
       await m.reply(successMsg);
       pendingSwgc.delete(m.sender);
@@ -200,7 +200,7 @@ async function handler(m, { sock, db }) {
     try {
       buffer = await m.quoted.download();
       if (!buffer) {
-        await m.reply(`❌ Gagal mengambil media.`);
+        await m.reply(`❌ No pude recuperar los medios.`);
         return;
       }
       const fileType = await fileTypeFromBuffer(buffer);
@@ -233,7 +233,7 @@ async function handler(m, { sock, db }) {
     try {
       buffer = await m.download();
       if (!buffer) {
-        await m.reply(`❌ Gagal mengambil media.`);
+        await m.reply(`❌ No pude recuperar los medios.`);
         return;
       }
       const fileType = await fileTypeFromBuffer(buffer);
@@ -283,7 +283,7 @@ async function handler(m, { sock, db }) {
     const groupList = Object.entries(groups);
 
     if (groupList.length === 0) {
-      await m.reply(`⚠️ *Bot tidak berada di grup manapun.*`);
+      await m.reply(`⚠️ *Bot no está en ningún grupo.*`);
       return;
     }
 
@@ -338,10 +338,10 @@ async function handler(m, { sock, db }) {
         {
           name: "single_select",
           buttonParamsJson: JSON.stringify({
-            title: "🏠 Pilih Grup",
+            title: "🏠 Seleccionar grupo",
             sections: [
               {
-                title: "Daftar Grup",
+                title: "Lista de grupos",
                 rows: groupRows,
               },
             ],

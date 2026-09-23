@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'garden',
     alias: ['kebun', 'farm', 'tanam'],
     category: 'rpg',
-    description: 'Berkebun dan panen tanaman',
+    description: "Jardinería y cosecha de cultivos",
     usage: '.garden <plant/harvest/status>',
     example: '.garden plant carrot',
     isOwner: false,
@@ -69,7 +69,8 @@ async function handler(m, { sock }) {
         txt += `> Plot: ${garden.plots.length}/${garden.maxPlots}\n\n`
         
         if (garden.plots.length === 0) {
-            txt += `> 🌾 Kebun kosong.\n> Gunakan \`${m.prefix}garden plant <crop>\``
+            txt += `> 🌾 El jardín está vacío.
+> Gunakan \`${m.prefix}garden plant <crop>\``
         } else {
             txt += `╭┈┈⬡「 🌿 *ᴘʟᴏᴛs* 」\n`
             for (let i = 0; i < garden.plots.length; i++) {
@@ -95,7 +96,7 @@ async function handler(m, { sock }) {
         
         const crop = CROPS[cropName]
         if (!crop) {
-            return m.reply(`❌ Tanaman tidak ditemukan!`)
+            return m.reply(`❌ ¡Las plantas no se encuentran!`)
         }
         
         const qty = Math.max(1, parseInt(args[2]) || 1)
@@ -124,7 +125,7 @@ async function handler(m, { sock }) {
         
         const crop = CROPS[cropName]
         if (!crop) {
-            return m.reply(`❌ Tanaman tidak ditemukan!`)
+            return m.reply(`❌ ¡Las plantas no se encuentran!`)
         }
         
         if (user.rpg.garden.plots.length >= user.rpg.garden.maxPlots) {
@@ -133,7 +134,7 @@ async function handler(m, { sock }) {
         
         const seedKey = `${cropName}seed`
         if ((user.inventory[seedKey] || 0) < 1) {
-            return m.reply(`❌ Tidak punya bibit ${crop.name}!\n\n> Beli: \`${m.prefix}garden buy ${cropName}\``)
+            return m.reply(`❌ No hay semillas. ${crop.name}!\n\n> Beli: \`${m.prefix}garden buy ${cropName}\``)
         }
         
         user.inventory[seedKey]--
@@ -160,7 +161,7 @@ async function handler(m, { sock }) {
         })
         
         if (readyPlots.length === 0) {
-            return m.reply(`❌ Belum ada tanaman siap panen!`)
+            return m.reply(`❌ ¡No hay cultivos listos para la cosecha todavía!`)
         }
         
         let totalExp = 0

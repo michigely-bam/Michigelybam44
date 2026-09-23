@@ -4,7 +4,7 @@ const pluginConfig = {
   name: "antimedia",
   alias: ["am", "nomedia"],
   category: "group",
-  description: "Mengatur antimedia di grup (blokir gambar/video/audio/dokumen)",
+  description: "Establecer antimedia en grupo (bloquear imagen / vídeo / audio / documento)",
   usage: ".antimedia <on/off>",
   example: ".antimedia on",
   isOwner: false,

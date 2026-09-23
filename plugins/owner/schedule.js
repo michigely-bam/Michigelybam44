@@ -21,7 +21,7 @@ const pluginConfig = {
   name: "schedule",
   alias: ["sched", "jadwal", "timer"],
   category: "owner",
-  description: "Bikin reminder atau jadwal bebas dengan text custom",
+  description: "Crear un recordatorio o un horario gratuito con texto personalizado",
   usage:
     ".schedule <add/edit/list/kategori/preset/detail/del/status> [options]",
   example: ".schedule preset sekolah 06:30",
@@ -49,28 +49,28 @@ const presetTemplates = {
   sekolah: {
     category: "sekolah",
     title: "Berangkat sekolah",
-    customText: "Mandi, sarapan, cek buku, dan berangkat tepat waktu.",
+    customText: "Ducha, desayuno, chequeo de libro, y salir a tiempo.",
     repeat: true,
     target: "me",
   },
   kerja: {
     category: "kerja",
-    title: "Mulai kerja",
-    customText: "Siapkan device, cek task, dan mulai kerja tepat waktu.",
+    title: "Inicio del trabajo",
+    customText: "Prepárese el dispositivo, compruebe el taskis y comience a trabajar a tiempo.",
     repeat: true,
     target: "me",
   },
   turnamen: {
     category: "turnamen",
     title: "Persiapan turnamen",
-    customText: "Cek roster, room, koneksi, dan standby sebelum match dimulai.",
+    customText: "Compruebe las listas, las habitaciones, las conexiones y la reserva antes de que comience el partido.",
     repeat: false,
     target: "here",
   },
   date: {
     category: "date",
     title: "Jadwal date",
-    customText: "Siap-siap, cek lokasi, dan datang tepat waktu.",
+    customText: "Listo, revisa la ubicación, y ven a tiempo.",
     repeat: false,
     target: "me",
   },
@@ -141,7 +141,7 @@ function parseRepeatValue(value = "") {
   if (isRepeatToken(value)) return true;
   if (isRepeatOffToken(value)) return false;
   throw new Error(
-    "❌ Nilai repeat harus salah satu: repeat, daily, harian, once, sekali, off",
+    "❌ El valor repetitivo debe ser uno: repetir, diariamente, una vez, una vez, apagado",
   );
 }
 
@@ -162,7 +162,7 @@ function resolveTarget(targetValue, m) {
   if (!raw || normalized === "here" || normalized === "this") {
     return {
       jid: m.chat,
-      label: m.isGroup ? "here (chat ini)" : "here (private chat ini)",
+      label: m.isGroup ? "aquí (esta charla)" : "aquí ( chat privado esto)",
     };
   }
 
@@ -185,7 +185,7 @@ function resolveTarget(targetValue, m) {
   if (!digits) {
     return {
       jid: m.chat,
-      label: m.isGroup ? "here (chat ini)" : "here (private chat ini)",
+      label: m.isGroup ? "aquí (esta charla)" : "aquí ( chat privado esto)",
     };
   }
 
@@ -284,16 +284,16 @@ function buildTaskPayload(id, parsed, extra = {}) {
 function buildHelpText(m) {
   return `📅 *SCHEDULE PLANNER*
 
-Fitur ini buat bikin jadwal atau reminder bebas.
-Bisa dipakai untuk sekolah, pelajaran, kerja, meeting, ngedate, turnamen, atau agenda apa aja.
+Esta función hace que el horario o el remoto sea gratuito.
+Se puede utilizar para escuelas, lecciones, trabajo, reuniones, fechas, torneos o cualquier programa.
 
-Pesan yang dikirim akan mengikuti *text custom* buatan owner.
+Mensaje enviado seguirá *text custom* buatan owner.
 
 *Format utama:*
-\`.schedule add <HH:MM> | <kategori> | <judul> | <pesan> | [target] | [repeat]\`
+\`.programa add י HH: MM √≥ HMS 124; √Īada categoría &gt; Hue 124;\`
 
 *Edit jadwal:*
-\`.schedule edit <id> <HH:MM> | <kategori> | <judul> | <pesan> | [target] | [repeat]\`
+\`.cronología de la edición не не нне нне нне нне нени нани нанти нения нантенти нани нани наните нанте нани ни нани ни нти ни натени ни ни ни ни ни нателитени ни нани нтенти ни нананантентентенантентентентентели ни ни ни нитени нитени ни ни нани ни нитенитени нани ни нани нан\`
 \`.schedule edit <id> time=08:00 | text=angkat rapat | repeat=off\`
 
 *Filter kategori:*
@@ -306,9 +306,9 @@ Pesan yang dikirim akan mengikuti *text custom* buatan owner.
 \`.schedule preset kerja 09:00 | standup pagi | masuk room meeting | here | repeat\`
 
 *Target opsional:*
-• \`here\` = kirim ke chat ini
-• \`me\` = kirim ke chat owner sendiri
-• \`628xxx@s.whatsapp.net\` = kirim ke nomor tertentu
+• \`here\` = enviar a este chat
+• \`me\` = enviarlo al dueño de chat usted mismo
+• \`628xxx@s.whatsapp.net\` = enviar a un número específico
 
 *Mode repeat opsional:*
 • \`repeat\`
@@ -317,21 +317,21 @@ Pesan yang dikirim akan mengikuti *text custom* buatan owner.
 
 *Contoh:*
 \`.schedule add 06:30 | sekolah | berangkat sekolah | mandi, sarapan, cek buku | me | repeat\`
-\`.schedule add 12:00 | kerja | standup team | masuk room meeting jam 12 tepat | here | repeat\`
-\`.schedule add 19:00 | date | dinner malam | jangan lupa datang rapi dan tepat waktu | me\`
-\`.schedule add 20:00 | turnamen | scrim malam | room dibuka 15 menit sebelum mulai | here\`
+\`.Horario añadida 12: 00 a.m. 124; trabajo # 124; equipo estándar # 124; sesión de la habitación a las 12 en punto\`
+\`.Horario añadir 19: 00 a.m. 12 4; fecha # 124; cena noche # 124; no te olvides de venir limpio y a tiempo # 124; yo\`
+\`.Horario de añadir 20: 00 pm, 124; torneo\`
 
 *Subcommand:*
 • \`.schedule list\`
-• \`.schedule kategori <nama>\`
-• \`.schedule preset <nama> <HH:MM>\`
+• \`.categoría de horarios &quot; nombre &quot;\`
+• \`.preset programado < nombre de la palabra &gt;\`
 • \`.schedule edit <id> ...\`
 • \`.schedule detail <id>\`
 • \`.schedule del <id>\`
 • \`.schedule status\`
 
-*Format lama masih didukung:*
-\`.schedule add 08:00 628xxx repeat Selamat pagi tim\``;
+*Los formatos antiguos siguen soportados:*
+\`.Horario añadir 08: 00 628xx Repetición Buen equipo de la mañana\``;
 }
 
 function parsePlannerInput(m, args) {
@@ -339,7 +339,7 @@ function parsePlannerInput(m, args) {
 
   if (!timeInfo) {
     throw new Error(
-      "❌ Format waktu salah. Gunakan HH:MM atau HH.MM, contoh: 08:00",
+      "❌ Formato de mal tiempo. Use HH: MM o HH.MM, por ejemplo: 8: 00 p.m.",
     );
   }
 
@@ -364,7 +364,7 @@ function parsePlannerInput(m, args) {
     const customText = args.slice(messageStart).join(" ").trim();
 
     if (!customText) {
-      throw new Error("❌ Pesan jadwal tidak boleh kosong");
+      throw new Error("❌ El mensaje programado no debe estar vacío");
     }
 
     return {
@@ -385,7 +385,7 @@ function parsePlannerInput(m, args) {
 
   if (segments.length < 3) {
     throw new Error(
-      "❌ Format baru minimal: `.schedule add <HH:MM> | <kategori> | <judul> | <pesan>`",
+      "❌ Formato mínimo nuevo: `.schedule add <HH:MM> | <kategori> | <judul> | <pesan>`",
     );
   }
 
@@ -395,7 +395,7 @@ function parsePlannerInput(m, args) {
   const customText = parsedTail.content;
 
   if (!customText) {
-    throw new Error("❌ Isi reminder tidak boleh kosong");
+    throw new Error("❌ El contenido de recordatorio no debe estar vacío");
   }
 
   return {
@@ -414,7 +414,7 @@ function parsePresetInput(m, args) {
 
   if (!config) {
     throw new Error(
-      "❌ Preset tidak dikenal. Gunakan `.schedule preset list` untuk lihat preset yang tersedia.",
+      "❌ Preset desconocido. Uso `.schedule preset list` para ver los presets disponibles.",
     );
   }
 
@@ -491,7 +491,7 @@ function parseEditInput(m, args, task) {
     .filter(Boolean);
 
   if (!segments.length) {
-    throw new Error("❌ Tidak ada field yang bisa diedit.");
+    throw new Error("❌ No hay campo editable.");
   }
 
   for (const segment of segments) {
@@ -507,7 +507,7 @@ function parseEditInput(m, args, task) {
     const value = segment.slice(separatorIndex + 1).trim();
 
     if (!value) {
-      throw new Error(`❌ Nilai untuk field \`${field}\` tidak boleh kosong`);
+      throw new Error(`❌ Valor en el campo \`${field}\` no puede estar vacío`);
     }
 
     switch (field) {
@@ -558,7 +558,7 @@ function parseEditInput(m, args, task) {
   }
 
   if (!state.customText) {
-    throw new Error("❌ Isi reminder tidak boleh kosong");
+    throw new Error("❌ El contenido de recordatorio no debe estar vacío");
   }
 
   return state;
@@ -579,13 +579,13 @@ function buildCategoryListText(tasks) {
     (a, b) => b[1] - a[1] || a[0].localeCompare(b[0]),
   );
 
-  let text = "🏷️ *KATEGORI JADWAL AKTIF*\n\n";
+  let text = "🏷️ *KATEGORI JADWAL ACTIVE*\n\n";
 
   for (const [category, total] of entries) {
     text += `• ${category} (${total})\n`;
   }
 
-  text += "\nGunakan `.schedule kategori <nama>` untuk filter list jadwal.";
+  text += "\nGunakan `.schedule kategori <nama>` para filtrar la lista de horarios.";
   return text;
 }
 
@@ -641,7 +641,7 @@ function buildDetailText(task) {
 🕕 Next run: ${formatTimeRemaining(msUntil)} lagi
 🗓️ Dibuat: ${task.createdAt || "-"}
 
-Pesan custom:
+Mensaje personalizado:
 ${getTaskText(task)}`;
 }
 

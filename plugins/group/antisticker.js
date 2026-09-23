@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'antisticker',
     alias: ['as', 'nosticker'],
     category: 'group',
-    description: 'Mengatur antisticker di grup',
+    description: "Configurar antiadherentes en el grupo",
     usage: '.antisticker <on/off>',
     example: '.antisticker on',
     isOwner: false,

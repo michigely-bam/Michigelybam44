@@ -71,7 +71,7 @@ function send(sock, m, text, title, body) {
       caption: `${text}\n\nhttps://inspired.by.roblox`,
       url: `https://inspired.by.roblox`,
       title: `𝗙𝗜𝗦𝗛 𝗜𝗧 𝗚𝗔𝗠𝗘𝗦`,
-      description: `dapatkan hadiah dan keseruannya dari hasil pancingan`,
+      description: `Obtenga la recompensa y los méritos del cebo.`,
       image: thumbFish,
       thumbnailWidth: 512,
       thumbnailHeight: 512,
@@ -106,8 +106,8 @@ async function handler(m, { sock }) {
 
   if (cmd === "fishit") {
     if (!sub || sub === "on" || sub === "off") {
-      if (!m.isGroup) return m.reply("_Toggle hanya di grup_");
-      if (!m.isOwner && !m.isAdmin) return m.reply("_Hanya admin/owner_");
+      if (!m.isGroup) return m.reply("_Toggle only in group_");
+      if (!m.isOwner && !m.isAdmin) return m.reply("_Admin / propietario Sólo_");
       const gd = db.getGroup(m.chat) || {};
       if (sub === "on") {
         gd.fishitEnabled = true;
@@ -115,7 +115,10 @@ async function handler(m, { sock }) {
         return send(
           sock,
           m,
-          `*FISHIT ENABLED*\n\nSemua member wajib main Fishit!\nKetik \`.fisht help\` untuk mulai`,
+          `*FISHIT ENABLED*
+
+¡Todos los miembros están obligados a jugar a Fishhit!
+Ketik \`.fisht help\` para empezar`,
           "Fishit ON",
           "Aktifkan",
         );
@@ -151,7 +154,7 @@ async function handler(m, { sock }) {
     const user = getOrCreateFischUser(db, m.sender);
     const f = user.fisch;
     if (f.fishingPending && f.fishingPending.length > 0)
-      return m.reply(`_Masih ada tangkapan!_ \`.fisht view\` _dulu._`);
+      return m.reply(`_¡Todavía hay una trampa!_ \`.fisht view\` _dulu._`);
     const now = Date.now();
     if (f.lastFishTime && now - f.lastFishTime < FC * 1000)
       return m.reply(
@@ -159,7 +162,7 @@ async function handler(m, { sock }) {
       );
     const rk = f.usedFishingRod || "basicrod";
     const rod = f.fishingRods[rk];
-    if (!rod) return m.reply(`_Rod aktif tidak ada!_ \`.fisht rods\``);
+    if (!rod) return m.reply(`_¡La vara activa no existe!_ \`.fisht rods\``);
     const ik = f.currentIsland || "mousewood";
     const st = getUpgradedStats(f, rod);
     const eRod = {
@@ -196,7 +199,9 @@ async function handler(m, { sock }) {
         Math.min(Math.max(2000, 5000 - (rod.speed || 0) * 3000), 4000),
       ),
     );
-    let txt = `*HASIL MANCING!*\n\n`;
+    let txt = `*HASIL MANING!*
+
+`;
     for (const c of catches) {
       txt += `${rc(c.rarity)} *${c.name}*\n   _${formatMoney(c.price)} | ${c.kg}kg_\n`;
       if (c.isMutated)
@@ -204,16 +209,18 @@ async function handler(m, { sock }) {
     }
     txt += `\n*Total: ${formatMoney(tv)}*`;
     if (f.streak >= 3) txt += `\n_Streak: ${f.streak}x_`;
-    txt += `\n\n\`.fisht view\` untuk mengambil!`;
+    txt += `
+
+\`.fisht view\` ¡Para tomar!`;
     db.markDirty("users");
-    return send(sock, m, txt, "Hasil Mancing!", formatMoney(tv));
+    return send(sock, m, txt, "¡Pesca!", formatMoney(tv));
   }
 
   if (sub === "view") {
     const user = getOrCreateFischUser(db, m.sender);
     const f = user.fisch;
     if (!f.fishingPending || f.fishingPending.length === 0)
-      return m.reply(`_Tidak ada tangkapan._ \`.fisht mancing\` _dulu!_`);
+      return m.reply(`_No hay trampa._ \`.fisht mancing\` _dulu!_`);
     const catches = f.fishingPending;
     let tv = 0,
       te = 0,
@@ -243,8 +250,10 @@ async function handler(m, { sock }) {
     const plu = addPlayerExp(f, te);
     f.fishingPending = [];
     let txt = `*TANGKAPAN DIAMBIL!*\n\n+${formatMoney(tv)}\n+${te} EXP\n+${catches.length} ikan\n`;
-    if (nf.length > 0) txt += `\n*Ikan Baru:* ${nf.join(", ")}`;
-    if (nm.length > 0) txt += `\n*Mutasi Baru:* ${nm.join(", ")}`;
+    if (nf.length > 0) txt += `
+*Nuevo pescado:* ${nf.join(", ")}`;
+    if (nm.length > 0) txt += `
+*Nueva mutación:* ${nm.join(", ")}`;
     if (rlu) txt += `\n\n${rlu}`;
     if (plu) txt += `\n*LEVEL UP! Level ${f.level}*`;
     db.markDirty("users");
@@ -255,7 +264,7 @@ async function handler(m, { sock }) {
     const user = getOrCreateFischUser(db, m.sender);
     const f = user.fisch;
     if (!f.inventory || f.inventory.length === 0)
-      return m.reply(`_Inventory kosong!_ \`.fisht mancing\` _dulu._`);
+      return m.reply(`_¡El inventario está vacío!_ \`.fisht mancing\` _dulu._`);
     let tv = 0;
     for (const fish of f.inventory) tv += fish.price || 0;
     const sb = UPGRADES.sell.effect(f.sellUpgrade || 0);
@@ -306,7 +315,7 @@ async function handler(m, { sock }) {
     const user = getOrCreateFischUser(db, m.sender);
     const found = user.fisch.fishFound || [];
     if (found.length === 0)
-      return m.reply(`_Fish Book kosong!_ \`.fisht mancing\` _dulu_`);
+      return m.reply(`_¡El libro de pescado está vacío!_ \`.fisht mancing\` _dulu_`);
     let txt = `*FISH BOOK* _(${found.length} spesies)_\n\n`;
     for (const [k, isle] of Object.entries(islands)) {
       const fl = isle.listFish.filter((f) => found.includes(f.name));
@@ -322,7 +331,7 @@ async function handler(m, { sock }) {
   if (sub === "mutbook") {
     const user = getOrCreateFischUser(db, m.sender);
     const found = user.fisch.mutationFound || [];
-    if (found.length === 0) return m.reply(`_Mutation Book kosong!_`);
+    if (found.length === 0) return m.reply(`_¡El Libro de Mutación está vacío!_`);
     let txt = `*MUTATION BOOK* _(${found.length})_\n\n`;
     for (const mut of found) {
       const d = mutations[mut];
@@ -335,7 +344,9 @@ async function handler(m, { sock }) {
     const user = getOrCreateFischUser(db, m.sender);
     const f = user.fisch;
     if (!sa[0]) {
-      let txt = `*DAFTAR PULAU*\n\n`;
+      let txt = `*- ¿Qué?*
+
+`;
       for (const [k, isle] of Object.entries(islands)) {
         const req = travelRequirements[k];
         const ok = (f.travelFound || []).includes(k);
@@ -348,14 +359,14 @@ async function handler(m, { sock }) {
         sock,
         m,
         txt + `\n\`.fisht travel <pulau>\``,
-        "Daftar Pulau",
+        "Lista de islas",
         islands[f.currentIsland || "mousewood"]?.name || "",
       );
     }
     const tk = sa[0].toLowerCase();
-    if (!islands[tk]) return m.reply(`_Pulau tidak ada!_ \`.fisht travel\``);
+    if (!islands[tk]) return m.reply(`_¡La isla no existe!_ \`.fisht travel\``);
     if (f.currentIsland === tk)
-      return m.reply(`_Sudah di ${islands[tk].name}!_`);
+      return m.reply(`_Está encendida. ${islands[tk].name}!_`);
     const req = travelRequirements[tk];
     if (req) {
       if ((f.money || 0) < req.money)
@@ -371,7 +382,7 @@ async function handler(m, { sock }) {
     return send(
       sock,
       m,
-      `*PINDAH PULAU!*\n\nSekarang di *${islands[tk].name}*\n${islands[tk].listFish.length} jenis ikan tersedia`,
+      `*PINDAH PULAU!*\n\nSekarang di *${islands[tk].name}*\n${islands[tk].listFish.length} Tipo de pescado disponible`,
       "Travel!",
       islands[tk].name,
     );
@@ -388,7 +399,7 @@ async function handler(m, { sock }) {
       m,
       txt + `\`.fisht buy <rod>\``,
       "Toko Rod",
-      "Pilih rod terbaik",
+      "Seleccione la mejor barra",
     );
   }
 
@@ -397,11 +408,11 @@ async function handler(m, { sock }) {
     const f = user.fisch;
     const rk = sa[0] ? sa[0].toLowerCase() : "";
     if (!rk) return m.reply(`_Tentukan rod!_ \`.fisht shop\``);
-    if (!fishingRod[rk]) return m.reply(`_Rod tidak ada!_ \`.fisht shop\``);
+    if (!fishingRod[rk]) return m.reply(`_¡Rod se ha ido!_ \`.fisht shop\``);
     if (f.fishingRods[rk])
-      return m.reply(`_Sudah punya ${fishingRod[rk].name}!_`);
+      return m.reply(`_Ya lo he hecho. ${fishingRod[rk].name}!_`);
     if (fishingRod[rk].price === 0)
-      return m.reply(`_Rod ini dari Token/Prestige!_`);
+      return m.reply(`_Rod es de Token / Prestige!_`);
     if ((f.money || 0) < fishingRod[rk].price)
       return m.reply(
         `_Uang kurang! Butuh ${formatMoney(fishingRod[rk].price)}_`,
@@ -412,8 +423,8 @@ async function handler(m, { sock }) {
     return send(
       sock,
       m,
-      `*ROD DIBELI!*\n\n*${fishingRod[rk].name}*\n_Ketik_ \`.fisht equip ${rk}\` _untuk memasang_`,
-      "Rod Baru!",
+      `*ROD DIBELI!*\n\n*${fishingRod[rk].name}*\n_Ketik_ \`.fisht equip ${rk}\` _para instalar_`,
+      "¡Nuevo Rod!",
       fishingRod[rk].name,
     );
   }
@@ -424,13 +435,13 @@ async function handler(m, { sock }) {
     const rk = sa[0] ? sa[0].toLowerCase() : "";
     if (!rk) return m.reply(`_Tentukan rod!_ \`.fisht rods\``);
     if (!f.fishingRods[rk])
-      return m.reply(`_Tidak punya rod ini!_ \`.fisht rods\``);
+      return m.reply(`_¡No tengo esta vara!_ \`.fisht rods\``);
     f.usedFishingRod = rk;
     db.markDirty("users");
     return send(
       sock,
       m,
-      `*ROD DIPASANG!*\n\n*${f.fishingRods[rk].name}* _sekarang aktif_`,
+      `*ROD DIPASANG!*\n\n*${f.fishingRods[rk].name}* _Ya está._`,
       "Equip Rod!",
       f.fishingRods[rk].name,
     );
@@ -440,7 +451,7 @@ async function handler(m, { sock }) {
     const user = getOrCreateFischUser(db, m.sender);
     const f = user.fisch;
     const rods = f.fishingRods || {};
-    if (Object.keys(rods).length === 0) return m.reply(`_Tidak punya rod!_`);
+    if (Object.keys(rods).length === 0) return m.reply(`_¡No vara!_`);
     let txt = `*KOLEKSI ROD*\n\n`;
     for (const [k, rod] of Object.entries(rods)) {
       txt += `*${rod.name}*${f.usedFishingRod === k ? " _AKTIF_" : ""}\n  _Lv.${rod.level || 1}/${rod.maxLevel} | Luck ${(rod.luck * 100).toFixed(0)}% | Speed ${(rod.speed * 100).toFixed(0)}%_\n`;
@@ -460,19 +471,20 @@ async function handler(m, { sock }) {
     const f = user.fisch;
     const rk = f.usedFishingRod || "basicrod";
     const rod = f.fishingRods[rk];
-    if (!rod) return m.reply(`_Rod aktif tidak ada!_`);
+    if (!rod) return m.reply(`_¡La vara activa no existe!_`);
     const ek = sa[0] ? sa[0].toLowerCase() : "";
     if (!ek) {
       if (rod.enchant) {
         const e = rodEnchants[rod.enchant];
         return m.reply(
-          `_Enchant saat ini: *${e ? e.name : rod.enchant}* (${e ? e.rarity : "?"})_\n\`.fisht enchant <key>\` untuk ganti`,
+          `_Enchanté actual: *${e ? e.name : rod.enchant}* (${e ? e.rarity : "?"})_
+\`.fisht enchant <key>\` para reemplazar`,
         );
       }
       return m.reply(`_Tentukan enchant!_ \`.fisht enchants\``);
     }
     if (!rodEnchants[ek])
-      return m.reply(`_Enchant tidak ada!_ \`.fisht enchants\``);
+      return m.reply(`_¡Encantar no!_ \`.fisht enchants\``);
     const ench = rodEnchants[ek];
     const cost = encCost(ench.rarity);
     if ((f.money || 0) < cost)
@@ -495,7 +507,9 @@ async function handler(m, { sock }) {
       if (!byR[e.rarity]) byR[e.rarity] = [];
       byR[e.rarity].push({ key: k, name: e.name, desc: e.desc });
     }
-    let txt = `*DAFTAR ENCHANTMENT*\n\n`;
+    let txt = `*LUZ DE INGRESO*
+
+`;
     for (const r of [
       "common",
       "rare",
@@ -516,7 +530,7 @@ async function handler(m, { sock }) {
       m,
       txt.trim() + `\n\`.fisht enchant <key>\``,
       "Enchantments",
-      "Pilih enchant",
+      "Seleccione la entrada",
     );
   }
 
@@ -525,8 +539,8 @@ async function handler(m, { sock }) {
     const f = user.fisch;
     const rk = f.usedFishingRod || "basicrod";
     const rod = f.fishingRods[rk];
-    if (!rod) return m.reply(`_Rod aktif tidak ada!_`);
-    if (rod.level >= rod.maxLevel) return m.reply(`_Rod sudah max level!_`);
+    if (!rod) return m.reply(`_¡La vara activa no existe!_`);
+    if (rod.level >= rod.maxLevel) return m.reply(`_¡Rod es el nivel máximo!_`);
     const cost = Math.floor(rod.price * 0.1 * rod.level) || 10000 * rod.level;
     if ((f.money || 0) < cost)
       return m.reply(`_Uang kurang! Butuh ${formatMoney(cost)}_`);
@@ -552,7 +566,7 @@ async function handler(m, { sock }) {
       const diff = now.getTime() - new Date(f.lastDaily).getTime();
       if (diff < 86400000)
         return m.reply(
-          `_Daily sudah diambil! Tunggu *${Math.ceil((86400000 - diff) / 3600000)}* jam._`,
+          `_¡El diario ha sido tomado! *${Math.ceil((86400000 - diff) / 3600000)}* jam._`,
         );
     }
     const ld = f.lastDaily ? new Date(f.lastDaily) : null;
@@ -667,7 +681,7 @@ async function handler(m, { sock }) {
     }
     const upg = UPGRADES[type];
     const lv = f[type + "Upgrade"] || 0;
-    if (lv >= upg.maxLevel) return m.reply(`_Sudah max!_`);
+    if (lv >= upg.maxLevel) return m.reply(`_¡Eso es!_`);
     const cost = upg.getCost(lv);
     if ((f.money || 0) < cost)
       return m.reply(`_Uang kurang! Butuh ${formatMoney(cost)}_`);
@@ -696,7 +710,7 @@ async function handler(m, { sock }) {
         { fish: 25000, money: 1e22 },
       ];
       const req = reqs[cp];
-      if (!req) return m.reply(`_Sudah max prestige!_`);
+      if (!req) return m.reply(`_¡Es el máximo prestigio!_`);
       if ((f.fishCaught || 0) < req.fish)
         return m.reply(`_Ikan kurang! Butuh ${req.fish}_`);
       if ((f.money || 0) < req.money)
@@ -708,7 +722,7 @@ async function handler(m, { sock }) {
       f.prestigeTokens =
         (f.prestigeTokens || 0) + [50, 150, 500, 1000, 5000][cp];
       const titles = [
-        "Pemancing Baru",
+        "New Fisher",
         "Veteran",
         "Master Angler",
         "Legend",
@@ -764,7 +778,7 @@ async function handler(m, { sock }) {
     }
     const iid = sa[0].toLowerCase();
     const item = TOKEN_SHOP.find((i) => i.id === iid);
-    if (!item) return m.reply(`_Item tidak ada!_ \`.fisht tokens\``);
+    if (!item) return m.reply(`_¡El artículo no existe!_ \`.fisht tokens\``);
     if ((f.prestigeTokens || 0) < item.cost)
       return m.reply(`_Tokens kurang! Butuh ${item.cost}_`);
     f.prestigeTokens -= item.cost;
@@ -798,7 +812,12 @@ async function handler(m, { sock }) {
     const user = getOrCreateFischUser(db, m.sender);
     const f = user.fisch;
     if (!sa[0]) {
-      let txt = `*JACKPOT SYSTEM*\n\n_Sistem jackpot dengan hadiah besar!_\n_Bisa dapat _Premium_, _Partner_, _Energi_, _Limit_, bahkan _UNLIMITED_!_\n\n`;
+      let txt = `*JACKPOT SYSTEM*
+
+_¡El sistema de jackpot con el gran premio!_
+_Lo tengo. _Premium_, _Partner_, _Energi_, _Limit_, bahkan _UNLIMITED_!_
+
+`;
       for (const pool of JACKPOT_POOLS) {
         txt += `*${pool.name}*\n  _Biaya: ${formatMoney(pool.cost)}_\n  _Rate: ${pool.weight}%_\n  _Rewards:_\n`;
         for (const rw of pool.rewards) {
@@ -810,10 +829,10 @@ async function handler(m, { sock }) {
               tickets: "Gacha Tickets",
               tokens: "Prestige Tokens",
               exp_boost: "EXP Boost",
-              premium_7d: "Premium 7 Hari",
-              premium_30d: "Premium 30 Hari",
-              partner_7d: "Partner 7 Hari",
-              partner_30d: "Partner 30 Hari",
+              premium_7d: "Premium 7 Días",
+              premium_30d: "Premium 30 días",
+              partner_7d: "7 Days Partners",
+              partner_30d: "Asociados 30 días",
               unlimited_energi: "UNLIMITED Energi",
               unlimited_limit: "UNLIMITED Limit",
             }[rw.type] || rw.type;
@@ -831,12 +850,12 @@ async function handler(m, { sock }) {
     }
     const poolId = sa[0].toLowerCase();
     const pool = JACKPOT_POOLS.find((p) => p.id === poolId);
-    if (!pool) return m.reply(`_Tier tidak ada!_ \`.fisht jackpot\``);
+    if (!pool) return m.reply(`_¡No Tier!_ \`.fisht jackpot\``);
     if ((f.money || 0) < pool.cost)
       return m.reply(`_Uang kurang! Butuh ${formatMoney(pool.cost)}_`);
     f.money -= pool.cost;
     const result = doJackpotPull(f, poolId);
-    if (!result) return m.reply(`_Gagal! Coba lagi._`);
+    if (!result) return m.reply(`_Fail, intenta de nuevo._`);
     const applied = applyJackpotReward(db, f, m.sender, result);
     db.markDirty("users");
     let txt = `*${pool.name.toUpperCase()}!*\n\n`;
@@ -872,7 +891,7 @@ async function handler(m, { sock }) {
           prestige: ud.fisch.prestige || 0,
         });
     }
-    if (rankings.length === 0) return m.reply(`_Belum ada pemain!_`);
+    if (rankings.length === 0) return m.reply(`_¡Todavía no hay jugadores!_`);
     rankings.sort((a, b) => {
       if (b.prestige !== a.prestige) return b.prestige - a.prestige;
       if (b.fishCaught !== a.fishCaught) return b.fishCaught - a.fishCaught;
@@ -886,7 +905,7 @@ async function handler(m, { sock }) {
         i === 0 ? "1." : i === 1 ? "2." : i === 2 ? "3." : `${i + 1}.`;
       txt += `${medal} @${p.jid}\n  _P${p.prestige} | ${p.fishCaught} fish | ${formatMoney(p.money)}_\n`;
     }
-    return send(sock, m, txt.trim(), "Leaderboard", "Top Pemain");
+    return send(sock, m, txt.trim(), "Leaderboard", "Top Player");
   }
 }
 

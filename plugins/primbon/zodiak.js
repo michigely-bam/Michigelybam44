@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['horoscope', 'ramalan'],
     category: 'primbon',
     description: 'Ramalan zodiak',
-    usage: '.zodiak <nama zodiak>',
+    usage: ".zodiac Identificar el nombre de zodiac",
     example: '.zodiak aries',
     isOwner: false,
     isPremium: false,
@@ -22,7 +22,11 @@ async function handler(m, { sock }) {
     const zodiac = m.args[0]?.toLowerCase()
     
     if (!zodiac || !validZodiacs.includes(zodiac)) {
-        return m.reply(`⭐ *ᴢᴏᴅɪᴀᴋ*\n\n> Masukkan nama zodiak:\n\n${validZodiacs.map(z => `• ${z}`).join('\n')}\n\n\`Contoh: ${m.prefix}zodiak aries\``)
+        return m.reply(`⭐ *ᴢᴏᴅɪᴀᴋ*
+
+> Ingrese el nombre zodiaco:
+
+${validZodiacs.map(z => `• ${z}`).join('\n')}\n\n\`Contoh: ${m.prefix}zodiak aries\``)
     }
     
     m.react('⭐')
@@ -33,7 +37,9 @@ async function handler(m, { sock }) {
         
         if (!data?.status || !data?.data) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Gagal mendapatkan ramalan`)
+            return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Fallado para conseguir la profecía`)
         }
         
         const r = data.data

@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'woodcut',
     alias: ['chop', 'nebang', 'kayu'],
     category: 'rpg',
-    description: 'Menebang pohon untuk mendapatkan kayu',
+    description: "Cortar árboles para conseguir madera",
     usage: '.woodcut',
     example: '.woodcut',
     isOwner: false,

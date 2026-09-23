@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'training',
     alias: ['train', 'latihan', 'workout'],
     category: 'rpg',
-    description: 'Latihan untuk meningkatkan stats',
+    description: "Ejercicio para mejorar las condiciones",
     usage: '.training <attack/defense/health>',
     example: '.training attack',
     isOwner: false,
@@ -35,7 +35,9 @@ async function handler(m, { sock }) {
     
     if (!trainType) {
         let txt = `🏋️ *ᴛʀᴀɪɴɪɴɢ sʏsᴛᴇᴍ*\n\n`
-        txt += `> Latihan untuk meningkatkan stats!\n\n`
+        txt += `> Practicar para mejorar el personal!
+
+`
         txt += `╭┈┈⬡「 📊 *sᴛᴀᴛs ᴋᴀᴍᴜ* 」\n`
         txt += `┃ ⚔️ Attack: *${user.rpg.attack || 10}*\n`
         txt += `┃ 🛡️ Defense: *${user.rpg.defense || 5}*\n`
@@ -56,7 +58,9 @@ async function handler(m, { sock }) {
     
     const training = TRAINING_TYPES[trainType]
     if (!training) {
-        return m.reply(`❌ Training tidak ditemukan!\n\n> Ketik \`${m.prefix}training\` untuk melihat daftar.`)
+        return m.reply(`❌ Entrenamiento no encontrado!
+
+> Ketik \`${m.prefix}training\` para ver la lista.`)
     }
     
     user.rpg.stamina = user.rpg.stamina ?? 100

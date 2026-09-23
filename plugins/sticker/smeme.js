@@ -15,7 +15,7 @@ const pluginConfig = {
   category: "sticker",
   description: "Membuat sticker meme dari gambar",
   usage: ".smeme <top>|<bottom>",
-  example: ".smeme Ketika|Kamu Lupa",
+  example: ".Cuando tenías 124 años, te olvidaste",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -31,13 +31,17 @@ async function handler(m, { sock }) {
     (m.quoted && (m.quoted.isSticker || m.quoted.type === "stickerMessage"));
   if (!isImage && !isSticker) {
     return m.reply(
-      `😂 *ᴍᴇᴍᴇ sᴛɪᴄᴋᴇʀ*\n\n> Reply atau kirim gambar/sticker dengan caption\n\n\`Contoh: ${m.prefix}smeme Top|Bottom\``,
+      `😂 *ᴍᴇᴍᴇ sᴛɪᴄᴋᴇʀ*
+
+> Responder o enviar una imagen / pegatina con descripción
+
+\`Contoh: ${m.prefix}smeme Top|Bottom\``,
     );
   }
   const input = m.args.join(" ");
   if (!input || !input.includes("|")) {
     return m.reply(
-      `😂 *ᴍᴇᴍᴇ sᴛɪᴄᴋᴇʀ*\n\n> Format: top|bottom\n\n\`Contoh: ${m.prefix}smeme Ketika|Kamu Lupa\``,
+      `😂 *ᴍᴇᴍᴇ sᴛɪᴄᴋᴇʀ*\n\n> Format: top|bottom\n\n\`Contoh: ${m.prefix}Cuando tenías 124 años, te olvidaste\``,
     );
   }
   const [top, bottom] = input.split("|").map((s) => s.trim());
@@ -51,7 +55,9 @@ async function handler(m, { sock }) {
     }
     if (!mediaBuffer) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Gagal mengunduh media`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> No se pudo download media`);
     }
     let imageBuffer;
     try {
@@ -113,7 +119,9 @@ async function handler(m, { sock }) {
     }
     if (!imageUrl) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Gagal upload gambar, coba lagi nanti`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Fallado para subir la imagen, inténtelo más tarde`);
     }
     console.log("[SMEME] Image uploaded:", imageUrl);
     const encodeText = (text) => {

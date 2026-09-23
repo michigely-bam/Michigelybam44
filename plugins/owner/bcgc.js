@@ -6,8 +6,8 @@ const pluginConfig = {
   name: 'bcgc',
   alias: ['broadcastgc', 'bcgroup'],
   category: 'owner',
-  description: 'Broadcast pesan ke semua grup',
-  usage: '.bcgc on/off/<pesan>',
+  description: "Transmisión de mensajes a todos los grupos",
+  usage: ".bcgc on / off / < Mensaje",
   isOwner: true,
   isPremium: false,
   isGroup: false,
@@ -55,12 +55,12 @@ async function handler(m, { sock }) {
 
   if (input.toLowerCase() === 'on') {
     db.setting('bcgcEnabled', true)
-    return m.reply('✅ Broadcast grup *diaktifkan*')
+    return m.reply("✅ Grupo de radiodifusión *diaktifkan*")
   }
 
   if (input.toLowerCase() === 'off') {
     db.setting('bcgcEnabled', false)
-    return m.reply('✅ Broadcast grup *dinonaktifkan*')
+    return m.reply("✅ Grupo de radiodifusión *dinonaktifkan*")
   }
 
   if (!input) {
@@ -82,12 +82,14 @@ async function handler(m, { sock }) {
   }
 
   if (global.statusBcgc) {
-    return m.reply(`❌ Broadcast grup sedang berjalan.\nKetik \`${m.prefix}stopbcgc\` untuk menghentikan.`)
+    return m.reply(`❌ El grupo de radiodifusión está funcionando.
+Ketik \`${m.prefix}stopbcgc\` Parar.`)
   }
 
   const enabled = db.setting('bcgcEnabled')
   if (!enabled) {
-    return m.reply(`❌ Broadcast grup belum diaktifkan.\nKetik \`${m.prefix}bcgc on\` dulu.`)
+    return m.reply(`❌ El grupo de radiodifusión no ha sido activado.
+Ketik \`${m.prefix}bcgc on\` dulu.`)
   }
 
   m.react('📢')
@@ -111,7 +113,7 @@ async function handler(m, { sock }) {
 
     if (groupIds.length === 0) {
       m.react('❌')
-      return m.reply('❌ Tidak ada grup ditemukan.')
+      return m.reply("❌ No hay grupo encontrado.")
     }
 
     const jeda = db.setting('jedaBcgc') || 5000

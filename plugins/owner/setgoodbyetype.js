@@ -17,11 +17,11 @@ const pluginConfig = {
     isEnabled: true
 }
 const VARIANTS = {
-    1: { name: 'Canvas Image', desc: 'Gambar canvas dengan foto profil' },
-    2: { name: 'Carousel Cards', desc: 'Kartu interaktif dengan tombol ( NOTE: setgoodbye tidak memengaruhi ini )' },
-    3: { name: 'Text Only', desc: 'Pesan teks minimalis tanpa gambar' },
-    4: { name: 'Group', desc: 'ExternalAdReply group ( NOTE: setgoodbye tidak memengaruhi ini )' },
-    5: { name: 'Simple', desc: 'Pesan teks simple + poto profile' }
+    1: { name: 'Canvas Image', desc: "Imagen de un lienzo con foto de perfil" },
+    2: { name: 'Carousel Cards', desc: "Tarjeta interactiva con llave (NOTA: despedida de soltero no afecta esto)" },
+    3: { name: 'Text Only', desc: "Mensajes de texto minimalistas sin imágenes" },
+    4: { name: 'Group', desc: "Externamente grupo AdReply (NOTE: Setgoodbye no afecta esto)" },
+    5: { name: 'Simple', desc: "Mensaje de texto simple + perfil de foto" }
 }
 async function handler(m, { sock, db }) {
     const args = m.args || []
@@ -49,6 +49,9 @@ async function handler(m, { sock, db }) {
             })
         })
     }
-    await sock.sendButton(m.chat, fs.readFileSync('./assets/images/ourin.jpg'), `🥗 *TIPE GOODBYE*\n\Tipe saat ini adalah versi *${current}*\n_${VARIANTS[current].name}_\n\nSilahkan pilih variant goodbye:`, m, { buttons })
+    await sock.sendButton(m.chat, fs.readFileSync('./assets/images/ourin.jpg'), `🥗 *TIPE GOODBYE*
+Tipo actual es la versión *${current}*\n_${VARIANTS[current].name}_
+
+Por favor, seleccione una variable de despedida:`, m, { buttons })
 }
 export { pluginConfig as config, handler }

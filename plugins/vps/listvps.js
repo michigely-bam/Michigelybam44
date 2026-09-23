@@ -5,7 +5,7 @@ const pluginConfig = {
     name: ['listvps', 'listdroplet', 'vpslist'],
     alias: [],
     category: 'vps',
-    description: 'List semua VPS DigitalOcean',
+    description: "Listar todo VPS Digital Ocean",
     usage: '.listvps',
     example: '.listvps',
     isOwner: false,
@@ -47,7 +47,9 @@ async function handler(m, { sock }) {
         const droplets = response.data.droplets || []
         
         if (droplets.length === 0) {
-            return m.reply(`📋 *ʟɪsᴛ ᴠᴘs*\n\n> Tidak ada VPS yang tersedia.`)
+            return m.reply(`📋 *ʟɪsᴛ ᴠᴘs*
+
+> No hay VPS disponible.`)
         }
         
         let txt = `📋 *ʟɪsᴛ ᴠᴘs ᴅɪɢɪᴛᴀʟᴏᴄᴇᴀɴ*\n`

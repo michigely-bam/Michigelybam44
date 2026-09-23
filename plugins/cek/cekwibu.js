@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekwibu',
     alias: ['wibu', 'weeb'],
     category: 'cek',
-    description: 'Cek seberapa wibu kamu',
-    usage: '.cekwibu <nama>',
+    description: "Mira cuántos años tienes.",
+    usage: ".ckwmumum",
     example: '.cekwibu Budi',
     isOwner: false,
     isPremium: false,
@@ -28,13 +28,13 @@ async function handler(m) {
     } else if (percent >= 30) {
         desc = 'Sedikit wibu 😊'
     } else {
-        desc = 'Bukan wibu, normal! 😎'
+        desc = "¡No es ingenio, normal! 😎"
     }
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kewibuan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kewibuan @${mentioned.split('@')[0]} yak? 
+Tu tasa de maternidad *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar la tasa de maternidad @${mentioned.split('@')[0]} yak? 
     
 Tingkat kewibuan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

@@ -13,9 +13,9 @@ const pluginConfig = {
   name: "ssweb-3hasil",
   alias: ["ssweb3", "ss3", "screenshot3", "screenshotweb3"],
   category: "tools",
-  description: "Screenshot website dalam 3 versi (desktop, mobile, tablet)",
-  usage: ".ssweb-3hasil <url>",
-  example: ".ssweb-3hasil https://google.com",
+  description: "Captura de pantalla web en 3 versiones (desktop, móvil, tablet)",
+  usage: ".sswab- 3 resultados",
+  example: ".ssweeb- 3 resultados https://google.com",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -52,7 +52,7 @@ async function handler(m, { sock }) {
     });
 
     if (!data?.status || !data?.results) {
-      throw new Error("Gagal mengambil screenshot");
+      throw new Error("No se pudo get screenshot");
     }
 
     const results = data.results;
@@ -95,7 +95,7 @@ async function handler(m, { sock }) {
     );
 
     if (mediaList.length === 0) {
-      throw new Error("Gagal mengunduh screenshot");
+      throw new Error("No se pudo download screenshot");
     }
 
     m.react("📤");

@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "apkmod-get",
   alias: ["apkmodget", "getapkmod"],
   category: "search",
-  description: "Download APK MOD dari hasil pencarian",
+  description: "Descargar APK MOD de resultados de búsqueda",
   usage: ".apkmod-get <no> <query>",
   example: ".apkmod-get 1 vpn",
   isOwner: false,
@@ -39,7 +39,7 @@ async function handler(m, { sock }) {
     );
 
     if (!data?.status || !data?.data) {
-      throw new Error("Gagal mengambil detail APK");
+      throw new Error("Fallado para recuperar detalles de APK");
     }
 
     const app = data.data;
@@ -65,7 +65,7 @@ async function handler(m, { sock }) {
 
       m.react("✅");
     } else {
-      let caption = `> ⚠️ Download URL tidak tersedia`;
+      let caption = `> ⚠️ Descargar URL no disponible`;
       await sock.sendMessage(
         m.chat,
         {

@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekkaya',
     alias: ['kaya', 'rich'],
     category: 'cek',
-    description: 'Cek seberapa kaya kamu',
-    usage: '.cekkaya <nama>',
+    description: "Mira lo rico que eres.",
+    usage: ".ckkaya   nombre",
     example: '.cekkaya Budi',
     isOwner: false,
     isPremium: false,
@@ -30,7 +30,7 @@ async function handler(m) {
         desc = 'Lumayan berada 💵'
         emoji = '💰'
     } else if (percent >= 30) {
-        desc = 'Cukup lah buat hidup 😊'
+        desc = "Es suficiente para la vida. 😊"
         emoji = '💵'
     } else {
         desc = 'Semangat nabung! 🙏'
@@ -39,8 +39,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kekayaan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kekayaan @${mentioned.split('@')[0]} yak? 
+Tu nivel de riqueza *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de riqueza @${mentioned.split('@')[0]} yak? 
     
 Tingkat kekayaan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

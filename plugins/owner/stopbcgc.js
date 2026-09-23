@@ -2,7 +2,7 @@ const pluginConfig = {
   name: 'stopbcgc',
   alias: ['stopbroadcastgc'],
   category: 'owner',
-  description: 'Hentikan broadcast grup yang sedang berjalan',
+  description: "Stop broadcast running group",
   usage: '.stopbcgc',
   isOwner: true,
   isPremium: false,
@@ -15,10 +15,10 @@ const pluginConfig = {
 
 async function handler(m) {
   if (!global.statusBcgc) {
-    return m.reply('❌ Tidak ada broadcast grup yang sedang berjalan.')
+    return m.reply("❌ Ningún grupo de transmisión está funcionando.")
   }
   global.stopBcgc = true
-  return m.reply('⏹️ Menghentikan broadcast grup...')
+  return m.reply("⏹️ Detener la transmisión del grupo...")
 }
 
 export { pluginConfig as config, handler }

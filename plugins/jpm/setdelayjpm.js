@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'setdelayjpm',
     alias: ['delayjpm', 'jedajpm', 'setjedajpm'],
     category: 'jpm',
-    description: 'Atur jeda antar kirim JPM ke grup',
+    description: "Establecer JPM enviar intermisión al grupo",
     usage: '.setdelayjpm <ms>',
     example: '.setdelayjpm 3000',
     isOwner: true,
@@ -61,7 +61,7 @@ function handler(m, { sock }) {
     const ms = parseInt(input)
 
     if (isNaN(ms) || ms < 1000 || ms > 30000) {
-        return m.reply(`❌ Delay harus antara *1000ms* (1s) sampai *30000ms* (30s)`)
+        return m.reply(`❌ Delay harus antara *1000ms* (1s) arriba *30000ms* (30s)`)
     }
 
     db.setting('jedaJpm', ms)

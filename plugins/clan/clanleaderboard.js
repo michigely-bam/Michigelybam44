@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'clanleaderboard',
     alias: ['clanlb', 'topclan', 'guildrank'],
     category: 'clan',
-    description: 'Lihat ranking clan',
+    description: "Ver el clan de las filas",
     usage: '.clanleaderboard',
     example: '.clanleaderboard',
     isOwner: false,
@@ -31,7 +31,9 @@ async function handler(m) {
 
     const clans = Object.values(db.db.data.clans)
     if (clans.length === 0) {
-        return m.reply(`🏰 Belum ada clan terdaftar\n\nBuat: *.clancreate <nama>*`)
+        return m.reply(`🏰 No clan registered yet
+
+Buat: *.clancreate <nama>*`)
     }
 
     clans.sort((a, b) => {

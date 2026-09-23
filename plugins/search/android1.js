@@ -7,7 +7,7 @@ const pluginConfig = {
   name: "android1",
   alias: ["an1"],
   category: "search",
-  description: "Cari dan download APK MOD dari Android1",
+  description: "Buscar y descargar APK MOD de Android1",
   usage: ".android1 <query>",
   example: ".android1 Subway Surfer",
   isOwner: false,
@@ -49,7 +49,7 @@ async function handler(m, { sock }) {
 
     if (!data?.status || !data?.data?.length) {
       m.react("❌");
-      return m.reply(`❌ Tidak ditemukan hasil untuk: \`${text}\``);
+      return m.reply(`❌ No se han encontrado resultados para: \`${text}\``);
     }
 
     const apps = data.data.slice(0, 10);
@@ -66,8 +66,10 @@ async function handler(m, { sock }) {
     const saluranId = config.saluran?.id || "120363400911374213@newsletter";
     const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
-    let caption = `📱 Hasil dari pencarian apk mod *${text}*\n`;
-    caption += `*${apps.length}* aplikasi ditemukan\n\n`;
+    let caption = `📱 Resultados de la búsqueda de apk mod *${text}*\n`;
+    caption += `*${apps.length}* aplicación encontrada
+
+`;
 
     apps.forEach((app, i) => {
       caption += `*${i + 1}.* ${app.name}\n`;
@@ -75,7 +77,7 @@ async function handler(m, { sock }) {
       caption += `   └ ⭐ ${app.rating}/5\n\n`;
     });
 
-    caption += `> Pilih angka untuk download langsung`;
+    caption += `> Seleccione el número para descargar directamente`;
 
     const buttons = apps.slice(0, 10).map((app, i) => ({
       title: `${i + 1}. ${app.name.substring(0, 20)}`,
@@ -94,7 +96,7 @@ async function handler(m, { sock }) {
           {
             name: "single_select",
             buttonParamsJson: JSON.stringify({
-              title: "Pilih APK",
+              title: "Seleccione APK",
               sections: [
                 {
                   title: "APK nya",

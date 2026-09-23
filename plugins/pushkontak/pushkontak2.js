@@ -11,8 +11,8 @@ const pluginConfig = {
   name: "pushkontak2",
   alias: ["puskontak2", "push2"],
   category: "pushkontak",
-  description: "Push pesan dengan nama kontak ke semua member grup",
-  usage: ".pushkontak2 <pesan>|<namakontak>",
+  description: "Empuje el mensaje con un nombre de contacto a todos los miembros del grupo",
+  usage: ".pushkonta2 Identificar el mensaje x124; Identificado namakhanc2",
   example: ".pushkontak2 Halo!|TokoBaru",
   isOwner: true,
   isPremium: false,
@@ -36,19 +36,27 @@ async function handler(m, { sock }) {
   const input = m.text?.trim();
   if (!input || !input.includes("|")) {
     return m.reply(
-      `📢 *ᴘᴜsʜ ᴋᴏɴᴛᴀᴋ 2*\n\n> Format: pesan|namakontak\n\n\`Contoh: ${m.prefix}pushkontak2 Halo semuanya!|TokoBaru\``,
+      `📢 *ᴘᴜsʜ ᴋᴏɴᴛᴀᴋ 2*
+
+> Formato: mensaje x124; nombre
+
+\`Contoh: ${m.prefix}pushkontak2 Halo semuanya!|TokoBaru\``,
     );
   }
 
   const [text, namaKontak] = input.split("|").map((s) => s.trim());
 
   if (!text || !namaKontak) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Format salah. Gunakan: pesan|namakontak`);
+    return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Formato inválido. Uso: mensaje Dz124; namacatorial`);
   }
 
   if (global.statuspush) {
     return m.reply(
-      `❌ *ɢᴀɢᴀʟ*\n\n> Pushkontak sedang berjalan. Ketik \`${m.prefix}stoppush\` untuk menghentikan.`,
+      `❌ *ɢᴀɢᴀʟ*
+
+> El contacto está funcionando. Tipo \`${m.prefix}stoppush\` Parar.`,
     );
   }
 
@@ -77,7 +85,9 @@ async function handler(m, { sock }) {
 
     if (participants.length === 0) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak ada member yang bisa dikirim`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Ningún miembro puede ser enviado`);
     }
 
     const jedaPush = db.setting("jedaPush") || 5000;

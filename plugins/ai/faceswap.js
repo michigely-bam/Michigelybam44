@@ -13,7 +13,7 @@ const pluginConfig = {
   alias: ["fs", "swapface"],
   category: "ai",
   description: "Tukar wajah dari 2 gambar",
-  usage: ".faceswap (kirim/reply 2 gambar)",
+  usage: ".faceswap (send / reply 2 images)",
   example: ".faceswap",
   cooldown: 30,
   energi: 2,
@@ -72,7 +72,7 @@ async function uploadTo0x0(buffer, filename) {
     },
   );
 
-  if (!res.data?.status ? res.data.path : "") throw new Error("Upload gagal");
+  if (!res.data?.status ? res.data.path : "") throw new Error("Error al subir");
   return res.data;
 }
 
@@ -149,7 +149,7 @@ async function handler(m, { sock }) {
   try {
     const targetUrl = await uploadTo0x0(imageBuffer, "target.jpg");
 
-    await m.reply("🔄 *ᴍᴇᴍᴘʀᴏsᴇs...*\n\n> Menukar wajah, tunggu sebentar...");
+    await m.reply("🔄 *ᴍᴇᴍᴘʀᴏsᴇs...*\n\n> Caras comerciales, espera un minuto...");
 
     const apiUrl = `https://api.neoxr.eu/api/faceswap?source=${encodeURIComponent(session.sourceUrl)}&target=${encodeURIComponent(targetUrl)}&apikey=${NEOXR_APIKEY}`;
 
@@ -159,7 +159,7 @@ async function handler(m, { sock }) {
 
     if (!data?.status || !data?.data?.url) {
       m.react("❌");
-      return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> API tidak merespon atau error");
+      return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> API no está respondiendo o error");
     }
 
     await sock.sendMedia(m.chat, data.data.url, null, m, {

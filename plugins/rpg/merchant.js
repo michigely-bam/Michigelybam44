@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'merchant',
     alias: ['npc', 'toko', 'tokoku'],
     category: 'rpg',
-    description: 'Jual beli item ke NPC merchant',
+    description: "Artículos de comercio a mercadería NPC",
     usage: '.merchant <buy/sell> <item> <qty>',
     example: '.merchant buy potion 5',
     isOwner: false,
@@ -21,8 +21,8 @@ const SHOP_ITEMS = {
     antidote: { name: '💊 Antidote', buyPrice: 80, sellPrice: 40, desc: 'Sembuhkan racun' },
     bread: { name: '🍞 Roti', buyPrice: 30, sellPrice: 15, desc: 'Pulihkan 10 stamina' },
     energydrink: { name: '⚡ Energy Drink', buyPrice: 200, sellPrice: 100, desc: 'Pulihkan 50 stamina' },
-    pickaxe: { name: '⛏️ Beliung', buyPrice: 500, sellPrice: 250, desc: 'Untuk mining' },
-    fishingrod: { name: '🎣 Joran', buyPrice: 400, sellPrice: 200, desc: 'Untuk memancing' },
+    pickaxe: { name: '⛏️ Beliung', buyPrice: 500, sellPrice: 250, desc: "Para la minería" },
+    fishingrod: { name: '🎣 Joran', buyPrice: 400, sellPrice: 200, desc: "Para pescar" },
     wood: { name: '🪵 Kayu', buyPrice: 50, sellPrice: 25, desc: 'Material dasar' },
     iron: { name: '🔩 Besi', buyPrice: 80, sellPrice: 40, desc: 'Material logam' },
     leather: { name: '🧶 Kulit', buyPrice: 60, sellPrice: 30, desc: 'Material armor' },
@@ -45,7 +45,9 @@ function handler(m) {
     
     if (!action || !['buy', 'sell', 'list'].includes(action)) {
         let txt = `🏪 *ᴍᴇʀᴄʜᴀɴᴛ sʜᴏᴘ*\n\n`
-        txt += `> Selamat datang di toko!\n\n`
+        txt += `> ¡Bienvenido a la tienda!
+
+`
         txt += `╭┈┈⬡「 📋 *ᴄᴏᴍᴍᴀɴᴅ* 」\n`
         txt += `┃ ${m.prefix}merchant list\n`
         txt += `┃ ${m.prefix}merchant buy <item> <qty>\n`
@@ -79,7 +81,9 @@ function handler(m) {
         
         const item = SHOP_ITEMS[itemKey]
         if (!item) {
-            return m.reply(`❌ Item tidak ditemukan!\n\n> Ketik \`${m.prefix}merchant list\` untuk melihat daftar.`)
+            return m.reply(`❌ ¡El artículo no se encuentra!
+
+> Ketik \`${m.prefix}merchant list\` para ver la lista.`)
         }
         
         const totalCost = item.buyPrice * qty
@@ -113,7 +117,7 @@ function handler(m) {
         
         const item = SHOP_ITEMS[itemKey]
         if (!item) {
-            return m.reply(`❌ Item tidak bisa dijual ke merchant!`)
+            return m.reply(`❌ ¡Los artículos no se pueden vender a la mercancía!`)
         }
         
         const have = user.inventory[itemKey] || 0

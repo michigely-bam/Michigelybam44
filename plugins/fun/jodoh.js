@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "jodoh",
   alias: ["match", "shipcouple", "ship"],
   category: "fun",
-  description: "Jodohkan 2 member random dengan kecocokan",
+  description: "Compuesto 2 miembro al azar con el partido",
   usage: ".jodoh",
   example: ".jodoh",
   isOwner: false,
@@ -30,9 +30,9 @@ try {
 } catch (e) {}
 
 const loveQuotes = [
-  "Cinta sejati tidak pernah mengenal jarak 💕",
-  "Dua hati yang bersatu takkan terpisahkan 💗",
-  "Kalian seperti puzzle yang sempurna 🧩",
+  "El amor verdadero nunca sabe la distancia 💕",
+  "Dos corazones unidos no serán separados 💗",
+  "Ustedes son como el rompecabezas perfecto. 🧩",
   "Match made in heaven! ✨",
   "Chemistry-nya kuat banget! 🔥",
   "Couple goals banget sih kalian 💑",
@@ -52,7 +52,7 @@ const compatibilityText = (percent) => {
   if (percent >= 90) return "JODOH SEJATI! 💍";
   if (percent >= 70) return "Sangat Cocok! 💖";
   if (percent >= 50) return "Lumayan Cocok 💗";
-  if (percent >= 30) return "Bisa Dicoba 💓";
+  if (percent >= 30) return "Probable 💓";
   return "Butuh Usaha Lebih 💔";
 };
 
@@ -70,7 +70,7 @@ async function handler(m, { sock }) {
   try {
     groupMeta = m.groupMetadata;
   } catch (e) {
-    return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> Tidak bisa mengambil data grup!");
+    return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> ¡No podía recuperar datos de grupo!");
   }
 
   const participants = groupMeta.participants || [];
@@ -79,7 +79,7 @@ async function handler(m, { sock }) {
     .filter((jid) => jid && jid !== botNumber);
 
   if (memberJids.length < 2) {
-    return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> Minimal ada 2 member untuk dijodohkan!");
+    return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> ¡Al menos dos miembros coinciden!");
   }
 
   const allUsers = db.getAllUsers();
@@ -96,7 +96,7 @@ async function handler(m, { sock }) {
 
   if (registrationRequired && registeredMembers.length < 2) {
     return m.reply(
-      "❌ *ɢᴀɢᴀʟ*\n\n> Mode wajib daftar aktif. Minimal harus ada 2 member yang sudah terdaftar di grup ini!",
+      "❌ *ɢᴀɢᴀʟ*\n\n> Modo obligatorio de lista activa. Minimal debe tener dos miembros ya registrados en este grupo!",
     );
   }
 
@@ -180,7 +180,8 @@ async function handler(m, { sock }) {
     text += `> ✨ _Dijodohkan berdasarkan data registrasi_\n`;
   }
   if (registrationRequired) {
-    text += `> 🔒 _Mode wajib daftar aktif, hanya member terdaftar yang dipilih_\n`;
+    text += `> 🔒 _El modo obligatorio de la lista activa, sólo el miembro registrado seleccionado_
+`;
   }
   text += `> _"${quote}"_`;
 

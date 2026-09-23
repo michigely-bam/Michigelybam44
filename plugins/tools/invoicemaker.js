@@ -47,7 +47,7 @@ async function handler(m, { sock }) {
 
   if (parts.length < 6) {
     return m.reply(
-      `❌ Format tidak lengkap! Butuh 6 parameter (toko|invoice|tanggal|status|items|total)`,
+      `❌ Formato incompleto! Necesidad 6 parámetros (plantear novatos 124; factura 0124; fecha 124; estado 124; iteex124; total)`,
     );
   }
 
@@ -68,7 +68,7 @@ async function handler(m, { sock }) {
 
   if (itemsArr.length === 0 || itemsArr.some((i) => !i.name)) {
     return m.reply(
-      `❌ Format items salah! Gunakan: Nama:unit:harga (pisah koma untuk multiple)`,
+      `❌ Formato de elementos inválidos! Uso: Nombre: unidad: precio (comma break for multiple)`,
     );
   }
 
@@ -94,7 +94,7 @@ async function handler(m, { sock }) {
     const response = await axios.get(url, { timeout: 60000 });
 
     if (!response.data?.status || !response.data?.data?.image?.url) {
-      throw new Error("API tidak mengembalikan data yang valid");
+      throw new Error("API no restableció datos válidos");
     }
 
     const imageUrl = response.data.data.image.url;
@@ -108,7 +108,7 @@ async function handler(m, { sock }) {
     caption += `┃ 🏪 Toko: *${data.store}*\n`;
     caption += `┃ 🔢 Invoice: *${data.invoice}*\n`;
     caption += `┃ 📅 Tanggal: *${data.date}*\n`;
-    caption += `┃ 📌 Status: *${data.status === "paid" ? "✅ LUNAS" : "❌ BELUM LUNAS"}*\n`;
+    caption += `┃ 📌 Status: *${data.status === "paid" ? "✅ LUNAS" : "❌ - ¿Qué?"}*\n`;
     caption += `╰┈┈⬡\n\n`;
 
     caption += `╭┈┈⬡「 🛒 *ɪᴛᴇᴍs* 」\n`;

@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'deltoxic',
     alias: ['hapustoxic', 'remtoxic', 'removetoxic'],
     category: 'group',
-    description: 'Hapus kata toxic dari daftar',
+    description: "Eliminar la palabra tóxica de la lista",
     usage: '.deltoxic <kata>',
     example: '.deltoxic kata_kasar',
     isOwner: false,
@@ -34,7 +34,7 @@ async function handler(m, { sock }) {
     const index = toxicWords.indexOf(word)
     
     if (index === -1) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Kata \`${word}\` tidak ada di daftar`)
+        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Kata \`${word}\` no está en la lista`)
     }
     
     toxicWords.splice(index, 1)

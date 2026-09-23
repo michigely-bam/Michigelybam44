@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'dolphin',
     alias: ['dolphinai', 'dphn'],
     category: 'ai',
-    description: 'Chat dengan Dolphin AI (24B Model)',
+    description: "Chat con Dolphin IA (24B Modelo)",
     usage: '.dolphin <pertanyaan> atau .dolphin --<template> <pertanyaan>',
     example: '.dolphin jelaskan tentang AI',
     isOwner: false,
@@ -41,7 +41,7 @@ async function dolphinAI(question, template = 'logical') {
         .map(line => line.choices[0].delta.content)
         .join('')
     
-    if (!result) throw new Error('Tidak ada respon dari AI')
+    if (!result) throw new Error("La IA no respondió")
     
     return result
 }
@@ -78,7 +78,7 @@ async function handler(m, { sock }) {
     }
     
     if (!text) {
-        return m.reply(`❌ Masukkan pertanyaan!`)
+        return m.reply(`❌ ¡Póngase en una pregunta!`)
     }
     
     await m.react('🕕')

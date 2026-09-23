@@ -76,7 +76,7 @@ function send(sock, m, text, title, body) {
       caption: `${text}\n\nhttps://inspired.by.roblox`,
       url: `https://inspired.by.roblox`,
       title: `𝗠𝗜𝗡𝗘𝗖𝗥𝗔𝗙𝗧 𝗚𝗔𝗠𝗘𝗦`,
-      description: `⛏️ tambang, 🛠️ craft, dan ⚔️ lawan mob di dunia minecraft`,
+      description: `⛏️ tambang, 🛠Fawcraft, y ⚔️ lawan mob di dunia minecraft`,
       image: thumbMC,
       thumbnailWidth: 512,
       thumbnailHeight: 512,
@@ -111,8 +111,8 @@ async function handler(m, { sock }) {
 
   if (cmd === "minecraft") {
     if (!sub || sub === "on" || sub === "off") {
-      if (!m.isGroup) return m.reply("_Toggle hanya di grup_");
-      if (!m.isOwner && !m.isAdmin) return m.reply("_Hanya admin/owner_");
+      if (!m.isGroup) return m.reply("_Toggle only in group_");
+      if (!m.isOwner && !m.isAdmin) return m.reply("_Admin / propietario Sólo_");
       const gd = db.getGroup(m.chat) || {};
       if (sub === "on") {
         gd.minecraftEnabled = true;
@@ -120,7 +120,10 @@ async function handler(m, { sock }) {
         return send(
           sock,
           m,
-          `*🧱 MINECRAFT ENABLED*\n\n🎮 Semua member wajib main Minecraft!\n🪧 Ketik \`.mct help\` untuk mulai`,
+          `*🧱 MINECRAFT ENABLED*
+
+🎮 ¡Todos los miembros deben jugar Minecraft!
+🪧 Ketik \`.mct help\` para empezar`,
           "🧱 Minecraft ON",
           "✅ Aktif",
         );
@@ -165,7 +168,7 @@ async function handler(m, { sock }) {
     const user = getOrCreateMCUser(db, m.sender);
     const mc = user.minecraft;
     if (mc.miningPending && mc.miningPending.length > 0)
-      return m.reply(`_📦 Masih ada hasil tambang!_ \`.mct collect\` _dulu._`);
+      return m.reply(`_📦 ¡Todavía hay una mina!_ \`.mct collect\` _dulu._`);
     const now = Date.now();
     if (mc.lastMineTime && now - mc.lastMineTime < MC * 1000)
       return m.reply(
@@ -173,7 +176,7 @@ async function handler(m, { sock }) {
       );
     const pk = mc.usedPickaxe || "woodpick";
     const pick = mc.pickaxes[pk];
-    if (!pick) return m.reply(`_🪓 Pickaxe aktif tidak ada!_ \`.mct picks\``);
+    if (!pick) return m.reply(`_🪓 ¡El Pickax no está encendido!_ \`.mct picks\``);
     const bk = mc.currentBiome || "plains";
     const st = getUpgradedStats(mc, pick);
     const ePick = {
@@ -209,7 +212,9 @@ async function handler(m, { sock }) {
         Math.min(Math.max(2000, 5000 - (pick.speed || 0) * 3000), 4000),
       ),
     );
-    let txt = `*⛏️ HASIL MENAMBANG!*\n\n`;
+    let txt = `*⛏️ ¡Estaciones empiezan!*
+
+`;
     for (const o of ores) {
       txt += `${rc(o.rarity)} *${o.name}*\n   _💰 ${formatMoney(o.price)} | 📦 x${o.stack}_\n`;
     }
@@ -217,14 +222,14 @@ async function handler(m, { sock }) {
     if (mc.streak >= 3) txt += `\n_🔥 Streak: ${mc.streak}x_`;
     txt += `\n\n\`.mct collect\` untuk 📦 mengambil!`;
     db.markDirty("users");
-    return send(sock, m, txt, "⛏️ Hasil Menambang!", `💰 ${formatMoney(tv)}`);
+    return send(sock, m, txt, "⛏️ ¡Resultados de atención!", `💰 ${formatMoney(tv)}`);
   }
 
   if (sub === "collect") {
     const user = getOrCreateMCUser(db, m.sender);
     const mc = user.minecraft;
     if (!mc.miningPending || mc.miningPending.length === 0)
-      return m.reply(`_📭 Tidak ada hasil._ \`.mct mine\` _dulu!_`);
+      return m.reply(`_📭 No hay suerte._ \`.mct mine\` _dulu!_`);
     const ores = mc.miningPending;
     let tv = 0,
       te = 0,
@@ -246,19 +251,22 @@ async function handler(m, { sock }) {
     const rlu = addPickExp(mc, mc.usedPickaxe || "woodpick", te);
     const plu = addPlayerExp(mc, te);
     mc.miningPending = [];
-    let txt = `*📦 HASIL DIAMBIL!*\n\n💰 +${formatMoney(tv)}\n⭐ +${te} EXP\n🧱 +${ores.length} ore\n`;
-    if (nf.length > 0) txt += `\n*🆕 Ore Baru:* ${nf.join(", ")}`;
+    let txt = `*📦 ¡A cubierto!*
+
+💰 +${formatMoney(tv)}\n⭐ +${te} EXP\n🧱 +${ores.length} ore\n`;
+    if (nf.length > 0) txt += `
+*🆕 Nuevo Ore:* ${nf.join(", ")}`;
     if (rlu) txt += `\n\n${rlu}`;
     if (plu) txt += `\n*⬆️ LEVEL UP! Level ${mc.level}*`;
     db.markDirty("users");
-    return send(sock, m, txt, "📦 Hasil Diambil!", `💰 +${formatMoney(tv)}`);
+    return send(sock, m, txt, "📦 ¡Resultados!", `💰 +${formatMoney(tv)}`);
   }
 
   if (sub === "sell") {
     const user = getOrCreateMCUser(db, m.sender);
     const mc = user.minecraft;
     if (!mc.inventory || mc.inventory.length === 0)
-      return m.reply(`_🎒 Inventory kosong!_ \`.mct mine\` _dulu._`);
+      return m.reply(`_🎒 ¡El inventario está vacío!_ \`.mct mine\` _dulu._`);
     let tv = 0;
     for (const item of mc.inventory) tv += item.price || 0;
     const sb = UPGRADES.fortune.effect(mc.fortuneUpgrade || 0);
@@ -297,7 +305,7 @@ async function handler(m, { sock }) {
     const mc = user.minecraft;
     const pick = mc.pickaxes[mc.usedPickaxe || "woodpick"];
     const st = getUpgradedStats(mc, pick);
-    let txt = `*📊 STATS DETAIL*\n\n*🪓 Pick: ${pick ? pick.name : "Tidak Ada"}*\n  _⬆️ Lv.${pick ? pick.level : 1}/${pick ? pick.maxLevel : 5} | ⭐ EXP ${pick ? pick.exp : 0}/${pick ? pick.expToNextLevel : 100}_\n  _🍀 Luck: ${(st.luck * 100).toFixed(1)}% | ⚡ Speed: ${(st.speed * 100).toFixed(1)}%_\n  _💎 Fortune: +${(st.fortune * 100).toFixed(1)}% | 💰 Sell: +${(st.sellMultiplier * 100).toFixed(1)}%_\n`;
+    let txt = `*📊 STATS DETAIL*\n\n*🪓 Pick: ${pick ? pick.name : "Ninguno"}*\n  _⬆️ Lv.${pick ? pick.level : 1}/${pick ? pick.maxLevel : 5} | ⭐ EXP ${pick ? pick.exp : 0}/${pick ? pick.expToNextLevel : 100}_\n  _🍀 Luck: ${(st.luck * 100).toFixed(1)}% | ⚡ Speed: ${(st.speed * 100).toFixed(1)}%_\n  _💎 Fortune: +${(st.fortune * 100).toFixed(1)}% | 💰 Sell: +${(st.sellMultiplier * 100).toFixed(1)}%_\n`;
     if (pick && pick.enchant) {
       const e = pickEnchants[pick.enchant];
       txt += `  _✨ Enchant: ${e ? e.name : pick.enchant} (${e ? e.rarity : "?"})_\n`;
@@ -311,7 +319,7 @@ async function handler(m, { sock }) {
     const user = getOrCreateMCUser(db, m.sender);
     const found = user.minecraft.oreFound || [];
     if (found.length === 0)
-      return m.reply(`_📚 Ore Book kosong!_ \`.mct mine\` _dulu_`);
+      return m.reply(`_📚 ¡El Libro de Ore está vacío!_ \`.mct mine\` _dulu_`);
     let txt = `*📚 ORE BOOK* _(${found.length} ore)_\n\n`;
     for (const [k, b] of Object.entries(biomes)) {
       const fl = b.listOre.filter((o) =>
@@ -330,7 +338,9 @@ async function handler(m, { sock }) {
     const user = getOrCreateMCUser(db, m.sender);
     const mc = user.minecraft;
     if (!sa[0]) {
-      let txt = `*🗺️ DAFTAR BIOME*\n\n`;
+      let txt = `*🗺️ BIOME LIST*
+
+`;
       for (const [k, b] of Object.entries(biomes)) {
         const req = travelRequirements[k];
         const ok = (mc.travelFound || []).includes(k);
@@ -343,14 +353,14 @@ async function handler(m, { sock }) {
         sock,
         m,
         txt + `\n\`.mct travel <biome>\``,
-        "🗺️ Daftar Biome",
+        "🗺️ Lista de biomas",
         biomes[mc.currentBiome || "plains"]?.name || "",
       );
     }
     const tk = sa[0].toLowerCase();
-    if (!biomes[tk]) return m.reply(`_🗺️ Biome tidak ada!_ \`.mct travel\``);
+    if (!biomes[tk]) return m.reply(`_🗺️ ¡La bioma no existe!_ \`.mct travel\``);
     if (mc.currentBiome === tk)
-      return m.reply(`_📍 Sudah di ${biomes[tk].name}!_`);
+      return m.reply(`_📍 Está encendida. ${biomes[tk].name}!_`);
     const req = travelRequirements[tk];
     if (req) {
       if ((mc.money || 0) < req.money)
@@ -366,7 +376,7 @@ async function handler(m, { sock }) {
     return send(
       sock,
       m,
-      `*🚪 PINDAH BIOME!*\n\n📍 Sekarang di *${biomes[tk].name}*\n🧱 ${biomes[tk].listOre.length} jenis ore tersedia`,
+      `*🚪 PINDAH BIOME!*\n\n📍 Sekarang di *${biomes[tk].name}*\n🧱 ${biomes[tk].listOre.length} Tipo de mineral disponible`,
       "🚪 Travel!",
       biomes[tk].name,
     );
@@ -383,7 +393,7 @@ async function handler(m, { sock }) {
       m,
       txt + `\`.mct buy <pick>\``,
       "🛒 Toko Pickaxe",
-      "🪓 Pilih pickaxe terbaik",
+      "🪓 Seleccione el mejor pickaxe",
     );
   }
 
@@ -392,11 +402,11 @@ async function handler(m, { sock }) {
     const mc = user.minecraft;
     const pk = sa[0] ? sa[0].toLowerCase() : "";
     if (!pk) return m.reply(`_🪓 Tentukan pickaxe!_ \`.mct shop\``);
-    if (!pickaxes[pk]) return m.reply(`_🪓 Pickaxe tidak ada!_ \`.mct shop\``);
+    if (!pickaxes[pk]) return m.reply(`_🪓 ¡El Pickax no existe!_ \`.mct shop\``);
     if (mc.pickaxes[pk])
-      return m.reply(`_✅ Sudah punya ${pickaxes[pk].name}!_`);
+      return m.reply(`_✅ Ya lo he hecho. ${pickaxes[pk].name}!_`);
     if (pickaxes[pk].price === 0)
-      return m.reply(`_🪙 Pickaxe ini dari Token/Prestige!_`);
+      return m.reply(`_🪙 Pickaxe es de Token / Prestige!_`);
     if ((mc.money || 0) < pickaxes[pk].price)
       return m.reply(
         `_💸 Uang kurang! Butuh ${formatMoney(pickaxes[pk].price)}_`,
@@ -407,8 +417,8 @@ async function handler(m, { sock }) {
     return send(
       sock,
       m,
-      `*🛍️ PICKAXE DIBELI!*\n\n*${pickaxes[pk].name}*\n_🪓 Ketik_ \`.mct equip ${pk}\` _untuk memasang_`,
-      "🪓 Pickaxe Baru!",
+      `*🛍️ PICKAXE DIBELI!*\n\n*${pickaxes[pk].name}*\n_🪓 Ketik_ \`.mct equip ${pk}\` _para instalar_`,
+      "🪓 ¡Nuevo Pickaxe!",
       pickaxes[pk].name,
     );
   }
@@ -419,13 +429,13 @@ async function handler(m, { sock }) {
     const pk = sa[0] ? sa[0].toLowerCase() : "";
     if (!pk) return m.reply(`_🪓 Tentukan pickaxe!_ \`.mct picks\``);
     if (!mc.pickaxes[pk])
-      return m.reply(`_📭 Tidak punya pickaxe ini!_ \`.mct picks\``);
+      return m.reply(`_📭 ¡No tengo este pico!_ \`.mct picks\``);
     mc.usedPickaxe = pk;
     db.markDirty("users");
     return send(
       sock,
       m,
-      `*🪓 PICKAXE DIPASANG!*\n\n*${mc.pickaxes[pk].name}* _✅ sekarang aktif_`,
+      `*🪓 PICKAXE DIPASANG!*\n\n*${mc.pickaxes[pk].name}* _✅ Ya está._`,
       "🪓 Equip Pickaxe!",
       mc.pickaxes[pk].name,
     );
@@ -436,7 +446,7 @@ async function handler(m, { sock }) {
     const mc = user.minecraft;
     const pks = mc.pickaxes || {};
     if (Object.keys(pks).length === 0)
-      return m.reply(`_📭 Tidak punya pickaxe!_`);
+      return m.reply(`_📭 ¡No hay escarabajo!_`);
     let txt = `*🎒 KOLEKSI PICKAXE*\n\n`;
     for (const [k, pick] of Object.entries(pks)) {
       txt += `*${pick.name}*${mc.usedPickaxe === k ? " _✅ AKTIF_" : ""}\n  _⬆️ Lv.${pick.level || 1}/${pick.maxLevel} | 🍀 Luck ${(pick.luck * 100).toFixed(0)}% | ⚡ Speed ${(pick.speed * 100).toFixed(0)}%_\n`;
@@ -457,19 +467,20 @@ async function handler(m, { sock }) {
     const mc = user.minecraft;
     const pk = mc.usedPickaxe || "woodpick";
     const pick = mc.pickaxes[pk];
-    if (!pick) return m.reply(`_🪓 Pickaxe aktif tidak ada!_`);
+    if (!pick) return m.reply(`_🪓 ¡El Pickax no está encendido!_`);
     const ek = sa[0] ? sa[0].toLowerCase() : "";
     if (!ek) {
       if (pick.enchant) {
         const e = pickEnchants[pick.enchant];
         return m.reply(
-          `_✨ Enchant saat ini: *${e ? e.name : pick.enchant}* (${e ? e.rarity : "?"})_\n\`.mct enchant <key>\` untuk ganti`,
+          `_✨ Enchanté actual: *${e ? e.name : pick.enchant}* (${e ? e.rarity : "?"})_
+\`.mct enchant <key>\` para reemplazar`,
         );
       }
       return m.reply(`_✨ Tentukan enchant!_ \`.mct enchants\``);
     }
     if (!pickEnchants[ek])
-      return m.reply(`_✨ Enchant tidak ada!_ \`.mct enchants\``);
+      return m.reply(`_✨ ¡Encantar no!_ \`.mct enchants\``);
     const ench = pickEnchants[ek];
     const cost = encCost(ench.rarity);
     if ((mc.money || 0) < cost)
@@ -492,7 +503,9 @@ async function handler(m, { sock }) {
       if (!byR[e.rarity]) byR[e.rarity] = [];
       byR[e.rarity].push({ key: k, name: e.name, desc: e.desc });
     }
-    let txt = `*📜 DAFTAR ENCHANTMENT*\n\n`;
+    let txt = `*📜 LUZ DE INGRESO*
+
+`;
     for (const r of [
       "common",
       "rare",
@@ -513,7 +526,7 @@ async function handler(m, { sock }) {
       m,
       txt.trim() + `\n\`.mct enchant <key>\``,
       "📜 Enchantments",
-      "✨ Pilih enchant",
+      "✨ Seleccione la entrada",
     );
   }
 
@@ -522,9 +535,9 @@ async function handler(m, { sock }) {
     const mc = user.minecraft;
     const pk = mc.usedPickaxe || "woodpick";
     const pick = mc.pickaxes[pk];
-    if (!pick) return m.reply(`_🪓 Pickaxe aktif tidak ada!_`);
+    if (!pick) return m.reply(`_🪓 ¡El Pickax no está encendido!_`);
     if (pick.level >= pick.maxLevel)
-      return m.reply(`_⬆️ Pickaxe sudah max level!_`);
+      return m.reply(`_⬆️ ¡El Pickax es el nivel máximo!_`);
     const cost =
       Math.floor(pick.price * 0.1 * pick.level) || 12000 * pick.level;
     if ((mc.money || 0) < cost)
@@ -549,21 +562,25 @@ async function handler(m, { sock }) {
     if (!sa[0]) {
       const mobs = getAvailableMobs(mc);
       if (mobs.length === 0)
-        return m.reply(`_👹 Tidak ada mob tersedia! Naikkan level dulu._`);
-      let txt = `*👹 DAFTAR MOB*\n\n_❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
+        return m.reply(`_👹 ¡No hay mafiosos disponibles!_`);
+      let txt = `*👹 MOB LIGHT*
+
+_❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
       for (const mob of mobs) {
         txt += `${rc(mob.rarity)} *${mob.name}*\n  _❤️ HP: ${mob.hp} | ⚔️ ATK: ${mob.atk} | ⬆️ Lv.${mob.minLevel}+_  \n`;
       }
       txt += `\n\`.mct fight <mob>\` untuk ⚔️ menyerang!`;
-      return send(sock, m, txt, "👹 Daftar Mob", `👾 ${mobs.length} mob`);
+      return send(sock, m, txt, "👹 Lista de la mafia", `👾 ${mobs.length} mob`);
     }
     const mk = sa[0].toLowerCase();
-    if (!mobData[mk]) return m.reply(`_👹 Mob tidak ada!_ \`.mct fight\``);
+    if (!mobData[mk]) return m.reply(`_👹 ¡Las mafias no existen!_ \`.mct fight\``);
     const result = doCombat(mc, mk);
     if (result.error) return m.reply(`_${result.error}_`);
     db.markDirty("users");
     if (result.won) {
-      let txt = `*🏆 KAMU MENANG!*\n\n⚔️ Melawan *${result.mobName}*\n\n`;
+      let txt = `*🏆 ¡Lo harás!*
+
+⚔️ Melawan *${result.mobName}*\n\n`;
       for (const line of result.log) txt += `${line}\n`;
       txt += `\n*⭐ EXP:* +${result.expGain}`;
       if (result.drops.length > 0) {
@@ -573,7 +590,9 @@ async function handler(m, { sock }) {
       }
       return send(sock, m, txt, "🏆 Menang!", result.mobName);
     } else {
-      let txt = `*💀 KAMU KALAH!*\n\n⚔️ Melawan *${result.mobName}*\n\n`;
+      let txt = `*💀 ¡Estás perdido!*
+
+⚔️ Melawan *${result.mobName}*\n\n`;
       for (const line of result.log) txt += `${line}\n`;
       txt += `\n_❤️ HP tersisa: ${mc.hp}/${mc.maxHp}_\n\`.mct heal\` untuk ❤️ sembuh`;
       return send(sock, m, txt, "💀 Kalah!", result.mobName);
@@ -600,10 +619,12 @@ async function handler(m, { sock }) {
     const mc = user.minecraft;
     const result = doSmelt(mc);
     if (result.count === 0)
-      return m.reply(`_🔥 Tidak ada ore yang bisa di-smelt!_`);
+      return m.reply(`_🔥 ¡No hay ore para oler!_`);
     mc.money = (mc.money || 0) + result.totalValue;
     mc.totalEarned = (mc.totalEarned || 0) + result.totalValue;
-    let txt = `*🔥 SMELTING SELESAI!*\n\n`;
+    let txt = `*🔥 SLATTING SLEEP!*
+
+`;
     for (const s of result.smelted)
       txt += `${s.from} → ${s.to} _💰 ${formatMoney(s.value)}_\n`;
     txt += `\n*💰 Total: ${formatMoney(result.totalValue)}*\n*🏦 Saldo: ${formatMoney(mc.money)}*`;
@@ -621,7 +642,9 @@ async function handler(m, { sock }) {
     const user = getOrCreateMCUser(db, m.sender);
     const mc = user.minecraft;
     if (!sa[0]) {
-      let txt = `*🛠️ DAFTAR CRAFTING*\n\n`;
+      let txt = `*🛠️ LIGHT CRAFING*
+
+`;
       for (const [k, r] of Object.entries(CRAFT_RECIPES)) {
         const canCraft = (mc.level || 1) >= r.requiredLevel;
         txt += `${canCraft ? "✅" : "🔒"} *${r.name}* _\`${k}\`_\n  _💰 Value: ${formatMoney(r.value)} | ⬆️ Lv.${r.requiredLevel}+_\n  _🧪 Bahan:_\n`;
@@ -634,7 +657,7 @@ async function handler(m, { sock }) {
         m,
         txt + `\`.mct craft <id>\``,
         "🛠️ Crafting",
-        "🧪 Pilih resep",
+        "🧪 Seleccione una receta",
       );
     }
     const result = doCraft(mc, sa[0].toLowerCase());
@@ -643,7 +666,9 @@ async function handler(m, { sock }) {
     return send(
       sock,
       m,
-      `*🛠️ CRAFTING BERHASIL!*\n\n*${result.item}*\n_💰 Value: ${formatMoney(result.value)}_`,
+      `*🛠️ ¡Explosiones de choque!*
+
+*${result.item}*\n_💰 Value: ${formatMoney(result.value)}_`,
       "🛠️ Crafted!",
       result.item,
     );
@@ -653,7 +678,7 @@ async function handler(m, { sock }) {
     const user = getOrCreateMCUser(db, m.sender);
     const mc = user.minecraft;
     if (!mc.inventory || mc.inventory.length === 0)
-      return m.reply(`_🎒 Inventory kosong!_`);
+      return m.reply(`_🎒 ¡El inventario está vacío!_`);
     const grouped = {};
     for (const item of mc.inventory) {
       const key = item.name;
@@ -685,7 +710,7 @@ async function handler(m, { sock }) {
       const diff = now.getTime() - new Date(mc.lastDaily).getTime();
       if (diff < 86400000)
         return m.reply(
-          `_🎁 Daily sudah diambil! Tunggu *${Math.ceil((86400000 - diff) / 3600000)}* jam._`,
+          `_🎁 ¡El diario ha sido tomado! *${Math.ceil((86400000 - diff) / 3600000)}* jam._`,
         );
     }
     const ld = mc.lastDaily ? new Date(mc.lastDaily) : null;
@@ -808,7 +833,7 @@ async function handler(m, { sock }) {
     }
     const upg = UPGRADES[type];
     const lv = mc[type + "Upgrade"] || 0;
-    if (lv >= upg.maxLevel) return m.reply(`_✅ Sudah max!_`);
+    if (lv >= upg.maxLevel) return m.reply(`_✅ ¡Eso es!_`);
     const cost = upg.getCost(lv);
     if ((mc.money || 0) < cost)
       return m.reply(`_💸 Uang kurang! Butuh ${formatMoney(cost)}_`);
@@ -839,7 +864,7 @@ async function handler(m, { sock }) {
         { blocks: 25000, money: 2e22 },
       ];
       const req = reqs[cp];
-      if (!req) return m.reply(`_👑 Sudah max prestige!_`);
+      if (!req) return m.reply(`_👑 ¡Es el máximo prestigio!_`);
       if ((mc.blocksMined || 0) < req.blocks)
         return m.reply(`_🧱 Blocks kurang! Butuh ${req.blocks}_`);
       if ((mc.money || 0) < req.money)
@@ -851,7 +876,7 @@ async function handler(m, { sock }) {
       mc.prestigeTokens =
         (mc.prestigeTokens || 0) + [60, 180, 600, 1200, 6000][cp];
       const titles = [
-        "Penambang Baru",
+        "Nuevos mineros",
         "Veteran",
         "Master Miner",
         "Legend",
@@ -907,7 +932,7 @@ async function handler(m, { sock }) {
     }
     const iid = sa[0].toLowerCase();
     const item = TOKEN_SHOP.find((i) => i.id === iid);
-    if (!item) return m.reply(`_🛒 Item tidak ada!_ \`.mct tokens\``);
+    if (!item) return m.reply(`_🛒 ¡El artículo no existe!_ \`.mct tokens\``);
     if ((mc.prestigeTokens || 0) < item.cost)
       return m.reply(`_🪙 Tokens kurang! Butuh ${item.cost}_`);
     mc.prestigeTokens -= item.cost;
@@ -941,7 +966,12 @@ async function handler(m, { sock }) {
     const user = getOrCreateMCUser(db, m.sender);
     const mc = user.minecraft;
     if (!sa[0]) {
-      let txt = `*🎰 JACKPOT SYSTEM*\n\n_💎 Sistem jackpot dengan hadiah super besar!_\n_🎁 Bisa dapat _Premium_, _Partner_, _Energi_, _Limit_, bahkan _UNLIMITED_!_\n\n`;
+      let txt = `*🎰 JACKPOT SYSTEM*
+
+_💎 ¡El sistema de jackpot con el premio supergrande!_
+_🎁 Lo tengo. _Premium_, _Partner_, _Energi_, _Limit_, bahkan _UNLIMITED_!_
+
+`;
       for (const pool of JACKPOT_POOLS) {
         txt += `*${pool.name}*\n  _💰 Biaya: ${formatMoney(pool.cost)}_\n  _🎯 Rate: ${pool.weight}%_\n  _🎁 Rewards:_\n`;
         for (const rw of pool.rewards) {
@@ -953,10 +983,10 @@ async function handler(m, { sock }) {
               tickets: "Gacha Tickets",
               tokens: "Prestige Tokens",
               exp_boost: "EXP Boost",
-              premium_7d: "Premium 7 Hari",
-              premium_30d: "Premium 30 Hari",
-              partner_7d: "Partner 7 Hari",
-              partner_30d: "Partner 30 Hari",
+              premium_7d: "Premium 7 Días",
+              premium_30d: "Premium 30 días",
+              partner_7d: "7 Days Partners",
+              partner_30d: "Asociados 30 días",
               unlimited_energi: "UNLIMITED Energi",
               unlimited_limit: "UNLIMITED Limit",
               owner_reward: "OWNER REWARD",
@@ -975,12 +1005,12 @@ async function handler(m, { sock }) {
     }
     const poolId = sa[0].toLowerCase();
     const pool = JACKPOT_POOLS.find((p) => p.id === poolId);
-    if (!pool) return m.reply(`_🎰 Tier tidak ada!_ \`.mct jackpot\``);
+    if (!pool) return m.reply(`_🎰 ¡No Tier!_ \`.mct jackpot\``);
     if ((mc.money || 0) < pool.cost)
       return m.reply(`_💸 Uang kurang! Butuh ${formatMoney(pool.cost)}_`);
     mc.money -= pool.cost;
     const result = doJackpotPull(mc, poolId);
-    if (!result) return m.reply(`_❌ Gagal! Coba lagi._`);
+    if (!result) return m.reply(`_❌ Fail, intenta de nuevo._`);
     const applied = applyJackpotReward(db, mc, m.sender, result);
     db.markDirty("users");
     let txt = `*🎰 ${pool.name.toUpperCase()}!*\n\n`;
@@ -1017,7 +1047,7 @@ async function handler(m, { sock }) {
           prestige: ud.minecraft.prestige || 0,
         });
     }
-    if (rankings.length === 0) return m.reply(`_👤 Belum ada pemain!_`);
+    if (rankings.length === 0) return m.reply(`_👤 ¡Todavía no hay jugadores!_`);
     rankings.sort((a, b) => {
       if (b.prestige !== a.prestige) return b.prestige - a.prestige;
       if (b.blocksMined !== a.blocksMined) return b.blocksMined - a.blocksMined;
@@ -1031,7 +1061,7 @@ async function handler(m, { sock }) {
         i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `${i + 1}.`;
       txt += `${medal} @${p.jid}\n  _👑 P${p.prestige} | 🧱 ${p.blocksMined} blocks | 💰 ${formatMoney(p.money)}_\n`;
     }
-    return send(sock, m, txt.trim(), "🏆 Leaderboard", "👑 Top Pemain");
+    return send(sock, m, txt.trim(), "🏆 Leaderboard", "👑 Top Player");
   }
 }
 

@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'heal',
     alias: ['sembuh', 'recover'],
     category: 'rpg',
-    description: 'Pulihkan health dengan istirahat (gratis tapi lama)',
+    description: "Restaurar la salud con el descanso (gratuito pero viejo)",
     usage: '.heal',
     example: '.heal',
     isOwner: false,
@@ -27,7 +27,7 @@ async function handler(m, { sock }) {
     user.rpg.maxStamina = user.rpg.maxStamina || 100
     
     if (user.rpg.health >= user.rpg.maxHealth && user.rpg.stamina >= user.rpg.maxStamina) {
-        return m.reply(`✅ Health dan Stamina sudah penuh!`)
+        return m.reply(`✅ ¡La salud y la resistencia están llenas!`)
     }
     
     await m.reply('💤 *sᴇᴅᴀɴɢ ɪsᴛɪʀᴀʜᴀᴛ...*')
@@ -47,7 +47,7 @@ async function handler(m, { sock }) {
     txt += `┃ ❤️ Health: ${oldHealth} → *${user.rpg.health}*\n`
     txt += `┃ ⚡ Stamina: ${oldStamina} → *${user.rpg.stamina}*\n`
     txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`
-    txt += `> Tip: Gunakan \`.use potion\` untuk heal instant!`
+    txt += `> Consejo: Uso \`.use potion\` ¡Para curar el instante!`
     
     db.save()
     await m.reply(txt)

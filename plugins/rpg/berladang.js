@@ -7,7 +7,7 @@ const pluginConfig = {
   name: "berladang",
   alias: ["farm", "tanam", "berkebun"],
   category: "rpg",
-  description: "Berladang untuk mendapat hasil panen",
+  description: "Agricultura para obtener cultivos",
   usage: ".berladang",
   example: ".berladang",
   isOwner: false,
@@ -30,7 +30,7 @@ try {
   if (fs.existsSync(thumbPath)) thumbRpg = fs.readFileSync(thumbPath);
 } catch (e) {}
 
-function getContextInfo(title = "🌾 *ʙᴇʀʟᴀᴅᴀɴɢ*", body = "Hasil Panen") {
+function getContextInfo(title = "🌾 *ʙᴇʀʟᴀᴅᴀɴɢ*", body = "Resultados de la cosecha") {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
@@ -156,7 +156,7 @@ async function handler(m, { sock }) {
   txt += `┃ 🚄 Exp: *+${expGain}*\n`;
   txt += `┃ ⚡ Stamina: *-${staminaCost}*\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
-  txt += `> Jual hasil panen dengan \`${m.prefix}sellall\``;
+  txt += `> Vender la cosecha a la cosecha \`${m.prefix}sellall\``;
 
   await sock.sendMessage(
     m.chat,

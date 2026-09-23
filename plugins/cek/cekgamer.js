@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekgamer',
     alias: ['gamer', 'pro'],
     category: 'cek',
-    description: 'Cek seberapa pro gamer kamu',
-    usage: '.cekgamer <nama>',
+    description: "Comprueba cómo son los jugadores profesionales.",
+    usage: ".cekgamer < nombre",
     example: '.cekgamer Budi',
     isOwner: false,
     isPremium: false,
@@ -26,15 +26,15 @@ async function handler(m) {
     } else if (percent >= 50) {
         desc = 'Lumayan pro 👍'
     } else if (percent >= 30) {
-        desc = 'Masih noob nih 😅'
+        desc = "Todavía está funcionando. 😅"
     } else {
         desc = 'Mending main masak-masakan 🍳'
     }
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kegameran kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kegameran @${mentioned.split('@')[0]} yak? 
+Tu nivel de exposición *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de la excursión @${mentioned.split('@')[0]} yak? 
     
 Tingkat kegameran dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

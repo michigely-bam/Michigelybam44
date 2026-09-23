@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'backupdb',
     alias: ['dbbackup', 'backupstore', 'storebackup'],
     category: 'owner',
-    description: 'Backup database/store dan kirim ke owner',
+    description: "Base de datos de respaldo / almacenar y enviarlo al propietario",
     usage: '.backupdb',
     isOwner: true,
     isGroup: false,
@@ -12,7 +12,7 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     const backupContents = [
-        '📁 database/*.json (semua file JSON)',
+        "📁 database/*.json (todos los archivos JSON)",
         '📁 database/cpanel/* (data cPanel)',
         '📄 storage/database.json (main database)',
         '📄 db.json (root database)',
@@ -39,7 +39,7 @@ async function handler(m, { sock }) {
             `> Backup telah dikirim ke owner utama.`
         )
     } else {
-        await m.reply(`❌ Backup gagal: ${result.error}`)
+        await m.reply(`❌ El respaldo falló: ${result.error}`)
     }
 }
 

@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'antilinkgc',
     alias: ['algc', 'antilinkgrup'],
     category: 'group',
-    description: 'Anti link WhatsApp (grup, saluran, wa.me)',
+    description: "Anti-link WhatsApp (grupo, canal, wa.me)",
     usage: '.antilinkgc <on/off/metode> [kick/remove]',
     example: '.antilinkgc on',
     isOwner: false,
@@ -49,7 +49,9 @@ function handler(m, { sock }) {
     
     if (option === 'on') {
         db.setGroup(m.chat, { antilinkgc: 'on' })
-        return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴡᴀ* diaktifkan!\n\n> Link WA akan dihapus otomatis.`)
+        return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴡᴀ* diaktifkan!
+
+> El enlace WA se borrará automáticamente.`)
     }
     
     if (option === 'off') {
@@ -61,26 +63,36 @@ function handler(m, { sock }) {
         const method = m.args?.[1]?.toLowerCase()
         if (method === 'kick') {
             db.setGroup(m.chat, { antilinkgc: 'on', antilinkgcMode: 'kick' })
-            return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴡᴀ* mode KICK diaktifkan!\n\n> User yang kirim link WA akan di-kick.`)
+            return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴡᴀ* mode KICK diaktifkan!
+
+> El usuario que envió el enlace WA será pateado.`)
         } else if (method === 'remove' || method === 'delete') {
             db.setGroup(m.chat, { antilinkgc: 'on', antilinkgcMode: 'remove' })
-            return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴡᴀ* mode DELETE diaktifkan!\n\n> Pesan dengan link WA akan dihapus.`)
+            return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴡᴀ* mode DELETE diaktifkan!
+
+> Se eliminará el mensaje con el enlace WA.`)
         } else {
-            return m.reply(`❌ Metode tidak valid! Gunakan: \`kick\` atau \`remove\`\n\n> Contoh: \`${m.prefix}antilinkgc metode kick\``)
+            return m.reply(`❌ ¡Método inválido! \`kick\` atau \`remove\`
+
+> Contoh: \`${m.prefix}antilinkgc metode kick\``)
         }
     }
     
     if (option === 'kick') {
         db.setGroup(m.chat, { antilinkgc: 'on', antilinkgcMode: 'kick' })
-        return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴡᴀ* mode KICK diaktifkan!\n\n> User yang kirim link WA akan di-kick.`)
+        return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴡᴀ* mode KICK diaktifkan!
+
+> El usuario que envió el enlace WA será pateado.`)
     }
     
     if (option === 'remove' || option === 'delete') {
         db.setGroup(m.chat, { antilinkgc: 'on', antilinkgcMode: 'remove' })
-        return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴡᴀ* mode DELETE diaktifkan!\n\n> Pesan dengan link WA akan dihapus.`)
+        return m.reply(`✅ *ᴀɴᴛɪʟɪɴᴋ ᴡᴀ* mode DELETE diaktifkan!
+
+> Se eliminará el mensaje con el enlace WA.`)
     }
     
-    return m.reply(`❌ Opsi tidak valid! Gunakan: \`on\`, \`off\`, \`metode kick\`, \`metode remove\``)
+    return m.reply(`❌ Opción inválida! Uso: \`on\`, \`off\`, \`metode kick\`, \`metode remove\``)
 }
 
 export { pluginConfig as config, handler }

@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekpelit',
     alias: ['pelit', 'kikir'],
     category: 'cek',
-    description: 'Cek seberapa pelit kamu',
-    usage: '.cekpelit <nama>',
+    description: "Mira lo picante que eres",
+    usage: ".checkout   nombre",
     example: '.cekpelit Budi',
     isOwner: false,
     isPremium: false,
@@ -20,7 +20,7 @@ async function handler(m) {
                     
     let desc = ''
     if (percent >= 90) {
-        desc = 'SUPER PELIT! Duit dijaga mati-matian! 💸'
+        desc = "¡El dinero está en juego! 💸"
     } else if (percent >= 70) {
         desc = 'Pelit banget! 🙊'
     } else if (percent >= 50) {
@@ -33,8 +33,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kepelitan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kepelitan @${mentioned.split('@')[0]} yak? 
+Tu pequeño nivel. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de inseguridad @${mentioned.split('@')[0]} yak? 
     
 Tingkat kepelitan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

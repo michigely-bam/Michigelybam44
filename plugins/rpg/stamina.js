@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "stamina",
   alias: ["energy", "cekstamina"],
   category: "rpg",
-  description: "Cek dan pulihkan stamina",
+  description: "Verificación y restauración de la resistencia",
   usage: ".stamina / .stamina isi",
   example: ".stamina",
   isOwner: false,
@@ -78,7 +78,9 @@ async function handler(m, { sock }) {
     const potionCost = 5000;
 
     if (user.rpg.stamina >= user.rpg.maxStamina) {
-      return m.reply(`⚡ *sᴛᴀᴍɪɴᴀ ᴘᴇɴᴜʜ*\n\n> Stamina kamu sudah penuh!`);
+      return m.reply(`⚡ *sᴛᴀᴍɪɴᴀ ᴘᴇɴᴜʜ*
+
+> ¡Tu resistencia está llena!`);
     }
 
     if ((user.koin || 0) < potionCost) {
@@ -120,7 +122,7 @@ async function handler(m, { sock }) {
   txt += `┃ 📊 [${staminaBar}]\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
   txt += `> Isi stamina: \`${m.prefix}stamina isi\` (Rp 5.000)\n`;
-  txt += `> Stamina pulih otomatis setiap jam`;
+  txt += `> Resistencia recuperada automática cada hora`;
 
   await sock.sendMessage(
     m.chat,

@@ -42,7 +42,9 @@ async function handler(m, { sock }) {
         
         if (!data) {
             m.react('❌')
-            return m.reply(`🚩 *Username Tidak Ditemukan*\n\n> Username: ${query}`)
+            return m.reply(`🚩 *Nombre de usuario No encontrado*
+
+> Username: ${query}`)
         }
         
         const video = data
@@ -70,7 +72,9 @@ async function handler(m, { sock }) {
         
     } catch (error) {
         m.react('❌')
-        m.reply(`🚩 *Username Tidak Ditemukan*\n\n> Username: ${query}`)
+        m.reply(`🚩 *Nombre de usuario No encontrado*
+
+> Username: ${query}`)
     }
 }
 

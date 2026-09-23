@@ -13,7 +13,7 @@ const pluginConfig = {
   name: "menucat",
   alias: ["mc", "category", "cat"],
   category: "main",
-  description: "Menampilkan commands dalam kategori tertentu",
+  description: "Mostrar comandos en una categoría específica",
   usage: ".menucat <kategori>",
   example: ".menucat tools",
   isOwner: false,
@@ -140,7 +140,7 @@ async function handler(m, { sock, db }) {
       }
     } catch (e) {}
     const excludeCategories = modeExcludeMap[botMode] || modeExcludeMap.md;
-    let txt = `📂 *${toMonoUpperBold("DAFTAR KATEGORI")}*\n\n`;
+    let txt = `📂 *${toMonoUpperBold("ITAR TATEGORY")}*\n\n`;
     txt += `> Ketik \`${prefix}menucat <kategori>\`\n\n`;
     const categoryOrder = [
       "owner",
@@ -340,18 +340,23 @@ async function handler(m, { sock, db }) {
   const matchedCat = allCategories.find((c) => c.toLowerCase() === categoryArg);
   if (!matchedCat) {
     return m.reply(
-      `❌ *KATEGORI TIDAK DITEMUKAN*\n\n> Kategori \`${categoryArg}\` tidak ada.\n> Ketik \`${prefix}menucat\` untuk list kategori.`,
+      `❌ *- ¿Qué?*
+
+> Kategori \`${categoryArg}\` Nada.
+> Ketik \`${prefix}menucat\` para la lista de categorías.`,
     );
   }
   if (matchedCat === "owner" && !m.isOwner) {
-    return m.reply(`❌ *AKSES DITOLAK*\n\n> Kategori ini hanya untuk owner.`);
+    return m.reply(`❌ *ACCESO REFUSADO*
+
+> Esta categoría es sólo para propietarios.`);
   }
   const pluginCommands = commandsByCategory[matchedCat] || [];
   const caseCommands = casesByCategory[matchedCat] || [];
   const allCommands = [...pluginCommands, ...caseCommands];
   if (allCommands.length === 0) {
     return m.reply(
-      `❌ *KOSONG*\n\n> Kategori \`${matchedCat}\` tidak memiliki command.`,
+      `❌ *KOSONG*\n\n> Kategori \`${matchedCat}\` no tiene orden.`,
     );
   }
   const emoji = CATEGORY_EMOJIS[matchedCat] || "📁";

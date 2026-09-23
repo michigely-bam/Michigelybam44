@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'sellall',
     alias: ['jualsemua', 'quicksell'],
     category: 'rpg',
-    description: 'Jual semua item yang bisa dijual sekaligus',
+    description: "Vender todos los artículos que se pueden vender de inmediato",
     usage: '.sellall',
     example: '.sellall',
     isOwner: false,
@@ -43,7 +43,9 @@ async function handler(m, { sock }) {
     }
     
     if (soldItems.length === 0) {
-        return m.reply(`❌ *ᴛɪᴅᴀᴋ ᴀᴅᴀ ɪᴛᴇᴍ*\n\n> Tidak ada item yang bisa dijual!`)
+        return m.reply(`❌ *ᴛɪᴅᴀᴋ ᴀᴅᴀ ɪᴛᴇᴍ*
+
+> ¡No se pueden vender artículos!`)
     }
     
     user.koin = (user.koin || 0) + totalEarned

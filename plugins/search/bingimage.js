@@ -24,7 +24,9 @@ async function handler(m, { sock }) {
 
     if (!query) {
       return m.reply(
-        `❌ *Masukkan kata kunci pencarian!*\n\n> Contoh: ${m.prefix}carigambar rem`,
+        `❌ *¡Introduzca la contraseña de búsqueda!*
+
+> Contoh: ${m.prefix}carigambar rem`,
       );
     }
 
@@ -42,7 +44,7 @@ async function handler(m, { sock }) {
 
     if (!data.status) {
       await m.react("❌");
-      return m.reply(`❌ *Tidak ditemukan hasil untuk:* ${query}`);
+      return m.reply(`❌ *No se han encontrado resultados para:* ${query}`);
     }
     const results = data.result;
     const album = await Promise.all(

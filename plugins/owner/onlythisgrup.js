@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'onlythisgrup',
     alias: ['onlythisgroup', 'lockgrup', 'lockgroup'],
     category: 'owner',
-    description: 'Bot hanya aktif di grup ini saja',
+    description: "Bot sólo está activo en este grupo",
     usage: '.onlythisgrup',
     example: '.onlythisgrup',
     isOwner: true,
@@ -22,7 +22,9 @@ async function handler(m, { sock }) {
     if (current === m.chat) {
         db.setting('onlyThisGroup', null)
         db.save()
-        return m.reply(`🔓 *UNLOCKED*\n\nBot aktif di semua grup`)
+        return m.reply(`🔓 *UNLOCKED*
+
+Bot habilitado en todos los grupos`)
     }
 
     db.setting('onlyThisGroup', m.chat)

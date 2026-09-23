@@ -9,7 +9,7 @@ const pluginConfig = {
   name: "film",
   alias: ["movie", "nonton", "lk21"],
   category: "search",
-  description: "Cari film dan nonton online",
+  description: "Encuentra películas y ver en línea",
   usage: ".film <judul>",
   example: ".film civil war",
   cooldown: 10,
@@ -78,7 +78,7 @@ async function handler(m, { sock }) {
     if (!data?.status || !data?.data?.length) {
       m.react("❌");
       return m.reply(
-        `❌ *ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n> Film "${query}" tidak ditemukan`,
+        `❌ *ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n> Film "${query}" no encontrado`,
       );
     }
 
@@ -94,14 +94,14 @@ async function handler(m, { sock }) {
     }, 300000);
 
     let text = `🎬 *ʜᴀsɪʟ ᴘᴇɴᴄᴀʀɪᴀɴ*\n\n`;
-    text += `> Ditemukan *${films.length}* film untuk "${query}"\n\n`;
+    text += `> Ditemukan *${films.length}* película para "${query}"\n\n`;
 
     films.forEach((f, i) => {
       text += `*${i + 1}. ${f.title}*\n`;
       text += `> ⭐ ${f.rating} | 📺 ${f.quality} | 📅 ${f.release}\n\n`;
     });
 
-    text += `> _Pilih film dari list di bawah_`;
+    text += `> _Seleccione una película de la lista de abajo_`;
 
     const listItems = films.map((f, i) => ({
       header: "",
@@ -120,10 +120,10 @@ async function handler(m, { sock }) {
           {
             name: "single_select",
             buttonParamsJson: JSON.stringify({
-              title: "🎬 Pilih Film",
+              title: "🎬 Seleccione películas",
               sections: [
                 {
-                  title: "Hasil Pencarian",
+                  title: "Resultados de búsqueda",
                   rows: listItems,
                 },
               ],

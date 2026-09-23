@@ -5,8 +5,8 @@ const pluginConfig = {
   name: "rvo",
   alias: ["readvo", "readviewonce", "readview"],
   category: "tools",
-  description: "Baca pesan sekali lihat (view once)",
-  usage: ".rvo (reply pesan view once)",
+  description: "Lea el mensaje de visualización (ver una vez)",
+  usage: ".rvo (reply once view message)",
   example: ".rvo",
   isOwner: false,
   isPremium: false,
@@ -21,12 +21,14 @@ async function handler(m, { sock }) {
   const quoted = m.quoted;
   if (!quoted) {
     return m.reply(
-      `Reply pesan sekali lihat (view once) untuk membukanya.\n\n\`Contoh: ${m.prefix}rvo\` (reply pesan view once)`,
+      `Responder, eche un vistazo a ello.
+
+\`Contoh: ${m.prefix}rvo\` (reply once view message)`,
     );
   }
 
   if (!quoted.isViewOnce && !quoted.isMedia) {
-    return m.reply("❌ Reply pesan view once (sekali lihat) untuk membukanya.");
+    return m.reply("❌ Responder un mensaje de una vez para abrirlo.");
   }
 
   m.react("⏱️");
@@ -40,7 +42,7 @@ async function handler(m, { sock }) {
     }
 
     const buffer = await quoted.download();
-    if (!buffer) throw new Error("Gagal download media");
+    if (!buffer) throw new Error("No se pudo download media");
 
     const caption = originalCaption ? `\`Pesan :\`\n> ${originalCaption}` : "";
 
@@ -90,7 +92,7 @@ async function handler(m, { sock }) {
     m.react("✅");
   } catch (e) {
     m.react("☢");
-    m.reply(`❌ Gagal membuka view once: ${e.message}`);
+    m.reply(`❌ Fallado a la vista abierta una vez: ${e.message}`);
   }
 }
 

@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'listsewa',
     alias: ['sewalist', 'daftarsewa'],
     category: 'owner',
-    description: 'Lihat daftar grup yang terdaftar sewa',
+    description: "Ver lista de grupos alquilados",
     usage: '.listsewa',
     example: '.listsewa',
     isOwner: true,
@@ -68,7 +68,9 @@ function handler(m) {
     const active = sorted.filter(id => sewaGroups[id].isLifetime || sewaGroups[id].expiredAt > Date.now())
     const expired = sorted.filter(id => !sewaGroups[id].isLifetime && sewaGroups[id].expiredAt <= Date.now())
 
-    let text = `📋 *DAFTAR SEWA*\n\n`
+    let text = `📋 *LÍNEA RENTA*
+
+`
     text += `Status sistem: *${db.db.data.sewa.enabled ? '✅ AKTIF' : '❌ NONAKTIF'}*\n`
     text += `Total: *${groupIds.length}* grup (${active.length} aktif, ${expired.length} expired)\n\n`
 
@@ -87,7 +89,7 @@ function handler(m) {
 
     text += `*AKSI:*\n`
     text += `• *${m.prefix}renewsewa <id> <durasi>* — Perpanjang\n`
-    text += `• *${m.prefix}delsewa <id>* — Hapus dari whitelist`
+    text += `• *${m.prefix}delsewa <id>* - Quitar de la lista blanca`
 
     return m.reply(text)
 }

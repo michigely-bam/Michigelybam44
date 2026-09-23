@@ -10,7 +10,7 @@ const pluginConfig = {
     name: 'sticker',
     alias: ['s', 'stiker', 'stickergif'],
     category: 'sticker',
-    description: 'Membuat sticker dari gambar/video dengan opsi crop/resize',
+    description: "Crear pegatinas de la imagen / video con opciones de redimensionamiento",
     usage: '.s [--crop] [--resize WxH] [--circle] [--rounded]',
     example: '.s --crop\n.s --resize 256x256\n.s --circle\n.s --rounded',
     isOwner: false,
@@ -148,7 +148,7 @@ async function handler(m, { sock, config: botConfig }) {
         }
         
         if (!buffer) {
-            await m.reply('❌ Gagal mendownload media!')
+            await m.reply("❌ ¡No se pudo download media!")
             await m.react('❌')
             return
         }
@@ -167,7 +167,8 @@ async function handler(m, { sock, config: botConfig }) {
                 const duration = parseFloat(stdout.trim())
                 
                 if (duration > 10) {
-                    await m.reply(`❌ Video terlalu panjang!\n\n> Durasi: ${duration.toFixed(1)} detik\n> Maksimal: 10 detik`)
+                    await m.reply(`❌ Video terlalu panjang!\n\n> Durasi: ${duration.toFixed(1)} detik
+> Máximo: 10 segundos`)
                     await m.react('☢')
                     if (fs.existsSync(tempVideo)) fs.unlinkSync(tempVideo)
                     return

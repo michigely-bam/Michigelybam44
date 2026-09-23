@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['gantiourinaudio', 'setourinaudio'],
     category: 'owner',
     description: 'Ganti audio ourin.mp3',
-    usage: '.ganti-ourin.mp3 (reply/kirim audio)',
+    usage: ".reemplazar -ourin.mp3 (reply / enviar audio)",
     example: '.ganti-ourin.mp3',
     isOwner: true,
     isPremium: false,
@@ -21,7 +21,10 @@ async function handler(m, { sock }) {
     const isAudio = m.type === 'audioMessage' || (m.quoted && m.quoted.type === 'audioMessage')
     
     if (!isAudio) {
-        return m.reply(`🎵 *ɢᴀɴᴛɪ ᴏᴜʀɪɴ.ᴍᴘ3*\n\n> Kirim/reply audio untuk mengganti\n> File: assets/audio/ourin.mp3`)
+        return m.reply(`🎵 *ɢᴀɴᴛɪ ᴏᴜʀɪɴ.ᴍᴘ3*
+
+> Enviar / respuesta audio para reemplazar
+> File: assets/audio/ourin.mp3`)
     }
     
     try {
@@ -33,7 +36,7 @@ async function handler(m, { sock }) {
         }
         
         if (!buffer) {
-            return m.reply(`❌ Gagal mendownload audio`)
+            return m.reply(`❌ No se pudo download audio`)
         }
         
         const targetPath = path.join(process.cwd(), 'assets', 'audio', 'ourin.mp3')

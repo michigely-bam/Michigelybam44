@@ -2,9 +2,9 @@ const pluginConfig = {
     name: 'setnamegc',
     alias: ['setnamegrup', 'setgcname', 'setnamegroup', 'setnamagrup'],
     category: 'group',
-    description: 'Mengubah nama grup',
-    usage: '.setnamegc <nama baru>',
-    example: '.setnamegc Grup Keren',
+    description: "Rename group",
+    usage: ".setnamegc Identificar nuevo nombre",
+    example: ".Cool Group setnamegc",
     isOwner: false,
     isPremium: false,
     isGroup: true,
@@ -39,7 +39,7 @@ async function handler(m, { sock }) {
         await sock.groupUpdateSubject(m.chat, newName)
         
         await m.reply(
-            `✅ Berhasil mengubah nama grup menjadi *${newName}*`
+            `✅ Cambio de nombre de grupo con éxito *${newName}*`
         )
     } catch (error) {
         await m.reply(

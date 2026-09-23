@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekgila',
     alias: ['gila', 'crazy'],
     category: 'cek',
-    description: 'Cek seberapa gila kamu',
-    usage: '.cekgila <nama>',
+    description: "Mira lo loco que estás.",
+    usage: ".ckecrazy   nombre",
     example: '.cekgila Budi',
     isOwner: false,
     isPremium: false,
@@ -33,8 +33,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kegilaan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kegilaan @${mentioned.split('@')[0]} yak? 
+Tu nivel de locura. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de locura @${mentioned.split('@')[0]} yak? 
     
 Tingkat kegilaan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'listjadibotaktif',
     alias: ['jadibotaktif', 'activejadibots'],
     category: 'owner',
-    description: 'Lihat jadibot yang sedang aktif dengan detail',
+    description: "Mira el kebabot que está siendo activado con detalle",
     usage: '.listjadibotaktif',
     example: '.listjadibotaktif',
     isOwner: true,
@@ -28,11 +28,13 @@ async function handler(m, { sock }) {
     const active = getActiveJadibots()
 
     if (active.length === 0) {
-        return m.reply(`❌ Tidak ada jadibot yang aktif saat ini`)
+        return m.reply(`❌ No hay jabots activos en este momento`)
     }
 
     let txt = `🟢 *ᴊᴀᴅɪʙᴏᴛ ᴀᴋᴛɪꜰ*\n\n`
-    txt += `> 📊 Total: *${active.length}* bot aktif\n\n`
+    txt += `> 📊 Total: *${active.length}* activo bot
+
+`
 
     active.forEach((s, i) => {
         const uptime = formatUptime(Date.now() - s.startedAt)
@@ -41,7 +43,7 @@ async function handler(m, { sock }) {
         txt += `   ⏱️ *${uptime}* — 👤 @${owner}\n\n`
     })
 
-    txt += `> \`${m.prefix}stopalljadibot\` — Hentikan semua`
+    txt += `> \`${m.prefix}stopalljadibot\` - Basta.`
 
     const mentions = active.flatMap(s => [s.jid, s.ownerJid].filter(Boolean))
 
@@ -52,7 +54,7 @@ async function handler(m, { sock }) {
             {
                 name: 'quick_reply',
                 buttonParamsJson: JSON.stringify({
-                    display_text: '🛑 Stop Semua',
+                    display_text: "🛑 Parad todos",
                     id: `${m.prefix}stopalljadibot`
                 })
             }

@@ -16,11 +16,11 @@ const pluginConfig = {
 }
 
 const PETS_FOR_SALE = {
-    cat: { name: '🐱 Kucing', price: 5000, desc: 'Luck tinggi, attack sedang' },
+    cat: { name: '🐱 Kucing', price: 5000, desc: "Altura alta, medio de ataque" },
     dog: { name: '🐕 Anjing', price: 6000, desc: 'Attack tinggi, defense bagus' },
     bird: { name: '🐦 Burung', price: 4500, desc: 'Luck sangat tinggi' },
     fish: { name: '🐟 Ikan', price: 3000, desc: 'Murah, luck tinggi' },
-    rabbit: { name: '🐰 Kelinci', price: 5500, desc: 'Balance semua stats' }
+    rabbit: { name: '🐰 Kelinci', price: 5500, desc: "Equilibrio todos los puntos" }
 }
 
 function handler(m) {
@@ -36,7 +36,9 @@ function handler(m) {
     
     if (!action || action !== 'buy') {
         let txt = `🏪 *ᴘᴇᴛ sʜᴏᴘ*\n\n`
-        txt += `> Beli pet untuk menemanimu berpetualang!\n\n`
+        txt += `> ¡Compra una mascota para montar contigo!
+
+`
         txt += `╭┈┈⬡「 🐾 *ᴘᴇᴛs* 」\n`
         
         for (const [key, pet] of Object.entries(PETS_FOR_SALE)) {
@@ -53,16 +55,18 @@ function handler(m) {
     
     if (action === 'buy') {
         if (!petKey) {
-            return m.reply(`❌ Pilih pet!\n\n> Contoh: \`${m.prefix}petshop buy cat\``)
+            return m.reply(`❌ ¡Elija una mascota!
+
+> Contoh: \`${m.prefix}petshop buy cat\``)
         }
         
         if (user.rpg.pet) {
-            return m.reply(`❌ Kamu sudah punya pet! Sell dulu atau gunakan breeding.`)
+            return m.reply(`❌ Vender primero o usar una panadería.`)
         }
         
         const petToBuy = PETS_FOR_SALE[petKey]
         if (!petToBuy) {
-            return m.reply(`❌ Pet tidak ditemukan!`)
+            return m.reply(`❌ ¡No hay mascotas!`)
         }
         
         if ((user.koin || 0) < petToBuy.price) {

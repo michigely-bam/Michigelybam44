@@ -55,7 +55,9 @@ async function handler(m, { sock }) {
     }
     
     if (!hasAccess(m.sender, m.isOwner)) {
-        return m.reply(`❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n> Fitur ini hanya untuk Owner/Seller.`)
+        return m.reply(`❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*
+
+> Esta característica es sólo para el propietario / vendedor.`)
     }
     
     const hostname = m.text?.trim()
@@ -72,12 +74,12 @@ async function handler(m, { sock }) {
     }
     
     if (!/^[a-zA-Z0-9-]+$/.test(hostname)) {
-        return m.reply(`❌ Hostname hanya boleh huruf, angka, dan dash.`)
+        return m.reply(`❌ El nombre de host solo puede ser letras, números y dash.`)
     }
     
     const spec = VPS_SPECS[m.command]
     if (!spec) {
-        return m.reply(`❌ Paket VPS tidak ditemukan.`)
+        return m.reply(`❌ Paquete VPS no encontrado.`)
     }
     
     const password = generatePassword()
@@ -113,7 +115,8 @@ ssh_pwauth: True`,
         const droplet = response.data.droplet
         const dropletId = droplet.id
         
-        await m.reply(`🕕 *ᴍᴇɴᴜɴɢɢᴜ ᴠᴘs sɪᴀᴘ...*\n\n> ID: \`${dropletId}\`\n> Estimasi: 60 detik`)
+        await m.reply(`🕕 *ᴍᴇɴᴜɴɢɢᴜ ᴠᴘs sɪᴀᴘ...*\n\n> ID: \`${dropletId}\`
+> Estimación: 60 segundos`)
         
         await new Promise(resolve => setTimeout(resolve, 60000))
         
@@ -123,7 +126,7 @@ ssh_pwauth: True`,
         
         const dropletInfo = infoRes.data.droplet
         const ipv4 = dropletInfo.networks?.v4?.find(n => n.type === 'public')
-        const ip = ipv4?.ip_address || 'Tidak tersedia'
+        const ip = ipv4?.ip_address || "No disponible"
         
         const detailTxt = `✅ *ᴠᴘs ʙᴇʀʜᴀsɪʟ ᴅɪʙᴜᴀᴛ*\n\n` +
             `╭─「 📋 *ᴅᴇᴛᴀɪʟ ᴠᴘs* 」\n` +
@@ -142,7 +145,9 @@ ssh_pwauth: True`,
             `> ⚠️ Simpan data ini baik-baik!`
         
         await sock.sendMessage(m.sender, { text: detailTxt })
-        await m.reply(`✅ *ᴠᴘs ʙᴇʀʜᴀsɪʟ ᴅɪʙᴜᴀᴛ*\n\n> Data dikirim ke private chat.`)
+        await m.reply(`✅ *ᴠᴘs ʙᴇʀʜᴀsɪʟ ᴅɪʙᴜᴀᴛ*
+
+> Datos enviados a chat privado.`)
         
     } catch (err) {
         return m.reply(te(m.prefix, m.command, m.pushName))

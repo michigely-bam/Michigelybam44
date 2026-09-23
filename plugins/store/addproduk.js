@@ -6,8 +6,8 @@ const pluginConfig = {
     name: 'addproduk',
     alias: ['addproduct'],
     category: 'store',
-    description: '➕ Tambah produk baru ke toko (hanya di private chat)',
-    usage: '.addproduk <nama>|<harga>|<tipe>|<stok>|<deskripsi>',
+    description: "➕ Añadir un nuevo producto a la tienda (sólo chat privado)",
+    usage: ".addproducto י nombre √≥ xd124; لе precio не x124; لентенте tipo не",
     example: '.addproduk Spotify Premium|25000|digital|10|Akun Premium 1 Bulan',
     isOwner: true,
     isPremium: false,
@@ -79,10 +79,14 @@ async function handler(m, { sock }) {
     const description = (parts[4] || '').replace(/;;/g, '\n')
 
     if (!name || name.length < 2) {
-        return m.reply(`❌ *Nama produk terlalu pendek.*\n\nMinimal 2 karakter diperlukan agar mudah dikenali pelanggan 📝`)
+        return m.reply(`❌ *El producto de nombre es demasiado corto.*
+
+Minimal 2 karakter diperlukan agar mudah dikenali pelanggan 📝`)
     }
     if (isNaN(price) || price < 1000) {
-        return m.reply(`❌ *Harga tidak valid.*\n\nHarga minimal *Rp 1.000* 💰 Pastikan Anda memasukkan angka yang benar.`)
+        return m.reply(`❌ *El precio es nulo.*
+
+Harga minimal *Rp 1.000* 💰 Asegúrese de introducir el número correcto.`)
     }
 
     const type = typeStr === 'fisik' || typeStr === 'physical' ? 'fisik' : 'digital'
@@ -150,11 +154,11 @@ async function handler(m, { sock }) {
         reply += `1️⃣ Tambahkan data akun/key: \`${m.prefix}addstok ${products.length}|<detail>\`\n`
         reply += `2️⃣ Atau import dari file .txt: \`${m.prefix}addstok ${products.length}\` (reply file 📄)\n`
     } else {
-        reply += `1️⃣ Stok sudah diatur otomatis (${stock} pcs) 📦\n`
-        reply += `2️⃣ Tambah stok: \`${m.prefix}editproduk ${products.length} stok <jumlah>\`\n`
+        reply += `1 para Stock ya establecido automáticamente (${stock} pcs) 📦\n`
+        reply += `2: Añada el stock: \`${m.prefix}editproduk ${products.length} stok <jumlah>\`\n`
     }
-    reply += `3️⃣ Lihat produk: \`${m.prefix}listproduk\` 🛍️\n\n`
-    reply += `_Produk ini akan terlihat oleh pelanggan melalui \`${m.prefix}listproduk\`_ 🎉`
+    reply += `Tres: Vea el producto: \`${m.prefix}listproduk\` 🛍️\n\n`
+    reply += `_El producto será visible por el cliente a través de \`${m.prefix}listproduk\`_ 🎉`
 
     return m.reply(reply)
 }

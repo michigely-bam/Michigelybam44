@@ -114,7 +114,9 @@ async function handler(m, { sock }) {
 
     const media = getMediaSource(m)
     if (!media) {
-        return m.reply(`${fx.emoji} *${effectName.toUpperCase()}*\n\nReply audio/video dengan command ini`)
+        return m.reply(`${fx.emoji} *${effectName.toUpperCase()}*
+
+Responder audio / video con este comando`)
     }
 
     m.react('🕕')
@@ -129,14 +131,14 @@ async function handler(m, { sock }) {
     try {
         const buffer = await media.download()
         if (!buffer?.length) {
-            return m.reply(`❌ Gagal download media`)
+            return m.reply(`❌ No se pudo download media`)
         }
 
         fs.writeFileSync(inputPath, buffer)
         await queueFFmpeg(`ffmpeg -y -i "${inputPath}" -af "${fx.filter}" -vn "${outputPath}"`)
 
         if (!fs.existsSync(outputPath)) {
-            return m.reply(`❌ Gagal memproses audio`)
+            return m.reply(`❌ No se pudo process audio`)
         }
 
         const audioBuffer = fs.readFileSync(outputPath)

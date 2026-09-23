@@ -9,7 +9,7 @@ const pluginConfig = {
     name: 'self',
     alias: ['selfmode', 'private-mode'],
     category: 'owner',
-    description: 'Mengaktifkan mode self (hanya owner & bot yang bisa akses)',
+    description: "Habilitar automodo (sólo propietario &quot; bot puede acceder)",
     usage: '.self',
     example: '.self',
     isOwner: true,
@@ -28,11 +28,11 @@ async function handler(m, { sock }) {
     try {
         const isRealOwner = validateOwner(m);
         if (!isRealOwner) {
-            return await m.reply('🚫 *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n> Hanya owner yang bisa mengubah mode bot!');
+            return await m.reply("🚫 *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n> ¡Sólo el propietario puede cambiar el modo robot!");
         }
         const currentMode = config.mode;
         if (currentMode === 'self') {
-            return await m.reply('ℹ️ Bot sudah dalam mode *self*');
+            return await m.reply("ℹBot ya está en modo *self*");
         }
         config.mode = 'self';
         const db = getDatabase();

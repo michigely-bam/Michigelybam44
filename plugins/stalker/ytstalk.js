@@ -20,7 +20,11 @@ async function handler(m, { sock }) {
     const username = m.args[0]
     
     if (!username) {
-        return m.reply(`📺 *ʏᴏᴜᴛᴜʙᴇ sᴛᴀʟᴋ*\n\n> Masukkan username YouTube\n\n\`Contoh: ${m.prefix}ytstalk mrbeast\``)
+        return m.reply(`📺 *ʏᴏᴜᴛᴜʙᴇ sᴛᴀʟᴋ*
+
+> Introduzca el nombre de usuario de YouTube
+
+\`Contoh: ${m.prefix}ytstalk mrbeast\``)
     }
     
     m.react('🔍')
@@ -32,7 +36,7 @@ async function handler(m, { sock }) {
         
         if (!res.data?.status || !res.data?.result) {
             m.react('❌')
-            return m.reply(`❌ Channel *${username}* tidak ditemukan`)
+            return m.reply(`❌ Channel *${username}* no encontrado`)
         }
         
         const c = res.data.result.channelMetadata

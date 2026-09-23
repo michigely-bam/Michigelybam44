@@ -9,7 +9,7 @@ const pluginConfig = {
     name: 'transkrip',
     alias: ['stt', 'speechtotext', 'transcribe'],
     category: 'tools',
-    description: 'Konversi voice note / audio ke teks (Speech-to-Text)',
+    description: "Convierte la nota de voz / audio en texto (Speech-to-Text)",
     usage: '.transkrip (reply voice note)',
     example: '.transkrip',
     isOwner: false,
@@ -73,7 +73,7 @@ async function handler(m, { sock }) {
         const buffer = await quoted.download();
         if (!buffer || buffer.length < 1000) {
             m.react('❌');
-            return m.reply('❌ Audio terlalu kecil atau gagal diunduh');
+            return m.reply("❌ Audio demasiado pequeño o falló en descargar");
         }
         fs.writeFileSync(inputFile, buffer);
         await convertToWav(inputFile, wavFile);
@@ -81,7 +81,7 @@ async function handler(m, { sock }) {
         const text = await transcribeWithGroq(wavBuffer, groqKey);
         if (!text || text.trim() === '') {
             m.react('❌');
-            return m.reply('❌ Tidak dapat mendeteksi suara. Pastikan audio jelas dan tidak terlalu pendek.');
+            return m.reply("❌ Incapaz de detectar el sonido. Asegúrese de que el audio sea claro y no demasiado corto.");
         }
         const duration = Math.ceil(buffer.length / 4000);
         await m.reply(
@@ -102,7 +102,7 @@ async function handler(m, { sock }) {
             return m.reply('❌ API Key Groq invalid. Cek config.js → APIkey.groq');
         }
         if (error.response?.status === 429) {
-            return m.reply('❌ Rate limit Groq tercapai. Coba lagi nanti.');
+            return m.reply("❌ - Inténtalo de nuevo más tarde.");
         }
         m.reply(te(m.prefix, m.command, m.pushName));
     } finally {

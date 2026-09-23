@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['3d', '3dfy', 'to3dmodel'],
     category: 'ai',
     description: 'Ubah foto menjadi gaya 3D render',
-    usage: '.to3d (reply/kirim gambar)',
+    usage: ".to3d (reply / enviar imagen)",
     example: '.to3d',
     isOwner: false,
     isPremium: true,
@@ -43,7 +43,7 @@ async function handler(m, { sock }) {
         
         if (!buffer) {
             m.react('❌')
-            return m.reply(`❌ Gagal mendownload gambar`)
+            return m.reply(`❌ No se pudo download image`)
         }
         
         await m.react('🕕')

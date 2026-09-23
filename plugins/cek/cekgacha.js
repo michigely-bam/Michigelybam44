@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekgacha',
     alias: ['gacha', 'luck'],
     category: 'cek',
-    description: 'Cek hoki gacha kamu',
-    usage: '.cekgacha <nama>',
+    description: "Tu cheque de hockey",
+    usage: ".cekgacha &gt; nombre &gt;",
     example: '.cekgacha Budi',
     isOwner: false,
     isPremium: false,
@@ -27,8 +27,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kegachaan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kegachaan @${mentioned.split('@')[0]} yak? 
+Tu nivel de teatro. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de omisión @${mentioned.split('@')[0]} yak? 
     
 Tingkat kegachaan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

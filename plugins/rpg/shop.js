@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'shop',
     alias: ['beli', 'jual', 'toko', 'store', 'buy', 'sell'],
     category: 'rpg',
-    description: 'Beli dan jual item RPG',
+    description: "Comprar y vender artículos RPG",
     usage: '.shop <buy/sell> <item> <jumlah>',
     example: '.shop buy potion 1',
     isOwner: false,
@@ -89,7 +89,9 @@ async function handler(m, { sock }) {
     
     if (action === 'buy') {
         if (item.type !== 'buyable') {
-            return m.reply(`❌ *ᴛɪᴅᴀᴋ ʙɪsᴀ ᴅɪʙᴇʟɪ*\n\n> Item ini tidak bisa dibeli!`)
+            return m.reply(`❌ *ᴛɪᴅᴀᴋ ʙɪsᴀ ᴅɪʙᴇʟɪ*
+
+> ¡Este artículo no se puede comprar!`)
         }
         
         const totalCost = item.price * amount
@@ -118,7 +120,9 @@ async function handler(m, { sock }) {
     
     if (action === 'sell') {
         if (item.type !== 'sellable') {
-            return m.reply(`❌ *ᴛɪᴅᴀᴋ ʙɪsᴀ ᴅɪᴊᴜᴀʟ*\n\n> Item ini tidak bisa dijual!`)
+            return m.reply(`❌ *ᴛɪᴅᴀᴋ ʙɪsᴀ ᴅɪᴊᴜᴀʟ*
+
+> ¡Este artículo no se puede vender!`)
         }
         
         const cleanJid = m.sender.split('@')[0]

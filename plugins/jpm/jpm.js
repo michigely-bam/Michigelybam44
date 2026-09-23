@@ -15,8 +15,8 @@ const pluginConfig = {
   name: "jpm",
   alias: ["jasher", "jaser"],
   category: "jpm",
-  description: "Kirim pesan ke semua grup (JPM)",
-  usage: ".jpm <pesan>",
+  description: "Enviar mensajes a todos los grupos (JPM)",
+  usage: ".jpm   mensaje de contacto",
   example: ".jpm Halo semuanya!",
   isOwner: true,
   isPremium: false,
@@ -27,7 +27,7 @@ const pluginConfig = {
   isEnabled: true,
 };
 
-function getContextInfo(title = "📢 ᴊᴘᴍ", body = "Jasa Pesan Massal") {
+function getContextInfo(title = "📢 ᴊᴘᴍ", body = "Mensajería de masas") {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
@@ -62,7 +62,11 @@ async function handler(m, { sock }) {
     const groupMode = getGroupMode(m.chat, db);
     if (groupMode !== "md" && groupMode !== "all") {
       return m.reply(
-        `❌ *ᴍᴏᴅᴇ ᴛɪᴅᴀᴋ sᴇsᴜᴀɪ*\n\n> JPM hanya tersedia di mode MD\n\n\`${m.prefix}botmode md\``,
+        `❌ *ᴍᴏᴅᴇ ᴛɪᴅᴀᴋ sᴇsᴜᴀɪ*
+
+> JPM sólo está disponible en modo MD
+
+\`${m.prefix}botmode md\``,
       );
     }
   }
@@ -87,7 +91,9 @@ async function handler(m, { sock }) {
 
   if (global.statusjpm) {
     return m.reply(
-      `❌ *ɢᴀɢᴀʟ*\n\n> JPM sedang berjalan. Ketik \`${m.prefix}stopjpm\` untuk menghentikan.`,
+      `❌ *ɢᴀɢᴀʟ*
+
+> JPM corriendo. \`${m.prefix}stopjpm\` Parar.`,
     );
   }
 
@@ -122,7 +128,9 @@ async function handler(m, { sock }) {
     if (groupIds.length === 0) {
       m.react("❌");
       return m.reply(
-        `❌ *ɢᴀɢᴀʟ*\n\n> Tidak ada grup yang ditemukan${blacklistedCount > 0 ? ` (${blacklistedCount} grup di-blacklist)` : ""}`,
+        `❌ *ɢᴀɢᴀʟ*
+
+> No se encontró ningún grupo${blacklistedCount > 0 ? ` (${blacklistedCount} grupo sobre -lista negra` : ""}`,
       );
     }
 

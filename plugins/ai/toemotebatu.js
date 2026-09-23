@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'toemotebatu',
     alias: ['emotebatu', 'moai', 'tomoai'],
     category: 'ai',
-    description: 'Ubah gambar ke emote batu 🗿',
+    description: "Cambiar la imagen a la emote de piedra 🗿",
     usage: '.toemotebatu (reply gambar)',
     example: '.toemotebatu',
     isOwner: false,
@@ -21,7 +21,11 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
     
     if (!isImage) {
-        return m.reply(`🗿 *ᴇᴍᴏᴛᴇ ʙᴀᴛᴜ*\n\n> Kirim/reply gambar\n\n\`${m.prefix}toemotebatu\``)
+        return m.reply(`🗿 *ᴇᴍᴏᴛᴇ ʙᴀᴛᴜ*
+
+> Enviar / responder imágenes
+
+\`${m.prefix}toemotebatu\``)
     }
     
     m.react('🕕')
@@ -36,7 +40,7 @@ async function handler(m, { sock }) {
         
         if (!buffer) {
             m.react('❌')
-            return m.reply(`❌ Gagal mendownload gambar`)
+            return m.reply(`❌ No se pudo download image`)
         }
         
         const imageUrl = await uploadImage(buffer, 'image.jpg')

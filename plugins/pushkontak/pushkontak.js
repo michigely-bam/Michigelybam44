@@ -13,8 +13,8 @@ const pluginConfig = {
   name: "pushkontak",
   alias: ["puskontak", "push"],
   category: "pushkontak",
-  description: "Push pesan ke semua member grup + auto simpan kontak ke VCF",
-  usage: ".pushkontak <pesan>",
+  description: "Empuje el mensaje a todos los grupos miembros + ahorro de auto contacto a VCF",
+  usage: ".pushcontact",
   example: ".pushkontak Halo semuanya!",
   isOwner: true,
   isPremium: false,
@@ -62,13 +62,19 @@ async function handler(m, { sock }) {
   const text = m.text?.trim();
   if (!text) {
     return m.reply(
-      `📢 *ᴘᴜsʜ ᴋᴏɴᴛᴀᴋ*\n\n> Masukkan pesan yang ingin dikirim\n\n\`Contoh: ${m.prefix}pushkontak Halo semuanya!\``,
+      `📢 *ᴘᴜsʜ ᴋᴏɴᴛᴀᴋ*
+
+> Introduzca el mensaje que desea enviar
+
+\`Contoh: ${m.prefix}pushkontak Halo semuanya!\``,
     );
   }
 
   if (global.statuspush) {
     return m.reply(
-      `❌ *ɢᴀɢᴀʟ*\n\n> Pushkontak sedang berjalan. Ketik \`${m.prefix}stoppush\` untuk menghentikan.`,
+      `❌ *ɢᴀɢᴀʟ*
+
+> El contacto está funcionando. Tipo \`${m.prefix}stoppush\` Parar.`,
     );
   }
 
@@ -97,7 +103,9 @@ async function handler(m, { sock }) {
 
     if (participants.length === 0) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak ada member yang bisa dikirim`);
+      return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> Ningún miembro puede ser enviado`);
     }
 
     const jedaPush = db.setting("jedaPush") || 5000;
@@ -187,7 +195,9 @@ async function sendVcfToOwner(sock, ownerJid, contacts, groupName) {
       document: fs.readFileSync(vcfPath),
       fileName: `Kontak_${groupName || "Group"}_${contacts.length}.vcf`,
       mimetype: "text/vcard",
-      caption: `💾 *ᴀᴜᴛᴏ-sᴀᴠᴇ ᴋᴏɴᴛᴀᴋ*\n\n> Total: \`${contacts.length}\` kontak\n> Grup: \`${groupName || "Unknown"}\`\n\n> _Import file ini ke HP untuk menyimpan semua kontak._`,
+      caption: `💾 *ᴀᴜᴛᴏ-sᴀᴠᴇ ᴋᴏɴᴛᴀᴋ*\n\n> Total: \`${contacts.length}\` kontak\n> Grup: \`${groupName || "Unknown"}\`
+
+> _Importe este archivo a su HP para guardar todos los contactos._`,
     });
 
     try {

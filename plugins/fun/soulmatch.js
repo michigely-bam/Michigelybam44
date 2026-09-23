@@ -7,8 +7,8 @@ const pluginConfig = {
     name: 'soulmatch',
     alias: [],
     category: 'fun',
-    description: 'Cek kecocokan jiwa dengan seseorang',
-    usage: '.soulmatch nama1|nama2',
+    description: "Revisa un fósforo con alguien.",
+    usage: ".nombre del alma gemela 1.",
     example: '.soulmatch Raiden|Mei',
     isOwner: false,
     isPremium: false,
@@ -47,13 +47,13 @@ function getMatchDescription(score) {
 
 function getReading(score) {
     if (score >= 80) {
-        return "Jiwa kalian memiliki koneksi yang sangat istimewa dan langka. Takdir telah merencanakan pertemuan ini."
+        return "Tus almas tienen una conexión muy especial y rara."
     } else if (score >= 60) {
-        return "Ada chemistry yang kuat di antara kalian. Perbedaan kalian justru menciptakan harmoni."
+        return "Hay una poderosa química entre ustedes, y sus diferencias crean armonía."
     } else if (score >= 40) {
-        return "Butuh waktu untuk saling memahami. Setiap tantangan akan memperkuat ikatan kalian."
+        return "Se necesita tiempo para entenderse, cada desafío para fortalecer su vínculo."
     }
-    return "Perbedaan signifikan dalam energi jiwa. Butuh banyak adaptasi dan pengertian."
+    return "Una diferencia significativa en la energía del alma requiere mucha adaptación y comprensión."
 }
 
 async function handler(m, { sock }) {
@@ -74,7 +74,7 @@ async function handler(m, { sock }) {
     const [nama1, nama2] = text.split('|').map(n => n.trim())
     
     if (!nama1 || !nama2) {
-        return m.reply(`❌ Masukkan 2 nama dengan format: \`${m.prefix}soulmatch nama1|nama2\``)
+        return m.reply(`❌ Introduzca 2 nombres en formato: \`${m.prefix}nombre del alma gemela 1.\``)
     }
     
     await m.react('🕕')

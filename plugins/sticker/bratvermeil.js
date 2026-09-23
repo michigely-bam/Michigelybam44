@@ -7,7 +7,7 @@ const pluginConfig = {
     category: 'sticker',
     description: 'Membuat sticker brat versi Vermeil',
     usage: '.bratvermeil <text>',
-    example: '.bratvermeil Jangan lupa makan',
+    example: ".Bratvermeil No olvides comer",
     isOwner: false,
     isPremium: false,
     isGroup: false,

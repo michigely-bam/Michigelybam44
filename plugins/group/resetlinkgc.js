@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'resetlinkgc',
     alias: ['resetlink', 'revokelink', 'newlink'],
     category: 'group',
-    description: 'Reset link invite grup',
+    description: "Grupo de reasentamiento invitan a los enlaces",
     usage: '.resetlinkgc',
     example: '.resetlinkgc',
     isOwner: false,
@@ -24,7 +24,9 @@ async function handler(m, { sock }) {
         await sock.groupRevokeInvite(m.chat)
         
         m.react('✅')
-        m.reply(`✅ *ʟɪɴᴋ ɢʀᴜᴘ ᴅɪʀᴇsᴇᴛ*\nLink grup lama sudah tidak berlaku.\nGunakan \`${m.prefix}linkgc\` untuk mendapatkan link baru.`)
+        m.reply(`✅ *ʟɪɴᴋ ɢʀᴜᴘ ᴅɪʀᴇsᴇᴛ*
+Los enlaces de grupo antiguo están fuera de orden.
+Gunakan \`${m.prefix}linkgc\` para conseguir un nuevo enlace.`)
         
     } catch (err) {
         m.react('☢')

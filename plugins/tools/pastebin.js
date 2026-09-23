@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'pastebin',
     alias: ['paste', 'pb'],
     category: 'tools',
-    description: 'Upload teks ke Pastebin',
+    description: "Subir texto a Pastebin",
     usage: '.pastebin <text>',
     example: '.pastebin console.log("Hello World")',
     isOwner: false,

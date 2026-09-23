@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['jodoh', 'match'],
     category: 'cek',
     description: 'Cek kecocokan jodoh',
-    usage: '.cekjodoh <nama1> & <nama2>',
+    usage: ".checkmate < nombre 1 ≤",
     example: '.cekjodoh Budi & Ani',
     isOwner: false,
     isPremium: false,
@@ -19,7 +19,11 @@ async function handler(m) {
     const parts = input.split(/[&,]/).map(s => s.trim()).filter(s => s)
     
     if (parts.length < 2) {
-        return m.reply(`💕 *ᴄᴇᴋ ᴊᴏᴅᴏʜ*\n\n> Masukkan 2 nama!\n\n> Contoh: ${m.prefix}cekjodoh Budi & Ani`)
+        return m.reply(`💕 *ᴄᴇᴋ ᴊᴏᴅᴏʜ*
+
+> ¡Pon dos nombres!
+
+> Contoh: ${m.prefix}cekjodoh Budi & Ani`)
     }
     
     const percent = Math.floor(Math.random() * 101)
@@ -27,7 +31,7 @@ async function handler(m) {
                     
     let desc = ''
     if (percent >= 90) {
-        desc = 'Jodoh banget! Langsung nikah aja! 💍'
+        desc = "¡Casarse inmediatamente! 💍"
     } else if (percent >= 70) {
         desc = 'Cocok banget! 💕'
     } else if (percent >= 50) {
@@ -35,13 +39,13 @@ async function handler(m) {
     } else if (percent >= 30) {
         desc = 'Hmm, perlu usaha lebih 🤔'
     } else {
-        desc = 'Mungkin cari yang lain? 😅'
+        desc = "¿Quizás encuentre a alguien más? 😅"
     }
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Tingkat kejodohan kamu *${percent}%*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek tingkat kejodohan @${mentioned.split('@')[0]} yak? 
+Tu nivel de matrimonio arreglado. *${percent}%*
+\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de juego @${mentioned.split('@')[0]} yak? 
     
 Tingkat kejodohan dia sebesar *${percent}%*
 \`\`\`${desc}\`\`\``

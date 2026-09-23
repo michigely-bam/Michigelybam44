@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'claninfo',
     alias: ['infoclan', 'myclan', 'guildinfo'],
     category: 'clan',
-    description: 'Lihat info clan',
+    description: "Ver información del clan",
     usage: '.claninfo [clan_id]',
     example: '.claninfo',
     isOwner: false,
@@ -49,7 +49,7 @@ async function handler(m) {
     const clan = db.db.data.clans[clanId]
         || Object.values(db.db.data.clans).find(c => c.name.toLowerCase() === clanId.toLowerCase())
         || Object.values(db.db.data.clans).find(c => c.id.toLowerCase() === clanId.toLowerCase())
-    if (!clan) return m.reply(`❌ Clan tidak ditemukan`)
+    if (!clan) return m.reply(`❌ Clan not found`)
 
     const totalGames = (clan.wins || 0) + (clan.losses || 0)
     const winRate = totalGames > 0

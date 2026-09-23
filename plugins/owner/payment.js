@@ -53,7 +53,9 @@ function buildPaymentText(paymentCfg, customText, botName, ownerName) {
   }
 
   if (paymentCfg.qrisUrl) {
-    text += `📸 *QRIS:* Tersedia (lihat gambar)\n\n`
+    text += `📸 *QRIS:* Disponible (ver imágenes)
+
+`
   }
 
   text += `━━━━━━━━━━━━━━━━━━\n`

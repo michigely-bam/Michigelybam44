@@ -6,8 +6,8 @@ const pluginConfig = {
     name: 'renewsewa',
     alias: ['perpanjangsewa', 'extendsewa'],
     category: 'owner',
-    description: 'Perpanjang durasi sewa grup',
-    usage: '.renewsewa <link/id grup> <durasi>',
+    description: "Ampliar la duración del alquiler de grupo",
+    usage: ".renovador < enlace / id grupo > duración",
     example: '.renewsewa https://chat.whatsapp.com/xxx 30d',
     isOwner: true,
     isPremium: false,
@@ -80,7 +80,8 @@ async function handler(m, { sock }) {
     const durationStr = args[1]
     const durationMs = parseDurationMs(durationStr)
 
-    if (!durationMs) return m.reply(`❌ Format durasi tidak valid\nContoh: 7d, 1m, 1y, lifetime`)
+    if (!durationMs) return m.reply(`❌ Formato de duración inválida
+Contoh: 7d, 1m, 1y, lifetime`)
 
     await m.react('🕕')
 
@@ -88,7 +89,7 @@ async function handler(m, { sock }) {
         const result = await resolveGroupId(sock, input)
         if (!result) {
             await m.react('❌')
-            return m.reply(`❌ Grup tidak ditemukan`)
+            return m.reply(`❌ Grupo no encontrado`)
         }
 
         const { id: groupId } = result
@@ -96,7 +97,8 @@ async function handler(m, { sock }) {
 
         if (!existing) {
             await m.react('❌')
-            return m.reply(`❌ Grup tidak terdaftar\nGunakan *${m.prefix}addsewa* untuk menambahkan`)
+            return m.reply(`❌ Grupo no incluido
+Gunakan *${m.prefix}addsewa* para añadir`)
         }
 
         if (durationMs === Infinity) {
@@ -105,7 +107,7 @@ async function handler(m, { sock }) {
         } else {
             if (existing.isLifetime) {
                 await m.react('❌')
-                return m.reply(`❌ Grup ini sudah Permanent, tidak perlu diperpanjang`)
+                return m.reply(`❌ El grupo ya es permanente, sin necesidad de extender`)
             }
             const baseTime = existing.expiredAt > Date.now() ? existing.expiredAt : Date.now()
             existing.expiredAt = baseTime + durationMs
@@ -125,10 +127,11 @@ async function handler(m, { sock }) {
         let text = `✅ *SEWA DIPERPANJANG*\n\n`
         text += `Grup: *${groupName}*\n`
         text += `Tambahan: *${formatDuration(durationStr)}*\n`
-        text += `Expired baru: *${expiredStr}*`
+        text += `Nuevos costos: *${expiredStr}*`
 
         try {
-            await sock.sendText(groupId, `📢 Sewa bot telah diperpanjang!\n\nTambahan: *${formatDuration(durationStr)}*\nExpired baru: *${expiredStr}*`, null, {
+            await sock.sendText(groupId, `📢 Sewa bot telah diperpanjang!\n\nTambahan: *${formatDuration(durationStr)}*
+Nuevos costos: *${expiredStr}*`, null, {
                 contextInfo: {
                     forwardingScore: 99,
                     isForwarded: true,

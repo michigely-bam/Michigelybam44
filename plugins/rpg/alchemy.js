@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'alchemy',
     alias: ['potion', 'brew', 'ramuan'],
     category: 'rpg',
-    description: 'Buat potion dan ramuan dari herba',
+    description: "Crear pociones y pociones de la herba",
     usage: '.alchemy <potion>',
     example: '.alchemy healthpotion',
     isOwner: false,
@@ -20,12 +20,12 @@ const POTIONS = {
     healthpotion: { name: '❤️ Health Potion', materials: { herb: 3 }, effect: 'Pulihkan 50 HP', exp: 80, result: 'healthpotion' },
     manapotion: { name: '💙 Mana Potion', materials: { herb: 2, flower: 1 }, effect: 'Pulihkan 50 Mana', exp: 90, result: 'manapotion' },
     staminapotion: { name: '⚡ Stamina Potion', materials: { herb: 2, mushroom: 1 }, effect: 'Pulihkan 30 Stamina', exp: 100, result: 'staminapotion' },
-    strengthpotion: { name: '💪 Strength Potion', materials: { herb: 3, dragonscale: 1 }, effect: '+20 ATK (5 menit)', exp: 200, result: 'strengthpotion' },
-    defensepotion: { name: '🛡️ Defense Potion', materials: { herb: 3, iron: 2 }, effect: '+15 DEF (5 menit)', exp: 180, result: 'defensepotion' },
-    luckpotion: { name: '🍀 Luck Potion', materials: { herb: 5, diamond: 1 }, effect: '+30% Drop Rate (10 menit)', exp: 300, result: 'luckpotion' },
-    exppotion: { name: '✨ EXP Potion', materials: { herb: 4, gold: 2 }, effect: '+50% EXP (15 menit)', exp: 250, result: 'exppotion' },
+    strengthpotion: { name: '💪 Strength Potion', materials: { herb: 3, dragonscale: 1 }, effect: "+20 ATK (5 minutos)", exp: 200, result: 'strengthpotion' },
+    defensepotion: { name: '🛡️ Defense Potion', materials: { herb: 3, iron: 2 }, effect: "+15 DEF (5 minutos)", exp: 180, result: 'defensepotion' },
+    luckpotion: { name: '🍀 Luck Potion', materials: { herb: 5, diamond: 1 }, effect: "+Tasa de caída del 30% (10 minutos)", exp: 300, result: 'luckpotion' },
+    exppotion: { name: '✨ EXP Potion', materials: { herb: 4, gold: 2 }, effect: "+50% EXP (15 minutos)", exp: 250, result: 'exppotion' },
     antidote: { name: '💊 Antidote', materials: { herb: 2 }, effect: 'Sembuhkan racun', exp: 50, result: 'antidote' },
-    elixir: { name: '🧪 Elixir', materials: { herb: 10, diamond: 2, gold: 5 }, effect: 'Pulihkan semua stats', exp: 500, result: 'elixir' }
+    elixir: { name: '🧪 Elixir', materials: { herb: 10, diamond: 2, gold: 5 }, effect: "Restaurar todos los estatos", exp: 500, result: 'elixir' }
 }
 
 async function handler(m, { sock }) {
@@ -57,7 +57,9 @@ async function handler(m, { sock }) {
     
     const potion = POTIONS[potionName]
     if (!potion) {
-        return m.reply(`❌ Resep tidak ditemukan!\n\n> Ketik \`${m.prefix}alchemy\` untuk melihat daftar.`)
+        return m.reply(`❌ ¡La prescripción no se encuentra!
+
+> Ketik \`${m.prefix}alchemy\` para ver la lista.`)
     }
     
     const missingMaterials = []

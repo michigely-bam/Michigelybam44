@@ -53,8 +53,8 @@ const pluginConfig = {
     name: allCommands,
     alias: [],
     category: 'panel',
-    description: 'Daftarkan grup sebagai GC Seller panel (akses command create server)',
-    usage: '.addgcsellerv1 (di dalam grup)',
+    description: "Grupo de lista como panel GC Vendedor (comando de acceso crear servidor)",
+    usage: ".addgcsellerv1 (grupo interno)",
     example: '.addgcsellerv1',
     isOwner: true,
     isGroup: true,
@@ -83,10 +83,10 @@ function parseCommand(cmd) {
 
 function handler(m) {
     const parsed = parseCommand(m.command)
-    if (!parsed) return m.reply('❌ Command tidak valid.')
+    if (!parsed) return m.reply("❌ Comando inválido.")
 
     if (!hasAccess(m.sender, m.isOwner)) {
-        return m.reply('❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n> Fitur ini hanya untuk Owner atau Owner Panel.')
+        return m.reply("❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n> Esta característica es sólo para el Propietario o Panel de Propietario.")
     }
 
     const { action, version } = parsed
@@ -95,7 +95,7 @@ function handler(m) {
     if (action === 'add') {
         const current = loadGcSeller(version)
         if (current === m.chat) {
-            return m.reply(`❌ Grup ini sudah terdaftar sebagai GC Seller *${serverLabel}*.`)
+            return m.reply(`❌ Este grupo ya está listado como GC Seller *${serverLabel}*.`)
         }
 
         saveGcSeller(version, m.chat)
@@ -110,14 +110,14 @@ function handler(m) {
             txt += `┃ ⚠️ ᴘʀᴇᴠ: \`${current}\` (diganti)\n`
         }
         txt += `╰┈┈⬡\n\n`
-        txt += `> Semua member grup ini sekarang bisa create server ${serverLabel}.`
+        txt += `> Todo miembro de este grupo ahora puede crear servidor ${serverLabel}.`
         return m.reply(txt)
     }
 
     if (action === 'reset') {
         const current = loadGcSeller(version)
         if (!current) {
-            return m.reply(`❌ Belum ada GC Seller terdaftar untuk *${serverLabel}*.`)
+            return m.reply(`❌ No GC Seller registrado a *${serverLabel}*.`)
         }
 
         saveGcSeller(version, null)

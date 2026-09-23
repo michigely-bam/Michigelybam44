@@ -15,25 +15,25 @@ const pluginConfig = {
 };
 
 const answers = [
-    'Karena memang sudah takdirnya begitu.',
+    "Porque estaba destinado a serlo.",
     'Hmm, pertanyaan bagus! Aku juga bingung.',
-    'Karena itulah cara kerjanya.',
-    'Karena Tuhan berkehendak demikian.',
+    "Porque así funciona.",
+    "Porque Dios quiere que sea.",
     'Aku nggak tau, cari di Google aja.',
-    'Karena ya gitu aja.',
-    'Mungkin karena kebetulan?',
-    'Karena dunia memang penuh misteri.',
+    "Porque eso es todo.",
+    "¿Tal vez por accidente?",
+    "Porque el mundo está lleno de misterios.",
     'Hmm, sulit dijelaskan sih.',
-    'Karena alam semesta bekerja dengan cara yang misterius.',
+    "Porque el universo trabaja de maneras misteriosas.",
     'Aku juga penasaran, kenapa ya?',
-    'Karena hal tersebut memang seharusnya terjadi.',
-    'Pertanyaan yang bagus! Sayangnya aku nggak punya jawabannya.',
-    'Karena itulah keunikan hidup.',
-    'Karena setiap hal punya alasannya masing-masing.',
-    'Hmm... aku butuh waktu untuk memikirkannya.',
-    'Karena begitulah logikanya.',
-    'Aku rasa karena memang harus begitu.',
-    'Karena segala sesuatu saling berhubungan.',
+    "Porque se supone que tiene que pasar.",
+    "Me temo que no tengo la respuesta.",
+    "Por eso es tan único para la vida.",
+    "Porque cada cosa tiene sus razones.",
+    "Necesito tiempo para pensarlo.",
+    "Porque esa es la lógica.",
+    "Supongo que tiene que ser.",
+    "Porque todo está conectado.",
     'Nah itu aku juga mikir!'
 ];
 
@@ -41,7 +41,12 @@ async function handler(m) {
     const text = m.text?.trim();
     
     if (!text) {
-        return m.reply(`🤔 *ᴍᴇɴɢᴀᴘᴀ*\n\n> Masukkan pertanyaan!\n\n*Contoh:*\n> .mengapa langit biru?`);
+        return m.reply(`🤔 *ᴍᴇɴɢᴀᴘᴀ*
+
+> ¡Póngase en una pregunta!
+
+*Contoh:*
+> .mengapa langit biru?`);
     }
     
     const answer = answers[Math.floor(Math.random() * answers.length)];

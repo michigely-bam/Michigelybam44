@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'notifclosegroup',
     alias: ['notifclose'],
     category: 'group',
-    description: 'Toggle notifikasi saat grup ditutup',
+    description: "Retrocede notificaciones cuando el grupo está cerrado",
     usage: '.notifclosegroup on/off',
     example: '.notifclosegroup on',
     isOwner: false,
@@ -16,7 +16,7 @@ const pluginConfig = {
 
 function handler(m, { sock, db }) {
     if (!m.isAdmin && !m.isOwner) {
-        return m.reply(`❌ Hanya admin grup yang bisa menggunakan fitur ini`)
+        return m.reply(`❌ Sólo administración de grupo puede utilizar esta característica`)
     }
     
     const args = m.args[0]?.toLowerCase()

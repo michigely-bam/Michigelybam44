@@ -5,7 +5,7 @@ const pluginConfig = {
     category: 'owner',
     description: 'Set rules/aturan bot custom',
     usage: '.setrules <text>',
-    example: '.setrules 1. Jangan spam\n2. Hormati sesama',
+    example: ".Setrules 1. No spam\n2. Hormati sesama",
     isOwner: true,
     isPremium: false,
     isGroup: false,

@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'akankah',
     alias: ['akan', 'will'],
     category: 'fun',
-    description: 'Tanya bot akankah sesuatu terjadi',
+    description: "Pregúntele al bot que sucederá algo.",
     usage: '.akankah <pertanyaan>',
     example: '.akankah aku sukses?',
     isOwner: false,
@@ -15,33 +15,38 @@ const pluginConfig = {
 };
 
 const answers = [
-    'Ya, pasti akan terjadi!',
-    'Tidak, sepertinya tidak akan.',
-    'Mungkin akan, mungkin tidak.',
-    'InsyaAllah akan terjadi!',
+    "¡Sí, lo hará!",
+    "No, no lo creo.",
+    "Tal vez lo haga, tal vez no lo haga.",
+    "¡La voluntad de Dios está hecha!",
     'Hmm, sulit diprediksi.',
     'Pasti! Yakin saja!',
     'Kayaknya nggak deh.',
-    'Akan terjadi kalau kamu mau berusaha.',
-    'Suatu saat nanti, pasti.',
-    'Nggak akan, maaf.',
-    'Tentu akan! Tunggu saja!',
+    "Ocurrirá si lo intentas.",
+    "Un día, seguro.",
+    "No, lo siento.",
+    "¡Por supuesto que lo haré!",
     'Hmm, aku ragu.',
-    'Akan! Percaya sama proses!',
+    "¡Confíe en el proceso!",
     'Kemungkinannya kecil.',
-    'Pasti akan, aku yakin!',
-    'Nggak akan, cari yang lain aja.',
-    'Akan, tapi butuh waktu.',
+    "¡Lo hará, estoy seguro!",
+    "No lo haré, sólo encontrar otro.",
+    "Lo hará, pero lleva tiempo.",
     'InsyaAllah!',
-    'Kalau jodoh, pasti akan.',
-    'Akan terjadi di saat yang tepat!'
+    "Si fuera una coincidencia, lo sería.",
+    "¡Sucederá en el momento adecuado!"
 ];
 
 async function handler(m) {
     const text = m.text?.trim();
     
     if (!text) {
-        return m.reply(`🔮 *ᴀᴋᴀɴᴋᴀʜ*\n\n> Masukkan pertanyaan!\n\n*Contoh:*\n> .akankah aku sukses?`);
+        return m.reply(`🔮 *ᴀᴋᴀɴᴋᴀʜ*
+
+> ¡Póngase en una pregunta!
+
+*Contoh:*
+> .akankah aku sukses?`);
     }
     
     const answer = answers[Math.floor(Math.random() * answers.length)];

@@ -3,9 +3,9 @@ import te from '../../src/lib/ourin-error.js'
 const pluginConfig = {
     name: ['ht', 'hidetag'],
     category: 'group',
-    description: 'Hidetag dengan support reply pesan (teks/media)',
-    usage: '.ht [pesan] atau reply pesan',
-    example: '.ht atau reply pesan lalu .ht',
+    description: "Hidetag con soporte de respuesta de mensaje (texto / medios)",
+    usage: ".ht [message] o mensaje de respuesta",
+    example: ".ht o respuesta último mensaje .ht",
     isOwner: false,
     isPremium: false,
     isGroup: true,
@@ -125,7 +125,7 @@ async function handler(m, { sock }) {
             const finalText = text || quotedText
 
             if (!finalText) {
-                return m.reply('❌ *Pesan kosong*')
+                return m.reply("❌ *El mensaje está vacío*")
             }
 
             return sock.sendMessage(m.chat, {

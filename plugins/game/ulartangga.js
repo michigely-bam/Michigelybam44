@@ -19,7 +19,7 @@ const pluginConfig = {
   name: "ulartangga",
   alias: ["ut", "snakeladder", "sl"],
   category: "game",
-  description: "Main ular tangga bersama player lain dengan visual board",
+  description: "Jugando escaleras de serpiente con otro jugador con una tabla visual",
   usage: ".ulartangga <create|join|start|info|exit|delete>",
   example: ".ulartangga create",
   isOwner: false,
@@ -57,7 +57,7 @@ try {
 
 function getUTContextInfo(
   title = "🐍🎲 ULAR TANGGA",
-  body = "Permainan klasik!",
+  body = "¡Un juego clásico!",
   mentions = [],
 ) {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
@@ -484,7 +484,8 @@ async function answerHandler(m, sock) {
   const currentTurn = ut[m.chat].turn % players.length;
   if (players.indexOf(m.sender) !== currentTurn) {
     await m.reply(
-      `❌ Bukan giliranmu!\n> Giliran: @${players[currentTurn].split("@")[0]}`,
+      `❌ ¡No es tu turno!
+> Giliran: @${players[currentTurn].split("@")[0]}`,
       {
         mentions: [players[currentTurn]],
       },

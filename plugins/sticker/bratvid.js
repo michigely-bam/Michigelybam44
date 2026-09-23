@@ -12,7 +12,7 @@ const pluginConfig = {
     category: 'sticker',
     description: 'Membuat sticker brat animated',
     usage: '.bratvid <text>',
-    example: '.bratvid Hai semua',
+    example: ".Bratvid, bratvid",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -25,7 +25,11 @@ const pluginConfig = {
 async function handler(m, { sock }) {
     const text = m.args.join(' ')
     if (!text) {
-        return m.reply(`🎬 *ʙʀᴀᴛ ᴀɴɪᴍᴀᴛᴇᴅ*\n\n> Masukkan teks\n\n\`Contoh: ${m.prefix}bratvid Hai semua\``)
+        return m.reply(`🎬 *ʙʀᴀᴛ ᴀɴɪᴍᴀᴛᴇᴅ*
+
+> Escriba texto
+
+\`Contoh: ${m.prefix}Bratvid, bratvid\``)
     }
     
     m.react('🕕')

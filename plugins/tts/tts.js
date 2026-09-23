@@ -6,7 +6,7 @@ const pluginConfig = {
   category: "tts",
   description: "Google Text To Speech",
   usage: ".tts <text>",
-  example: ".tts halo semua",
+  example: ".Hola a todos.",
   cooldown: 10,
   energi: 1,
   isEnabled: true,

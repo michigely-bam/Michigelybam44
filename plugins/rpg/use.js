@@ -4,7 +4,7 @@ const pluginConfig = {
   name: "use",
   alias: ["pake", "makan", "open"],
   category: "rpg",
-  description: "Menggunakan item consumable atau membuka crate",
+  description: "Use artículos de consumo o grúas abiertas",
   usage: ".use <item>",
   example: ".use potion",
   isOwner: false,

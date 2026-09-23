@@ -4,7 +4,7 @@ const pluginConfig = {
   name: ["sprem", "stickerpremium", "premiumsticker"],
   alias: [],
   category: "owner",
-  description: "Kirim ulang sticker sebagai premium (Lottie/AI)",
+  description: "Rewire stickers as premium (Lottie / IA)",
   usage: ".sprem (reply sticker)",
   example: ".sprem",
   isOwner: true,
@@ -26,7 +26,7 @@ async function handler(m, { sock }) {
 
   try {
     const msg = q.message?.stickerMessage;
-    if (!msg) return m.reply("❌ Gagal membaca data sticker");
+    if (!msg) return m.reply("❌ No ha leído los datos de las pegatinas");
 
     const stickerMessage = proto.Message.StickerMessage.fromObject({
       url: msg.url,

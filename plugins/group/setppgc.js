@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'setppgc',
     alias: ['setprofilegc', 'setppgroup', 'setppgrup'],
     category: 'group',
-    description: 'Mengubah foto profil grup',
+    description: "Cambiar fotos de perfil de grupo",
     usage: '.setppgc (reply gambar)',
     example: '.setppgc',
     isOwner: false,
@@ -22,14 +22,14 @@ async function handler(m, { sock }) {
         try {
             buffer = await m.quoted.download()
         } catch (e) {
-            await m.reply(`❌ Gagal mengambil gambar.`)
+            await m.reply(`❌ Falló en tomar una foto.`)
             return
         }
     } else if (m.isImage) {
         try {
             buffer = await m.download()
         } catch (e) {
-            await m.reply(`❌ Gagal mengambil gambar.`)
+            await m.reply(`❌ Falló en tomar una foto.`)
             return
         }
     }
@@ -44,7 +44,7 @@ async function handler(m, { sock }) {
     try {
         await sock.updateProfilePicture(m.chat, buffer)
         await m.reply(
-            `✅ Foto profil grup berhasil diperbarui!`
+            `✅ Perfil de grupo foto actualizada con éxito!`
         )
     } catch (error) {
         await m.reply(

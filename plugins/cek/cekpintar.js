@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekpintar',
     alias: ['pintar', 'iq', 'smart'],
     category: 'cek',
-    description: 'Cek seberapa pintar kamu',
-    usage: '.cekpintar <nama>',
+    description: "Mira lo inteligente que eres.",
+    usage: ".Revisar",
     example: '.cekpintar Budi',
     isOwner: false,
     isPremium: false,
@@ -34,8 +34,8 @@ async function handler(m) {
     
     let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
     
-Kepintaran (IQ) kamu *${iq}*
-\`\`\`${desc}\`\`\`` : `Kamu ingin ngecek kepintaran @${mentioned.split('@')[0]} yak? 
+Tu inteligencia. *${iq}*
+\`\`\`${desc}\`\`\`` : `¿Quieres echar un vistazo a la inteligencia @${mentioned.split('@')[0]} yak? 
     
 Kepintaran (IQ) dia sebesar *${iq}*
 \`\`\`${desc}\`\`\``

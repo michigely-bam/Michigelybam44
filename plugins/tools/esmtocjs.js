@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'esmtocjs',
     alias: ['esm2cjs', 'esmconvert'],
     category: 'tools',
-    description: 'Convert ESM (ES Modules) ke CommonJS',
+    description: "Convertir ESM (ES Modules) en CommonJS",
     usage: '.esmtocjs <reply kode>',
     example: '.esmtocjs',
     isOwner: false,

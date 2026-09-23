@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['setbiobot', 'setstatus', 'setabout'],
     category: 'tools',
     description: 'Mengubah bio/status bot',
-    usage: '.setbio <bio baru>',
+    usage: ".setbio Identificar nuevo bio",
     example: '.setbio Bot WhatsApp by Lucky Archz',
     isOwner: true,
     isPremium: false,

@@ -7,7 +7,7 @@ const pluginConfig = {
   category: "sticker",
   description: "Membuat sticker brat squidward",
   usage: ".bratsquidward <text>",
-  example: ".bratsquidward Hai semua",
+  example: ".Bratsquidward Hi everyone",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -21,7 +21,11 @@ async function handler(m, { sock }) {
   const text = m.args.join(" ");
   if (!text) {
     return m.reply(
-      `🖼️ *BRAT SQUIDWARD*\n\n> Masukkan teks\n\n\`Contoh: ${m.prefix}bratsquidward Hai semua\``,
+      `🖼️ *BRAT SQUIDWARD*
+
+> Escriba texto
+
+\`Contoh: ${m.prefix}Bratsquidward Hi everyone\``,
     );
   }
 

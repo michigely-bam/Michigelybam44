@@ -30,14 +30,14 @@ try {
 } catch (e) {}
 
 const rejectionQuotes = [
-  "Sabar ya, yang lebih baik pasti datang! 🌟",
-  "Belum jodoh bukan berarti tidak ada jodoh 💪",
+  "Sé paciente, ¡el mejor vendrá! 🌟",
+  "Ni siquiera una coincidencia significa que no hay nadie. 💪",
   "Move on! Banyak ikan di laut! 🐟",
-  "Yang sabar ya, cinta sejati akan datang 💕",
-  "Jangan patah semangat, tetap semangat! 🔥",
+  "Sé paciente, el amor verdadero vendrá 💕",
+  "¡No pierdas el corazón, sigue luchando! 🔥",
   "Penolakan adalah awal dari keberhasilan 💪",
-  "Masih banyak kesempatan di luar sana! ✨",
-  "Yakin masih ada yang lebih cocok buat kamu! 🌈",
+  "¡Todavía hay muchas oportunidades ahí fuera! ✨",
+  "¡Seguro que hay más para ti! 🌈",
 ];
 
 function getContextInfo(title = "💔 *ᴛᴏʟᴀᴋ*", body = "Rejected!") {
@@ -99,11 +99,15 @@ async function handler(m, { sock }) {
   }
 
   if (shooterJid === m.sender) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Tidak bisa menolak diri sendiri!`);
+    return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> ¡No puedes resistirte!`);
   }
 
   if (shooterJid === m.botNumber) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Bot tidak punya hati untuk ditolak!`);
+    return m.reply(`❌ *ɢᴀɢᴀʟ*
+
+> ¡Bot no tiene corazón para negarse!`);
   }
 
   let shooterData = db.getUser(shooterJid) || {};

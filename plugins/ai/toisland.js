@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['island', 'tropical'],
     category: 'ai',
     description: 'Ubah foto menjadi suasana pulau tropis',
-    usage: '.toisland (reply/kirim gambar)',
+    usage: ".toisland (reply / enviar imágenes)",
     example: '.toisland',
     isOwner: false,
     isPremium: true,
@@ -45,7 +45,7 @@ async function handler(m, { sock }) {
         
         if (!buffer) {
             m.react('❌')
-            return m.reply(`❌ Gagal mendownload gambar`)
+            return m.reply(`❌ No se pudo download image`)
         }
         
         const result = await live3d(buffer, PROMPT)
