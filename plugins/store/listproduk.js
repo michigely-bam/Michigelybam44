@@ -27,10 +27,16 @@ async function handler(m, { sock }) {
 
   if (products.length === 0) {
     return m.reply(
-      `🏪 *Produk Belum Tersedia*\n\n` +
-        `Saat ini belum ada produk yang ditambahkan oleh admin 😔\n\n` +
-        `Silakan cek kembali nanti atau hubungi admin untuk informasi lebih lanjut.\n\n` +
-        `_Terima kasih atas ketertarikan Anda_ 🙏`,
+      `🏪 *Productos No están disponibles*
+
+` +
+        `Actualmente no hay ningún producto añadido por el administrador 😔
+
+` +
+        `Por favor revise más tarde o comuníquese con el administrador para más información.
+
+` +
+        `_ 🙏 Gracias por su interés`,
     );
   }
 
@@ -39,7 +45,7 @@ async function handler(m, { sock }) {
 `;
   txt += `Aquí están los productos disponibles hoy 🎉
 `;
-  txt += `Para compras, tipo \`${m.prefix}comprar el número de contacto\`
+  txt += `Para comprar, escribe \`${m.prefix}beli <número>\`
 
 `;
 
@@ -47,14 +53,14 @@ async function handler(m, { sock }) {
     const p = products[i];
     const type = p.type || "digital";
     const typeIcon = type === "digital" ? "🔑" : "📦";
-    const typeLabel = type === "digital" ? "Digital" : "Fisik";
+    const typeLabel = type === "digital" ? "Digital" : "Físico";
 
     let stockDisplay;
     if (type === "digital") {
       const count = p.stockItems?.length || 0;
-      stockDisplay = p.stock === -1 ? "♾️ Unlimited" : `${count} akun`;
+      stockDisplay = p.stock === -1 ? "♾️ Ilimitadas" : `${count} cuentas`;
     } else {
-      stockDisplay = p.stock === -1 ? "♾️ Unlimited" : `${p.stock} pcs`;
+      stockDisplay = p.stock === -1 ? "♾️ Ilimitadas" : `${p.stock} unidades`;
     }
 
     const isAvailable =
@@ -70,14 +76,14 @@ async function handler(m, { sock }) {
 
     txt += `*${i + 1}.* ${typeIcon} ${p.name}\n`;
     txt += `   💰 ${originalPriceStr}${priceStr}\n`;
-    txt += `   📊 Stok: ${stockDisplay} ${statusIcon}\n`;
-    txt += `   🏷️ Tipe: ${typeLabel}\n`;
+    txt += `   📊 Existencias: ${stockDisplay} ${statusIcon}\n`;
+    txt += `   🏷️ Tipo: ${typeLabel}\n`;
     if (p.description)
       txt += `   📝 _${p.description.substring(0, 60)}${p.description.length > 60 ? "..." : ""}_\n`;
     txt += `\n`;
   }
 
-  txt += `💡 _Ketik \`${m.prefix}comprar el número de contacto\` para ordenar productos_`;
+  txt += `💡 Escribe \`${m.prefix}beli <número>\` para pedir un producto_`;
 
   if (m.isGroup) {
     const saluranId = config.saluran?.id || "120363400911374213@newsletter";

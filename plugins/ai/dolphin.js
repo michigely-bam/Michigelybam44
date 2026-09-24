@@ -6,8 +6,8 @@ const pluginConfig = {
     alias: ['dolphinai', 'dphn'],
     category: 'ai',
     description: "Chat con Dolphin IA (24B Modelo)",
-    usage: '.dolphin <pertanyaan> atau .dolphin --<template> <pertanyaan>',
-    example: '.dolphin jelaskan tentang AI',
+    usage: ".dolphin <pregunta> o .dolphin --<plantilla> <pregunta>",
+    example: ".dolphin explicar acerca de AI",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -52,17 +52,25 @@ async function handler(m, { sock }) {
     if (!text) {
         return m.reply(
             `🐬 *ᴅᴏʟᴘʜɪɴ ᴀɪ*\n\n` +
-            `> Chat dengan Dolphin AI 24B Model\n\n` +
+            `> Chat con el delfín AI Modelo 24B
+
+` +
             `╭┈┈⬡「 📋 *ᴛᴇᴍᴘʟᴀᴛᴇs* 」\n` +
-            `┃ • \`logical\` - Jawaban logis\n` +
-            `┃ • \`creative\` - Jawaban kreatif\n` +
-            `┃ • \`summarize\` - Ringkasan\n` +
-            `┃ • \`code-beginner\` - Kode pemula\n` +
-            `┃ • \`code-advanced\` - Kode lanjutan\n` +
+            `┃ • \`logical\` - Respuestas lógicas
+` +
+            `┃ • \`creative\` - Respuestas creativas
+` +
+            `┃ • \`summarize\` - Resumen
+` +
+            `┃ • \`code-beginner\` - Código para principiantes
+` +
+            `┃ • \`code-advanced\` - Código avanzado
+` +
             `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-            `> *Contoh:*\n` +
-            `> ${m.prefix}dolphin apa itu AI?\n` +
-            `> ${m.prefix}dolphin --creative buat puisi`
+            `> *Ejemplo:*\n` +
+            `> ${m.prefix}dolphin ¿qué es la IA?
+` +
+            `> ${m.prefix}dolphin --creative escribe un poema`
         )
     }
     

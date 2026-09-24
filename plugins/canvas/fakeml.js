@@ -10,8 +10,8 @@ const pluginConfig = {
   name: "fakeml",
   alias: ["mlbbfake", "mlcard", "mlfake"],
   category: "canvas",
-  description: "Membuat fake ML profile card",
-  usage: ".fax: Nombre √≥ (reply / enviar foto)",
+  description: "Crear una tarjeta de perfil falsa de Mobile Legends",
+  usage: '.fakeml <nombre> (responde o envía una foto)',
   example: ".fakeml Misaki",
   isOwner: false,
   isPremium: false,
@@ -27,10 +27,12 @@ async function handler(m, { sock }) {
   if (!name) {
     return m.reply(
       `🎮 *ꜰᴀᴋᴇ ᴍʟ ᴘʀᴏꜰɪʟᴇ*\n\n` +
-        `> Masukkan nama untuk profile\n\n` +
-        `*ᴄᴀʀᴀ ᴘᴀᴋᴀɪ:*\n` +
-        `> 1. Kirim foto + caption \`${m.prefix}fakeml <nama>\`\n` +
-        `> 2. Reply foto dengan \`${m.prefix}fakeml <nama>\``,
+        `> Ingrese un nombre para el perfil
+
+` +
+        `*MODO DE USO:*\n` +
+        `> 1. Envía una foto con el texto \`${m.prefix}fakeml <nombre>\`\n` +
+        `> 2. Responde a la foto con \`${m.prefix}fakeml <nombre>\``,
     );
   }
   let buffer = null;

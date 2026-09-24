@@ -17,13 +17,13 @@ const pluginConfig = {
 }
 
 const ENCHANTABLE = {
-    sword: { name: '⚔️ Pedang', stat: 'attack', bonus: 5, cost: 500, successRate: 70 },
-    shield: { name: '🛡️ Perisai', stat: 'defense', bonus: 4, cost: 500, successRate: 70 },
+    sword: { name: '⚔️ Espada', stat: 'attack', bonus: 5, cost: 500, successRate: 70 },
+    shield: { name: '🛡️ Escudo', stat: 'defense', bonus: 4, cost: 500, successRate: 70 },
     armor: { name: '🦺 Armor', stat: 'health', bonus: 20, cost: 800, successRate: 60 },
-    helmet: { name: '⛑️ Helm', stat: 'defense', bonus: 3, cost: 400, successRate: 75 },
-    bow: { name: '🏹 Busur', stat: 'attack', bonus: 4, cost: 450, successRate: 72 },
-    goldsword: { name: '🗡️ Pedang Emas', stat: 'attack', bonus: 10, cost: 2000, successRate: 50 },
-    diamondarmor: { name: '💎 Armor Berlian', stat: 'health', bonus: 50, cost: 5000, successRate: 40 }
+    helmet: { name: '⛑️ Casco', stat: 'defense', bonus: 3, cost: 400, successRate: 75 },
+    bow: { name: '🏹 Arco', stat: 'attack', bonus: 4, cost: 450, successRate: 72 },
+    goldsword: { name: '🗡️ Espada de oro', stat: 'attack', bonus: 10, cost: 2000, successRate: 50 },
+    diamondarmor: { name: '💎 Armadura de diamante', stat: 'health', bonus: 50, cost: 5000, successRate: 40 }
 }
 
 async function handler(m, { sock }) {
@@ -62,7 +62,7 @@ async function handler(m, { sock }) {
     if (!item) {
         return m.reply(`❌ ¡Los artículos no pueden ser introducidos!
 
-> Ketik \`${m.prefix}enchant\` para ver la lista.`)
+> Escribe \`${m.prefix}enchant\` para ver la lista.`)
     }
     
     if ((user.inventory[itemName] || 0) < 1) {
@@ -77,8 +77,8 @@ async function handler(m, { sock }) {
     const cost = item.cost * (currentLevel + 1)
     if ((user.koin || 0) < cost) {
         return m.reply(
-            `❌ *ʙᴀʟᴀɴᴄᴇ ᴋᴜʀᴀɴɢ*\n\n` +
-            `> Butuh: ${cost.toLocaleString()}\n` +
+            `❌ *SALDO INSUFICIENTE*\n\n` +
+            `> Necesita: ${cost.toLocaleString()}\n` +
             `> Balance: ${(user.koin || 0).toLocaleString()}`
         )
     }
@@ -86,7 +86,7 @@ async function handler(m, { sock }) {
     user.koin -= cost
     
     await m.react('✨')
-    await m.reply(`✨ *ᴍᴇɴɢ-ᴇɴᴄʜᴀɴᴛ ${item.name.toUpperCase()}...*\n\n> Level ${currentLevel} → ${currentLevel + 1}`)
+    await m.reply(`✨ *ENCANTANDO ${item.name.toUpperCase()}...*\n\n> Level ${currentLevel} → ${currentLevel + 1}`)
     await new Promise(r => setTimeout(r, 2000))
     
     const adjustedRate = Math.max(20, item.successRate - (currentLevel * 5))
@@ -101,10 +101,12 @@ async function handler(m, { sock }) {
         
         await m.react('🎉')
         return m.reply(
-            `🎉 *ᴇɴᴄʜᴀɴᴛ ʙᴇʀʜᴀsɪʟ!*\n\n` +
+            `🎉 ¡El encantador ha logrado!
+
+` +
             `╭┈┈⬡「 ✨ *ʀᴇsᴜʟᴛ* 」\n` +
             `┃ 📦 Item: *${item.name}*\n` +
-            `┃ 📊 Level: *${currentLevel} → ${currentLevel + 1}*\n` +
+            `┃ 📊 Nivel: *${currentLevel} → ${currentLevel + 1}*\n` +
             `┃ 💪 Bonus: *+${item.bonus} ${item.stat}*\n` +
             `┃ 💰 Cost: *-${cost.toLocaleString()}*\n` +
             `┃ ✨ EXP: *+150*\n` +
@@ -115,13 +117,15 @@ async function handler(m, { sock }) {
         
         await m.react('💔')
         return m.reply(
-            `💔 *ᴇɴᴄʜᴀɴᴛ ɢᴀɢᴀʟ!*\n\n` +
+            `💔 *ᴇɴᴄʜᴀɴᴛ ERROR!*\n\n` +
             `╭┈┈⬡「 😢 *ʀᴇsᴜʟᴛ* 」\n` +
             `┃ 📦 Item: *${item.name}*\n` +
-            `┃ 📊 Level: *${currentLevel}* (tidak naik)\n` +
-            `┃ 💰 Cost: *-${cost.toLocaleString()}* (hangus)\n` +
+            `┃ 📊 Nivel: *${currentLevel}*(no sube)
+` +
+            `┃ 💰 Cost: *-${cost.toLocaleString()}* (se pierde)
+` +
             `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-            `💡 *Tips:* Coba lagi! Rate: ${adjustedRate}%`
+            `¡💡 Tipos: ¡Pues vuelve a intentarlo! Rate: ${adjustedRate}%`
         )
     }
 }

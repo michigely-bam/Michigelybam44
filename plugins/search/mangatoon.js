@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'mangatoon',
     alias: ['mtoon', 'mangatoonsearch', 'searchmangatoon'],
     category: 'search',
-    description: 'Cari komik di Mangatoon',
+    description: "Busca cómics en Mangatoon",
     usage: '.mangatoon <query>',
     example: '.mangatoon love',
     isOwner: false,
@@ -47,7 +47,7 @@ async function handler(m, { sock }) {
     const query = m.text?.trim()
 
     if (!query) {
-        return m.reply(`📚 *MANGATOON SEARCH*\n\n> Contoh:\n\`${m.prefix}mangatoon love\``)
+        return m.reply(`📚 *MANGATOON SEARCH*\n\n> Ejemplo:\n\`${m.prefix}mangatoon love\``)
     }
 
     m.react('🔍')

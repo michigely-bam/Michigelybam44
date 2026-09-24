@@ -10,7 +10,7 @@ const pluginConfig = {
   name: ["ttmp3"],
   alias: ["ttmusic", "tiktokmusic"],
   category: "download",
-  description: "Download audio TikTok",
+  description: "Descarga audio de TikTok",
   usage: ".ttmp3 <url>",
   example: ".ttmp3 https://vt.tiktok.com/xxx",
   isOwner: false,
@@ -83,10 +83,10 @@ async function handler(m, { sock }) {
   if (!url) {
     return m.reply(
       `╭┈┈⬡「 🎵 *ᴛɪᴋᴛᴏᴋ ᴅᴏᴡɴʟᴏᴀᴅ* 」
-┃ ㊗ ᴜsᴀɢᴇ: \`${m.prefix}ttmp3 <url>\`
+┃ ㊗ USO: \`${m.prefix}ttmp3 <url>\`
 ╰┈┈⬡
 
-> Contoh: ${m.prefix}ttmp3 https://vt.tiktok.com/xxx`,
+> Ejemplo: ${m.prefix}ttmp3 https://vt.tiktok.com/xxx`,
     );
   }
 
@@ -142,7 +142,7 @@ async function handler(m, { sock }) {
     cleanupTempFiles();
     console.error("[TikTokDL] Error:", err);
     m.react("❌");
-    m.reply(`❌ *ɢᴀɢᴀʟ ᴍᴇɴɢᴜɴᴅᴜʜ*\n\n> ${err.message}`);
+    m.reply(`❌ *ERROR DE DESCARGA*\n\n> ${err.message}`);
   }
 }
 

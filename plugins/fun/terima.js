@@ -7,7 +7,7 @@ const pluginConfig = {
   name: "terima",
   alias: ["accept", "yes"],
   category: "fun",
-  description: "Menerima tembakan dari seseorang",
+  description: "Recibir un disparo de alguien",
   usage: ".terima @tag",
   example: ".terima @628xxx",
   isOwner: false,
@@ -32,16 +32,16 @@ try {
 
 const celebrationQuotes = [
   "¡Tanto tiempo puede llegar al palanquín! 💍",
-  "Dari teman jadi cinta, indahnya! 💕",
+  "¡De la amistad al amor, qué bonito! 💕",
   "Love is in the air! 💖",
   "Couple goals detected! 💑",
   "¡No olvides invitarme cuando te cases! 💒",
   "¡Que tengan una vida agradable juntos! 🥰",
-  "Chemistry-nya kuat banget! 🔥",
+  "¡Hay muchísima química! 🔥",
   "Match made in heaven! ✨",
 ];
 
-function getContextInfo(title = "💕 *ᴛᴇʀɪᴍᴀ*", body = "Love accepted!") {
+function getContextInfo(title = "💕 *ACEPTAR*", body = "Love accepted!") {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
@@ -93,20 +93,20 @@ async function handler(m, { sock }) {
 
   if (!shooterJid) {
     return m.reply(
-      `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-        `> Reply pesan tembakan + \`${m.prefix}terima\`\n` +
-        `> Atau \`${m.prefix}terima @tag\``,
+      `⚠️ *MODO DE USO*\n\n` +
+        `> Responder el mensaje de disparos + \`${m.prefix}terima\`\n` +
+        `> O \`${m.prefix}terima @tag\``,
     );
   }
 
   if (shooterJid === m.sender) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*
+    return m.reply(`❌ *falló*
 
 > ¡No puedes aceptarte!`);
   }
 
   if (shooterJid === m.botNumber) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*
+    return m.reply(`❌ *falló*
 
 > ¡Bot no puede salir!`);
   }
@@ -122,8 +122,8 @@ async function handler(m, { sock }) {
     shooterData.fun.tembakTarget !== m.sender
   ) {
     return m.reply(
-      `❌ *ᴛɪᴅᴀᴋ ᴍᴇɴᴇᴍʙᴀᴋ*\n\n` +
-        `> @${shooterJid.split("@")[0]} tidak sedang menembakmu`,
+      `❌ *NADIE SE TE ESTÁ DECLARANDO*\n\n` +
+        `> @${shooterJid.split("@")[0]} no te está proponiendo ser pareja`,
       { mentions: [shooterJid] },
     );
   }
@@ -150,13 +150,15 @@ async function handler(m, { sock }) {
   const dateStr = timeHelper.formatFull("dddd, DD MMMM YYYY");
 
   await m.react("💕");
-  const ctx = getContextInfo("💕 *ᴊᴀᴅɪᴀɴ*", "Selamat!");
+  const ctx = getContextInfo("💕 *RELACIÓN ACEPTADA*", "¡Felicidades!");
   ctx.mentionedJid = [m.sender, shooterJid];
 
   await m.reply(
-    `💕 *WIDIHHHH, CIE CIE DITERIMA* @${shooterJid.split("@")[0]}\n\n` +
-      `@${m.sender.split("@")[0]} dan @${shooterJid.split("@")[0]} resmi pacaran\n\n` +
-      `Semoga langgeng dan bahagia 💍`,
+    `💕 *¡PROPUESTA ACEPTADA!* @${shooterJid.split("@")[0]}\n\n` +
+      `@${m.sender.split("@")[0]} y @${shooterJid.split("@")[0]} ya son pareja
+
+` +
+      `Que su relación sea duradera y feliz 💍`,
     { mentions: [m.sender, shooterJid] },
   );
 }

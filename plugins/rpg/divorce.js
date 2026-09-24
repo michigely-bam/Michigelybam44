@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'divorce',
     alias: ['cerai', 'pisah'],
     category: 'rpg',
-    description: 'Bercerai dari pasangan',
+    description: "Divorciarse de la pareja",
     usage: '.divorce',
     example: '.divorce',
     isOwner: false,
@@ -24,9 +24,10 @@ async function handler(m, { sock }) {
     
     if (!user.rpg.spouse) {
         return m.reply(
-            `❌ *ʙᴇʟᴜᴍ ᴍᴇɴɪᴋᴀʜ*\n\n` +
-            `> Kamu belum menikah!\n` +
-            `> Nikah dengan \`.marry @user\``
+            `❌ *AÚN NO ESTÁS CASADO*\n\n` +
+            `¡No estás casado!
+` +
+            `> Casarse con \`.marry @user\``
         )
     }
     
@@ -36,9 +37,11 @@ async function handler(m, { sock }) {
     const divorceCost = 25000
     if ((user.koin || 0) < divorceCost) {
         return m.reply(
-            `❌ *sᴀʟᴅᴏ ᴛɪᴅᴀᴋ ᴄᴜᴋᴜᴘ*\n\n` +
-            `> Koin kamu: Rp ${(user.koin || 0).toLocaleString('id-ID')}\n` +
-            `> Butuh: Rp ${divorceCost.toLocaleString('id-ID')}`
+            `❌ *saldo no es suficiente*
+
+` +
+            `> Tus monedas: Rp ${(user.koin || 0).toLocaleString('id-ID')}\n` +
+            `> Necesidad: Rp ${divorceCost.toLocaleString('id-ID')}`
         )
     }
     
@@ -53,10 +56,11 @@ async function handler(m, { sock }) {
     
     db.save()
     
-    let txt = `💔 *ᴘᴇʀᴄᴇʀᴀɪᴀɴ*\n\n`
+    let txt = `💔 *DIVORCIO*\n\n`
     txt += `> 😢 @${m.sender.split('@')[0]} & @${spouseJid.split('@')[0]}\n`
-    txt += `> Resmi bercerai!\n`
-    txt += `> 💸 Biaya: Rp ${divorceCost.toLocaleString('id-ID')}\n\n`
+    txt += `> ¡Divorcio oficial!
+`
+    txt += `> 💸 Costo: Rp ${divorceCost.toLocaleString('id-ID')}\n\n`
     txt += `> _Move on yaa..._`
     
     await m.reply(txt, { mentions: [m.sender, spouseJid] })

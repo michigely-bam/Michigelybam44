@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'marry',
     alias: ['nikah', 'wedding', 'propose'],
     category: 'rpg',
-    description: 'Menikahi player lain',
+    description: "Casarse con otro jugador",
     usage: '.marry @user',
     example: '.marry @user',
     isOwner: false,
@@ -28,9 +28,11 @@ async function handler(m, { sock }) {
         return m.reply(
             `💒 *ᴍᴀʀʀʏ*\n\n` +
             `╭┈┈⬡「 📋 *ᴜsᴀɢᴇ* 」\n` +
-            `┃ > Tag pasangan yang mau dinikahi\n` +
+            `┃ > Marca a la pareja que quiere casarse
+` +
             `┃ > \`.marry @user\`\n` +
-            `┃ > Biaya: Rp 50.000\n` +
+            `┃ > Costo: Rp 50.000
+` +
             `╰┈┈┈┈┈┈┈┈⬡`
         )
     }
@@ -46,17 +48,21 @@ async function handler(m, { sock }) {
     
     if (user.rpg.spouse) {
         return m.reply(
-            `❌ *sᴜᴅᴀʜ ᴍᴇɴɪᴋᴀʜ*\n\n` +
-            `> Kamu sudah menikah dengan @${user.rpg.spouse.split('@')[0]}!\n` +
-            `> Cerai dulu dengan \`.divorce\``,
+            `❌ *después de casarse*
+
+` +
+            `> Estás casado con @${user.rpg.spouse.split('@')[0]}!\n` +
+            `> Divorcio primero con \`.divorce\``,
             { mentions: [user.rpg.spouse] }
         )
     }
     
     if (partner.rpg.spouse) {
         return m.reply(
-            `❌ *ᴛᴀʀɢᴇᴛ sᴜᴅᴀʜ ᴍᴇɴɪᴋᴀʜ*\n\n` +
-            `> @${target.split('@')[0]} sudah menikah dengan orang lain!`,
+            `❌ *target es casado*
+
+` +
+            `> @${target.split('@')[0]} ¡Estás casado con otra persona!`,
             { mentions: [target] }
         )
     }
@@ -64,9 +70,11 @@ async function handler(m, { sock }) {
     const marriageCost = 50000
     if ((user.koin || 0) < marriageCost) {
         return m.reply(
-            `❌ *sᴀʟᴅᴏ ᴛɪᴅᴀᴋ ᴄᴜᴋᴜᴘ*\n\n` +
-            `> Koin kamu: Rp ${(user.koin || 0).toLocaleString('id-ID')}\n` +
-            `> Butuh: Rp ${marriageCost.toLocaleString('id-ID')}`
+            `❌ *saldo no es suficiente*
+
+` +
+            `> Tus monedas: Rp ${(user.koin || 0).toLocaleString('id-ID')}\n` +
+            `> Necesidad: Rp ${marriageCost.toLocaleString('id-ID')}`
         )
     }
     
@@ -78,11 +86,12 @@ async function handler(m, { sock }) {
     
     db.save()
     
-    let txt = `💒 *ᴘᴇʀɴɪᴋᴀʜᴀɴ*\n\n`
+    let txt = `💒 *MATRIMONIO*\n\n`
     txt += `> 💑 @${m.sender.split('@')[0]} & @${target.split('@')[0]}\n`
-    txt += `> 💍 Resmi menikah!\n`
-    txt += `> 💸 Biaya: Rp ${marriageCost.toLocaleString('id-ID')}\n\n`
-    txt += `> _Semoga langgeng! 💕_`
+    txt += `> 💍 ¡Matrimonio oficial!
+`
+    txt += `> 💸 Costo: Rp ${marriageCost.toLocaleString('id-ID')}\n\n`
+    txt += `> _¡Que dure para siempre! 💕_`
     
     await m.reply(txt, { mentions: [m.sender, target] })
 }

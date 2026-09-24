@@ -20,37 +20,37 @@ const pluginConfig = {
 const MODES = {
     md: {
         name: 'Multi-Device',
-        desc: 'Mode default dengan semua fitur standar',
+        desc: "Modo predeterminado con todas las características estándar",
         allowedCategories: null,
         excludeCategories: ['cpanel', 'pushkontak', 'store']
     },
     all: {
         name: 'All Features',
-        desc: 'Semua fitur dari semua mode bisa diakses',
+        desc: "Todas las características de todas las modalidades son accesibles",
         allowedCategories: null,
         excludeCategories: null
     },
     cpanel: {
         name: 'CPanel Pterodactyl',
-        desc: 'Mode khusus untuk panel server',
+        desc: "Modo especial para el panel del servidor",
         allowedCategories: ['main', 'group', 'sticker', 'owner', 'tools', 'panel'],
         excludeCategories: null
     },
     pushkontak: {
-        name: 'Push Kontak',
-        desc: 'Mode khusus untuk push kontak ke member',
+        name: 'Envío de contactos',
+        desc: "Modo especial para empujar contactos a los miembros",
         allowedCategories: ['owner', 'main', 'group', 'sticker', 'pushkontak'],
         excludeCategories: null
     },
     store: {
-        name: 'Store/Toko',
-        desc: 'Mode khusus untuk toko online',
+        name: 'Tienda',
+        desc: "Modalidad especial para tiendas en línea",
         allowedCategories: ['main', 'group', 'sticker', 'owner', 'store'],
         excludeCategories: null
     },
     otp: {
         name: 'OTP Service',
-        desc: 'Mode layanan OTP otomatis',
+        desc: 'Modo de servicio OTP automático',
         allowedCategories: ['main', 'group', 'sticker', 'owner'],
         excludeCategories: null
     }
@@ -77,15 +77,15 @@ function handler(m, { sock }) {
 
         return m.reply(
             `🔧 *ʙᴏᴛ ᴍᴏᴅᴇ*\n\n` +
-            `> Mode saat ini: *${currentMode.toUpperCase()}* (${MODES[currentMode]?.name || 'Unknown'})\n` +
+            `> Modo actual: *${currentMode.toUpperCase()}* (${MODES[currentMode]?.name || 'Desconocido'})\n` +
             (currentMode === 'store' ? `> Autoorder: *${autoorderStatus}*\n` : '') +
-            `\n╭─「 📋 *ᴘɪʟɪʜᴀɴ* 」\n` +
+            `\n╭─「 📋 *OPCIONES* 」\n` +
             `${modeList}` +
             `╰───────────────\n\n` +
             `*ꜰʟᴀɢ sᴛᴏʀᴇ:*\n` +
-            `> \`${m.prefix}botmode store\` - Manual order\n` +
-            `> \`${m.prefix}botmode store --autoorder\` - Auto payment\n\n` +
-            `> _Pengaturan per-grup_`
+            `> \`${m.prefix}botmode store\` - Pedido manual\n` +
+            `> \`${m.prefix}botmode store --autoorder\` - Pago automático\n\n` +
+            `> _Configuración independiente por grupo_`
         )
     }
 
@@ -109,13 +109,13 @@ function handler(m, { sock }) {
 
         if (isAutoorder && !pakasirEnabled) {
             return m.reply(
-                `⚠️ *ᴀᴜᴛᴏᴏʀᴅᴇʀ ᴛɪᴅᴀᴋ ʙɪsᴀ ᴅɪᴀᴋᴛɪꜰᴋᴀɴ*\n\n` +
-                `> Pakasir belum dikonfigurasi!\n\n` +
-                `*ᴄᴀʀᴀ sᴇᴛᴜᴘ:*\n` +
-                `1. Buka \`config.js\`\n` +
-                `2. Set \`pakasir.slug\` dan \`pakasir.apiKey\`\n` +
-                `3. Restart bot\n\n` +
-                `> Atau gunakan mode manual:\n` +
+                `⚠️ *NO SE PUEDE ACTIVAR EL PEDIDO AUTOMÁTICO*\n\n` +
+                `> Pakasir no está configurado.\n\n` +
+                `*Configuración:*\n` +
+                `1. Abre \`config.js\`\n` +
+                `2. Configura \`pakasir.slug\` y \`pakasir.apiKey\`\n` +
+                `3. Reinicia el bot\n\n` +
+                `> O usa el modo manual:\n` +
                 `\`${m.prefix}botmode store\``
             )
         }
@@ -136,26 +136,28 @@ function handler(m, { sock }) {
     if (mode === 'store') {
         const products = newGroupData.storeConfig?.products || []
         if (isAutoorder) {
-            extraInfo = `\n\n✅ *Autoorder aktif!*\n` +
-                `> Pembayaran otomatis via Pakasir\n` +
-                `> Product: \`${products.length}\` item`
+            extraInfo = `\n\n✅ *¡PEDIDO AUTOMÁTICO ACTIVO!*\n` +
+                `> Pagos automáticos mediante Pakasir\n` +
+                `> Productos: \`${products.length}\``
         } else {
-            extraInfo = `\n\n📋 *Manual mode*\n` +
-                `> Admin perlu confirm order manual\n` +
-                `> Product: \`${products.length}\` item\n\n` +
-                `*ᴘᴀɴᴅᴜᴀɴ:*\n` +
-                `> \`${m.prefix}addprod <kode> <harga> <nama>\`\n` +
-                `> \`${m.prefix}listprod\` - Lihat produk`
+            extraInfo = `\n\n📋 *MODO MANUAL*\n` +
+                `> Un administrador debe confirmar cada pedido\n` +
+                `> Productos: \`${products.length}\`\n\n` +
+                `*GUÍA:*\n` +
+                `> \`${m.prefix}addprod <código> <precio> <nombre>\`\n` +
+                `> \`${m.prefix}listprod\` - Ver los productos`
         }
     }
 
     return m.reply(
-        `✅ *ᴍᴏᴅᴇ ᴅɪᴜʙᴀʜ*\n\n` +
-        `> Mode: *${mode.toUpperCase()}* (${MODES[mode].name})\n` +
-        `> Grup: *${m.chat.split('@')[0]}*\n` +
+        `✅ *MODO CAMBIADO*\n\n` +
+        `> Modo: *${mode.toUpperCase()}* (${MODES[mode].name})\n` +
+        `> Grupo: *${m.chat.split('@')[0]}*\n` +
         (mode === 'store' ? `> Autoorder: *${isAutoorder ? 'ON' : 'OFF'}*` : '') +
         extraInfo +
-        `\n\n> Ketik \`${m.prefix}menu\` untuk melihat menu.`
+        `
+
+> Escribe \`${m.prefix}menu\` para ver el menú.`
     )
 }
 

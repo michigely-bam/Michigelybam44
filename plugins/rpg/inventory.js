@@ -22,19 +22,19 @@ const ITEMS = {
     mythic: { emote: '🎁', name: 'Mythic Crate' },
     legendary: { emote: '💎', name: 'Legendary Crate' },
     
-    rock: { emote: '🪨', name: 'Batu' },
-    coal: { emote: '⚫', name: 'Batubara' },
-    iron: { emote: '⛓️', name: 'Besi' },
-    gold: { emote: '🥇', name: 'Emas' },
-    diamond: { emote: '💠', name: 'Berlian' },
+    rock: { emote: '🪨', name: 'Piedra' },
+    coal: { emote: '⚫', name: 'Carbón' },
+    iron: { emote: '⛓️', name: 'Hierro' },
+    gold: { emote: '🥇', name: 'Oro' },
+    diamond: { emote: '💠', name: 'Diamante' },
     emerald: { emote: '💚', name: 'Emerald' },
     
-    trash: { emote: '🗑️', name: 'Sampah' },
-    fish: { emote: '🐟', name: 'Ikan' },
-    prawn: { emote: '🦐', name: 'Udang' },
-    octopus: { emote: '🐙', name: 'Gurita' },
-    shark: { emote: '🦈', name: 'Hiu' },
-    whale: { emote: '🐳', name: 'Paus' },
+    trash: { emote: '🗑️', name: 'Basura' },
+    fish: { emote: '🐟', name: 'Pez' },
+    prawn: { emote: '🦐', name: 'Camarón' },
+    octopus: { emote: '🐙', name: 'Pulpo' },
+    shark: { emote: '🦈', name: 'Tiburón' },
+    whale: { emote: '🐳', name: 'Ballena' },
     
     potion: { emote: '🥤', name: 'Health Potion' },
     mpotion: { emote: '🧪', name: 'Mana Potion' },
@@ -80,7 +80,7 @@ async function handler(m, { sock }) {
 `
         invText += `> Utilice un comando RPG para obtener elementos.`
     } else {
-        invText += `> Gunakan \`.use <item>\` para usar artículos.`
+        invText += `> Usa \`.use <item>\` para utilizar objetos.`
     }
     
     await m.reply(invText)

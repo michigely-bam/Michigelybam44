@@ -23,20 +23,24 @@ function handler(m, { sock, db }) {
     const group = db.getGroup(m.chat) || {}
     
     if (!['on', 'off'].includes(args)) {
-        const status = group.notifDemote === true ? '✅ Aktif' : '❌ Nonaktif'
-        return m.reply(`👤 *ɴᴏᴛɪꜰ ᴅᴇᴍᴏᴛᴇ*\n\n> Status: ${status}\n\n*Penggunaan:*\n\`${m.prefix}notifdemote on\` - Aktifkan\n\`${m.prefix}notifdemote off\` - Nonaktifkan`)
+        const status = group.notifDemote === true ? "✅ Activo" : "❌ Inactivo"
+        return m.reply(`👤 *ɴᴏᴛɪꜰ ᴅᴇᴍᴏᴛᴇ*\n\n> Status: ${status}
+
+*Uso:*
+\`${m.prefix}notifdemote on\` - Activa
+\`${m.prefix}notifdemote off\` - Desactivación`)
     }
     
     if (args === 'on') {
         group.notifDemote = true
         db.setGroup(m.chat, group)
-        return m.reply(`✅ *ɴᴏᴛɪꜰ ᴅᴇᴍᴏᴛᴇ ᴅɪᴀᴋᴛɪꜰᴋᴀɴ*`)
+        return m.reply(`✅ *ɴᴏᴛɪꜰ ᴅᴇᴍᴏᴛᴇ ACTIVADO*`)
     }
     
     if (args === 'off') {
         group.notifDemote = false
         db.setGroup(m.chat, group)
-        return m.reply(`❌ *ɴᴏᴛɪꜰ ᴅᴇᴍᴏᴛᴇ ᴅɪɴᴏɴᴀᴋᴛɪꜰᴋᴀɴ*`)
+        return m.reply(`❌ *NOTIFICACIÓN DE DESCENSO DESACTIVADA*`)
     }
 }
 

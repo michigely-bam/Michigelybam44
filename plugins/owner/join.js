@@ -36,19 +36,21 @@ async function handler(m, { sock }) {
 
   if (!input) {
     return m.reply(
-      `🔗 *ᴊᴏɪɴ ɢʀᴜᴘ*\n\n` +
-        `╭┈┈⬡「 📋 *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ* 」\n` +
-        `┃ ◦ Kirim link invite grup\n` +
-        `┃ ◦ Bot akan otomatis join\n` +
+      `🔗 *UNIRSE AL GRUPO*\n\n` +
+        `╭┈┈⬡「 📋 *MODO DE USO* 」\n` +
+        `┃ ◦ Envía un enlace para invitar al grupo
+` +
+        `┃ ◦ El bot se unirá automáticamente
+` +
         `╰┈┈⬡\n\n` +
-        `\`Contoh: ${m.prefix}join https://chat.whatsapp.com/xxx\``,
+        `\`Ejemplo: ${m.prefix}join https://chat.whatsapp.com/xxx\``,
     );
   }
 
   const inviteCode = extractInviteCode(input);
 
   if (!inviteCode) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*
+    return m.reply(`❌ *falló*
 
 > Enlace de invitación inválido`);
   }
@@ -60,7 +62,7 @@ async function handler(m, { sock }) {
 
     if (!groupInfo) {
       await m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > No se puede recuperar información del grupo`);
     }
@@ -72,7 +74,7 @@ async function handler(m, { sock }) {
 
     if (isMember) {
       await m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > El Bot ya es miembro de este grupo`);
     }
@@ -86,11 +88,13 @@ async function handler(m, { sock }) {
 
     await m.reply({
       text:
-        `✅ *ʙᴇʀʜᴀsɪʟ ᴊᴏɪɴ*\n\n` +
-        `╭┈┈⬡「 📋 *ɪɴꜰᴏ ɢʀᴜᴘ* 」\n` +
-        `┃ 🏠 ɴᴀᴍᴀ: *${groupInfo.subject || "Unknown"}*\n` +
+        `✅ *logró unirse*
+
+` +
+        `╭┈┈⬡「 📋 *ɪɴꜰᴏ GRUPO* 」\n` +
+        `┃ 🏠 NOMBRE: *${groupInfo.subject || "Desconocido"}*\n` +
         `┃ 👥 ᴍᴇᴍʙᴇʀ: *${groupInfo.size || groupInfo.participants?.length || 0}*\n` +
-        `┃ 👤 ᴏᴡɴᴇʀ: *${groupInfo.owner?.split("@")[0] || "Unknown"}*\n` +
+        `┃ 👤 PROPIETARIO: *${groupInfo.owner?.split("@")[0] || "Desconocido"}*\n` +
         `╰┈┈⬡`,
       contextInfo: {
         forwardingScore: 9999,

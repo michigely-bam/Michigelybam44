@@ -81,7 +81,7 @@ const pluginConfig = {
     name: 'lirik',
     alias: ['lyric', 'lyrics', 'liriklagu'],
     category: 'search',
-    description: 'Cari lirik lagu',
+    description: "Busca las letras de las canciones",
     usage: '.lirik <query>',
     example: '.lirik ',
     isOwner: false,
@@ -98,9 +98,11 @@ async function handler(m, { sock }) {
     
     if (!query) {
         return m.reply(
-            `*ʟɪʀɪᴋ ʟᴀɢᴜ*\n\n` +
-            `> Masukkan kata kunci pencarian\n\n` +
-            `> Contoh: \`${m.prefix}lirik Somewhere only we know\``
+            `*LETRA DE LA CANCIÓN*\n\n` +
+            `> Ingrese la palabra clave de búsqueda
+
+` +
+            `> Ejemplo: \`${m.prefix}lirik Somewhere only we know\``
         )
     }
     

@@ -3,7 +3,7 @@ import { games } from '../../src/lib/ourin-games.js'
 games.register('asahotak', {
     alias: ['asah', 'quiz'],
     emoji: '🧠',
-    title: 'ASAH OTAK',
+    title: "DESAFÍO MENTAL",
     description: "Afilador de cerebro juego - Adivina la respuesta"
 })
 

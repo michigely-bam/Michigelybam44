@@ -29,8 +29,8 @@ async function handler(m, { sock }) {
   const links = donasiConfig.links || [];
   const qrisUrl = donasiConfig.qris || "";
   const benefits = donasiConfig.benefits || [
-    "Mendukung development",
-    "Server lebih stabil",
+    "Apoya el desarrollo",
+    "Servidor más estable",
     "Las nuevas características son más rápidas",
     "Priority support",
   ];
@@ -38,7 +38,8 @@ async function handler(m, { sock }) {
   let text = `LA DONACIÓN A OVER ${botName} 🙏`;
 
   if (payments.length > 0 || links.length > 0) {
-    text += `Pembayaran\n`;
+    text += `El pago
+`;
     for (const pay of payments) {
       text += `🏦 *${pay.name
         ?.toLowerCase()
@@ -64,7 +65,7 @@ async function handler(m, { sock }) {
     text += `┃\n`;
     text += `┃ > Desconfigurado
 `;
-    text += `┃ > Edit config.donasi\n`;
+    text += `┃ > Edita config.donasi\n`;
     text += `┃\n`;
     text += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
   }
@@ -75,7 +76,8 @@ async function handler(m, { sock }) {
   }
   text += `\n`;
 
-  text += `_Donasi berapapun sangat berharga_\n`;
+  text += `Cualquier donación es muy valiosa.
+`;
   text += `Contact: @${config.owner?.number?.[0] || "owner"}`;
 
   const copyButtons = payments.map((pay) => ({

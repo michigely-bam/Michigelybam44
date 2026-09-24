@@ -7,7 +7,7 @@ const pluginConfig = {
     alias: ['mekah', 'mecca', 'tomecca'],
     category: 'ai',
     description: "Cambiar el fondo de la imagen a Mecca",
-    usage: '.tomekah (reply gambar)',
+    usage: ".tomekah (respuesta a la imagen)",
     example: '.tomekah',
     isOwner: false,
     isPremium: false,
@@ -22,7 +22,7 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
     
     if (!isImage) {
-        return m.reply(`🕋 *ᴍᴇᴋᴀʜ sᴛʏʟᴇ*
+        return m.reply(`🕋 *ESTILO MECA*
 
 > Enviar / responder imágenes
 

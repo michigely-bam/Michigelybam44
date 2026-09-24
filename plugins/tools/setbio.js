@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'setbio',
     alias: ['setbiobot', 'setstatus', 'setabout'],
     category: 'tools',
-    description: 'Mengubah bio/status bot',
+    description: "Cambiar la bio/status del bot",
     usage: ".setbio Identificar nuevo bio",
     example: '.setbio Bot WhatsApp by Lucky Archz',
     isOwner: true,
@@ -19,9 +19,10 @@ async function handler(m, { sock }) {
     
     if (!newBio && m.args?.length === 0) {
         await m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-            `> \`${m.prefix}setbio Bio bot baru\`\n` +
-            `> \`${m.prefix}setbio clear\` - Hapus bio`
+            `⚠️ *MODO DE USO*\n\n` +
+            `> \`${m.prefix}setbio Nueva biografía del bot\`
+` +
+            `> \`${m.prefix}setbio clear\` - Eliminación de la bio`
         )
         return
     }
@@ -30,8 +31,10 @@ async function handler(m, { sock }) {
     
     if (bioToSet.length > 139) {
         await m.reply(
-            `⚠️ *ᴠᴀʟɪᴅᴀsɪ*\n\n` +
-            `> Bio maksimal 139 karakter.`
+            `⚠️ *VALIDACIÓN*
+
+` +
+            `Biografía máxima de 139 caracteres.`
         )
         return
     }
@@ -41,20 +44,24 @@ async function handler(m, { sock }) {
         
         if (bioToSet) {
             await m.reply(
-                `✅ *ʙɪᴏ ʙᴏᴛ ᴅɪᴜʙᴀʜ*\n\n` +
-                `> Bio bot sekarang:\n` +
+                `✅ *ʙɪᴏ ʙᴏᴛ CAMBIADO*\n\n` +
+                `> Bio bot ahora:
+` +
                 `> _${bioToSet}_`
             )
         } else {
             await m.reply(
-                `✅ *ʙɪᴏ ʙᴏᴛ ᴅɪʜᴀᴘᴜs*\n\n` +
-                `> Bio bot berhasil dihapus!`
+                `✅ *bio bot eliminado*
+
+` +
+                `¡Biobot fue eliminado con éxito!`
             )
         }
     } catch (error) {
         await m.reply(
-            `❌ *ɢᴀɢᴀʟ*\n\n` +
-            `> Tidak dapat mengubah bio bot.\n` +
+            `❌ *ERROR*\n\n` +
+            `> No se pudo cambiar la biografía del bot.
+` +
             `> _${error.message}_`
         )
     }

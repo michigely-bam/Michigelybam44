@@ -65,7 +65,8 @@ function handler(m) {
 
     if (!text) {
         return m.reply(
-            `╭┈┈⬡「 🎨 *ɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ ᴇɴɪɢᴍᴀ* 」\n┃ ㊗ ᴜsᴀɢᴇ: \`${m.prefix}installtemaenigma <ip>|<password>|<link_wa>|<link_group>|<link_channel>\`\n╰┈┈⬡\n\n> Contoh:\n> \`${m.prefix}installtemaenigma 192.168.1.1|pass|https://wa.me/628xxx|https://t.me/group|https://t.me/channel\``
+            `╭┈┈⬡「 🎨 *ɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ ᴇɴɪɢᴍᴀ* 」
+┃ ㊗ USO: \`${m.prefix}installtemaenigma <ip>|<password>|<link_wa>|<link_group>|<link_channel>\`\n╰┈┈⬡\n\n> Ejemplo:\n> \`${m.prefix}installtemaenigma 192.168.1.1|pass|https://wa.me/628xxx|https://t.me/group|https://t.me/channel\``
         )
     }
 
@@ -73,7 +74,7 @@ function handler(m) {
     if (parts.length < 5) {
         return m.reply(`❌ ¡Formato equivocado!
 
-> Gunakan: \`ip|password|link_wa|link_group|link_channel\``)
+> Utilice: \`ip|password|link_wa|link_group|link_channel\``)
     }
 
     const ipvps = parts[0].trim()
@@ -96,10 +97,10 @@ function handler(m) {
 
     conn.on('ready', async () => {
         try {
-            await m.reply(`🕕 *[1/3] ɪɴsᴛᴀʟʟ ᴅᴇᴘᴇɴᴅᴇɴᴄɪᴇs...*\n\n> Menginstall Node.js, Yarn, Composer...`)
+            await m.reply(`🕕 *[1/3] INSTALANDO DEPENDENCIAS...*\n\n> Instalando Node.js, Yarn y Composer...`)
             await execSSH(conn, DEPS_CMD)
 
-            await m.reply(`🕕 *[2/3] ɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ...*\n\n> Mendownload & install tema Enigma...`)
+            await m.reply(`🕕 *[2/3] INSTALANDO TEMA...*\n\n> Descargando e instalando el tema Enigma...`)
             await execSSHInteractive(conn, THEME_CMD, [
                 { trigger: "TOKEN ACCESS", value: 'skyzodev' },
                 { trigger: "Introduzca la opción", value: '1' },
@@ -114,7 +115,7 @@ function handler(m) {
 
             m.react('✅')
             await m.reply(
-                `╭┈┈⬡「 ✅ *ᴛᴇᴍᴀ ᴇɴɪɢᴍᴀ* 」\n┃ ㊗ sᴛᴀᴛᴜs: *Terinstall*\n┃ ㊗ ɪᴘ: ${ipvps}
+                `╭┈┈⬡「 ✅ *TEMA ENIGMA* 」\n┃ ㊗ ᴇsᴛᴀᴅᴏ: *Instalado*\n┃ ㊗ ɪᴘ: ${ipvps}
 ╰┈┈⬡
 
 > _Enigma + dependencias tema instalado con éxito!_`

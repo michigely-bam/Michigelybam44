@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['pintar', 'iq', 'smart'],
     category: 'cek',
     description: "Mira lo inteligente que eres.",
-    usage: ".Revisar",
+    usage: ".cekpintar [@usuario]",
     example: '.cekpintar Budi',
     isOwner: false,
     isPremium: false,
@@ -21,25 +21,24 @@ async function handler(m) {
     
     let desc = ''
     if (iq >= 150) {
-        desc = 'JENIUS! Einstein level! 🧠✨'
+        desc = "¡GENIO! ¡Nivel Einstein! 🧠✨"
     } else if (iq >= 130) {
-        desc = 'Sangat cerdas! 🎓'
+        desc = "¡Muy inteligente! 🎓"
     } else if (iq >= 110) {
-        desc = 'Di atas rata-rata! 👍'
+        desc = "¡Por encima de la media! 👍"
     } else if (iq >= 90) {
-        desc = 'Normal, rata-rata 😊'
+        desc = "Normal, promedio 😊"
     } else {
-        desc = 'Tetap semangat belajar! 📚'
+        desc = "¡Sigue estudiando con ánimo! 📚"
     }
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu inteligencia. *${iq}*
-\`\`\`${desc}\`\`\`` : `¿Quieres echar un vistazo a la inteligencia @${mentioned.split('@')[0]} yak? 
-    
-Kepintaran (IQ) dia sebesar *${iq}*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu IQ estimado es *${iq}*.
 \`\`\`${desc}\`\`\``
-    
+        : `IQ estimado de @${mentioned.split('@')[0]}: *${iq}*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

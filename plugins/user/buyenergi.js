@@ -4,7 +4,7 @@ const pluginConfig = {
     alias: ['belienergi', 'purchaseenergi', 'buyenergy'],
     category: 'user',
     description: "Comprar energía con una moneda (1 energía = 100 monedas)",
-    usage: '.buyenergi <jumlah>',
+    usage: '.buyenergi <cantidad>',
     example: '.buyenergi 10',
     isOwner: false,
     isPremium: false,
@@ -29,13 +29,16 @@ async function handler(m, { sock }) {
         const user = db.getUser(m.sender) || db.setUser(m.sender)
         
         return m.reply(
-            `🛒 *ʙᴜʏ ᴇɴᴇʀɢɪ*\n\n` +
+            `🛒 *ʙᴜʏ ENERGÍA*\n\n` +
             `╭┈┈⬡「 💰 *ɪɴꜰᴏ* 」\n` +
-            `┃ 💵 ʜᴀʀɢᴀ: *${PRICE_PER_ENERGI}* koin/energi\n` +
-            `┃ 💰 ᴋᴏɪɴ ᴋᴀᴍᴜ: *${formatNumber(user.koin || 0)}*\n` +
+            `┃ 💵 PRECIO: *${PRICE_PER_ENERGI}*monedas/energía
+` +
+            `┃ 💰 TUS MONEDAS: *${formatNumber(user.koin || 0)}*\n` +
             `╰┈┈⬡\n\n` +
-            `> Gunakan: \`.buyenergi <jumlah>\`\n\n` +
-            `\`Contoh: ${m.prefix}buyenergi 10\``
+            `> Utilice: \`.buyenergi <cantidad>\`
+
+` +
+            `\`Ejemplo: ${m.prefix}buyenergi 10\``
         )
     }
     
@@ -44,10 +47,11 @@ async function handler(m, { sock }) {
     
     if ((user.koin || 0) < totalPrice) {
         return m.reply(
-            `❌ *ɢᴀɢᴀʟ*\n\n` +
-            `> Koin tidak cukup!\n` +
-            `> Butuh: *${formatNumber(totalPrice)}*\n` +
-            `> Kamu punya: *${formatNumber(user.koin || 0)}*`
+            `❌ *ERROR*\n\n` +
+            `> ¡No tienes suficientes monedas!
+` +
+            `> Necesita: *${formatNumber(totalPrice)}*\n` +
+            `> Tienes: *${formatNumber(user.koin || 0)}*`
         )
     }
     
@@ -56,9 +60,12 @@ async function handler(m, { sock }) {
     if (user.energi === -1) {
         m.react('✅')
         return m.reply(
-            `✅ *ᴘᴇᴍʙᴇʟɪᴀɴ ʙᴇʀʜᴀsɪʟ*\n\n` +
-            `> Tapi kamu sudah punya unlimited energi!\n` +
-            `> Koin dikembalikan.`
+            `✅ *la compra fue exitosa*
+
+` +
+            `¡Pero ya tienes energía ilimitada!
+` +
+            `> Las monedas fueron devueltas.`
         )
     }
     
@@ -68,14 +75,18 @@ async function handler(m, { sock }) {
     m.react('✅')
     
     await m.reply(
-        `✅ *ᴘᴇᴍʙᴇʟɪᴀɴ ʙᴇʀʜᴀsɪʟ*\n\n` +
+        `✅ *la compra fue exitosa*
+
+` +
         `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-        `┃ ⚡ ᴇɴᴇʀɢɪ: *+${formatNumber(amount)}*\n` +
-        `┃ 💵 ʜᴀʀɢᴀ: *-${formatNumber(totalPrice)}* koin\n` +
+        `┃ ⚡ ENERGÍA: *+${formatNumber(amount)}*\n` +
+        `┃ 💵 PRECIO: *-${formatNumber(totalPrice)}* monedas
+` +
         `╰┈┈⬡\n\n` +
-        `╭┈┈⬡「 💰 *sᴀʟᴅᴏ* 」\n` +
-        `┃ ⚡ ᴇɴᴇʀɢɪ: *${formatNumber(newEnergi)}*\n` +
-        `┃ 💰 ᴋᴏɪɴ: *${formatNumber(newKoin)}*\n` +
+        `╭┈┈⬡「 💰 *SALDO* 」
+` +
+        `┃ ⚡ ENERGÍA: *${formatNumber(newEnergi)}*\n` +
+        `┃ 💰 MONEDAS: *${formatNumber(newKoin)}*\n` +
         `╰┈┈⬡`
     )
 }

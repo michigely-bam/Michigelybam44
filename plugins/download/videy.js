@@ -2,13 +2,13 @@ import axios from 'axios'
 import config from '../../config.js'
 import { f } from '../../src/lib/ourin-http.js'
 import te from '../../src/lib/ourin-error.js'
-const NEOXR_APIKEY = config.APIkey?.neoxr || 'Milik-Bot-OurinMD'
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD"
 
 const pluginConfig = {
     name: 'videy',
     alias: ['vdl', 'videydownload', 'videydl'],
     category: 'download',
-    description: 'Download video dari videy.co',
+    description: "Descarga el video de videy.co",
     usage: '.videy <url>',
     example: '.videy https://videy.co/v?id=7ZH1ZRIF',
     isOwner: false,
@@ -26,8 +26,10 @@ async function handler(m, { sock }) {
     if (!url) {
         return m.reply(
             `🎬 *ᴠɪᴅᴇʏ ᴅᴏᴡɴʟᴏᴀᴅ*\n\n` +
-            `> Masukkan URL videy.co\n\n` +
-            `\`Contoh: ${m.prefix}videy https://videy.co/v?id=7ZH1ZRIF\``
+            `> Introduce la URL de videy.co
+
+` +
+            `\`Ejemplo: ${m.prefix}videy https://videy.co/v?id=7ZH1ZRIF\``
         )
     }
     

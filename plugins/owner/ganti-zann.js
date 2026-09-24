@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'ganti-zann.jpg',
     alias: ['gantizann', 'setzann'],
     category: 'owner',
-    description: 'Ganti gambar zann.jpg',
-    usage: ".reemplazar -zann.jpg (reply / enviar imagen)",
+    description: "Cambiar las imágenes de zann.",
+    usage: ".gantizann (responde o envía una imagen)",
     example: '.ganti-zann.jpg',
     isOwner: true,
     isPremium: false,
@@ -19,7 +19,7 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
-    if (!isImage) return m.reply(`🖼️ *ɢᴀɴᴛɪ ZANN.JPG*
+    if (!isImage) return m.reply(`🖼️ *sustituye a ZANN.JPG*
 
 > Enviar / respuesta imágenes para reemplazar
 > File: assets/images/zann.jpg`)
@@ -28,7 +28,9 @@ async function handler(m, { sock }) {
         if (!buffer) return m.reply("❌ No se pudo download image")
         const targetPath = path.join(process.cwd(), 'assets', 'images', 'zann.jpg')
         fs.writeFileSync(targetPath, buffer)
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*\n\n> Gambar zann.jpg telah diganti`)
+        m.reply(`✅ *correcto*
+
+Las imágenes de zann.jpg han sido reemplazadas`)
     } catch (error) {
         await m.reply(te(m.prefix, m.command, m.pushName))
     }

@@ -25,8 +25,10 @@ async function handler(m) {
   }
 
   return m.reply(
-    `✅ Sesi pendaftaran berhasil dibatalkan.\n\n` +
-      `> Mulai lagi dengan: \`${m.prefix}daftar\``,
+    `✅ La sesión de registro fue cancelada con éxito.
+
+` +
+      `> Comienza de nuevo con: \`${m.prefix}daftar\``,
   );
 }
 

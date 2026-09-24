@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['jadibotqr', 'becomebot', 'bot'],
     category: 'main',
     description: "Haga su número un bot (Código de pago / QR)",
-    usage: '.jadibot atau .jadibot qr',
+    usage: ".jadibot o .jadibot qr",
     example: '.jadibot',
     isOwner: false,
     isPremium: false,
@@ -22,9 +22,10 @@ async function handler(m, { sock }) {
 
     if (isJadibotActive(sender)) {
         return m.reply(
-            `⚠️ *ᴊᴀᴅɪʙᴏᴛ ꜱᴜᴅᴀʜ ᴀᴋᴛɪꜰ*\n\n` +
-            `> Nomor kamu sudah menjadi bot\n` +
-            `> Ketik \`${m.prefix}stopjadibot\` untuk menghentikan`
+            `⚠️ *JADIBOT YA ESTÁ ACTIVO*\n\n` +
+            `Tu número ya es un bot.
+` +
+            `> Escribe \`${m.prefix}stopjadibot\` para detener`
         )
     }
 
@@ -34,13 +35,14 @@ async function handler(m, { sock }) {
     if (useQR) {
         await m.reply(
             `🤖 *ᴊᴀᴅɪʙᴏᴛ — Qʀ ᴍᴏᴅᴇ*\n\n` +
-            `> Menyiapkan koneksi...\n` +
-            `> Scan QR Code yang akan dikirim`
+            `> Preparando la conexión...
+` +
+            `> Scan QR El código que se enviará`
         )
     } else {
         await m.reply(
             `🤖 *ᴊᴀᴅɪʙᴏᴛ — ᴘᴀɪʀɪɴɢ ᴄᴏᴅᴇ*\n\n` +
-            `> Menyiapkan koneksi...`
+            `> Preparando la conexión...`
         )
     }
 
@@ -48,9 +50,9 @@ async function handler(m, { sock }) {
         await startJadibot(sock, m, sender, !useQR)
     } catch (e) {
         await m.reply(
-            `❌ *ᴊᴀᴅɪʙᴏᴛ ɢᴀɢᴀʟ*\n\n` +
-            `> ${e.message || 'Terjadi kesalahan'}\n\n` +
-            `Coba lagi dalam beberapa menit.`
+            `❌ *ᴊᴀᴅɪʙᴏᴛ ERROR*\n\n` +
+            `> ${e.message || "Ocurrió un error"}\n\n` +
+            `Inténtalo de nuevo en unos minutos.`
         )
     }
 }

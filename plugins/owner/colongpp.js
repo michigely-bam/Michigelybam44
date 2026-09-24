@@ -9,7 +9,7 @@ const pluginConfig = {
   alias: ["stealpp", "malingpp", "ambilpp"],
   category: "owner",
   description: "Tome el objetivo de perfil de foto como bot PP",
-  usage: ".cuppp (mensaje objetivo de respuesta)",
+  usage: ".colongpp (responde al mensaje objetivo)",
   example: ".colongpp",
   isOwner: true,
   isPremium: false,
@@ -34,16 +34,18 @@ async function handler(m, { sock }) {
   console.log(targetJid);
   if (!targetJid) {
     return m.reply(
-      `🕵️ *ᴄᴏʟᴏɴɢ ᴘᴘ*\n\n` +
-        `> Reply pesan seseorang untuk mencuri PP-nya\n\n` +
-        `*ᴄᴀʀᴀ:*\n` +
-        `> Reply pesan target → \`${m.prefix}colongpp\``,
+      `🕵️ *COPIAR FOTO DE PERFIL*\n\n` +
+        `> Responder a un mensaje de alguien para robar su PP
+
+` +
+        `*INSTRUCCIONES:*\n` +
+        `> Responder al mensaje objetivo → \`${m.prefix}colongpp\``,
     );
   }
   await m.react("🕵️");
   try {
     let ppBuffer;
-    let source = "profil";
+    let source = "perfil";
     try {
       const ppUrl = await sock.profilePictureUrl(targetJid, "image");
       const res = await axios.get(ppUrl, {
@@ -65,9 +67,11 @@ async function handler(m, { sock }) {
     const targetNumber = targetJid.split("@")[0];
     await m.react("✅");
     return m.reply(
-      `✅ *ᴘᴘ ʙᴇʀʜᴀsɪʟ ᴅɪᴄᴏʟᴏɴɢ!*\n\n` +
+      `✅ ¡Creo que se ha logrado el robo!
+
+` +
         `> 🎯 Target: @${targetNumber}\n` +
-        `> 📸 Sumber: ${source}`,
+        `> 📸 Fuente: ${source}`,
       { mentions: [targetJid] },
     );
   } catch (err) {

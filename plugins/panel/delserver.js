@@ -63,9 +63,11 @@ async function handler(m, { sock }) {
     if (!hasFullAccess(m.sender, serverVersion, m.isOwner)) {
         const userRole = getUserRole(m.sender, serverVersion)
         return m.reply(
-            `❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n` +
-            `> Kamu tidak punya akses ke *${serverLabel}*\n` +
-            `> Role kamu: *${userRole || 'Tidak ada'}*`
+            `❌ *se rechazó el acceso*
+
+` +
+            `No tienes acceso a *${serverLabel}*\n` +
+            `> Tu rol: *${userRole || "No hay"}*`
         )
     }
     
@@ -76,12 +78,12 @@ async function handler(m, { sock }) {
     
     if (missingConfig.length > 0) {
         const available = getAvailableServers(pteroConfig)
-        let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`
+        let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} SIN CONFIGURAR*\n\n`
         if (available.length > 0) {
             txt += `> Servidor disponible: *${available.join(', ')}*\n`
-            txt += `> Contoh: \`${m.prefix}delserver${available[0]} serverid\``
+            txt += `> Ejemplo: \`${m.prefix}delserver${available[0]} serverid\``
         } else {
-            txt += `> Isi config pterodactyl di \`config.js\``
+            txt += `> Contenido de config pterodactyl en \`config.js\``
         }
         return m.reply(txt)
     }
@@ -89,10 +91,10 @@ async function handler(m, { sock }) {
     if (!serverId || isNaN(serverId)) {
         const available = getAvailableServers(pteroConfig)
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+            `⚠️ *MODO DE USO*\n\n` +
             `> \`${m.prefix}${m.command} serverid\`\n\n` +
-            `> Server tersedia: *${available.join(', ') || 'none'}*\n` +
-            `> Lihat ID dengan \`${m.prefix}listserver${serverVersion}\``
+            `> Servidores disponibles: *${available.join(', ') || 'none'}*\n` +
+            `> Ver ID con \`${m.prefix}listserver${serverVersion}\``
         )
     }
     
@@ -116,10 +118,12 @@ async function handler(m, { sock }) {
         })
         
         return m.reply(
-            `✅ *sᴇʀᴠᴇʀ ᴅɪʜᴀᴘᴜs*\n\n` +
+            `✅ *el servidor fue eliminado*
+
+` +
             `> Panel: *${serverLabel}*\n` +
             `> Server ID: \`${serverId}\`\n` +
-            `> Nama: \`${server.name}\``
+            `> Nombre: \`${server.name}\``
         )
         
     } catch (err) {

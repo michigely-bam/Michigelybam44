@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['editstock'],
     category: 'store',
     description: "✏️ Editar productos de artículo de stock (sólo en chat privado)",
-    usage: ".editstock - Número de referencia_producto √≥n_item>|<detail_baru>",
+    usage: ".editstok <número_producto> <número_artículo>|<detalle_nuevo>",
     example: ".Editor 1 3@mail.com;;Password: newpass",
     isOwner: true,
     isPremium: false,
@@ -19,9 +19,13 @@ const pluginConfig = {
 async function handler(m, { sock }) {
     if (m.isGroup) {
         return m.reply(
-            `🚫 *Akses Ditolak*\n\n` +
-            `Untuk menjaga privasi 🛡️, pengeditan stok hanya dapat dilakukan di *private chat*.\n\n` +
-            `Silakan chat bot secara langsung 📱`
+            `🚫 *Debido de acceso*
+
+` +
+            `Para mantener la privacidad 🛡️, la edición de existencias sólo se puede hacer en el chat privado **.
+
+` +
+            `Por favor chatear bot en vivo 📱`
         )
     }
 
@@ -31,7 +35,7 @@ async function handler(m, { sock }) {
     if (products.length === 0) {
         return m.reply(`📭 *Aún no hay producto.*
 
-Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
+Añadir el producto primero: \`${m.prefix}addproduk\` ➕`)
     }
 
     const text = m.text?.trim() || ''
@@ -39,13 +43,16 @@ Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
 
     if (firstPipe === -1) {
         return m.reply(
-            `✏️ *EDIT STOK*\n\n` +
-            `📋 Format: \`${m.prefix}editstok <nomor_produk> <nomor_item>|<detail_baru>\`\n\n` +
-            `📝 *Contoh:*\n` +
-            `\`${m.prefix}editstok 1 3|Email: baru@mail.com;;Password: newpass\`\n\n` +
-            `• Gunakan \`;;\` untuk baris baru dalam detail 🔑\n` +
-            `📋 Lihat nomor item: \`${m.prefix}liststok <nomor_produk>\`\n\n` +
-            `⚠️ _Stok yang sudah terkirim ke pembeli tidak akan berubah_ 🔒`
+            `✏️ *EDITAR EXISTENCIAS*
+
+` +
+            `📋 Formato: \`${m.prefix}editstok <número_producto> <número_artículo>|<detalle_nuevo>\`\n\n` +
+            `📝 *Ejemplo:*\n` +
+            `\`${m.prefix}editstok 1 3|Correo: nuevo@mail.com;;Contraseña: nueva_clave\`\n\n` +
+            `• Usa \`;;\` para crear líneas nuevas en el detalle 🔑
+` +
+            `📋 Consulta el número del artículo: \`${m.prefix}liststok <número_producto>\`\n\n` +
+            `⚠️ _Las acciones ya enviadas a los compradores no cambiarán_ 🔒`
         )
     }
 
@@ -59,17 +66,21 @@ Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
     if (isNaN(productNo) || productNo < 0 || productNo >= products.length) {
         return m.reply(`❌ *Número de producto no válido.*
 
-Rentang: 1-${products.length} 📋`)
+Rango: 1-${products.length} 📋`)
     }
 
     const product = products[productNo]
 
     if (product.type === 'fisik') {
         return m.reply(
-            `📦 *Produk Fisik*\n\n` +
-            `Produk fisik tidak memiliki data per-item 🔑\n` +
-            `Untuk mengubah stok, gunakan:\n` +
-            `\`${m.prefix}editproduk ${productNo + 1} stok <jumlah>\``
+            `📦 *Productos físicos*
+
+` +
+            `Los productos físicos no tienen datos por artículo 🔑
+` +
+            `Para cambiar las existencias, utiliza:
+` +
+            `\`${m.prefix}editproduk ${productNo + 1} stok <cantidad>`
         )
     }
 
@@ -78,13 +89,15 @@ Rentang: 1-${products.length} 📋`)
     if (isNaN(itemNo) || itemNo < 0 || itemNo >= stockItems.length) {
         return m.reply(`❌ *Número de artículo inválido.*
 
-Rentang: 1-${stockItems.length}
+Rango: 1-${stockItems.length}
 
 📋 Ver lista: \`${m.prefix}liststok ${productNo + 1}\``)
     }
 
     if (!newDetail || newDetail.length < 3) {
-        return m.reply(`❌ *Detail terlalu pendek.*\n\nMinimal 3 karakter diperlukan 🔑`)
+        return m.reply(`❌ *El detalle es demasiado corto.*
+
+Se requieren al menos 3 caracteres 🔑`)
     }
 
     const oldDetail = stockItems[itemNo].detail
@@ -95,12 +108,16 @@ Rentang: 1-${stockItems.length}
     await m.react('✅')
 
     return m.reply(
-        `✅ *STOK DIPERBARUI*\n\n` +
-        `🏷️ Produk: *${product.name}*\n` +
+        `✅ *EXISTENCIAS RENOVADO*
+
+` +
+        `🏷️ Producto: *${product.name}*\n` +
         `🔑 Item #${itemNo + 1}\n\n` +
-        `❌ Sebelum:\n\`${oldDetail.replace(/\n/g, ' ').substring(0, 50)}\`\n\n` +
-        `✅ Sesudah:\n\`${newDetail.replace(/\n/g, ' ').substring(0, 50)}\`\n\n` +
-        `⚠️ _Perubahan hanya berlaku untuk item yang belum dikirim ke pembeli_ 🔒`
+        `❌ Antes de:
+\`${oldDetail.replace(/\n/g, ' ').substring(0, 50)}\`\n\n` +
+        `✅ Después:
+\`${newDetail.replace(/\n/g, ' ').substring(0, 50)}\`\n\n` +
+        `⚠️ _Los cambios solo se aplican a los artículos que no han sido enviados a los compradores_ 🔒`
     )
 }
 

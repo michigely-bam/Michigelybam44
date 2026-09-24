@@ -38,7 +38,8 @@ async function handler(m, { sock }) {
         txt += `> Practicar para mejorar el personal!
 
 `
-        txt += `╭┈┈⬡「 📊 *sᴛᴀᴛs ᴋᴀᴍᴜ* 」\n`
+        txt += `╭┈┈⬡「 📊 *TUS ESTADÍSTICAS* 」
+`
         txt += `┃ ⚔️ Attack: *${user.rpg.attack || 10}*\n`
         txt += `┃ 🛡️ Defense: *${user.rpg.defense || 5}*\n`
         txt += `┃ ❤️ Health: *${user.rpg.health || 100}*\n`
@@ -60,24 +61,26 @@ async function handler(m, { sock }) {
     if (!training) {
         return m.reply(`❌ Entrenamiento no encontrado!
 
-> Ketik \`${m.prefix}training\` para ver la lista.`)
+> Escribe \`${m.prefix}training\` para ver la lista.`)
     }
     
     user.rpg.stamina = user.rpg.stamina ?? 100
     
     if (user.rpg.stamina < training.staminaCost) {
         return m.reply(
-            `⚡ *sᴛᴀᴍɪɴᴀ ᴋᴜʀᴀɴɢ*\n\n` +
-            `> Butuh: ${training.staminaCost}\n` +
-            `> Punya: ${user.rpg.stamina}\n\n` +
-            `💡 Gunakan \`${m.prefix}rest\` atau makan makanan`
+            `⚡ *RESISTENCIA INSUFICIENTE*
+
+` +
+            `> Necesita: ${training.staminaCost}\n` +
+            `> Tiene: ${user.rpg.stamina}\n\n` +
+            `💡 Usa \`${m.prefix}rest\` o comer comida`
         )
     }
     
     user.rpg.stamina -= training.staminaCost
     
     await m.react('🏋️')
-    await m.reply(`🏋️ *ʟᴀᴛɪʜᴀɴ ${training.name.toUpperCase()}...*`)
+    await m.reply(`🏋️ *ENTRENAMIENTO ${training.name.toUpperCase()}...*`)
     await new Promise(r => setTimeout(r, 2500))
     
     const statBonus = Math.floor(Math.random() * (training.bonus[1] - training.bonus[0] + 1)) + training.bonus[0]
@@ -89,7 +92,9 @@ async function handler(m, { sock }) {
     
     await m.react('💪')
     return m.reply(
-        `💪 *ᴛʀᴀɪɴɪɴɢ sᴇʟᴇsᴀɪ!*\n\n` +
+        `💪 ¡El entrenamiento ha terminado!
+
+` +
         `╭┈┈⬡「 📊 *ʀᴇsᴜʟᴛ* 」\n` +
         `┃ 🏋️ Training: *${training.name}*\n` +
         `┃ 📈 ${training.stat}: *${currentStat} → ${currentStat + statBonus}* (+${statBonus})\n` +

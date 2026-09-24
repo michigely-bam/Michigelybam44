@@ -5,10 +5,10 @@ const pluginConfig = {
   name: "invoicemaker",
   alias: ["invoice", "faktur", "nota"],
   category: "tools",
-  description: "Membuat invoice/nota penjualan",
-  usage: ".invoicemaker <toko>|<invoice>|<tanggal>|<status>|<items>|<total>",
+  description: "Crear una factura o nota de venta",
+  usage: ".invoicemaker <tienda>|<factura>|<fecha>|<estado>|<artículos>|<total>",
   example:
-    ".invoicemaker TokoKu|INV001|15/01/2026|paid|Nasi Goreng:1x:15000,Es Teh:2x:6000|21000",
+    ".invoicemaker MiTienda|INV001|15/01/2026|paid|Arroz frito:1x:15000,Té helado:2x:6000|21000",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -18,7 +18,7 @@ const pluginConfig = {
   isEnabled: true,
 };
 
-const NEOXR_APIKEY = config.APIkey?.neoxr || "Milik-Bot-OurinMD";
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD";
 
 async function handler(m, { sock }) {
   const args = m.args || [];
@@ -28,18 +28,23 @@ async function handler(m, { sock }) {
     return m.reply(
       `🧾 *ɪɴᴠᴏɪᴄᴇ ᴍᴀᴋᴇʀ*\n\n` +
         `╭┈┈⬡「 📋 *ꜰᴏʀᴍᴀᴛ* 」\n` +
-        `┃ \`${m.prefix}invoicemaker <toko>|<invoice>|<tanggal>|<status>|<items>|<total>\`\n` +
+        `┃ \`${m.prefix}invoicemaker <tienda>|<factura>|<fecha>|<estado>|<artículos>|<total>\`\n` +
         `╰┈┈⬡\n\n` +
         `╭┈┈⬡「 📝 *ᴘᴀʀᴀᴍᴇᴛᴇʀ* 」\n` +
-        `┃ • toko: Nama toko\n` +
-        `┃ • invoice: Nomor invoice\n` +
-        `┃ • tanggal: Format DD/MM/YYYY\n` +
+        `┃ • tienda: Nombre de la tienda
+` +
+        `┃ • factura: Número de factura
+` +
+        `┃ • fecha: formato DD/MM/AAAA
+` +
         `┃ • status: paid/unpaid\n` +
-        `┃ • items: Nama:unit:harga (pisah koma)\n` +
-        `┃ • total: Total harga\n` +
+        `┃ • items: Nombre:unidad:precio (comas separadas)
+` +
+        `┃ • total: precio total
+` +
         `╰┈┈⬡\n\n` +
-        `> Contoh:\n` +
-        `\`${m.prefix}invoicemaker TokoKu|INV001|15/01/2026|paid|Nasi Goreng:1x:15000,Es Teh:2x:6000|21000\``,
+        `> Ejemplo:\n` +
+        `\`${m.prefix}invoicemaker MiTienda|INV001|15/01/2026|paid|Arroz frito:1x:15000,Té helado:2x:6000|21000\``,
     );
   }
 
@@ -47,14 +52,14 @@ async function handler(m, { sock }) {
 
   if (parts.length < 6) {
     return m.reply(
-      `❌ Formato incompleto! Necesidad 6 parámetros (plantear novatos 124; factura 0124; fecha 124; estado 124; iteex124; total)`,
+      `❌ ¡Formato incompleto! Se necesitan 6 parámetros: tienda | factura | fecha | estado | artículos | total.`,
     );
   }
 
   const [store, invoice, date, status, itemsRaw, totalRaw] = parts;
 
   if (!["paid", "unpaid"].includes(status.toLowerCase())) {
-    return m.reply(`❌ Status harus 'paid' atau 'unpaid'!`);
+    return m.reply(`❌ ¡El estado debe ser 'pagado' o 'no pagado'!`);
   }
 
   const itemsArr = itemsRaw.split(",").map((item) => {
@@ -105,9 +110,9 @@ async function handler(m, { sock }) {
 
     let caption = `🧾 *ɪɴᴠᴏɪᴄᴇ ɢᴇɴᴇʀᴀᴛᴇᴅ*\n\n`;
     caption += `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n`;
-    caption += `┃ 🏪 Toko: *${data.store}*\n`;
+    caption += `┃ 🏪 Tienda: *${data.store}*\n`;
     caption += `┃ 🔢 Invoice: *${data.invoice}*\n`;
-    caption += `┃ 📅 Tanggal: *${data.date}*\n`;
+    caption += `┃ 📅 Fecha: *${data.date}*\n`;
     caption += `┃ 📌 Status: *${data.status === "paid" ? "✅ LUNAS" : "❌ - ¿Qué?"}*\n`;
     caption += `╰┈┈⬡\n\n`;
 

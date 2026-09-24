@@ -24,7 +24,9 @@ async function handler(m, { sock }) {
     const customWords = groupData.toxicWords || []
     const defaultWords = DEFAULT_TOXIC_WORDS || []
     
-    let text = `📋 *ᴅᴀꜰᴛᴀʀ ᴋᴀᴛᴀ ᴛᴏxɪᴄ*\n\n`
+    let text = `📋 *lista de palabras tóxicas*
+
+`
     
     if (customWords.length > 0) {
         text += `╭┈┈⬡「 ✏️ *ᴄᴜsᴛᴏᴍ* (${customWords.length}) 」\n`
@@ -41,10 +43,11 @@ async function handler(m, { sock }) {
     }
     text += `╰┈┈┈┈┈┈┈┈⬡\n\n`
     
-    text += `Total: *${customWords.length + defaultWords.length}* kata\n`
-    text += `\`.addtoxic <kata>\` para añadir
+    text += `Total: *${customWords.length + defaultWords.length}* palabra
 `
-    text += `\`.deltoxic <kata>\` para eliminar`
+    text += `\`.addtoxic <palabra>\` para añadir
+`
+    text += `\`.deltoxic <palabra>\` para eliminar`
     
     await m.reply(text)
 }

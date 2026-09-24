@@ -3,7 +3,7 @@ import { games } from '../../src/lib/ourin-games.js'
 games.register('caklontong', {
     alias: ['cak', 'lontong'],
     emoji: '🤔',
-    title: 'CAK LONTONG',
+    title: "ADIVINANZAS CAK LONTONG",
     description: "El juego se llama putt - una respuesta de diez centavos"
 })
 

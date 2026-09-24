@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'anime-gen',
     alias: ['animegen', 'aianimegen', 'genai-anime'],
     category: 'ai',
-    description: 'Generate AI anime art dari prompt',
+    description: "Generar AI arte de anime desde el prompt",
     usage: '.anime-gen <prompt>',
     example: '.anime-gen girl, vibrant color, smilling',
     isOwner: false,
@@ -23,30 +23,34 @@ async function handler(m, { sock }) {
     if (!prompt) {
         return m.reply(
             `🎨 *ᴀɴɪᴍᴇ ᴀʀᴛ ɢᴇɴᴇʀᴀᴛᴏʀ*\n\n` +
-            `> Generate gambar anime AI dari prompt!\n\n` +
-            `*ᴄᴀʀᴀ ᴘᴀᴋᴀɪ:*\n` +
-            `> \`${m.prefix}anime-gen <deskripsi>\`\n\n` +
-            `*ᴄᴏɴᴛᴏʜ:*\n` +
+            `> ¡Genera una imagen de anime con IA a partir de un prompt!
+
+` +
+            `*MODO DE USO:*\n` +
+            `> \`${m.prefix}anime-gen <descripción>\`\n\n` +
+            `*EJEMPLO:*\n` +
             `> \`${m.prefix}anime-gen girl, vibrant color, smilling, yellow pink gradient hair\`\n` +
             `> \`${m.prefix}anime-gen boy, dark aesthetic, silver hair, red eyes\`\n\n` +
             `*ᴛɪᴘs:*\n` +
-            `> • Gunakan bahasa Inggris\n` +
-            `> • Makin detail prompt, makin bagus hasil\n` +
-            `> • Tambahkan style: vibrant, dark, pastel, etc`
+            `• Utilice el inglés
+` +
+            `> • Cuanto más detalle rápido, mejor resultado
+` +
+            `> • Añadir estilo: vibrante, oscuro, pastel, etc`
         )
     }
     
     m.react('🕕')
 
     try {
-        const NEOXR_APIKEY = config.APIkey?.neoxr || 'Milik-Bot-OurinMD'
+        const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD"
         const apiUrl = `https://api.neoxr.eu/api/ai-anime?q=${encodeURIComponent(prompt)}&apikey=${NEOXR_APIKEY}`
         
         const data = await f(apiUrl)
         
         if (!data?.status || !data?.data?.url) {
             m.react('❌')
-            return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> No se pudo generate image. ¡Inténtalo de nuevo más tarde!")
+            return m.reply("❌ *falló*\n\n> No se pudo generate image. ¡Inténtalo de nuevo más tarde!")
         }
         
         const result = data.data  

@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'ganti-ourin-store.jpg',
     alias: ['gantistore', 'setourinstore'],
     category: 'owner',
-    description: 'Ganti gambar ourin-store.jpg (thumbnail store)',
-    usage: ".Swap -ourin -store.jpg (reply / enviar imagen)",
+    description: "Cambiar las imágenes de ourin-store.",
+    usage: ".gantistore (responde o envía una imagen)",
     example: '.ganti-ourin-store.jpg',
     isOwner: true,
     isPremium: false,
@@ -21,7 +21,7 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
     
     if (!isImage) {
-        return m.reply(`🖼️ *ɢᴀɴᴛɪ ᴏᴜʀɪɴ-sᴛᴏʀᴇ.ᴊᴘɢ*
+        return m.reply(`🖼️ *reemplazado por ourin-store.jpg*
 
 > Enviar / respuesta imágenes para reemplazar
 > File: assets/images/ourin-store.jpg`)
@@ -48,7 +48,9 @@ async function handler(m, { sock }) {
         
         fs.writeFileSync(targetPath, buffer)
         
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*\n\n> Gambar ourin-store.jpg telah diganti`)
+        m.reply(`✅ *correcto*
+
+La imagen ourin-store.jpg ha sido cambiada`)
         
     } catch (error) {
         await m.reply(te(m.prefix, m.command, m.pushName))

@@ -76,7 +76,7 @@ function send(sock, m, text, title, body) {
       caption: `${text}\n\nhttps://inspired.by.roblox`,
       url: `https://inspired.by.roblox`,
       title: `𝗠𝗜𝗡𝗘𝗖𝗥𝗔𝗙𝗧 𝗚𝗔𝗠𝗘𝗦`,
-      description: `⛏️ tambang, 🛠Fawcraft, y ⚔️ lawan mob di dunia minecraft`,
+      description: `⛏️ Mina, 🛠️ fabrica y ⚔️ combate criaturas en el mundo de Minecraft`,
       image: thumbMC,
       thumbnailWidth: 512,
       thumbnailHeight: 512,
@@ -112,7 +112,7 @@ async function handler(m, { sock }) {
   if (cmd === "minecraft") {
     if (!sub || sub === "on" || sub === "off") {
       if (!m.isGroup) return m.reply("_Toggle only in group_");
-      if (!m.isOwner && !m.isAdmin) return m.reply("_Admin / propietario Sólo_");
+      if (!m.isOwner && !m.isAdmin) return m.reply("_Solo administradores o propietarios_");
       const gd = db.getGroup(m.chat) || {};
       if (sub === "on") {
         gd.minecraftEnabled = true;
@@ -123,9 +123,9 @@ async function handler(m, { sock }) {
           `*🧱 MINECRAFT ENABLED*
 
 🎮 ¡Todos los miembros deben jugar Minecraft!
-🪧 Ketik \`.mct help\` para empezar`,
+🪧 Escriba \`.mct help\` para empezar`,
           "🧱 Minecraft ON",
-          "✅ Aktif",
+          "✅ Activo",
         );
       }
       if (sub === "off") {
@@ -136,7 +136,7 @@ async function handler(m, { sock }) {
           m,
           `*🧱 MINECRAFT DISABLED*`,
           "🧱 Minecraft OFF",
-          "❌ Nonaktif",
+          "❌ Inactivo",
         );
       }
       return m.reply(
@@ -151,14 +151,61 @@ async function handler(m, { sock }) {
     return send(
       sock,
       m,
-      `*🧱 MINECRAFT GAME*\n_⛏️ Sistem pertambangan & 🛠️ crafting terlengkap_\n\n` +
-        `*⛏️ MINING*\n\`.mct mine\` _⛏️ Mulai menambang_\n\`.mct collect\` _📦 Ambil hasil_\n\`.mct sell\` _💸 Jual ore_\n\`.mct orebook\` _📚 Koleksi ore_\n\`.mct top\` _🏆 Leaderboard_\n\n` +
-        `*⚔️ COMBAT*\n\`.mct fight\` _👹 Daftar mob_\n\`.mct fight <mob>\` _⚔️ Lawan mob_\n\`.mct heal\` _❤️ Sembuhkan HP_\n\`.mct stats\` _📊 Stats detail_\n\n` +
-        `*👤 PROFILE*\n\`.mct me\` _🪪 Profil kamu_\n\`.mct daily\` _🎁 Daily reward_\n\n` +
-        `*🗺️ BIOME & PICKAXE*\n\`.mct travel\` _🗺️ Daftar biome_\n\`.mct travel <biome>\` _🚪 Pindah biome_\n\`.mct shop\` _🛒 Toko pickaxe_\n\`.mct buy <pick>\` _💰 Beli pickaxe_\n\`.mct equip <pick>\` _🪓 Pasang pickaxe_\n\`.mct picks\` _🎒 Koleksi pickaxe_\n\`.mct enchant <key>\` _✨ Enchant pickaxe_\n\`.mct enchants\` _📜 Daftar enchant_\n\`.mct pickup\` _⬆️ Upgrade pickaxe_\n\n` +
-        `*🔥 CRAFTING & SMELTING*\n\`.mct smelt\` _🔥 Smelt semua ore_\n\`.mct craft\` _🛠️ Daftar resep_\n\`.mct craft <id>\` _🧪 Craft item_\n\`.mct inv\` _🎒 Inventory_\n\n` +
-        `*👑 PRESTIGE*\n\`.mct prestige\` _👑 Info prestige_\n\`.mct tokens\` _🪙 Token store_\n\`.mct upgrade\` _📈 Upgrade stats_\n\`.mct gacha\` _🎰 Gacha_\n\`.mct gacha ticket\` _🎟️ Gacha pakai tiket_\n\n` +
-        `*🎰 JACKPOT*\n\`.mct jackpot\` _🎰 Daftar jackpot_\n\`.mct jackpot <tier>\` _💎 Main jackpot_\n_🎁 Jackpot bisa kasih _Premium_, _Partner_, _Energi_, _Limit_, bahkan _UNLIMITED_!_`,
+      `*🧱 MINECRAFT GAME*
+_⛏️ Sistema completo de minería y fabricación_
+
+` +
+        `*⛏️ MINING*
+\`.mct mine\` _⛏️ Comienza a minar_
+\`.mct collect\` _📦 Recoger lo obtenido_
+\`.mct sell\` _💸 Vender minerales_
+\`.mct mineralesbook\` _📚 Colección de minerales_
+\`.mct top\` _🏆 Leaderboard_
+
+` +
+        `*⚔️ COMBAT*
+\`.mct fight\` _👹 Lista de los mobs_
+\`.mct fight <mob>\` _⚔️ Combatir una criatura_
+\`.mct heal\` _❤️ Recuperar HP_
+\`.mct stats\` _📊 Estadísticas detalladas_
+
+` +
+        `*👤 PROFILE*
+\`.mct me\` _🪪 Tu perfil_
+\`.mct daily\` _🎁 Daily reward_
+
+` +
+        `*🗺️ BIOME & PICKAXE*
+\`.mct travel\` _🗺️ Lista de biomas_
+\`.mct travel <biome>\` _🚪 Cambiar de bioma_
+\`.mct shop\` _🛒 tienda de pickaxe_
+\`.mct buy <pick>\` _💰 Comprar pickaxe_
+\`.mct equip <pick>\` _🪓 Equipar un pico_
+\`.mct picks\` _🎒 Colección de picos_
+\`.mct enchant <key>\` _✨ Enchant pickaxe_
+\`.mct enchants\` _📜 Lista de encantamientos_
+\`.mct pickup\` _⬆️ Mejorar el pico_
+
+` +
+        `*🔥 CRAFTING & SMELTING*
+\`.mct smelt\` _🔥 Smelt todos los minerales_
+\`.mct craft\` _🛠️ Lista de recetas_
+\`.mct craft <id>\` _🧪 Craft item_
+\`.mct inv\` _🎒 Inventory_
+
+` +
+        `*👑 PRESTIGE*
+\`.mct prestige\` _👑 Info prestige_
+\`.mct tokens\` _🪙 Tienda de fichas_
+\`.mct upgrade\` _📈 Mejorar estadísticas_
+\`.mct gacha\` _🎰 Gacha_
+\`.mct gacha ticket\` _🎟️ Gacha con boleto_
+
+` +
+        `*🎰 JACKPOT*
+\`.mct jackpot\` _🎰 Lista de premios_
+\`.mct jackpot <tier>\` _💎 Jugar al jackpot_
+_🎁 ¡El jackpot puede darte _Premium_, _Partner_, _Energía_, _Limit_ e incluso _UNLIMITED_!_`,
       "🧱 Minecraft Game",
       "⛏️ Mining & 🛠️ Crafting",
     );
@@ -168,11 +215,11 @@ async function handler(m, { sock }) {
     const user = getOrCreateMCUser(db, m.sender);
     const mc = user.minecraft;
     if (mc.miningPending && mc.miningPending.length > 0)
-      return m.reply(`_📦 ¡Todavía hay una mina!_ \`.mct collect\` _dulu._`);
+      return m.reply(`_📦 ¡Aún hay minerales pendientes!_ Usa \`.mct collect\` _primero._`);
     const now = Date.now();
     if (mc.lastMineTime && now - mc.lastMineTime < MC * 1000)
       return m.reply(
-        `_⏳ Tunggu *${Math.ceil((MC * 1000 - (now - mc.lastMineTime)) / 1000)}* detik_`,
+        `Espera *${Math.ceil((MC * 1000 - (now - mc.lastMineTime)) / 1000)}* segundos`,
       );
     const pk = mc.usedPickaxe || "woodpick";
     const pick = mc.pickaxes[pk];
@@ -202,8 +249,8 @@ async function handler(m, { sock }) {
     await send(
       sock,
       m,
-      `*_⛏️ Menambang di ${biomes[bk]?.name || bk}..._*\n_🪓 Pick: ${pick.name} | 🍀 Luck: ${(st.luck * 100).toFixed(1)}%_`,
-      "⛏️ Menambang...",
+      `*_⛏️ Minando en ${biomes[bk]?.name || bk}..._*\n_🪓 Pick: ${pick.name} | 🍀 Luck: ${(st.luck * 100).toFixed(1)}%_`,
+      "⛏️ Minando...",
       biomes[bk]?.name || "",
     );
     await new Promise((r) =>
@@ -220,7 +267,9 @@ async function handler(m, { sock }) {
     }
     txt += `\n*💰 Total: ${formatMoney(tv)}*`;
     if (mc.streak >= 3) txt += `\n_🔥 Streak: ${mc.streak}x_`;
-    txt += `\n\n\`.mct collect\` untuk 📦 mengambil!`;
+    txt += `
+
+¡Usa \`.mct collect\` para recogerlo! 📦`;
     db.markDirty("users");
     return send(sock, m, txt, "⛏️ ¡Resultados de atención!", `💰 ${formatMoney(tv)}`);
   }
@@ -229,7 +278,7 @@ async function handler(m, { sock }) {
     const user = getOrCreateMCUser(db, m.sender);
     const mc = user.minecraft;
     if (!mc.miningPending || mc.miningPending.length === 0)
-      return m.reply(`_📭 No hay suerte._ \`.mct mine\` _dulu!_`);
+      return m.reply(`_📭 Aún no has minado._ Usa \`.mct mine\` _primero._`);
     const ores = mc.miningPending;
     let tv = 0,
       te = 0,
@@ -253,7 +302,8 @@ async function handler(m, { sock }) {
     mc.miningPending = [];
     let txt = `*📦 ¡A cubierto!*
 
-💰 +${formatMoney(tv)}\n⭐ +${te} EXP\n🧱 +${ores.length} ore\n`;
+💰 +${formatMoney(tv)}\n⭐ +${te} EXP\n🧱 +${ores.length} minerales
+`;
     if (nf.length > 0) txt += `
 *🆕 Nuevo Ore:* ${nf.join(", ")}`;
     if (rlu) txt += `\n\n${rlu}`;
@@ -266,7 +316,7 @@ async function handler(m, { sock }) {
     const user = getOrCreateMCUser(db, m.sender);
     const mc = user.minecraft;
     if (!mc.inventory || mc.inventory.length === 0)
-      return m.reply(`_🎒 ¡El inventario está vacío!_ \`.mct mine\` _dulu._`);
+      return m.reply(`_🎒 ¡El inventario está vacío!_ Usa \`.mct mine\` _primero._`);
     let tv = 0;
     for (const item of mc.inventory) tv += item.price || 0;
     const sb = UPGRADES.fortune.effect(mc.fortuneUpgrade || 0);
@@ -281,8 +331,10 @@ async function handler(m, { sock }) {
     return send(
       sock,
       m,
-      `*💸 ORE TERJUAL!*\n\n📦 Jumlah: ${fc2}\n💰 Total: ${formatMoney(fv)}\n🏦 Saldo: ${formatMoney(mc.money)}`,
-      "💸 Ore Terjual!",
+      `*💸 ¡MINERALES VENDIDOS!*
+
+📦 Cantidad: ${fc2}\n💰 Total: ${formatMoney(fv)}\n🏦 Saldo: ${formatMoney(mc.money)}`,
+      "💸 ¡Minerales vendidos!",
       `💰 ${formatMoney(fv)}`,
     );
   }
@@ -294,8 +346,11 @@ async function handler(m, { sock }) {
     return send(
       sock,
       m,
-      `*👤 PROFIL PENAMBANG*\n\n*⬆️ Level:* ${mc.level} _(${mc.exp}/${mc.expToNextLevel} EXP)_\n*💰 Uang:* ${formatMoney(mc.money)}\n*❤️ HP:* ${mc.hp}/${mc.maxHp}\n*⚔️ ATK:* ${mc.atk}\n*🧱 Blocks:* ${mc.blocksMined}\n*🪓 Pick:* ${pick ? pick.name : "🪵 Wooden Pickaxe"} _(Lv.${pick ? pick.level : 1})_\n*🗺️ Biome:* ${biomes[mc.currentBiome] ? biomes[mc.currentBiome].name : mc.currentBiome}\n*🔥 Streak:* ${mc.streak || 0}\n*⚔️ Combat:* ${mc.combatWins || 0}W/${mc.combatLosses || 0}L\n*👑 Prestige:* ${mc.prestige || 0}\n*🪙 Tokens:* ${mc.prestigeTokens || 0}\n*🎟️ Tickets:* ${mc.gachaTickets || 0}\n*📚 OreBook:* ${mc.oreFound ? mc.oreFound.length : 0}\n*📈 Upgrades:*\n  _🍀 Luck: Lv.${mc.luckUpgrade || 0}_\n  _⚡ Speed: Lv.${mc.speedUpgrade || 0}_\n  _💎 Fortune: Lv.${mc.fortuneUpgrade || 0}_\n  _⚔️ Combat: Lv.${mc.combatUpgrade || 0}_`,
-      "👤 Profil",
+      `*👤 PERFIL DEL MINERO*
+
+*⬆️ Level:* ${mc.level} _(${mc.exp}/${mc.expToNextLevel} EXP)_
+*💰 Dinero:* ${formatMoney(mc.money)}\n*❤️ HP:* ${mc.hp}/${mc.maxHp}\n*⚔️ ATK:* ${mc.atk}\n*🧱 Blocks:* ${mc.blocksMined}\n*🪓 Pick:* ${pick ? pick.name : "🪵 Wooden Pickaxe"} _(Lv.${pick ? pick.level : 1})_\n*🗺️ Biome:* ${biomes[mc.currentBiome] ? biomes[mc.currentBiome].name : mc.currentBiome}\n*🔥 Streak:* ${mc.streak || 0}\n*⚔️ Combat:* ${mc.combatWins || 0}W/${mc.combatLosses || 0}L\n*👑 Prestige:* ${mc.prestige || 0}\n*🪙 Tokens:* ${mc.prestigeTokens || 0}\n*🎟️ Tickets:* ${mc.gachaTickets || 0}\n*📚 OreBook:* ${mc.oreFound ? mc.oreFound.length : 0}\n*📈 Upgrades:*\n  _🍀 Luck: Lv.${mc.luckUpgrade || 0}_\n  _⚡ Speed: Lv.${mc.speedUpgrade || 0}_\n  _💎 Fortune: Lv.${mc.fortuneUpgrade || 0}_\n  _⚔️ Combat: Lv.${mc.combatUpgrade || 0}_`,
+      "👤 Perfil",
       `⬆️ Level ${mc.level}`,
     );
   }
@@ -319,8 +374,10 @@ async function handler(m, { sock }) {
     const user = getOrCreateMCUser(db, m.sender);
     const found = user.minecraft.oreFound || [];
     if (found.length === 0)
-      return m.reply(`_📚 ¡El Libro de Ore está vacío!_ \`.mct mine\` _dulu_`);
-    let txt = `*📚 ORE BOOK* _(${found.length} ore)_\n\n`;
+      return m.reply(`_📚 ¡El libro de minerales está vacío!_ Usa \`.mct mine\` _primero._`);
+    let txt = `*📚 LIBRO DE MINERALES* _(${found.length} minerales)_
+
+`;
     for (const [k, b] of Object.entries(biomes)) {
       const fl = b.listOre.filter((o) =>
         found.includes(o.name.replace(/[\u{1F300}-\u{1F9FF}]/gu, "").trim()),
@@ -331,7 +388,7 @@ async function handler(m, { sock }) {
         txt += `\n`;
       }
     }
-    return send(sock, m, txt.trim(), "📚 Ore Book", `🧱 ${found.length} ore`);
+    return send(sock, m, txt.trim(), "📚 Libro de minerales", `🧱 ${found.length} minerales`);
   }
 
   if (sub === "travel") {
@@ -364,9 +421,9 @@ async function handler(m, { sock }) {
     const req = travelRequirements[tk];
     if (req) {
       if ((mc.money || 0) < req.money)
-        return m.reply(`_💸 Uang kurang! Butuh ${formatMoney(req.money)}_`);
+        return m.reply(`¡Dinero insuficiente! Necesita ${formatMoney(req.money)}_`);
       if ((mc.blocksMined || 0) < req.blocks)
-        return m.reply(`_🧱 Blocks kurang! Butuh ${req.blocks}_`);
+        return m.reply(`¡Bloques insuficientes! Necesita ${req.blocks}_`);
       mc.money -= req.money;
     }
     if (!(mc.travelFound || []).includes(tk))
@@ -376,14 +433,18 @@ async function handler(m, { sock }) {
     return send(
       sock,
       m,
-      `*🚪 PINDAH BIOME!*\n\n📍 Sekarang di *${biomes[tk].name}*\n🧱 ${biomes[tk].listOre.length} Tipo de mineral disponible`,
+      `*🚪 ¡CAMBIO DE BIOMA!*
+
+📍 Ahora en *${biomes[tk].name}*\n🧱 ${biomes[tk].listOre.length} Tipo de mineral disponible`,
       "🚪 Travel!",
       biomes[tk].name,
     );
   }
 
   if (sub === "shop") {
-    let txt = `*🛒 TOKO PICKAXE*\n\n`;
+    let txt = `*🛒 TIENDA DE PICOS*
+
+`;
     for (const [k, pick] of Object.entries(pickaxes)) {
       if (pick.price > 0)
         txt += `*${pick.name}*\n   _💰 ${formatMoney(pick.price)}_\n   _🍀 Luck +${(pick.luck * 100).toFixed(0)}% | ⚡ Speed +${(pick.speed * 100).toFixed(0)}% | 📦 Combo: ${pick.comboOre}_\n   _${pick.description}_\n\n`;
@@ -392,7 +453,7 @@ async function handler(m, { sock }) {
       sock,
       m,
       txt + `\`.mct buy <pick>\``,
-      "🛒 Toko Pickaxe",
+      "🛒 Tienda de picos",
       "🪓 Seleccione el mejor pickaxe",
     );
   }
@@ -401,7 +462,7 @@ async function handler(m, { sock }) {
     const user = getOrCreateMCUser(db, m.sender);
     const mc = user.minecraft;
     const pk = sa[0] ? sa[0].toLowerCase() : "";
-    if (!pk) return m.reply(`_🪓 Tentukan pickaxe!_ \`.mct shop\``);
+    if (!pk) return m.reply(`_🪓 ¡Elige un pico!_ \`.mct shop\``);
     if (!pickaxes[pk]) return m.reply(`_🪓 ¡El Pickax no existe!_ \`.mct shop\``);
     if (mc.pickaxes[pk])
       return m.reply(`_✅ Ya lo he hecho. ${pickaxes[pk].name}!_`);
@@ -409,7 +470,7 @@ async function handler(m, { sock }) {
       return m.reply(`_🪙 Pickaxe es de Token / Prestige!_`);
     if ((mc.money || 0) < pickaxes[pk].price)
       return m.reply(
-        `_💸 Uang kurang! Butuh ${formatMoney(pickaxes[pk].price)}_`,
+        `¡Dinero insuficiente! Necesita ${formatMoney(pickaxes[pk].price)}_`,
       );
     mc.money -= pickaxes[pk].price;
     mc.pickaxes[pk] = { ...pickaxes[pk] };
@@ -417,7 +478,8 @@ async function handler(m, { sock }) {
     return send(
       sock,
       m,
-      `*🛍️ PICKAXE DIBELI!*\n\n*${pickaxes[pk].name}*\n_🪓 Ketik_ \`.mct equip ${pk}\` _para instalar_`,
+      `*🛍️ ¡PICO COMPRADO!*\n\n*${pickaxes[pk].name}*
+_🪓 Escriba_ \`.mct equip ${pk}\` _para instalar_`,
       "🪓 ¡Nuevo Pickaxe!",
       pickaxes[pk].name,
     );
@@ -427,7 +489,7 @@ async function handler(m, { sock }) {
     const user = getOrCreateMCUser(db, m.sender);
     const mc = user.minecraft;
     const pk = sa[0] ? sa[0].toLowerCase() : "";
-    if (!pk) return m.reply(`_🪓 Tentukan pickaxe!_ \`.mct picks\``);
+    if (!pk) return m.reply(`_🪓 ¡Elige un pico!_ \`.mct picks\``);
     if (!mc.pickaxes[pk])
       return m.reply(`_📭 ¡No tengo este pico!_ \`.mct picks\``);
     mc.usedPickaxe = pk;
@@ -435,7 +497,7 @@ async function handler(m, { sock }) {
     return send(
       sock,
       m,
-      `*🪓 PICKAXE DIPASANG!*\n\n*${mc.pickaxes[pk].name}* _✅ Ya está._`,
+      `*🪓 ¡PICO EQUIPADO!*\n\n*${mc.pickaxes[pk].name}* _✅ Ya está equipado._`,
       "🪓 Equip Pickaxe!",
       mc.pickaxes[pk].name,
     );
@@ -447,9 +509,11 @@ async function handler(m, { sock }) {
     const pks = mc.pickaxes || {};
     if (Object.keys(pks).length === 0)
       return m.reply(`_📭 ¡No hay escarabajo!_`);
-    let txt = `*🎒 KOLEKSI PICKAXE*\n\n`;
+    let txt = `*🎒 COLECCIÓN DE PICOS*
+
+`;
     for (const [k, pick] of Object.entries(pks)) {
-      txt += `*${pick.name}*${mc.usedPickaxe === k ? " _✅ AKTIF_" : ""}\n  _⬆️ Lv.${pick.level || 1}/${pick.maxLevel} | 🍀 Luck ${(pick.luck * 100).toFixed(0)}% | ⚡ Speed ${(pick.speed * 100).toFixed(0)}%_\n`;
+      txt += `*${pick.name}*${mc.usedPickaxe === k ? " ACTIVO" : ""}\n  _⬆️ Lv.${pick.level || 1}/${pick.maxLevel} | 🍀 Luck ${(pick.luck * 100).toFixed(0)}% | ⚡ Speed ${(pick.speed * 100).toFixed(0)}%_\n`;
       if (pick.enchant)
         txt += `  _✨ Enchant: ${pickEnchants[pick.enchant] ? pickEnchants[pick.enchant].name : pick.enchant}_\n`;
     }
@@ -457,7 +521,7 @@ async function handler(m, { sock }) {
       sock,
       m,
       txt + `\n\`.mct equip <pick>\``,
-      "🎒 Koleksi Pickaxe",
+      "🎒 Colección de picos",
       `🪓 ${Object.keys(pks).length} pickaxe`,
     );
   }
@@ -477,21 +541,22 @@ async function handler(m, { sock }) {
 \`.mct enchant <key>\` para reemplazar`,
         );
       }
-      return m.reply(`_✨ Tentukan enchant!_ \`.mct enchants\``);
+      return m.reply(`_✨ ¡Elige un encantamiento!_ \`.mct enchants\``);
     }
     if (!pickEnchants[ek])
       return m.reply(`_✨ ¡Encantar no!_ \`.mct enchants\``);
     const ench = pickEnchants[ek];
     const cost = encCost(ench.rarity);
     if ((mc.money || 0) < cost)
-      return m.reply(`_💸 Uang kurang! Butuh ${formatMoney(cost)}_`);
+      return m.reply(`¡Dinero insuficiente! Necesita ${formatMoney(cost)}_`);
     mc.money -= cost;
     pick.enchant = ek;
     db.markDirty("users");
     return send(
       sock,
       m,
-      `*✨ ENCHANT DIPASANG!*\n\n*${ench.name}* _(${ench.rarity})_ ke *${pick.name}*\n_${ench.desc}_\n_💰 Biaya: ${formatMoney(cost)}_`,
+      `*✨ ¡ENCANTAMIENTO EQUIPADO!*\n\n*${ench.name}* _(${ench.rarity})_ aplicado a *${pick.name}*\n_${ench.desc}_
+Costo: ${formatMoney(cost)}_`,
       "✨ Enchant!",
       ench.name,
     );
@@ -541,7 +606,7 @@ async function handler(m, { sock }) {
     const cost =
       Math.floor(pick.price * 0.1 * pick.level) || 12000 * pick.level;
     if ((mc.money || 0) < cost)
-      return m.reply(`_💸 Uang kurang! Butuh ${formatMoney(cost)}_`);
+      return m.reply(`¡Dinero insuficiente! Necesita ${formatMoney(cost)}_`);
     mc.money -= cost;
     const res = addPickExp(mc, pk, Math.floor(pick.expToNextLevel * 0.5));
     db.markDirty("users");
@@ -549,8 +614,10 @@ async function handler(m, { sock }) {
       sock,
       m,
       res
-        ? `*⬆️ PICKAXE UPGRADED!*\n\n${res}\n_💰 Biaya: ${formatMoney(cost)}_`
-        : `*⭐ PICKAXE EXP UP!*\n\n⭐ +${Math.floor(pick.expToNextLevel * 0.5)} EXP\n_💰 Biaya: ${formatMoney(cost)}_`,
+        ? `*⬆️ PICKAXE UPGRADED!*\n\n${res}
+Costo: ${formatMoney(cost)}_`
+        : `*⭐ PICKAXE EXP UP!*\n\n⭐ +${Math.floor(pick.expToNextLevel * 0.5)} EXP
+Costo: ${formatMoney(cost)}_`,
       "⬆️ Pickaxe Upgrade!",
       pick.name,
     );
@@ -569,7 +636,8 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
       for (const mob of mobs) {
         txt += `${rc(mob.rarity)} *${mob.name}*\n  _❤️ HP: ${mob.hp} | ⚔️ ATK: ${mob.atk} | ⬆️ Lv.${mob.minLevel}+_  \n`;
       }
-      txt += `\n\`.mct fight <mob>\` untuk ⚔️ menyerang!`;
+      txt += `
+¡Usa \`.mct fight <mob>\` para atacar! ⚔️`;
       return send(sock, m, txt, "👹 Lista de la mafia", `👾 ${mobs.length} mob`);
     }
     const mk = sa[0].toLowerCase();
@@ -580,7 +648,7 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
     if (result.won) {
       let txt = `*🏆 ¡Lo harás!*
 
-⚔️ Melawan *${result.mobName}*\n\n`;
+⚔️ Contra *${result.mobName}*\n\n`;
       for (const line of result.log) txt += `${line}\n`;
       txt += `\n*⭐ EXP:* +${result.expGain}`;
       if (result.drops.length > 0) {
@@ -588,14 +656,16 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
         for (const d of result.drops)
           txt += `\n  ${d.name} _💰 ${formatMoney(d.value)}_`;
       }
-      return send(sock, m, txt, "🏆 Menang!", result.mobName);
+      return send(sock, m, txt, "🏆 ¡Victoria!", result.mobName);
     } else {
       let txt = `*💀 ¡Estás perdido!*
 
-⚔️ Melawan *${result.mobName}*\n\n`;
+⚔️ Contra *${result.mobName}*\n\n`;
       for (const line of result.log) txt += `${line}\n`;
-      txt += `\n_❤️ HP tersisa: ${mc.hp}/${mc.maxHp}_\n\`.mct heal\` untuk ❤️ sembuh`;
-      return send(sock, m, txt, "💀 Kalah!", result.mobName);
+      txt += `
+_❤️ HP restante: ${mc.hp}/${mc.maxHp}_
+\`.mct heal\` para ❤️ curarse`;
+      return send(sock, m, txt, "💀 ¡Derrota!", result.mobName);
     }
   }
 
@@ -608,7 +678,8 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
     return send(
       sock,
       m,
-      `*❤️ HEAL!*\n\n❤️ HP: ${result.hp}/${mc.maxHp}\n_💰 Biaya: ${formatMoney(result.cost)}_`,
+      `*❤️ HEAL!*\n\n❤️ HP: ${result.hp}/${mc.maxHp}
+Costo: ${formatMoney(result.cost)}_`,
       "❤️ Heal!",
       `❤️ ${result.hp}`,
     );
@@ -619,7 +690,7 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
     const mc = user.minecraft;
     const result = doSmelt(mc);
     if (result.count === 0)
-      return m.reply(`_🔥 ¡No hay ore para oler!_`);
+      return m.reply(`_🔥 ¡No hay minerales para fundir!_`);
     mc.money = (mc.money || 0) + result.totalValue;
     mc.totalEarned = (mc.totalEarned || 0) + result.totalValue;
     let txt = `*🔥 SLATTING SLEEP!*
@@ -647,7 +718,9 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
 `;
       for (const [k, r] of Object.entries(CRAFT_RECIPES)) {
         const canCraft = (mc.level || 1) >= r.requiredLevel;
-        txt += `${canCraft ? "✅" : "🔒"} *${r.name}* _\`${k}\`_\n  _💰 Value: ${formatMoney(r.value)} | ⬆️ Lv.${r.requiredLevel}+_\n  _🧪 Bahan:_\n`;
+        txt += `${canCraft ? "✅" : "🔒"} *${r.name}* _\`${k}\`_\n  _💰 Value: ${formatMoney(r.value)} | ⬆️ Lv.${r.requiredLevel}+_
+  _🧪 Materiales:_
+`;
         for (const [ing, cnt] of Object.entries(r.ingredients))
           txt += `    _${ing} x${cnt}_\n`;
         txt += `\n`;
@@ -710,7 +783,7 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
       const diff = now.getTime() - new Date(mc.lastDaily).getTime();
       if (diff < 86400000)
         return m.reply(
-          `_🎁 ¡El diario ha sido tomado! *${Math.ceil((86400000 - diff) / 3600000)}* jam._`,
+          `_🎁 ¡El diario ha sido tomado! *${Math.ceil((86400000 - diff) / 3600000)}* horas._`,
         );
     }
     const ld = mc.lastDaily ? new Date(mc.lastDaily) : null;
@@ -729,7 +802,9 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
     return send(
       sock,
       m,
-      `*🎁 DAILY REWARD!*\n\n*🔥 Streak:* ${mc.dailyStreak} hari\n💰 +${formatMoney(rw.money)}\n🎟️ +${rw.tickets} Tiket Gacha\n*🏦 Saldo:* ${formatMoney(mc.money)}`,
+      `*🎁 DAILY REWARD!*\n\n*🔥 Streak:* ${mc.dailyStreak} días
+💰 +${formatMoney(rw.money)}\n🎟️ +${rw.tickets} Boleto de gacha
+*🏦 Saldo:* ${formatMoney(mc.money)}`,
       "🎁 Daily Reward!",
       `🔥 Streak ${mc.dailyStreak}`,
     );
@@ -741,12 +816,12 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
     const useT = sa[0] && sa[0].toLowerCase() === "ticket";
     if (useT) {
       if ((mc.gachaTickets || 0) < 1)
-        return m.reply(`_🎟️ Tiket habis! Punya ${mc.gachaTickets || 0}_`);
+        return m.reply(`_🎟️ ¡No tienes boletos! Tienes ${mc.gachaTickets || 0}_`);
       mc.gachaTickets -= 1;
     } else {
       if ((mc.money || 0) < GACHA_COST_COINS)
         return m.reply(
-          `_💸 Uang kurang! Butuh ${formatMoney(GACHA_COST_COINS)}_`,
+          `¡Dinero insuficiente! Necesita ${formatMoney(GACHA_COST_COINS)}_`,
         );
       mc.money -= GACHA_COST_COINS;
     }
@@ -757,19 +832,20 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
       case "pickaxe":
         if (pickaxes[item.value] && !mc.pickaxes[item.value]) {
           mc.pickaxes[item.value] = { ...pickaxes[item.value] };
-          txt += `🪓 DAPAT PICKAXE: *${item.label}*\n`;
+          txt += `🪓 PUEDE SER PICKAXE: *${item.label}*\n`;
         } else if (mc.pickaxes[item.value]) {
           const ref = Math.floor(
             (pickaxes[item.value] ? pickaxes[item.value].price : 0) * 0.3 ||
               120000,
           );
           mc.money = (mc.money || 0) + ref;
-          txt += `♻️ Duplikat: *${item.label}* _💰 +${formatMoney(ref)}_\n`;
+          txt += `♻️ Duplicados: *${item.label}* _💰 +${formatMoney(ref)}_\n`;
         }
         break;
       case "tickets":
         mc.gachaTickets = (mc.gachaTickets || 0) + item.value;
-        txt += `🎟️ +${item.value} Tiket\n`;
+        txt += `🎟️ +${item.value} boletos
+`;
         break;
       case "tokens":
         mc.prestigeTokens = (mc.prestigeTokens || 0) + item.value;
@@ -788,7 +864,8 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
           const pk2 = mc.usedPickaxe || "woodpick";
           if (mc.pickaxes[pk2]) {
             mc.pickaxes[pk2].enchant = ek2;
-            txt += `✨ Enchant: *${ed.name}* _(${item.value})_ ke pickaxe!\n`;
+            txt += `✨ Enchant: *${ed.name}* _(${item.value}¡A los pickaxes!
+`;
           }
         }
         break;
@@ -802,7 +879,7 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
     }
     if (result.isSSR) txt += `\n*🌈 SSR PULL!*`;
     if (result.pity) txt += `\n*🔥 Pity Activated!*`;
-    txt += `\n\n_🔥 Pity: ${mc.gachaPity}/${GACHA_PITY_LIMIT}_\n_🏦 Saldo: ${formatMoney(mc.money)} | 🎟️ Tiket: ${mc.gachaTickets}_`;
+    txt += `\n\n_🔥 Pity: ${mc.gachaPity}/${GACHA_PITY_LIMIT}_\n_🏦 Saldo: ${formatMoney(mc.money)} | 🎟️ boletos: ${mc.gachaTickets}_`;
     db.markDirty("users");
     return send(
       sock,
@@ -836,7 +913,7 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
     if (lv >= upg.maxLevel) return m.reply(`_✅ ¡Eso es!_`);
     const cost = upg.getCost(lv);
     if ((mc.money || 0) < cost)
-      return m.reply(`_💸 Uang kurang! Butuh ${formatMoney(cost)}_`);
+      return m.reply(`¡Dinero insuficiente! Necesita ${formatMoney(cost)}_`);
     mc.money -= cost;
     mc[type + "Upgrade"] = lv + 1;
     if (type === "combat")
@@ -845,7 +922,8 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
     return send(
       sock,
       m,
-      `*⬆️ ${upg.name} LEVEL UP!*\n\n_⬆️ Level ${lv + 1}_\n_💰 Biaya: ${formatMoney(cost)}_\n_${upg.desc}_`,
+      `*⬆️ ${upg.name} LEVEL UP!*\n\n_⬆️ Level ${lv + 1}_
+Costo: ${formatMoney(cost)}_\n_${upg.desc}_`,
       "📈 Upgrade!",
       `${upg.name} Lv.${lv + 1}`,
     );
@@ -866,9 +944,9 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
       const req = reqs[cp];
       if (!req) return m.reply(`_👑 ¡Es el máximo prestigio!_`);
       if ((mc.blocksMined || 0) < req.blocks)
-        return m.reply(`_🧱 Blocks kurang! Butuh ${req.blocks}_`);
+        return m.reply(`¡Bloques insuficientes! Necesita ${req.blocks}_`);
       if ((mc.money || 0) < req.money)
-        return m.reply(`_💸 Uang kurang! Butuh ${formatMoney(req.money)}_`);
+        return m.reply(`¡Dinero insuficiente! Necesita ${formatMoney(req.money)}_`);
       mc.prestige = cp + 1;
       mc.money = Math.floor(mc.money * 0.1);
       mc.blocksMined = 0;
@@ -891,7 +969,9 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
       return send(
         sock,
         m,
-        `*👑 PRESTIGE UP!*\n\n*🏷️ Title:* ${titles[mc.prestige]}\n*🪙 Tokens:* ${mc.prestigeTokens}\n\n_💸 Uang -90%, 🧱 blocks count reset_`,
+        `*👑 PRESTIGE UP!*\n\n*🏷️ Title:* ${titles[mc.prestige]}\n*🪙 Tokens:* ${mc.prestigeTokens}
+
+_💸 Dinero -90 %, 🧱 cantidad de bloques reiniciada_`,
         "👑 PRESTIGE!",
         titles[mc.prestige],
       );
@@ -909,7 +989,7 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
     return send(
       sock,
       m,
-      txt + `\`.mct prestige confirm\` _(hati-hati!)_`,
+      txt + `\`.mct prestige confirm\` _(¡ten cuidado!)_`,
       "👑 Prestige",
       `P${cp}`,
     );
@@ -934,7 +1014,7 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
     const item = TOKEN_SHOP.find((i) => i.id === iid);
     if (!item) return m.reply(`_🛒 ¡El artículo no existe!_ \`.mct tokens\``);
     if ((mc.prestigeTokens || 0) < item.cost)
-      return m.reply(`_🪙 Tokens kurang! Butuh ${item.cost}_`);
+      return m.reply(`¡Tokens insuficientes! Necesita ${item.cost}_`);
     mc.prestigeTokens -= item.cost;
     switch (item.type) {
       case "pickaxe":
@@ -942,7 +1022,7 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
           mc.pickaxes[item.value] = { ...pickaxes[item.value] };
         } else {
           mc.prestigeTokens += item.cost;
-          return m.reply(`_✅ Sudah punya pickaxe ini!_`);
+          return m.reply(`¡Ya tengo este pickaxe!`);
         }
         break;
       case "tickets":
@@ -956,7 +1036,7 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
     return send(
       sock,
       m,
-      `*🛍️ ITEM DIBELI!*\n\n*${item.name}* _seharga 🪙 ${item.cost} tokens_`,
+      `*🛍️ ¡ARTÍCULO COMPRADO!*\n\n*${item.name}* _por 🪙 ${item.cost} tokens_`,
       "🪙 Token Store!",
       item.name,
     );
@@ -969,26 +1049,27 @@ _❤️ HP: ${mc.hp}/${mc.maxHp} | ⚔️ ATK: ${mc.atk}_\n\n`;
       let txt = `*🎰 JACKPOT SYSTEM*
 
 _💎 ¡El sistema de jackpot con el premio supergrande!_
-_🎁 Lo tengo. _Premium_, _Partner_, _Energi_, _Limit_, bahkan _UNLIMITED_!_
+_🎁 Lo tengo. _¡Premium_, _Partner_, _Energía_, _Límite_ e incluso _ILIMITADO_!_
 
 `;
       for (const pool of JACKPOT_POOLS) {
-        txt += `*${pool.name}*\n  _💰 Biaya: ${formatMoney(pool.cost)}_\n  _🎯 Rate: ${pool.weight}%_\n  _🎁 Rewards:_\n`;
+        txt += `*${pool.name}*
+  Costo: ${formatMoney(pool.cost)}_\n  _🎯 Rate: ${pool.weight}%_\n  _🎁 Rewards:_\n`;
         for (const rw of pool.rewards) {
           const label =
             {
-              coins: "Koin",
-              energi: "Energi",
+              coins: "Monedas",
+              energi: "Energía",
               limit: "Limit",
-              tickets: "Gacha Tickets",
+              tickets: "Boletos de gacha",
               tokens: "Prestige Tokens",
               exp_boost: "EXP Boost",
               premium_7d: "Premium 7 Días",
               premium_30d: "Premium 30 días",
               partner_7d: "7 Days Partners",
               partner_30d: "Asociados 30 días",
-              unlimited_energi: "UNLIMITED Energi",
-              unlimited_limit: "UNLIMITED Limit",
+              unlimited_energi: "Energía ILIMITADA",
+              unlimited_limit: "Límite ILIMITADO",
               owner_reward: "OWNER REWARD",
             }[rw.type] || rw.type;
           txt += `    _${label}: ${rw.min === rw.max ? rw.min : `${rw.min}-${rw.max}`} (${rw.weight}%)_\n`;
@@ -1000,14 +1081,14 @@ _🎁 Lo tengo. _Premium_, _Partner_, _Energi_, _Limit_, bahkan _UNLIMITED_!_
         m,
         txt + `\`.mct jackpot <iron/gold/diamond/netherite/dragon>\``,
         "🎰 Jackpot!",
-        "💎 Hadiah Super Besar",
+        "💎 Premio enorme",
       );
     }
     const poolId = sa[0].toLowerCase();
     const pool = JACKPOT_POOLS.find((p) => p.id === poolId);
     if (!pool) return m.reply(`_🎰 ¡No Tier!_ \`.mct jackpot\``);
     if ((mc.money || 0) < pool.cost)
-      return m.reply(`_💸 Uang kurang! Butuh ${formatMoney(pool.cost)}_`);
+      return m.reply(`¡Dinero insuficiente! Necesita ${formatMoney(pool.cost)}_`);
     mc.money -= pool.cost;
     const result = doJackpotPull(mc, poolId);
     if (!result) return m.reply(`_❌ Fail, intenta de nuevo._`);
@@ -1023,13 +1104,17 @@ _🎁 Lo tengo. _Premium_, _Partner_, _Energi_, _Limit_, bahkan _UNLIMITED_!_
       "unlimited_limit",
       "owner_reward",
     ].includes(result.reward.type);
-    if (isBig) txt += `*💥 JACKPOT BESAR!*\n\n`;
-    txt += `${applied.desc}\n\n_💰 Biaya: ${formatMoney(pool.cost)}_\n_🏦 Saldo: ${formatMoney(mc.money)}_`;
+    if (isBig) txt += `*💥 ¡GRAN PREMIO!*
+
+`;
+    txt += `${applied.desc}
+
+Costo: ${formatMoney(pool.cost)}_\n_🏦 Saldo: ${formatMoney(mc.money)}_`;
     return send(
       sock,
       m,
       txt,
-      isBig ? "💥 JACKPOT BESAR!" : `🎰 ${pool.name}`,
+      isBig ? "💥 ¡GRAN PREMIO!" : `🎰 ${pool.name}`,
       applied.desc,
     );
   }

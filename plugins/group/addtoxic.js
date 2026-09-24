@@ -4,8 +4,8 @@ const pluginConfig = {
     alias: ['tambahtoxic', 'addkata'],
     category: 'group',
     description: "Añadir una palabra tóxica a la lista",
-    usage: '.addtoxic <kata>',
-    example: '.addtoxic kata_kasar',
+    usage: '.addtoxic <palabra>',
+    example: ".addtoxic palabras_casar",
     isOwner: false,
     isPremium: false,
     isGroup: true,
@@ -23,24 +23,32 @@ async function handler(m, { sock }) {
     if (!word) {
         return m.reply(
             `📝 *ᴀᴅᴅ ᴛᴏxɪᴄ*\n\n` +
-            `> Gunakan: \`.addtoxic <kata>\`\n\n` +
-            `\`Contoh: ${m.prefix}addtoxic katakasar\``
+            `> Utilice: \`.addtoxic <palabra>\`
+
+` +
+            `\`Ejemplo: ${m.prefix}addtoxic katakasar\``
         )
     }
     
     if (word.length < 2) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Kata terlalu pendek (min 2 huruf)`)
+        return m.reply(`❌ *falló*
+
+> La palabra es demasiado corta (mínimo 2 letras)`)
     }
     
     if (word.length > 30) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Kata terlalu panjang (max 30 huruf)`)
+        return m.reply(`❌ *falló*
+
+> La palabra es demasiado larga (máximo 30 letras)`)
     }
     
     const groupData = db.getGroup(m.chat) || {}
     const toxicWords = groupData.toxicWords || []
     
     if (toxicWords.includes(word)) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Kata \`${word}\` Ya está en la lista.`)
+        return m.reply(`❌ *falló*
+
+> Palabra \`${word}\` Ya está en la lista.`)
     }
     
     toxicWords.push(word)
@@ -49,10 +57,13 @@ async function handler(m, { sock }) {
     m.react('✅')
     
     await m.reply(
-        `✅ *ᴋᴀᴛᴀ ᴛᴏxɪᴄ ᴅɪᴛᴀᴍʙᴀʜ*\n\n` +
+        `✅ *palabras tóxicas añadidas*
+
+` +
         `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-        `┃ 📝 ᴋᴀᴛᴀ: \`${word}\`\n` +
-        `┃ 📊 ᴛᴏᴛᴀʟ: \`${toxicWords.length}\` kata\n` +
+        `┃ 📝 PALABRA: \`${word}\`\n` +
+        `┃ 📊 ᴛᴏᴛᴀʟ: \`${toxicWords.length}\` palabra
+` +
         `╰┈┈⬡`
     )
 }

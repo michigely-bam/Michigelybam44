@@ -29,15 +29,15 @@ const BREEDING_RESULTS = {
 }
 
 const PET_NAMES = {
-    cat: '🐱 Kucing',
-    dog: '🐕 Anjing',
-    bird: '🐦 Burung',
-    fish: '🐟 Ikan',
-    rabbit: '🐰 Kelinci',
-    lion: '🦁 Singa',
-    wolf: '🐺 Serigala',
+    cat: "🐱 Gato",
+    dog: "🐕 Perro",
+    bird: "🐦 Ave",
+    fish: "🐟 Pez",
+    rabbit: "🐰 Conejo",
+    lion: "🦁 León",
+    wolf: "🐺 Lobo",
     phoenix: '🔥 Phoenix',
-    dragon: '🐉 Naga',
+    dragon: "🐉 Dragón",
     thunderbunny: '⚡ Thunder Bunny'
 }
 
@@ -52,15 +52,19 @@ async function handler(m, { sock }) {
     if (!mentioned) {
         return m.reply(
             `🐾 *ʙʀᴇᴇᴅɪɴɢ sʏsᴛᴇᴍ*\n\n` +
-            `> Kawinkan pet-mu dengan pet player lain!\n\n` +
-            `╭┈┈⬡「 📋 *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ* 」\n` +
+            `¡Casar a tu mascota con otro jugador de mascota!
+
+` +
+            `╭┈┈⬡「 📋 *MODO DE USO* 」\n` +
             `┃ ${m.prefix}breeding @user\n` +
-            `┃ Reply pesan + ${m.prefix}breeding\n` +
+            `┃ Responder a los mensajes + ${m.prefix}breeding\n` +
             `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-            `⚠️ *Syarat:*\n` +
-            `> • Kedua player punya pet\n` +
+            `⚠️ *Requisitos:*
+` +
+            `• Ambos jugadores tienen mascotas
+` +
             `> • Pet level 5+\n` +
-            `> • Biaya: 3000 gold masing-masing`
+            `• Costo: 3000 oro cada uno`
         )
     }
     
@@ -81,16 +85,16 @@ async function handler(m, { sock }) {
     const partnerPet = partner.rpg.pet
     
     if ((myPet.level || 1) < 5) {
-        return m.reply(`❌ Pet-mu harus level 5+! (Current: ${myPet.level || 1})`)
+        return m.reply(`❌ ¡Tu mascota tiene que ser de nivel 5+! (Current: ${myPet.level || 1})`)
     }
     
     if ((partnerPet.level || 1) < 5) {
-        return m.reply(`❌ Pet partner harus level 5+! (Current: ${partnerPet.level || 1})`)
+        return m.reply(`❌ ¡El compañero de mascotas debe ser de nivel 5+! (Current: ${partnerPet.level || 1})`)
     }
     
     const breedingCost = 3000
     if ((user.koin || 0) < breedingCost) {
-        return m.reply(`❌ Balance kurang! Butuh ${breedingCost.toLocaleString()}`)
+        return m.reply(`¡❌ Saldo insuficiente! Necesita ${breedingCost.toLocaleString()}`)
     }
     
     user.koin -= breedingCost
@@ -125,14 +129,16 @@ async function handler(m, { sock }) {
     
     await m.react(isRare ? '🎉' : '✅')
     
-    let txt = `${isRare ? '🎉' : '✅'} *ʙʀᴇᴇᴅɪɴɢ ʙᴇʀʜᴀsɪʟ!*\n\n`
+    let txt = `${isRare ? '🎉' : '✅'} *breeding ¡Fue un éxito!*
+
+`
     txt += `╭┈┈⬡「 🐾 *ʙᴀʙʏ ᴘᴇᴛ* 」\n`
-    txt += `┃ 🏷️ Jenis: *${PET_NAMES[resultPetType]}*\n`
+    txt += `┃ 🏷️ Tipo: *${PET_NAMES[resultPetType]}*\n`
     txt += `┃ ${isRare ? '⭐ *RARE PET!*' : '📊 Common pet'}\n`
     txt += `┃ ✨ EXP: *+${expReward}*\n`
     txt += `┃ 💰 Cost: *-${breedingCost.toLocaleString()}*\n`
     txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`
-    txt += `> Pet disimpan di storage. Total: ${user.rpg.petStorage.length}`
+    txt += `> La mascota se guardó en el inventario. Total: ${user.rpg.petStorage.length}`
     
     return m.reply(txt, { mentions: [m.sender, mentioned] })
 }

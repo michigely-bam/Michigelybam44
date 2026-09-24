@@ -4,9 +4,9 @@ const pluginConfig = {
     name: 'spamngl',
     alias: [],
     category: 'tools',
-    description: 'Send NGL Spam',
-    usage: '.spamngl <url> | <text> | <jumlah>',
-    example: '.spamngl https://ngl.link/xxxx | hai | 10',
+    description: 'Enviar varios mensajes NGL',
+    usage: '.spamngl <url> | <texto> | <cantidad>',
+    example: '.spamngl https://ngl.link/xxxx | hola | 10',
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -19,10 +19,17 @@ const pluginConfig = {
 async function handler(m, { sock }) {
     const text = m.text?.split('|')
     const [ link, kata, jumlah ] = text
-    if(!link) return m.reply(`*LINK NGL NYA MANA ??*\nContoh: \`${m?.prefix}spamngl https://ngl.link/xxxx | hai | 10`)
-    if(!kata) return m.reply(`*KATA KATA NYA MANA ??*\n\nContoh: \`${m?.prefix}spamngl https://ngl.link/xxxx | hai | 10`)
-    if(!jumlah) return m.reply(`*JUMLAH NYA MANA ??*\n\nContoh: \`${m?.prefix}spamngl https://ngl.link/xxxx | hai | 10`)
-    if(isNaN(jumlah)) return m.reply(`*JUMLAH NYA HARUS ANGKA*\n\nContoh: \`${m?.prefix}spamngl https://ngl.link/xxxx | hai | 10`)
+    if(!link) return m.reply(`*¿DÓNDE ESTÁ EL ENLACE DE NGL?*
+    Ejemplo: \`${m?.prefix}spamngl https://ngl.link/xxxx | hola | 10`)
+    if(!kata) return m.reply(`*FALTA EL MENSAJE*
+
+    Ejemplo: \`${m?.prefix}spamngl https://ngl.link/xxxx | hola | 10`)
+    if(!jumlah) return m.reply(`*FALTA LA CANTIDAD*
+
+    Ejemplo: \`${m?.prefix}spamngl https://ngl.link/xxxx | hola | 10`)
+    if(isNaN(jumlah)) return m.reply(`*LA CANTIDAD DEBE SER UN NÚMERO*
+
+    Ejemplo: \`${m?.prefix}spamngl https://ngl.link/xxxx | hola | 10`)
     m.react('🎴')
     
     try {
@@ -37,7 +44,8 @@ async function handler(m, { sock }) {
             text: `✅ *DONE*
 
 ¡Envió exitosamente un mensaje de spam NGL!
-Target: ${link}\nPesan: ${kata} (${jumlah}x)`
+Target: ${link}
+Mensaje: ${kata} (${jumlah}x)`
         }, { quoted: m })
         
     } catch (error) {

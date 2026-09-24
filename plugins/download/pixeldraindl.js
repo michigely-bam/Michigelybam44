@@ -5,13 +5,13 @@ import path from 'path'
 import fs from 'fs'
 import { f } from '../../src/lib/ourin-http.js'
 import te from '../../src/lib/ourin-error.js'
-const NEOXR_APIKEY = config.APIkey?.neoxr || "Milik-Bot-OurinMD";
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD";
 
 const pluginConfig = {
   name: "pixeldraindl",
   alias: ["pddl", "pixeldrain", "pddownload"],
   category: "download",
-  description: "Download file dari Pixeldrain",
+  description: "Descarga archivos de Pixeldrain",
   usage: ".pixeldraindl <url>",
   example: ".pixeldraindl https://pixeldrain.com/u/xxxxx",
   cooldown: 15,
@@ -26,10 +26,13 @@ async function handler(m, { sock }) {
   if (!url || !url.includes("pixeldrain.com")) {
     return m.reply(
       `📥 *ᴘɪxᴇʟᴅʀᴀɪɴ ᴅᴏᴡɴʟᴏᴀᴅ*\n\n` +
-        `> Download file dari Pixeldrain\n\n` +
-        `*Format:*\n` +
+        `> Descarga archivos de Pixeldrain
+
+` +
+        `*Formato:*\n` +
         `> \`${m.prefix}pixeldraindl <url>\`\n\n` +
-        `*Contoh:*\n` +
+        `*Ejemplo:*
+` +
         `> \`${m.prefix}pixeldraindl https://pixeldrain.com/u/xxxxx\``,
     );
   }
@@ -43,7 +46,7 @@ async function handler(m, { sock }) {
     if (!data?.status || !data?.data) {
       m.react("❌");
       return m.reply(
-        "❌ *ɢᴀɢᴀʟ*\n\n> Archivo no encontrado o inválido",
+        "❌ *falló*\n\n> Archivo no encontrado o inválido",
       );
     }
 
@@ -72,7 +75,9 @@ async function handler(m, { sock }) {
       })
     } else if (sizeInMB > 100) {
       await m.reply(
-        `⚠️ *ꜰɪʟᴇ ᴛᴇʀʟᴀʟᴜ ʙᴇsᴀʀ*\n\n> File ${file.size} demasiado grande para enviar
+        `⚠️ *el archivo es demasiado grande*
+
+> File ${file.size} demasiado grande para enviar
 > Usar enlaces de descarga arriba`,
       );
     }

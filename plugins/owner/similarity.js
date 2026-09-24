@@ -20,7 +20,10 @@ async function handler(m, { sock }) {
     const args = m.args
     
     if (!args[0]) {
-        return m.reply(`⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n> \`.similarity on\` - Aktifkan\n> \`.similarity off\` - Matikan`)
+        return m.reply(`⚠️ *modo de uso*
+
+> \`.similarity on\` - Activa
+> \`.similarity off\` - Matikan`)
     }
     
     const mode = args[0].toLowerCase()
@@ -28,17 +31,20 @@ async function handler(m, { sock }) {
     if (mode === 'on') {
         db.setting('similarity', true)
         await m.react('✅')
-        await m.reply(`✅ *sᴜᴋsᴇs*
+        await m.reply(`✅ *COMPLETADO*
 
-> Función de comando de firmas *DIAKTIFKAN*`)
+> Función de similitud de comandos *ACTIVADA*`)
     } else if (mode === 'off') {
         db.setting('similarity', false)
         await m.react('✅')
-        await m.reply(`✅ *sᴜᴋsᴇs*
+        await m.reply(`✅ *COMPLETADO*
 
-> Función de comando de firmas *DIMATIKAN*`)
+> Función de similitud de comandos *DESACTIVADA*`)
     } else {
-        return m.reply(`⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n> \`.similarity on\` - Aktifkan\n> \`.similarity off\` - Matikan`)
+        return m.reply(`⚠️ *modo de uso*
+
+> \`.similarity on\` - Activa
+> \`.similarity off\` - Matikan`)
     }
     
     await db.save()

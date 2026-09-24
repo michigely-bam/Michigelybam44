@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "setreply",
   alias: ["replyvariant", "replystyle"],
   category: "owner",
-  description: "Mengatur variant tampilan reply",
+  description: "Configura la variante visual de las respuestas",
   usage: ".setreply <v1-v10>",
   example: ".setreply v5",
   isOwner: true,
@@ -22,7 +22,7 @@ const VARIANTS = {
   v1: {
     id: 1,
     name: "Simple",
-    desc: "Reply text biasa tanpa styling",
+    desc: "Responder a un texto ordinario sin estilos",
     emoji: "📝",
   },
   v2: {
@@ -40,7 +40,7 @@ const VARIANTS = {
   v4: {
     id: 4,
     name: "Qkontak",
-    desc: "V3 + fake quoted reply (centang biru)",
+    desc: "V3 + fake quoted reply (marca azul)",
     emoji: "✅",
   },
   v5: {
@@ -49,24 +49,24 @@ const VARIANTS = {
     desc: "V3 + faketroli quoted + large thumbnail",
     emoji: "🛒",
   },
-  v6: { id: 6, name: "Hehe", desc: "Centang biru + document", emoji: "📄" },
-  v7: { id: 7, name: "Andalan ku", desc: "Centang biru + gambar", emoji: "📄" },
+  v6: { id: 6, name: "Hehe", desc: "Marca azul + document", emoji: "📄" },
+  v7: { id: 7, name: "Mi favorito", desc: "Marca azul + imagen", emoji: "📄" },
   v8: {
     id: 8,
-    name: "Gambar panjang, tanpa centang biru",
-    desc: "Gambar panjang, tanpa centang biru",
+    name: "Imagen alargada, sin marca azul",
+    desc: "Imagen alargada, sin marca azul",
     emoji: "📄",
   },
   v9: {
     id: 9,
     name: "Video GIF",
-    desc: "Video GIF, tanpa centang biru",
+    desc: "Video GIF sin marca azul",
     emoji: "📄",
   },
   v10: {
     id: 10,
     name: "LinkPreview",
-    desc: "sendPreview + fake quoted (centang biru)",
+    desc: "sendPreview + fake quoted (marca azul)",
     emoji: "🔗",
   },
 };
@@ -87,7 +87,7 @@ Uso: v1 s / d v10`);
     db.setting("replyVariant", selected.id);
 
     await m.reply(
-      `✅ *ʀᴇᴘʟʏ ᴠᴀʀɪᴀɴᴛ ᴅɪᴜʙᴀʜ*\n\n` +
+      `✅ *ʀᴇᴘʟʏ ᴠᴀʀɪᴀɴᴛ CAMBIADO*\n\n` +
         `> ${selected.emoji} *V${selected.id} — ${selected.name}*\n` +
         `> _${selected.desc}_`,
     );
@@ -104,19 +104,19 @@ Uso: v1 s / d v10`);
 
   const bodyText =
     `💬 *sᴇᴛ ʀᴇᴘʟʏ ᴠᴀʀɪᴀɴᴛ*\n\n` +
-    `> Variant aktif: *V${current}*\n` +
-    `> _${VARIANTS[`v${current}`]?.name || "Unknown"}_\n\n` +
-    `> Pilih variant dari daftar di bawah`;
+    `> Variante activa: *V${current}*\n` +
+    `> _${VARIANTS[`v${current}`]?.name || "Desconocido"}_\n\n` +
+    `> Elige una variante de la lista siguiente`;
 
   try {
     const interactiveButtons = [
       {
         name: "single_select",
         buttonParamsJson: JSON.stringify({
-          title: "💬 ᴘɪʟɪʜ ᴠᴀʀɪᴀɴᴛ",
+          title: "💬 ELEGIR VARIANTE",
           sections: [
             {
-              title: "ᴅᴀꜰᴛᴀʀ ᴠᴀʀɪᴀɴᴛ ʀᴇᴘʟʏ",
+              title: "LISTA DE VARIANTES DE RESPUESTA",
               rows,
             },
           ],
@@ -176,7 +176,8 @@ Uso: v1 s / d v10`);
       const mark = val.id === current ? " ✓" : "";
       txt += `> ${val.emoji} *${key.toUpperCase()}*${mark} — _${val.desc}_\n`;
     }
-    txt += `\n_Gunakan: \`.setreply v1\` s/d \`.setreply v10\`_`;
+    txt += `
+_Uso: \`.setreply v1\` s/d \`.setreply v10\`_`;
     await m.reply(txt);
   }
 }

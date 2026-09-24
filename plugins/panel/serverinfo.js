@@ -55,7 +55,7 @@ function getAvailableServers(pteroConfig) {
 }
 
 function formatBytes(bytes) {
-    if (bytes === 0) return 'Unlimited'
+    if (bytes === 0) return 'Ilimitado'
     const mb = bytes
     if (mb >= 1000) return `${(mb / 1000).toFixed(1)} GB`
     return `${mb} MB`
@@ -70,9 +70,11 @@ async function handler(m, { sock }) {
     if (!hasFullAccess(m.sender, serverVersion, m.isOwner)) {
         const userRole = getUserRole(m.sender, serverVersion)
         return m.reply(
-            `❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n` +
-            `> Kamu tidak punya akses ke *${serverLabel}*\n` +
-            `> Role kamu: *${userRole || 'Tidak ada'}*`
+            `❌ *se rechazó el acceso*
+
+` +
+            `No tienes acceso a *${serverLabel}*\n` +
+            `> Tu rol: *${userRole || "No hay"}*`
         )
     }
     
@@ -83,7 +85,7 @@ async function handler(m, { sock }) {
     
     if (missingConfig.length > 0) {
         const available = getAvailableServers(pteroConfig)
-        let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`
+        let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} SIN CONFIGURAR*\n\n`
         if (available.length > 0) {
             txt += `> Servidor disponible: *${available.join(', ')}*`
         }
@@ -92,9 +94,9 @@ async function handler(m, { sock }) {
     
     if (!serverId || isNaN(serverId)) {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+            `⚠️ *MODO DE USO*\n\n` +
             `> \`${m.prefix}${m.command} serverid\`\n\n` +
-            `> Lihat ID dengan \`${m.prefix}listserver${serverVersion}\``
+            `> Ver ID con \`${m.prefix}listserver${serverVersion}\``
         )
     }
     
@@ -114,14 +116,15 @@ async function handler(m, { sock }) {
         let txt = `📊 *ɪɴꜰᴏ sᴇʀᴠᴇʀ [${serverLabel}]*\n\n`
         txt += `╭─「 📋 *ᴅᴇᴛᴀɪʟ* 」\n`
         txt += `┃ 🆔 \`ɪᴅ\`: *${s.id}*\n`
-        txt += `┃ 📛 \`ɴᴀᴍᴀ\`: *${s.name}*\n`
+        txt += `┃ 📛 \`NOMBRE\`: *${s.name}*\n`
         txt += `┃ 👤 \`ᴏᴡɴᴇʀ ɪᴅ\`: *${s.user}*\n`
-        txt += `┃ 📝 \`ᴅᴇsᴋʀɪᴘsɪ\`: *${s.description || '-'}*\n`
+        txt += `┃ 📝 \`DESCRIPCIÓN\`: *${s.description || '-'}*\n`
         txt += `┃ 📊 \`sᴛᴀᴛᴜs\`: *${s.suspended ? '⛔ Suspended' : '✅ Active'}*\n`
         txt += `╰───────────────\n\n`
-        txt += `╭─「 🧠 *sᴘᴇsɪꜰɪᴋᴀsɪ* 」\n`
+        txt += `╭─「 🧠 *ESPECIFICACIONES* 」
+`
         txt += `┃ 💾 \`ʀᴀᴍ\`: *${formatBytes(limits.memory)}*\n`
-        txt += `┃ ⚡ \`ᴄᴘᴜ\`: *${limits.cpu === 0 ? 'Unlimited' : limits.cpu + '%'}*\n`
+        txt += `┃ ⚡ \`ᴄᴘᴜ\`: *${limits.cpu === 0 ? 'Ilimitada' : limits.cpu + '%'}*\n`
         txt += `┃ 📦 \`ᴅɪsᴋ\`: *${formatBytes(limits.disk)}*\n`
         txt += `┃ 🔄 \`sᴡᴀᴘ\`: *${limits.swap} MB*\n`
         txt += `╰───────────────\n\n`

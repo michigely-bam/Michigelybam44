@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'bratcewek',
     alias: ['cewekbrat', 'bratperempuan', 'bratgirl'],
     category: 'sticker',
-    description: 'Membuat sticker brat',
+    description: "Crear un sticker Brat",
     usage: '.bratcewek <text>',
     example: ".Bratgirl.",
     isOwner: false,
@@ -20,11 +20,11 @@ const pluginConfig = {
 async function handler(m, { sock }) {
     const text = m.args.join(' ')
     if (!text) {
-        return m.reply(`🖼️ *ʙʀᴀᴛ cᴇᴡᴇᴋ sᴛɪᴄᴋᴇʀ*
+        return m.reply(`🖼️ *STICKER BRAT PARA CHICA*
 
 > Escriba texto
 
-\`Contoh: ${m.prefix}Bratgirl.\``)
+\`Ejemplo: ${m.prefix}Bratgirl.\``)
     }
     
     m.react('🕕')

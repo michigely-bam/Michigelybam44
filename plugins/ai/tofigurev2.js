@@ -7,7 +7,7 @@ const pluginConfig = {
     alias: ['figurev2', 'figure2'],
     category: 'ai',
     description: "Convertir imágenes en estilo Figura v2",
-    usage: '.tofigurev2 (reply gambar)',
+    usage: ".tofigurev2 (respuesta a la imagen)",
     example: '.tofigurev2',
     isOwner: false,
     isPremium: false,

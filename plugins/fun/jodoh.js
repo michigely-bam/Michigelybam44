@@ -34,8 +34,8 @@ const loveQuotes = [
   "Dos corazones unidos no serán separados 💗",
   "Ustedes son como el rompecabezas perfecto. 🧩",
   "Match made in heaven! ✨",
-  "Chemistry-nya kuat banget! 🔥",
-  "Couple goals banget sih kalian 💑",
+  "¡Hay muchísima química! 🔥",
+  "¡Ustedes son la pareja ideal! 💑",
   "Destiny brought you together 🌟",
   "Perfect match detected! 💘",
 ];
@@ -49,11 +49,11 @@ const compatibilityEmoji = (percent) => {
 };
 
 const compatibilityText = (percent) => {
-  if (percent >= 90) return "JODOH SEJATI! 💍";
-  if (percent >= 70) return "Sangat Cocok! 💖";
-  if (percent >= 50) return "Lumayan Cocok 💗";
+  if (percent >= 90) return "¡ALMA GEMELA! 💍";
+  if (percent >= 70) return "¡Son muy compatibles! 💖";
+  if (percent >= 50) return "Bastante compatibles 💗";
   if (percent >= 30) return "Probable 💓";
-  return "Butuh Usaha Lebih 💔";
+  return "Requiere más de 7.000 esfuerzos 💔";
 };
 
 const isRegistrationRequired = (db) => {
@@ -70,7 +70,7 @@ async function handler(m, { sock }) {
   try {
     groupMeta = m.groupMetadata;
   } catch (e) {
-    return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> ¡No podía recuperar datos de grupo!");
+    return m.reply("❌ *falló*\n\n> ¡No podía recuperar datos de grupo!");
   }
 
   const participants = groupMeta.participants || [];
@@ -79,7 +79,7 @@ async function handler(m, { sock }) {
     .filter((jid) => jid && jid !== botNumber);
 
   if (memberJids.length < 2) {
-    return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> ¡Al menos dos miembros coinciden!");
+    return m.reply("❌ *falló*\n\n> ¡Al menos dos miembros coinciden!");
   }
 
   const allUsers = db.getAllUsers();
@@ -96,7 +96,7 @@ async function handler(m, { sock }) {
 
   if (registrationRequired && registeredMembers.length < 2) {
     return m.reply(
-      "❌ *ɢᴀɢᴀʟ*\n\n> Modo obligatorio de lista activa. Minimal debe tener dos miembros ya registrados en este grupo!",
+      "❌ *falló*\n\n> Modo obligatorio de lista activa. Minimal debe tener dos miembros ya registrados en este grupo!",
     );
   }
 
@@ -165,19 +165,21 @@ async function handler(m, { sock }) {
     return "█".repeat(filled) + "░".repeat(empty);
   })();
 
-  let text = `💘 *ᴊᴏᴅᴏʜ ʀᴀɴᴅᴏᴍ*\n\n`;
-  text += `╭┈┈⬡「 💑 *ᴘᴀsᴀɴɢᴀɴ* 」\n`;
+  let text = `💘 *PAREJA ALEATORIA*\n\n`;
+  text += `╭┈┈⬡「 💑 *PAREJA* 」
+`;
   text += `┃ ${label1} ${name1}\n`;
   text += `┃ ❤️\n`;
   text += `┃ ${label2} ${name2}\n`;
   text += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
-  text += `╭┈┈⬡「 📊 *ᴋᴇᴄᴏᴄᴏᴋᴀɴ* 」\n`;
+  text += `╭┈┈⬡「 📊 *COMPATIBILIDAD* 」\n`;
   text += `┃ ${progressBar} *${compatibility}%*\n`;
   text += `┃ ${compatibilityEmoji(compatibility)}\n`;
   text += `┃ Status: *${compatibilityText(compatibility)}*\n`;
   text += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
   if (usedRegistration) {
-    text += `> ✨ _Dijodohkan berdasarkan data registrasi_\n`;
+    text += `> ✨ _Emparejados según los datos del registro_
+`;
   }
   if (registrationRequired) {
     text += `> 🔒 _El modo obligatorio de la lista activa, sólo el miembro registrado seleccionado_

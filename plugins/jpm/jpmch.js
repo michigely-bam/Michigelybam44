@@ -15,8 +15,8 @@ const pluginConfig = {
     alias: ['jpmchannel'],
     category: 'jpm',
     description: "Enviar un mensaje a todos los canales de WhatsApp",
-    usage: ".jpmch &gt; Mensaje &gt;",
-    example: '.jpmch Halo semuanya!',
+    usage: '.jpmch <mensaje>',
+    example: ".jpmch ¡Hola a todos!",
     isOwner: true,
     isPremium: false,
     isGroup: false,
@@ -27,9 +27,9 @@ const pluginConfig = {
 }
 
 /**
- * Fetch semua channel yang di-subscribe (dari inibaileysnya)
+ Fetch todos los canales suscritos (de sus inibaileys)
  * @param {Object} sock - Socket Baileys
- * @returns {Promise<Object>} Daftar channel
+ *@returns {Promise<Object>} Lista de canales
  */
 async function fetchAllSubscribedChannels(sock) {
     const data = {}
@@ -70,7 +70,7 @@ async function fetchAllSubscribedChannels(sock) {
                     if (ch.id) {
                         data[ch.id] = {
                             id: ch.id,
-                            name: ch.thread_metadata?.name?.text || ch.name || 'Unknown',
+                            name: ch.thread_metadata?.name?.text || ch.name || 'Desconocido',
                             subscribers: ch.thread_metadata?.subscribers_count || 0
                         }
                     }
@@ -93,7 +93,7 @@ async function handler(m, { sock }) {
     if (m.isGroup) {
         const groupMode = getGroupMode(m.chat, db)
         if (groupMode !== 'md' && groupMode !== 'all') {
-            return m.reply(`❌ *ᴍᴏᴅᴇ ᴛɪᴅᴀᴋ sᴇsᴜᴀɪ*
+            return m.reply(`❌ *modo no es adecuado*
 
 > JPM sólo está disponible en modo MD
 
@@ -104,18 +104,26 @@ async function handler(m, { sock }) {
     const text = m.fullArgs?.trim() || m.text?.trim()
     if (!text) {
         return m.reply(
-            `📢 *JPM CHANNEL (JASA PESAN MASSAL)*\n\n` +
-            `Sistem broadcast otomatis ke seluruh channel WhatsApp yang mensubscribe bot ini.\n\n` +
-            `*PENGGUNAAN:*\n` +
-            `• *${m.prefix}jpmch <pesan>* — Mengirim JPM teks ke channel\n` +
-            `• *${m.prefix}jpmch (reply foto/video)* — Mengirim JPM media ke channel\n\n` +
-            `*CONTOH:*\n` +
-            `> \`${m.prefix}jpmch Halo semua, ikuti update terbaru kami!\``
+            `📢 *JPM CANAL (SERVICIO DE MENSAJERÍA MASIVA)*
+
+` +
+            `Sistema de transmisión automática a todos los canales de WhatsApp que se suscriben a este bot.
+
+` +
+            `*USO:*
+` +
+            `• *${m.prefix}jpmch <mensaje>* — Enviar una difusión de texto a los canales
+` +
+            `• *${m.prefix}jpmch (Responde foto/video)* — Enviar JPM medios a los canales
+
+` +
+            `*EJEMPLO:*\n` +
+            `> \`${m.prefix}jpmch ¡Hola a todos! Sigan nuestras últimas novedades.\``
         )
     }
     
     if (global.statusjpm) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*
+        return m.reply(`❌ *falló*
 
 > JPM corriendo. \`${m.prefix}stopjpm\` Parar.`)
     }
@@ -151,7 +159,7 @@ async function handler(m, { sock }) {
         
         if (channelIds.length === 0) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > No hay canal encontrado ni bot todavía subscribir ningún canal`)
         }
@@ -161,12 +169,12 @@ async function handler(m, { sock }) {
         await m.reply(
             `📢 *ᴊᴘᴍ ᴄʜᴀɴɴᴇʟ*\n\n` +
             `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-            `┃ 📝 ᴘᴇsᴀɴ: \`${text.substring(0, 50)}${text.length > 50 ? '...' : ''}\`\n` +
-            `┃ 📷 ᴍᴇᴅɪᴀ: \`${mediaBuffer ? mediaType : 'Tidak'}\`\n` +
+            `┃ 📝 mensaje: \`${text.substring(0, 50)}${text.length > 50 ? '...' : ''}\`\n` +
+            `┃ 📷 ᴍᴇᴅɪᴀ: \`${mediaBuffer ? mediaType : "No"}\`\n` +
             `┃ 📺 ᴛᴀʀɢᴇᴛ: \`${channelIds.length}\` channel\n` +
-            `┃ ⏱️ ᴊᴇᴅᴀ: \`${jedaJpm}ms\`\n` +
+            `┃ ⏱️ INTERVALO: \`${jedaJpm}ms\`\n` +
             `╰┈┈⬡\n\n` +
-            `> Memulai JPM ke semua channel...`
+            `> Iniciando JPM en todos los canales...`
         )
         
         global.statusjpm = true
@@ -181,9 +189,9 @@ async function handler(m, { sock }) {
                 delete global.statusjpm
                 
                 await m.reply(
-                    `⏹️ *ᴊᴘᴍ ᴅɪʜᴇɴᴛɪᴋᴀɴ*\n\n` +
-                    `> ✅ Berhasil: \`${successCount}\`\n` +
-                    `> ❌ Gagal: \`${failedCount}\``
+                    `⏹️ *ᴊᴘᴍ DETENIDO*\n\n` +
+                    `> ✅ Correcto: \`${successCount}\`\n` +
+                    `> ❌ Falló: \`${failedCount}\``
                 )
                 return
             }
@@ -235,10 +243,12 @@ async function handler(m, { sock }) {
         
         m.react('✅')
         await m.reply(
-            `✅ *ᴊᴘᴍ ᴄʜᴀɴɴᴇʟ sᴇʟᴇsᴀɪ*\n\n` +
-            `╭┈┈⬡「 📊 *ʜᴀsɪʟ* 」\n` +
-            `┃ ✅ ʙᴇʀʜᴀsɪʟ: \`${successCount}\`\n` +
-            `┃ ❌ ɢᴀɢᴀʟ: \`${failedCount}\`\n` +
+            `✅ *jpm canal terminado*
+
+` +
+            `╭┈┈⬡「 📊 *RESULTADO* 」\n` +
+            `┃ ✅ correcto: \`${successCount}\`\n` +
+            `┃ ❌ ERROR: \`${failedCount}\`\n` +
             `┃ 📊 ᴛᴏᴛᴀʟ: \`${channelIds.length}\`\n` +
             `╰┈┈⬡`
         )

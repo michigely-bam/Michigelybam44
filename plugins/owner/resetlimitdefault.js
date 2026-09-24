@@ -23,9 +23,11 @@ async function handler(m, { sock }) {
     db.setting('defaultLimit', null)
     
     await m.reply(
-        `✅ *ʙᴇʀʜᴀsɪʟ*\n\n` +
-        `> Default limit direset ke config: \`${configDefault}\`\n` +
-        `> User baru akan mendapat limit dari config`
+        `✅ *correcto*
+
+` +
+        `> Default limit se ha resetado a config: \`${configDefault}\`\n` +
+        `> El nuevo usuario obtendrá un límite de configuración`
     )
 }
 

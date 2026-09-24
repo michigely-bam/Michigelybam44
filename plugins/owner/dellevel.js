@@ -7,8 +7,8 @@ const pluginConfig = {
   name: "dellevel",
   alias: ["kuranglevel", "removelevel", "dellvl"],
   category: "owner",
-  description: "Kurangi level user (via exp)",
-  usage: ".dellevel <jumlah> @user",
+  description: "Reduce el nivel de un usuario mediante su EXP",
+  usage: ".dellevel <cantidad> @usuario",
   example: ".dellevel 5 @user",
   isOwner: true,
   isPremium: false,
@@ -42,10 +42,12 @@ async function handler(m, { sock }) {
     return m.reply(
       `📊 *ᴅᴇʟ ʟᴇᴠᴇʟ*\n\n` +
         `╭┈┈⬡「 📋 *ᴜsᴀɢᴇ* 」\n` +
-        `┃ > \`.dellevel <jumlah>\` - ke diri sendiri\n` +
-        `┃ > \`.dellevel <jumlah> @user\` - ke orang lain\n` +
+        `┃ > \`.dellevel <cantidad>\` - a sí mismo
+` +
+        `┃ > \`.dellevel <cantidad> @usuario\` - a otros
+` +
         `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-        `> Contoh: \`${m.prefix}dellevel 5\``,
+        `> Ejemplo: \`${m.prefix}dellevel 5\``,
     );
   }
 
@@ -60,12 +62,12 @@ async function handler(m, { sock }) {
   await m.react("✅");
 
   await m.reply(
-    `✅ *ʟᴇᴠᴇʟ ᴅɪᴋᴜʀᴀɴɢɪ*\n\n` +
+    `✅ *NIVEL REDUCIDO*\n\n` +
       `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
       `┃ 👤 User: @${targetJid.split("@")[0]}\n` +
-      `┃ ➖ Kurang: *-${levels} Level*\n` +
+      `┃ ➖ Insuficiente: *-${levels} Level*\n` +
       `┃ 🚄 Exp Removed: *-${expToRemove.toLocaleString("id-ID")}*\n` +
-      `┃ 📊 Level: *${oldLevel} → ${newLevel}*\n` +
+      `┃ 📊 Nivel: *${oldLevel} → ${newLevel}*\n` +
       `┃ ${getRole(newLevel)}\n` +
       `╰┈┈┈┈┈┈┈┈⬡`,
     { mentions: [targetJid] },

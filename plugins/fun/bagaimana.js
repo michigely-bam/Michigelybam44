@@ -2,9 +2,9 @@ const pluginConfig = {
     name: 'bagaimana',
     alias: ['gimana', 'how'],
     category: 'fun',
-    description: 'Tanya bot bagaimana sesuatu',
-    usage: '.bagaimana <pertanyaan>',
-    example: '.bagaimana cara jadi sukses?',
+    description: "Pregúntale al bot cómo es algo",
+    usage: '.bagaimana <pregunta>',
+    example: ".bagaimana ¿cómo puedo tener éxito?",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -15,16 +15,16 @@ const pluginConfig = {
 };
 
 const answers = [
-    'Caranya gampang, ya tinggal dilakuin aja!',
+    "Es fácil: ¡solo tienes que hacerlo!",
     "Es difícil de explicar.",
     "Con esfuerzo y oración, por supuesto.",
-    'Ya begitulah caranya.',
+    "Así es como se hace.",
     "No lo sé, trata de encontrar otra referencia.",
-    "Pelan-pelan Puedes hacerlo más tarde.",
+    "Ve poco a poco; puedes hacerlo más tarde.",
     "¡Con trabajo duro y sin rendición!",
-    'Pertama, percaya sama diri sendiri dulu.',
-    'Hmm, tiap orang beda-beda sih caranya.',
-    'Ikutin kata hatimu aja.',
+    "Primero, confía en ti.",
+    "Mmm, cada persona tiene su propia forma.",
+    "Sigue a tu corazón.",
     "Aprende de la experiencia.",
     "Paso a paso, no te apresures.",
     "¡Con firme determinación!",
@@ -32,7 +32,7 @@ const answers = [
     "Constante, más tarde.",
     "¡No pienses demasiado, acción!",
     "¡Es fácil, sólo empieza!",
-    'Caranya? Ya dicoba dulu!',
+    "¿Cómo? ¡Inténtalo primero!",
     "Con la estrategia correcta.",
     "Todavía estoy aprendiendo."
 ];
@@ -41,12 +41,12 @@ async function handler(m) {
     const text = m.text?.trim();
     
     if (!text) {
-        return m.reply(`📋 *ʙᴀɢᴀɪᴍᴀɴᴀ*
+        return m.reply(`📋 *CÓMO*
 
-> ¡Póngase en una pregunta!
+> ¡Haz una pregunta!
 
-*Contoh:*
-> .bagaimana cara jadi sukses?`);
+*Ejemplo:*
+> .bagaimana ¿cómo puedo tener éxito?`);
     }
     
     const answer = answers[Math.floor(Math.random() * answers.length)];

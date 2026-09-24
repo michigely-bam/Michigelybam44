@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "level",
   alias: ["lvl", "ceklevel"],
   category: "user",
-  description: "Cek level user",
+  description: "Consulta el nivel de un usuario",
   usage: ".level [@user]",
   example: ".level",
   isOwner: false,
@@ -56,7 +56,7 @@ async function handler(m, { sock }) {
   const db = getDatabase();
 
   let targetJid = m.sender;
-  let targetName = m.pushName || "Kamu";
+  let targetName = m.pushName || "Tú";
 
   if (m.quoted) {
     targetJid = m.quoted.sender;
@@ -88,7 +88,7 @@ async function handler(m, { sock }) {
   txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
 
   txt += `╭┈┈⬡「 📈 *sᴛᴀᴛs* 」\n`;
-  txt += `┃ 📊 Level: *${level}*\n`;
+  txt += `┃ 📊 Nivel: *${level}*\n`;
   txt += `┃ ${role}\n`;
   txt += `┃ 🚄 Exp: *${exp.toLocaleString("id-ID")}*\n`;
   txt += `┃ 📊 Progress:\n`;
@@ -96,7 +96,7 @@ async function handler(m, { sock }) {
   txt += `┃ ${expInLevel.toLocaleString("id-ID")} / ${expNeeded.toLocaleString("id-ID")}\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
 
-  txt += `> Next level: *${expToNextLevel(exp).toLocaleString("id-ID")} exp* lagi!`;
+  txt += `> Next level: *${expToNextLevel(exp).toLocaleString("id-ID")} exp* más!`;
 
   await m.reply(txt, { mentions: [targetJid] });
 }

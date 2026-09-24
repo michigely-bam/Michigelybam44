@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['delstok', 'delstock', 'deletestok'],
     category: 'store',
     description: "🗑️ Eliminar los artículos de stock del producto",
-    usage: ".Eliminar el stock − número_producto √≥n_item>",
+    usage: '.hapusstok <número_producto> <número_artículo>',
     example: '.hapusstok 1 3',
     isOwner: true,
     isPremium: false,
@@ -23,7 +23,7 @@ async function handler(m, { sock }) {
     if (products.length === 0) {
         return m.reply(`📭 *Aún no hay producto.*
 
-Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
+Añadir el producto primero: \`${m.prefix}addproduk\` ➕`)
     }
 
     const args = m.text?.trim().split(/\s+/) || []
@@ -32,18 +32,22 @@ Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
 
     if (args.length < 2 || isNaN(productNo) || isNaN(itemNo)) {
         return m.reply(
-            `🗑️ *HAPUS STOK*\n\n` +
-            `Format: \`${m.prefix}hapusstok <nomor_produk> <nomor_item>\`\n\n` +
-            `📝 *Contoh:*\n` +
-            `\`${m.prefix}hapusstok 1 3\` — Hapus item ke-3 dari produk ke-1\n\n` +
-            `📋 Lihat nomor item: \`${m.prefix}liststok <nomor_produk>\``
+            `🗑️ *ELIMINAR EXISTENCIAS*
+
+` +
+            `Formato: \`${m.prefix}hapusstok <número_producto> <número_artículo>\`\n\n` +
+            `📝 *Ejemplo:*\n` +
+            `\`${m.prefix}hapusstok 1 3\` — Eliminar el artículo 3 del producto 1
+
+` +
+            `📋 Consulta el número del artículo: \`${m.prefix}liststok <número_producto>\``
         )
     }
 
     if (productNo < 0 || productNo >= products.length) {
         return m.reply(`❌ *Número de producto no válido.*
 
-Rentang: 1-${products.length} 📋`)
+Rango: 1-${products.length} 📋`)
     }
 
     const product = products[productNo]
@@ -52,10 +56,15 @@ Rentang: 1-${products.length} 📋`)
         const reduceCount = parseInt(args[1])
         if (isNaN(reduceCount) || reduceCount <= 0) {
             return m.reply(
-                `📦 *Produk Fisik*\n\n` +
-                `Untuk mengurangi stok fisik, gunakan:\n` +
-                `\`${m.prefix}editproduk ${productNo + 1} stok <jumlah_baru>\`\n\n` +
-                `Stok saat ini: *${product.stock === -1 ? '♾️ Unlimited' : product.stock + ' pcs'}*`
+                `📦 *Productos físicos*
+
+` +
+                `Para reducir las existencias físicas, utiliza:
+` +
+                `\`${m.prefix}editproduk ${productNo + 1} stok <cantidad_nueva>
+
+` +
+                `Existencias actuales: *${product.stock === -1 ? '♾️ Ilimitadas' : product.stock + ' unidades'}*`
             )
         }
         if (product.stock !== -1) {
@@ -63,15 +72,17 @@ Rentang: 1-${products.length} 📋`)
             db.setting('storeProducts', products)
             await m.react('✅')
             return m.reply(
-                `📦 *STOK FISIK DIKURANGI*\n\n` +
-                `🏷️ Produk: *${product.name}*\n` +
-                `➖ Dikurangi: *${reduceCount} pcs*\n` +
-                `📊 Sisa stok: *${product.stock} pcs*`
+                `📦 *EXISTENCIAS FÍSICAS REDUCIDAS*
+
+` +
+                `🏷️ Producto: *${product.name}*\n` +
+                `➖ Reducción: *${reduceCount} unidades*\n` +
+                `📊 Existencias restantes: *${product.stock} unidades*`
             )
         }
         return m.reply(`♾️ *No se puede reducir el stock ilimitado.*
 
-Ubah tipe stok terlebih dahulu: \`${m.prefix}editproduk ${productNo + 1} stok <jumlah>\``)
+Cambia primero las existencias: \`${m.prefix}editproduk ${productNo + 1} stok <cantidad>`)
     }
 
     const stockItems = product.stockItems || []
@@ -79,7 +90,7 @@ Ubah tipe stok terlebih dahulu: \`${m.prefix}editproduk ${productNo + 1} stok <j
     if (itemNo < 0 || itemNo >= stockItems.length) {
         return m.reply(`❌ *Número de artículo inválido.*
 
-Rentang: 1-${stockItems.length}
+Rango: 1-${stockItems.length}
 
 📋 Ver lista: \`${m.prefix}liststok ${productNo + 1}\``)
     }
@@ -90,10 +101,12 @@ Rentang: 1-${stockItems.length}
 
     await m.react('✅')
     return m.reply(
-        `🗑️ *STOK DIHAPUS*\n\n` +
-        `🏷️ Produk: *${product.name}*\n` +
+        `🗑️ *EXISTENCIAS FUE ELIMINADO*
+
+` +
+        `🏷️ Producto: *${product.name}*\n` +
         `🔑 Item: \`${deleted.detail.replace(/\n/g, ' ').substring(0, 50)}\`\n` +
-        `📊 Sisa stok: *${stockItems.length}* akun`
+        `📊 Existencias restantes: *${stockItems.length}* cuenta`
     )
 }
 

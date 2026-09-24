@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['esm2cjs', 'esmconvert'],
     category: 'tools',
     description: "Convertir ESM (ES Modules) en CommonJS",
-    usage: '.esmtocjs <reply kode>',
+    usage: '.esmtocjs <código respondido>',
     example: '.esmtocjs',
     isOwner: false,
     isPremium: false,
@@ -127,10 +127,13 @@ async function handler(m, { sock }) {
     if (!code) {
         return m.reply(
             `🔄 *ᴇsᴍ ᴛᴏ ᴄᴊs ᴄᴏɴᴠᴇʀᴛᴇʀ*\n\n` +
-            `> Convert ES Modules ke CommonJS\n\n` +
-            `> *Cara pakai:*\n` +
-            `> Reply kode ESM dengan ${m.prefix}esmtocjs\n\n` +
-            `> *Contoh ESM:*\n` +
+            `> Convertir los módulos ES a CommonJS
+
+` +
+            `> *Modo de uso:*
+` +
+            `> Responder al código ESM con ${m.prefix}esmtocjs\n\n` +
+            `> *Ejemplo ESM:*\n` +
             `> \`import axios from 'axios'\`\n` +
             `> \`export default function() {}\``
         )

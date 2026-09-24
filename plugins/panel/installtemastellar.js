@@ -37,7 +37,8 @@ function handler(m) {
 
     if (!text) {
         return m.reply(
-            `╭┈┈⬡「 🎨 *ɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ sᴛᴇʟʟᴀʀ* 」\n┃ ㊗ ᴜsᴀɢᴇ: \`${m.prefix}installtemastellar <ip>|<password>\`\n╰┈┈⬡\n\n> \`Contoh: ${m.prefix}installtemastellar 192.168.1.1|secretpass\``
+            `╭┈┈⬡「 🎨 *ɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ sᴛᴇʟʟᴀʀ* 」
+┃ ㊗ USO: \`${m.prefix}installtemastellar <ip>|<password>\`\n╰┈┈⬡\n\n> \`Ejemplo: ${m.prefix}installtemastellar 192.168.1.1|secretpass\``
         )
     }
 
@@ -63,10 +64,10 @@ function handler(m) {
 
     conn.on('ready', async () => {
         try {
-            await m.reply(`🕕 *[1/3] ɪɴsᴛᴀʟʟ ᴅᴇᴘᴇɴᴅᴇɴᴄɪᴇs...*\n\n> Menginstall Node.js, Yarn, Composer...`)
+            await m.reply(`🕕 *[1/3] INSTALANDO DEPENDENCIAS...*\n\n> Instalando Node.js, Yarn y Composer...`)
             await execSSH(conn, DEPS_CMD)
 
-            await m.reply(`🕕 *[2/3] ɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ...*\n\n> Mendownload & install tema Stellar...`)
+            await m.reply(`🕕 *[2/3] INSTALANDO TEMA...*\n\n> Descargando e instalando el tema Stellar...`)
             await execSSH(conn, THEME_CMD)
 
             await m.reply(`🕕 *[3/3] ʙᴜɪʟᴅ ᴀssᴇᴛs...*\n\n> Compiling panel assets...`)
@@ -74,7 +75,7 @@ function handler(m) {
 
             m.react('✅')
             await m.reply(
-                `╭┈┈⬡「 ✅ *ᴛᴇᴍᴀ sᴛᴇʟʟᴀʀ* 」\n┃ ㊗ sᴛᴀᴛᴜs: *Terinstall*\n┃ ㊗ ɪᴘ: ${ipvps}
+                `╭┈┈⬡「 ✅ *TEMA STELLAR* 」\n┃ ㊗ ᴇsᴛᴀᴅᴏ: *Instalado*\n┃ ㊗ ɪᴘ: ${ipvps}
 ╰┈┈⬡
 
 > _Stellar + dependientes tema instalado con éxito!_`

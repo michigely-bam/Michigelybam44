@@ -30,7 +30,7 @@ try {
   if (fs.existsSync(thumbPath)) thumbRpg = fs.readFileSync(thumbPath);
 } catch (e) {}
 
-function getContextInfo(title = "🌾 *ʙᴇʀʟᴀᴅᴀɴɢ*", body = "Resultados de la cosecha") {
+function getContextInfo(title = "🌾 *CULTIVANDO*", body = "Resultados de la cosecha") {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
@@ -70,32 +70,35 @@ async function handler(m, { sock }) {
 
   if (user.rpg.stamina < staminaCost) {
     return m.reply(
-      `⚡ *sᴛᴀᴍɪɴᴀ ʜᴀʙɪs*\n\n` +
-        `> Butuh ${staminaCost} stamina untuk berladang\n` +
-        `> Stamina kamu: ${user.rpg.stamina}`,
+      `⚡ *RESISTENCIA AGOTADA*
+
+` +
+        `> Necesita ${staminaCost} stamina para servido
+` +
+        `> Tu resistencia: ${user.rpg.stamina}`,
     );
   }
 
   user.rpg.stamina -= staminaCost;
 
   await m.react("🌾");
-  await m.reply(`🌾 *sᴇᴅᴀɴɢ ʙᴇʀʟᴀᴅᴀɴɢ...*`);
+  await m.reply(`🌾 *CULTIVANDO...*`);
   await new Promise((r) => setTimeout(r, 2500));
 
   const crops = [
-    { item: "padi", name: "🌾 Padi", chance: 90, min: 2, max: 8, price: 100 },
+    { item: "padi", name: "🌾 Arroz", chance: 90, min: 2, max: 8, price: 100 },
     {
       item: "jagung",
-      name: "🌽 Jagung",
+      name: "🌽 Maíz",
       chance: 70,
       min: 1,
       max: 5,
       price: 150,
     },
-    { item: "tomat", name: "🍅 Tomat", chance: 50, min: 1, max: 4, price: 200 },
+    { item: "tomat", name: "🍅 Tomate", chance: 50, min: 1, max: 4, price: 200 },
     {
       item: "wortel",
-      name: "🥕 Wortel",
+      name: "🥕 Zanahoria",
       chance: 40,
       min: 1,
       max: 3,
@@ -135,7 +138,7 @@ async function handler(m, { sock }) {
 
   if (results.length === 0) {
     user.inventory["padi"] = (user.inventory["padi"] || 0) + 1;
-    results.push({ name: "🌾 Padi", qty: 1, value: 100 });
+    results.push({ name: "🌾 Arroz", qty: 1, value: 100 });
     totalValue = 100;
   }
 
@@ -146,13 +149,15 @@ async function handler(m, { sock }) {
 
   await m.react("✅");
 
-  let txt = `🌾 *ʙᴇʀʟᴀᴅᴀɴɢ sᴇʟᴇsᴀɪ*\n\n`;
-  txt += `╭┈┈⬡「 🧺 *ʜᴀsɪʟ ᴘᴀɴᴇɴ* 」\n`;
+  let txt = `🌾 *se está terminando el proyecto*
+
+`;
+  txt += `╭┈┈⬡「 🧺 *RESULTADO DE LA COSECHA* 」\n`;
   for (const r of results) {
     txt += `┃ ${r.name}: *+${r.qty}* (Rp ${r.value.toLocaleString("id-ID")})\n`;
   }
   txt += `┃ ─────────\n`;
-  txt += `┃ 💰 Total Nilai: *Rp ${totalValue.toLocaleString("id-ID")}*\n`;
+  txt += `┃ 💰 Valor total: *Rp ${totalValue.toLocaleString("id-ID")}*\n`;
   txt += `┃ 🚄 Exp: *+${expGain}*\n`;
   txt += `┃ ⚡ Stamina: *-${staminaCost}*\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;

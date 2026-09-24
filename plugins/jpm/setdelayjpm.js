@@ -24,33 +24,37 @@ function handler(m, { sock }) {
     if (!input) {
         return sock.sendMessage(m.chat, {
             text: `⏱️ *ᴊᴘᴍ ᴅᴇʟᴀʏ*\n\n` +
-                `> Delay saat ini: *${current}ms* (${(current / 1000).toFixed(1)}s)\n\n` +
-                `*ᴄᴀʀᴀ ᴘᴀᴋᴀɪ:*\n` +
+                `El retraso actual: *${current}ms* (${(current / 1000).toFixed(1)}s)\n\n` +
+                `*MODO DE USO:*\n` +
                 `> \`${m.prefix}setdelayjpm <ms>\`\n\n` +
-                `*ᴄᴏɴᴛᴏʜ:*\n` +
-                `> \`${m.prefix}setdelayjpm 3000\` → 3 detik\n` +
-                `> \`${m.prefix}setdelayjpm 5000\` → 5 detik\n` +
-                `> \`${m.prefix}setdelayjpm 10000\` → 10 detik\n\n` +
+                `*EJEMPLO:*\n` +
+                `> \`${m.prefix}setdelayjpm 3000\` → 3 segundos
+` +
+                `> \`${m.prefix}setdelayjpm 5000\` → 5 segundos
+` +
+                `> \`${m.prefix}setdelayjpm 10000\` → 10 segundos
+
+` +
                 `> Range: *1000ms - 30000ms*`,
             interactiveButtons: [
                 {
                     name: 'quick_reply',
                     buttonParamsJson: JSON.stringify({
-                        display_text: '⏱️ 3 detik',
+                        display_text: "⏱️ 3 segundos",
                         id: `${m.prefix}setdelayjpm 3000`
                     })
                 },
                 {
                     name: 'quick_reply',
                     buttonParamsJson: JSON.stringify({
-                        display_text: '⏱️ 5 detik',
+                        display_text: "⏱️ 5 segundos",
                         id: `${m.prefix}setdelayjpm 5000`
                     })
                 },
                 {
                     name: 'quick_reply',
                     buttonParamsJson: JSON.stringify({
-                        display_text: '⏱️ 10 detik',
+                        display_text: "⏱️ 10 segundos",
                         id: `${m.prefix}setdelayjpm 10000`
                     })
                 }
@@ -61,16 +65,16 @@ function handler(m, { sock }) {
     const ms = parseInt(input)
 
     if (isNaN(ms) || ms < 1000 || ms > 30000) {
-        return m.reply(`❌ Delay harus antara *1000ms* (1s) arriba *30000ms* (30s)`)
+        return m.reply(`❌ El retraso debe estar entre *1000ms* (1s) arriba *30000ms* (30s)`)
     }
 
     db.setting('jedaJpm', ms)
 
     return sock.sendMessage(m.chat, {
-        text: `✅ *ᴅᴇʟᴀʏ ᴊᴘᴍ ᴅɪᴜʙᴀʜ*\n\n` +
-            `> Sebelumnya: *${current}ms* (${(current / 1000).toFixed(1)}s)\n` +
-            `> Sekarang: *${ms}ms* (${(ms / 1000).toFixed(1)}s)\n\n` +
-            `> Estimasi ${100} grup: *${Math.ceil((100 * ms) / 60000)} menit*`,
+        text: `✅ *ᴅᴇʟᴀʏ ᴊᴘᴍ CAMBIADO*\n\n` +
+            `> Anteriormente: *${current}ms* (${(current / 1000).toFixed(1)}s)\n` +
+            `> Ahora: *${ms}ms* (${(ms / 1000).toFixed(1)}s)\n\n` +
+            `> Estimación para ${100} grupos: *${Math.ceil((100 * ms) / 60000)} minutos*`,
         interactiveButtons: [
             {
                 name: 'quick_reply',

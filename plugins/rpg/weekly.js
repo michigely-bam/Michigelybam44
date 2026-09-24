@@ -4,7 +4,7 @@ const pluginConfig = {
   name: "weekly",
   alias: ["mingguan"],
   category: "rpg",
-  description: "Claim hadiah mingguan (lebih besar dari daily)",
+  description: "Reclamo de recompensas semanales (más grandes que diarias)",
   usage: ".weekly",
   example: ".weekly",
   isOwner: false,
@@ -36,7 +36,7 @@ async function handler(m, { sock }) {
       `🕕 *ᴡᴇᴇᴋʟʏ ᴄᴏᴏʟᴅᴏᴡɴ*
 
 > Has estado reclamando esta semana.
-> Tunggu: *${days} hari ${hours} jam* lagi.`,
+> Espera: *${days} días y ${hours} horas más*.`,
     );
   }
 
@@ -54,11 +54,11 @@ async function handler(m, { sock }) {
   user.cooldowns.weekly = now;
   db.save();
 
-  let txt = `🎊 *ᴡᴇᴇᴋʟʏ ᴄʟᴀɪᴍ sᴜᴋsᴇs*\n\n`;
+  let txt = `🎊 *RECOMPENSA SEMANAL RECLAMADA*\n\n`;
   txt += `╭┈┈⬡「 🎁 *ʀᴇᴡᴀʀᴅs* 」\n`;
   txt += `┃ 🚄 Exp: *+${expReward.toLocaleString("id-ID")}*\n`;
-  txt += `┃ 🪙 Money: *+Rp ${moneyReward.toLocaleString("id-ID")}*\n`;
-  txt += `┃ 🛍️ Uncommon Crate: *+${crateReward}*\n`;
+  txt += `┃ 🪙 Dinero: *+Rp ${moneyReward.toLocaleString("id-ID")}*\n`;
+  txt += `┃ 🛍️ Caja poco común: *+${crateReward}*\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
   txt += `> ¡Reclamen otra vez la semana que viene!`;
 

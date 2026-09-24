@@ -19,7 +19,7 @@ const pluginConfig = {
 }
 
 function formatDate(timestamp) {
-    return new Intl.DateTimeFormat('id-ID', {
+    return new Intl.DateTimeFormat('es-ES', {
         weekday: 'long',
         day: 'numeric',
         month: 'long',
@@ -36,8 +36,8 @@ async function handler(m, { sock }) {
 
     if (!sub || !['list', 'approve', 'reject'].includes(sub)) {
         return m.reply(
-            `📋 *ᴊᴏɪɴ ʀᴇQᴜᴇsᴛ ᴍᴀɴᴀɢᴇʀ*\n\n` +
-            `╭┈┈⬡「 📌 *ᴄᴏᴍᴍᴀɴᴅ* 」\n` +
+            `📋 *GESTOR DE SOLICITUDES DE INGRESO*\n\n` +
+            `╭┈┈⬡「 📌 *COMANDOS* 」\n` +
             `┃ ${m.prefix}acc list\n` +
             `┃ ${m.prefix}acc approve all\n` +
             `┃ ${m.prefix}acc reject all\n` +
@@ -58,12 +58,16 @@ async function handler(m, { sock }) {
         }
 
         if (sub === 'list') {
-            let text = `📋 *ᴅᴀꜰᴛᴀʀ ᴘᴇʀᴍɪɴᴛᴀᴀɴ ᴍᴀsᴜᴋ*\n\n`
-            text += `> Total: ${pendingList.length} permintaan\n\n`
+            let text = `📋 *lista de solicitudes de ingreso*
+
+`
+            text += `> Total: ${pendingList.length} solicitudes
+
+`
 
             for (let i = 0; i < pendingList.length; i++) {
                 const req = pendingList[i]
-                const number = req.jid?.split('@')[0] || 'Unknown'
+                const number = req.jid?.split('@')[0] || 'Desconocido'
                 const method = req.request_method || '-'
                 const time = req.request_time ? formatDate(req.request_time) : '-'
 
@@ -73,7 +77,7 @@ async function handler(m, { sock }) {
                 text += `   🕐 ${time}\n\n`
             }
 
-            text += `> Gunakan \`${m.prefix}acc approve all\` atau \`${m.prefix}acc reject all\``
+            text += `> Usa \`${m.prefix}acc approve all\` o \`${m.prefix}acc reject all\``
 
             const mentions = pendingList.map(r => r.jid)
             await m.react('📋')
@@ -90,12 +94,14 @@ async function handler(m, { sock }) {
             const success = results.filter(r => r.status === '200' || !r.status || r.status === 200).length
             const failed = results.length - success
 
-            const label = action === 'approve' ? 'Diterima' : 'Ditolak'
+            const label = action === 'approve' ? 'Aceptadas' : 'Rechazadas'
             await m.react('✅')
             return m.reply(
-                `✅ *${label.toUpperCase()} SEMUA*\n\n` +
-                `> ✅ Berhasil: ${success}\n` +
-                `> ❌ Gagal: ${failed}\n` +
+                `✅ *${label.toUpperCase()} TODOS*
+
+` +
+                `> ✅ Correcto: ${success}\n` +
+                `> ❌ Falló: ${failed}\n` +
                 `> 📊 Total: ${results.length}`
             )
         }
@@ -105,15 +111,18 @@ async function handler(m, { sock }) {
         if (!indices.length) {
             await m.react('❌')
             return m.reply(
-                `❌ Nomor tidak valid.\n\n` +
-                `> Gunakan \`${m.prefix}acc list\` untuk melihat daftar.\n` +
-                `> Contoh: \`${m.prefix}acc ${action} 1|2|3\``
+                `❌ El número no es válido.
+
+` +
+                `> Usa \`${m.prefix}acc list\` para ver la lista.
+` +
+                `> Ejemplo: \`${m.prefix}acc ${action} 1|2|3\``
             )
         }
 
         const targets = indices.map(i => pendingList[i])
         let text = ''
-        const label = action === 'approve' ? 'Diterima' : 'Ditolak'
+        const label = action === 'approve' ? 'Aceptado' : 'Rechazado'
         let successCount = 0
 
         for (const target of targets) {
@@ -123,7 +132,7 @@ async function handler(m, { sock }) {
                 const ok = status === '200' || !status || status === 200
 
                 const number = target.jid.split('@')[0]
-                text += `${ok ? '✅' : '❌'} ${number} — ${ok ? label : 'Gagal'}\n`
+                text += `${ok ? '✅' : '❌'} ${number} — ${ok ? label : "Falló"}\n`
                 if (ok) successCount++
             } catch {
                 const number = target.jid.split('@')[0]
@@ -133,9 +142,9 @@ async function handler(m, { sock }) {
 
         await m.react('✅')
         return m.reply(
-            `📋 *ʜᴀsɪʟ ${label.toUpperCase()}*\n\n` +
+            `📋 *RESULTADO ${label.toUpperCase()}*\n\n` +
             text + `\n` +
-            `> ✅ ${successCount}/${targets.length} berhasil`
+            `> ✅ ${successCount}/${targets.length} correcto`
         )
     } catch (error) {
         await m.react('☢')

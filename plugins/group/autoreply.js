@@ -35,7 +35,7 @@ async function handler(m, { sock }) {
     
     if (action === 'private') {
         if (!m.isOwner) {
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > ¡Sólo el propietario puede gestionar de forma privada!`)
         }
@@ -45,7 +45,7 @@ async function handler(m, { sock }) {
         if (subAction === 'on') {
             db.setting('autoreplyPrivate', true)
             m.react('✅')
-            return m.reply(`✅ *ᴀᴜᴛᴏʀᴇᴘʟʏ ᴘʀɪᴠᴀᴛᴇ ᴅɪᴀᴋᴛɪꜰᴋᴀɴ*
+            return m.reply(`✅ *ᴀᴜᴛᴏʀᴇᴘʟʏ ᴘʀɪᴠᴀᴛᴇ ACTIVADO*
 
 > Bot responderá automáticamente en chat privado`)
         }
@@ -53,7 +53,7 @@ async function handler(m, { sock }) {
         if (subAction === 'off') {
             db.setting('autoreplyPrivate', false)
             m.react('❌')
-            return m.reply(`❌ *ᴀᴜᴛᴏʀᴇᴘʟʏ ᴘʀɪᴠᴀᴛᴇ ᴅɪɴᴏɴᴀᴋᴛɪꜰᴋᴀɴ*
+            return m.reply(`❌ *autoreply private se ha desactivado*
 
 > Bot no responderá automáticamente en chat privado`)
         }
@@ -61,16 +61,18 @@ async function handler(m, { sock }) {
         const currentStatus = db.setting('autoreplyPrivate') ?? false
         return m.reply(
             `📱 *AUTOREPLY PRIVATE*\n\n` +
-            `Status: *${currentStatus ? '✅ AKTIF' : '❌ NONAKTIF'}*\n\n` +
-            `*PERINTAH TERSEDIA:*\n` +
-            `• *${m.prefix}autoreply private on* — Aktifkan private\n` +
-            `• *${m.prefix}autoreply private off* — Nonaktifkan private`
+            `Status: *${currentStatus ? "✅ ACTIVO" : "❌ INACTIVO"}*\n\n` +
+            `*LAS ÓRDENES ESTÁN DISPONIBLES:*
+` +
+            `• *${m.prefix}autoreply private on* — Activar el privado
+` +
+            `• *${m.prefix}autoreply private off* — Desactiva el privado`
         )
     }
     
     if (action === 'global') {
         if (!m.isOwner) {
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > ¡Sólo los propietarios pueden manejar el mundo de forma autorírica!`)
         }
@@ -83,10 +85,14 @@ async function handler(m, { sock }) {
             const pipeIdx = fullBody.indexOf('|')
             if (pipeIdx === -1) {
                 return m.reply(
-                    `❌ *ꜰᴏʀᴍᴀᴛ sᴀʟᴀʜ*\n\n` +
-                    `> Gunakan format: \`trigger|reply\`\n\n` +
-                    `> Contoh:\n` +
-                    `> \`${m.prefix}autoreply global add halo|Hai {name}!\``
+                    `❌ *formato erróneo*
+
+` +
+                    `> Utilice el formato: \`trigger|Responde\`
+
+` +
+                    `> Ejemplo:\n` +
+                    `> \`${m.prefix}autoreply global add halo|Hola {name}!\``
                 )
             }
             
@@ -96,7 +102,7 @@ async function handler(m, { sock }) {
             const reply = fullBody.substring(pipeIdx + 1)
             
             if (!trigger.trim() || !reply) {
-                return m.reply(`❌ *ɢᴀɢᴀʟ*
+                return m.reply(`❌ *falló*
 
 > ¡El truco y la respuesta no deben estar vacíos!`)
             }
@@ -113,24 +119,28 @@ async function handler(m, { sock }) {
             
             m.react('✅')
             return m.reply(
-                `✅ *GLOBAL AUTOREPLY DITAMBAHKAN*\n\n` +
+                `✅ *GLOBAL AUTOREPLY AÑADIDO*
+
+` +
                 `• Trigger: *${trigger.trim()}*\n` +
                 `• Total: *${globalCustomReplies.length}* replies\n\n` +
-                `_Aktif di semua grup dan private chat_`
+                `_Activo en todos los grupos y chats privados_`
             )
         }
         
         if (subAction === 'del' || subAction === 'rm') {
             const trigger = args.slice(2).join(' ').toLowerCase().trim()
             if (!trigger) {
-                return m.reply(`❌ *ɢᴀɢᴀʟ*
+                return m.reply(`❌ *falló*
 
 > ¡Introduzca el gatillo para eliminar!`)
             }
             
             const index = globalCustomReplies.findIndex(r => r.trigger === trigger)
             if (index === -1) {
-                return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Trigger \`${trigger}\` ¡No lo encontraron!`)
+                return m.reply(`❌ *falló*
+
+> Trigger \`${trigger}\` ¡No lo encontraron!`)
             }
             
             globalCustomReplies.splice(index, 1)
@@ -138,7 +148,7 @@ async function handler(m, { sock }) {
             await db.save()
             
             m.react('🗑️')
-            return m.reply(`🗑️ *GLOBAL AUTOREPLY HAPUS*
+            return m.reply(`🗑️ *GLOBAL AUTOREPLY BORRAR*
 
 Trigger *${trigger}* ¡Se ha borrado!`)
         }
@@ -147,15 +157,18 @@ Trigger *${trigger}* ¡Se ha borrado!`)
             if (globalCustomReplies.length === 0) {
                 return m.reply(
                     `📋 *GLOBAL AUTOREPLY*\n\n` +
-                    `Status: *❌ TIDAK ADA DATA*\n\n` +
-                    `*PERINTAH TERSEDIA:*\n` +
+                    `Estatus: *❌ NO hay datos*
+
+` +
+                    `*LAS ÓRDENES ESTÁN DISPONIBLES:*
+` +
                     `• *${m.prefix}autoreply global add <trigger>|<reply>*`
                 )
             }
             
             let text = `📋 *GLOBAL AUTOREPLY*\n\n`
             text += `Total: *${globalCustomReplies.length}* replies\n`
-            text += `Berlaku di: *All Group &amp; Private Chat*
+            text += `Se aplica en: *Todos los grupos y chats privados*
 
 `
             text += `*TRIGGER DAR:*
@@ -177,17 +190,20 @@ Trigger *${trigger}* ¡Se ha borrado!`)
     
     if (!m.isGroup) {
         return m.reply(
-            `📱 *SISTEM AUTOREPLY*\n\n` +
-            `Autoreply Private: *${privateAutoreply ? '✅ AKTIF' : '❌ NONAKTIF'}*\n\n` +
-            `*PERINTAH TERSEDIA:*\n` +
+            `📱 *SISTEMA DE RESPUESTAS AUTOMÁTICAS*
+
+` +
+            `Autoreply Private: *${privateAutoreply ? "✅ ACTIVO" : "❌ INACTIVO"}*\n\n` +
+            `*LAS ÓRDENES ESTÁN DISPONIBLES:*
+` +
             `• *${m.prefix}autoreply private on/off* — Toggle private\n` +
             `• *${m.prefix}autoreply global add/del/list* — Global triggers\n\n` +
-            `_Catatan: Untuk setting autoreply grup, gunakan perintah ini di dalam grup._`
+            `_Nota: Para la configuración de autoreply grupo, use este comando dentro del grupo._`
         )
     }
     
     if (!m.isAdmin && !m.isOwner) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*
+        return m.reply(`❌ *falló*
 
 > ¡Sólo el administrador puede manejarlo de forma automática en el grupo!`)
     }
@@ -200,15 +216,15 @@ Trigger *${trigger}* ¡Se ha borrado!`)
         const effectiveStatus = groupStatus ?? globalSmartTriggers
         const customReplies = groupData.customReplies || []
         
-        let text = `🤖 *SISTEM AUOREPLY GRUPP*
+        let text = `🤖 *SISTEMA DE RESPUESTAS AUTOMÁTICAS DEL GRUPO*
 
 `
-        text += `Status Global: *${globalSmartTriggers ? '✅ AKTIF' : '❌ NONAKTIF'}*\n`
-        text += `Situación actual del Grupo: *${groupStatus === undefined ? 'DEFAULT' : (groupStatus ? '✅ AKTIF' : '❌ NONAKTIF')}*\n`
-        text += `Status Private: *${privateAutoreply ? '✅ AKTIF' : '❌ NONAKTIF'}*\n`
-        text += `Effective in Group: *${effectiveStatus ? '✅ AKTIF' : '❌ NONAKTIF'}*\n`
+        text += `Status Global: *${globalSmartTriggers ? "✅ ACTIVO" : "❌ INACTIVO"}*\n`
+        text += `Situación actual del Grupo: *${groupStatus === undefined ? 'DEFAULT' : (groupStatus ? "✅ ACTIVO" : "❌ INACTIVO")}*\n`
+        text += `Status Private: *${privateAutoreply ? "✅ ACTIVO" : "❌ INACTIVO"}*\n`
+        text += `Effective in Group: *${effectiveStatus ? "✅ ACTIVO" : "❌ INACTIVO"}*\n`
         text += `Total Custom Reply (Group): *${customReplies.length}*\n\n`
-        text += `*MANAJEMEN GRUPP:*
+        text += `*GESTIÓN DEL GRUPO:*
 `
         text += `• *${m.prefix}autoreply on* - Activar en este grupo
 `
@@ -225,15 +241,19 @@ Trigger *${trigger}* ¡Se ha borrado!`)
 `
         
         if (m.isOwner) {
-            text += `*MANAJEMEN GLOBAL (OWNER):*\n`
+            text += `*GESTIÓN GLOBAL (PROPIETARIO):*
+`
             text += `• *${m.prefix}autoreply global add <trigger>|<reply>*\n`
             text += `• *${m.prefix}autoreply global del <trigger>*\n`
             text += `• *${m.prefix}autoreply global list* - El desencadenante está activo.
 `
-            text += `• *${m.prefix}autoreply private on/off* — Toggle bot reply di DM\n\n`
+            text += `• *${m.prefix}autoreply private on/off* — Activar o desactivar respuestas del bot en mensajes privados
+
+`
         }
         
-        text += `*CARA PENAMBAHAN GAMBAR:*\n`
+        text += `*FORMAS DE AÑADIR IMÁGENES:*
+`
         text += `1. Enviar imagen junto con la leyenda: *${m.prefix}autoreply add trigger|reply*\n`
         text += `O responder fotos con: *${m.prefix}autoreply add trigger|reply*\n\n`
         text += `*Puede usar PLACEHOLDER:*
@@ -246,7 +266,7 @@ Trigger *${trigger}* ¡Se ha borrado!`)
     if (action === 'on') {
         db.setGroup(m.chat, { ...groupData, autoreply: true })
         m.react('✅')
-        return m.reply(`✅ *ᴀᴜᴛᴏʀᴇᴘʟʏ ᴅɪᴀᴋᴛɪꜰᴋᴀɴ*
+        return m.reply(`✅ *ᴀᴜᴛᴏʀᴇᴘʟʏ ACTIVADO*
 
 > El Bot responderá automáticamente a este grupo`)
     }
@@ -254,7 +274,7 @@ Trigger *${trigger}* ¡Se ha borrado!`)
     if (action === 'off') {
         db.setGroup(m.chat, { ...groupData, autoreply: false })
         m.react('❌')
-        return m.reply(`❌ *ᴀᴜᴛᴏʀᴇᴘʟʏ ᴅɪɴᴏɴᴀᴋᴛɪꜰᴋᴀɴ*
+        return m.reply(`❌ *autoreply desactivado*
 
 > Bot no responderá automáticamente en este grupo`)
     }
@@ -265,20 +285,31 @@ Trigger *${trigger}* ¡Se ha borrado!`)
         
         if (pipeIdx === -1) {
             return m.reply(
-                `❌ *FORMAT SALAH*\n\n` +
-                `Gunakan format: *trigger|reply*\n\n` +
+                `❌ *FORMATO ERRÓNEO*
+
+` +
+                `Utilice el formato: *trigger
+
+` +
                 `*Text Only:*\n` +
-                `• ${m.prefix}ar add halo|Hai {name}! 👋\n\n` +
-                `*Dengan Gambar:*\n` +
-                `1. Reply gambar + ${m.prefix}ar add trigger|caption\n` +
-                `2. Kirim gambar + caption ${m.prefix}ar add trigger|caption\n\n` +
+                `• ${m.prefix}ar add halo|Hola {name}! 👋
+
+` +
+                `*Con imagen:*
+` +
+                `1. Responda a las imágenes ${m.prefix}ar add trigger|caption\n` +
+                `2. Envíe imágenes + captura ${m.prefix}ar add trigger|caption\n\n` +
                 `*Placeholder:*\n` +
-                `• {name} - Nama user\n` +
+                `• {name} - Nombre de usuario
+` +
                 `• {tag} - Tag @user\n` +
-                `• {sender} - Nomor user\n` +
-                `• {botname} - Nama bot\n` +
-                `• {time} - Waktu sekarang\n` +
-                `• {date} - Tanggal sekarang`
+                `• {sender} - Número de usuario
+` +
+                `- El nombre del bot
+` +
+                `• {time} - El tiempo ahora
+` +
+                `• {date} - Date ahora`
             )
         }
         
@@ -288,7 +319,7 @@ Trigger *${trigger}* ¡Se ha borrado!`)
         const reply = fullBody.substring(pipeIdx + 1)
         
         if (!trigger) {
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > ¡El desencadenante no debe estar vacío!`)
         }
@@ -303,13 +334,13 @@ Trigger *${trigger}* ¡Se ha borrado!`)
             try {
                 imageBuffer = await m.quoted.download()
             } catch (e) {
-                console.error('[Autoreply] Failed to download quoted image:', e.message)
+                console.error('[Autoreply] No se pudo descargar la imagen citada:', e.message)
             }
         } else if (hasDirectImage) {
             try {
                 imageBuffer = await m.download()
             } catch (e) {
-                console.error('[Autoreply] Failed to download direct image:', e.message)
+                console.error('[Autoreply] No se pudo descargar la imagen directa:', e.message)
             }
         }
         
@@ -346,14 +377,17 @@ Trigger *${trigger}* ¡Se ha borrado!`)
         
         m.react('✅')
         
-        let successMsg = `✅ *AUTOREPLY DITAMBAHKAN*\n\n`
+        let successMsg = `✅ *AUTOREPLY AÑADIDO*
+
+`
         successMsg += `*DETAIL:*\n`
         successMsg += `• Trigger: *${trigger.trim()}*\n`
         if (reply) {
             successMsg += `• Reply: ${reply.substring(0, 50)}${reply.length > 50 ? '...' : ''}\n`
         }
         if (imagePath) {
-            successMsg += `• Image: ✅ Tersimpan\n`
+            successMsg += `• Imagen: ✅ Guardada
+`
         }
         successMsg += `\nTotal: *${customReplies.length}* respuestas a este grupo`
         
@@ -364,7 +398,7 @@ Trigger *${trigger}* ¡Se ha borrado!`)
         const trigger = args.slice(1).join(' ').toLowerCase().trim()
         
         if (!trigger) {
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > ¡Introduzca el gatillo para eliminar!
 
@@ -375,7 +409,9 @@ Trigger *${trigger}* ¡Se ha borrado!`)
         const index = customReplies.findIndex(r => r.trigger === trigger)
         
         if (index === -1) {
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Trigger \`${trigger}\` ¡No lo encontraron!`)
+            return m.reply(`❌ *falló*
+
+> Trigger \`${trigger}\` ¡No lo encontraron!`)
         }
         
         if (customReplies[index].image) {
@@ -391,9 +427,12 @@ Trigger *${trigger}* ¡Se ha borrado!`)
         
         m.react('🗑️')
         return m.reply(
-            `🗑️ *AUTOREPLY DIHAPUS*\n\n` +
-            `Trigger *${trigger}* berhasil dihapus!\n` +
-            `Sisa: *${customReplies.length}* replies`
+            `🗑️ *AUTOREPLY ELIMINADO*
+
+` +
+            `El disparador *${trigger}* fue eliminado.
+` +
+            `Restante: *${customReplies.length}* replies`
         )
     }
     
@@ -402,9 +441,9 @@ Trigger *${trigger}* ¡Se ha borrado!`)
         
         const defaultTriggers = [
             { trigger: '@mention', reply: "👋 ¿Alguien me llama bot?" },
-            { trigger: 'p', reply: '💬 Budayakan salam sebelum percakapan!' },
+            { trigger: 'p', reply: "💬 ¡Acostúmbrate a saludar antes de conversar!" },
             { trigger: 'bot / ourin', reply: "🤖 ¡Adelante y en marcha!" },
-            { trigger: 'assalamualaikum', reply: 'Waalaikumsalam saudaraku' }
+            { trigger: 'assalamualaikum', reply: 'Wa alaikum assalam, hermano' }
         ]
         
         let text = `📋 *SIGN OUTOREPLY GRUPP*
@@ -452,12 +491,14 @@ Trigger *${trigger}* ¡Se ha borrado!`)
         
         db.setGroup(m.chat, { ...groupData, customReplies: [] })
         m.react('🗑️')
-        return m.reply(`🗑️ *ᴀᴜᴛᴏʀᴇᴘʟʏ ᴅɪʀᴇsᴇᴛ*
+        return m.reply(`🗑️ *ᴀᴜᴛᴏʀᴇᴘʟʏ RESTABLECIDO*
 
 > ¡Todas las personalizados!`)
     }
     
-    return m.reply(`❌ *ᴀᴄᴛɪᴏɴ ᴛɪᴅᴀᴋ ᴠᴀʟɪᴅ*\n\n> Gunakan: \`on\`, \`off\`, \`private on/off\`, \`add\`, \`del\`, \`list\`, \`reset\``)
+    return m.reply(`❌ *action no es válido*
+
+> Utilice: \`on\`, \`off\`, \`private on/off\`, \`add\`, \`del\`, \`list\`, \`reset\``)
 }
 
 export { pluginConfig as config, handler }

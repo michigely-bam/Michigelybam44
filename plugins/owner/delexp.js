@@ -3,8 +3,8 @@ const pluginConfig = {
     name: 'delexp',
     alias: ['kurangexp', 'removeexp', 'delxp'],
     category: 'owner',
-    description: 'Kurangi exp user',
-    usage: '.delexp <jumlah> @user',
+    description: 'Reduce la EXP de un usuario',
+    usage: '.delexp <cantidad> @usuario',
     example: '.delexp 5000 @user',
     isOwner: true,
     isPremium: false,
@@ -44,20 +44,25 @@ async function handler(m, { sock }) {
     if (!targetJid || amount <= 0) {
         return m.reply(
             `⭐ *ᴅᴇʟ ᴇxᴘ*\n\n` +
-            `> \`.delexp <jumlah>\` - dari diri sendiri\n` +
-            `> \`.delexp <jumlah> @user\` - dari user\n\n` +
-            `\`Contoh: ${m.prefix}delexp 5000\``
+            `> \`.delexp <cantidad>\` - de sí mismo
+` +
+            `> \`.delexp <cantidad> @usuario\` - del usuario
+
+` +
+            `\`Ejemplo: ${m.prefix}delexp 5000\``
         )
     }
     
     if (amount <= 0) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Jumlah harus lebih dari 0`)
+        return m.reply(`❌ *falló*
+
+> El número debe ser superior a 0`)
     }
     
     const user = db.getUser(targetJid)
     
     if (!user) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*
+        return m.reply(`❌ *falló*
 
 > Usuario no encontrado en la base de datos`)
     }
@@ -67,11 +72,11 @@ async function handler(m, { sock }) {
     await m.react('✅')
     
     await m.reply(
-        `✅ *ᴇxᴘ ᴅɪᴋᴜʀᴀɴɢɪ*\n\n` +
+        `✅ *EXPERIENCIA REDUCIDA*\n\n` +
         `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
         `┃ 👤 ᴜsᴇʀ: @${targetJid.split('@')[0]}\n` +
-        `┃ ➖ ᴋᴜʀᴀɴɢ: *-${formatNumber(amount)}*\n` +
-        `┃ ⭐ sɪsᴀ: *${formatNumber(newExp)}*\n` +
+        `┃ ➖ RESTADO: *-${formatNumber(amount)}*\n` +
+        `┃ ⭐ restante: *${formatNumber(newExp)}*\n` +
         `╰┈┈⬡`,
         { mentions: [targetJid] }
     )

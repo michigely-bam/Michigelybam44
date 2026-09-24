@@ -9,8 +9,8 @@ const pluginConfig = {
   alias: ["fstory3", "igstory3", "quotestory"],
   category: "canvas",
   description: "Fake Instagram historia con el texto superpuesto",
-  usage: ".facetory3 < nombre",
-  example: ".# Dale una sonrisa # 124 # para cubrir la tristeza #",
+  usage: '.fakestory3 <nombre>|<texto1>|<texto2>',
+  example: '.fakestory3 Misaki|Sonríe|para ocultar la tristeza',
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -245,10 +245,11 @@ async function handler(m, { sock }) {
   if (!input || !input.includes("|")) {
     return m.reply(
       `📷 *ꜰᴀᴋᴇ sᴛᴏʀʏ 3*\n\n` +
-        `> Reply gambar dengan format:\n` +
-        `> \`${m.prefix}fakestory3 nama|text1|text2\`\n\n` +
-        `> Contoh:\n` +
-        `> \`${m.prefix}fakestory3 Misaki|Tersenyumlah|untuk menutupi kesedihan\``,
+        `> Responda a la imagen con formato:
+` +
+        `> \`${m.prefix}fakestory3 nombre|texto1|texto2\`\n\n` +
+        `> Ejemplo:\n` +
+        `> \`${m.prefix}fakestory3 Misaki|Sonríe|para ocultar la tristeza\``,
     );
   }
   const parts = input.split("|").map((s) => s.trim());
@@ -261,7 +262,7 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.isImage);
     if (!isImage) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > Responder foto para hacer una historia falsa!`);
     }
@@ -273,7 +274,7 @@ async function handler(m, { sock }) {
     }
     if (!imageBuffer) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > No se puede descargar imagen`);
     }

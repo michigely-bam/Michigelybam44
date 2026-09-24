@@ -8,7 +8,7 @@ const pluginConfig = {
   alias: ["black", "hitamkan", "hitam", "tohitam"],
   category: "ai",
   description: "Convertir imágenes en tono de piel más oscura",
-  usage: ".toblack (reply gambar)",
+  usage: ".toblack (respuesta a la imagen)",
   example: ".toblack",
   isOwner: false,
   isPremium: false,

@@ -28,7 +28,7 @@ const romanticQuotes = [
   "Si eres una estrella, quiero ser el cielo que siempre te encuentra. ✨",
   "No necesito un GPS, porque mi corazón te señala. 💘",
   "¿Sabes la diferencia entre tú y el café? ☕",
-  "Boleh pinjam hatimu? Janji bakal dijaga selamanya 💖",
+  "¿Puedo tomar prestado tu corazón? Prometo cuidarlo para siempre 💖",
   "Si el amor es la canción, eres la melodía más hermosa 🎵",
   "Necesito 3 cosas: sol, luna y tú. 🌙",
   "Eres el último rompecabezas que necesito para completar mi vida. 🧩",
@@ -45,7 +45,7 @@ try {
   if (fs.existsSync(thumbPath)) thumbFun = fs.readFileSync(thumbPath);
 } catch (e) {}
 
-function getContextInfo(title = "💘 *ᴛᴇᴍʙᴀᴋ*", body = "Confess your love!") {
+function getContextInfo(title = "💘 *DECLARACIÓN*", body = "Confess your love!") {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
@@ -92,11 +92,11 @@ async function handler(m, { sock }) {
 
   if (!targetJid) {
     return m.reply(
-      `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+      `⚠️ *MODO DE USO*\n\n` +
         `> \`${m.prefix}tembak @tag\`\n\n` +
-        `> Contoh:\n` +
+        `> Ejemplo:\n` +
         `> \`${m.prefix}tembak @628xxx\`\n` +
-        `> Reply pesan + \`${m.prefix}tembak\``,
+        `> Responder el mensaje + \`${m.prefix}tembak\``,
     );
   }
 
@@ -118,9 +118,11 @@ async function handler(m, { sock }) {
     const partnerData = db.getUser(senderData.fun.pasangan);
     if (partnerData?.fun?.pasangan === m.sender) {
       return m.reply(
-        `❌ *sᴜᴅᴀʜ ᴘᴜɴʏᴀ ᴘᴀsᴀɴɢᴀɴ*\n\n` +
-          `Pasanganmu: @${senderData.fun.pasangan.split("@")[0]}\n` +
-          `Putus dulu sama ${partnerData.name} dengan cara: \`${m.prefix}putus\``,
+        `❌ *ya tiene pareja*
+
+` +
+          `Tu pareja: @${senderData.fun.pasangan.split("@")[0]}\n` +
+          `Terminó su relación con ${partnerData.name} de la manera: \`${m.prefix}putus\``,
         { mentions: [senderData.fun.pasangan] },
       );
     }
@@ -130,8 +132,10 @@ async function handler(m, { sock }) {
     const targetPartner = db.getUser(targetData.fun.pasangan);
     if (targetPartner?.fun?.pasangan === targetJid) {
       return m.reply(
-        `💔 *ᴅɪᴀ sᴜᴅᴀʜ ᴘᴀᴄᴀʀᴀɴ*\n\n` +
-          `Pasangannya: @${targetData.fun.pasangan.split("@")[0]}`,
+        `💔 *él ya está saliendo*
+
+` +
+          `Su pareja: @${targetData.fun.pasangan.split("@")[0]}`,
         { mentions: [targetData.fun.pasangan] },
       );
     }
@@ -151,9 +155,13 @@ async function handler(m, { sock }) {
 
     await m.react("💕");
     return m.reply(
-      `💕 *CIE CIEE :3*\n\n` +
-        `@${m.sender.split("@")[0]} dan @${targetJid.split("@")[0]} resmi pacaran !\n\n` +
-        `Semoga langgeng yak! 💍`,
+      `💕 *¡QUÉ LINDA PAREJA! :3*
+
+` +
+        `@${m.sender.split("@")[0]} y @${targetJid.split("@")[0]} ¡ya son pareja!
+
+` +
+        `¡Que su relación dure para siempre! 💍`,
       { mentions: [m.sender, targetJid] },
     );
   }
@@ -173,10 +181,13 @@ async function handler(m, { sock }) {
   await m.react("💘");
 
   const sentMsg = await m.reply(
-    `💘 *ADA YANG NEMBAK NIHH*\n\n` +
-      `Hei @${targetJid.split("@")[0]} , kamu ditembak oleh @${m.sender.split("@")[0]} nichh\n\n` +
-      `⏱️ Berlaku *1 jam* dari sekarang\n` +
-      `gunakan: \`${m.prefix}terima\` / \`${m.prefix}tolak\``,
+    `💘 *ALGUIEN DISPARÓ ESTO*
+
+` +
+      `Hei @${targetJid.split("@")[0]} , usted fue baleado por @${m.sender.split("@")[0]} nichh\n\n` +
+      `⏱️ *1 hora* desde ahora
+` +
+      `usa: \`${m.prefix}terima\` / \`${m.prefix}tolak\``,
     { mentions: [targetJid, m.sender] },
   );
 
@@ -225,9 +236,11 @@ async function answerHandler(m, sock) {
 
     await m.react("💕");
     await m.reply(
-      `💕 *WIDIHHHH, CIE CIE DITERIMA* @${sessData.shooter.split("@")[0]}\n\n` +
-        `@${m.sender.split("@")[0]} dan @${sessData.shooter.split("@")[0]} resmi pacaran\n\n` +
-        `Semoga langgeng dan bahagia 💍`,
+      `💕 *¡PROPUESTA ACEPTADA!* @${sessData.shooter.split("@")[0]}\n\n` +
+        `@${m.sender.split("@")[0]} y @${sessData.shooter.split("@")[0]} ya son pareja
+
+` +
+        `Que su relación sea duradera y feliz 💍`,
       { mentions: [m.sender, sessData.shooter] },
     );
 
@@ -252,9 +265,11 @@ async function answerHandler(m, sock) {
 
     await m.react("💔");
     await m.reply(
-      `💔 *WADUHH, YANG SABAR YAK* @${sessData.shooter.split("@")[0]}\n\n` +
-        `@${m.sender.split("@")[0]} menolak @${sessData.shooter.split("@")[0]} sebagai pacarnya\n\n` +
-        `Sabar ya, masih banyak yang lain! 😢`,
+      `💔 *OH, QUE EL PACIENTE YA* @${sessData.shooter.split("@")[0]}\n\n` +
+        `@${m.sender.split("@")[0]} rechazó a @${sessData.shooter.split("@")[0]} como su pareja
+
+` +
+        `¡Tenga paciencia, hay más! 😢`,
       { mentions: [m.sender, sessData.shooter] },
     );
     return true;

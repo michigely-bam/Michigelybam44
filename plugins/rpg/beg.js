@@ -23,15 +23,15 @@ async function handler(m, { sock }) {
     
     if (!user.rpg) user.rpg = {}
     
-    await m.reply('🙏 *sᴇᴅᴀɴɢ ᴍᴇɴɢᴇᴍɪs...*')
+    await m.reply("🙏 *MENDIGANDO...*")
     await new Promise(r => setTimeout(r, 2000))
     
     const responses = [
-        { success: true, money: 500, exp: 10, msg: 'Seorang dermawan memberikanmu uang!' },
+        { success: true, money: 500, exp: 10, msg: "¡Un donante te dio dinero!" },
         { success: true, money: 1000, exp: 20, msg: "¡Tienes consejos de un buen hombre!" },
         { success: true, money: 2000, exp: 50, msg: "¡Hay un pobre sultán!" },
         { success: false, money: 0, exp: 0, msg: "A nadie le importa..." },
-        { success: false, money: 0, exp: 0, msg: 'Orang-orang mengabaikanmu...' },
+        { success: false, money: 0, exp: 0, msg: "La gente te ignora..." },
         { success: true, money: 100, exp: 5, msg: "¡Saca un centavo del bolsillo de alguien!" },
         { success: false, money: -500, exp: 0, msg: "¡Te robaron otro mendigo!" }
     ]
@@ -51,12 +51,17 @@ async function handler(m, { sock }) {
     
     let txt = ''
     if (result.success && result.money > 0) {
-        txt = `🙏 *ɴɢᴇᴍɪs sᴜᴋsᴇs*\n\n> ${result.msg}\n> 💰 Dapat: *+Rp ${result.money.toLocaleString('id-ID')}*`
+        txt = `🙏 *MENDIGAR COMPLETADO*\n\n> ${result.msg}
+> 💰 Puede: *+Rp ${result.money.toLocaleString('id-ID')}*`
         if (result.exp > 0) txt += `\n> 🚄 Exp: *+${result.exp}*`
     } else if (result.money < 0) {
-        txt = `😭 *ɴɢᴇᴍɪs ɢᴀɢᴀʟ*\n\n> ${result.msg}\n> 💸 Lost: *Rp ${Math.abs(result.money).toLocaleString('id-ID')}*`
+        txt = `😭 *el peticionario fracaso*
+
+> ${result.msg}\n> 💸 Lost: *Rp ${Math.abs(result.money).toLocaleString('id-ID')}*`
     } else {
-        txt = `😢 *ɴɢᴇᴍɪs ɢᴀɢᴀʟ*\n\n> ${result.msg}`
+        txt = `😢 *el peticionario fracaso*
+
+> ${result.msg}`
     }
     
     await m.reply(txt)

@@ -4,8 +4,8 @@ const pluginConfig = {
     alias: ['top5', 'toplist'],
     category: 'fun',
     description: "Top 5-miembro al azar para una categoría específica",
-    usage: '.top <kategori>',
-    example: '.top orang pintar',
+    usage: '.top <categoría>',
+    example: ".top persona inteligente",
     isOwner: false,
     isPremium: false,
     isGroup: true,
@@ -20,7 +20,7 @@ async function handler(m, { sock }) {
     
     if (!kategori) {
         return m.reply(
-            `\`Contoh: ${m.prefix}top orang pintar\``
+            `\`Ejemplo: ${m.prefix}top persona inteligente\``
         )
     }
     

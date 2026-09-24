@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'ganti-ourin-allmenu.jpg',
     alias: ['gantiallemenu', 'setourinallmenu'],
     category: 'owner',
-    description: 'Ganti gambar ourin-allmenu.jpg (thumbnail allmenu)',
-    usage: ".Swap-ourin-allmen.jpg (reply / enviar imagen)",
+    description: "Cambiar las imágenes ourin-allmenu.jpg",
+    usage: ".gantiallemenu (responde o envía una imagen)",
     example: '.ganti-ourin-allmenu.jpg',
     isOwner: true,
     isPremium: false,
@@ -21,7 +21,7 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
     
     if (!isImage) {
-        return m.reply(`🖼️ *ɢᴀɴᴛɪ ᴏᴜʀɪɴ-ᴀʟʟᴍᴇɴᴜ.ᴊᴘɢ*
+        return m.reply(`🖼️ *sustituye ourin-allmenu.jpg*
 
 > Enviar / respuesta imágenes para reemplazar
 > File: assets/images/ourin-allmenu.jpg`)
@@ -48,7 +48,9 @@ async function handler(m, { sock }) {
         
         fs.writeFileSync(targetPath, buffer)
         
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*\n\n> Gambar ourin-allmenu.jpg telah diganti`)
+        m.reply(`✅ *correcto*
+
+La imagen ourin-allmenu.jpg ha sido cambiada`)
         
     } catch (error) {
         await m.reply(te(m.prefix, m.command, m.pushName))

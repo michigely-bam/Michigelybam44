@@ -7,8 +7,8 @@ const pluginConfig = {
     alias: ['editinfo'],
     category: 'store',
     description: "✏️ Editar información de la tienda (sólo chat privado)",
-    usage: ".editores √ n nÂomero de contacto > campo de referencia > valor",
-    example: ".Editor 1 nuevo contenido de contenido aquí",
+    usage: '.editlist <número> <campo> <valor>',
+    example: '.editlist 1 isi Nuevo contenido aquí',
     isOwner: true,
     isPremium: false,
     isGroup: false,
@@ -36,9 +36,13 @@ async function uploadToCatbox(buffer, filename = 'file.jpg') {
 async function handler(m, { sock }) {
     if (m.isGroup) {
         return m.reply(
-            `🚫 *Akses Ditolak*\n\n` +
-            `Untuk menjaga keamanan data 🛡️, pengeditan informasi hanya dapat dilakukan di *private chat*.\n\n` +
-            `Silakan chat bot secara langsung 📱`
+            `🚫 *Debido de acceso*
+
+` +
+            `Para mantener la seguridad de los datos 🛡️, la edición de la información sólo se puede hacer en el chat privado **.
+
+` +
+            `Por favor chatear bot en vivo 📱`
         )
     }
 
@@ -48,7 +52,7 @@ async function handler(m, { sock }) {
     if (lists.length === 0) {
         return m.reply(`📭 *Aún no hay información.*
 
-Tambahkan informasi terlebih dahulu: \`${m.prefix}addlist\` ➕`)
+Añade información primero: \`${m.prefix}addlist\` ➕`)
     }
 
     const text = m.text?.trim() || ''
@@ -56,19 +60,32 @@ Tambahkan informasi terlebih dahulu: \`${m.prefix}addlist\` ➕`)
 
     if (!match) {
         return m.reply(
-            `✏️ *EDIT INFORMASI TOKO*\n\n` +
-            `📋 Format: \`${m.prefix}editlist <nomor> <field> <nilai>\`\n\n` +
-            `📌 *Field yang bisa diedit:*\n` +
-            `• *nama* 🏷️ — Judul informasi\n` +
-            `• *isi* 📝 — Konten informasi (gunakan \`;;\` untuk baris baru)\n` +
-            `• *deskripsi* 📋 — Deskripsi singkat (preview di daftar)\n` +
-            `• *gambar* 🖼️ — Upload gambar baru (reply gambar)\n` +
-            `• *video* 🎬 — Upload video baru (reply video)\n\n` +
-            `📝 *Contoh:*\n` +
-            `\`${m.prefix}editlist 1 isi Syarat baru: blablabla;;Ketentuan: blablabla\`\n` +
-            `\`${m.prefix}editlist 1 nama FAQ Pembayaran\`\n` +
-            `\`${m.prefix}editlist 1 gambar\` (reply gambar 🖼️)\n\n` +
-            `_Gunakan \`;;\` untuk baris baru dalam isi_ ✍️`
+            `✏️ *EDIT INFORMACIÓN DE LA TIENDA*
+
+` +
+            `📋 Formato: \`${m.prefix}editlist <número> <campo> <valor>\`\n\n` +
+            `📌 *Field que se puede editar:*
+` +
+            `• *nama* 🏷️ — Título de información
+` +
+            `• *isi* 📝 — Contenido de información (usar \`;;\` para nuevas líneas)
+` +
+            `• *deskripsi* 📋 — Breve descripción (previsión en la lista)
+` +
+            `• *gambar* 🖼️ — Subir nuevas imágenes (Responde imagen)
+` +
+            `• *video* 🎬 — Subir un video nuevo (responde a un video)
+
+` +
+            `📝 *Ejemplo:*\n` +
+            `\`${m.prefix}editlist 1 isi Nuevo requisito: blablabla;;Condiciones: blablabla\`
+` +
+            `\`${m.prefix}editlist 1 nama Preguntas frecuentes sobre pagos\`
+` +
+            `\`${m.prefix}editlist 1 imagen \` (Responde imagen 🖼️)
+
+` +
+            `_Use \`;;\` para nuevas líneas en el contenido_ ✍️`
         )
     }
 
@@ -79,19 +96,19 @@ Tambahkan informasi terlebih dahulu: \`${m.prefix}addlist\` ➕`)
     if (idx < 0 || idx >= lists.length) {
         return m.reply(`❌ *Número inválido.*
 
-Rentang: 1-${lists.length} 📋`)
+Rango: 1-${lists.length} 📋`)
     }
 
     const item = lists[idx]
 
     switch (field) {
         case 'nama': {
-            if (!value || value.length < 2) return m.reply(`❌ *Nama terlalu pendek.* Minimal 2 karakter 🏷️`)
+            if (!value || value.length < 2) return m.reply(`❌ *Los nombres son demasiado cortos.* Un mínimo de 2 caracteres 🏷️`)
             item.name = value
             break
         }
         case 'isi': {
-            if (!value || value.length < 3) return m.reply(`❌ *Isi terlalu pendek.* Minimal 3 karakter 📝`)
+            if (!value || value.length < 3) return m.reply(`❌ *El contenido es demasiado corto.* Un mínimo de 3 caracteres 📝`)
             item.content = value.replace(/;;/g, '\n')
             item.description = item.content.substring(0, 80).replace(/\n/g, ' ')
             break
@@ -103,48 +120,58 @@ Rentang: 1-${lists.length} 📋`)
         case 'gambar': {
             const hasMedia = m.quoted?.isMedia && (m.quoted?.isImage || m.quoted?.type === 'imageMessage')
             const isDirectImage = m.isImage
-            if (!hasMedia && !isDirectImage) return m.reply(`🖼️ *Reply atau kirim gambar baru.*\n\nKirim gambar lalu reply dengan command ini.`)
-            await m.reply(`⏳ _Mengunggah gambar..._`)
+            if (!hasMedia && !isDirectImage) return m.reply(`🖼️ *Responde o envíe una nueva imagen.*
+
+Envía una imagen y responde con este comando.`)
+            await m.reply(`⏳ _Subiendo la imagen..._`)
             try {
                 const buffer = hasMedia ? await m.quoted.download() : await m.download()
                 if (buffer) {
                     const url = await uploadToCatbox(buffer, 'image.jpg')
                     if (url) item.image = url
-                    else return m.reply(`❌ *Gagal mengunggah gambar.* Coba lagi nanti 🖼️`)
+                    else return m.reply(`❌ *Fallo en subir las imágenes.* Prueba más tarde 🖼️`)
                 }
             } catch {
-                return m.reply(`❌ *Gagal mengunggah gambar.* Coba lagi nanti 🖼️`)
+                return m.reply(`❌ *Fallo en subir las imágenes.* Prueba más tarde 🖼️`)
             }
             break
         }
         case 'video': {
             const hasMedia = m.quoted?.isMedia && (m.quoted?.isVideo || m.quoted?.type === 'videoMessage')
             const isDirectVideo = m.isVideo
-            if (!hasMedia && !isDirectVideo) return m.reply(`🎬 *Reply atau kirim video baru.*\n\nKirim video lalu reply dengan command ini.`)
-            await m.reply(`⏳ _Mengunggah video..._`)
+            if (!hasMedia && !isDirectVideo) return m.reply(`🎬 *Responde o envíe un nuevo video.*
+
+Envíe el video y responda con este comando.`)
+            await m.reply(`⏳ _Subiendo el video..._`)
             try {
                 const buffer = hasMedia ? await m.quoted.download() : await m.download()
                 if (buffer) {
                     const url = await uploadToCatbox(buffer, 'video.mp4')
                     if (url) item.video = url
-                    else return m.reply(`❌ *Gagal mengunggah video.* Coba lagi nanti 🎬`)
+                    else return m.reply(`❌ *Fallo en subir el video.* Trate de hacerlo más tarde 🎬`)
                 }
             } catch {
-                return m.reply(`❌ *Gagal mengunggah video.* Coba lagi nanti 🎬`)
+                return m.reply(`❌ *Fallo en subir el video.* Trate de hacerlo más tarde 🎬`)
             }
             break
         }
         default:
-            return m.reply(`❌ *Field tidak dikenali.*\n\nGunakan: nama, isi, deskripsi, gambar, video 📋`)
+            return m.reply(`❌ *El campo es desconocido.*
+
+Utilice: nombre, contenido, descripción, imagen, video 📋`)
     }
 
     db.setting('storeLists', lists)
     await m.react('✅')
 
-    let reply = `✅ *INFORMASI DIPERBARUI*\n\n`
-    reply += `🏷️ Nama: *${item.name}*\n`
-    if (field === 'isi') reply += `📝 Isi:\n${item.content}\n\n`
-    if (field === 'gambar') reply += `🖼️ Gambar: ✅\n`
+    let reply = `✅ *INFORMACIÓN ACTUALIZADA*
+
+`
+    reply += `🏷️ Nombre: *${item.name}*\n`
+    if (field === 'isi') reply += `📝 Contenido:
+${item.content}\n\n`
+    if (field === 'gambar') reply += `🖼️ Imagen: ✅
+`
     if (field === 'video') reply += `🎬 Video: ✅\n`
     reply += `
 👀 _Ver cambios: \`${m.prefix}list\`_`

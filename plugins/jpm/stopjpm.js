@@ -16,7 +16,7 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     if (!global.statusjpm) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*
+        return m.reply(`❌ *falló*
 
 > No JPM running`)
     }

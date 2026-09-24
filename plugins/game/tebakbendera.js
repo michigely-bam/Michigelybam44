@@ -3,8 +3,8 @@ import { games } from '../../src/lib/ourin-games.js'
 games.register('tebakbendera', {
     alias: ['tbendera', 'flag'],
     emoji: '🏳️',
-    title: 'TEBAK BENDERA',
-    description: 'Tebak negara dari bendera',
+    title: "ADIVINA LA BANDERA",
+    description: "Adivina el país de la bandera",
     dataFile: 'tebakbendera2.json',
     answerField: 'name',
     hasImage: true

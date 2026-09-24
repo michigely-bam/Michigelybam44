@@ -8,7 +8,7 @@ const pluginConfig = {
   name: "cekfemboy",
   alias: ["femboy"],
   category: "cek",
-  description: "Mira a tu chica.",
+  description: "Comprueba tu resultado de femboy.",
   usage: ".cekfemboy - Nombre",
   example: ".cekfemboy Budi",
   isOwner: false,
@@ -50,7 +50,7 @@ async function handler(m, { sock }) {
   const inputName = m.text?.trim();
   const nama =
     mentioned === m.sender
-      ? inputName || m.pushName || "Kamu"
+      ? inputName || m.pushName || "Tú"
       : `@${mentioned.split("@")[0]}`;
 
   try {
@@ -70,10 +70,10 @@ async function handler(m, { sock }) {
 
     let txt =
       mentioned === m.sender
-        ? `Hai @${mentioned.split("@")[0]}
+        ? `Hola @${mentioned.split("@")[0]}
 
 ${result.hasil}`
-        : `Usted quiere comprobar los niveles femorales${mentioned.split("@")[0]} yak? 
+        : `Resultado de femboy para @${mentioned.split("@")[0]}:
 
 ${result.hasil}`;
 

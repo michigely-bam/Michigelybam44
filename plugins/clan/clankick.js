@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'clankick',
     alias: ['kickclan'],
     category: 'clan',
-    description: 'Kick member dari clan (leader only)',
+    description: "Kick miembros del clan (líder sólo)",
     usage: '.clankick @user',
     example: '.clankick @user',
     isOwner: false,
@@ -30,8 +30,10 @@ async function handler(m) {
     if (!target) {
         return m.reply(
             `👢 *CLAN KICK*\n\n` +
-            `Tag atau reply member yang mau dikeluarkan\n\n` +
-            `Contoh: *.clankick @user*`
+            `Etiquetas o miembros que deseen ser eliminados
+
+` +
+            `Ejemplo: *.clankick @user*`
         )
     }
 
@@ -46,8 +48,8 @@ async function handler(m) {
 
     await m.reply(
         `${emblem} *KICKED*\n\n` +
-        `@${target.split('@')[0]} dikeluarkan dari *${clan.name}*\n` +
-        `Sisa members: ${clan.members.length}/50`,
+        `@${target.split('@')[0]} fue expulsado de *${clan.name}*\n` +
+        `El resto de miembros: ${clan.members.length}/50`,
         { mentions: [target] }
     )
 }

@@ -28,7 +28,7 @@ function handler(m) {
             return m.reply(`📋 ¡La lista antilink está vacía!`)
         }
         
-        let txt = `🔗 *ᴅᴀꜰᴛᴀʀ ᴀɴᴛɪʟɪɴᴋ*\n\n`
+        let txt = `🔗 *LISTA DE ENLACES BLOQUEADOS*\n\n`
         antilinkList.forEach((l, i) => {
             txt += `> ${i + 1}. \`${l}\`\n`
         })
@@ -51,9 +51,11 @@ function handler(m) {
     db.setGroup(m.chat, { antilinkList })
     
     m.reply(
-        `✅ *ᴀɴᴛɪʟɪɴᴋ ᴅɪʜᴀᴘᴜs*\n\n` +
+        `✅ *se han eliminado los enlaces*
+
+` +
         `> Link: \`${link}\`\n` +
-        `> Sisa: *${antilinkList.length}* link`
+        `> Restante: *${antilinkList.length}* link`
     )
 }
 

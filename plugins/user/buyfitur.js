@@ -4,8 +4,8 @@ const pluginConfig = {
     name: 'buyfitur',
     alias: ['belifitur', 'purchasefeature', 'buyfeature'],
     category: 'user',
-    description: "Comprar características premium (1 función = 3000 monedas)",
-    usage: ".fuente de alimentación [nombre_fitur]",
+    description: "Compra funciones prémium (1 función = 3000 monedas)",
+    usage: '.buyfitur [nombre_función]',
     example: '.buyfitur',
     isOwner: false,
     isPremium: false,
@@ -19,11 +19,11 @@ const pluginConfig = {
 const PRICE_PER_FEATURE = 3000
 
 const PREMIUM_FEATURES = [
-    { id: 'sticker', name: 'Sticker Unlimited', desc: 'Unlimited sticker commands' },
-    { id: 'downloader', name: 'Downloader Pro', desc: 'Download tanpa limit' },
-    { id: 'ai', name: 'AI Access', desc: "Acceso de alta calidad IA" },
-    { id: 'tools', name: 'Advanced Tools', desc: 'Tools eksklusif' },
-    { id: 'game', name: 'Game Bonus', desc: '2x rewards game' }
+    { id: 'sticker', name: 'Stickers ilimitados', desc: 'Comandos de stickers sin límites' },
+    { id: 'downloader', name: 'Downloader Pro', desc: "Descarga sin límites" },
+    { id: 'ai', name: 'Acceso a IA', desc: "Acceso a IA de alta calidad" },
+    { id: 'tools', name: 'Herramientas avanzadas', desc: "Herramientas exclusivas" },
+    { id: 'game', name: 'Bonificación de juegos', desc: 'Recompensas dobles en juegos' }
 ]
 
 function formatNumber(num) {
@@ -38,8 +38,8 @@ async function handler(m, { sock }) {
     if (user.isPremium || config.isPremium(m.sender)) {
         return m.reply(
             `✨ *ᴘʀᴇᴍɪᴜᴍ ᴜsᴇʀ*\n\n` +
-            `> Kamu sudah premium!\n` +
-            `> Semua fitur sudah ter-unlock!`
+            `> ¡Ya eres usuario prémium!\n` +
+            `> Todas las funciones están desbloqueadas.`
         )
     }
     
@@ -47,13 +47,13 @@ async function handler(m, { sock }) {
         const unlockedFeatures = user.unlockedFeatures || []
         
         let text = `╭━━━━━━━━━━━━━━━━━╮\n`
-        text += `┃  🛒 *ʙᴜʏ ꜰɪᴛᴜʀ*\n`
+        text += `┃  🛒 *COMPRAR FUNCIONES*\n`
         text += `╰━━━━━━━━━━━━━━━━━╯\n\n`
         
-        text += `> Harga: *${formatNumber(PRICE_PER_FEATURE)}* bal/fitur\n`
-        text += `> Koin: *${formatNumber(user.koin || 0)}*\n\n`
+        text += `> Precio: *${formatNumber(PRICE_PER_FEATURE)} monedas por función*\n`
+        text += `> Monedas: *${formatNumber(user.koin || 0)}*\n\n`
         
-        text += `╭┈┈⬡「 📋 *ꜰɪᴛᴜʀ* 」\n`
+        text += `╭┈┈⬡「 📋 *FUNCIONES* 」\n`
         
         for (const feature of PREMIUM_FEATURES) {
             const isUnlocked = unlockedFeatures.includes(feature.id)
@@ -65,8 +65,8 @@ async function handler(m, { sock }) {
         }
         
         text += `╰┈┈┈┈┈┈┈┈⬡\n\n`
-        text += `> Gunakan: \`.buyfitur <id>\`\n`
-        text += `> Atau jadi *Premium* ¡Todos desbloqueen!`
+        text += `> Utiliza: \`.buyfitur <id>\`\n`
+        text += `> También puedes hacerte *Prémium* para desbloquearlas todas.`
         
         await m.reply(text)
         return
@@ -76,24 +76,24 @@ async function handler(m, { sock }) {
     
     if (!feature) {
         return m.reply(
-            `❌ *ɢᴀɢᴀʟ*\n\n` +
-            `> Fitur \`${featureName}\` tidak ditemukan\n` +
-            `> Ketik \`.buyfitur\` untuk lihat daftar`
+            `❌ *ERROR*\n\n` +
+            `> No se encontró la función \`${featureName}\`.\n` +
+            `> Escribe \`.buyfitur\` para ver la lista`
         )
     }
     
     const unlockedFeatures = user.unlockedFeatures || []
     
     if (unlockedFeatures.includes(feature.id)) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Fitur \`${feature.name}\` ¡Está desbloqueado!`)
+        return m.reply(`❌ *ERROR*\n\n> La función \`${feature.name}\` ya está desbloqueada.`)
     }
     
     if ((user.koin || 0) < PRICE_PER_FEATURE) {
         return m.reply(
-            `❌ *ɢᴀɢᴀʟ*\n\n` +
-            `> Koin tidak cukup!\n` +
-            `> Butuh: *${formatNumber(PRICE_PER_FEATURE)}*\n` +
-            `> Kamu punya: *${formatNumber(user.koin || 0)}*`
+            `❌ *ERROR*\n\n` +
+            `> ¡No tienes suficientes monedas!\n` +
+            `> Necesitas: *${formatNumber(PRICE_PER_FEATURE)}*\n` +
+            `> Tienes: *${formatNumber(user.koin || 0)}*`
         )
     }
     
@@ -106,14 +106,14 @@ async function handler(m, { sock }) {
     m.react('✅')
     
     await m.reply(
-        `✅ *ꜰɪᴛᴜʀ ᴅɪ-ᴜɴʟᴏᴄᴋ*\n\n` +
+        `✅ *FUNCIÓN DESBLOQUEADA*\n\n` +
         `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-        `┃ 🎁 ꜰɪᴛᴜʀ: *${feature.name}*\n` +
-        `┃ 💵 ʜᴀʀɢᴀ: *-${formatNumber(PRICE_PER_FEATURE)}* bal\n` +
-        `┃ 💰 sɪsᴀ: *${formatNumber(newKoin)}*\n` +
+        `┃ 🎁 Función: *${feature.name}*\n` +
+        `┃ 💵 Precio: *-${formatNumber(PRICE_PER_FEATURE)} monedas*\n` +
+        `┃ 💰 Saldo restante: *${formatNumber(newKoin)}*\n` +
         `╰┈┈⬡\n\n` +
         `> _${feature.desc}_\n\n` +
-        `> 💡 Tip: Jadi *Premium* untuk unlock SEMUA!`
+        `> 💡 Consejo: hazte *Prémium* para desbloquearlo todo.`
     )
 }
 

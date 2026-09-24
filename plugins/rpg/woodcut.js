@@ -30,22 +30,24 @@ async function handler(m, { sock }) {
     
     if (user.rpg.stamina < staminaCost) {
         return m.reply(
-            `⚡ *sᴛᴀᴍɪɴᴀ ʜᴀʙɪs*\n\n` +
-            `> Butuh ${staminaCost} stamina.\n` +
-            `> Stamina kamu: ${user.rpg.stamina}`
+            `⚡ *RESISTENCIA AGOTADA*
+
+` +
+            `> Necesita ${staminaCost} stamina.\n` +
+            `> Tu resistencia: ${user.rpg.stamina}`
         )
     }
     
     user.rpg.stamina -= staminaCost
     
-    await m.reply('🪓 *sᴇᴅᴀɴɢ ᴍᴇɴᴇʙᴀɴɢ...*')
+    await m.reply("🪓 *TALANDO...*")
     await new Promise(r => setTimeout(r, 2000))
     
     const drops = [
-        { item: 'wood', chance: 70, name: '🪵 Kayu', min: 2, max: 5 },
-        { item: 'stick', chance: 50, name: '🥢 Ranting', min: 1, max: 3 },
-        { item: 'apple', chance: 20, name: '🍎 Apel', min: 1, max: 2 },
-        { item: 'rubber', chance: 10, name: '⚫ Karet', min: 1, max: 1 }
+        { item: 'wood', chance: 70, name: '🪵 Madera', min: 2, max: 5 },
+        { item: 'stick', chance: 50, name: '🥢 Rama', min: 1, max: 3 },
+        { item: 'apple', chance: 20, name: '🍎 Manzana', min: 1, max: 2 },
+        { item: 'rubber', chance: 10, name: '⚫ Caucho', min: 1, max: 1 }
     ]
     
     let results = []
@@ -59,7 +61,7 @@ async function handler(m, { sock }) {
     
     if (results.length === 0) {
         user.inventory['wood'] = (user.inventory['wood'] || 0) + 1
-        results.push({ name: '🪵 Kayu', qty: 1 })
+        results.push({ name: '🪵 Madera', qty: 1 })
     }
     
     const expGain = Math.floor(Math.random() * 200) + 50
@@ -67,8 +69,10 @@ async function handler(m, { sock }) {
     
     db.save()
     
-    let txt = `🪓 *ᴡᴏᴏᴅᴄᴜᴛ sᴇʟᴇsᴀɪ*\n\n`
-    txt += `╭┈┈⬡「 📦 *ʜᴀsɪʟ* 」\n`
+    let txt = `🪓 *woodcut terminado*
+
+`
+    txt += `╭┈┈⬡「 📦 *RESULTADO* 」\n`
     for (const r of results) {
         txt += `┃ ${r.name}: *+${r.qty}*\n`
     }

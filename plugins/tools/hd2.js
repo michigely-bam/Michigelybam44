@@ -15,7 +15,7 @@ const pluginConfig = {
   alias: ["enhance2", "upscale2", "aienhancer"],
   category: "tools",
   description: "Mejorar la imagen a HD con IA (V3)",
-  usage: ".hd2 (reply gambar)",
+  usage: ".hd2 (respuesta a la imagen)",
   example: ".hd2",
   isOwner: false,
   isPremium: false,
@@ -51,7 +51,7 @@ async function handler(m, { sock }) {
       return m.reply(`❌ No se pudo download image`);
     }
     await m.reply(
-      `🕕 *ᴍᴇᴍᴘʀᴏsᴇs ɢᴀᴍʙᴀʀ...*
+      `🕕 *procesar las imágenes...*
 
 > Tiempo estimado: 0,1 minutos
 > Por favor, espera...`,

@@ -20,7 +20,7 @@ const pluginConfig = {
 
 function gpMsg(key, replacements = {}) {
     const defaults = {
-        antidocument: '⚠ *AntiDocument* — Dokumen dari @%user% dihapus.',
+        antidocument: "⚠ *AntiDocument* — Los documentos de @%user% fueron eliminados.",
     }
     let text = config.groupProtection?.[key] || defaults[key] || ''
     for (const [k, v] of Object.entries(replacements)) {
@@ -65,18 +65,18 @@ async function handler(m, { sock }) {
     if (action === 'on') {
         db.setGroup(m.chat, { antidocument: true })
         m.react('✅')
-        await m.reply(`✅ *AntiDocument diaktifkan*`)
+        await m.reply(`✅ *AntiDocument activado*`)
         return
     }
 
     if (action === 'off') {
         db.setGroup(m.chat, { antidocument: false })
         m.react('❌')
-        await m.reply(`❌ *AntiDocument dinonaktifkan*`)
+        await m.reply(`❌ *AntiDocument fue desactivado*`)
         return
     }
 
-    await m.reply(`❌ Gunakan \`.antidocument on\` atau \`.antidocument off\``)
+    await m.reply(`❌ Utilice \`.antidocument on\` o \`.antidocument off\``)
 }
 
 export { pluginConfig as config, handler, checkAntidocument }

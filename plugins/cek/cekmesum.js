@@ -3,7 +3,7 @@ const pluginConfig = {
   alias: ["mesum"],
   category: "cek",
   description: "Mira lo sucio que estás.",
-  usage: ".cekperg - nombre identificado",
+  usage: ".cekmesum [@usuario]",
   example: ".cekmesum Budi",
   isOwner: false,
   isPremium: false,
@@ -20,26 +20,23 @@ async function handler(m) {
 
   let desc = "";
   if (percent >= 90) {
-    desc = "MESUM AKUT! Tobat mas! 😳🔞";
+    desc = "¡PICARDÍA EXTREMA! ¡Compórtate! 😳🔞";
   } else if (percent >= 70) {
-    desc = "Mesum banget! 👀";
+    desc = "¡Muy pícaro/a! 👀";
   } else if (percent >= 50) {
-    desc = "Lumayan mesum 😏";
+    desc = "Bastante pícaro/a 😏";
   } else if (percent >= 30) {
-    desc = "Sedikit mesum 🙈";
+    desc = "Un poco pervertido/a 🙈";
   } else {
-    desc = "¡Llanta y santa! 😇";
+    desc = "¡Inocente y angelical! 😇";
   }
 
-  let txt =
-    mentioned === m.sender
-      ? `Hai @${mentioned.split("@")[0]}
-    
-Tus pretendientes nivel. *${percent}%*
+  let txt = mentioned === m.sender
+    ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de picardía es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-      : `Usted quiere comprobar el nivel de succión${mentioned.split("@")[0]} yak? 
-    
-Tingkat kemesuman dia sebesar *${percent}%*
+    : `Nivel de picardía de @${mentioned.split('@')[0]}: *${percent}%*.
 \`\`\`${desc}\`\`\``;
 
   await m.reply(txt, { mentions: [mentioned] });

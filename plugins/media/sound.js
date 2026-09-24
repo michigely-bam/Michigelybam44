@@ -11,7 +11,7 @@ const pluginConfig = {
     alias: [],
     category: 'media',
     description: "Enviar efecto de sonido (sonido 1 - sonido250)",
-    usage: '.sound1 atau .sound250',
+    usage: ".sound1 o .sound250",
     example: '.sound1',
     isOwner: false,
     isPremium: false,
@@ -28,8 +28,9 @@ async function handler(m, { sock }) {
     if (command === 'sound' || !command.startsWith('sound')) {
         return m.reply(
             `🔊 *sᴏᴜɴᴅ ᴇꜰꜰᴇᴄᴛ*\n\n` +
-            `> Tersedia: sound1 - sound250\n` +
-            `> Contoh: \`${m.prefix}sound1\``
+            `> Disponible: sound1 - sound250
+` +
+            `> Ejemplo: \`${m.prefix}sound1\``
         )
     }
     

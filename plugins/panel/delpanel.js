@@ -7,7 +7,7 @@ const pluginConfig = {
     category: 'panel',
     description: "Borrar el panel (servidor + usuario)",
     usage: '.delpanel [s1/s2/s3] serverid [full]',
-    example: '.delpanel 5 atau .delpanel s2 5 full',
+    example: ".delpanel 5 o .delpanel s2 5 full",
     isOwner: true,
     isPremium: false,
     isGroup: false,
@@ -58,7 +58,7 @@ async function handler(m, { sock }) {
     
     if (missingConfig.length > 0) {
         const available = getAvailableServers(pteroConfig)
-        let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverKey.toUpperCase()} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`
+        let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverKey.toUpperCase()} SIN CONFIGURAR*\n\n`
         if (available.length > 0) {
             txt += `> Servidor disponible: *${available.join(', ')}*`
         }
@@ -71,16 +71,20 @@ async function handler(m, { sock }) {
     
     if (!serverId) {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-            `> \`${m.prefix}delpanel ID\` - Hapus server saja\n` +
-            `> \`${m.prefix}delpanel ID full\` - Hapus server + user\n` +
-            `> \`${m.prefix}delpanel s2 ID\` - Dari server 2\n\n` +
-            `> Lihat ID dengan \`${m.prefix}listserver\``
+            `⚠️ *MODO DE USO*\n\n` +
+            `> \`${m.prefix}delpanel ID\` - Sólo elimine el servidor
+` +
+            `> \`${m.prefix}delpanel ID full\` - Eliminar el servidor + el usuario
+` +
+            `> \`${m.prefix}delpanel s2 ID\` - Desde el servidor 2
+
+` +
+            `> Ver ID con \`${m.prefix}listserver\``
         )
     }
     
     if (isNaN(serverId)) {
-        return m.reply(`❌ Server ID harus berupa angka.`)
+        return m.reply(`❌ El servidor ID debe ser un número.`)
     }
     
     try {
@@ -105,7 +109,7 @@ async function handler(m, { sock }) {
             isUserAdmin = userInfo.root_admin
         } catch (e) {}
         
-        await m.reply(`🗑️ *ᴍᴇɴɢʜᴀᴘᴜs ᴘᴀɴᴇʟ...*\n\n> Server: *${serverLabel}*\n> Panel: \`${server.name}\`\n> Mode: *${option === 'full' ? 'Server + User' : 'Server saja'}*`)
+        await m.reply(`🗑️ *ELIMINANDO ᴘᴀɴᴇʟ...*\n\n> Server: *${serverLabel}*\n> Panel: \`${server.name}\`\n> Mode: *${option === 'full' ? 'Server + User' : "Solo el servidor"}*`)
         
         await axios.delete(`${serverConfig.domain}/api/application/servers/${serverId}`, {
             headers: {
@@ -115,8 +119,8 @@ async function handler(m, { sock }) {
             }
         })
         
-        let result = `✅ *sᴇʀᴠᴇʀ ᴅɪʜᴀᴘᴜs [${serverLabel}]*\n\n`
-        result += `> Nama: \`${server.name}\`\n`
+        let result = `✅ *el servidor fue eliminado [${serverLabel}]*\n\n`
+        result += `> Nombre: \`${server.name}\`\n`
         result += `> ID: \`${serverId}\`\n`
         
         if (option === 'full' && userInfo && !isUserAdmin) {
@@ -128,7 +132,9 @@ async function handler(m, { sock }) {
                         'Accept': 'Application/vnd.pterodactyl.v1+json'
                     }
                 })
-                result += `\n✅ *ᴜsᴇʀ ᴅɪʜᴀᴘᴜs*\n`
+                result += `
+✅ *usuario eliminado*
+`
                 result += `> Username: \`${userInfo.username}\`\n`
                 result += `> ID: \`${userId}\``
             } catch (userErr) {

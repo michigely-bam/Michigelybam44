@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['emotebatu', 'moai', 'tomoai'],
     category: 'ai',
     description: "Cambiar la imagen a la emote de piedra 🗿",
-    usage: '.toemotebatu (reply gambar)',
+    usage: ".toemotebatu (respuesta a la imagen)",
     example: '.toemotebatu',
     isOwner: false,
     isPremium: false,

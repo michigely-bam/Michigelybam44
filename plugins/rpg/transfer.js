@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['tf', 'kirim'],
     category: 'rpg',
     description: "Transferir dinero o artículos a otro usuario",
-    usage: ".transferencia de dinero / nombre_item> <jumlah> @user",
+    usage: ".transfer <dinero/nombre_artículo> <cantidad> @usuario",
     example: '.transfer money 10000 @tag',
     isOwner: false,
     isPremium: false,
@@ -36,7 +36,9 @@ function handler(m, { sock }) {
     const target = m.mentionedJid?.[0] || m.quoted?.sender
     
     if (!target) {
-        return m.reply(`❌ *ᴛᴀʀɢᴇᴛ ɴᴏᴛ ꜰᴏᴜɴᴅ*\n\n> Tag user tujuan!`)
+        return m.reply(`❌ *ᴛᴀʀɢᴇᴛ ɴᴏᴛ ꜰᴏᴜɴᴅ*
+
+> ¡Menciona al usuario destinatario!`)
     }
     
     if (target === m.sender) {
@@ -46,7 +48,9 @@ function handler(m, { sock }) {
     }
     
     if (!amount || amount <= 0) {
-        return m.reply(`❌ *ɪɴᴠᴀʟɪᴅ ᴀᴍᴏᴜɴᴛ*\n\n> Jumlah harus lebih dari 0!`)
+        return m.reply(`❌ *ɪɴᴠᴀʟɪᴅ ᴀᴍᴏᴜɴᴛ*
+
+¡El número debe ser superior a 0!`)
     }
     
     const recipient = db.getUser(target) || db.setUser(target)
@@ -54,9 +58,11 @@ function handler(m, { sock }) {
     if (type === 'money' || type === 'balance') {
         if ((sender.koin || 0) < amount) {
             return m.reply(
-                `❌ *sᴀʟᴅᴏ ᴛɪᴅᴀᴋ ᴄᴜᴋᴜᴘ*\n\n` +
-                `> Koin kamu: Rp ${(sender.koin || 0).toLocaleString('id-ID')}\n` +
-                `> Butuh: Rp ${amount.toLocaleString('id-ID')}`
+                `❌ *saldo no es suficiente*
+
+` +
+                `> Tus monedas: Rp ${(sender.koin || 0).toLocaleString('id-ID')}\n` +
+                `> Necesidad: Rp ${amount.toLocaleString('id-ID')}`
             )
         }
         
@@ -66,18 +72,19 @@ function handler(m, { sock }) {
         db.setUser(m.sender, sender)
         db.setUser(target, recipient)
         db.save()
-        return m.reply(`✅ *ᴛʀᴀɴsꜰᴇʀ sᴜᴋsᴇs*
+        return m.reply(`✅ *ᴛʀᴀɴsꜰᴇʀ COMPLETADO*
 
-> 💸 Enviado: Rp ${amount.toLocaleString('id-ID')}\n> 👤 Penerima: @${target.split('@')[0]}`, { mentions: [target] })
+> 💸 Enviado: Rp ${amount.toLocaleString('id-ID')}
+> 👤 Destinatario: @${target.split('@')[0]}`, { mentions: [target] })
     } else {
         sender.inventory = sender.inventory || {}
         recipient.inventory = recipient.inventory || {}
         
         if ((sender.inventory[type] || 0) < amount) {
             return m.reply(
-                `❌ *ɪᴛᴇᴍ ᴛɪᴅᴀᴋ ᴄᴜᴋᴜᴘ*\n\n` +
-                `> Item *${type}* kamu: ${sender.inventory[type] || 0}\n` +
-                `> Butuh: ${amount}`
+                `❌ *OBJETOS INSUFICIENTES*\n\n` +
+                `> Item *${type}* tú: ${sender.inventory[type] || 0}\n` +
+                `> Necesita: ${amount}`
             )
         }
         
@@ -87,7 +94,9 @@ function handler(m, { sock }) {
         db.setUser(m.sender, sender)
         db.setUser(target, recipient)
         db.save()
-        return m.reply(`✅ *ᴛʀᴀɴsꜰᴇʀ sᴜᴋsᴇs*\n\n> 📦 Item: ${type}\n> 🔢 Jumlah: ${amount}\n> 👤 Penerima: @${target.split('@')[0]}`, { mentions: [target] })
+        return m.reply(`✅ *ᴛʀᴀɴsꜰᴇʀ COMPLETADO*\n\n> 📦 Item: ${type}
+> 🔢 Cantidad: ${amount}
+> 👤 Destinatario: @${target.split('@')[0]}`, { mentions: [target] })
     }
 }
 

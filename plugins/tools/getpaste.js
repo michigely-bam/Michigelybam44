@@ -23,8 +23,10 @@ async function handler(m, { sock }) {
   if (!text || !text.includes("pastebin.com")) {
     return m.reply(
       `📋 *ɢᴇᴛ ᴘᴀsᴛᴇʙɪɴ*\n\n` +
-        `> Masukkan link Pastebin yang valid\n\n` +
-        `> Contoh: \`${m.prefix}getpaste https://pastebin.com/Gu8RZaqv\``,
+        `> Ingrese un enlace válido de Pastebin
+
+` +
+        `> Ejemplo: \`${m.prefix}getpaste https://pastebin.com/Gu8RZaqv\``,
     );
   }
 
@@ -42,11 +44,13 @@ async function handler(m, { sock }) {
     const timestamp = timeHelper.formatDateTime("DD MMMM YYYY HH:mm:ss");
 
     const caption =
-      `📋 *ᴋᴏɴᴛᴇɴ ᴘᴀsᴛᴇʙɪɴ*\n\n` +
-      `> 🕹 ID: ${data.paste_id || "Unknown"}\n` +
-      `> 📆 Waktu: ${timestamp}\n` +
-      `> 📝 Jumlah Baris: ${lineCount}\n\n` +
-      `\`\`\`\n${data.content.substring(0, 3000)}${data.content.length > 3000 ? "\n... (terpotong)" : ""}\n\`\`\``;
+      `📋 *CONTENIDO DE PASTEBIN*
+
+` +
+      `> 🕹 ID: ${data.paste_id || "Desconocido"}\n` +
+      `> 📆 Tiempo: ${timestamp}\n` +
+      `> 📝 Número de líneas: ${lineCount}\n\n` +
+      `\`\`\`\n${data.content.substring(0, 3000)}${data.content.length > 3000 ? "\n... (recortado)" : ""}\n\`\`\``;
 
     await m.reply(caption);
     m.react("✅");

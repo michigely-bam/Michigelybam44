@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'ganti-ourin-welcome.jpg',
     alias: ['gantiwelcome', 'setourinwelcome'],
     category: 'owner',
-    description: 'Ganti gambar ourin-welcome.jpg (thumbnail welcome)',
-    usage: ".reemplazar -ourin -welcome.jpg (reply / enviar imagen)",
+    description: "Cambiar la imagen ourin-welcome.jpg (tumbnail welcome)",
+    usage: ".gantiwelcome (responde o envía una imagen)",
     example: '.ganti-ourin-welcome.jpg',
     isOwner: true,
     isPremium: false,
@@ -21,7 +21,7 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
     
     if (!isImage) {
-        return m.reply(`🖼️ *ɢᴀɴᴛɪ ᴏᴜʀɪɴ-ᴡᴇʟᴄᴏᴍᴇ.ᴊᴘɢ*
+        return m.reply(`🖼️ *sustituye ourin-welcome.jpg*
 
 > Enviar / respuesta imágenes para reemplazar
 > File: assets/images/ourin-welcome.jpg`)
@@ -48,7 +48,9 @@ async function handler(m, { sock }) {
         
         fs.writeFileSync(targetPath, buffer)
         
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*\n\n> Gambar ourin-welcome.jpg telah diganti`)
+        m.reply(`✅ *correcto*
+
+La imagen ourin-welcome.jpg ha sido cambiada`)
         
     } catch (error) {
         await m.reply(te(m.prefix, m.command, m.pushName))

@@ -17,7 +17,7 @@ const pluginConfig = {
     category: 'jpm',
     description: "Enviar mensajes a todos los grupos con escondite",
     usage: ".jpmht − Mensaje hecho",
-    example: '.jpmht Halo semuanya!',
+    example: ".jpmht ¡Hola a todos!",
     isOwner: true,
     isPremium: false,
     isGroup: false,
@@ -33,7 +33,7 @@ async function handler(m, { sock }) {
     if (m.isGroup) {
         const groupMode = getGroupMode(m.chat, db)
         if (groupMode !== 'md' && groupMode !== 'all') {
-            return m.reply(`❌ *ᴍᴏᴅᴇ ᴛɪᴅᴀᴋ sᴇsᴜᴀɪ*
+            return m.reply(`❌ *modo no es adecuado*
 
 > JPM sólo está disponible en modo MD
 
@@ -44,18 +44,26 @@ async function handler(m, { sock }) {
     const text = m.fullArgs?.trim() || m.text?.trim()
     if (!text) {
         return m.reply(
-            `📢 *JPM HIDETAG (JASA PESAN MASSAL)*\n\n` +
-            `Sistem broadcast otomatis ke seluruh grup yang terdaftar dengan tag semua member (hidetag).\n\n` +
-            `*PENGGUNAAN:*\n` +
-            `• *${m.prefix}jpmht <pesan>* — Mengirim JPM hidetag teks biasa\n` +
-            `• *${m.prefix}jpmht (reply foto/video)* — Mengirim JPM hidetag dengan media\n\n` +
-            `*CONTOH:*\n` +
-            `> \`${m.prefix}jpmht Halo semuanya! Jangan lupa cek channel kita ya.\``
+            `📢 *JPM HIDETAG (SERVICIO DE MENSAJERÍA MASIVA)*
+
+` +
+            `Sistema de transmisión automática a todo el grupo que está registrado con la etiqueta de todos los miembros (hidetag).
+
+` +
+            `*USO:*
+` +
+            `• *${m.prefix}jpmht <mensaje>* — Enviar una difusión de texto con mención oculta
+` +
+            `• *${m.prefix}jpmht (Responde foto/video)* — Enviar JPM hidatag con los medios
+
+` +
+            `*EJEMPLO:*\n` +
+            `> \`${m.prefix}jpmht ¡Hola a todos! No olviden revisar nuestro canal.\``
         )
     }
     
     if (global.statusjpm) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*
+        return m.reply(`❌ *falló*
 
 > JPM corriendo. \`${m.prefix}stopjpm\` Parar.`)
     }
@@ -88,7 +96,7 @@ async function handler(m, { sock }) {
         
         if (groupIds.length === 0) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > No se encontró ningún grupo${blacklistedCount > 0 ? ` (${blacklistedCount} grupo sobre -lista negra` : ''}`)
         }
@@ -98,12 +106,13 @@ async function handler(m, { sock }) {
         await m.reply(
             `📢 *ᴊᴘᴍ ʜɪᴅᴇᴛᴀɢ*\n\n` +
             `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-            `┃ 📝 ᴘᴇsᴀɴ: \`${text.substring(0, 50)}${text.length > 50 ? '...' : ''}\`\n` +
-            `┃ 📷 ᴍᴇᴅɪᴀ: \`${mediaBuffer ? mediaType : 'Tidak'}\`\n` +
-            `┃ 👥 ᴛᴀʀɢᴇᴛ: \`${groupIds.length}\` grup\n` +
-            `┃ ⏱️ ᴊᴇᴅᴀ: \`${jedaJpm}ms\`\n` +
+            `┃ 📝 mensaje: \`${text.substring(0, 50)}${text.length > 50 ? '...' : ''}\`\n` +
+            `┃ 📷 ᴍᴇᴅɪᴀ: \`${mediaBuffer ? mediaType : "No"}\`\n` +
+            `┃ 👥 ᴛᴀʀɢᴇᴛ: \`${groupIds.length}\` grupo
+` +
+            `┃ ⏱️ INTERVALO: \`${jedaJpm}ms\`\n` +
             `╰┈┈⬡\n\n` +
-            `> Memulai JPM hidetag...`
+            `> Iniciando JPM con mención oculta...`
         )
         
         global.statusjpm = true
@@ -116,9 +125,9 @@ async function handler(m, { sock }) {
                 delete global.statusjpm
                 
                 await m.reply(
-                    `⏹️ *ᴊᴘᴍ ᴅɪʜᴇɴᴛɪᴋᴀɴ*\n\n` +
-                    `> ✅ Berhasil: \`${successCount}\`\n` +
-                    `> ❌ Gagal: \`${failedCount}\``
+                    `⏹️ *ᴊᴘᴍ DETENIDO*\n\n` +
+                    `> ✅ Correcto: \`${successCount}\`\n` +
+                    `> ❌ Falló: \`${failedCount}\``
                 )
                 return
             }
@@ -170,10 +179,12 @@ async function handler(m, { sock }) {
         
         m.react('✅')
         await m.reply(
-            `✅ *ᴊᴘᴍ ʜɪᴅᴇᴛᴀɢ sᴇʟᴇsᴀɪ*\n\n` +
-            `╭┈┈⬡「 📊 *ʜᴀsɪʟ* 」\n` +
-            `┃ ✅ ʙᴇʀʜᴀsɪʟ: \`${successCount}\`\n` +
-            `┃ ❌ ɢᴀɢᴀʟ: \`${failedCount}\`\n` +
+            `✅ *jpm Hidetag terminado*
+
+` +
+            `╭┈┈⬡「 📊 *RESULTADO* 」\n` +
+            `┃ ✅ correcto: \`${successCount}\`\n` +
+            `┃ ❌ ERROR: \`${failedCount}\`\n` +
             `┃ 📊 ᴛᴏᴛᴀʟ: \`${groupIds.length}\`\n` +
             `╰┈┈⬡`
         )

@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'bucin',
     alias: ['gombal', 'love', 'romantis'],
     category: 'fun',
-    description: 'Random kata-kata bucin/romantis',
+    description: "Frases románticas aleatorias",
     usage: '.bucin',
     example: '.bucin',
     isOwner: false,

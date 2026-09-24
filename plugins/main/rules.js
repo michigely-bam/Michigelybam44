@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'rules',
     alias: ['aturanbot', 'botrules'],
     category: 'main',
-    description: 'Menampilkan rules/aturan bot',
+    description: "Muestra las reglas del bot",
     usage: '.rules',
     example: '.rules',
     isOwner: false,
@@ -20,8 +20,8 @@ const pluginConfig = {
 const DEFAULT_BOT_RULES = [
     "No el comando de spam",
     "Usar características sabiamente",
-    'Dilarang menyalahgunakan bot',
-    'Hormati sesama pengguna',
+    "Está prohibido usar indebidamente el bot",
+    "Respeta a los demás usuarios",
     "Reportar errores al propietario",
     "No solicite características extrañas",
     "Bot no es 24 / 7, hay mantenimiento"
@@ -48,7 +48,7 @@ async function handler(m, { sock, config: botConfig }) {
 
         await sock.sendTable(
             m.chat,
-            '📜 Aturan Bot',
+            "📜 Reglas del bot",
             ['No', 'Rule'],
             tableData,
             m,

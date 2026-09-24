@@ -1,8 +1,8 @@
 /**
- * Nama Plugin: PlayCh (Saluran)
- * Pembuat Code: Zann
+ *Nombre del plugin: PlayCh (canal)
+ * Autor del código: Zann
  * API: api.zenzxz.my.id
- * Convert: ffmpeg mp3 → ogg/opus (support saluran)
+ * Convert: ffmpeg mp3 → ogg/opus (compatible con canales)
  */
 import crypto from "crypto";
 import axios from "axios";
@@ -20,7 +20,7 @@ const pluginConfig = {
   alias: ["pch", "playsaluran"],
   category: "search",
   description: "Juega música al canal (convert opus)",
-  usage: ".playch <query> atau .playch --idch <id> <query>",
+  usage: ".playch <query> o .playch --idch <id> <query>",
   example: ".playch komang",
   cooldown: 15,
   energi: 1,
@@ -91,11 +91,13 @@ async function handler(m, { sock }) {
 
   if (!q)
     return m.reply(
-      `🎵 *PLAY SALURAN*\n\n\`${m.prefix}playch <judul lagu>\`\n\`${m.prefix}playch --idch <id_saluran> <judul lagu>\``,
+      `🎵 *REPRODUCIR EN EL CANAL*
+
+\`${m.prefix}playch <título de canción>\`\n\`${m.prefix}playch --idch <id_canal> <título de canción>\``,
     );
   if (!chId)
     return m.reply(
-      `❌ Canal no fijado. \`--idch <id>\` atau atur di config.js`,
+      `❌ Canal no fijado. \`--idch <id>\` o configurar en config.js`,
     );
 
   m.react("🔎");
@@ -104,21 +106,24 @@ async function handler(m, { sock }) {
     const video = pickVideo({ videos });
     if (!video) return m.reply(`❌ Video no encontrado`);
 
-    const ytChannel = video.author?.name || video.author?.username || "Unknown";
+    const ytChannel = video.author?.name || video.author?.username || "Desconocido";
 
-    let info = `🎵 *NOW PLAYING (SALURAN)*\n\n`;
-    info += `📌 *Judul:* ${video.title}\n\n`;
+    let info = `🎵 *REPRODUCIENDO AHORA (CANAL)*
+
+`;
+    info += `📌 *Título:* ${video.title}\n\n`;
     info += `*DETAIL*\n`;
     info += `👤 Channel: *${ytChannel}*\n`;
-    info += `⏱️ Durasi: *${video.duration.timestamp}*\n`;
+    info += `⏱️ Duración: *${video.duration.timestamp}*\n`;
     info += `👀 Views: *${formatViews(video.views)}*\n`;
     info += `📅 Upload: *${video.ago}*\n`;
     info += `🆔 ID: \`${video.videoId}\`\n\n`;
     if (video.description) {
       const desc = video.description.substring(0, 150).replace(/\n/g, " ");
-      info += `*Deskripsi:*\n_${desc}${video.description.length > 150 ? "..." : ""}_\n\n`;
+      info += `*Descripción:*
+_${desc}${video.description.length > 150 ? "..." : ""}_\n\n`;
     }
-    info += `📡 Saluran: \`${chId}\`\n`;
+    info += `📡 Canal: \`${chId}\`\n`;
     info += `🔗 ${video.url}\n\n`;
     info += `_⏳ enviar audio al canal, por favor espere..._`;
 
@@ -137,7 +142,7 @@ async function handler(m, { sock }) {
             })
           ).data,
         );
-    if (mp3Buf.length < 50000) throw new Error("Audio terlalu kecil");
+    if (mp3Buf.length < 50000) throw new Error("El audio es demasiado pequeño.");
     const opusBuf = await toOggOpus(mp3Buf);
     if (opusBuf.length < 10000) throw new Error("La conversión de Opus falló");
     const title = video.title;

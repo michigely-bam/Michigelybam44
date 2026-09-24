@@ -1,7 +1,7 @@
 /**
- * Nama Plugin: Play
- * Pembuat Code: Zann
- * Saluran: https://whatsapp.com/channel/0029Vb7g5Qt90x2yn7bOlM2U
+ *Nombre del complemento: Play
+ * Autor del código: Zann
+ * Canal: https://whatsapp.com/channel/0029Vb7g5Qt90x2yn7bOlM2U
  */
 
 import yts from "yt-search";
@@ -11,7 +11,7 @@ const pluginConfig = {
   name: "play",
   alias: ["playaudio"],
   category: "search",
-  description: "Putar musik dari YouTube (Siputzx API)",
+  description: "Juego de música de YouTube (Siputzx API)",
   usage: ".play <query>",
   example: ".play komang",
   cooldown: 15,
@@ -49,7 +49,7 @@ async function getPlayAudioDownload(url) {
 async function handler(m, { sock, text }) {
   const query = m.text?.trim();
   if (!query)
-    return m.reply(`🎵 *ᴘʟᴀʏ*\n\n> Contoh:\n\`${m.prefix}play komang\``);
+    return m.reply(`🎵 *ᴘʟᴀʏ*\n\n> Ejemplo:\n\`${m.prefix}play komang\``);
 
   m.react("🕐");
 
@@ -60,16 +60,17 @@ async function handler(m, { sock, text }) {
     const video = search.videos[0];
 
     let info = `🎵 *NOW PLAYING*\n\n`;
-    info += `📌 *Judul:* ${video.title}\n\n`;
+    info += `📌 *Título:* ${video.title}\n\n`;
     info += `*DETAIL*\n`;
     info += `👤 Channel: *${video.author.name}*\n`;
-    info += `⏱️ Durasi: *${video.duration.timestamp}*\n`;
+    info += `⏱️ Duración: *${video.duration.timestamp}*\n`;
     info += `👀 Views: *${formatViews(video.views)}*\n`;
     info += `📅 Upload: *${video.ago}*\n`;
     info += `🆔 ID: \`${video.videoId}\`\n\n`;
     if (video.description) {
       const desc = video.description.substring(0, 150).replace(/\n/g, " ");
-      info += `*Deskripsi:*\n_${desc}${video.description.length > 150 ? "..." : ""}_\n\n`;
+      info += `*Descripción:*
+_${desc}${video.description.length > 150 ? "..." : ""}_\n\n`;
     }
     info += `🔗 ${video.url}\n\n`;
     info += `_⏳ Envía audio, por favor espera..._`;

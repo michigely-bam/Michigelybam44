@@ -3,13 +3,13 @@ import axios from 'axios'
 import config from '../../config.js'
 import { f } from '../../src/lib/ourin-http.js'
 import te from '../../src/lib/ourin-error.js'
-const NEOXR_APIKEY = config.APIkey?.neoxr || 'Milik-Bot-OurinMD'
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD"
 const pluginConfig = {
     name: 'attp',
     alias: ['attp2', 'attp3'],
     category: 'sticker',
-    description: 'Membuat sticker animated text',
-    usage: '.attp <teks>',
+    description: "Crear un sticker de texto animado",
+    usage: '.attp <texto>',
     example: '.attp Hello World',
     isOwner: false,
     isPremium: false,
@@ -31,12 +31,14 @@ async function handler(m, { sock }) {
     if (!text) {
         return m.reply(
             `🎨 *ᴀɴɪᴍᴀᴛᴇᴅ ᴛᴇxᴛ sᴛɪᴄᴋᴇʀ*\n\n` +
-            `> Masukkan teks untuk sticker\n\n` +
-            `> Contoh: \`${m.prefix}attp Hello World\``
+            `> Ingrese el texto para el stickers
+
+` +
+            `> Ejemplo: \`${m.prefix}attp Hello World\``
         )
     }
     if (text.length > 100) {
-        return m.reply(`❌ Teks terlalu panjang! Maksimal 100 karakter.`)
+        return m.reply(`❌ ¡El texto es demasiado largo! Un máximo de 100 caracteres.`)
     }
     m.react('🕕')
     try {

@@ -24,18 +24,18 @@ async function handler(m, { sock }) {
     
     const credits = [
         { name: 'hyuuOkkotsuX', role: 'Lead Staff', icon: '👨‍💻' },
-        { name: 'Zann', role: 'Creator Ourin MD dan APK Stardem Ourin', icon: '👨‍💻' },
+        { name: 'Zann', role: 'Creador de Ourin MD y APK Stardem Ourin', icon: '👨‍💻' },
         { name: 'SenzOkkotsu', role: 'Asisstant Developer', icon: '👨‍💻' },
         { name: 'Ell', role: 'Asisstant Developer', icon: '👨‍💻' },
         { name: 'Aqell', role: 'Developer SC BUG Ourin Glitch', icon: '👨‍💻' },
         { name: 'Mobbc', role: 'Staff', icon: '👨‍💻' },
-        { name: 'Sanxz', role: 'Tangan Kanan', icon: '👨‍💻' },
-        { name: 'Dinz', role: 'Tangan Kanan', icon: '👨‍💻' },
-        { name: 'Forone Store', role: 'Tangan Kanan', icon: '🛒' },
-        { name: 'Rakaa', role: 'Tangan Kanan', icon: '🛒' },
-        { name: 'Sabila', role: 'Tangan Kanan', icon: '👩‍💻' },
-        { name: 'Syura Store', role: 'Tangan Kanan', icon: '👩‍💻' },
-        { name: 'Xero', role: 'Tangan Kanan', icon: '👩‍💻' },
+        { name: 'Sanxz', role: 'Colaborador principal', icon: '👨‍💻' },
+        { name: 'Dinz', role: 'Colaborador principal', icon: '👨‍💻' },
+        { name: 'Forone Store', role: 'Colaborador principal', icon: '🛒' },
+        { name: 'Rakaa', role: 'Colaborador principal', icon: '🛒' },
+        { name: 'Sabila', role: 'Colaboradora principal', icon: '👩‍💻' },
+        { name: 'Syura Store', role: 'Colaboradora principal', icon: '👩‍💻' },
+        { name: 'Xero', role: 'Colaboradora principal', icon: '👩‍💻' },
         { name: 'Lyoraaa', role: 'Owner', icon: '👩‍💻' },
         { name: 'Danzzz', role: 'Owner', icon: '👨‍💻' },
         { name: 'Muzan', role: 'Owner', icon: '👨‍💻' },
@@ -70,13 +70,13 @@ async function handler(m, { sock }) {
         { name: 'Udun', role: 'Partner', icon: '🛒' },
         { name: 'Zanspiw', role: 'Youtuber', icon: '🌐' },
         { name: 'Danzz Nano', role: 'Youtuber', icon: '🌐' },
-        { name: 'Youtuber Lain yang udah review', role: 'Youtuber', icon: '🌐' },
-        { name: 'Kalian Semua', role: 'Best', icon: '🌐' },
+        { name: 'Otros YouTubers que hicieron reseñas', role: 'YouTuber', icon: '🌐' },
+        { name: 'Todos ustedes', role: 'Los mejores', icon: '🌐' },
         { name: 'Open Source Community', role: 'Libraries & Tools', icon: '🌐' },
 
     ]
     
-    const headers = ['No', 'Nama', 'Role / Tier']
+    const headers = ['No', "Nombre", 'Role / Tier']
     const rows = credits.map((c, i) => [i + 1, c.name, c.role])
     
     await sock.sendTable(m.chat, "OURIN TEAM", headers, rows, m, { 

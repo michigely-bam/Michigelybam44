@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['gila', 'crazy'],
     category: 'cek',
     description: "Mira lo loco que estás.",
-    usage: ".ckecrazy   nombre",
+    usage: ".cekgila [@usuario]",
     example: '.cekgila Budi',
     isOwner: false,
     isPremium: false,
@@ -20,25 +20,24 @@ async function handler(m) {
                     
     let desc = ''
     if (percent >= 90) {
-        desc = 'GILA BENERAN! Masuk RSJ! 🤪'
+        desc = "¡LOCURA TOTAL! 🤪"
     } else if (percent >= 70) {
-        desc = 'Hampir gila 😵'
+        desc = "Casi loco/a 😵"
     } else if (percent >= 50) {
-        desc = 'Lumayan waras 😅'
+        desc = "Bastante cuerdo/a 😅"
     } else if (percent >= 30) {
-        desc: 'Normal kok 🙂'
+        desc: "Es normal 🙂"
     } else {
-        desc = 'Waras banget! 😇'
+        desc = "¡Muy cuerdo/a! 😇"
     }
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu nivel de locura. *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de locura @${mentioned.split('@')[0]} yak? 
-    
-Tingkat kegilaan dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de locura es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de locura de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

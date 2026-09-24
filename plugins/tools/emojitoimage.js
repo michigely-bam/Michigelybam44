@@ -3,7 +3,7 @@ import config from "../../config.js";
 import path from "path";
 import fs from "fs";
 import te from "../../src/lib/ourin-error.js";
-const NEOXR_APIKEY = config.APIkey?.neoxr || "Milik-Bot-OurinMD";
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD";
 
 const pluginConfig = {
   name: "emojitoimage",
@@ -69,12 +69,16 @@ async function handler(m, { sock }) {
   if (!emoji) {
     return m.reply(
       `🖼️ *ᴇᴍᴏᴊɪ ᴛᴏ ɪᴍᴀɢᴇ*\n\n` +
-        `> Konversi emoji ke gambar HD\n\n` +
-        `*Format:*\n` +
+        `> Conversión de emoji a imágenes HD
+
+` +
+        `*Formato:*\n` +
         `> \`${m.prefix}emojitoimage <emoji> [style]\`\n\n` +
-        `*Contoh:*\n` +
+        `*Ejemplo:*
+` +
         `> \`${m.prefix}emojitoimage 😳 apple\`\n\n` +
-        `*Style tersedia:*\n` +
+        `*Estyle disponible:*
+` +
         `> ${STYLES.join(", ")}`,
     );
   }
@@ -89,7 +93,7 @@ async function handler(m, { sock }) {
 
     if (!data?.status || !data?.data?.url) {
       m.react("❌");
-      return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> Emoji no se encuentra o error de API");
+      return m.reply("❌ *falló*\n\n> Emoji no se encuentra o error de API");
     }
 
     const imgUrl = data.data.url;

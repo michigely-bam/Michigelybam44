@@ -35,7 +35,7 @@ async function uploadTmpfiles(buffer) {
   );
 
   if (!res.data?.status || !res.data?.path)
-    throw new Error("Upload gagal: " + JSON.stringify(res.data));
+    throw new Error("Descarga fallida: " + JSON.stringify(res.data));
 
   return res.data.path;
 }
@@ -45,9 +45,11 @@ async function handler(m, { sock }) {
   if (!prompt) {
     return m.reply(
       `🍌 *ɴᴀɴᴏ ʙᴀɴᴀɴᴀ*\n\n` +
-        `> Edit gambar dengan AI\n\n` +
-        `\`Contoh: ${m.prefix}nanobanana make it anime style\`\n\n` +
-        `> Reply atau kirim gambar dengan caption`,
+        `> Editar imágenes con AI
+
+` +
+        `\`Ejemplo: ${m.prefix}nanobanana make it anime style\`\n\n` +
+        `> Responda o envíe una imagen con la descripción`,
     );
   }
 
@@ -71,7 +73,7 @@ async function handler(m, { sock }) {
 
     if (!mediaBuffer || !Buffer.isBuffer(mediaBuffer)) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > No se pudo download image`);
     }
@@ -93,7 +95,7 @@ async function handler(m, { sock }) {
 
     if (!data.status) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > Incapaz de editar la imagen`);
     }
@@ -107,7 +109,7 @@ async function handler(m, { sock }) {
     console.log(error?.response?.data || error.message);
     m.react("❌");
     m.reply(`🍀 *Waduhh, parece que hay un pinchazo.*
-Pruebe de nuevo más tarde, por favor no Spam, o pruebe otra opción: ${m.prefix}ourinbanana ${m.text} ( reply gambar )`);
+Pruebe de nuevo más tarde, por favor no Spam, o pruebe otra opción: ${m.prefix}ourinbanana ${m.text} (respuesta a la imagen)`);
   }
 }
 

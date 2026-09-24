@@ -79,7 +79,7 @@ async function handler(m, { sock }) {
 
   let caption = `*〔 👤 USER PROFILE 〕*\n\n`;
 
-  caption += `*〔 👤 Nama 〕* ${user.name || m.pushName || "User"}\n`;
+  caption += `*〔 👤 Nombre 〕* ${user.name || m.pushName || "User"}\n`;
   caption += `*〔 🆔 Tag 〕* @${target.split("@")[0]}\n`;
   caption += `*〔 👑 Status 〕* ${isOwnerUser ? "Owner" : isPremiumUser ? "Premium" : "Free"}\n\n`;
 
@@ -95,9 +95,9 @@ async function handler(m, { sock }) {
   caption += `*〔 ⚡ Stamina 〕* ${user.rpg.stamina} / ${user.rpg.maxStamina}\n\n`;
 
   caption += `*〔 💰 ASSETS 〕*\n`;
-  caption += `*〔 🪙 Koin 〕* Rp ${user.koin?.toLocaleString("id-ID") || 0}\n`;
+  caption += `*〔 🪙 Monedas 〕* Rp ${user.koin?.toLocaleString("id-ID") || 0}\n`;
   caption += `*〔 🏦 Bank 〕* Rp ${user.rpg.bank?.toLocaleString("id-ID") || 0}\n`;
-  caption += `*〔 ⚡ Energi 〕* ${isOwnerUser || isPremiumUser ? "∞ Unlimited" : user.energi}\n`;
+  caption += `*〔 ⚡ Energía 〕* ${isOwnerUser || isPremiumUser ? "∞ Ilimitada" : user.energi}\n`;
 
   if (user.rpg.spouse) {
     caption += `*〔 💑 Spouse 〕* @${user.rpg.spouse.split("@")[0]}\n`;

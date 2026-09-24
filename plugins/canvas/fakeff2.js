@@ -6,9 +6,9 @@ const pluginConfig = {
     name: 'fakeff2',
     alias: ['fakefreefire2'],
     category: 'canvas',
-    description: 'Membuat gambar ff',
+    description: "Haciendo las imágenes ff",
     usage: '.fakeff2 <text>',
-    example: '.fakeff2 Hai cantik',
+    example: ".fakeff2 Hola, bonita",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -21,7 +21,7 @@ const pluginConfig = {
 async function handler(m, { sock }) {
     const nama = m.text
     if(!nama) {
-        return m.reply(`*FAKE FF 2*\n\n> Contoh: ${m.prefix}nombre de marisma 1`)
+        return m.reply(`*FAKE FF 2*\n\n> Ejemplo: ${m.prefix}nombre de marisma 1`)
     }
     m.react('🕕')
     

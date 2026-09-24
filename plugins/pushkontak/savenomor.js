@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'savenomor',
     alias: ['sv', 'save', 'simpannomor'],
     category: 'pushkontak',
-    description: "Guardar el número de contacto de arranque",
-    usage: ".saventosh   nombre",
+    description: 'Guardar un número de contacto',
+    usage: '.savenomor <nombre> o .savenomor <numero>|<nombre>',
     example: '.savenomor JohnDoe',
     isOwner: true,
     isPremium: false,
@@ -23,7 +23,11 @@ async function handler(m, { sock }) {
     if (m.isGroup) {
         const groupMode = getGroupMode(m.chat, db)
         if (groupMode !== 'pushkontak' && groupMode !== 'all') {
-            return m.reply(`❌ *ᴍᴏᴅᴇ ᴛɪᴅᴀᴋ sᴇsᴜᴀɪ*\n\n> Aktifkan mode pushkontak terlebih dahulu\n\n\`${m.prefix}botmode pushkontak\``)
+            return m.reply(`❌ *modo no es adecuado*
+
+> Activar el modo Pushcontack primero
+
+\`${m.prefix}botmode pushkontak\``)
         }
     }
     
@@ -44,13 +48,17 @@ async function handler(m, { sock }) {
             nama = nm
         } else {
             return m.reply(
-                `📱 *sᴀᴠᴇ ɴᴏᴍᴏʀ*\n\n` +
-                `> Di grup:\n` +
-                `┃ \`${m.prefix}savenomor nama\` (reply pesan)\n` +
-                `┃ \`${m.prefix}savenomor @tag|nama\`\n` +
-                `┃ \`${m.prefix}savenomor 628xxx|nama\`\n\n` +
-                `> Di private:\n` +
-                `┃ \`${m.prefix}savenomor nama\``
+                `📱 *save el número*
+
+` +
+                `> En el grupo:
+` +
+                `┃ \`${m.prefix}savenomor nombre\` (respondiendo al mensaje)
+` +
+                `┃ \`${m.prefix}savenomor @mención|nombre\`\n` +
+                `┃ \`${m.prefix}savenomor 628xxx|nombre\`\n\n` +
+                `> En privado:\n` +
+                `┃ \`${m.prefix}savenomor nombre\``
             )
         }
     } else {
@@ -59,13 +67,13 @@ async function handler(m, { sock }) {
     }
     
     if (!nama) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*
+        return m.reply(`❌ *falló*
 
 > Ingrese el nombre de contacto`)
     }
     
     if (!targetNumber) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*
+        return m.reply(`❌ *falló*
 
 > Incapaz de determinar el número de destino`)
     }
@@ -83,9 +91,11 @@ async function handler(m, { sock }) {
         
         m.react('✅')
         await m.reply(
-            `✅ *ᴋᴏɴᴛᴀᴋ ᴅɪsɪᴍᴘᴀɴ*\n\n` +
-            `> ɴᴏᴍᴏʀ: \`${targetNumber.split('@')[0]}\`\n` +
-            `> ɴᴀᴍᴀ: \`${nama}\``
+            `✅ *CONTACTO GUARDADO*
+
+` +
+            `> NÚMERO: \`${targetNumber.split('@')[0]}\`\n` +
+            `> NOMBRE: \`${nama}\``
         )
         
     } catch (error) {

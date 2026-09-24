@@ -29,7 +29,9 @@ function convertToOpus(inputPath, outputPath) {
 
 async function handler(m, { sock }) {
     const text = m.text?.trim()
-    if (!text) return m.reply(`🐉 *ɢᴏᴋᴜ ᴛᴛs*\n\n> Gunakan: \`${m.prefix}ttsgoku <text>\``)
+    if (!text) return m.reply(`🐉 *ɢᴏᴋᴜ ᴛᴛs*
+
+> Usa: \`${m.prefix}ttsgoku <text>\``)
     
     m.react('🐉')
     

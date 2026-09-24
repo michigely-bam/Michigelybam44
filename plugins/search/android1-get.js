@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "android1-get",
   alias: ["an1get", "an1dl"],
   category: "search",
-  description: "Download APK dari Android1",
+  description: "Descarga el APK de Android1",
   usage: ".android1-get <url>",
   example: ".android1-get https://an1.com/xxx",
   isOwner: false,
@@ -17,7 +17,7 @@ const pluginConfig = {
   isEnabled: true,
 };
 
-const NEOXR_APIKEY = config.APIkey?.neoxr || "Milik-Bot-OurinMD";
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD";
 
 async function handler(m, { sock }) {
   const url = m.text?.trim();

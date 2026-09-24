@@ -25,10 +25,10 @@ function handler(m, { sock }) {
     if (group.mute) return m.reply("❌ El grupo ya está en un estado mudo.")
 
     db.setGroup(m.chat, { ...group, mute: true })
-    m.reply(`✅ Grup *${groupName}* con éxito mudo por @${m.sender.split('@')[0]}
+    m.reply(`✅ Grupo *${groupName}* con éxito mudo por @${m.sender.split('@')[0]}
 
 Sólo el administrador puede enviar un mensaje.
-Ketik *${m.prefix}unmute* Para reabrir.`, { mentions: [m.sender] })
+Escribe *${m.prefix}unmute* Para reabrir.`, { mentions: [m.sender] })
 }
 
 function isMuted(groupJid, db) {

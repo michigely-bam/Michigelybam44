@@ -35,10 +35,12 @@ Bot habilitado en todos los grupos`)
 
     await m.reply(
         `🔒 *LOCKED*\n\n` +
-        `Bot hanya aktif di:\n` +
+        `el bot solo están activos en:
+` +
         `*${groupName}*\n\n` +
-        `Grup lain tidak bisa pakai bot\n` +
-        `Ketik ulang untuk unlock`
+        `Otros grupos no pueden usar bot.
+` +
+        `Escríbelo de nuevo para desbloquear`
     )
 }
 

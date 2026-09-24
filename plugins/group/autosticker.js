@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'autosticker',
     alias: ['autostiker', 'as'],
     category: 'group',
-    description: 'Toggle auto sticker - otomatis jadikan gambar/video jadi sticker',
+    description: "Toggle auto sticker - hace automáticamente que la imagen/video sea un sticker",
     usage: '.autosticker on/off',
     example: '.autosticker on',
     isOwner: false,
@@ -25,14 +25,18 @@ async function handler(m, { sock }) {
     const arg = args[0]?.toLowerCase()
     
     if (!arg) {
-        const status = current ? '✅ Aktif' : '❌ Nonaktif'
+        const status = current ? "✅ Activo" : "❌ Inactivo"
         return m.reply(
             `🖼️ *ᴀᴜᴛᴏsᴛɪᴄᴋᴇʀ*\n\n` +
             `> Status: ${status}\n\n` +
-            `> Gunakan:\n` +
-            `> \`${m.prefix}autosticker on\` - aktifkan\n` +
-            `> \`${m.prefix}autosticker off\` - nonaktifkan\n\n` +
-            `> _Otomatis jadikan gambar/video jadi sticker_`
+            `> Usa:
+` +
+            `> \`${m.prefix}autosticker on\` - activar
+` +
+            `> \`${m.prefix}autosticker off\` - desactivar
+
+` +
+            `> _Automáticamente hacer una imagen/video en un sticker_`
         )
     }
     
@@ -64,7 +68,7 @@ async function handler(m, { sock }) {
 > ❌ ¡Se ha desactivado!`)
     }
     
-    return m.reply(`❌ Gunakan: \`${m.prefix}autosticker on/off\``)
+    return m.reply(`❌ Usa: \`${m.prefix}autosticker on/off\``)
 }
 
 async function autoStickerHandler(m, sock) {

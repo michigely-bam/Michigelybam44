@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'bocil',
     alias: ['bocilvid'],
     category: 'asupan',
-    description: 'Video bocil',
+    description: "Video infantil",
     usage: '.bocil',
     example: '.bocil',
     isOwner: false,

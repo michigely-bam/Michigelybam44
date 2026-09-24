@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'addcmdsticker',
     alias: ['addstickercmd', 'setsticker', 'stickeradd'],
     category: 'group',
-    description: 'Jadikan sticker sebagai shortcut command',
+    description: "Usar un sticker como acceso directo a un comando",
     usage: '.addcmdsticker <command> (reply sticker)',
     example: '.addcmdsticker menu',
     isOwner: false,
@@ -21,7 +21,7 @@ async function handler(m, { sock }) {
     const args = m.args || []
     const commandName = args[0]
     
-    // Validasi command name
+    // Validación del nombre del comando
     if (!commandName) {
         const existingCmds = listStickerCommands()
         
@@ -29,17 +29,20 @@ async function handler(m, { sock }) {
         txt += `> Responder sticker + tipo comando que quiere ser atajo.
 
 `
-        txt += `*Contoh:*\n`
-        txt += `> Reply sticker, lalu ketik:\n`
+        txt += `*Ejemplo:*
+`
+        txt += `> Responder a la sticker, y luego escribir:
+`
         txt += `> \`.addcmdsticker menu\`\n\n`
         
         if (existingCmds.length > 0) {
-            txt += `╭┈┈⬡「 📋 *ᴀᴋᴛɪꜰ* 」\n`
+            txt += `╭┈┈⬡「 📋 *ACTIVO* 」\n`
             for (const cmd of existingCmds.slice(0, 10)) {
                 txt += `┃ 🖼️ → \`${cmd.command}\`\n`
             }
             if (existingCmds.length > 10) {
-                txt += `┃ ... dan ${existingCmds.length - 10} lainnya\n`
+                txt += `┃ ...y ${existingCmds.length - 10} más
+`
             }
             txt += `╰┈┈┈┈┈┈┈┈⬡`
         }
@@ -47,7 +50,7 @@ async function handler(m, { sock }) {
         return m.reply(txt)
     }
     
-    // Validasi reply sticker
+    // Validación del sticker respondido
     if (!m.quoted) {
         return m.reply("⚠️ *Reply sticker* ¡Es un comando!")
     }
@@ -57,14 +60,16 @@ async function handler(m, { sock }) {
         return m.reply("⚠️ Mensaje no devuelto *sticker*!")
     }
     
-    // Validasi command exists
+    // Validación de que el comando exista
     const cleanCmd = commandName.toLowerCase().replace(/^\./, '')
     const plugin = getPlugin(cleanCmd)
     
     if (!plugin) {
         return m.reply(
-            `❌ Command \`${cleanCmd}\` tidak ditemukan!\n\n` +
-            `> Pastikan command yang ingin dijadikan shortcut valid.`
+            `❌ Command \`${cleanCmd}¡\` no encontrado!
+
+` +
+            `> Asegúrese de que el comando que desea convertir en un atajo es válido.`
         )
     }
     
@@ -74,9 +79,11 @@ async function handler(m, { sock }) {
     if (success) {
         await m.react('✅')
         await m.reply(
-            `✅ *sᴛɪᴄᴋᴇʀ ᴄᴏᴍᴍᴀɴᴅ ᴅɪᴛᴀᴍʙᴀʜᴋᴀɴ*\n\n` +
+            `✅ *sticker de comando se añadió*
+
+` +
             `> 🖼️ Sticker → \`.${cleanCmd}\`\n\n` +
-            `_Kirim sticker tersebut untuk menjalankan command!_`
+            `¡Envía el sticker para ejecutar el comando!`
         )
     } else {
         await m.reply("❌ ¡No se pudo save sticker command!")

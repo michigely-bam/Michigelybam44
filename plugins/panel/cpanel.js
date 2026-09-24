@@ -31,7 +31,7 @@ async function handler(m, { sock }) {
     }
     
     const userServers = getAccessibleServers(m.sender)
-    const userRoleList = userServers.map(s => `${s.server.toUpperCase()}:${s.role}`).join(', ') || 'Tidak ada'
+    const userRoleList = userServers.map(s => `${s.server.toUpperCase()}:${s.role}`).join(', ') || "No hay"
     
     let txt = `🖥️ *ᴄᴘᴀɴᴇʟ ᴍᴇɴᴜ v2.0*\n\n`
     txt += `> V1: ${serverStatuses.v1} | V2: ${serverStatuses.v2} | V3: ${serverStatuses.v3} | V4: ${serverStatuses.v4} | V5: ${serverStatuses.v5}\n`
@@ -100,7 +100,7 @@ async function handler(m, { sock }) {
     txt += `┃ 🔧 *ᴍᴀɴᴀɢᴇ:*\n`
     txt += `┃ \`${prefix}listvps\` | \`${prefix}cekvps\` | \`${prefix}delvps\` | \`${prefix}sisavps\`\n`
     txt += `┃\n`
-    txt += `┃ ⚡ *ᴋᴏɴᴛʀᴏʟ:*\n`
+    txt += `┃ ⚡ *CONTROL:*\n`
     txt += `┃ \`${prefix}turnon\` | \`${prefix}turnoff\` | \`${prefix}restartvps\`\n`
     txt += `╰───────────────\n\n`
     

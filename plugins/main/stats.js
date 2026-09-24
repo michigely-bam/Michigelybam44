@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "stats",
   alias: ["botstats", "status", "stat"],
   category: "main",
-  description: "Menampilkan statistik bot",
+  description: "Muestra las estadísticas del bot",
   usage: ".stats",
   example: ".stats",
   isOwner: false,

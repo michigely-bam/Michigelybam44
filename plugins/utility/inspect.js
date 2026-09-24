@@ -4,7 +4,7 @@ const pluginConfig = {
     alias: ['cekgrup', 'ceksaluran', 'groupinfo', 'channelinfo'],
     category: 'utility',
     description: "Información del grupo de inspectores o canal WhatsApp vía enlace",
-    usage: ".referencia − grupo de enlace / canal",
+    usage: ".inspect <enlace_grupo/canal>",
     example: '.inspect https://chat.whatsapp.com/xxx',
     isOwner: false,
     isPremium: false,
@@ -21,8 +21,10 @@ async function handler(m, { sock }) {
     if (!text) {
         return m.reply(
             `🔍 *ɪɴsᴘᴇᴄᴛ*\n\n` +
-            `> Cek info grup atau saluran via link\n\n` +
-            `*ᴄᴏɴᴛᴏʜ:*\n` +
+            `> Compruebe la información del grupo o canal a través de un enlace
+
+` +
+            `*EJEMPLO:*\n` +
             `> \`${m.prefix}inspect https://chat.whatsapp.com/xxx\`\n` +
             `> \`${m.prefix}inspect https://whatsapp.com/channel/xxx\``
         )

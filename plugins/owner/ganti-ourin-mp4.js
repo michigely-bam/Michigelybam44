@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'ganti-ourin.mp4',
     alias: ['gantiourinvideo', 'setourinvideo'],
     category: 'owner',
-    description: 'Ganti video ourin.mp4',
-    usage: ".Reemplace -ourin.mp4 (reply / enviar vídeo)",
+    description: "Cambiar el video ourin.mp4",
+    usage: ".gantiourinvideo (responde o envía un video)",
     example: '.ganti-ourin.mp4',
     isOwner: true,
     isPremium: false,
@@ -21,7 +21,7 @@ async function handler(m, { sock }) {
     const isVideo = m.type === 'videoMessage' || (m.quoted && m.quoted.type === 'videoMessage')
     
     if (!isVideo) {
-        return m.reply(`🎬 *ɢᴀɴᴛɪ ᴏᴜʀɪɴ.ᴍᴘ4*
+        return m.reply(`🎬 *reemplazado por ourin.mp4*
 
 > Enviar / respuesta vídeo para reemplazar
 > File: assets/video/ourin.mp4`)
@@ -48,7 +48,9 @@ async function handler(m, { sock }) {
         
         fs.writeFileSync(targetPath, buffer)
         
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*\n\n> Video ourin.mp4 telah diganti`)
+        m.reply(`✅ *correcto*
+
+El video ourin.mp4 ha sido reemplazado`)
         
     } catch (error) {
         await m.reply(te(m.prefix, m.command, m.pushName))

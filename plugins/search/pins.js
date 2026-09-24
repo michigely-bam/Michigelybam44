@@ -12,7 +12,7 @@ const pluginConfig = {
   name: "pins",
   alias: ["pinsearch", "pinterestsearch"],
   category: "search",
-  description: "Cari gambar di Pinterest (album)",
+  description: "Busque imágenes en Pinterest (álbum)",
   usage: ".pins <query>",
   example: ".pins Zhao Lusi",
   isOwner: false,
@@ -29,7 +29,7 @@ async function handler(m, { sock }) {
   if (!query) {
     return m.reply(
       `🔍 *ᴘɪɴᴛᴇʀᴇsᴛ sᴇᴀʀᴄʜ*\n\n` +
-        `> Contoh:\n` +
+        `> Ejemplo:\n` +
         `\`${m.prefix}pins Zhao Lusi\``,
     );
   }

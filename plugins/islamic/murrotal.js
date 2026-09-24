@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "murrotal",
   alias: ["murottal", "audioquran", "quraudio"],
   category: "islamic",
-  description: "Dengarkan audio murottal Al-Quran berdasarkan surah",
+  description: "Escucha la recitación del Corán por sura",
   usage: ".murrotal < correspondencia > nombre",
   example: ".murrotal al fatihah",
   isOwner: false,
@@ -24,9 +24,11 @@ async function handler(m, { sock }) {
   if (!query) {
     return m.reply(
       `🎧 *MURROTTAL*\n\n` +
-        `> Masukkan nama surah\n\n` +
-        `\`Contoh: ${m.prefix}murrotal al fatihah\`\n` +
-        `\`Contoh: ${m.prefix}murrotal ar rahman\``,
+        `> Ingrese el nombre del capítulo
+
+` +
+        `\`Ejemplo: ${m.prefix}murrotal al fatihah\`\n` +
+        `\`Ejemplo: ${m.prefix}murrotal ar rahman\``,
     );
   }
 
@@ -54,7 +56,7 @@ async function handler(m, { sock }) {
 
     if (!find || !find.audio) {
       m.react("❌");
-      return m.reply(`❌ Surah *${query}* no encontrado`);
+      return m.reply(`❌ La sura *${query}* no encontrado`);
     }
 
     m.react("✅");

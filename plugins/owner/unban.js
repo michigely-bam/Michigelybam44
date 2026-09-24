@@ -45,8 +45,10 @@ async function handler(m, { sock }) {
     if (!targetNumber || targetNumber.length < 10 || targetNumber.length > 15) {
         return m.reply(
             `✅ *ᴜɴʙᴀɴ ᴜsᴇʀ*\n\n` +
-            `> Masukkan nomor atau tag user\n\n` +
-            `\`Contoh: ${m.prefix}unban 6281234567890\``
+            `> Ingrese el número o la etiqueta de usuario
+
+` +
+            `\`Ejemplo: ${m.prefix}unban 6281234567890\``
         )
     }
 
@@ -59,7 +61,9 @@ async function handler(m, { sock }) {
     })
 
     if (index === -1) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Nomor \`${targetNumber}\` no en la lista prohibida`)
+        return m.reply(`❌ *falló*
+
+> Número \`${targetNumber}\` no en la lista prohibida`)
     }
 
     bannedList.splice(index, 1)
@@ -71,7 +75,7 @@ async function handler(m, { sock }) {
     await m.reply(
         `✅ *ᴜsᴇʀ ᴅɪᴜɴʙᴀɴ*\n\n` +
         `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-        `┃ 📱 ɴᴏᴍᴏʀ: \`${targetNumber}\`\n` +
+        `┃ 📱 NÚMERO: \`${targetNumber}\`\n` +
         `┃ ✅ sᴛᴀᴛᴜs: \`Unbanned\`\n` +
         `┃ 📊 ᴛᴏᴛᴀʟ: \`${bannedList.length}\` ᴜsᴇʀ\n` +
         `╰┈┈⬡`

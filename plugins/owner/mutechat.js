@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: [],
     category: 'owner',
     description: 'Mute/unmute chat',
-    usage: ".mutechat − número de contacto / respuesta .mutechat abierto , número de contacto",
+    usage: '.mutechat <número/respuesta> / .mutechat open <número>',
     example: '.mutechat 628xxx',
     isOwner: true,
     cooldown: 3,
@@ -39,7 +39,7 @@ async function handler(m, { sock }) {
         return m.reply(
             '🔇 *ᴍᴜᴛᴇ ᴄʜᴀᴛ*\n\n' +
             '> `.mutechat 628xxx` — Mute chat\n' +
-            '> `.mutechat` (di private chat) — Mute chat ini\n' +
+            "> `.mutechat` (en chat privado) — Silenciar este chat\n" +
             '> `.mutechat buka 628xxx` — Unmute chat'
         )
     }
@@ -54,7 +54,7 @@ async function handler(m, { sock }) {
                 : `🔊 *ᴄʜᴀᴛ ᴅɪᴜɴᴍᴜᴛᴇ*\n\n> Target: ${target}`
         )
     } catch (err) {
-        return m.reply(`❌ Gagal: ${err.message}`)
+        return m.reply(`❌ Falló: ${err.message}`)
     }
 }
 

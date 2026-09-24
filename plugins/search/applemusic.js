@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'applemusic',
     alias: ['amusic', 'am'],
     category: 'search',
-    description: 'Cari lagu di Apple Music',
+    description: "Busca canciones en Apple Music",
     usage: '.applemusic <query>',
     example: '.applemusic Best Friend',
     isOwner: false,
@@ -21,9 +21,9 @@ async function handler(m, { sock }) {
     
     if (!query) {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+            `⚠️ *MODO DE USO*\n\n` +
             `> \`${m.prefix}applemusic <query>\`\n\n` +
-            `> Contoh:\n` +
+            `> Ejemplo:\n` +
             `> \`${m.prefix}applemusic Best Friend\``
         )
     }
@@ -42,7 +42,7 @@ async function handler(m, { sock }) {
         
         tracks.forEach((t, i) => {
             txt += `*${i + 1}.* \`\`\`${t.title}\`\`\`\n`
-            txt += `   ├ 📀 \`${t.subtitle || 'Unknown'}\`\n`
+            txt += `   ├ 📀 \`${t.subtitle || 'Desconocido'}\`\n`
             txt += `   └ 🔗 \`${t.link}\`\n\n`
         })
         

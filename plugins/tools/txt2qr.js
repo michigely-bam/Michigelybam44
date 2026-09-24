@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'txt2qr',
     alias: ['texttoqr', 'qrcode', 'qrcreate'],
     category: 'tools',
-    description: 'Generate QR code dari teks',
+    description: "Generar QR códigos de texto",
     usage: '.txt2qr <text>',
     example: '.txt2qr https://google.com',
     isOwner: false,
@@ -24,7 +24,7 @@ async function handler(m, { sock }) {
 
 > Introduzca texto / URL
 
-\`Contoh: ${m.prefix}txt2qr https://google.com\``)
+\`Ejemplo: ${m.prefix}txt2qr https://google.com\``)
     }
     
     m.react('📱')

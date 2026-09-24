@@ -3,7 +3,7 @@ import { games } from '../../src/lib/ourin-games.js'
 games.register('tebakhewan', {
     alias: ['th', 'guessanimal'],
     emoji: '🐾',
-    title: 'TEBAK HEWAN',
+    title: "ADIVINA EL ANIMAL",
     description: "Adivina el nombre del animal.",
 })
 

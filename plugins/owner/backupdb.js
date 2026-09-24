@@ -21,8 +21,10 @@ async function handler(m, { sock }) {
     ]
     
     await m.reply(
-        `🕕 *Membuat backup database...*\n\n` +
-        `╭┈┈⬡「 📦 *ᴀᴘᴀ ʏᴀɴɢ ᴅɪ-ʙᴀᴄᴋᴜᴘ* 」\n` +
+        `🕕 *Creando copia de seguridad de la base de datos...*
+
+` +
+        `╭┈┈⬡「 📦 *QUÉ INCLUYE LA COPIA DE SEGURIDAD* 」\n` +
         backupContents.map(c => `┃ ${c}`).join('\n') +
         `\n╰┈┈┈┈┈┈┈┈⬡`
     )
@@ -31,12 +33,15 @@ async function handler(m, { sock }) {
     
     if (result.success) {
         await m.reply(
-            `✅ *Backup Berhasil!*\n\n` +
+            `✅ ¡Un respaldo exitoso!
+
+` +
             `📦 Size: ${result.size}\n` +
             `📁 Files: ${result.files}\n` +
             `🔖 Schema: v${SCHEMA_VERSION}\n\n` +
-            `> Type-safe backup, kompatibel dengan update mendatang.\n` +
-            `> Backup telah dikirim ke owner utama.`
+            `> Backup de tipo seguro, compatible con las próximas actualizaciones.
+` +
+            `Las copias de seguridad han sido enviadas al propietario principal.`
         )
     } else {
         await m.reply(`❌ El respaldo falló: ${result.error}`)

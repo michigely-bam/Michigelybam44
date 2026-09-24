@@ -30,14 +30,14 @@ async function handler(m, { sock }) {
     const token = config.digitalocean?.token
     
     if (!token) {
-        return m.reply(`⚠️ *ᴅɪɢɪᴛᴀʟᴏᴄᴇᴀɴ ʙᴇʟᴜᴍ ᴅɪsᴇᴛᴜᴘ*`)
+        return m.reply(`⚠️ *DigitalOcean aún no está configurado*`)
     }
     
     if (!hasAccess(m.sender, m.isOwner)) {
-        return m.reply(`❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*`)
+        return m.reply(`❌ *se rechazó el acceso*`)
     }
     
-    await m.reply(`🕕 *ᴍᴇɴɢᴀᴍʙɪʟ ᴅᴀᴛᴀ ᴠᴘs...*`)
+    await m.reply(`🕕 *OBTENIENDO DATOS ᴠᴘs...*`)
     
     try {
         const response = await axios.get('https://api.digitalocean.com/v2/droplets', {

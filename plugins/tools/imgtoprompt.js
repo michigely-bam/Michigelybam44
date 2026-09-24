@@ -1,6 +1,6 @@
 /**
  * @file plugins/tools/imgtoprompt.js
- * @description Plugin untuk mengubah gambar menjadi prompt AI
+ *@description Plugin para convertir las imágenes en un prompt AI
  */
 
 import imgtoprompt from '../../src/scraper/img2prompt.js'
@@ -11,8 +11,8 @@ const pluginConfig = {
     name: 'imgtoprompt',
     alias: ['img2prompt', 'imagetoprompt', 'i2p'],
     category: 'tools',
-    description: 'Mengubah gambar menjadi prompt AI',
-    usage: '.imgtoprompt (reply gambar)',
+    description: "Convertir las imágenes en un prompt AI",
+    usage: ".imgtoprompt (respuesta a la imagen)",
     example: '.imgtoprompt',
     isOwner: false,
     isPremium: false,
@@ -27,10 +27,10 @@ async function handler(m, { sock }) {
     try {
         const isImage = m.isImage || (m.quoted && m.quoted.isImage);
         if (!isImage) {
-            return await m.reply("❌ *ɢᴀᴍʙᴀʀ ᴅɪʙᴜᴛᴜʜᴋᴀɴ*\n\n> Responder o enviar una imagen con descripción .imgtoprompt");
+            return await m.reply("❌ *imágenes necesarios*\n\n> Responder o enviar una imagen con descripción .imgtoprompt");
         }
         
-        await m.reply("🕕 *ᴍᴇᴍᴘʀᴏsᴇs ɢᴀᴍʙᴀʀ...*\n\n> Analizar imágenes para producir prompt");
+        await m.reply("🕕 *procesar las imágenes...*\n\n> Analizar imágenes para producir prompt");
         let mediaBuffer;
         if (m.isImage && m.download) {
             mediaBuffer = await m.download();
@@ -55,7 +55,7 @@ async function handler(m, { sock }) {
             fs.unlinkSync(tmpFile);
         } catch (e) {}
         if (result.status === 'eror' || !result.prompt) {
-            return await m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> ${result.msg || "Incapaz de generar prompt de esta imagen"}`);
+            return await m.reply(`❌ *ERROR*\n\n> ${result.msg || "Incapaz de generar prompt de esta imagen"}`);
         }
         const responseText = `🎨 *ɪᴍᴀɢᴇ ᴛᴏ ᴘʀᴏᴍᴘᴛ*\n\n` +
             `\`\`\`${result.prompt}\`\`\`\n\n` +

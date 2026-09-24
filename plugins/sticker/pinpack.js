@@ -35,7 +35,7 @@ const pluginConfig = {
   name: "pinpack",
   alias: ["ppack", "pinsticker", "pinsearchpack"],
   category: "sticker",
-  description: "Cari gambar Pinterest lalu jadikan sticker pack",
+  description: "Busca una imagen de Pinterest y haz un paquete de stickers.",
   usage: ".pinpack <query>",
   example: ".pinpack cat",
   isOwner: false,
@@ -53,8 +53,11 @@ async function handler(m, { sock }) {
   if (!query) {
     return m.reply(
       `── .✦ 𝗣𝗜𝗡 𝗣𝗔𝗖𝗞 ✦. ── 𝜗ৎ\n\n` +
-        `Cari gambar Pinterest → jadikan sticker pack!\n\n` +
-        `╭─〔 Cara Pakai 〕───⬣\n` +
+        `¡Busca imágenes de Pinterest → haz un paquete de stickers!
+
+` +
+        `╭─〔 Modo de uso 〕───⬣
+` +
         `│  ✦ ${m.prefix}pinpack <query>\n` +
         `╰──────────────⬣\n\n` +
         `*${m.prefix}pinpack anime cat*\n` +
@@ -77,7 +80,9 @@ async function handler(m, { sock }) {
     }
 
     await m.reply(
-      `── .✦ ──\n\n> Mengunduh *${results.length}* gambar dari Pinterest
+      `── .✦ ──
+
+> Descargando *${results.length}*imágenes de Pinterest
 > Luego se convirtió en las pegatinas de la manada...☘︎ ݁˖`,
     );
 
@@ -113,12 +118,12 @@ async function handler(m, { sock }) {
         packname,
         publisher: author,
         author,
-        description: `Sticker pack dari Pinterest: ${query}`,
+        description: `Sticker paquetes de Pinterest: ${query}`,
         emojis: ["❤"],
       });
       await m.react("✓");
     } catch (packErr) {
-      console.error("[PinPack] Pack send failed:", packErr.message);
+      console.error("[PinPack] Falló el envío del paquete:", packErr.message);
       await m.reply(
         `── .✦ ──
 
@@ -156,7 +161,7 @@ async function handler(m, { sock }) {
         await m.reply(
           `── .✦ ──
 
-> Enviado con éxito *${sent}* sticker dari *${packname}* .☘︎ ݁˖`,
+> Enviado con éxito *${sent}*sticker de*${packname}* .☘︎ ݁˖`,
         );
       } else {
         await m.react("✘");

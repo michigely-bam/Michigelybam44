@@ -3,8 +3,8 @@ import { games } from '../../src/lib/ourin-games.js'
 games.register('tekateki', {
     alias: ['teka'],
     emoji: '🧩',
-    title: 'TEKA-TEKI',
-    description: 'Game teka-teki tradisional'
+    title: "ACERTIJOS",
+    description: "Juego tradicional de acertijos"
 })
 
 const { config: pluginConfig, handler, answerHandler } = games.createPlugin('tekateki')

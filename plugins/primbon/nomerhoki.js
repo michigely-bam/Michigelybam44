@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['nomorhoki', 'ceknomor'],
     category: 'primbon',
     description: "Control de suerte de HP",
-    usage: ".Número",
+    usage: ".nomerhoki <número>",
     example: '.nomerhoki 6281234567890',
     isOwner: false,
     isPremium: false,
@@ -19,11 +19,11 @@ const pluginConfig = {
 async function handler(m, { sock }) {
     let nomor = m.args.join('').replace(/[^0-9]/g, '')
     if (!nomor) {
-        return m.reply(`🍀 *ɴᴏᴍᴏʀ ʜᴏᴋɪ*
+        return m.reply(`🍀 *número de la suerte*
 
 > Introduzca el número de HP
 
-\`Contoh: ${m.prefix}nomerhoki 6281234567890\``)
+\`Ejemplo: ${m.prefix}nomerhoki 6281234567890\``)
     }
     
     m.react('🍀')
@@ -34,7 +34,7 @@ async function handler(m, { sock }) {
         
         if (!data?.status || !data?.data) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > Fallado para analizar número`)
         }
@@ -43,20 +43,20 @@ async function handler(m, { sock }) {
         const ep = r.energi_positif.details
         const en = r.energi_negatif.details
         
-        const response = `🍀 *ɴᴏᴍᴏʀ ʜᴏᴋɪ*\n\n` +
-            `> Nomor: *${r.nomor}*\n\n` +
-            `📊 *ᴀɴɢᴋᴀ ʙᴀɢᴜᴀ:* ${r.angka_bagua_shuzi.value}%\n\n` +
-            `✅ *ᴇɴᴇʀɢɪ ᴘᴏꜱɪᴛɪꜰ:* ${r.energi_positif.total}%\n` +
-            `├ Kekayaan: ${ep.kekayaan}\n` +
-            `├ Kesehatan: ${ep.kesehatan}\n` +
+        const response = `🍀 *NÚMERO DE LA SUERTE*\n\n` +
+            `> Número: *${r.nomor}*\n\n` +
+            `📊 *NÚMERO BAGUA:* ${r.angka_bagua_shuzi.value}%\n\n` +
+            `✅ *ENERGÍA POSITIVA:* ${r.energi_positif.total}%\n` +
+            `├ Riqueza: ${ep.kekayaan}\n` +
+            `├ Salud: ${ep.kesehatan}\n` +
             `├ Cinta: ${ep.cinta}\n` +
-            `└ Kestabilan: ${ep.kestabilan}\n\n` +
-            `❌ *ᴇɴᴇʀɢɪ ɴᴇɢᴀᴛɪꜰ:* ${r.energi_negatif.total}%\n` +
-            `├ Perselisihan: ${en.perselisihan}\n` +
-            `├ Kehilangan: ${en.kehilangan}\n` +
-            `├ Malapetaka: ${en.malapetaka}\n` +
-            `└ Kehancuran: ${en.kehancuran}\n\n` +
-            `> Status: ${r.analisis.status ? '✅ HOKI' : '❌ TIDAK HOKI'}`
+            `└ Estabilidad: ${ep.kestabilan}\n\n` +
+            `❌ *ENERGÍA NEGATIVA:* ${r.energi_negatif.total}%\n` +
+            `├ Conflictos: ${en.perselisihan}\n` +
+            `├ Pérdidas: ${en.kehilangan}\n` +
+            `├ Desgracias: ${en.malapetaka}\n` +
+            `└ Ruina: ${en.kehancuran}\n\n` +
+            `> Status: ${r.analisis.status ? "✅ BUENA SUERTE" : "❌ NO ES SUERTE"}`
         
         m.react('✅')
         await m.reply(response)

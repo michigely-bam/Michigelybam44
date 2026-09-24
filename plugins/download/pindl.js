@@ -8,7 +8,7 @@ const pluginConfig = {
   name: "pindl",
   alias: ["pinterestdl", "pindownload", "pintdl"],
   category: "download",
-  description: "Download gambar/video dari Pinterest",
+  description: "Descargar imágenes/video de Pinterest",
   usage: ".pindl <url>",
   example: ".pindl https://pin.it/xxx",
   isOwner: false,
@@ -24,8 +24,10 @@ async function handler(m, { sock }) {
   if (!url) {
     return m.reply(
       `📌 *ᴘɪɴᴛᴇʀᴇsᴛ ᴅᴏᴡɴʟᴏᴀᴅ*\n\n` +
-        `> Download gambar/video dari Pinterest\n\n` +
-        `*ᴄᴏɴᴛᴏʜ:*\n` +
+        `> Descargar imágenes/video de Pinterest
+
+` +
+        `*EJEMPLO:*\n` +
         `> \`${m.prefix}pindl https://pin.it/xxx\`\n` +
         `> \`${m.prefix}pindl https://pinterest.com/pin/xxx\``,
     );

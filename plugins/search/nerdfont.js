@@ -50,7 +50,7 @@ const pluginConfig = {
   name: "dafont",
   alias: ["nerdfont", "font"],
   category: "search",
-  description: "Cari font di DaFont",
+  description: "Busca fuentes en DaFont",
   usage: ".dafont <query>",
   example: ".dafont Coolvetica",
   isOwner: false,

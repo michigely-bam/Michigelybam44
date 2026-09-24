@@ -63,9 +63,11 @@ async function handler(m, { sock }) {
     if (!hasFullAccess(m.sender, serverVersion, m.isOwner)) {
         const userRole = getUserRole(m.sender, serverVersion)
         return m.reply(
-            `❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n` +
-            `> Kamu tidak punya akses ke *${serverLabel}*\n` +
-            `> Role kamu: *${userRole || 'Tidak ada'}*`
+            `❌ *se rechazó el acceso*
+
+` +
+            `No tienes acceso a *${serverLabel}*\n` +
+            `> Tu rol: *${userRole || "No hay"}*`
         )
     }
     
@@ -74,11 +76,11 @@ async function handler(m, { sock }) {
     
     if (missingConfig.length > 0) {
         const available = getAvailableServers(pteroConfig)
-        let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`
+        let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} SIN CONFIGURAR*\n\n`
         if (available.length > 0) {
             txt += `> Servidor disponible: *${available.join(', ')}*`
         } else {
-            txt += `> Isi di \`config.js\` bagian \`pterodactyl.server1\``
+            txt += `> Contenido en la sección \`config.js\` \`pterodactyl.server1\``
         }
         return m.reply(txt)
     }
@@ -87,9 +89,9 @@ async function handler(m, { sock }) {
     
     if (!userId || isNaN(userId)) {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+            `⚠️ *MODO DE USO*\n\n` +
             `> \`${m.prefix}${m.command} userid\`\n\n` +
-            `> Lihat user ID dengan \`${m.prefix}listadmin${serverVersion}\``
+            `> Vea el usuario ID con \`${m.prefix}listadmin${serverVersion}\``
         )
     }
     
@@ -113,7 +115,7 @@ async function handler(m, { sock }) {
         })
         
         return m.reply(
-            `✅ *ᴀᴅᴍɪɴ ᴅɪʜᴀᴘᴜs [${serverLabel}]*\n\n` +
+            `✅ *admin fue eliminado [${serverLabel}]*\n\n` +
             `> User ID: \`${userId}\`\n` +
             `> Username: \`${user.username}\`\n` +
             `> Email: \`${user.email}\``

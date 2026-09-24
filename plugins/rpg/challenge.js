@@ -76,7 +76,7 @@ async function handler(m, { sock }) {
             `┃ 💰 Gold: *+${challenge.reward.gold.toLocaleString()}*\n` +
             `┃ ✨ EXP: *+${challenge.reward.exp}*\n` +
             `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-            `> Challenge baru akan muncul besok!`
+            `> ¡Mañana aparecerá un nuevo desafío!`
         )
     }
     
@@ -84,7 +84,7 @@ async function handler(m, { sock }) {
     txt += `╭┈┈⬡「 🎯 *ᴛᴏᴅᴀʏ* 」\n`
     txt += `┃ 📝 ${challenge.name}\n`
     txt += `┃ 📊 Progress: *${challenge.progress}/${challenge.target}*\n`
-    txt += `┃ ${isComplete ? '✅ SELESAI!' : "🕕 En progreso..."}\n`
+    txt += `┃ ${isComplete ? "¡✅ TERMINADO!" : "🕕 En progreso..."}\n`
     txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`
     
     txt += `╭┈┈⬡「 🎁 *ʀᴇᴡᴀʀᴅ* 」\n`
@@ -93,7 +93,7 @@ async function handler(m, { sock }) {
     txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`
     
     if (isComplete && !challenge.claimed) {
-        txt += `> Ketik \`${m.prefix}challenge claim\` ¡Por un reclamo de recompensa!`
+        txt += `> Escribe \`${m.prefix}challenge claim\` ¡Por un reclamo de recompensa!`
     } else if (challenge.claimed) {
         txt += `> ✅ La recompensa ha sido reclamada, mañana hay un nuevo desafío!`
     } else {

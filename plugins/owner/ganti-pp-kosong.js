@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['gantippkosong', 'setppkosong'],
     category: 'owner',
     description: "Reemplazar la imagen ppong vacía.jpg",
-    usage: ".Reemplazar -pp-empty .jpg (reply / enviar imagen)",
+    usage: ".gantippkosong (responde o envía una imagen)",
     example: '.ganti-pp-kosong.jpg',
     isOwner: true,
     isPremium: false,
@@ -19,7 +19,7 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
-    if (!isImage) return m.reply(`🖼️ *ɢᴀɴᴛ- PP-KOSONG.JPG*
+    if (!isImage) return m.reply(`🖼️ *CAMBIAR IMAGEN PREDETERMINADA*
 
 > Enviar / respuesta imágenes para reemplazar
 > Archivo: activos / imágenes / pp-empty`)
@@ -28,7 +28,7 @@ async function handler(m, { sock }) {
         if (!buffer) return m.reply("❌ No se pudo download image")
         const targetPath = path.join(process.cwd(), 'assets', 'images', 'pp-kosong.jpg')
         fs.writeFileSync(targetPath, buffer)
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*
+        m.reply(`✅ *correcto*
 
 > La imagen de pp- vacío .jpg ha sido reemplazada`)
     } catch (error) {

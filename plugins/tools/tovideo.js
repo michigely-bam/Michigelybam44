@@ -10,7 +10,7 @@ const pluginConfig = {
     name: 'tovideo',
     alias: ['tovid', 'stickertovideo', 'giftomp4', 'webmtomp4'],
     category: 'tools',
-    description: 'Mengubah sticker animasi menjadi video MP4',
+    description: "Convertir los stickers de animación en videos MP4",
     usage: '.tovideo (reply/caption sticker animasi)',
     example: '.tovideo',
     isOwner: false,
@@ -113,11 +113,14 @@ async function handler(m, { sock }) {
 
     if (!downloadFn) {
         return m.reply(
-            `❌ *ɢᴀɢᴀʟ*\n\n` +
-            `> Tidak ada sticker yang terdeteksi!\n\n` +
-            `*Cara penggunaan:*\n` +
-            `> 1. Kirim sticker + caption \`${m.prefix}tovideo\`\n` +
-            `> 2. Reply sticker dengan \`${m.prefix}tovideo\``
+            `❌ *ERROR*\n\n` +
+            `> ¡No se detectó ningún sticker!
+
+` +
+            `*Modo de uso:*
+` +
+            `> 1. Envía un sticker + una captura \`${m.prefix}tovideo\`\n` +
+            `> 2. Responda el sticker con \`${m.prefix}tovideo\``
         )
     }
 
@@ -128,7 +131,7 @@ async function handler(m, { sock }) {
 
         if (!buffer || buffer.length === 0) {
             await m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > Incapaz de descargar pegatinas.`)
         }
@@ -140,7 +143,9 @@ async function handler(m, { sock }) {
             const pngBuffer = await sharp(buffer).png().toBuffer()
             await sock.sendMessage(m.chat, {
                 image: pngBuffer,
-                caption: `✅ *ʙᴇʀʜᴀsɪʟ*\n\n> Sticker statis → gambar`
+                caption: `✅ *correcto*
+
+> Sticker estático → imagen`
             }, { quoted: m })
             await m.react('✅')
             return
@@ -148,7 +153,7 @@ async function handler(m, { sock }) {
         const gifBuffer = await webpToGif(buffer)
         if (!gifBuffer) {
             await m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > Las pegatinas no pueden ser convertidas (no animadas)`)
         }
@@ -157,7 +162,7 @@ async function handler(m, { sock }) {
 
         if (!mp4Buffer || mp4Buffer.length < 100) {
             await m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > La salida de vídeo está vacía`)
         }

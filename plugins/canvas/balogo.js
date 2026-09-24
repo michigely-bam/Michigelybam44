@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'balogo',
     alias: ['bluearchivelogo', 'ba'],
     category: 'canvas',
-    description: 'Membuat logo Blue Archive style',
+    description: "Crear un logo al estilo Blue Archive",
     usage: '.balogo <textL> & <textR>',
     example: '.balogo Blue & Archive',
     isOwner: false,
@@ -26,7 +26,7 @@ async function handler(m, { sock }) {
 
 > Introduzca 2 texto para el logotipo
 
-> Contoh: ${m.prefix}balogo Blue & Archive`)
+> Ejemplo: ${m.prefix}balogo Blue & Archive`)
     }
     
     const textL = parts[0]

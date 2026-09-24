@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['del', 'hapus', 'd'],
     category: 'group',
     description: "Suprímase el mensaje con respuesta",
-    usage: ".eliminar (reprobar mensajes)",
+    usage: ".delete (responde al mensaje)",
     example: '.delete',
     isOwner: false,
     isPremium: false,

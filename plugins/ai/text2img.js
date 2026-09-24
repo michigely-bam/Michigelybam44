@@ -7,7 +7,7 @@ const pluginConfig = {
   alias: [],
   category: "ai",
   description: "Crear imagen del texto",
-  usage: ".text2img <teks>",
+  usage: ".text2img <texto>",
   example: ".texto2img Haga la imagen del texto",
   isOwner: false,
   isPremium: false,
@@ -26,7 +26,7 @@ async function handler(m, { sock }) {
 
 > Escriba texto
 
-\`Contoh: ${m.prefix}text2img Crear imagen del texto\``,
+\`Ejemplo: ${m.prefix}text2img Crear imagen del texto\``,
     );
   }
 

@@ -6,7 +6,7 @@ const pluginConfig = {
   alias: ["liststore", "daftar", "info"],
   category: "store",
   description: "📋 Ver la lista de información de la tienda",
-  usage: ".list atau .list <nomor>",
+  usage: ".list o .list <número>",
   example: ".list 1",
   isOwner: false,
   isPremium: false,
@@ -23,10 +23,16 @@ async function handler(m, { sock }) {
 
   if (lists.length === 0) {
     return m.reply(
-      `📋 *Belum Ada Informasi Toko*\n\n` +
-        `Saat ini belum ada informasi yang ditambahkan oleh admin 😔\n\n` +
-        `Silakan cek kembali nanti atau hubungi admin untuk informasi lebih lanjut.\n\n` +
-        `_Terima kasih atas ketertarikan Anda_ 🙏`,
+      `📋 *No hay información de la tienda*
+
+` +
+        `Actualmente no hay información añadida por el administrador 😔
+
+` +
+        `Por favor revise más tarde o comuníquese con el administrador para más información.
+
+` +
+        `_ 🙏 Gracias por su interés`,
     );
   }
 
@@ -61,7 +67,7 @@ async function handler(m, { sock }) {
 `;
   txt += `Aquí está la información disponible 📝
 `;
-  txt += `Ketik \`${m.prefix}lista de datos\` para ver los detalles.
+  txt += `Escribe \`${m.prefix}lista de datos\` para ver los detalles.
 
 `;
 
@@ -72,7 +78,7 @@ async function handler(m, { sock }) {
   }
   txt += "\n";
 
-  txt += `💡 _Ketik \`${m.prefix}lista de datos\` para leer detalles de información_`;
+  txt += `💡 Escribe \`${m.prefix}lista de datos\` para leer detalles de información_`;
 
   await m.reply(txt);
 }

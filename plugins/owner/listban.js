@@ -25,7 +25,7 @@ async function handler(m, { sock }) {
 
 > Ningún usuario es desafiado
 
-\`Gunakan: ${m.prefix}neumáticos no identificados\``)
+\`Usa: ${m.prefix}neumáticos no identificados\``)
     }
     
     let caption = `🚫 *ʟɪsᴛ ʙᴀɴɴᴇᴅ*\n\n`

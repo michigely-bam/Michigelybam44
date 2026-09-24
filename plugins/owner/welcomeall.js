@@ -24,8 +24,10 @@ async function handler(m, { sock }) {
     if (!action || !['on', 'off'].includes(action)) {
         return m.reply(
             `👋 *ᴡᴇʟᴄᴏᴍᴇ ɢʟᴏʙᴀʟ*\n\n` +
-            `> Aktifkan/nonaktifkan welcome di SEMUA grup sekaligus\n\n` +
-            `╭┈┈⬡「 📋 *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ* 」\n` +
+            `> Activa o desactiva la bienvenida en TODOS los grupos a la vez
+
+` +
+            `╭┈┈⬡「 📋 *MODO DE USO* 」\n` +
             `┃ ${m.prefix}welcomeall on\n` +
             `┃ ${m.prefix}welcomeall off\n` +
             `╰┈┈┈┈┈┈┈┈⬡`
@@ -51,19 +53,21 @@ async function handler(m, { sock }) {
             return m.reply(
                 `✅ *ᴡᴇʟᴄᴏᴍᴇ ɢʟᴏʙᴀʟ ᴏɴ*\n\n` +
                 `╭┈┈⬡「 📊 *ʀᴇsᴜʟᴛ* 」\n` +
-                `┃ 🌐 Total Grup: *${count}*\n` +
-                `┃ ✅ Welcome: *AKTIF*\n` +
+                `┃ 🌐 Total de grupos: *${count}*\n` +
+                `┃ ✅ Bienvenido: *ACTIVO*
+` +
                 `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-                `> Semua member baru akan disambut otomatis!`
+                `¡Todos los nuevos miembros serán recibidos automáticamente!`
             )
         } else {
             return m.reply(
                 `❌ *ᴡᴇʟᴄᴏᴍᴇ ɢʟᴏʙᴀʟ ᴏꜰꜰ*\n\n` +
                 `╭┈┈⬡「 📊 *ʀᴇsᴜʟᴛ* 」\n` +
-                `┃ 🌐 Total Grup: *${count}*\n` +
-                `┃ ❌ Welcome: *NONAKTIF*\n` +
+                `┃ 🌐 Total de grupos: *${count}*\n` +
+                `┃ ❌ Bienvenido: *NONACTIVO*
+` +
                 `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-                `> Welcome dinonaktifkan di semua grup.`
+                `> Welcome se desactiva en todos los grupos.`
             )
         }
     } catch (error) {

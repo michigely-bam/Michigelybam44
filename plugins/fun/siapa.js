@@ -12,7 +12,7 @@ const pluginConfig = {
     alias: [],
     category: 'fun',
     description: "Aleatoriamente seleccione un miembro para una categoría específica",
-    usage: '.<kategori>',
+    usage: '.<categoría>',
     example: '.ganteng',
     isOwner: false,
     isPremium: false,
@@ -39,8 +39,8 @@ async function handler(m, { sock }) {
         const positiveWords = ['ganteng', 'cantik', 'keren', 'pro', 'sultan', 'kaya', 'pinter', 'pintar', 'mastah']
         const isPositive = positiveWords.includes(command)
         const emoji = isPositive ? '✨' : '😏'
-        const label = isPositive ? "El más" : 'Anak'
-        await m.reply(`*${label} ${command} di sini adalah* @${randomMember.split('@')[0]}`, { mentions: [randomMember] })
+        const label = isPositive ? "El más" : "Niño"
+        await m.reply(`*${label} ${command} aquí es*${randomMember.split('@')[0]}`, { mentions: [randomMember] })
         m.react('✅')
     } catch (error) {
         m.react('☢')

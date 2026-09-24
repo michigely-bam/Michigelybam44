@@ -5,7 +5,7 @@ const pluginConfig = {
     name: ['sisavps', 'sisadroplet', 'vpsquota'],
     alias: [],
     category: 'vps',
-    description: 'Cek sisa kuota VPS',
+    description: "Chequear el resto de cuotas VPS",
     usage: '.sisavps',
     example: '.sisavps',
     isOwner: false,
@@ -30,11 +30,11 @@ async function handler(m, { sock }) {
     const token = config.digitalocean?.token
     
     if (!token) {
-        return m.reply(`⚠️ *ᴅɪɢɪᴛᴀʟᴏᴄᴇᴀɴ ʙᴇʟᴜᴍ ᴅɪsᴇᴛᴜᴘ*`)
+        return m.reply(`⚠️ *DigitalOcean aún no está configurado*`)
     }
     
     if (!hasAccess(m.sender, m.isOwner)) {
-        return m.reply(`❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*`)
+        return m.reply(`❌ *se rechazó el acceso*`)
     }
     
     try {
@@ -53,11 +53,11 @@ async function handler(m, { sock }) {
         const dropletsUsed = droplets.length
         const dropletsRemaining = dropletLimit - dropletsUsed
         
-        let txt = `📊 *ᴋᴜᴏᴛᴀ ᴅɪɢɪᴛᴀʟᴏᴄᴇᴀɴ*\n\n`
+        let txt = `📊 *CUOTA DE DIGITALOCEAN*\n\n`
         txt += `╭─────────────\n`
         txt += `┃ 📦 Limit: *${dropletLimit}* droplet\n`
-        txt += `┃ ✅ Terpakai: *${dropletsUsed}* droplet\n`
-        txt += `┃ 📋 Sisa: *${dropletsRemaining}* droplet\n`
+        txt += `┃ ✅ En uso: *${dropletsUsed}* droplet\n`
+        txt += `┃ 📋 Restante: *${dropletsRemaining}* droplet\n`
         txt += `╰─────────────\n\n`
         txt += `> 👤 Email: ${account.email}\n`
         txt += `> ✅ Status: ${account.status}`

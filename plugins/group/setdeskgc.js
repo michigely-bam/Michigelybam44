@@ -20,9 +20,10 @@ async function handler(m, { sock }) {
     const newDesc = m.text?.trim() || ''
     if (!m.text && m.args?.length === 0) {
         await m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-            `> \`${m.prefix}setdeskgc Deskripsi baru\`\n` +
-            `> \`${m.prefix}setdeskgc clear\` - Hapus deskripsi`
+            `⚠️ *MODO DE USO*\n\n` +
+            `> \`${m.prefix}setdeskgc Nueva descripción\`
+` +
+            `> \`${m.prefix}setdeskgc clear\` - Eliminación de la descripción`
         )
         return
     }
@@ -30,8 +31,10 @@ async function handler(m, { sock }) {
     
     if (descToSet.length > 2048) {
         await m.reply(
-            `⚠️ *ᴠᴀʟɪᴅᴀsɪ*\n\n` +
-            `> Deskripsi maksimal 2048 karakter.`
+            `⚠️ *VALIDACIÓN*
+
+` +
+            `Descripción máxima de 2048 caracteres.`
         )
         return
     }
@@ -50,8 +53,9 @@ async function handler(m, { sock }) {
         }
     } catch (error) {
         await m.reply(
-            `❌ *ɢᴀɢᴀʟ*\n\n` +
-            `> Tidak dapat mengubah deskripsi grup.\n` +
+            `❌ *ERROR*\n\n` +
+            `> No se pudo cambiar la descripción del grupo.
+` +
             `> _${error.message}_`
         )
     }

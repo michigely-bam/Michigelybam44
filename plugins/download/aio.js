@@ -24,7 +24,9 @@ async function handler(m, { sock }) {
   if (!url) {
     return m.reply(
       `📥 *ᴀʟʟ ɪɴ ᴏɴᴇ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ*\n\n` +
-        `> Download dari berbagai platform!\n\n` +
+        `¡Descarga desde diferentes plataformas!
+
+` +
         `╭┈┈⬡「 🌐 *ᴘʟᴀᴛꜰᴏʀᴍ* 」\n` +
         `┃ • Instagram\n` +
         `┃ • TikTok\n` +
@@ -35,7 +37,7 @@ async function handler(m, { sock }) {
         `┃ • CapCut\n` +
         `┃ • Threads / Reddit\n` +
         `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-        `> *Contoh:* ${m.prefix}aio https://instagram.com/p/xxx`,
+        `> *Ejemplo:* ${m.prefix}aio https://instagram.com/p/xxx`,
     );
   }
 

@@ -7,7 +7,7 @@ const pluginConfig = {
   alias: ["judi", "gamble"],
   category: "rpg",
   description: "Jugar casino para jugar al juego",
-  usage: ".casino <jumlah>",
+  usage: ".casino <cantidad>",
   example: ".casino 10000",
   isOwner: false,
   isPremium: false,
@@ -66,9 +66,9 @@ async function handler(m, { sock }) {
 
   if (!bet) {
     return m.reply(
-      `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-        `> \`${m.prefix}casino <jumlah>\`\n\n` +
-        `> Contoh:\n` +
+      `⚠️ *MODO DE USO*\n\n` +
+        `> \`${m.prefix}casino <cantidad>\`\n\n` +
+        `> Ejemplo:\n` +
         `> \`${m.prefix}casino 10000\`\n` +
         `> \`${m.prefix}casino all\``,
     );
@@ -81,19 +81,23 @@ async function handler(m, { sock }) {
   }
 
   if (isNaN(bet) || bet < 1000) {
-    return m.reply(`❌ *ᴍɪɴɪᴍᴀʟ ʙᴇᴛ*\n\n> Minimal taruhan Rp 1.000`);
+    return m.reply(`❌ *APUESTA MÍNIMA*
+
+> Apuesta mínima: Rp 1.000`);
   }
 
   if (bet > (user.koin || 0)) {
     return m.reply(
-      `❌ *sᴀʟᴅᴏ ᴛɪᴅᴀᴋ ᴄᴜᴋᴜᴘ*\n\n` +
-        `> Saldo kamu: Rp ${(user.koin || 0).toLocaleString("id-ID")}\n` +
-        `> Taruhan: Rp ${bet.toLocaleString("id-ID")}`,
+      `❌ *saldo no es suficiente*
+
+` +
+        `> Su saldo: Rp ${(user.koin || 0).toLocaleString("id-ID")}\n` +
+        `> Apuesta: Rp ${bet.toLocaleString("id-ID")}`,
     );
   }
 
   await m.react("🎰");
-  await m.reply(`🎰 *ᴍᴇᴍᴜᴛᴀʀ ʀᴏᴅᴀ...*`);
+  await m.reply(`🎰 *GIRANDO LA RULETA...*`);
   await new Promise((r) => setTimeout(r, 2000));
 
   const playerScore = Math.floor(Math.random() * 100);
@@ -102,17 +106,17 @@ async function handler(m, { sock }) {
   let result, emoji, moneyChange;
 
   if (playerScore > botScore) {
-    result = "MENANG";
+    result = "GANASTE";
     emoji = "🎉";
     moneyChange = bet;
     user.koin = (user.koin || 0) + bet;
   } else if (playerScore < botScore) {
-    result = "KALAH";
+    result = "PERDISTE";
     emoji = "💔";
     moneyChange = -bet;
     user.koin = (user.koin || 0) - bet;
   } else {
-    result = "SERI";
+    result = "EMPATE";
     emoji = "🤝";
     moneyChange = 0;
   }
@@ -122,11 +126,14 @@ async function handler(m, { sock }) {
   await m.react(emoji);
 
   let txt = `🎰 *ᴄᴀsɪɴᴏ ʀᴇsᴜʟᴛ*\n\n`;
-  txt += `╭┈┈⬡「 🎲 *sᴋᴏʀ* 」\n`;
-  txt += `┃ 👤 Kamu: *${playerScore}* poin\n`;
-  txt += `┃ 🤖 Bot: *${botScore}* poin\n`;
+  txt += `╭┈┈⬡「 🎲 *PUNTUACIÓN* 」
+`;
+  txt += `┃ 👤 Tú: *${playerScore}* puntos
+`;
+  txt += `┃ 🤖 Bot: *${botScore}* puntos
+`;
   txt += `┃ ─────────\n`;
-  txt += `┃ ${emoji} Hasil: *${result}*\n`;
+  txt += `┃ ${emoji} Resultado: *${result}*\n`;
   if (moneyChange !== 0) {
     txt += `┃ 💵 ${moneyChange > 0 ? "+" : ""}Rp ${moneyChange.toLocaleString("id-ID")}\n`;
   }

@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "setmenucat",
   alias: ["menucatvariant", "menucatstyle"],
   category: "owner",
-  description: "Mengatur variant tampilan menucat",
+  description: "Configura la variante visual del menú por categorías",
   usage: ".setmenucat <v1-v4>",
   example: ".setmenucat v2",
   isOwner: true,
@@ -22,7 +22,7 @@ const VARIANTS = {
   v1: {
     id: 1,
     name: "Simple Text",
-    desc: "Text biasa tanpa contextInfo",
+    desc: "Texto ordinario sin contextoInfo",
     emoji: "📝",
   },
   v2: {
@@ -62,7 +62,7 @@ Uso: v1 s / d v4`);
     await db.save();
 
     await m.reply(
-      `✅ *ᴍᴇɴᴜᴄᴀᴛ ᴠᴀʀɪᴀɴᴛ ᴅɪᴜʙᴀʜ*\n\n` +
+      `✅ *ᴍᴇɴᴜᴄᴀᴛ ᴠᴀʀɪᴀɴᴛ CAMBIADO*\n\n` +
         `> ${selected.emoji} *V${selected.id} — ${selected.name}*\n` +
         `> _${selected.desc}_`,
     );
@@ -80,19 +80,19 @@ Uso: v1 s / d v4`);
 
   const bodyText =
     `📂 *sᴇᴛ ᴍᴇɴᴜᴄᴀᴛ ᴠᴀʀɪᴀɴᴛ*\n\n` +
-    `> Variant aktif: *V${current}*\n` +
-    `> _${VARIANTS[`v${current}`]?.name || "Unknown"}_\n\n` +
-    `> Pilih variant dari daftar di bawah`;
+    `> Variante activa: *V${current}*\n` +
+    `> _${VARIANTS[`v${current}`]?.name || "Desconocido"}_\n\n` +
+    `> Elige una variante de la lista siguiente`;
 
   try {
     const interactiveButtons = [
       {
         name: "single_select",
         buttonParamsJson: JSON.stringify({
-          title: "📂 ᴘɪʟɪʜ ᴠᴀʀɪᴀɴᴛ",
+          title: "📂 ELEGIR VARIANTE",
           sections: [
             {
-              title: "ᴅᴀꜰᴛᴀʀ ᴠᴀʀɪᴀɴᴛ ᴍᴇɴᴜᴄᴀᴛ",
+              title: "LISTA DE VARIANTES DEL MENÚ POR CATEGORÍAS",
               rows,
             },
           ],
@@ -152,7 +152,8 @@ Uso: v1 s / d v4`);
       const mark = val.id === current ? " ✓" : "";
       txt += `> ${val.emoji} *${key.toUpperCase()}*${mark} — _${val.desc}_\n`;
     }
-    txt += `\n_Gunakan: \`.setmenucat v1\` s/d \`.setmenucat v4\`_`;
+    txt += `
+_Uso: \`.setmenucat v1\` s/d \`.setmenucat v4\`_`;
     await m.reply(txt);
   }
 }

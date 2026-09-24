@@ -12,8 +12,8 @@ const pluginConfig = {
   name: "jadwalsholat",
   alias: ["sholat", "prayertime", "jadwalsolat", "waktusolat", "waktusholat"],
   category: "religi",
-  description: "Menampilkan jadwal sholat real-time dari myquran.com",
-  usage: ".jadwalsholat <kota>",
+  description: "Muestra el calendario de oraciones en tiempo real de myquran.com",
+  usage: ".jadwalsholat <ciudad>",
   example: ".jadwalsholat Jakarta",
   isOwner: false,
   isPremium: false,
@@ -31,8 +31,10 @@ async function handler(m, { sock }) {
     if (!kota) {
       m.react("❌");
       return m.reply(
-        `❌ *ɢᴀɢᴀʟ*\n\n> Kota "${city}" no encontrado
-> Pruebe otro distrito / nombre de la ciudad`,
+        `❌ *NO ENCONTRADO*
+
+> No se encontró la ciudad "${city}".
+> Prueba con otro distrito o nombre de ciudad.`,
       );
     }
     const jadwalData = await getTodaySchedule(kota.id);
@@ -48,22 +50,22 @@ async function handler(m, { sock }) {
         thumbnail = fs.readFileSync("./assets/images/ourin.jpg");
       }
     } catch {}
-    const caption = `🕌 *ᴊᴀᴅᴡᴀʟ sʜᴏʟᴀᴛ*
+    const caption = `🕌 *el calendario de las oraciones*
 ╭┈┈⬡「 📍 *${lokasi}* 」
 ┃ 📅 ${today}
 ┃ 🗺️ ${daerah}
 ╰┈┈⬡
-╭┈┈⬡「 ⏰ *ᴡᴀᴋᴛᴜ sʜᴏʟᴀᴛ* 」
-┃ 🌙 ɪᴍsᴀᴋ: \`${times.imsak}\`
-┃ 🌅 sᴜʙᴜʜ: \`${times.subuh}\`
-┃ ☀️ ᴛᴇʀʙɪᴛ: \`${times.terbit}\`
+╭┈┈⬡「 ⏰ *HORARIOS DE ORACIÓN* 」
+┃ 🌙 Imsak: \`${times.imsak}\`
+┃ 🌅 Fajr: \`${times.subuh}\`
+┃ ☀️ AMANECER: \`${times.terbit}\`
 ┃ 🌤️ ᴅʜᴜʜᴀ: \`${times.dhuha}\`
-┃ 🌞 ᴅᴢᴜʜᴜʀ: \`${times.dzuhur}\`
-┃ 🌇 ᴀsʜᴀʀ: \`${times.ashar}\`
-┃ 🌆 ᴍᴀɢʜʀɪʙ: \`${times.maghrib}\`
-┃ 🌃 ɪsʏᴀ: \`${times.isya}\`
+┃ 🌞 DHUHR: \`${times.dzuhur}\`
+┃ 🌇 Asr: \`${times.ashar}\`
+┃ 🌆 MAGHRIB: \`${times.maghrib}\`
+┃ 🌃 Isha: \`${times.isya}\`
 ╰┈┈⬡
-> _Fuente: myquran.com Dz124; ¡No te olvides de rezarte! 🤲_`;
+> _Fuente: myquran.com • ¡No olvides rezar! 🤲_`;
     const adzanUrl = "https://files.catbox.moe/z2bj5s.mp3";
     let adzanBuffer;
     try {
@@ -77,7 +79,7 @@ async function handler(m, { sock }) {
     }
     const contextInfo = {
       externalAdReply: {
-        title: `🕌 Jadwal Sholat — ${lokasi}`,
+        title: `🕌 — El calendario de la oración — ${lokasi}`,
         body: `${today} | myquran.com`,
         thumbnail,
         sourceUrl: config.saluran?.link || "",

@@ -36,9 +36,9 @@ const pluginConfig = {
     name: 'fakedana',
     alias: ['danafake'],
     category: 'canvas',
-    description: 'Membuat gambar fake dana',
+    description: "Haciendo imágenes falsas de fondos",
     usage: '.fakedana <text>',
-    example: '.fakedana Hai cantik',
+    example: ".fakedana Hola, bonita",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -51,7 +51,7 @@ const pluginConfig = {
 async function handler(m, { sock }) {
     const nominal = m.text
     if (!nominal) {
-        return m.reply(`*FAKE DANA*\n\n\`Contoh: ${m.prefix}fakedana 10000\``)
+        return m.reply(`*FAKE DANA*\n\n\`Ejemplo: ${m.prefix}fakedana 10000\``)
     }
     if(isNaN(nominal)) return m.reply(`*Por favor, ingrese al NUMBER*`)
     m.react('🕕')

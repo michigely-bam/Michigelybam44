@@ -24,7 +24,7 @@ async function handler(m, { sock, db }) {
         const status = group.antiremove || 'off'
         await m.reply(
             `🗑️ *AntiRemove*\n\n` +
-            `> Status: *${status === 'on' ? '✅ Aktif' : '❌ Nonaktif'}*\n\n` +
+            `> Status: *${status === 'on' ? "✅ Activo" : "❌ Inactivo"}*\n\n` +
             `> \`.antiremove on/off\``
         )
         return
@@ -33,7 +33,7 @@ async function handler(m, { sock, db }) {
     if (action === 'on') {
         db.setGroup(m.chat, { ...group, antiremove: 'on' })
         m.react('✅')
-        await m.reply(`✅ *AntiRemove diaktifkan*
+        await m.reply(`✅ *AntiRemove activado*
 > El mensaje eliminado será redireccionado.`)
         return
     }
@@ -41,11 +41,11 @@ async function handler(m, { sock, db }) {
     if (action === 'off') {
         db.setGroup(m.chat, { ...group, antiremove: 'off' })
         m.react('❌')
-        await m.reply(`❌ *AntiRemove dinonaktifkan*`)
+        await m.reply(`❌ *AntiRemove ha sido desactivado*`)
         return
     }
 
-    await m.reply(`❌ Gunakan \`.antiremove on\` atau \`.antiremove off\``)
+    await m.reply(`❌ Utilice \`.antiremove on\` o \`.antiremove off\``)
 }
 
 export { pluginConfig as config, handler }

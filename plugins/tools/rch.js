@@ -21,11 +21,13 @@ async function handler(m, { sock }) {
 
   if (args.length < 2) {
     return m.reply(
-      `⚠️ *ꜰᴏʀᴍᴀᴛ sᴀʟᴀʜ!*\n\n` +
-        `╭┈┈⬡「 📋 *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ* 」\n` +
+      `⚠️ ¡Es un error de formato!
+
+` +
+        `╭┈┈⬡「 📋 *MODO DE USO* 」\n` +
         `┃ \`${m.prefix}rch <link_post> <emoji>\`\n` +
         `╰┈┈⬡\n\n` +
-        `📌 *Contoh:*\n` +
+        `📌 *Ejemplo:*\n` +
         `\`${m.prefix}rch https://whatsapp.com/channel/xxx/123 😂\`\n` +
         `\`${m.prefix}rch https://whatsapp.com/channel/xxx/123 😂😱🔥\``,
     );
@@ -36,12 +38,14 @@ async function handler(m, { sock }) {
 
   if (!link.includes("whatsapp.com/channel")) {
     return m.reply(
-      `❌ *ʟɪɴᴋ ᴛɪᴅᴀᴋ ᴠᴀʟɪᴅ*\n\n> Link harus dari channel WhatsApp!`,
+      `❌ *enlace no es válido*
+
+¡El enlace debe ser del canal de WhatsApp!`,
     );
   }
 
   if (!emoji) {
-    return m.reply(`❌ *ᴇᴍᴏᴊɪ ᴋᴏsᴏɴɢ*
+    return m.reply(`❌ *emojis vacíos*
 
 > ¡Introdúzcase emoji para reaccionar!`);
   }
@@ -72,8 +76,12 @@ async function handler(m, { sock }) {
   } catch (err) {
     m.react("❌");
     await m.reply(
-      `❌ *ɢᴀɢᴀʟ ᴍᴇɴɢɪʀɪᴍ ʀᴇᴀᴋsɪ*\n\n` +
-        `> Limit RCH habis, silahkan tunggu hari berikutnya hehe\n\n`,
+      `❌ *falta en enviar una reacción*
+
+` +
+        `El límite de RCH se ha agotado, por favor espere al día siguiente
+
+`,
     );
   }
 }

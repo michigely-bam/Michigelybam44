@@ -24,8 +24,10 @@ async function handler(m, { sock }) {
   if (!id) {
     return m.reply(
       `🔥 *ꜰʀᴇᴇ ꜰɪʀᴇ sᴛᴀʟᴋ*\n\n` +
-        `> Masukkan ID Free Fire\n\n` +
-        `\`Contoh: ${m.prefix}ffstalk 775417067\``,
+        `> Introduce el ID de Free Fire
+
+` +
+        `\`Ejemplo: ${m.prefix}ffstalk 775417067\``,
     );
   }
 

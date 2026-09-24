@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['baik', 'kind'],
     category: 'cek',
     description: "Mira lo bueno que eres.",
-    usage: ".checkgood   nombre",
+    usage: ".cekbaik [@usuario]",
     example: '.cekbaik Budi',
     isOwner: false,
     isPremium: false,
@@ -20,25 +20,24 @@ async function handler(m) {
     
     let desc = ''
     if (percent >= 90) {
-        desc = "¡Eres el hombre más amable del mundo! 😇✨"
+        desc = "¡Eres la persona más amable del mundo! 😇✨"
     } else if (percent >= 70) {
         desc = "¡Bien y no arrogante! 💝"
     } else if (percent >= 50) {
-        desc = 'Lumayan baik 😊'
+        desc = "Bastante bueno/a 😊"
     } else if (percent >= 30) {
-        desc = 'Sedikit baik 🙂'
+        desc = "Un poco bueno 🙂"
     } else {
-        desc = 'Hmm, perlu introspeksi ?? 🤔'
+        desc = "Mmm, quizá necesite reflexionar 🤔 🤔"
     }
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu nivel de bondad *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de bondad @${mentioned.split('@')[0]} yak? 
-    
-Tingkat kebaikan dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de bondad es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de bondad de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'wastalk',
     alias: ['whatsappstalk', 'stalkwa'],
     category: 'stalker',
-    description: 'Stalk profile WhatsApp',
-    usage: ".Preck , número de contacto / tag √",
+    description: 'Consultar un perfil de WhatsApp',
+    usage: '.wastalk <número/mención/respuesta>',
     example: '.wastalk 6281234567890',
     isGroup: false,
     isBotAdmin: false,
@@ -46,7 +46,7 @@ async function handler(m, { sock }) {
             bio = await sock.fetchStatus(num);
         } catch (e) {}
 
-        let name = 'Unknown';
+        let name = 'Desconocido';
         try {
             name = await sock.getName(num) || num.split('@')[0];
         } catch (e) {}
@@ -65,7 +65,7 @@ async function handler(m, { sock }) {
             country = regionNames.of(format.getRegionCode('mobile'));
         } catch (e) {
             format = null;
-            country = 'Unknown';
+            country = 'Desconocido';
         }
 
         const formattedNumber = format ? format.getNumber('international') : num.split('@')[0];
@@ -100,7 +100,7 @@ async function handler(m, { sock }) {
 
     } catch (e) {
         console.error('WaStalk Error:', e);
-        m.reply('❌ Failed to stalk user.');
+        m.reply('❌ No se pudo consultar al usuario.');
     }
 }
 

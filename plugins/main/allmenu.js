@@ -127,11 +127,11 @@ async function handler(m, { sock, config: botConfig, db, uptime }) {
     roleEmoji = "💎";
   }
   const greeting = getTimeGreeting();
-  let txt = `Hai *@${m.pushName || "User"}* 🪸
-Aku ${botConfig.bot?.name || "Ourin-AI"}, Botas WhatsApp listas para ayudarte.  
-Puedes utilizarme para obtener información, obtener datos o ayudar a que las cosas simples pasen directamente por WhatsApp - prácticamente sin costillas.
+  let txt = `Hola, *@${m.pushName || "User"}* 🪸
+Soy ${botConfig.bot?.name || "Ourin-AI"}, un bot de WhatsApp listo para ayudarte.
+Puedes usarme para obtener información, descargar contenido o facilitar tareas sencillas directamente desde WhatsApp, sin complicaciones.
 `;
-  txt += createBracketBox("🤖", "KETERANGAN", [
+  txt += createBracketBox("🤖", "DESCRIPCIÓN", [
     "Ⓞ = Owner Only",
     "ⓟ = Premium Only",
     "Ⓛ = Limit Required",
@@ -333,14 +333,14 @@ Puedes utilizarme para obtener información, obtener datos o ayudar a que las co
           {
             name: "single_select",
             buttonParamsJson: JSON.stringify({
-              title: "📁 ᴘɪʟɪʜ ᴋᴀᴛᴇɢᴏʀɪ",
-              sections: [{ title: "📋 PILIH KATEGORI", rows: categoryRows }],
+              title: "📁 ELEGIR CATEGORÍA",
+              sections: [{ title: "📋 SELECCIONE LA CATEGORÍA", rows: categoryRows }],
             }),
           },
           {
             name: "quick_reply",
             buttonParamsJson: JSON.stringify({
-              display_text: "🏠 ᴋᴇᴍʙᴀʟɪ ᴋᴇ ᴍᴇɴᴜ",
+              display_text: "🏠 VOLVER AL MENÚ",
               id: `${prefix}menu`,
             }),
           },
@@ -416,7 +416,7 @@ Puedes utilizarme para obtener información, obtener datos o ayudar a que las co
               nativeFlowMessage: {
                 messageParamsJson: JSON.stringify({
                   limited_time_offer: {
-                    text: "Hai " + m.pushName,
+                    text: "Hola " + m.pushName,
                     url: "https://ourin.site",
                     copy_code: botConfig.owner?.name || "Ourin-AI",
                     expiration_time: Date.now(),
@@ -438,7 +438,7 @@ Puedes utilizarme para obtener información, obtener datos o ayudar a que las co
                   {
                     name: "quick_reply",
                     buttonParamsJson: JSON.stringify({
-                      display_text: "Kembali Ke Menu Utama",
+                      display_text: "Regresa al menú principal",
                       id: prefix + "menu",
                     }),
                   },

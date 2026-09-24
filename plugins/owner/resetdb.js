@@ -32,24 +32,29 @@ async function handler(m, { sock }) {
         global.resetDbPending[m.sender] = Date.now()
         
         return m.reply(
-            `⚠️ *ᴘᴇʀɪɴɢᴀᴛᴀɴ!*\n\n` +
-            `> Ini akan menghapus SEMUA data:\n` +
+            `⚠️ *ADVERTENCIA!*\n\n` +
+            `Esto borrará todos los datos:
+` +
             `> • Data user\n` +
             `> • Data group\n` +
             `> • Data clan\n` +
-            `> • Semua statistik\n\n` +
-            `╭┈┈⬡「 ⚠️ *ᴋᴏɴғɪʀᴍᴀsɪ* 」\n` +
-            `┃ Ketik: *.resetdb confirm*\n` +
-            `┃ dalam 60 detik\n` +
+            `• Todas las estadísticas
+
+` +
+            `╭┈┈⬡「 ⚠️ *CONFIRMACIÓN* 」\n` +
+            `┃ Escribe: *.resetdb confirm*
+` +
+            `┃ en 60 segundos
+` +
             `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-            `> ❌ Aksi ini TIDAK BISA dibatalkan!`
+            `❌ ¡Este acto no puede ser cancelado!`
         )
     }
     
     const pending = global.resetDbPending[m.sender]
     if (!pending || (Date.now() - pending) > 60000) {
         delete global.resetDbPending[m.sender]
-        return m.reply(`❌ Timeout! Ketik *.resetdb* Repita el lanzamiento.`)
+        return m.reply(`❌ Timeout! Escribe *.resetdb* para volver a ejecutarlo.`)
     }
     
     delete global.resetDbPending[m.sender]
@@ -86,13 +91,15 @@ async function handler(m, { sock }) {
         await db.save()
         
         await m.reply(
-            `✅ *ᴅᴀᴛᴀʙᴀsᴇ ᴅɪʀᴇsᴇᴛ!*\n\n` +
-            `╭┈┈⬡「 📊 *ᴅᴀᴛᴀ ᴅɪʜᴀᴘᴜs* 」\n` +
+            `✅ *ᴅᴀᴛᴀʙᴀsᴇ RESTABLECIDO!*\n\n` +
+            `╭┈┈⬡「 📊 *DATOS ELIMINADOS* 」
+` +
             `┃ 👤 Users: ${userCount}\n` +
             `┃ 👥 Groups: ${groupCount}\n` +
             `┃ ⚔️ Clans: ${clanCount}\n` +
             `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-            `> Backup disimpan di:\n` +
+            `> Copia de seguridad guardada en:
+` +
             `> \`${path.basename(backupPath)}\``
         )
         

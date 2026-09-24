@@ -1,7 +1,7 @@
 import axios from 'axios'
 import config from '../../config.js'
 import te from '../../src/lib/ourin-error.js'
-const NEOXR_APIKEY = config.APIkey?.neoxr || 'Milik-Bot-OurinMD'
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD"
 
 const pluginConfig = {
     name: 'robloxplayer',
@@ -25,7 +25,9 @@ async function handler(m, { sock }) {
     if (!query) {
         return m.reply(
             `🎮 *ʀᴏʙʟᴏx ᴘʟᴀʏᴇʀ sᴇᴀʀᴄʜ*\n\n` +
-            `> Masukkan username untuk dicari\n\n` +
+            `> Ingrese un nombre de usuario para buscar
+
+` +
             `\`${m.prefix}robloxplayer linkmon\``
         )
     }
@@ -46,21 +48,21 @@ async function handler(m, { sock }) {
         
         let text = `🎮 *ʀᴏʙʟᴏx ᴘʟᴀʏᴇʀ sᴇᴀʀᴄʜ*\n\n`
         text += `> Query: \`${query}\`\n`
-        text += `> Ditemukan: *${players.length}* player\n\n`
+        text += `> Encontrado: *${players.length}* player\n\n`
         
         players.forEach((player, i) => {
             text += `╭┈┈⬡「 ${i + 1}. *${player.displayName}* 」\n`
             text += `┃ 🆔 ID: \`${player.id}\`\n`
             text += `┃ 👤 Username: \`${player.name}\`\n`
             text += `┃ 📛 Display: *${player.displayName}*\n`
-            text += `┃ ✅ Verified: ${player.hasVerifiedBadge ? 'Ya' : 'Tidak'}\n`
+            text += `┃ ✅ Verified: ${player.hasVerifiedBadge ? 'Ya' : "No"}\n`
             if (player.previousUsernames?.length > 0) {
                 text += `┃ 📜 Previous: ${player.previousUsernames.join(', ')}\n`
             }
             text += `╰┈┈⬡\n\n`
         })
         
-        text += `> _Gunakan \`.robloxstalk <username>\` para más detalles_`
+        text += `> _Usa \`.robloxstalk <username>\` para más detalles_`
         
         await m.reply(text)
         m.react('✅')

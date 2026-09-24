@@ -2,9 +2,9 @@ const pluginConfig = {
     name: 'kapan',
     alias: ['when'],
     category: 'fun',
-    description: 'Tanya bot kapan sesuatu',
-    usage: '.kapan <pertanyaan>',
-    example: '.kapan aku nikah?',
+    description: "Pregúntale al bot cuándo ocurre algo",
+    usage: '.kapan <pregunta>',
+    example: ".kapan ¿cuándo me casaré?",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -15,24 +15,24 @@ const pluginConfig = {
 };
 
 const answers = [
-    'Besok mungkin?',
-    'Tahun depan kayaknya.',
+    "¿Quizá mañana?",
+    "Parece que el próximo año.",
     "3 ¡Otro día!",
     "Ha pasado un tiempo.",
     "¡Estaré allí en un minuto!",
     "Cuando el tiempo sea correcto, ocurrirá.",
-    'Bulan depan!',
+    "¡El próximo mes!",
     "No sé cuándo, pero ten paciencia.",
     "¡En un futuro próximo!",
     "10 ¿Otro año quizá?",
     "¡No por mucho tiempo!",
-    'Kalau jodoh, pasti ketemu.',
-    'Hmm, susah diprediksi.',
-    'Minggu depan!',
-    'Kalau usahanya lebih keras, lebih cepat!',
-    'Pas waktunya tepat.',
-    'Secepatnya, tenang aja.',
-    'Ntar kalo udah siap.',
+    "Si están destinados, se encontrarán.",
+    "Mmm, es difícil de predecir.",
+    "¡La próxima semana!",
+    "¡Cuanto más te esfuerces, más pronto ocurrirá!",
+    "Cuando llegue el momento.",
+    "Muy pronto, no te preocupes.",
+    "Cuando estés listo/a.",
     "¡En cuestión de días!",
     "Cuando estés listo para eso."
 ];
@@ -41,12 +41,12 @@ async function handler(m) {
     const text = m.text?.trim();
     
     if (!text) {
-        return m.reply(`⏰ *ᴋᴀᴘᴀɴ*
+        return m.reply(`⏰ *CUÁNDO*
 
-> ¡Póngase en una pregunta!
+> ¡Haz una pregunta!
 
-*Contoh:*
-> .kapan aku nikah?`);
+*Ejemplo:*
+> .kapan ¿cuándo me casaré?`);
     }
     
     const answer = answers[Math.floor(Math.random() * answers.length)];

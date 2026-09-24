@@ -20,7 +20,7 @@ const pluginConfig = {
 
 function gpMsg(key, replacements = {}) {
     const defaults = {
-        antisticker: '⚠ *AntiSticker* — Sticker dari @%user% dihapus.',
+        antisticker: "⚠ *AntiSticker* — El sticker de @%user% fue eliminado.",
     }
     let text = config.groupProtection?.[key] || defaults[key] || ''
     for (const [k, v] of Object.entries(replacements)) {
@@ -65,18 +65,18 @@ async function handler(m, { sock }) {
     if (action === 'on') {
         db.setGroup(m.chat, { antisticker: true })
         m.react('✅')
-        await m.reply(`✅ *AntiSticker diaktifkan*`)
+        await m.reply(`✅ *AntiSticker activado*`)
         return
     }
 
     if (action === 'off') {
         db.setGroup(m.chat, { antisticker: false })
         m.react('❌')
-        await m.reply(`❌ *AntiSticker dinonaktifkan*`)
+        await m.reply(`❌ *AntiSticker ha sido desactivado*`)
         return
     }
 
-    await m.reply(`❌ Gunakan \`.antisticker on\` atau \`.antisticker off\``)
+    await m.reply(`❌ Utilice \`.antisticker on\` o \`.antisticker off\``)
 }
 
 export { pluginConfig as config, handler, checkAntisticker }

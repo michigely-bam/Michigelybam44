@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'setpp',
     alias: ['setprofilebot', 'setppbot', 'setfotobot'],
     category: 'tools',
-    description: 'Mengubah foto profil bot',
-    usage: '.setpp (reply gambar)',
+    description: "Cambiar la imagen del perfil del bot",
+    usage: ".setpp (respuesta a la imagen)",
     example: '.setpp',
     isOwner: true,
     isPremium: false,
@@ -33,9 +33,9 @@ async function handler(m, { sock }) {
     }
     if (!buffer) {
         await m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-            `> Reply gambar + \`${m.prefix}setpp\`\n` +
-            `> Kirim gambar + caption \`${m.prefix}setpp\``
+            `⚠️ *MODO DE USO*\n\n` +
+            `> Responder a la imagen + \`${m.prefix}setpp\`\n` +
+            `> Envía imágenes + descripción \`${m.prefix}setpp\``
         )
         return
     }
@@ -50,13 +50,14 @@ async function handler(m, { sock }) {
         await sock.updateProfilePicture(botJid, buffer)
         
         await m.reply(
-            `✅ *ᴘᴘ ʙᴏᴛ ᴅɪᴜʙᴀʜ*\n\n` +
-            `> Foto profil bot berhasil diperbarui!`
+            `✅ *ᴘᴘ ʙᴏᴛ CAMBIADO*\n\n` +
+            `¡Las fotos del perfil del bot se han actualizado con éxito!`
         )
     } catch (error) {
         await m.reply(
-            `❌ *ɢᴀɢᴀʟ*\n\n` +
-            `> Tidak dapat mengubah foto bot.\n` +
+            `❌ *ERROR*\n\n` +
+            `> No se pudo cambiar la foto del bot.
+` +
             `> _${error.message}_`
         )
     }

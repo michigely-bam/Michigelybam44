@@ -4,9 +4,9 @@ const pluginConfig = {
   name: "sendngl",
   alias: [],
   category: "tools",
-  description: "Send NGL",
-  usage: ".sendngl <url> | <text>",
-  example: ".sendngl https://ngl.link/xxxx | hai",
+  description: "Enviar un mensaje NGL",
+  usage: ".sendngl <url> | <texto>",
+  example: ".sendngl https://ngl.link/xxxx | hola",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -21,11 +21,14 @@ async function handler(m, { sock }) {
   const [link, kata] = text;
   if (!link)
     return m.reply(
-      `*LINK NGL NYA MANA ??*\nContoh: \`${m?.prefix}sendngl https://ngl.link/xxxx | hai`,
+      `*¿DÓNDE ESTÁ EL ENLACE DE NGL?*
+Ejemplo: \`${m?.prefix}sendngl https://ngl.link/xxxx | hola`,
     );
   if (!kata)
     return m.reply(
-      `*KATA KATA NYA MANA ??*\n\nContoh: \`${m?.prefix}sendngl https://ngl.link/xxxx | hai`,
+      `*FALTA EL MENSAJE*
+
+Ejemplo: \`${m?.prefix}sendngl https://ngl.link/xxxx | hola`,
     );
   m.react("🎴");
 
@@ -48,7 +51,8 @@ async function handler(m, { sock }) {
         text: `✅ *DONE*
 
 ¡Ha sido un éxito enviando un mensaje!
-Target: ${link}\nPesan: ${kata}`,
+Target: ${link}
+Mensaje: ${kata}`,
       },
       { quoted: m },
     );

@@ -55,7 +55,7 @@ function execSSH(conn, cmd) {
             if (err) return reject(err)
             let output = ''
             stream.on('close', (code, signal) => {
-                if (code !== 0) return reject(new Error(`Command failed with code ${code}\nOutput: ${output}`))
+                if (code !== 0) return reject(new Error(`El comando falló con el código ${code}\nSalida: ${output}`))
                 resolve(output)
             })
             stream.on('data', d => { output += d.toString() })
@@ -69,7 +69,8 @@ function handler(m) {
 
     if (!text) {
         return m.reply(
-            `╭┈┈⬡「 🌌 *ɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ ɴᴇʙᴜʟᴀ* 」\n┃ ㊗ ᴜsᴀɢᴇ: \`${m.prefix}installtemanebula <ip>|<password>\`\n╰┈┈⬡\n\n> \`Contoh: ${m.prefix}installtemanebula 192.168.1.1|secretpass\``
+            `╭┈┈⬡「 🌌 *ɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ ɴᴇʙᴜʟᴀ* 」
+┃ ㊗ USO: \`${m.prefix}installtemanebula <ip>|<password>\`\n╰┈┈⬡\n\n> \`Ejemplo: ${m.prefix}installtemanebula 192.168.1.1|secretpass\``
         )
     }
 
@@ -100,15 +101,17 @@ function handler(m) {
 > Instala Node.js 22, Yarn y dependientes...`)
             await execSSH(conn, CMD_DEPS)
 
-            await m.reply(`🕕 *[2/3] ɪɴsᴛᴀʟʟ ʙʟᴜᴇᴘʀɪɴᴛ...*\n\n> Mendownload & konfigurasi Blueprint Framework...`)
+            await m.reply(`🕕 *[2/3] INSTALANDO BLUEPRINT...*
+
+> Descargando y configurando Blueprint Framework...`)
             await execSSH(conn, CMD_BLUEPRINT)
 
-            await m.reply(`🕕 *[3/3] ɪɴsᴛᴀʟʟ ɴᴇʙᴜʟᴀ...*\n\n> Menginstall tema Nebula (Auto-Confirm)...`)
+            await m.reply(`🕕 *[3/3] INSTALANDO NEBULA...*\n\n> Instalando el tema Nebula (confirmación automática)...`)
             await execSSH(conn, CMD_NEBULA)
 
             m.react('✅')
             await m.reply(
-                `╭┈┈⬡「 ✅ *ᴛᴇᴍᴀ ɴᴇʙᴜʟᴀ* 」\n┃ ㊗ sᴛᴀᴛᴜs: *Terinstall*\n┃ ㊗ ɪᴘ: ${ipvps}
+                `╭┈┈⬡「 ✅ *TEMA NEBULA* 」\n┃ ㊗ ᴇsᴛᴀᴅᴏ: *Instalado*\n┃ ㊗ ɪᴘ: ${ipvps}
 ╰┈┈⬡
 
 > _Nebula tema instalado con éxito!_`

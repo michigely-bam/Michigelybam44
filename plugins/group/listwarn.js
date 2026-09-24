@@ -5,7 +5,7 @@ const pluginConfig = {
   alias: ["warnings", "cekwarn", "warnlist"],
   category: "group",
   description: "Ver lista de advertencia de miembro",
-  usage: ".listwarn atau .listwarn @user",
+  usage: ".listwarn o .listwarn @user",
   example: ".listwarn @user",
   isOwner: false,
   isPremium: false,
@@ -61,7 +61,7 @@ async function handler(m, { sock }) {
       return;
     }
 
-    let txt = `⚠️ *ᴅᴀꜰᴛᴀʀ ᴡᴀʀɴɪɴɢ*\n\n`;
+    let txt = `⚠️ *LISTA DE ADVERTENCIAS*\n\n`;
 
     usersWithWarnings.forEach((user, i) => {
       const count = warnings[user].length;
@@ -69,7 +69,8 @@ async function handler(m, { sock }) {
       txt += `*${i + 1}.* @${name} - *${count}/${maxWarns}* warning\n`;
     });
 
-    txt += `\n> Ketik \`${m.prefix}listwarn @user\` Para más detalles.`;
+    txt += `
+> Escribe \`${m.prefix}listwarn @user\` Para más detalles.`;
 
     await m.reply(txt, { mentions: usersWithWarnings });
   }

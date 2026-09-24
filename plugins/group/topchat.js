@@ -29,8 +29,9 @@ async function handler(m, { sock }) {
     if (sorted.length === 0) {
         return m.reply(
             `📊 *ᴄʜᴀᴛ sᴛᴀᴛɪsᴛɪᴄs*\n\n` +
-            `> Belum ada data chat di grup ini.\n` +
-            `> Data akan tercatat otomatis setelah member aktif chat.`
+            `No hay datos de chat en este grupo.
+` +
+            `Los datos se registrarán automáticamente después de activar el chat.`
         )
     }
     let txt = `📊 *TOTAL CHAT*
@@ -40,7 +41,8 @@ Aquí está el número de mensajes enviados por los miembros de este grupo:
     for (let i = 0; i < sorted.length; i++) {
         const { jid, count } = sorted[i]
         const name = jid.split('@')[0]
-        txt += `${i + 1}. @${name} - 💬 *${count.toLocaleString('id-ID')}* pesan\n`
+        txt += `${i + 1}. @${name} - 💬 *${count.toLocaleString('id-ID')}* mensaje
+`
     }
     txt += `
 *Mensaje total: ${sorted.reduce((a, b) => a + b.count, 0).toLocaleString('id-ID')}*`

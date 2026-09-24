@@ -117,10 +117,12 @@ async function handler(m, { sock }) {
         if (!text) {
             return m.reply(
                 `📢 *HIDETAG PREMIUM*\n\n` +
-                `• Reply pesan lalu ketik \`${m.prefix}ht\`\n` +
-                `• Atau ketik \`${m.prefix}ht <custom tag> | <pesan>\`\n\n` +
-                `• Contoh: \`${m.prefix}ht everyone | hai semua\`\n\n` +
-                `Support: teks, gambar, video, sticker, audio, dokumen`
+                `• Responder al mensaje y escribir \`${m.prefix}ht\`\n` +
+                `• O escribe \`${m.prefix}ht <etiqueta personalizada> | <mensaje>\`\n\n` +
+                `• Ejemplo: \`${m.prefix}ht everyone | hola a todos\`
+
+` +
+                `Soporte: texto, imágenes, videos, stickers, audio, documentos`
             )
         }
 

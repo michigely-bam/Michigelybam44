@@ -29,9 +29,10 @@ async function handler(m, { sock }) {
 
     if (!targetJid) {
         await m.reply(
-            `❌ *ᴛᴀʀɢᴇᴛ ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n` +
-            `> Reply pesan user atau mention!\n` +
-            `> Contoh: \`${m.prefix}kick @user\``
+            `❌ *ᴛᴀʀɢᴇᴛ NO ENCONTRADO*\n\n` +
+            `> ¡Responda a los mensajes de usuario o mención!
+` +
+            `> Ejemplo: \`${m.prefix}kick @user\``
         )
         return
     }
@@ -40,14 +41,14 @@ async function handler(m, { sock }) {
     const targetNumber = targetJid.replace(/@.*$/, '')
 
     if (targetJid === botNumber || targetNumber === botNumber.replace(/@.*$/, '')) {
-        await m.reply(`❌ *ɢᴀɢᴀʟ*
+        await m.reply(`❌ *falló*
 
 > ¡No puedes patear tu propio bot!`)
         return
     }
 
     if (targetJid === m.sender) {
-        await m.reply(`❌ *ɢᴀɢᴀʟ*
+        await m.reply(`❌ *falló*
 
 > ¡No puedes patearte!`)
         return
@@ -58,14 +59,14 @@ async function handler(m, { sock }) {
         const targetParticipant = findParticipantByNumber(groupMeta.participants, targetJid)
         
         if (!targetParticipant) {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*
+            await m.reply(`❌ *falló*
 
 > ¡Usuario no encontrado en grupo!`)
             return
         }
         
         if (targetParticipant.admin) {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*
+            await m.reply(`❌ *falló*
 
 > ¡No puedo patear a un grupo de administradores!`)
             return

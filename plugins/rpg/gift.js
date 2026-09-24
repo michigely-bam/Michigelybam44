@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['kasih', 'hadiah'],
     category: 'rpg',
     description: "Dar regalos a las parejas para mejorar el amor",
-    usage: '.gift <item> <jumlah>',
+    usage: '.gift <artículo> <cantidad>',
     example: '.gift diamond 1',
     isOwner: false,
     isPremium: false,
@@ -24,9 +24,10 @@ async function handler(m, { sock }) {
     
     if (!user.rpg.spouse) {
         return m.reply(
-            `❌ *ʙᴇʟᴜᴍ ᴍᴇɴɪᴋᴀʜ*\n\n` +
-            `> Kamu belum menikah!\n` +
-            `> Nikah dulu dengan \`.marry @user\``
+            `❌ *AÚN NO ESTÁS CASADO*\n\n` +
+            `¡No estás casado!
+` +
+            `> Casado antes con \`.marry @user\``
         )
     }
     
@@ -38,7 +39,8 @@ async function handler(m, { sock }) {
         return m.reply(
             `🎁 *ɢɪꜰᴛ*\n\n` +
             `╭┈┈⬡「 📋 *ᴜsᴀɢᴇ* 」\n` +
-            `┃ > Pilih item untuk diberikan\n` +
+            `┃ > Elige los objetos que quieres regalar
+` +
             `┃ > \`.gift diamond 1\`\n` +
             `╰┈┈┈┈┈┈┈┈⬡`
         )
@@ -48,9 +50,9 @@ async function handler(m, { sock }) {
     
     if ((user.inventory[itemKey] || 0) < amount) {
         return m.reply(
-            `❌ *ɪᴛᴇᴍ ᴛɪᴅᴀᴋ ᴄᴜᴋᴜᴘ*\n\n` +
-            `> Item *${itemKey}* kamu: ${user.inventory[itemKey] || 0}\n` +
-            `> Butuh: ${amount}`
+            `❌ *OBJETOS INSUFICIENTES*\n\n` +
+            `> Item *${itemKey}* tú: ${user.inventory[itemKey] || 0}\n` +
+            `> Necesita: ${amount}`
         )
     }
     
@@ -58,7 +60,7 @@ async function handler(m, { sock }) {
     const partner = db.getUser(spouseJid)
     
     if (!partner) {
-        return m.reply(`❌ *ᴘᴀsᴀɴɢᴀɴ ɴᴏᴛ ꜰᴏᴜɴᴅ*
+        return m.reply(`❌ *PAREJA NO ENCONTRADA*
 
 > ¡Las parejas no se encuentran en la base de datos!`)
     }
@@ -73,9 +75,9 @@ async function handler(m, { sock }) {
     
     db.save()
     
-    let txt = `🎁 *ɢɪꜰᴛ sᴜᴋsᴇs*\n\n`
+    let txt = `🎁 *ɢɪꜰᴛ COMPLETADO*\n\n`
     txt += `> 💝 Te das ${amount}x ${itemKey}\n`
-    txt += `> 👤 Untuk: @${spouseJid.split('@')[0]}\n`
+    txt += `> 👤 Para: @${spouseJid.split('@')[0]}\n`
     txt += `> 💕 Love: +${amount * 10}\n\n`
     txt += `> _So sweet! 💖_`
     

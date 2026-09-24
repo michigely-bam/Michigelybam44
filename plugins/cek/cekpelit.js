@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekpelit',
     alias: ['pelit', 'kikir'],
     category: 'cek',
-    description: "Mira lo picante que eres",
-    usage: ".checkout   nombre",
+    description: "Comprueba qué tan tacaño eres",
+    usage: ".cekpelit [@usuario]",
     example: '.cekpelit Budi',
     isOwner: false,
     isPremium: false,
@@ -20,25 +20,24 @@ async function handler(m) {
                     
     let desc = ''
     if (percent >= 90) {
-        desc = "¡El dinero está en juego! 💸"
+        desc = "¡No sueltas ni una moneda! 💸"
     } else if (percent >= 70) {
-        desc = 'Pelit banget! 🙊'
+        desc = "¡Muy tacaño/a! 🙊"
     } else if (percent >= 50) {
-        desc = 'Lumayan pelit 😅'
+        desc = "Bastante tacaño/a 😅"
     } else if (percent >= 30) {
-        desc: 'Sedikit hemat 😊'
+        desc: "Un poco ahorrador/a 😊"
     } else {
-        desc = 'Dermawan banget! 🎁'
+        desc = "¡Muy generoso/a! 🎁"
     }
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu pequeño nivel. *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de inseguridad @${mentioned.split('@')[0]} yak? 
-    
-Tingkat kepelitan dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de tacañería es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de tacañería de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

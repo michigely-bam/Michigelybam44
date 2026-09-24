@@ -14,7 +14,7 @@ const pluginConfig = {
   name: "werewolf",
   alias: ["ww", "wwgc"],
   category: "game",
-  description: "Main Werewolf Game bersama player lain",
+  description: "Juega al Hombre Lobo con otros jugadores.",
   usage: ".ww <create|join|start|vote|player|exit|delete>",
   example: ".ww create",
   isOwner: false,
@@ -46,7 +46,7 @@ try {
     thumbWin = fs.readFileSync(path.join(assetsPath, "ourin-winner.jpg"));
   }
 } catch (e) {
-  console.log("[WW] Failed to load thumbnails:", e.message);
+  console.log("[WW] No se pudieron cargar las miniaturas:", e.message);
 }
 
 const ROLES = {
@@ -54,31 +54,31 @@ const ROLES = {
     emoji: "🐺",
     name: "Werewolf",
     team: "wolf",
-    desc: "Bunuh warga tiap malam",
+    desc: "Mata a un aldeano cada noche",
   },
   seer: {
     emoji: "🔮",
     name: "Seer",
     team: "village",
-    desc: "Lihat role player tiap malam",
+    desc: "Mira a los jugadores de rol todas las noches.",
   },
   guardian: {
     emoji: "🛡️",
     name: "Guardian",
     team: "village",
-    desc: "Lindungi player tiap malam",
+    desc: "Protege a un jugador cada noche",
   },
   sorcerer: {
     emoji: "🧙",
     name: "Sorcerer",
     team: "wolf",
-    desc: "Cari tahu siapa Seer",
+    desc: "Descubra quién es Seer.",
   },
   villager: {
     emoji: "👨‍🌾",
     name: "Villager",
     team: "village",
-    desc: "Diskusi dan vote werewolf",
+    desc: "Debate y vota para descubrir al hombre lobo",
   },
 };
 
@@ -92,7 +92,7 @@ const PHASE_DURATION = {
 
 function getWWContextInfo(
   title = "🐺 WEREWOLF",
-  body = "Social deduction game!",
+  body = "¡Juego de deducción social!",
   thumbBuffer = thumbWW,
   mentions,
 ) {
@@ -228,56 +228,86 @@ function getRoleDescription(role, prefix = ".") {
   const descriptions = {
     werewolf:
       `🐺 *WEREWOLF*\n\n` +
-      `Kamu adalah predator malam!\n\n` +
+      `¡Usted es un depredador nocturno!
+
+` +
       `╭┈┈⬡「 📋 *INFO* 」\n` +
-      `┃ 🎯 Tujuan: Bunuh semua Villager\n` +
-      `┃ ⚔️ Skill: Bunuh 1 player tiap malam\n` +
-      `┃ 🕐 Aksi: Malam hari\n` +
+      `┃ 🎯 Objetivo: matar a todos los villanos
+` +
+      `┃ ⚔️ Habilidad: matar a un jugador cada noche
+` +
+      `┃ 🕐 Acción: Por la noche
+` +
       `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-      `> Di malam hari, ketik:\n` +
-      `> \`${prefix}wwkill <nomor>\` di PM bot`,
+      `> Por la noche, escribe:
+` +
+      `> \`${prefix}wwkill <número>\` por mensaje privado al bot`,
     seer:
       `🔮 *SEER*\n\n` +
-      `Kamu bisa melihat identitas player!\n\n` +
+      `¡Puedes ver la identidad del jugador!
+
+` +
       `╭┈┈⬡「 📋 *INFO* 」\n` +
-      `┃ 🎯 Tujuan: Bantu Villager\n` +
-      `┃ 🔮 Skill: Lihat role 1 player\n` +
-      `┃ 🕐 Aksi: Malam hari\n` +
+      `┃ 🎯 Objetivo: ayudar a los aldeanos
+` +
+      `┃ 🔮 Habilidad: Mira el rol de un jugador
+` +
+      `┃ 🕐 Acción: Por la noche
+` +
       `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-      `> Di malam hari, ketik:\n` +
-      `> \`${prefix}wwsee <nomor>\` di PM bot`,
+      `> Por la noche, escribe:
+` +
+      `> \`${prefix}wwsee <número>\` por mensaje privado al bot`,
     guardian:
       `🛡️ *GUARDIAN*\n\n` +
-      `Kamu bisa melindungi player!\n\n` +
+      `¡Puedes proteger al jugador!
+
+` +
       `╭┈┈⬡「 📋 *INFO* 」\n` +
-      `┃ 🎯 Tujuan: Lindungi Villager\n` +
-      `┃ 🛡️ Skill: Lindungi 1 player\n` +
-      `┃ 🕐 Aksi: Malam hari\n` +
+      `┃ 🎯 Objetivo: proteger a los aldeanos
+` +
+      `┃ 🛡️ Habilidad: proteger a un jugador
+` +
+      `┃ 🕐 Acción: Por la noche
+` +
       `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-      `> Di malam hari, ketik:\n` +
-      `> \`${prefix}wwprotect <nomor>\` di PM bot`,
+      `> Por la noche, escribe:
+` +
+      `> \`${prefix}wwprotect <número>\` por mensaje privado al bot`,
     sorcerer:
       `🧙 *SORCERER*\n\n` +
-      `Kamu sekutu Werewolf!\n\n` +
+      `¡Usted es un aliado Werewolf!
+
+` +
       `╭┈┈⬡「 📋 *INFO* 」\n` +
-      `┃ 🎯 Tujuan: Bantu Werewolf menang\n` +
-      `┃ 🔍 Skill: Cek apakah target adalah Seer\n` +
-      `┃ 🕐 Aksi: Malam hari\n` +
+      `┃ 🎯 Objetivo: ayudar al hombre lobo a ganar
+` +
+      `┃ 🔍 Habilidad: Verifique si el objetivo es Seer
+` +
+      `┃ 🕐 Acción: Por la noche
+` +
       `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-      `> Di malam hari, ketik:\n` +
-      `> \`${prefix}wwsorcerer <nomor>\` di PM bot`,
+      `> Por la noche, escribe:
+` +
+      `> \`${prefix}wwsorcerer <número>\` por mensaje privado al bot`,
     villager:
       `👨‍🌾 *VILLAGER*\n\n` +
-      `Kamu warga biasa!\n\n` +
+      `¡Ustedes son ciudadanos comunes!
+
+` +
       `╭┈┈⬡「 📋 *INFO* 」\n` +
-      `┃ 🎯 Tujuan: Temukan Werewolf\n` +
-      `┃ 🗳️ Skill: Vote di siang hari\n` +
-      `┃ 🕐 Aksi: Siang hari\n` +
+      `┃ 🎯 Objetivo: encontrar al hombre lobo
+` +
+      `┃ 🗳️ Habilidad: Votar de día
+` +
+      `┃ 🕐 Acción: El día
+` +
       `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-      `> Diskusi dan vote werewolf!\n` +
-      `> \`${prefix}ww vote <nomor>\` di grup`,
+      `> ¡Debate y vota para descubrir al hombre lobo!
+` +
+      `> \`${prefix}ww vote <número>\` en el grupo`,
   };
-  return descriptions[role] || "Unknown Role";
+  return descriptions[role] || "Rol desconocido";
 }
 
 async function handler(m, { sock }) {
@@ -294,14 +324,18 @@ async function handler(m, { sock }) {
         const game = ww[m.chat];
         if (game.status === "waiting") {
           return m.reply(
-            `❌ *ROOM SUDAH ADA*\n\n` +
-              `Room masih menunggu player\n` +
-              `Ketik \`${prefix}ww join\` untuk gabung\n` +
+            `❌ *YA EXISTE UNA SALA*
+
+` +
+              `La sala sigue esperando jugadores
+` +
+              `Escribe \`${prefix}ww join\` para unirte
+` +
               `Host: @${game.owner.split("@")[0]}`,
             { mentions: [game.owner] },
           );
         }
-        return m.reply(`❌ Game sedang berlangsung! Tunggu sampai selesai.`);
+        return m.reply(`¡Ya hay una partida en curso! Espera hasta que termine.`);
       }
 
       // Check if player already in another room
@@ -309,7 +343,7 @@ async function handler(m, { sock }) {
         room.players.some((p) => p.id === m.sender),
       );
       if (existingRoom) {
-        return m.reply(`❌ Kamu masih dalam game di grup lain!`);
+        return m.reply(`¡Ya estás en una partida de otro grupo!`);
       }
 
       // Create new game room
@@ -344,17 +378,25 @@ async function handler(m, { sock }) {
       await m.react("🐺");
       await m.reply(
         `🐺 *WEREWOLF GAME*\n\n` +
-          `Room berhasil dibuat!\n\n` +
-          `╭┈┈⬡「 📋 *INFO ROOM* 」\n` +
+          `¡Sala creada correctamente!
+
+` +
+          `╭┈┈⬡「 📋 *INFORMACIÓN DE LA SALA* 」
+` +
           `┃ 👑 Host: @${m.sender.split("@")[0]}\n` +
           `┃ 👥 Player: 1/${MAX_PLAYERS}\n` +
           `┃ ⏱️ Min: ${MIN_PLAYERS} player\n` +
           `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-          `╭┈┈⬡「 🎮 *CARA MAIN* 」\n` +
-          `┃ ➕ \`${prefix}ww join\` - Gabung\n` +
-          `┃ ▶️ \`${prefix}ww start\` - Mulai (host)\n` +
-          `┃ 👥 \`${prefix}ww player\` - List player\n` +
-          `┃ 🚪 \`${prefix}ww exit\` - Keluar\n` +
+          `╭┈┈⬡「 🎮 *CÓMO JUGAR* 」
+` +
+          `┃ ➕ \`${prefix}ww join\` - Unirse
+` +
+          `┃ ▶️ \`${prefix}ww start\` - Iniciar (anfitrión)
+` +
+          `┃ 👥 \`${prefix}ww player\` - Lista de jugadores
+` +
+          `┃ 🚪 \`${prefix}ww exit\` - Salir
+` +
           `╰┈┈┈┈┈┈┈┈⬡`,
         { mentions: [m.sender] },
       );
@@ -363,20 +405,21 @@ async function handler(m, { sock }) {
     join: async () => {
       if (!ww[m.chat]) {
         return m.reply(
-          `❌ Belum ada room!\n> Ketik \`${prefix}ww create\` untuk buat room`,
+          `¡Todavía no hay ninguna sala!
+> Escribe \`${prefix}ww create\` para crear una sala`,
         );
       }
 
       if (ww[m.chat].status !== "waiting") {
-        return m.reply(`❌ Game sudah dimulai! Tunggu ronde berikutnya.`);
+        return m.reply(`¡La partida ya comenzó! Espera a la siguiente ronda.`);
       }
 
       if (ww[m.chat].players.length >= MAX_PLAYERS) {
-        return m.reply(`❌ Room penuh! (Max ${MAX_PLAYERS} player)`);
+        return m.reply(`¡La sala está llena! (Max ${MAX_PLAYERS} player)`);
       }
 
       if (ww[m.chat].players.some((p) => p.id === m.sender)) {
-        return m.reply(`❌ Kamu sudah bergabung!`);
+        return m.reply(`¡Ya te uniste!`);
       }
 
       const existingRoom = Object.entries(ww).find(
@@ -384,7 +427,7 @@ async function handler(m, { sock }) {
           chatId !== m.chat && room.players.some((p) => p.id === m.sender),
       );
       if (existingRoom) {
-        return m.reply(`❌ Kamu masih dalam game di grup lain!`);
+        return m.reply(`¡Ya estás en una partida de otro grupo!`);
       }
 
       ww[m.chat].players.push({
@@ -404,9 +447,14 @@ async function handler(m, { sock }) {
 
       await m.react("✅");
       await m.reply(
-        `✅ *PLAYER BERGABUNG*\n\n` +
-          `@${m.sender.split("@")[0]} masuk!\n\n` +
-          `╭┈┈⬡「 👥 *PLAYER LIST* 」\n` +
+        `✅ *JUGADOR INCORPORADO*
+
+` +
+          `@${m.sender.split("@")[0]} ¡se unió!
+
+` +
+          `╭┈┈⬡「 👥 *LISTA DE JUGADORES* 」
+` +
           `${playerList
             .split("\n")
             .map((l) => `┃ ${l}`)
@@ -414,28 +462,29 @@ async function handler(m, { sock }) {
           `╰┈┈┈┈┈┈┈┈⬡\n\n` +
           `Total: ${ww[m.chat].players.length}/${MIN_PLAYERS} (min)\n` +
           (canStart
-            ? `✅ Bisa mulai! \`${prefix}ww start\``
-            : `🕕 Butuh ${MIN_PLAYERS - ww[m.chat].players.length} player lagi`),
+            ? `✅ ¡Ya se puede iniciar! \`${prefix}ww start\``
+            : `🕕 Faltan ${MIN_PLAYERS - ww[m.chat].players.length} jugadores`),
         { mentions: ww[m.chat].players.map((p) => p.id) },
       );
     },
 
     start: async () => {
       if (!ww[m.chat]) {
-        return m.reply(`❌ Belum ada room!`);
+        return m.reply(`¡Todavía no hay ninguna sala!`);
       }
 
       if (ww[m.chat].status !== "waiting") {
-        return m.reply(`❌ Game sudah berjalan!`);
+        return m.reply(`¡La partida ya está en curso!`);
       }
 
       if (ww[m.chat].owner !== m.sender && !config.isOwner?.(m.sender)) {
-        return m.reply(`❌ Hanya host yang dapat memulai game!`);
+        return m.reply(`¡Solo el anfitrión puede iniciar la partida!`);
       }
 
       if (ww[m.chat].players.length < MIN_PLAYERS) {
         return m.reply(
-          `❌ Minimal ${MIN_PLAYERS} player!\n> Saat ini: ${ww[m.chat].players.length} player`,
+          `❌ Minimal ${MIN_PLAYERS} player!
+> Actualmente: ${ww[m.chat].players.length} player`,
         );
       }
 
@@ -456,11 +505,11 @@ async function handler(m, { sock }) {
             text: getRoleDescription(player.role, prefix),
             contextInfo: getWWContextInfo(
               `${ROLES[player.role].emoji} ${ROLES[player.role].name}`,
-              "Role kamu!",
+              "¡Tu rol!",
             ),
           });
         } catch (e) {
-          console.log(`[WW] Failed to send role to ${player.id}:`, e.message);
+          console.log(`[WW] No se pudo enviar el rol a ${player.id}:`, e.message);
         }
       }
 
@@ -483,8 +532,12 @@ async function handler(m, { sock }) {
 
       await m.react("🌙");
       await m.reply(
-        `🐺 *GAME DIMULAI!*\n\n` +
-          `🌙 *Malam Hari ke-1*\n\n` +
+        `🐺 *¡PARTIDA INICIADA!*
+
+` +
+          `🌙 *Noche 1*
+
+` +
           `╭┈┈⬡「 👥 *PLAYERS* 」\n` +
           `${playerList
             .split("\n")
@@ -497,9 +550,11 @@ async function handler(m, { sock }) {
             .map((l) => `┃ ${l}`)
             .join("\n")}\n` +
           `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-          `📩 Cek PM untuk role kalian!\n` +
-          `🌙 Werewolf berburu...\n` +
-          `⏱️ Waktu malam: ${PHASE_DURATION.night / 1000} detik`,
+          `📩 ¡Revisa el chat privado para conocer tu rol!
+` +
+          `🌙 El hombre lobo está cazando...
+` +
+          `⏱️ Duración de la noche: ${PHASE_DURATION.night / 1000} segundos`,
         { mentions: ww[m.chat].players.map((p) => p.id) },
       );
 
@@ -514,26 +569,27 @@ async function handler(m, { sock }) {
 
     vote: async () => {
       if (!ww[m.chat] || ww[m.chat].status !== "playing") {
-        return m.reply(`❌ Tidak ada game aktif!`);
+        return m.reply(`¡No hay ninguna partida activa!`);
       }
 
       if (ww[m.chat].phase !== "day") {
         return m.reply(
-          `❌ Sekarang bukan waktu voting!\n> Phase: ${ww[m.chat].phase === "night" ? "🌙 Malam" : ww[m.chat].phase}`,
+          `¡Ahora no es el momento de votar!
+> Phase: ${ww[m.chat].phase === "night" ? "🌙 Noche" : ww[m.chat].phase}`,
         );
       }
 
       const player = ww[m.chat].players.find((p) => p.id === m.sender);
       if (!player) {
-        return m.reply(`❌ Kamu bukan player dalam game ini!`);
+        return m.reply(`¡No eres jugador de esta partida!`);
       }
 
       if (!player.alive) {
-        return m.reply(`❌ Kamu sudah mati! Tidak bisa vote.`);
+        return m.reply(`¡Ya estás muerto/a y no puedes votar!`);
       }
 
       if (player.voted) {
-        return m.reply(`❌ Kamu sudah vote! Tunggu hasil voting.`);
+        return m.reply(`¡Ya votaste! Espera el resultado.`);
       }
 
       if (!target) {
@@ -543,9 +599,11 @@ async function handler(m, { sock }) {
           .join("\n");
         return m.reply(
           `🗳️ *VOTING*\n\n` +
-            `Pilih siapa yang ingin dieliminasi:\n\n` +
+            `Elige a quién quieres eliminar:
+
+` +
             `${list}\n\n` +
-            `Ketik: \`${prefix}ww vote <nomor>\``,
+            `Escribe: \`${prefix}ww vote <número>\``,
           { mentions: alivePlayers.map((p) => p.id) },
         );
       }
@@ -553,7 +611,7 @@ async function handler(m, { sock }) {
       const targetNum = parseInt(target);
       if (isNaN(targetNum)) {
         return m.reply(
-          `❌ Masukkan nomor player! Contoh: \`${prefix}ww vote 2\``,
+          `❌ ¡Ingresa el número del jugador! Ejemplo: \`${prefix}ww vote 2\``,
         );
       }
 
@@ -561,11 +619,11 @@ async function handler(m, { sock }) {
         (p) => p.number === targetNum,
       );
       if (!targetPlayer) {
-        return m.reply(`❌ Player nomor ${targetNum} tidak ditemukan!`);
+        return m.reply(`❌ No se encontró al jugador número ${targetNum}.`);
       }
 
       if (!targetPlayer.alive) {
-        return m.reply(`❌ Player tersebut sudah mati!`);
+        return m.reply(`¡Ese jugador ya está muerto!`);
       }
 
       player.voted = true;
@@ -577,7 +635,9 @@ async function handler(m, { sock }) {
 
       await m.react("🗳️");
       await m.reply(
-        `🗳️ *VOTE TERCATAT*\n\n` +
+        `🗳️ *VOTO REGISTRADO*
+
+` +
           `@${m.sender.split("@")[0]} ➜ @${targetPlayer.id.split("@")[0]}\n\n` +
           `Progress: ${votedCount}/${alivePlayers.length}`,
         { mentions: [m.sender, targetPlayer.id] },
@@ -592,14 +652,14 @@ async function handler(m, { sock }) {
 
     player: async () => {
       if (!ww[m.chat]) {
-        return m.reply(`❌ Tidak ada game di room ini!`);
+        return m.reply(`¡No hay ninguna partida en esta sala!`);
       }
 
       const playerList = ww[m.chat].players
         .map((p, i) => {
           const status = p.alive
             ? "✅"
-            : `☠️ (${ROLES[p.role]?.name || "Unknown"})`;
+            : `☠️ (${ROLES[p.role]?.name || "Desconocido"})`;
           return `${p.number}. @${p.id.split("@")[0]} ${status}`;
         })
         .join("\n");
@@ -631,16 +691,16 @@ async function handler(m, { sock }) {
 
     exit: async () => {
       if (!ww[m.chat]) {
-        return m.reply(`❌ Tidak ada game di room ini!`);
+        return m.reply(`¡No hay ninguna partida en esta sala!`);
       }
 
       const playerIdx = ww[m.chat].players.findIndex((p) => p.id === m.sender);
       if (playerIdx === -1) {
-        return m.reply(`❌ Kamu tidak ada di game ini!`);
+        return m.reply(`¡No estás en esta partida!`);
       }
 
       if (ww[m.chat].status === "playing") {
-        return m.reply(`❌ Tidak bisa keluar saat game berjalan!`);
+        return m.reply(`¡No puedes salir mientras la partida está en curso!`);
       }
 
       ww[m.chat].players.splice(playerIdx, 1);
@@ -649,19 +709,19 @@ async function handler(m, { sock }) {
       if (ww[m.chat].players.length === 0) {
         if (ww[m.chat].timeout) clearTimeout(ww[m.chat].timeout);
         delete ww[m.chat];
-        return m.reply(`🗑️ Room dihapus karena kosong.`);
+        return m.reply(`🗑️ La sala se eliminó porque estaba vacía.`);
       }
 
       // Transfer host if owner left
       if (ww[m.chat].owner === m.sender && ww[m.chat].players.length > 0) {
         ww[m.chat].owner = ww[m.chat].players[0].id;
         await m.reply(
-          `👋 @${m.sender.split("@")[0]} keluar.\n` +
-            `👑 Host baru: @${ww[m.chat].owner.split("@")[0]}`,
+          `👋 @${m.sender.split("@")[0]} salió.\n` +
+            `👑 Nuevo anfitrión: @${ww[m.chat].owner.split("@")[0]}`,
           { mentions: [m.sender, ww[m.chat].owner] },
         );
       } else {
-        await m.reply(`👋 @${m.sender.split("@")[0]} keluar dari game.`, {
+        await m.reply(`👋 @${m.sender.split("@")[0]} salió de la partida.`, {
           mentions: [m.sender],
         });
       }
@@ -669,21 +729,21 @@ async function handler(m, { sock }) {
 
     delete: async () => {
       if (!ww[m.chat]) {
-        return m.reply(`❌ Tidak ada game di room ini!`);
+        return m.reply(`¡No hay ninguna partida en esta sala!`);
       }
 
       const isOwner = ww[m.chat].owner === m.sender;
       const isBotOwner = config.isOwner?.(m.sender);
 
       if (!isOwner && !isBotOwner) {
-        return m.reply(`❌ Hanya host atau owner bot yang dapat menghapus!`);
+        return m.reply(`¡Solo el anfitrión o el propietario del bot pueden eliminarla!`);
       }
 
       if (ww[m.chat].timeout) clearTimeout(ww[m.chat].timeout);
       delete ww[m.chat];
 
       await m.react("🗑️");
-      await m.reply(`🗑️ Game dihapus!`);
+      await m.reply(`🗑️ ¡Partida eliminada!`);
     },
   };
 
@@ -691,22 +751,35 @@ async function handler(m, { sock }) {
   if (!action || !commands[action]) {
     return m.reply(
       `🐺 *WEREWOLF GAME*\n\n` +
-        `Permainan sosial mencari Werewolf!\n\n` +
+        `¡Juego social para encontrar al hombre lobo!
+
+` +
         `╭┈┈⬡「 🎮 *COMMANDS* 」\n` +
-        `┃ 🆕 \`${prefix}ww create\` - Buat room\n` +
-        `┃ ➕ \`${prefix}ww join\` - Gabung\n` +
-        `┃ ▶️ \`${prefix}ww start\` - Mulai (host)\n` +
+        `┃ 🆕 \`${prefix}ww create\` - Crear una sala
+` +
+        `┃ ➕ \`${prefix}ww join\` - Unirse
+` +
+        `┃ ▶️ \`${prefix}ww start\` - Comienza (host)
+` +
         `┃ 🗳️ \`${prefix}ww vote <no>\` - Vote\n` +
-        `┃ 👥 \`${prefix}ww player\` - List player\n` +
-        `┃ 🚪 \`${prefix}ww exit\` - Keluar\n` +
-        `┃ 🗑️ \`${prefix}ww delete\` - Hapus room\n` +
+        `┃ 👥 \`${prefix}ww player\` - Lista de jugadores
+` +
+        `┃ 🚪 \`${prefix}ww exit\` - Salir
+` +
+        `┃ 🗑️ \`${prefix}ww delete\` - Elimina la habitación
+` +
         `╰┈┈┈┈┈┈┈┈⬡\n\n` +
         `╭┈┈⬡「 🎭 *ROLES* 」\n` +
-        `┃ 🐺 Werewolf - Bunuh warga\n` +
-        `┃ 🧙 Sorcerer - Cari Seer\n` +
-        `┃ 🔮 Seer - Lihat role\n` +
-        `┃ 🛡️ Guardian - Lindungi\n` +
-        `┃ 👨‍🌾 Villager - Vote werewolf\n` +
+        `┃ 🐺 Hombre lobo: mata aldeanos
+` +
+        `┃ 🧙 Sorcerer - Busca a los Vectores
+` +
+        `Seer - Mira el papel
+` +
+        `┃ 🛡️ Guardián: protege
+` +
+        `┃ 👨‍🌾 Aldeano: vota al hombre lobo
+` +
         `╰┈┈┈┈┈┈┈┈⬡\n\n` +
         `Min: ${MIN_PLAYERS} players | Max: ${MAX_PLAYERS} players`,
     );
@@ -751,37 +824,58 @@ async function sendNightPrompts(chatId, sock, prefix) {
       switch (player.role) {
         case "werewolf":
           text =
-            `🐺 *MALAM HARI*\n\n` +
-            `Saatnya berburu! Pilih target:\n\n` +
+            `🐺 *NOCHE Y DÍA*
+
+` +
+            `¡Es hora de cazar! Elige un objetivo:
+
+` +
             `${playerListWolf}\n` +
-            `> Ketik \`${prefix}wwkill <nomor>\` untuk membunuh`;
+            `> Escribe \`${prefix}wwkill <número>\` para matar`;
           break;
         case "seer":
           text =
-            `🔮 *MALAM HARI*\n\n` +
-            `Siapa yang ingin kamu lihat rolenya?\n\n` +
+            `🔮 *NOCHE Y DÍA*
+
+` +
+            `¿De quién quieres ver el rol?
+
+` +
             `${playerListNormal}\n` +
-            `> Ketik \`${prefix}wwsee <nomor>\` untuk melihat role`;
+            `> Escribe \`${prefix}wwsee <número>\` para ver el rol`;
           break;
         case "guardian":
           text =
-            `🛡️ *MALAM HARI*\n\n` +
-            `Siapa yang ingin kamu lindungi?\n\n` +
+            `🛡️ *NOCHE Y DÍA*
+
+` +
+            `¿A quién quieres proteger?
+
+` +
             `${playerListNormal}\n` +
-            `> Ketik \`${prefix}wwprotect <nomor>\` untuk melindungi`;
+            `> Escribe \`${prefix}wwprotect <número>\` para proteger`;
           break;
         case "sorcerer":
           text =
-            `🧙 *MALAM HARI*\n\n` +
-            `Cari tahu siapa Seer!\n\n` +
+            `🧙 *NOCHE Y DÍA*
+
+` +
+            `¡Encuentra quién es Seer!
+
+` +
             `${playerListWolf}\n` +
-            `> Ketik \`${prefix}wwsorcerer <nomor>\` untuk mengecek`;
+            `> Escribe \`${prefix}wwsorcerer <número>\` para comprobar`;
           break;
         case "villager":
           text =
-            `👨‍🌾 *MALAM HARI*\n\n` +
-            `Sebagai warga, berhati-hatilah.\n` +
-            `Mungkin kamu adalah target selanjutnya.\n\n` +
+            `👨‍🌾 *LA NOCHE Y EL DÍA*
+
+` +
+            `Como aldeano, ten cuidado.
+` +
+            `Tal vez usted sea el próximo objetivo.
+
+` +
             `${playerListNormal}`;
           break;
       }
@@ -799,7 +893,7 @@ async function sendNightPrompts(chatId, sock, prefix) {
         });
       }
     } catch (e) {
-      console.log(`[WW] Failed to send prompt to ${player.id}:`, e.message);
+      console.log(`[WW] No se pudo enviar la instrucción a ${player.id}:`, e.message);
     }
   }
 }
@@ -846,7 +940,7 @@ async function processNightActions(chatId, sock, db, prefix) {
       mentions: ww[chatId].players.map((p) => p.id),
       contextInfo: getWWContextInfo(
         "☀️ DAY",
-        "Pagi telah tiba...",
+        "Ha llegado la mañana...",
         thumbDay,
         ww[chatId].players.map((p) => p.id),
       ),
@@ -874,16 +968,18 @@ async function processNightActions(chatId, sock, db, prefix) {
     .map((p) => `${p.number}. @${p.id.split("@")[0]}`)
     .join("\n");
 
-  nightReport += `╭┈┈⬡「 👥 *PLAYER HIDUP* 」\n`;
+  nightReport += `╭┈┈⬡「 👥 *JUGADORES VIVOS* 」
+`;
   nightReport += `${playerList
     .split("\n")
     .map((l) => `┃ ${l}`)
     .join("\n")}\n`;
   nightReport += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
-  nightReport += `> 🗳️ Waktunya voting!\n`;
-  nightReport += `> Ketik \`${prefix}ww vote , número de contacto\`
+  nightReport += `> 🗳️ ¡Es hora de votar!
 `;
-  nightReport += `> ⏱️ Waktu: ${PHASE_DURATION.day / 1000} detik`;
+  nightReport += `> Escribe \`${prefix}ww vote <número>\`
+`;
+  nightReport += `> ⏱️ Tiempo: ${PHASE_DURATION.day / 1000} segundos`;
 
   await sock.sendMessage(chatId, {
     text: nightReport,
@@ -927,14 +1023,14 @@ async function executeVote(chatId, sock, db, prefix) {
   if (isTie || maxVotes === 0) {
     resultText += `🤷 ¡Nada ha sido eliminado!
 `;
-    resultText += `> ${isTie ? "Vote seri!" : "No hay nada de voto."}\n\n`;
+    resultText += `> ${isTie ? "¡Empate en la votación!" : "No hay nada de voto."}\n\n`;
   } else if (eliminated) {
     const player = ww[chatId].players.find((p) => p.id === eliminated);
     if (player) {
       player.alive = false;
       ww[chatId].dead.push(player);
 
-      resultText += `⚰️ @${eliminated.split("@")[0]} dieliminasi!\n`;
+      resultText += `⚰️ ¡@${eliminated.split("@")[0]} fue eliminado!\n`;
       resultText += `> Role: ${ROLES[player.role].emoji} ${ROLES[player.role].name}\n`;
       resultText += `> Votes: ${maxVotes}\n\n`;
     }
@@ -967,17 +1063,18 @@ async function executeVote(chatId, sock, db, prefix) {
   });
 
   resultText += `🌙 *- ¿Qué?${ww[chatId].day}*\n\n`;
-  resultText += `> Werewolf berburu...\n`;
+  resultText += `> El hombre lobo está cazando...
+`;
   resultText += `> Funciones especiales, ¡utiliza tus habilidades en el PM!
 `;
-  resultText += `> ⏱️ Waktu: ${PHASE_DURATION.night / 1000} detik`;
+  resultText += `> ⏱️ Tiempo: ${PHASE_DURATION.night / 1000} segundos`;
 
   await sock.sendMessage(chatId, {
     text: resultText,
     mentions: eliminated ? [eliminated] : [],
     contextInfo: getWWContextInfo(
       "🌙 NIGHT",
-      "Werewolf berburu...",
+      "El hombre lobo está cazando...",
       thumbNight,
     ),
   });
@@ -1029,7 +1126,7 @@ async function endGame(chatId, sock, db, winner) {
         db.setUser(player.id, user);
       }
     } catch (e) {
-      console.log(`[WW] Failed to give reward to ${player.id}:`, e.message);
+      console.log(`[WW] No se pudo entregar la recompensa a ${player.id}:`, e.message);
     }
   }
 
@@ -1044,18 +1141,21 @@ async function endGame(chatId, sock, db, winner) {
   await sock.sendMessage(chatId, {
     text:
       `🎉 *GAME OVER!*\n\n` +
-      `${winner === "wolf" ? "🐺 *WEREWOLF MENANG!*" : "👨‍🌾 *VILLAGER MENANG!*"}\n\n` +
-      `╭┈┈⬡「 👥 *SEMUA PLAYER* 」\n` +
+      `${winner === "wolf" ? "🐺 *¡GANAN LOS HOMBRES LOBO!*" : "👨‍🌾 *¡GANAN LOS ALDEANOS!*"}\n\n` +
+      `╭┈┈⬡「 👥 *TODOS LOS JUGADORES* 」
+` +
       `${allPlayers
         .split("\n")
         .map((l) => `┃ ${l}`)
         .join("\n")}\n` +
       `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-      `╭┈┈⬡「 🎁 *HADIAH* 」\n` +
-      `┃ 💰 +${WIN_REWARD.koin.toLocaleString()} Koin\n` +
+      `╭┈┈⬡「 🎁 *PREMIO* 」
+` +
+      `┃ 💰 +${WIN_REWARD.koin.toLocaleString()} Monedas
+` +
       `┃ ⭐ +${WIN_REWARD.exp.toLocaleString()} EXP\n` +
       `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-      `> GG WP! Main lagi? \`${config.command?.prefix || "."}ww create\``,
+      `> GG WP! ¿Juega de nuevo? \`${config.command?.prefix || "."}ww create\``,
     mentions: ww[chatId].players.map((p) => p.id),
     contextInfo: getWWContextInfo(
       "🏆 GAME OVER",
@@ -1119,9 +1219,11 @@ async function nightActionHandler(m, { sock }) {
     game.nightActions.kill = targetPlayer.id;
     player.skillUsed = true;
     await m.reply(
-      `🐺 *TARGET TERPILIH*\n\n` +
+      `🐺 *OBJETIVO ELEGIDO*
+
+` +
         `Target: @${targetPlayer.id.split("@")[0]}\n` +
-        `> Menunggu malam berakhir...`,
+        `> Esperando que la noche termine...`,
       { mentions: [targetPlayer.id] },
     );
     return true;
@@ -1131,9 +1233,11 @@ async function nightActionHandler(m, { sock }) {
     game.nightActions.protect = targetPlayer.id;
     player.skillUsed = true;
     await m.reply(
-      `🛡️ *TARGET DILINDUNGI*\n\n` +
-        `Melindungi: @${targetPlayer.id.split("@")[0]}\n` +
-        `> Menunggu malam berakhir...`,
+      `🛡️ *OBJETIVO PROTEGIDO*
+
+` +
+        `Protegiendo a: @${targetPlayer.id.split("@")[0]}\n` +
+        `> Esperando que la noche termine...`,
       { mentions: [targetPlayer.id] },
     );
     return true;
@@ -1143,8 +1247,11 @@ async function nightActionHandler(m, { sock }) {
     const roleInfo = ROLES[targetPlayer.role];
     player.skillUsed = true;
     await m.reply(
-      `🔮 *HASIL PENGLIHATAN*\n\n` +
-        `@${targetPlayer.id.split("@")[0]} adalah:\n` +
+      `🔮 *RESULTADO DE LA VISIÓN*
+
+` +
+        `@${targetPlayer.id.split("@")[0]} es:
+` +
         `${roleInfo.emoji} *${roleInfo.name}*\n\n` +
         `> Team: ${roleInfo.team === "wolf" ? "🐺 Wolf" : "👨‍🌾 Village"}`,
       { mentions: [targetPlayer.id] },
@@ -1156,10 +1263,12 @@ async function nightActionHandler(m, { sock }) {
     const isSeer = targetPlayer.role === "seer";
     player.skillUsed = true;
     await m.reply(
-      `🧙 *HASIL INVESTIGASI*\n\n` +
+      `🧙 *RESULTADO DE LA INVESTIGACIÓN*
+
+` +
         `@${targetPlayer.id.split("@")[0]}\n` +
-        `${isSeer ? "✅ *adalah SEER!*" : "❌ *bukan Seer*"}\n\n` +
-        `> Lanjutkan membantu Werewolf!`,
+        `${isSeer ? "✅ *¡ES EL VIDENTE!*" : "❌ *no es el Vidente*"}\n\n` +
+        `> ¡Sigue ayudando al hombre lobo!`,
       { mentions: [targetPlayer.id] },
     );
     return true;
@@ -1168,7 +1277,7 @@ async function nightActionHandler(m, { sock }) {
   // Wrong role for command
   return m.reply(
     `❌ ¡No tienes esta habilidad!
-> Papel que usted: ${ROLES[player.role]?.name || "Unknown"}`,
+> Tu papel: ${ROLES[player.role]?.name || "Desconocido"}`,
   );
 }
 

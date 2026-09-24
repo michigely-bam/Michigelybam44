@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "bratpatrick",
   alias: [],
   category: "sticker",
-  description: "Membuat sticker brat patrick",
+  description: "Crear un sticker Brat de Patricio",
   usage: ".bratpatrick <text>",
   example: ".Bratpatrick.",
   isOwner: false,
@@ -25,7 +25,7 @@ async function handler(m, { sock }) {
 
 > Escriba texto
 
-\`Contoh: ${m.prefix}Bratpatrick.\``,
+\`Ejemplo: ${m.prefix}Bratpatrick.\``,
     );
   }
 

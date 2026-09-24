@@ -61,7 +61,7 @@ function getContextInfo(title = "⏰ *ʜᴏᴜʀʟʏ*", body = "Un regalo por ho
 function msToTime(duration) {
   const minutes = Math.floor((duration / (1000 * 60)) % 60);
   const seconds = Math.floor((duration / 1000) % 60);
-  return `${minutes} menit ${seconds} detik`;
+  return `${minutes} minutos ${seconds} segundos`;
 }
 
 async function handler(m, { sock }) {
@@ -78,9 +78,12 @@ async function handler(m, { sock }) {
   if (now - lastClaim < COOLDOWN) {
     const remaining = COOLDOWN - (now - lastClaim);
     return m.reply(
-      `⏰ *sᴜᴅᴀʜ ᴋʟᴀɪᴍ*\n\n` +
-        `> Kamu sudah klaim hadiah jam ini\n` +
-        `> Kembali dalam: *${msToTime(remaining)}*`,
+      `⏰ *después de la reclamación*
+
+` +
+        `Has reclamado el regalo de esta hora.
+` +
+        `Volver a la interior: *${msToTime(remaining)}*`,
     );
   }
 
@@ -96,7 +99,7 @@ async function handler(m, { sock }) {
   await m.react("⏰");
 
   let txt = `⏰ *ʜᴏᴜʀʟʏ ʀᴇᴡᴀʀᴅ*\n\n`;
-  txt += `╭┈┈⬡「 🎊 *ʜᴀᴅɪᴀʜ* 」\n`;
+  txt += `╭┈┈⬡「 🎊 *PREMIO* 」\n`;
   txt += `┃ 💵 Money: *+Rp ${moneyReward.toLocaleString("id-ID")}*\n`;
   txt += `┃ 🚄 Exp: *+${expReward}*\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;

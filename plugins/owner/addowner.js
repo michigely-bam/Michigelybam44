@@ -87,7 +87,7 @@ function savePanelConfig() {
     fs.writeFileSync(configPath, content, "utf8");
     return true;
   } catch (e) {
-    console.error("[AddOwner] Failed to save panel config:", e.message);
+    console.error("[AddOwner] No se pudo guardar la configuración del panel:", e.message);
     return false;
   }
 }

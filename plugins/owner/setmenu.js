@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "setmenu",
   alias: ["menuvariant", "menustyle"],
   category: "owner",
-  description: "Mengatur variant tampilan menu",
+  description: "Configura la variante visual del menú",
   usage: ".setmenu <v1-v13>",
   example: ".setmenu v8",
   isOwner: true,
@@ -19,7 +19,7 @@ const pluginConfig = {
 };
 
 const VARIANTS = {
-  v1: { id: 1, name: "Simple", desc: "Image biasa tanpa contextInfo" },
+  v1: { id: 1, name: "Simple", desc: "Imagen normal sin contextoInfo" },
   v2: { id: 2, name: "Standard", desc: "Image + full contextInfo (default)" },
   v3: {
     id: 3,
@@ -40,7 +40,7 @@ const VARIANTS = {
   v7: {
     id: 7,
     name: "Carousel",
-    desc: "Swipeable cards per kategori (modern)",
+    desc: "Tarjetas deslizables por categoría (moderno)",
   },
   v8: {
     id: 8,
@@ -58,14 +58,14 @@ const VARIANTS = {
     name: "Document Interactive",
     desc: "Document + nativeFlowMessage + limited_time_offer + cta buttons",
   },
-  v12: { id: 12, name: "MENU VERSI 12", desc: "XXXXXX" },
+  v12: { id: 12, name: "MENÚ VERSIÓN 12", desc: "XXXXXX" },
   v13: {
     id: 13,
     name: "Canvas Thumbnail",
     desc: "Document style V6 + Canvas Banner Thumbnail",
   },
-  v14: { id: 14, name: "MENU VERSI 14", desc: "XXXXXX" },
-  v15: { id: 15, name: "MENU VERSI 15", desc: "XXXXXX" },
+  v14: { id: 14, name: "MENÚ VERSIÓN 14", desc: "XXXXXX" },
+  v15: { id: 15, name: "MENÚ VERSIÓN 15", desc: "XXXXXX" },
 };
 
 async function handler(m, { sock, db }) {
@@ -85,7 +85,7 @@ Uso: v1 s / d v15`);
     await db.save();
 
     await m.reply(
-      `✅ Menu variant diubah ke *V${selected.id}*\n\n` +
+      `✅ El menú de variantes fue cambiado a *V${selected.id}*\n\n` +
         `> *${selected.name}*\n` +
         `> _${selected.desc}_`,
     );
@@ -102,19 +102,19 @@ Uso: v1 s / d v15`);
 
   const bodyText =
     `🎨 *sᴇᴛ ᴍᴇɴᴜ ᴠᴀʀɪᴀɴᴛ*\n\n` +
-    `> Variant aktif: *V${current}*\n` +
-    `> _${VARIANTS[`v${current}`]?.name || "Unknown"}_\n\n` +
-    `> Pilih variant dari daftar di bawah`;
+    `> Variante activa: *V${current}*\n` +
+    `> _${VARIANTS[`v${current}`]?.name || "Desconocido"}_\n\n` +
+    `> Elige una variante de la lista siguiente`;
 
   try {
     const interactiveButtons = [
       {
         name: "single_select",
         buttonParamsJson: JSON.stringify({
-          title: "🎨 ᴘɪʟɪʜ ᴠᴀʀɪᴀɴᴛ",
+          title: "🎨 ELEGIR VARIANTE",
           sections: [
             {
-              title: "ᴅᴀꜰᴛᴀʀ ᴠᴀʀɪᴀɴᴛ ᴍᴇɴᴜ",
+              title: "LISTA DE VARIANTES DEL MENÚ",
               rows,
             },
           ],
@@ -174,7 +174,8 @@ Uso: v1 s / d v15`);
       const mark = val.id === current ? " ✓" : "";
       txt += `> *${key.toUpperCase()}*${mark} — _${val.desc}_\n`;
     }
-    txt += `\n_Gunakan: \`.setmenu v1\` dst._`;
+    txt += `
+_Uso: \`.setmenu v1\` dst._`;
     await m.reply(txt);
   }
 }

@@ -5,8 +5,8 @@ const pluginConfig = {
   name: "beli",
   alias: ["order", "pesan", "buy"],
   category: "store",
-  description: "🛒 Mensaje del producto y obtener números de transacción",
-  usage: ".comprar el número de_produk>",
+  description: "🛒 Comprar un producto y obtener un número de transacción",
+  usage: ".beli <número_producto>",
   example: ".beli 1",
   isOwner: false,
   isPremium: false,
@@ -29,7 +29,7 @@ async function handler(m, { sock }) {
     return m.reply(
       `📭 *Todavía no hay producto disponible.*
 
-Ketik \`${m.prefix}listproduk\` para ver la lista de productos 🛍️`,
+Escribe \`${m.prefix}listproduk\` para ver la lista de productos 🛍️`,
     );
   }
 
@@ -39,7 +39,7 @@ Ketik \`${m.prefix}listproduk\` para ver la lista de productos 🛍️`,
   if (isNaN(idx) || idx < 0 || idx >= products.length) {
     let txt = `🛒 *Seleccione el producto*
 
-Ketik \`${m.prefix}comprar el número de contacto\` para ordenar.
+Escribe \`${m.prefix}beli <número>\` para pedirlo.
 
 `;
     for (let i = 0; i < products.length; i++) {
@@ -56,7 +56,7 @@ Ketik \`${m.prefix}comprar el número de contacto\` para ordenar.
 
   const product = products[idx];
   const typeIcon = product.type === "fisik" ? "📦" : "🔑";
-  const typeLabel = product.type === "fisik" ? "Fisik" : "Digital";
+  const typeLabel = product.type === "fisik" ? "Físico" : "Digital";
 
   const isAvailable =
     product.type === "fisik"
@@ -65,10 +65,16 @@ Ketik \`${m.prefix}comprar el número de contacto\` para ordenar.
 
   if (!isAvailable) {
     return m.reply(
-      `❌ *Stok Habis*\n\n` +
-        `${typeIcon} Produk *${product.name}* saat ini sedang tidak tersedia 😔\n\n` +
-        `Silakan hubungi admin atau cek kembali nanti.\n\n` +
-        `_Kami akan segera mengisi ulang stok_ 🙏`,
+      `❌ *Sin existencias*
+
+` +
+        `${typeIcon} Producto *${product.name}*actualmente no está disponible 😔
+
+` +
+        `Por favor, póngase en contacto con el administrador o revise más tarde.
+
+` +
+        `_ 🙏 Vamos a reponer el stock pronto`,
     );
   }
 
@@ -104,10 +110,11 @@ Ketik \`${m.prefix}comprar el número de contacto\` para ordenar.
 
 `;
   txt += `🧾 Número de transacción: \`${trxId}\`\n\n`;
-  txt += `📦 *Detail Pesanan:*\n`;
-  txt += `${typeIcon} Produk: *${product.name}*\n`;
-  txt += `🏷️ Tipe: *${typeLabel}*\n`;
-  txt += `💰 Harga: *${formatPrice(product.price)}*\n`;
+  txt += `📦 *Detalles del pedido:*
+`;
+  txt += `${typeIcon} Producto: *${product.name}*\n`;
+  txt += `🏷️ Tipo: *${typeLabel}*\n`;
+  txt += `💰 Precio: *${formatPrice(product.price)}*\n`;
   if (product.originalPrice)
     txt += `🏷️ ~~${formatPrice(product.originalPrice)}~~\n`;
   if (product.description) txt += `📝 _${product.description}_\n`;
@@ -129,8 +136,10 @@ Ketik \`${m.prefix}comprar el número de contacto\` para ordenar.
     await m.reply(txt);
   }
 
-  let paymentTxt = `💳 *INSTRUKSI PEMBAYARAN*\n\n`;
-  paymentTxt += `1️⃣ Transfer sebesar *${formatPrice(product.price)}* al número de administración 💰
+  let paymentTxt = `💳 *INSTRUCCIONES DE PAGO*
+
+`;
+  paymentTxt += `1️⃣ Transferencia de *${formatPrice(product.price)}* al número de administración 💰
 `;
 
   if (config.store?.payment?.length) {
@@ -144,7 +153,7 @@ Ketik \`${m.prefix}comprar el número de contacto\` para ordenar.
   }
 
   paymentTxt += `
-Dos, después de la transferencia, envía. *bukti pembayaran* a admin 📸
+Dos, después de la transferencia, envía. *prueba de pago* un administrador 📸
 `;
   paymentTxt += `3 para Admin verificará y enviará datos de producto a usted ✅
 
@@ -164,13 +173,15 @@ Dos, después de la transferencia, envía. *bukti pembayaran* a admin 📸
     const buyerNum = m.sender.split("@")[0];
     await sock.sendMessage(ownerJid, {
       text:
-        `🛒 *PESANAN BARU*\n\n` +
+        `🛒 *NUEVO PEDIDO*
+
+` +
         `🧾 TRX: \`${trxId}\`\n` +
-        `👤 Pembeli: *${m.pushName || buyerNum}*\n` +
-        `📱 Nomor: \`${buyerNum}\`\n` +
-        `${typeIcon} Produk: *${product.name}*\n` +
-        `💰 Harga: *${formatPrice(product.price)}*\n\n` +
-        `_Setelah menerima bukti transfer 📸, reply pesan pembeli lalu ketik \`${m.prefix}done ${trxId}\`_ ✅`,
+        `👤 Compradores: *${m.pushName || buyerNum}*\n` +
+        `📱 Número: \`${buyerNum}\`\n` +
+        `${typeIcon} Producto: *${product.name}*\n` +
+        `💰 Precio: *${formatPrice(product.price)}*\n\n` +
+        `_Después de recibir la prueba de transferencia 📸, responda el mensaje del comprador y escriba \`${m.prefix}done ${trxId}\`_ ✅`,
     });
   }
 }

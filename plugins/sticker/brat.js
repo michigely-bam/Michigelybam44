@@ -6,9 +6,9 @@ const pluginConfig = {
   name: "brat",
   alias: ["bratmenu", "bratimg", "brattext"],
   category: "sticker",
-  description: "Menú de la variante de latón y generador de adhesivos",
-  usage: ".brat | .bratimg <text>",
-  example: ".Hermano Hi todos",
+  description: "Menú de variantes y generador de stickers Brat",
+  usage: ".brat | .bratimg <texto>",
+  example: ".bratimg Hola a todos",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -20,64 +20,64 @@ const pluginConfig = {
 
 const BRAT_VARIANTS = [
   {
-    title: "Brat Default",
-    description: "Sticker brat versi biasa",
+    title: "Brat predeterminado",
+    description: "Sticker Brat normal",
     command: "bratimg",
   },
   {
-    title: "Brat Green",
-    description: "Variant brat warna hijau",
+    title: "Brat verde",
+    description: "Variante Brat de color verde",
     command: "bratgreen",
   },
   {
-    title: "Brat White",
-    description: "Variant brat warna putih",
+    title: "Brat blanco",
+    description: "Variante Brat de color blanco",
     command: "bratwhite",
   },
   {
     title: "Brat Anime",
-    description: "Variant brat anime",
+    description: "Variante Brat de anime",
     command: "bratanime",
   },
   {
-    title: "Brat Cewek",
-    description: "Variant brat cewek",
+    title: "Brat para chica",
+    description: "Variante Brat para chica",
     command: "bratcewek",
   },
   {
     title: "Brat Bahlil",
-    description: "Variant brat bahlil",
+    description: "Variante Brat Bahlil",
     command: "bratbahlil",
   },
   {
     title: "Brat Patrick",
-    description: "Variant brat Patrick",
+    description: "Variante Brat Patrick",
     command: "bratpatrick",
   },
   {
     title: "Brat Squidward",
-    description: "Variant brat Squidward",
+    description: "Variante Brat Squidward",
     command: "bratsquidward",
   },
   {
     title: "Brat Vermeil",
-    description: "Variant brat Vermeil",
+    description: "Variante Brat Vermeil",
     command: "bratvermeil",
   },
-  { title: "Brat HD", description: "Variant brat HD", command: "brathd" },
+  { title: "Brat HD", description: "Variante Brat HD", command: "brathd" },
   {
     title: "Brat Video",
-    description: "Sticker brat animated",
+    description: "Sticker Brat animado",
     command: "bratvid",
   },
   {
     title: "Brat Video V2",
-    description: "Sticker brat video v2",
+    description: "Sticker Brat de video V2",
     command: "bratvid2",
   },
   {
     title: "Kanna Brat",
-    description: "Variant brat Kanna",
+    description: "Variante Brat Kanna",
     command: "kannabrat",
   },
 ];
@@ -85,22 +85,22 @@ const BRAT_VARIANTS = [
 function buildVariantRows(prefix, text) {
   return BRAT_VARIANTS.map((item) => ({
     title: item.title,
-    description: `${item.description} • .${item.command} <text>`,
+    description: `${item.description} • .${item.command} <texto>`,
     id: `${prefix}${item.command} ${text}`,
   }));
 }
 
 async function sendBratMenu(m, sock, text) {
   const caption =
-    "🌿 *Usted quiere crear yak de latón, por favor seleccione un rango de teclas diferente debajo*";
+    "🌿 *¿Quieres crear un sticker Brat? Elige una variante.*";
   const buttons = [
     {
       name: "single_select",
       buttonParamsJson: JSON.stringify({
-        title: "🌾 Seleccione una correa variable",
+        title: "🌾 Elegir variante",
         sections: [
           {
-            title: "Variant Brat",
+            title: "Variantes Brat",
             rows: buildVariantRows(m.prefix, text),
           },
         ],
@@ -135,7 +135,7 @@ async function handler(m, { sock }) {
 
 > Escriba texto
 
-\`Contoh: ${m.prefix}Hermano Hi todos\``,
+\`Ejemplo: ${m.prefix}Hermano Hi todos\``,
     );
   }
 

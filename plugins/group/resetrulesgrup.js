@@ -22,9 +22,11 @@ function handler(m) {
     db.setGroup(m.chat, { groupRules: null })
     
     m.reply(
-        `✅ *ɢʀᴜᴘ ʀᴜʟᴇs ᴅɪʀᴇsᴇᴛ*\n` +
-        `Rules grup berhasil direset ke default!\n` +
-        `Ketik \`${m.prefix}rulesgrup\` untuk melihat.`
+        `✅ *el grupo de reglas se rediseñó*
+` +
+        `¡Las reglas del grupo se restablecieron correctamente!
+` +
+        `Escribe \`${m.prefix}rulesgrup\` para ver.`
     )
 }
 

@@ -24,14 +24,18 @@ async function handler(m, { sock }) {
         return m.reply(
             `🎨 *ʟɪɴᴇ sᴛɪᴄᴋᴇʀ ᴘᴀᴄᴋ*\n\n` +
             `> Download LINE sticker pack\n\n` +
-            `╭┈┈⬡「 📋 *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ* 」\n` +
+            `╭┈┈⬡「 📋 *MODO DE USO* 」\n` +
             `┃ ${m.prefix}linesticker <url>\n` +
             `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-            `*ᴄᴀʀᴀ ᴅᴀᴘᴀᴛ ᴜʀʟ:*\n` +
-            `> 1. Buka https://store.line.me\n` +
-            `> 2. Pilih sticker pack\n` +
-            `> 3. Copy URL dari browser\n\n` +
-            `*ᴄᴏɴᴛᴏʜ:*\n` +
+            `*CÓMO OBTENER LA URL:*\n` +
+            `> 1. Abre https://store.line.me
+` +
+            `> 2. Elige un paquete de stickers
+` +
+            `> 3. Copiar URL desde el navegador
+
+` +
+            `*EJEMPLO:*\n` +
             `> ${m.prefix}linesticker https://store.line.me/stickershop/product/9801/en`
         )
     }
@@ -55,7 +59,7 @@ async function handler(m, { sock }) {
         
         const data = res.data.data
         const title = data.title || 'LINE Sticker'
-        const author = data.author || 'Unknown'
+        const author = data.author || 'Desconocido'
         const isAnimated = data.animated || false
         
         const stickerUrls = isAnimated && data.sticker_animation_url?.length
@@ -72,10 +76,10 @@ async function handler(m, { sock }) {
             `╭┈┈⬡「 📦 *ɪɴꜰᴏ* 」\n` +
             `┃ 📝 *Title:* ${title}\n` +
             `┃ 👤 *Author:* ${author}\n` +
-            `┃ 🎬 *Animated:* ${isAnimated ? 'Ya' : 'Tidak'}\n` +
+            `┃ 🎬 *Animated:* ${isAnimated ? 'Ya' : "No"}\n` +
             `┃ 📊 *Total:* ${stickerUrls.length}\n` +
             `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-            `> 🕕 Mengirim sticker...`
+            `> 🕕 Enviando stickers...`
         )
         
         const maxStickers = Math.min(stickerUrls.length, 10)

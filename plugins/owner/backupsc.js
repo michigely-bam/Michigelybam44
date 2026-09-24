@@ -223,12 +223,14 @@ async function handler(m, { sock }) {
         fileName: zipFileName,
         mimetype: "application/zip",
         caption:
-          `✅ *ʙᴀᴄᴋᴜᴘ sᴇʟᴇsᴀɪ*\n\n` +
+          `✅ *backup completado*
+
+` +
           `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-          `┃ 📝 ɴᴀᴍᴀ: \`${zipFileName}\`\n` +
+          `┃ 📝 NOMBRE: \`${zipFileName}\`\n` +
           `┃ 📊 sɪᴢᴇ: \`${fileSizeMB} MB\`\n` +
           `┃ 📁 ꜰɪʟᴇ: \`${fileCount}\`\n` +
-          `┃ 📅 ᴛᴀɴɢɢᴀʟ: \`${moment().tz("Asia/Jakarta").format("DD/MM/YYYY")}\`\n` +
+          `┃ 📅 FECHA: \`${moment().tz("Asia/Jakarta").format("DD/MM/YYYY")}\`\n` +
           `╰┈┈⬡`,
         contextInfo: {
           forwardingScore: 9999,

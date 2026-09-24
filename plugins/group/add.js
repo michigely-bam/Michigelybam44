@@ -3,8 +3,8 @@ const pluginConfig = {
     name: 'add',
     alias: ['addmember', 'invite'],
     category: 'group',
-    description: "Añadiendo miembro al grupo (apoyo múltiple)",
-    usage: ".añadir √° n° 1 √°2 [número 2] [número 3]..._grup]",
+    description: 'Añadir miembros al grupo (admite varios números)',
+    usage: '.add <número1> [número2] [número3] ... [enlace_grupo]',
     example: '.add 6281234567890 6281234567890',
     isOwner: false,
     isPremium: false,
@@ -23,17 +23,20 @@ async function handler(m, { sock }) {
     if (args.length === 0) {
         return m.reply(
             `👥 *ᴀᴅᴅ ᴍᴇᴍʙᴇʀ*\n\n` +
-            `> Cara pakai:\n` +
-            `> 1. Di grup: \`${m.prefix}add <nomor>\`\n` +
-            `> 2. Multiple: \`${m.prefix}add <nomor1> <nomor2> ...\`\n` +
-            `> 3. Di private: \`${m.prefix}add <nomor> <link_grup>\`\n\n` +
-            `> Contoh:\n` +
+            `> Modo de uso:
+` +
+            `> 1. En el grupo: \`${m.prefix}add <número>\`\n` +
+            `> 2. Múltiples: \`${m.prefix}add <número1> <número2> ...\`\n` +
+            `> 3. En privado: \`${m.prefix}add <número> <enlace_grupo>\`\n\n` +
+            `> Ejemplo:\n` +
             `> \`${m.prefix}add 6281234567890\`\n` +
             `> \`${m.prefix}add 628123 628456 628789\`\n` +
             `> \`${m.prefix}add 628123 https://chat.whatsapp.com/xxx\`\n\n` +
-            `> Syarat:\n` +
-            `> - Bot harus admin di grup target\n` +
-            `> - Yang jalankan command harus admin`
+            `> Requisitos:
+` +
+            `> - el bot deben ser administradores en el grupo objetivo
+` +
+            `El ejecutor del comando debe ser el administrador.`
         )
     }
     
@@ -47,7 +50,7 @@ async function handler(m, { sock }) {
                 const groupInfo = await sock.groupGetInviteInfo(linkMatch[1])
                 targetGroup = groupInfo.id
             } catch (e) {
-                return m.reply(`❌ *ɢᴀɢᴀʟ*
+                return m.reply(`❌ *falló*
 
 > Inválido o ya caducado enlace de grupo!`)
             }
@@ -65,17 +68,17 @@ async function handler(m, { sock }) {
     }
     
     if (targetNumbers.length === 0) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*
+        return m.reply(`❌ *falló*
 
 > ¡Introdúzca un número válido!`)
     }
     
     if (!targetGroup) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*
+        return m.reply(`❌ *Error*
 
-> ¡Corre en grupo o incluya enlaces de grupo!
+> Ejecuta este comando en un grupo o incluye el enlace del grupo.
 
-\`${m.prefix}añadir el número de contacto_grup>\``)
+\`${m.prefix}add <número>`)
     }
     
     try {
@@ -86,7 +89,7 @@ async function handler(m, { sock }) {
         )
         
         if (!botParticipant || !['admin', 'superadmin'].includes(botParticipant.admin)) {
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > No grupo admin bot *${groupMeta.subject}*!`)
         }
@@ -98,7 +101,7 @@ async function handler(m, { sock }) {
             )
             
             if (!senderParticipant || !['admin', 'superadmin'].includes(senderParticipant.admin)) {
-                return m.reply(`❌ *ɢᴀɢᴀʟ*
+                return m.reply(`❌ *falló*
 
 > No eres un administrador en el grupo. *${groupMeta.subject}*!`)
             }
@@ -120,7 +123,7 @@ async function handler(m, { sock }) {
         }
         
         if (validNumbers.length === 0) {
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > ¡Todos los números están en el grupo!`)
         }
@@ -150,7 +153,7 @@ async function handler(m, { sock }) {
 `
         
         if (successList.length > 0) {
-            resultText += `Ada *${successList.length}* Miembro añadido con éxito:
+            resultText += `Hay *${successList.length}* Miembro añadido con éxito:
 `
             successList.forEach(n => resultText += `• @${n}\n`)
             resultText += `\n`
@@ -164,13 +167,13 @@ async function handler(m, { sock }) {
         }
         
         if (failedList.length > 0) {
-            resultText += `❌ *ɢᴀɢᴀʟ (${failedList.length}):*\n`
+            resultText += `❌ *ERROR (${failedList.length}):*\n`
             failedList.forEach(f => resultText += `• @${f.num} (${f.status})\n`)
             resultText += `\n`
         }
         
         if (alreadyInGroup.length > 0) {
-            resultText += `⏭️ *sᴜᴅᴀʜ ᴅɪ ɢʀᴜᴘ (${alreadyInGroup.length}):*\n`
+            resultText += `⏭️ *ya en el grupo (${alreadyInGroup.length}):*\n`
             alreadyInGroup.forEach(n => resultText += `• @${n}\n`)
         }
         
@@ -181,11 +184,11 @@ async function handler(m, { sock }) {
         m.react('❌')
         
         if (error.message?.includes('not-authorized')) {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*
+            await m.reply(`❌ *falló*
 
 > ¡El Bot no tiene permiso para añadir un miembro!`)
         } else if (error.message?.includes('forbidden')) {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*
+            await m.reply(`❌ *falló*
 
 > ¡El Bot no tiene acceso a este grupo!`)
         } else {

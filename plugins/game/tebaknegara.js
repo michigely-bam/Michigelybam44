@@ -3,7 +3,7 @@ import { games } from '../../src/lib/ourin-games.js'
 games.register('tebaknegara', {
     alias: ['tn', 'guesscountry'],
     emoji: '🌍',
-    title: 'TEBAK NEGARA',
+    title: "ADIVINA EL PAÍS",
     description: "Adivina el nombre del país."
 })
 

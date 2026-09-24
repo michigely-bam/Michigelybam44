@@ -16,20 +16,20 @@ const pluginConfig = {
 }
 
 const SHOP_ITEMS = {
-    potion: { name: '🧪 Potion', buyPrice: 100, sellPrice: 50, desc: 'Pulihkan 50 HP' },
-    manapotion: { name: '💙 Mana Potion', buyPrice: 150, sellPrice: 75, desc: 'Pulihkan 50 Mana' },
-    antidote: { name: '💊 Antidote', buyPrice: 80, sellPrice: 40, desc: 'Sembuhkan racun' },
-    bread: { name: '🍞 Roti', buyPrice: 30, sellPrice: 15, desc: 'Pulihkan 10 stamina' },
-    energydrink: { name: '⚡ Energy Drink', buyPrice: 200, sellPrice: 100, desc: 'Pulihkan 50 stamina' },
-    pickaxe: { name: '⛏️ Beliung', buyPrice: 500, sellPrice: 250, desc: "Para la minería" },
-    fishingrod: { name: '🎣 Joran', buyPrice: 400, sellPrice: 200, desc: "Para pescar" },
-    wood: { name: '🪵 Kayu', buyPrice: 50, sellPrice: 25, desc: 'Material dasar' },
-    iron: { name: '🔩 Besi', buyPrice: 80, sellPrice: 40, desc: 'Material logam' },
-    leather: { name: '🧶 Kulit', buyPrice: 60, sellPrice: 30, desc: 'Material armor' },
-    string: { name: '🧵 Benang', buyPrice: 40, sellPrice: 20, desc: 'Material busur' },
-    herb: { name: '🌿 Herba', buyPrice: 70, sellPrice: 35, desc: 'Bahan alchemy' },
-    gold: { name: '🪙 Emas', buyPrice: 500, sellPrice: 250, desc: 'Material langka' },
-    diamond: { name: '💎 Berlian', buyPrice: 2000, sellPrice: 1000, desc: 'Material mewah' }
+    potion: { name: '🧪 Poción', buyPrice: 100, sellPrice: 50, desc: 'Recupera 50 de HP' },
+    manapotion: { name: '💙 Poción de maná', buyPrice: 150, sellPrice: 75, desc: "Recupera 50 de maná" },
+    antidote: { name: '💊 Antídoto', buyPrice: 80, sellPrice: 40, desc: "Cura el veneno" },
+    bread: { name: '🍞 Pan', buyPrice: 30, sellPrice: 15, desc: 'Recupera 10 de resistencia' },
+    energydrink: { name: '⚡ Bebida energética', buyPrice: 200, sellPrice: 100, desc: 'Recupera 50 de resistencia' },
+    pickaxe: { name: '⛏️ Pico', buyPrice: 500, sellPrice: 250, desc: "Para la minería" },
+    fishingrod: { name: '🎣 Caña de pescar', buyPrice: 400, sellPrice: 200, desc: "Para pescar" },
+    wood: { name: '🪵 Madera', buyPrice: 50, sellPrice: 25, desc: "Material básico" },
+    iron: { name: '🔩 Hierro', buyPrice: 80, sellPrice: 40, desc: "Material metálico" },
+    leather: { name: '🧶 Cuero', buyPrice: 60, sellPrice: 30, desc: 'Material para armaduras' },
+    string: { name: '🧵 Hilo', buyPrice: 40, sellPrice: 20, desc: "Material para arcos" },
+    herb: { name: '🌿 Hierba', buyPrice: 70, sellPrice: 35, desc: "Material de alquimia" },
+    gold: { name: '🪙 Oro', buyPrice: 500, sellPrice: 250, desc: "Material raro" },
+    diamond: { name: '💎 Diamante', buyPrice: 2000, sellPrice: 1000, desc: "Material de lujo" }
 }
 
 function handler(m) {
@@ -58,13 +58,13 @@ function handler(m) {
     }
     
     if (action === 'list') {
-        let txt = `🏪 *ᴅᴀꜰᴛᴀʀ ɪᴛᴇᴍ*\n\n`
+        let txt = `🏪 *LISTA DE ARTÍCULOS*\n\n`
         txt += `╭┈┈⬡「 📦 *sʜᴏᴘ* 」\n`
         
         for (const [key, item] of Object.entries(SHOP_ITEMS)) {
             txt += `┃ ${item.name}\n`
-            txt += `┃ 💵 Beli: ${item.buyPrice.toLocaleString()}\n`
-            txt += `┃ 💰 Jual: ${item.sellPrice.toLocaleString()}\n`
+            txt += `┃ 💵 Comprar: ${item.buyPrice.toLocaleString()}\n`
+            txt += `┃ 💰 Venta: ${item.sellPrice.toLocaleString()}\n`
             txt += `┃ 📝 ${item.desc}\n`
             txt += `┃ → \`${key}\`\n`
             txt += `┃\n`
@@ -76,21 +76,21 @@ function handler(m) {
     
     if (action === 'buy') {
         if (!itemKey) {
-            return m.reply(`❌ Tentukan item!\n\n> Contoh: \`${m.prefix}merchant buy potion 5\``)
+            return m.reply(`❌ ¡Elige un artículo!\n\n> Ejemplo: \`${m.prefix}merchant buy potion 5\``)
         }
         
         const item = SHOP_ITEMS[itemKey]
         if (!item) {
             return m.reply(`❌ ¡El artículo no se encuentra!
 
-> Ketik \`${m.prefix}merchant list\` para ver la lista.`)
+> Escribe \`${m.prefix}merchant list\` para ver la lista.`)
         }
         
         const totalCost = item.buyPrice * qty
         if ((user.koin || 0) < totalCost) {
             return m.reply(
-                `❌ *ʙᴀʟᴀɴᴄᴇ ᴋᴜʀᴀɴɢ*\n\n` +
-                `> Harga: ${totalCost.toLocaleString()}\n` +
+                `❌ *SALDO INSUFICIENTE*\n\n` +
+                `> Precio: ${totalCost.toLocaleString()}\n` +
                 `> Balance: ${(user.koin || 0).toLocaleString()}`
             )
         }
@@ -100,19 +100,21 @@ function handler(m) {
         db.save()
         
         return m.reply(
-            `✅ *ᴘᴇᴍʙᴇʟɪᴀɴ ʙᴇʀʜᴀsɪʟ*\n\n` +
+            `✅ *la compra fue exitosa*
+
+` +
             `╭┈┈⬡「 🛒 *ᴅᴇᴛᴀɪʟ* 」\n` +
             `┃ 📦 Item: *${item.name}*\n` +
             `┃ 📊 Qty: *${qty}*\n` +
             `┃ 💵 Total: *-${totalCost.toLocaleString()}*\n` +
-            `┃ 💰 Sisa: *${user.koin.toLocaleString()}*\n` +
+            `┃ 💰 Restante: *${user.koin.toLocaleString()}*\n` +
             `╰┈┈┈┈┈┈┈┈⬡`
         )
     }
     
     if (action === 'sell') {
         if (!itemKey) {
-            return m.reply(`❌ Tentukan item!\n\n> Contoh: \`${m.prefix}merchant sell iron 10\``)
+            return m.reply(`❌ ¡Elige un artículo!\n\n> Ejemplo: \`${m.prefix}merchant sell iron 10\``)
         }
         
         const item = SHOP_ITEMS[itemKey]
@@ -123,9 +125,9 @@ function handler(m) {
         const have = user.inventory[itemKey] || 0
         if (have < qty) {
             return m.reply(
-                `❌ *ɪᴛᴇᴍ ᴋᴜʀᴀɴɢ*\n\n` +
-                `> Punya: ${have}\n` +
-                `> Mau jual: ${qty}`
+                `❌ *FALTAN ARTÍCULOS*\n\n` +
+                `> Tiene: ${have}\n` +
+                `> Vas a vender: ${qty}`
             )
         }
         
@@ -136,7 +138,9 @@ function handler(m) {
         db.save()
         
         return m.reply(
-            `✅ *ᴘᴇɴᴊᴜᴀʟᴀɴ ʙᴇʀʜᴀsɪʟ*\n\n` +
+            `✅ *las ventas fueron exitosas*
+
+` +
             `╭┈┈⬡「 💰 *ᴅᴇᴛᴀɪʟ* 」\n` +
             `┃ 📦 Item: *${item.name}*\n` +
             `┃ 📊 Qty: *${qty}*\n` +

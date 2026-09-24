@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "robloxstalk",
   alias: ["rblxstalk", "rbxstalk", "stalkroblox", "stalkrbx"],
   category: "stalker",
-  description: "Stalk akun Roblox berdasarkan username",
+  description: "Detenga la cuenta de Roblox basándose en el nombre de usuario",
   usage: ".robloxstalk <username>",
   example: ".robloxstalk Linkmon99",
   isOwner: false,
@@ -115,8 +115,10 @@ async function handler(m, { sock }) {
   if (!username) {
     return m.reply(
       `🎮 *ʀᴏʙʟᴏx sᴛᴀʟᴋ*\n\n` +
-        `> Masukkan username Roblox\n\n` +
-        `\`Contoh: ${m.prefix}robloxstalk Linkmon99\``,
+        `> Ingrese el nombre de usuario de Roblox
+
+` +
+        `\`Ejemplo: ${m.prefix}robloxstalk Linkmon99\``,
     );
   }
 
@@ -177,7 +179,7 @@ async function handler(m, { sock }) {
       `🆔 *ID*: ${res.id}\n` +
       `🎄 *Username*: ${res.username}\n` +
       `📛 *Display*: ${res.displayName}\n` +
-      `✅ *Verified*: ${res.verified ? "Ya" : "Tidak"}\n` +
+      `✅ *Verified*: ${res.verified ? "Ya" : "No"}\n` +
       `📅 *Created*: ${res.created ? new Date(res.created).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }) : "-"}\n` +
       `\n` +
       `*SOCIAL*\n` +

@@ -10,8 +10,8 @@ const pluginConfig = {
   alias: ["fstory", "fakeinsta", "igstory"],
   category: "canvas",
   description: "Crear una historia de Instagram con 2 imágenes",
-  usage: ".faestory < nombre",
-  example: ".fakestory Misaki (reply 2 gambar)",
+  usage: ".fakestory <nombre>",
+  example: ".fakestory Misaki (respuesta 2 imágenes)",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -212,9 +212,11 @@ async function handler(m, { sock }) {
       m.react("❌");
       return m.reply(
         `📷 *ꜰᴀᴋᴇ sᴛᴏʀʏ*\n\n` +
-          `> Reply 1 atau 2 gambar!\n\n` +
-          `> Format: \`${m.prefix}fakestory <nama>\`\n` +
-          `> Contoh: \`${m.prefix}fakestory Misaki\``,
+          `¡Responda a una o dos imágenes!
+
+` +
+          `> Formato: \`${m.prefix}fakestory <nombre>\`\n` +
+          `> Ejemplo: \`${m.prefix}fakestory Misaki\``,
       );
     }
     if (m.isImage && m.download) {
@@ -226,7 +228,7 @@ async function handler(m, { sock }) {
     }
     if (!imageTopBuffer) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > No se puede descargar imagen`);
     }

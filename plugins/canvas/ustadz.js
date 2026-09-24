@@ -7,7 +7,7 @@ const pluginConfig = {
     alias: ['ustad', 'quoteustadz', 'canvasustadz'],
     category: 'canvas',
     description: "Crear citas de estilo ustadz",
-    usage: '.ustadz <text>',
+    usage: '.ustadz <texto>',
     example: ".No olvides rezar.",
     isOwner: false,
     isPremium: false,
@@ -24,8 +24,10 @@ async function handler(m, { sock }) {
     if (!text) {
         return m.reply(
             `👲 *ᴄᴀɴᴠᴀs ᴜsᴛᴀᴅᴢ*\n\n` +
-            `> Masukkan teks untuk dijadikan quote.\n\n` +
-            `> Contoh: \`${m.prefix}ustadz Jangan lupa bersyukur\``
+            `Introduce el texto para ser citado.
+
+` +
+            `> Ejemplo: \`${m.prefix}ustadz No olvides dar las gracias\``
         )
     }
     

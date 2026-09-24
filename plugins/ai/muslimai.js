@@ -5,8 +5,8 @@ const pluginConfig = {
     alias: ['islamai', 'quranai'],
     category: 'ai',
     description: "IA para preguntar sobre el Islam y el Corán",
-    usage: '.muslimai <pertanyaan>',
-    example: '.muslimai Apa itu sholat?',
+    usage: '.muslimai <pregunta>',
+    example: ".muslimai ¿Qué es la oración?",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -23,7 +23,7 @@ async function handler(m, { sock }) {
 
 > Introdúzcase la pregunta sobre el Islam
 
-\`Contoh: ${m.prefix}muslimai Apa itu sholat?\``)
+\`Ejemplo: ${m.prefix}muslimai ¿Qué es la oración?\``)
     }
     
     m.react('🕕')

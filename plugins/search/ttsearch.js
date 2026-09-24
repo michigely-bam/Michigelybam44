@@ -10,7 +10,7 @@ const pluginConfig = {
   name: "ttsearch",
   alias: ["tiktoksearch", "tts", "searchtiktok"],
   category: "search",
-  description: "Cari video TikTok",
+  description: "Busca los vídeos de TikTok",
   usage: ".ttsearch <query>",
   example: ".ttsearch jj epep",
   isOwner: false,
@@ -27,13 +27,13 @@ async function handler(m, { sock }) {
 
   if (!query) {
     return m.reply(
-      `╭┈┈⬡「 🎵 *ᴛɪᴋᴛᴏᴋ sᴇᴀʀᴄʜ* 」
+      `╭┈┈⬡「 🎵 *BÚSQUEDA EN TIKTOK* 」
 ┃
-㊗ ᴜsᴀɢᴇ: \`${m.prefix}ttsearch <query>\`
+㊗ USO: \`${m.prefix}ttsearch <query>\`
 ┃
 ╰┈┈⬡
 
-> \`Contoh: ${m.prefix}ttsearch anime\``,
+> \`Ejemplo: ${m.prefix}ttsearch anime\``,
     );
   }
 
@@ -51,7 +51,7 @@ async function handler(m, { sock }) {
     const mediaList = videos.slice(0, maxShow).map((video) => ({
       video: { url: video.link },
       mimetype: "video/mp4",
-      caption: `🎵 *TIKTOK SEARCH*
+      caption: `🎵 *BÚSQUEDA EN TIKTOK*
 
 📌 ${video.title || "-"}
 👤 ${video.author?.nickname || "-"}

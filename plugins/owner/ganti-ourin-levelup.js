@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'ganti-ourin-levelup.jpg',
     alias: ['gantiourinlevelup', 'setourinlevelup'],
     category: 'owner',
-    description: 'Ganti gambar ourin-levelup.jpg',
-    usage: ".Swap -ourin -levelup.jpg (reply / enviar imagen)",
+    description: "Cambiar las imágenes ourin-levelup.",
+    usage: ".gantiourinlevelup (responde o envía una imagen)",
     example: '.ganti-ourin-levelup.jpg',
     isOwner: true,
     isPremium: false,
@@ -19,7 +19,7 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
-    if (!isImage) return m.reply(`🖼️ *ɢᴀɴᴛɪ OURIN-LEVELUP.JPG*
+    if (!isImage) return m.reply(`🖼️ *sustituye a OURIN-LEVELUP.JPG*
 
 > Enviar / respuesta imágenes para reemplazar
 > File: assets/images/ourin-levelup.jpg`)
@@ -28,7 +28,9 @@ async function handler(m, { sock }) {
         if (!buffer) return m.reply("❌ No se pudo download image")
         const targetPath = path.join(process.cwd(), 'assets', 'images', 'ourin-levelup.jpg')
         fs.writeFileSync(targetPath, buffer)
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*\n\n> Gambar ourin-levelup.jpg telah diganti`)
+        m.reply(`✅ *correcto*
+
+La imagen ourin-levelup.jpg ha sido cambiada`)
     } catch (error) {
         await m.reply(te(m.prefix, m.command, m.pushName))
     }

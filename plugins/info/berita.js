@@ -5,9 +5,9 @@ const pluginConfig = {
     name: ['antara', 'cnn', 'cnbc', 'sindonews', 'berita'],
     alias: [],
     category: 'berita',
-    description: 'Mendapatkan berita terkini dari berbagai sumber',
-    usage: '.berita <sumber>',
-    example: '.kompas atau .berita cnn',
+    description: "Obtenga las últimas noticias de diferentes fuentes.",
+    usage: '.berita <fuente>',
+    example: ".kompas o .berita cnn",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -72,7 +72,7 @@ async function fetchRSS(url) {
 function formatDate(dateStr) {
     try {
         const date = new Date(dateStr)
-        return date.toLocaleString('id-ID', {
+        return date.toLocaleString('es-ES', {
             day: 'numeric',
             month: 'short',
             year: 'numeric',
@@ -91,18 +91,20 @@ async function handler(m) {
     if (cmd === 'berita') {
         const arg = m.text?.toLowerCase()?.trim()
         if (!arg) {
-            let txt = `📰 *ᴅᴀꜰᴛᴀʀ sᴜᴍʙᴇʀ ʙᴇʀɪᴛᴀ*\n\n`
+            let txt = `📰 *lista de fuentes de noticias*
+
+`
             for (const [key, val] of Object.entries(NEWS_SOURCES)) {
                 txt += `> ${val.emoji} \`${m.prefix}${key}\` - ${val.name}\n`
             }
             txt += `
-_O uso: \`${m.prefix}berita <sumber>\`_`
+_Uso: \`${m.prefix}berita <fuente>\`_`
             return m.reply(txt)
         }
         
         if (!NEWS_SOURCES[arg]) {
             return m.reply(`❌ No se encontró la fuente de las noticias.
-> Gunakan: \`${m.prefix}berita\` para ver la lista.`)
+> Usa: \`${m.prefix}berita\` para ver la lista.`)
         }
         source = arg
     }

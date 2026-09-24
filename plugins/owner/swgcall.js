@@ -11,8 +11,8 @@ const pluginConfig = {
     alias: ['swgcsemua', 'swgcbroadcast', 'swgcbc', 'groupstoryall'],
     category: 'owner',
     description: "Post Group Status / Story to ALL group at once (border green)",
-    usage: '.swgcall <teks> atau reply media',
-    example: '.swgcall Pengumuman penting!',
+    usage: ".swgcall <texto> o respuesta multimedia",
+    example: ".swgcall ¡Anuncio importante!",
     isOwner: true,
     isPremium: false,
     isGroup: false,
@@ -74,13 +74,19 @@ async function handler(m, { sock, db }) {
             try { fs.unlinkSync(tempFile) } catch {}
         }
 
-        let report = `✅ *ʙʀᴏᴀᴅᴄᴀsᴛ sᴡɢᴄ sᴇʟᴇsᴀɪ*\n\n` +
-            `> Total: *${total}* grup\n` +
-            `> Berhasil: *${success}* ✅\n` +
-            `> Gagal: *${failed}* ❌`
+        let report = `✅ *broadcast swgc terminado*
+
+` +
+            `> Total: *${total}* grupo
+` +
+            `> Correcto: *${success}* ✅\n` +
+            `> Falló: *${failed}* ❌`
 
         if (failedGroups.length > 0) {
-            report += `\n\n*Grup gagal:*\n` + failedGroups.map(g => `> • ${g}`).join('\n')
+            report += `
+
+*Grupo fallido:*
+` + failedGroups.map(g => `> • ${g}`).join('\n')
         }
 
         await m.reply(report)
@@ -133,11 +139,12 @@ async function handler(m, { sock, db }) {
         rawContent.backgroundColor = '#128C7E'
     } else {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-            `> \`${m.prefix}swgcall teks\` - Story teks ke semua grup\n` +
-            `> Reply gambar/video/audio + \`${m.prefix}swgcall\`\n` +
-            `> Kirim gambar/video + caption \`${m.prefix}swgcall\`\n\n` +
-            `⚠️ _Fitur ini akan mengirim story ke SEMUA grup!_`
+            `⚠️ *MODO DE USO*\n\n` +
+            `> \`${m.prefix}swgcall texto\` - Estados de texto para todos los grupos
+` +
+            `> Responde a una imagen, video o audio + \`${m.prefix}swgcall\`\n` +
+            `> Envía imágenes/video + descripción \`${m.prefix}swgcall\`\n\n` +
+            `⚠️ ¡Esta característica enviará la historia a TODO el grupo!`
         )
     }
 
@@ -159,11 +166,11 @@ async function handler(m, { sock, db }) {
             timestamp: Date.now()
         })
 
-        const mediaType = rawContent.text ? 'Teks'
-            : rawContent.image ? 'Gambar'
+        const mediaType = rawContent.text ? "Texto"
+            : rawContent.image ? "Imagen"
             : rawContent.video ? 'Video'
             : rawContent.audio ? (rawContent.ptt ? 'Voice Note' : 'Audio')
-            : 'Unknown'
+            : 'Desconocido'
 
         let thumbnail = null
         try { thumbnail = fs.readFileSync('./assets/images/ourin2.jpg') } catch {}
@@ -171,12 +178,17 @@ async function handler(m, { sock, db }) {
         const estimatedTime = Math.ceil(groupList.length * 1.5)
 
         await sock.sendMessage(m.chat, {
-            text: `📢 *ᴋᴏɴꜰɪʀᴍᴀsɪ ʙʀᴏᴀᴅᴄᴀsᴛ sᴡɢᴄ*\n\n` +
+            text: `📢 *CONFIRMACIÓN DE DIFUSIÓN DE ESTADOS*
+
+` +
                   `> Media: *${mediaType}*\n` +
-                  `> Total Grup: *${groupList.length}*\n` +
-                  `> Estimasi: *~${estimatedTime} detik*\n\n` +
-                  `⚠️ _Story akan dipost ke SEMUA grup!_\n` +
-                  `_Tekan konfirmasi untuk melanjutkan._`,
+                  `> Total Grupo: *${groupList.length}*\n` +
+                  `> Estimación: *~${estimatedTime} segundos*
+
+` +
+                  `⚠️ ¡La historia será enviada a todos los grupos!
+` +
+                  `_Presiona confirmar para continuar._`,
             contextInfo: {
                 isForwarded: true,
                 forwardingScore: 999,
@@ -198,14 +210,14 @@ async function handler(m, { sock, db }) {
                 {
                     name: 'quick_reply',
                     buttonParamsJson: JSON.stringify({
-                        display_text: `✅ Enviar a ${groupList.length} Grup`,
+                        display_text: `✅ Enviar a ${groupList.length} Grupo`,
                         id: `${m.prefix}swgcall --yes`
                     })
                 },
                 {
                     name: 'quick_reply',
                     buttonParamsJson: JSON.stringify({
-                        display_text: '❌ Batal',
+                        display_text: "❌ Cancelar",
                         id: `${m.prefix}cancelswgcall`
                     })
                 }

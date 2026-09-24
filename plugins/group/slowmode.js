@@ -3,8 +3,8 @@ const pluginConfig = {
     name: 'slowmode',
     alias: ['slow', 'setslowmode'],
     category: 'group',
-    description: "Grupo de lento - limitar la velocidad de los mensajes de correo al miembro",
-    usage: ".lentomodo Identificado en / apagado / sólo comando √° [ segundos]",
+    description: 'Modo lento: limita la frecuencia de mensajes de los miembros',
+    usage: '.slowmode <on/off/cmdonly> [segundos]',
     example: '.slowmode on 30',
     isOwner: false,
     isPremium: false,
@@ -27,8 +27,8 @@ const PRESETS = {
 }
 
 const MODES = {
-    all: 'Semua pesan + command dihapus',
-    onlycommand: 'Command di-silent, chat biasa tetap jalan',
+    all: "Todos los mensajes + comandos son eliminados",
+    onlycommand: "El comando en silencio, el chat normal sigue funcionando",
 }
 
 async function handler(m, { sock }) {
@@ -50,21 +50,26 @@ async function handler(m, { sock }) {
             `🐢 *SLOWMODE*\n\n` +
             `Status: ${enabled ? `✅ ON (${delay}s)` : '❌ OFF'}\n` +
             `Mode: *${mode}*\n\n` +
-            `*Penggunaan:*\n` +
-            `*.slowmode on 30* — semua pesan + command\n` +
+            `*Uso:*
+` +
+            `*.slowmode en 30* — todos los mensajes + comandos
+` +
             `*.slowmode onlycommand 30* — command only\n` +
-            `*.slowmode off* — nonaktifkan\n\n` +
+            `*.slowmode off* — desactivar
+
+` +
             `*Preset:*\n${presetList}\n\n` +
             `*Mode:*\n` +
-            `  *all* — hapus semua pesan saat delay\n` +
-            `  *onlycommand* — silent command, chat bebas\n\n` +
-            `_Admin & owner tidak terpengaruh_`
+            `  *all* — borrar todos los mensajes en el retraso
+` +
+            `  *onlycommand* — solo comandos; el resto del chat queda libre\n\n` +
+            `_Admin & owner no se ve afectado_`
         )
     }
 
     if (subCmd === 'off') {
         db.setGroup(m.chat, { ...groupData, slowmode: { enabled: false } })
-        return m.reply(`✅ Slowmode *dinonaktifkan*`)
+        return m.reply(`✅ Slowmode *desactivado*`)
     }
 
     let mode = 'all'
@@ -83,7 +88,7 @@ async function handler(m, { sock }) {
     } else {
         delay = parseInt(subCmd)
         if (isNaN(delay)) {
-            return m.reply(`❌ Gunakan *.slowmode on 30* atau *.slowmode onlycommand 30*`)
+            return m.reply(`❌ Utilice *.slowmode en 30* o *.slowmode onlycommand 30*`)
         }
     }
 
@@ -109,11 +114,13 @@ async function handler(m, { sock }) {
     const modeDesc = MODES[mode]
 
     await m.reply(
-        `✅ Slowmode *aktif*\n\n` +
-        `Delay: *${delay} detik*${label}\n` +
+        `✅ Slowmode *activo*
+
+` +
+        `Delay: *${delay} segundos*${label}\n` +
         `Mode: *${mode}*\n` +
         `${modeDesc}\n\n` +
-        `_Admin & owner tidak terpengaruh_`
+        `_Admin & owner no se ve afectado_`
     )
 }
 

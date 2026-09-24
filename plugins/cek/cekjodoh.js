@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekjodoh',
     alias: ['jodoh', 'match'],
     category: 'cek',
-    description: 'Cek kecocokan jodoh',
-    usage: ".checkmate < nombre 1 ≤",
+    description: "Comprueba la compatibilidad amorosa",
+    usage: ".cekjodoh [@usuario]",
     example: '.cekjodoh Budi & Ani',
     isOwner: false,
     isPremium: false,
@@ -19,11 +19,11 @@ async function handler(m) {
     const parts = input.split(/[&,]/).map(s => s.trim()).filter(s => s)
     
     if (parts.length < 2) {
-        return m.reply(`💕 *ᴄᴇᴋ ᴊᴏᴅᴏʜ*
+        return m.reply(`💕 *COMPATIBILIDAD AMOROSA*
 
 > ¡Pon dos nombres!
 
-> Contoh: ${m.prefix}cekjodoh Budi & Ani`)
+> Ejemplo: ${m.prefix}cekjodoh Budi & Ani`)
     }
     
     const percent = Math.floor(Math.random() * 101)
@@ -33,23 +33,22 @@ async function handler(m) {
     if (percent >= 90) {
         desc = "¡Casarse inmediatamente! 💍"
     } else if (percent >= 70) {
-        desc = 'Cocok banget! 💕'
+        desc = "¡Muy compatibles! 💕"
     } else if (percent >= 50) {
-        desc = 'Lumayan cocok~ 😊'
+        desc = "Bastante compatibles~ 😊"
     } else if (percent >= 30) {
-        desc = 'Hmm, perlu usaha lebih 🤔'
+        desc = "Hmm, hace falta más esfuerzo 🤔"
     } else {
         desc = "¿Quizás encuentre a alguien más? 😅"
     }
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu nivel de matrimonio arreglado. *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de juego @${mentioned.split('@')[0]} yak? 
-    
-Tingkat kejodohan dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de compatibilidad amorosa es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de compatibilidad amorosa de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

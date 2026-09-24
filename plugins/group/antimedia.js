@@ -20,7 +20,7 @@ const pluginConfig = {
 
 function gpMsg(key, replacements = {}) {
   const defaults = {
-    antimedia: "⚠ *AntiMedia* — Media dari @%user% dihapus.",
+    antimedia: "⚠ *AntiMedia* — Medios de @%user% se han eliminado.",
   };
   let text = config.groupProtection?.[key] || defaults[key] || "";
   for (const [k, v] of Object.entries(replacements)) {
@@ -68,18 +68,18 @@ async function handler(m, { sock }) {
   if (action === "on") {
     db.setGroup(m.chat, { antimedia: true });
     m.react("✅");
-    await m.reply(`✅ *AntiMedia diaktifkan*`);
+    await m.reply(`✅ *AntiMedia activado*`);
     return;
   }
 
   if (action === "off") {
     db.setGroup(m.chat, { antimedia: false });
     m.react("❌");
-    await m.reply(`❌ *AntiMedia dinonaktifkan*`);
+    await m.reply(`❌ *AntiMedia se ha desactivado*`);
     return;
   }
 
-  await m.reply(`❌ Gunakan \`.antimedia on\` atau \`.antimedia off\``);
+  await m.reply(`❌ Utilice \`.antimedia on\` o \`.antimedia off\``);
 }
 
 export { pluginConfig as config, handler, checkAntimedia };

@@ -23,12 +23,13 @@ async function handler(m, { sock }) {
   if (!isVideo) {
     return m.reply(
       `📹 *ʜᴅ ᴠɪᴅᴇᴏ ᴇɴʜᴀɴᴄᴇʀ*\n\n` +
-        `╭┈┈⬡「 📋 *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ* 」\n` +
-        `┃ ◦ Reply video dengan \`${m.prefix}hdvid\`\n` +
-        `┃ ◦ Kirim video dengan caption \`${m.prefix}hdvid\`\n` +
+        `╭┈┈⬡「 📋 *MODO DE USO* 」\n` +
+        `┃ ◦ Responder el video con \`${m.prefix}hdvid\`\n` +
+        `┃ ◦ Enviar el video con la descripción \`${m.prefix}hdvid\`\n` +
         `╰┈┈⬡\n\n` +
-        `> ⚠️ Proses membutuhkan waktu 30-60 detik\n` +
-        `> 💎 Fitur premium`,
+        `⚠️ El proceso tarda entre 30 y 60 segundos.
+` +
+        `> 💎 Función prémium`,
     );
   }
 
@@ -39,14 +40,16 @@ async function handler(m, { sock }) {
 
     if (!videoBuffer || videoBuffer.length === 0) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > ¡No se pudo download video!`);
     }
 
     if (videoBuffer.length > 50 * 1024 * 1024) {
       m.react("❌");
-      return m.reply(`❌ *ᴇʀʀᴏʀ*\n\n> Video terlalu besar! Maksimal 50MB.`);
+      return m.reply(`❌ *ᴇʀʀᴏʀ*
+
+¡El video es demasiado grande! Máximo 50 MB.`);
     }
 
     await m.reply(

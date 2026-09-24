@@ -7,7 +7,7 @@ const pluginConfig = {
     alias: ['perpanjangsewa', 'extendsewa'],
     category: 'owner',
     description: "Ampliar la duración del alquiler de grupo",
-    usage: ".renovador < enlace / id grupo > duración",
+    usage: ".renewsewa <link/id_grupo> <duración>",
     example: '.renewsewa https://chat.whatsapp.com/xxx 30d',
     isOwner: true,
     isPremium: false,
@@ -29,10 +29,10 @@ function parseDurationMs(str) {
 }
 
 function formatDuration(str) {
-    if (['lifetime', 'permanent', 'forever', 'unlimited'].includes(str.toLowerCase())) return 'Permanent'
+    if (['lifetime', 'permanent', 'forever', 'unlimited'].includes(str.toLowerCase())) return 'Permanente'
     const match = str.match(/^(\d+)([iIdDmMyYhH])$/)
     if (!match) return str
-    const units = { i: 'menit', h: 'jam', d: 'hari', m: 'bulan', y: 'tahun' }
+    const units = { i: 'minutos', h: 'horas', d: 'días', m: 'meses', y: 'años' }
     return `${match[1]} ${units[match[2].toLowerCase()] || match[2]}`
 }
 
@@ -43,7 +43,7 @@ async function resolveGroupId(sock, input) {
         try {
             const metadata = await sock.groupGetInviteInfo(inviteCode)
             if (!metadata?.id) return null
-            return { id: metadata.id, name: metadata.subject || 'Unknown' }
+            return { id: metadata.id, name: metadata.subject || 'Desconocido' }
         } catch { return null }
     }
     const groupId = input.includes('@g.us') ? input : input + '@g.us'
@@ -60,19 +60,24 @@ async function handler(m, { sock }) {
     const args = m.args
     if (args.length < 2) {
         return m.reply(
-            `📝 *PERPANJANG SEWA*\n\n` +
-            `Format: *${m.prefix}renewsewa <link/id> <durasi>*\n\n` +
-            `*FORMAT DURASI:*\n` +
-            `• 30i = 30 menit\n` +
-            `• 12h = 12 jam\n` +
-            `• 7d = 7 hari\n` +
-            `• 1m = 1 bulan\n` +
-            `• 1y = 1 tahun\n` +
-            `• lifetime = Permanent\n\n` +
-            `*CONTOH:*\n` +
+            `📝 *EXTENDER ALQUILER*
+
+` +
+            `Formato: *${m.prefix}renewsewa <enlace/id> <duración>*\n\n` +
+            `*FORMATO DE DURACIÓN:*
+` +
+            `• 30i = 30 minutos
+` +
+            `• 12h = 12 horas\n` +
+            `• 7d = 7 días
+` +
+            `• 1m = 1 mes\n` +
+            `• 1y = 1 año\n` +
+            `• lifetime = Permanente\n\n` +
+            `*EJEMPLO:*\n` +
             `• ${m.prefix}renewsewa https://chat.whatsapp.com/xxx 30d\n` +
             `• ${m.prefix}renewsewa 120363xxx 1m\n\n` +
-            `💡 Durasi ditambahkan ke sisa waktu yang ada, bukan di-reset`
+            `💡 La duración se añade al tiempo restante; no se reinicia.`
         )
     }
 
@@ -81,7 +86,7 @@ async function handler(m, { sock }) {
     const durationMs = parseDurationMs(durationStr)
 
     if (!durationMs) return m.reply(`❌ Formato de duración inválida
-Contoh: 7d, 1m, 1y, lifetime`)
+Ejemplo: 7d, 1m, 1y, lifetime`)
 
     await m.react('🕕')
 
@@ -98,7 +103,7 @@ Contoh: 7d, 1m, 1y, lifetime`)
         if (!existing) {
             await m.react('❌')
             return m.reply(`❌ Grupo no incluido
-Gunakan *${m.prefix}addsewa* para añadir`)
+Usa *${m.prefix}addsewa* para añadir`)
         }
 
         if (durationMs === Infinity) {
@@ -120,25 +125,29 @@ Gunakan *${m.prefix}addsewa* para añadir`)
         db.db.write()
 
         const groupName = existing.name || groupId.split('@')[0]
-        const expiredStr = existing.isLifetime ? 'Permanent' : timeHelper.fromTimestamp(existing.expiredAt, 'D MMMM YYYY HH:mm')
+        const expiredStr = existing.isLifetime ? 'Permanente' : timeHelper.fromTimestamp(existing.expiredAt, 'D MMMM YYYY HH:mm')
 
         await m.react('✅')
 
-        let text = `✅ *SEWA DIPERPANJANG*\n\n`
-        text += `Grup: *${groupName}*\n`
-        text += `Tambahan: *${formatDuration(durationStr)}*\n`
-        text += `Nuevos costos: *${expiredStr}*`
+        let text = `✅ *ALQUILER EXTENDIDO*
+
+`
+        text += `Grupo: *${groupName}*\n`
+        text += `Tiempo añadido: *${formatDuration(durationStr)}*\n`
+        text += `Nuevo vencimiento: *${expiredStr}*`
 
         try {
-            await sock.sendText(groupId, `📢 Sewa bot telah diperpanjang!\n\nTambahan: *${formatDuration(durationStr)}*
-Nuevos costos: *${expiredStr}*`, null, {
+            await sock.sendText(groupId, `📢 ¡El alquiler del bot fue renovado!
+
+Tiempo añadido: *${formatDuration(durationStr)}*
+Nuevo vencimiento: *${expiredStr}*`, null, {
                 contextInfo: {
                     forwardingScore: 99,
                     isForwarded: true,
                     externalAdReply: {
                         mediaType: 1,
-                        title: 'SEWA DIPERPANJANG',
-                        body: `Tambahan: ${formatDuration(durationStr)}`,
+                        title: "ALQUILER EXTENDIDO",
+                        body: `Tiempo añadido: ${formatDuration(durationStr)}`,
                         thumbnail: fs.readFileSync('./assets/images/ourin.jpg'),
                         renderLargerThumbnail: true
                     }

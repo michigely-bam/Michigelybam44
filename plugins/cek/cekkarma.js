@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['karma'],
     category: 'cek',
     description: "Revisa tus niveles de karma.",
-    usage: ".ceckarma &gt; nombre &gt;",
+    usage: '.cekkarma [@usuario]',
     example: '.cekkarma Budi',
     isOwner: false,
     isPremium: false,
@@ -19,20 +19,19 @@ async function handler(m) {
     const mentioned = m.mentionedJid[0] || m.sender
                     
     let desc = ''
-    if (percent >= 80) desc = 'Karma baik! Surga menantimu~ ✨'
-    else if (percent >= 60) desc = 'Cukup baik, terus tingkatkan! 🙏'
-    else if (percent >= 40) desc = 'Netral, perbanyak kebaikan~ ⚖️'
-    else if (percent >= 20) desc = "Hati-hati ¡Con mal karma! ⚠️"
-    else desc = 'Wah perlu banyak tobat nih... 😱'
+    if (percent >= 80) desc = "¡Buen karma! El cielo te espera~ ✨"
+    else if (percent >= 60) desc = "¡Muy bien, sigue mejorando! 🙏"
+    else if (percent >= 40) desc = 'Neutral, haz más buenas acciones~ ⚖️'
+    else if (percent >= 20) desc = "¡Cuidado con el mal karma! ⚠️"
+    else desc = "Ah, necesita mucho arrepentimiento... 😱"
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu nivel de decencia *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de descuido @${mentioned.split('@')[0]} yak? 
-    
-Tingkat kekarmaan dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de karma es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de karma de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

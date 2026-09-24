@@ -22,10 +22,10 @@ async function handler(m) {
     if (!text) {
         return m.reply(
             `╭┈┈⬡「 🗑️ *ᴜɴɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ* 」
-┃ ㊗ ᴜsᴀɢᴇ: \`${m.prefix}uinstalltema <ip>|<password>\`
+┃ ㊗ USO: \`${m.prefix}uinstalltema <ip>|<password>\`
 ╰┈┈⬡
 
-> \`Contoh: ${m.prefix}uinstalltema 192.168.1.1|secretpass\``
+> \`Ejemplo: ${m.prefix}uinstalltema 192.168.1.1|secretpass\``
         )
     }
     
@@ -50,7 +50,7 @@ async function handler(m) {
     const ress = new Client()
     
     m.react('🕕')
-    await m.reply(`🕕 *ᴍᴇᴍᴘʀᴏsᴇs ᴜɴɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ...*
+    await m.reply(`🕕 *DESINSTALANDO EL TEMA...*
 
 > Espera 1 -10 minutos hasta que termine el proceso`)
     
@@ -65,7 +65,7 @@ async function handler(m) {
                 m.react('✅')
                 await m.reply(
                     `╭┈┈⬡「 ✅ *ᴜɴɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ* 」
-┃ ㊗ sᴛᴀᴛᴜs: *Berhasil*
+┃ 祝 estado: *Fue exitoso*
 ┃ ㊗ ɪᴘ: ${ipvps}
 ╰┈┈⬡
 

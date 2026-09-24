@@ -245,7 +245,7 @@ async function handler(m, { sock }) {
 ┃ 📨 Method: ${method}
 ┃ ⏱️ Time: ${elapsed}ms
 ┃ 📦 Size: ${formatSize(size)}
-┃ 📄 Type: ${mimeType || "unknown"}
+┃ 📄 Tipo: ${mimeType || "desconocido"}
 ╰┈┈⬡`;
 
     if (isVerbose) {
@@ -327,7 +327,9 @@ async function handler(m, { sock }) {
               mimetype: "application/json",
               caption:
                 header +
-                `\n\n📄 Pretty JSON dikirim sebagai file (${formatSize(pretty.length)})`,
+                `
+
+📄 Pretty JSON se envía como un archivo (${formatSize(pretty.length)})`,
             },
             { quoted: m },
           );
@@ -339,7 +341,7 @@ async function handler(m, { sock }) {
               document: buffer,
               fileName,
               mimetype: mimeType || "application/octet-stream",
-              caption: header + "\n\n📎 Full response dikirim sebagai file",
+              caption: header + "\n\n📎 La respuesta completa se envía como un archivo",
             },
             { quoted: m },
           );
@@ -352,7 +354,7 @@ async function handler(m, { sock }) {
             document: buffer,
             fileName,
             mimetype: mimeType || "application/octet-stream",
-            caption: header + "\n\n📎 Full response dikirim sebagai file",
+            caption: header + "\n\n📎 La respuesta completa se envía como un archivo",
           },
           { quoted: m },
         );
@@ -365,13 +367,13 @@ async function handler(m, { sock }) {
           document: buffer,
           fileName,
           mimetype: mimeType || "application/octet-stream",
-          caption: header + "\n\n📎 Full response dikirim sebagai file",
+          caption: header + "\n\n📎 La respuesta completa se envía como un archivo",
         },
         { quoted: m },
       );
     }
   } catch (e) {
-    await m.reply(`❌ *REQUEST FAILED*\n\n> ${e.message}`);
+    await m.reply(`❌ *LA SOLICITUD FALLÓ*\n\n> ${e.message}`);
   }
 }
 

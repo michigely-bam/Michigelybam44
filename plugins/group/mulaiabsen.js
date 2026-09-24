@@ -4,8 +4,8 @@ const pluginConfig = {
   alias: ["startabsen", "bukaabsen", "openabsen"],
   category: "group",
   description: "Iniciar sesión ausente en grupo (sólo personal)",
-  usage: ".mulaiabsen [keterangan]",
-  example: ".mulaiabsen Rapat Mingguan",
+  usage: ".mulaiabsen [descripción]",
+  example: ".mulaiabsen Reunión semanal",
   isOwner: false,
   isPremium: false,
   isGroup: true,
@@ -23,14 +23,19 @@ async function handler(m, { sock }) {
 
   if (global.absensi[chatId]) {
     return m.reply(
-      `❌ *ᴍᴀsɪʜ ᴀᴅᴀ ᴀʙsᴇɴ*\n\n` +
-        `> Masih ada sesi absen di grup ini!\n\n` +
-        `> Ketik *.hapusabsen* untuk menghapus\n` +
-        `> atau *.cekabsen* untuk melihat daftar`,
+      `❌ *todavía hay asistencia*
+
+` +
+        `¡Todavía hay sesiones de asistencia en este grupo!
+
+` +
+        `> Escribe *.hapusabsen* para eliminar
+` +
+        `> o *.cekabsen* para ver la lista`,
     );
   }
 
-  const keterangan = m.text?.trim() || "Absen Harian";
+  const keterangan = m.text?.trim() || "Registro diario";
 
   global.absensi[chatId] = {
     keterangan: keterangan,
@@ -43,14 +48,18 @@ async function handler(m, { sock }) {
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
   await m.reply(
-    `📋 *ABSEN UDAH JALAN NIHH*\n\n` +
+    `📋 *ASISTENCIA YA ESTÁ FUNCIONANDO*
+
+` +
       `「 📋 *ɪɴғᴏ* 」\n` +
       `📝 ${keterangan}\n` +
-      `👑 Dibuat oleh: @${m.sender.split("@")[0]}\n` +
-      `👥 Peserta: 0\n\n` +
-      `Untuk kamu yang mau ikutan absen, silahkan ketik *${m.prefix}absen*` +
-      `Untuk admin yang mau cek absen, silahkan ketik *${m.prefix}cekabsen*` +
-      `Untuk admin yang mau hapus absen, silahkan ketik *${m.prefix}hapusabsen*`,
+      `👑 Creado por: @${m.sender.split("@")[0]}\n` +
+      `👥 Participantes: 0
+
+` +
+      `Para aquellos de ustedes que quieran participar, por favor escriban *${m.prefix}asistencia*` +
+      `Para los administradores que deseen revisar la asistencia, escriban *${m.prefix}cekabsen*` +
+      `Para los administradores que deseen eliminar asistencia, por favor escriba *${m.prefix}hapusabsen*`,
     { mentions: [m.sender] },
   );
 }

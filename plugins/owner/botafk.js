@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['afkbot', 'afkmode'],
     category: 'owner',
     description: "El modo Assair para bots no responde al comando, sólo responde mensajes Alute",
-    usage: '.botafk <alasan>',
+    usage: '.botafk <motivo>',
     example: ".Boftafk De nuevo descansar",
     isOwner: true,
     isPremium: false,
@@ -28,12 +28,13 @@ async function handler(m, { sock }) {
         const duration = formatDuration(afkDuration)
         
         return m.reply(
-            `✅ *ʙᴏᴛ ᴋᴇᴍʙᴀʟɪ ᴏɴʟɪɴᴇ*\n\n` +
-            `╭┈┈⬡「 📊 *sᴛᴀᴛɪsᴛɪᴋ ᴀꜰᴋ* 」\n` +
-            `┃ ⏱️ ᴅᴜʀᴀsɪ: \`${duration}\`\n` +
-            `┃ 📝 ᴀʟᴀsᴀɴ: \`${currentAfk.reason || '-'}\`\n` +
+            `✅ *EL BOT VOLVIÓ A ESTAR EN LÍNEA*\n\n` +
+            `╭┈┈⬡「 📊 *ESTADÍSTICAS DE AUSENCIA* 」
+` +
+            `┃ ⏱️ DURACIÓN: \`${duration}\`\n` +
+            `┃ 📝 MOTIVO: \`${currentAfk.reason || '-'}\`\n` +
             `╰┈┈⬡\n\n` +
-            `> Bot siap menerima command!`
+            `> ¡El bot está listo para recibir comandos!`
         )
     } else {
         const reason = m.args.join(' ') || 'AFK'
@@ -46,18 +47,22 @@ async function handler(m, { sock }) {
         
         await m.react('💤')
         return m.reply(
-            `💤 *ʙᴏᴛ ᴀꜰᴋ ᴀᴋᴛɪꜰ*\n\n` +
+            `💤 *BOT AUSENTE*\n\n` +
             `╭┈┈⬡「 📋 *ɪɴꜰᴏ* 」\n` +
-            `┃ 📝 ᴀʟᴀsᴀɴ: \`${reason}\`\n` +
-            `┃ ⏰ sᴇᴊᴀᴋ: \`${moment().tz('Asia/Jakarta').format('HH:mm:ss')}\`\n` +
+            `┃ 📝 MOTIVO: \`${reason}\`\n` +
+            `┃ ⏰ ᴅᴇsᴅᴇ: \`${moment().tz('Asia/Jakarta').format('HH:mm:ss')}\`\n` +
             `╰┈┈⬡\n\n` +
-            `╭┈┈⬡「 🔒 *ᴀᴋsᴇs* 」\n` +
+            `╭┈┈⬡「 🔒 *ACCESO* 」
+` +
             `┃ ✅ Owner bot\n` +
-            `┃ ✅ Bot sendiri (fromMe)\n` +
-            `┃ ❌ Semua user lain\n` +
+            `┃ ✅ El propio bot (fromMe)
+` +
+            `Todos los demás usuarios
+` +
             `╰┈┈⬡\n\n` +
-            `> User lain akan dapat pesan AFK\n` +
-            `> Ketik \`${m.prefix}botafk\` untuk kembali online`
+            `> Otros usuarios podrán enviar mensajes AFK
+` +
+            `> Escribe \`${m.prefix}botafk\` para volver en línea`
         )
     }
 }
@@ -68,10 +73,10 @@ function formatDuration(ms) {
     const hours = Math.floor(minutes / 60)
     const days = Math.floor(hours / 24)
     
-    if (days > 0) return `${days} hari ${hours % 24} jam`
-    if (hours > 0) return `${hours} jam ${minutes % 60} menit`
-    if (minutes > 0) return `${minutes} menit ${seconds % 60} detik`
-    return `${seconds} detik`
+    if (days > 0) return `${days} días ${hours % 24} horas`
+    if (hours > 0) return `${hours} horas ${minutes % 60} minutos`
+    if (minutes > 0) return `${minutes} minutos ${seconds % 60} segundos`
+    return `${seconds} segundos`
 }
 
 export { pluginConfig as config, handler }

@@ -110,9 +110,10 @@ async function handler(m, { sock }) {
 
         if (!hasGit) {
             return m.reply(
-                `❌ *ɢᴀɢᴀʟ*\n\n` +
-                `> Git tidak terinstall di server\n` +
-                `> Install git dulu: \`apt install git\` / \`pkg install git\``
+                `❌ *ERROR*\n\n` +
+                `> Git no está instalado en el servidor
+` +
+                `> Instala Git primero: \`apt install git\` / \`pkg install git\``
             )
         }
 
@@ -121,7 +122,7 @@ async function handler(m, { sock }) {
             `🔄 *ᴜᴘᴅᴀᴛᴇ sᴄʀɪᴘᴛ*\n\n` +
             `> Repo: \`LuckyArch/OurinMD\`\n` +
             `> Branch: \`${BRANCH}\`\n\n` +
-            `📦 Step 1/4 — Backup data penting...`
+            `📦 Paso 1/4 — Creando copia de seguridad de los datos importantes...`
         )
 
         if (!fs.existsSync(backupDir)) {
@@ -137,10 +138,10 @@ async function handler(m, { sock }) {
         }
 
         await m.reply(
-            `✅ *ʙᴀᴄᴋᴜᴘ sᴜᴋsᴇs*\n\n` +
-            `> ${backedUp.length} item disimpan\n` +
+            `✅ *ʙᴀᴄᴋᴜᴘ COMPLETADO*\n\n` +
+            `> ${backedUp.length} elementos guardados\n` +
             `> ${backedUp.map(i => `\`${i}\``).join(', ')}\n\n` +
-            `📥 Step 2/4 — Clone repo terbaru...`
+            `📥 Paso 2/4 — Clonando el repositorio más reciente...`
         )
 
         cleanDir(tempDir)
@@ -153,9 +154,9 @@ async function handler(m, { sock }) {
         } catch (e) {
             await m.react('❌')
             return m.reply(
-                `❌ *ɢᴀɢᴀʟ ᴄʟᴏɴᴇ*\n\n` +
+                `❌ *ERROR ᴄʟᴏɴᴇ*\n\n` +
                 `> ${e.message}\n\n` +
-                `💾 Backup tersimpan di: \`backup/pre_update_${timestamp}\``
+                `💾 Copia de seguridad guardada en: \`backup/pre_update_${timestamp}\``
             )
         }
 
@@ -163,9 +164,11 @@ async function handler(m, { sock }) {
         cleanDir(gitDir)
 
         await m.reply(
-            `✅ *ᴄʟᴏɴᴇ sᴜᴋsᴇs*\n\n` +
-            `> Script terbaru berhasil diunduh\n\n` +
-            `📋 Step 3/4 — Menyalin file baru...`
+            `✅ *ᴄʟᴏɴᴇ COMPLETADO*\n\n` +
+            `El último guión se descargó con éxito
+
+` +
+            `📋 Paso 3/4 — Copiando archivos nuevos...`
         )
 
         let copiedCount = 0
@@ -174,18 +177,20 @@ async function handler(m, { sock }) {
         } catch (e) {
             await m.react('❌')
             return m.reply(
-                `❌ *ɢᴀɢᴀʟ ᴄᴏᴘʏ*\n\n` +
+                `❌ *ERROR ᴄᴏᴘʏ*\n\n` +
                 `> ${e.message}\n\n` +
-                `💾 Backup tersimpan di: \`backup/pre_update_${timestamp}\``
+                `💾 Copia de seguridad guardada en: \`backup/pre_update_${timestamp}\``
             )
         }
 
         cleanDir(tempDir)
 
         await m.reply(
-            `✅ *ᴄᴏᴘʏ sᴜᴋsᴇs*\n\n` +
-            `> ${copiedCount} file diperbarui\n` +
-            `> Data penting tidak ditimpa\n\n` +
+            `✅ *ᴄᴏᴘʏ COMPLETADO*\n\n` +
+            `> ${copiedCount} archivos actualizados\n` +
+            `> Los datos importantes no se han perdido
+
+` +
             `🔧 Step 4/4 — Install dependencies...`
         )
 
@@ -195,12 +200,14 @@ async function handler(m, { sock }) {
                 timeout: 300000,
                 stdio: 'pipe'
             })
-            await m.reply(`✅ *ɴᴘᴍ ɪɴsᴛᴀʟʟ sᴜᴋsᴇs*`)
+            await m.reply(`✅ *INSTALACIÓN DE NPM COMPLETADA*`)
         } catch (e) {
             await m.reply(
-                `⚠️ *ɴᴘᴍ ɪɴsᴛᴀʟʟ ɢᴀɢᴀʟ*\n\n` +
+                `⚠️ *FALLÓ LA INSTALACIÓN DE NPM*
+
+` +
                 `> ${e.message?.slice(0, 200)}\n` +
-                `> Jalankan \`npm install\` manual`
+                `> Ejecuta \`npm install\` manualmente`
             )
         }
 
@@ -208,14 +215,18 @@ async function handler(m, { sock }) {
 
         await sock.sendMessage(m.chat, {
             text:
-                `✅ *ᴜᴘᴅᴀᴛᴇ sᴇʟᴇsᴀɪ!*\n\n` +
-                `╭┈┈⬡「 📊 *ʀɪɴɢᴋᴀsᴀɴ* 」\n` +
-                `┃ 📄 File diperbarui: \`${copiedCount}\`\n` +
+                `✅ ¡La actualización está terminada!
+
+` +
+                `╭┈┈⬡「 📊 *RESUMEN* 」
+` +
+                `┃ 📄 Archivos actualizados: \`${copiedCount}\`\n` +
                 `┃ 💾 Backup: \`backup/pre_update_${timestamp}\`\n` +
                 `┃ 📦 Repo: \`LuckyArch/OurinMD\`\n` +
                 `╰┈┈⬡\n\n` +
-                `> Bot akan restart dalam 3 detik...\n` +
-                `> Jika ada error, restore dari backup`
+                `El bot se reinicia en 3 segundos...
+` +
+                `> Si hay un error, restablezca el backup`
         }, { quoted: m })
 
         setTimeout(() => {
@@ -226,9 +237,9 @@ async function handler(m, { sock }) {
         cleanDir(tempDir)
         await m.react('❌')
         return m.reply(
-            `❌ *ᴜᴘᴅᴀᴛᴇ ɢᴀɢᴀʟ*\n\n` +
+            `❌ *ᴜᴘᴅᴀᴛᴇ ERROR*\n\n` +
             `> ${error.message}\n\n` +
-            `💾 Backup tersimpan di: \`backup/pre_update_${timestamp}\``
+            `💾 Copia de seguridad guardada en: \`backup/pre_update_${timestamp}\``
         )
     }
 }

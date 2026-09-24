@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'ourin-large',
     alias: ['setourinlarge', 'gantiourinlarge'],
     category: 'owner',
-    description: 'Preset: Ganti gambar ourin.jpg, serta ourin-v7 hingga ourin-v11.jpg sekaligus',
-    usage: ".nuestroen-grande (reply / enviar la imagen)",
+    description: "Preset: Cambiar la imagen de ourin.jpg, y ourin-v7 a ourin-v11.jpg a la vez",
+    usage: ".gantiourinlarge (responde o envía una imagen)",
     example: '.ourin-large',
     isOwner: true,
     isPremium: false,
@@ -62,10 +62,10 @@ async function handler(m, { sock }) {
         }
         
         await m.react('✅')
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*
+        m.reply(`✅ *correcto*
 
-> Gambar bundle *ourin-large* Es un éxito remplazado en masa.
-> Mencakup: ${targetImages.join(', ')}
+> Foto bundle *ourin-large* Es un éxito remplazado en el tiempo.
+> Incluye: ${targetImages.join(', ')}
 > Reinicie el bot si la imagen no cambia al instante.`)
         
     } catch (error) {

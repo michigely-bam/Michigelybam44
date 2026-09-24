@@ -3,8 +3,8 @@ const pluginConfig = {
     name: 'delkoin',
     alias: ['kurangkoin', 'removekoin', 'delcoin', 'delmoney'],
     category: 'owner',
-    description: 'Kurangi koin user',
-    usage: '.delkoin <jumlah> @user',
+    description: "Reducir las monedas de usuario",
+    usage: '.delkoin <cantidad> @usuario',
     example: '.delkoin 50000 @user',
     isOwner: true,
     isPremium: false,
@@ -44,21 +44,26 @@ async function handler(m, { sock }) {
     
     if (!targetJid || amount <= 0) {
         return m.reply(
-            `💰 *ᴅᴇʟ ᴋᴏɪɴ*\n\n` +
-            `> \`.delkoin <jumlah>\` - dari diri sendiri\n` +
-            `> \`.delkoin <jumlah> @user\` - dari user\n\n` +
-            `\`Contoh: ${m.prefix}delkoin 50000\``
+            `💰 *RESTAR MONEDAS*\n\n` +
+            `> \`.delkoin <cantidad>\` - de sí mismo
+` +
+            `> \`.delkoin <cantidad> @usuario\` - del usuario
+
+` +
+            `\`Ejemplo: ${m.prefix}delkoin 50000\``
         )
     }
     
     if (amount <= 0) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Jumlah harus lebih dari 0`)
+        return m.reply(`❌ *falló*
+
+> El número debe ser superior a 0`)
     }
     
     const user = db.getUser(targetJid)
     
     if (!user) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*
+        return m.reply(`❌ *falló*
 
 > Usuario no encontrado en la base de datos`)
     }
@@ -68,11 +73,11 @@ async function handler(m, { sock }) {
     await m.react('✅')
     
     await m.reply(
-        `✅ *ᴋᴏɪɴ ᴅɪᴋᴜʀᴀɴɢɪ*\n\n` +
+        `✅ *MONEDAS REDUCIDAS*\n\n` +
         `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
         `┃ 👤 ᴜsᴇʀ: @${targetJid.split('@')[0]}\n` +
-        `┃ ➖ ᴋᴜʀᴀɴɢ: *-${formatKoin(amount)}*\n` +
-        `┃ 💰 sɪsᴀ: *${formatKoin(newKoin)}*\n` +
+        `┃ ➖ RESTADO: *-${formatKoin(amount)}*\n` +
+        `┃ 💰 restante: *${formatKoin(newKoin)}*\n` +
         `╰┈┈⬡`,
         { mentions: [targetJid] }
     )

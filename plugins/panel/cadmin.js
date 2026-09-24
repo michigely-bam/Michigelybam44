@@ -13,7 +13,7 @@ const pluginConfig = {
   alias: allAliases,
   category: "panel",
   description: "Crear un nuevo administrador de panel (v1-v5)",
-  usage: ".cadminv1 username atau .cadminv2 username,628xxx",
+  usage: ".cadminv1 nombre de usuario o .cadminv2 nombre de usuario,628xxx",
   example: ".cadminv1 adminku,628xxx",
   isOwner: false,
   isPremium: false,
@@ -80,9 +80,11 @@ async function handler(m, { sock }) {
   if (!hasFullAccess(m.sender, serverVersion, m.isOwner)) {
     const userRole = getUserRole(m.sender, serverVersion);
     return m.reply(
-      `❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n` +
-        `> Kamu tidak punya akses ke *${serverLabel}*\n` +
-        `> Role kamu: *${userRole || "Tidak ada"}*`,
+      `❌ *se rechazó el acceso*
+
+` +
+        `No tienes acceso a *${serverLabel}*\n` +
+        `> Tu rol: *${userRole || "No hay"}*`,
     );
   }
 
@@ -91,12 +93,12 @@ async function handler(m, { sock }) {
 
   if (missingConfig.length > 0) {
     const available = getAvailableServers(pteroConfig);
-    let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`;
+    let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} SIN CONFIGURAR*\n\n`;
     if (available.length > 0) {
       txt += `> Servidor disponible: *${available.join(", ")}*\n`;
-      txt += `> Contoh: \`${m.prefix}cadmin${available[0]} username\``;
+      txt += `> Ejemplo: \`${m.prefix}cadmin${available[0]} username\``;
     } else {
-      txt += `> Isi di \`config.js\` bagian \`pterodactyl.server1\``;
+      txt += `> Contenido en la sección \`config.js\` \`pterodactyl.server1\``;
     }
     return m.reply(txt);
   }
@@ -117,11 +119,11 @@ async function handler(m, { sock }) {
   if (!username) {
     const available = getAvailableServers(pteroConfig);
     return m.reply(
-      `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+      `⚠️ *MODO DE USO*\n\n` +
         `> \`${m.prefix}${m.command} username\`\n` +
         `> \`${m.prefix}${m.command} username,628xxx\`\n` +
         `> Reply/mention user\n\n` +
-        `> Server tersedia: *${available.join(", ") || "none"}*`,
+        `> Servidores disponibles: *${available.join(", ") || "none"}*`,
     );
   }
 
@@ -149,7 +151,7 @@ async function handler(m, { sock }) {
     const [onWa] = await sock.onWhatsApp(targetUser.split("@")[0]);
     if (!onWa?.exists) {
       return m.reply(
-        `❌ Nomor \`${targetUser.split("@")[0]}\` ¡No está registrado en WhatsApp!`,
+        `❌ Número \`${targetUser.split("@")[0]}\` ¡No está registrado en WhatsApp!`,
       );
     }
   } catch (e) {}
@@ -159,7 +161,9 @@ async function handler(m, { sock }) {
   const password = username + crypto.randomBytes(3).toString("hex");
 
   await m.reply(
-    `🛠️ *ᴍᴇᴍʙᴜᴀᴛ ᴀᴅᴍɪɴ ᴘᴀɴᴇʟ...*\n\n> Server: *${serverLabel}*\n> Username: \`${username}\`\n> Target: \`${targetUser.split("@")[0]}\``,
+    `🛠️ *CREANDO ADMINISTRADOR DEL PANEL...*
+
+> Server: *${serverLabel}*\n> Username: \`${username}\`\n> Target: \`${targetUser.split("@")[0]}\``,
   );
 
   try {
@@ -185,14 +189,16 @@ async function handler(m, { sock }) {
 
     const user = userRes.data.attributes;
 
-    let detailTxt = `✅ *ᴀᴅᴍɪɴ ᴘᴀɴᴇʟ ʙᴇʀʜᴀsɪʟ ᴅɪʙᴜᴀᴛ*\n\n`;
-    detailTxt += `╭─「 📋 *ᴅᴇᴛᴀɪʟ ᴀᴋᴜɴ* 」\n`;
+    let detailTxt = `✅ *admin panel fue creado con éxito*
+
+`;
+    detailTxt += `╭─「 📋 *DETALLES DE LA CUENTA* 」\n`;
     detailTxt += `┃ 🖥️ \`sᴇʀᴠᴇʀ\`: *${serverLabel}*\n`;
     detailTxt += `┃ 🆔 \`ᴜsᴇʀ ɪᴅ\`: *${user.id}*\n`;
     detailTxt += `┃ 👤 \`ᴜsᴇʀɴᴀᴍᴇ\`: *${user.username}*\n`;
     detailTxt += `┃ 🔐 \`ᴘᴀssᴡᴏʀᴅ\`: *${password}*\n`;
     detailTxt += `┃ 👑 \`sᴛᴀᴛᴜs\`: *Root Admin*\n`;
-    detailTxt += `┃ 🗓️ \`ᴛᴀɴɢɢᴀʟ\`: *${formatDate()}*\n`;
+    detailTxt += `┃ 🗓️ \`FECHA\`: *${formatDate()}*\n`;
     detailTxt += `╰───────────────\n\n`;
     detailTxt += `🌐 *ʟᴏɢɪɴ ᴘᴀɴᴇʟ:* ${serverConfig.domain}\n\n`;
     detailTxt += `> ⚠️ ¡Esta cuenta tiene acceso completo!
@@ -203,7 +209,9 @@ async function handler(m, { sock }) {
 
     if (targetUser !== m.sender) {
       await m.reply(
-        `✅ *ᴀᴅᴍɪɴ ᴘᴀɴᴇʟ ʙᴇʀʜᴀsɪʟ ᴅɪʙᴜᴀᴛ*\n\n> Server: *${serverLabel}*
+        `✅ *admin panel fue creado con éxito*
+
+> Server: *${serverLabel}*
 > Los datos se han enviado a \`${targetUser.split("@")[0]}\``,
       );
     }

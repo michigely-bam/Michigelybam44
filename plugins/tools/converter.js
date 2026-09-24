@@ -26,16 +26,21 @@ async function handler(m, { sock }) {
   if (!m.quoted && !m.isMedia) {
     return m.reply(
       `🔄 *ᴄᴏɴᴠᴇʀᴛᴇʀ*\n\n` +
-        `> Reply file dengan format tujuan\n\n` +
-        `*Format:*\n` +
+        `> Responder a los archivos con formato de destino
+
+` +
+        `*Formato:*\n` +
         `> \`${m.prefix}converter <format>\`\n\n` +
-        `*Contoh:*\n` +
+        `*Ejemplo:*
+` +
         `> \`${m.prefix}converter mp3\`\n` +
         `> \`${m.prefix}converter mp4\`\n` +
         `> \`${m.prefix}converter png\`\n\n` +
-        `*Cara pakai:*\n` +
-        `> 1. Reply file yang mau diconvert\n` +
-        `> 2. Ketik \`${m.prefix}converter <format>\``,
+        `*Modo de uso:*
+` +
+        `> 1. Responda a los archivos a convertir
+` +
+        `> 2. Escribe \`${m.prefix}converter <format>\``,
     );
   }
 
@@ -43,7 +48,7 @@ async function handler(m, { sock }) {
     return m.reply(
       `❌ ¡Introduzca el formato de destino!
 
-> Contoh: \`${m.prefix}converter mp3\``,
+> Ejemplo: \`${m.prefix}converter mp3\``,
     );
   }
 
@@ -64,7 +69,7 @@ async function handler(m, { sock }) {
   }
 
   m.react("🕕");
-  await m.reply(`🕕 *ᴍᴇɴɢᴜɴᴅᴜʜ ғɪʟᴇ...*`);
+  await m.reply(`🕕 *DESCARGANDO ARCHIVO...*`);
 
   try {
     const stream = await downloadContentFromMessage(
@@ -97,7 +102,7 @@ async function handler(m, { sock }) {
 
     if (result.error) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ ᴄᴏɴᴠᴇʀᴛ*\n\n> ${result.error}`);
+      return m.reply(`❌ *ERROR ᴄᴏɴᴠᴇʀᴛ*\n\n> ${result.error}`);
     }
 
     const saluranId = config.saluran?.id || "120363400911374213@newsletter";

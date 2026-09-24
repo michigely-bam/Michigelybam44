@@ -7,7 +7,7 @@ const pluginConfig = {
     name: 'system',
     alias: ['ram', 'cpu', 'disk', 'latency', 'ping'],
     category: 'main',
-    description: 'Menampilkan informasi sistem (RAM, CPU, Disk, Latency)',
+    description: "Se muestra la información del sistema (RAM, CPU, disco, latencia)",
     usage: '.ram | .cpu | .disk | .ping',
     isGroup: false,
     isBotAdmin: false,
@@ -103,7 +103,7 @@ async function handler(m, { sock }) {
                 let speed = '';
                 if (latency < 100) speed = '🚀 Fast';
                 else if (latency < 500) speed = '⚡ Good';
-                else if (latency < 1000) speed = '🐢 Oke';
+                else if (latency < 1000) speed = "🐢 Bien";
                 else speed = '🐌 Slow';
                 m.reply(`📶 *Pong!*\nLatency: ${latency}ms\nResponse: ${speed}`);
             }

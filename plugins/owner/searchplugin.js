@@ -7,7 +7,7 @@ const pluginConfig = {
   alias: ["splugin", "findplugin", "infoplugin"],
   category: "owner",
   description: "Buscar y mostrar información del plugin",
-  usage: ".splugin &gt; Nombre &gt;",
+  usage: '.splugin <nombre>',
   example: ".splugin sticker",
   isOwner: true,
   isPremium: false,
@@ -86,8 +86,10 @@ async function handler(m, { sock }) {
   if (!name) {
     return m.reply(
       `🔍 *sᴇᴀʀᴄʜ ᴘʟᴜɢɪɴ*\n\n` +
-        `> Cari dan tampilkan info plugin\n\n` +
-        `*ᴄᴏɴᴛᴏʜ:*\n` +
+        `> Buscar y mostrar la información del plugin
+
+` +
+        `*EJEMPLO:*\n` +
         `> \`${m.prefix}splugin sticker\`\n` +
         `> \`${m.prefix}splugin menu\``,
     );
@@ -106,7 +108,9 @@ async function handler(m, { sock }) {
     if (!info) {
       await m.react("❌");
       return m.reply(
-        `❌ *ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n> Plugin \`${name}\` no encontrado`,
+        `❌ *no encontrado*
+
+> Plugin \`${name}\` no encontrado`,
       );
     }
 
@@ -123,21 +127,21 @@ async function handler(m, { sock }) {
     const aliases = Array.isArray(info.alias)
       ? info.alias.join(", ")
       : info.alias || "-";
-    const isEnabled = info.isEnabled !== false ? "✅ Ya" : "❌ Tidak";
-    const isOwner = info.isOwner ? "✅ Ya" : "❌ Tidak";
-    const isPremium = info.isPremium ? "✅ Ya" : "❌ Tidak";
-    const isGroup = info.isGroup ? "✅ Ya" : "❌ Tidak";
-    const isAdmin = info.isAdmin ? "✅ Ya" : "❌ Tidak";
+    const isEnabled = info.isEnabled !== false ? "✅ Ya" : "❌ No";
+    const isOwner = info.isOwner ? "✅ Ya" : "❌ No";
+    const isPremium = info.isPremium ? "✅ Ya" : "❌ No";
+    const isGroup = info.isGroup ? "✅ Ya" : "❌ No";
+    const isAdmin = info.isAdmin ? "✅ Ya" : "❌ No";
 
     await m.react("✅");
     return m.reply(
       `📋 *ɪɴꜰᴏ ᴘʟᴜɢɪɴ*\n\n` +
         `╭┈┈⬡「 📝 *ᴅᴇᴛᴀɪʟ* 」\n` +
-        `┃ 📛 ɴᴀᴍᴀ: \`${info.name || "-"}\`\n` +
+        `┃ 📛 NOMBRE: \`${info.name || "-"}\`\n` +
         `┃ 🏷️ ᴀʟɪᴀs: \`${aliases}\`\n` +
         `┃ 📁 ᴄᴀᴛᴇɢᴏʀʏ: \`${info.category || "-"}\`\n` +
         `┃ 📄 ᴅᴇsᴄ: ${info.description || "-"}\n` +
-        `┃ 📝 ᴜsᴀɢᴇ: \`${info.usage || "-"}\`\n` +
+        `┃ 📝 USO: \`${info.usage || "-"}\`\n` +
         `┃ 📌 ᴇxᴀᴍᴘʟᴇ: \`${info.example || "-"}\`\n` +
         `╰┈┈⬡\n\n` +
         `╭┈┈⬡「 ⚙️ *sᴇᴛᴛɪɴɢs* 」\n` +

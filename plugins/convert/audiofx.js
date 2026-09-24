@@ -5,29 +5,29 @@ import te from '../../src/lib/ourin-error.js'
 const EFFECTS = {
     bass:      { emoji: '🔊', filter: 'bass=g=20:f=110:w=0.6', desc: 'Bass boost' },
     blown:     { emoji: '💥', filter: 'acrusher=level_in=4:level_out=5:bits=8:mode=log:aa=1', desc: 'Distortion' },
-    deep:      { emoji: '🎤', filter: 'asetrate=44100*0.7,atempo=1.3', desc: 'Suara berat' },
+    deep:      { emoji: '🎤', filter: 'asetrate=44100*0.7,atempo=1.3', desc: "Voz grave" },
     earrape:   { emoji: '📢', filter: 'volume=10,bass=g=30:f=80:w=0.6,acrusher=level_in=8:level_out=12:bits=4:mode=log:aa=1', desc: 'Earrape' },
     echo:      { emoji: '🔁', filter: 'aecho=0.8:0.88:60:0.4', desc: 'Echo/gema' },
-    fast:      { emoji: '⚡', filter: 'atempo=1.5', desc: 'Percepat 1.5x' },
+    fast:      { emoji: '⚡', filter: 'atempo=1.5', desc: 'Acelerar 1.5x' },
     fat:       { emoji: '🎵', filter: 'bass=g=15:f=60:w=0.8,lowpass=f=3000,volume=1.5', desc: 'Thick bass' },
     nightcore: { emoji: '🌙', filter: 'asetrate=44100*1.25,atempo=0.9', desc: 'Nightcore' },
-    reverse:   { emoji: '🔄', filter: 'areverse', desc: 'Putar mundur' },
-    robot:     { emoji: '🤖', filter: "afftfilt=real='hypot(re,im)*sin(0)':imag='hypot(re,im)*cos(0)':win_size=512:overlap=0.75", desc: 'Suara robot' },
+    reverse:   { emoji: '🔄', filter: 'areverse', desc: "Reversa" },
+    robot:     { emoji: '🤖', filter: "afftfilt=real='hypot(re,im)*sin(0)':imag='hypot(re,im)*cos(0)':win_size=512:overlap=0.75", desc: "Voz robótica" },
     slow:      { emoji: '🐢', filter: 'atempo=0.8,asetrate=44100*0.9', desc: 'Slowed' },
     smooth:    { emoji: '🎶', filter: 'lowpass=f=4000,bass=g=3:f=100,treble=g=-2:f=3000,aecho=0.8:0.88:60:0.4', desc: 'Mellow' },
     tupai:     { emoji: '🐿️', filter: 'asetrate=44100*1.5,atempo=0.8', desc: 'Chipmunk' },
-    superfast: { emoji: '💨', filter: 'atempo=2.0', desc: 'Percepat 2x' },
-    superslow: { emoji: '🦥', filter: 'atempo=0.5', desc: 'Perlambat 2x' },
-    tremolo:   { emoji: '〰️', filter: 'tremolo=f=8:d=0.7', desc: 'Tremolo / getar' },
+    superfast: { emoji: '💨', filter: 'atempo=2.0', desc: 'Acelerar 2x' },
+    superslow: { emoji: '🦥', filter: 'atempo=0.5', desc: 'Ralentizar 2x' },
+    tremolo:   { emoji: '〰️', filter: 'tremolo=f=8:d=0.7', desc: "Trémolo / vibración" },
     vibrato:   { emoji: '🎸', filter: 'vibrato=f=7:d=0.5', desc: 'Vibrato' },
-    phone:     { emoji: '📞', filter: 'highpass=f=300,lowpass=f=3400,volume=1.5', desc: 'Suara telepon' },
-    cave:      { emoji: '🕳️', filter: 'aecho=0.8:0.9:500:0.3,aecho=0.8:0.9:1000:0.2', desc: 'Gema gua' },
-    radio:     { emoji: '📻', filter: 'highpass=f=300,lowpass=f=3000,acrusher=level_in=2:level_out=3:bits=12:mode=log:aa=1', desc: 'Suara radio' },
-    demon:     { emoji: '👹', filter: 'asetrate=44100*0.5,atempo=1.5,aecho=0.8:0.88:200:0.5', desc: 'Suara iblis' },
-    underwater:{ emoji: '💧', filter: 'lowpass=f=500,tremolo=f=2:d=0.4', desc: 'Bawah air' },
+    phone:     { emoji: '📞', filter: 'highpass=f=300,lowpass=f=3400,volume=1.5', desc: "Voz telefónica" },
+    cave:      { emoji: '🕳️', filter: 'aecho=0.8:0.9:500:0.3,aecho=0.8:0.9:1000:0.2', desc: 'Eco de cueva' },
+    radio:     { emoji: '📻', filter: 'highpass=f=300,lowpass=f=3000,acrusher=level_in=2:level_out=3:bits=12:mode=log:aa=1', desc: "Voz de radio" },
+    demon:     { emoji: '👹', filter: 'asetrate=44100*0.5,atempo=1.5,aecho=0.8:0.88:200:0.5', desc: "Voz demoníaca" },
+    underwater:{ emoji: '💧', filter: 'lowpass=f=500,tremolo=f=2:d=0.4', desc: "Bajo el agua" },
     concert:   { emoji: '🏟️', filter: 'aecho=0.8:0.88:40:0.4,aecho=0.8:0.88:80:0.3,treble=g=3:f=4000', desc: 'Live concert' },
     '8bit':    { emoji: '👾', filter: 'acrusher=level_in=3:level_out=4:bits=4:mode=log:aa=0,aresample=8000', desc: '8-bit retro' },
-    helium:    { emoji: '🎈', filter: 'asetrate=44100*2.0,atempo=0.6', desc: 'Suara helium' },
+    helium:    { emoji: '🎈', filter: 'asetrate=44100*2.0,atempo=0.6', desc: "Voz de helio" },
 }
 
 const EFFECT_NAMES = Object.keys(EFFECTS)
@@ -79,7 +79,9 @@ function buildEffectList() {
     }
 
     let txt = `🎧 *AUDIO FX* — ${EFFECT_NAMES.length} effects\n\n`
-    txt += `Reply audio/video lalu ketik efeknya\n\n`
+    txt += `Responder audio/video y luego escribir el efecto
+
+`
 
     for (const [cat, effects] of Object.entries(categories)) {
         txt += `${cat}\n`
@@ -90,7 +92,7 @@ function buildEffectList() {
         txt += `\n`
     }
 
-    txt += `_Contoh: reply audio lalu ketik .bass_`
+    txt += `_Por ejemplo: responder audio y luego escribir .bass_`
     return txt
 }
 
@@ -107,8 +109,10 @@ async function handler(m, { sock }) {
     const fx = EFFECTS[effectName]
     if (!fx) {
         return m.reply(
-            `❌ Efek *${effectName}* tidak ditemukan\n\n` +
-            `Ketik *${m.prefix}audiofx list* untuk daftar efek`
+            `❌ El efecto *${effectName}* no encontrado
+
+` +
+            `Escribe *${m.prefix}audiofx list*para la lista de efectos`
         )
     }
 

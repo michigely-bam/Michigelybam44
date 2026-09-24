@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'asupantiktok',
     alias: ['tiktokasupan', 'ttasupan'],
     category: 'asupan',
-    description: 'Video TikTok dari username random atau spesifik',
+    description: "Vídeos de TikTok de un nombre de usuario aleatorio o específico",
     usage: '.asupantiktok [username]',
     example: '.asupantiktok natajadeh',
     isOwner: false,

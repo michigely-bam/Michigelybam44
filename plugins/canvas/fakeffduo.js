@@ -6,9 +6,9 @@ const pluginConfig = {
   name: "fakeffduo",
   alias: ["fakefreefirduo"],
   category: "canvas",
-  description: "Membuat gambar ff",
+  description: "Haciendo las imágenes ff",
   usage: ".fakeffduo <text>",
-  example: ".fakeffduo Hai cantik",
+    example: ".fakeffduo Hola, bonita",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -22,7 +22,7 @@ async function handler(m, { sock }) {
   const nama = m.text?.split("|");
   if (!nama || nama.length < 2) {
     return m.reply(
-      `*FAKE FF DUO*\n\n> Contoh: ${m.prefix}nombre falso 1`,
+      `*FAKE FF DUO*\n\n> Ejemplo: ${m.prefix}nombre falso 1`,
     );
   }
   m.react("🕕");

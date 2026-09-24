@@ -26,8 +26,9 @@ async function handler(m, { db }) {
         const status = group.antiswgc || 'off'
         await m.reply(
             `📡 *ᴀɴᴛɪsᴡɢᴄ*\n\n` +
-            `> Status: *${status === 'on' ? '✅ Aktif' : '❌ Nonaktif'}*\n\n` +
-            `> Fitur ini mendeteksi tipe SW group mention seperti:\n` +
+            `> Status: *${status === 'on' ? "✅ Activo" : "❌ Inactivo"}*\n\n` +
+            `> Esta característica detecta el tipo de mención de grupo SW como:
+` +
             `> • groupStatusMentionMessage\n` +
             `> • groupMentionedMessage\n` +
             `> • statusMentionMessage\n` +
@@ -46,7 +47,7 @@ async function handler(m, { db }) {
 
     if (action === 'off') {
         db.setGroup(m.chat, { ...group, antiswgc: 'off' })
-        await m.reply('❌ *AntiSWGC nonaktif*')
+        await m.reply("❌ *AntiSWGC no está activo*")
         return
     }
 

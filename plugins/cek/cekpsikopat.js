@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['psikopat', 'psycho'],
     category: 'cek',
     description: "Mira lo psicópata que eres.",
-    usage: ".cecpsychopath - Nombre",
+    usage: ".cekpsikopat [@usuario]",
     example: '.cekpsikopat Budi',
     isOwner: false,
     isPremium: false,
@@ -20,25 +20,24 @@ async function handler(m) {
                     
     let desc = ''
     if (percent >= 90) {
-        desc = 'PSIKOPAT AKUT! Jauhi! 😈'
+        desc = "¡PSICÓPATA EXTREMO/A! ¡Aléjate! 😈"
     } else if (percent >= 70) {
-        desc = "Hati-hati Con este tipo. 👀"
+        desc = "Ten cuidado con esta persona 👀"
     } else if (percent >= 50) {
-        desc = 'Ada sisi gelapnya 🌑'
+        desc = "Tiene un lado oscuro 🌑"
     } else if (percent >= 30) {
-        desc = 'Sedikit misterius 🤔'
+        desc = "Un poco misterioso/a 🤔"
     } else {
         desc = "Normal y amable 😇"
     }
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu nivel de psicosis. *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de psico @${mentioned.split('@')[0]} yak? 
-    
-Tingkat kepsikopatan dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de psicopatía es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de psicopatía de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

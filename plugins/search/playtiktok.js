@@ -7,7 +7,7 @@ const pluginConfig = {
   category: "search",
   description: "Buscar y enviar un video del mejor Ticktock",
   usage: ".playtiktok <query>",
-  example: ".playtiktok cewe tiktok",
+  example: ".playtiktok chica tiktok",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -29,7 +29,7 @@ async function handler(m, { sock }) {
 
   if (!query) {
     return m.reply(
-      `🎵 *PLAY TIKTOK*\n\n> Contoh:\n\`${m.prefix}playtiktok cewe tiktok\``,
+      `🎵 *PLAY TIKTOK*\n\n> Ejemplo:\n\`${m.prefix}playtiktok chica tiktok\``,
     );
   }
 
@@ -44,7 +44,7 @@ async function handler(m, { sock }) {
 
     const video = videos[0];
     let caption = "🎵 *PLAY TIKTOK*\n\n";
-    caption += `📌 *Judul:* ${video.title || "-"}\n`;
+    caption += `📌 *Título:* ${video.title || "-"}\n`;
     caption += `👤 *Author:* ${video.author?.nickname || "-"}\n`;
     caption += `👀 *Views:* ${formatNumber(video.stats?.plays)}\n`;
     caption += `❤️ *Likes:* ${formatNumber(video.stats?.likes)}\n`;

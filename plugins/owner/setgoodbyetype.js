@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'setgoodbyetype',
     alias: ['goodbyetype', 'goodbyevariant', 'goodbyestyle'],
     category: 'owner',
-    description: 'Mengatur variant tampilan goodbye message',
+    description: "Configura la variante visual del mensaje de despedida",
     usage: '.setgoodbyetype',
     example: '.setgoodbyetype',
     isOwner: true,
@@ -32,7 +32,7 @@ async function handler(m, { sock, db }) {
         db.setting('goodbyeType', id)
         await db.save()
         await m.reply(
-            `✅ Goodbye type diubah ke *V${id}*\n` +
+            `✅ El tipo Goodbye fue cambiado a *V${id}*\n` +
             `*${VARIANTS[id].name}*\n` +
             `_${VARIANTS[id].desc}_`
         )
@@ -49,7 +49,7 @@ async function handler(m, { sock, db }) {
             })
         })
     }
-    await sock.sendButton(m.chat, fs.readFileSync('./assets/images/ourin.jpg'), `🥗 *TIPE GOODBYE*
+    await sock.sendButton(m.chat, fs.readFileSync('./assets/images/ourin.jpg'), `🥗 *TIPO DE DESPEDIDA*
 Tipo actual es la versión *${current}*\n_${VARIANTS[current].name}_
 
 Por favor, seleccione una variable de despedida:`, m, { buttons })

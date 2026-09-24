@@ -23,8 +23,10 @@ function handler(m) {
     if (!link) {
         return m.reply(
             `🔗 *ᴀᴅᴅ ᴀɴᴛɪʟɪɴᴋ*\n\n` +
-            `> Masukkan domain/pattern link yang ingin diblokir\n\n` +
-            `\`Contoh:\`\n` +
+            `> Ingrese el dominio/pattern enlace que desea bloquear
+
+` +
+            `\`Ejemplo:\`\n` +
             `\`${m.prefix}addantilink tiktok.com\`\n` +
             `\`${m.prefix}addantilink chat.whatsapp.com\`\n` +
             `\`${m.prefix}addantilink instagram.com\``
@@ -42,10 +44,10 @@ function handler(m) {
     db.setGroup(m.chat, { antilinkList })
     
     m.reply(
-        `✅ *ᴀɴᴛɪʟɪɴᴋ ᴅɪᴛᴀᴍʙᴀʜ*\n\n` +
+        `✅ *ᴀɴᴛɪʟɪɴᴋ AÑADIDO*\n\n` +
         `> Link: \`${link}\`\n` +
         `> Total: *${antilinkList.length}* link\n\n` +
-        `> Gunakan \`${m.prefix}listantilink\` untuk melihat daftar`
+        `> Usa \`${m.prefix}listantilink\` para ver la lista`
     )
 }
 

@@ -7,7 +7,7 @@ const pluginConfig = {
     alias: ['addban', 'block'],
     category: 'owner',
     description: "Bloquear al usuario de usar el bot",
-    usage: ".neumáticos@tag>",
+    usage: ".ban <@mención/número/respuesta>",
     example: '.ban 6281234567890',
     isOwner: true,
     isPremium: false,
@@ -45,13 +45,15 @@ async function handler(m, { sock }) {
     if (!targetNumber || targetNumber.length < 10 || targetNumber.length > 15) {
         return m.reply(
             `🚫 *ʙᴀɴ ᴜsᴇʀ*\n\n` +
-            `> Masukkan nomor atau tag user\n\n` +
-            `\`Contoh: ${m.prefix}ban 6281234567890\``
+            `> Ingrese el número o la etiqueta de usuario
+
+` +
+            `\`Ejemplo: ${m.prefix}ban 6281234567890\``
         )
     }
 
     if (config.isOwner(targetNumber)) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*
+        return m.reply(`❌ *falló*
 
 > No puedo conseguir un dueño de neumáticos`)
     }
@@ -65,7 +67,9 @@ async function handler(m, { sock }) {
     })
 
     if (alreadyBanned) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Nomor \`${targetNumber}\` Se ha cruzado.`)
+        return m.reply(`❌ *falló*
+
+> Número \`${targetNumber}\` Se ha cruzado.`)
     }
 
     bannedList.push(targetNumber)
@@ -77,7 +81,7 @@ async function handler(m, { sock }) {
     await m.reply(
         `🚫 *ᴜsᴇʀ ᴅɪʙᴀɴɴᴇᴅ*\n\n` +
         `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-        `┃ 📱 ɴᴏᴍᴏʀ: \`${targetNumber}\`\n` +
+        `┃ 📱 NÚMERO: \`${targetNumber}\`\n` +
         `┃ 🚫 sᴛᴀᴛᴜs: \`Banned\`\n` +
         `┃ 📊 ᴛᴏᴛᴀʟ: \`${bannedList.length}\` ᴜsᴇʀ\n` +
         `╰┈┈⬡`

@@ -7,7 +7,7 @@ const pluginConfig = {
   name: "cekjeda",
   alias: ["jedastatus", "statusjeda"],
   category: "panel",
-  description: "Cek status jeda panel create",
+  description: "Consulta el intervalo de creación de paneles",
   usage: ".cekjeda",
   example: ".cekjeda",
   isOwner: false,
@@ -20,16 +20,16 @@ const pluginConfig = {
 };
 
 function formatTime(ms) {
-  if (ms <= 0) return "0 detik";
+  if (ms <= 0) return "0 segundos";
 
   const seconds = Math.floor(ms / 1000);
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
 
   if (hours > 0)
-    return `${hours} jam ${minutes % 60} menit ${seconds % 60} detik`;
-  if (minutes > 0) return `${minutes} menit ${seconds % 60} detik`;
-  return `${seconds} detik`;
+    return `${hours} horas ${minutes % 60} minutos ${seconds % 60} segundos`;
+  if (minutes > 0) return `${minutes} minutos ${seconds % 60} segundos`;
+  return `${seconds} segundos`;
 }
 
 function handler(m, { sock }) {
@@ -38,7 +38,7 @@ function handler(m, { sock }) {
   );
 
   if (!hasAccess && !m.isOwner) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*
+    return m.reply(`❌ *falló*
 
 > ¡No tienes acceso al CPanel!`);
   }
@@ -51,25 +51,28 @@ function handler(m, { sock }) {
   const remaining = Math.max(0, jedaMs - elapsed);
 
   let status = "✅ *READY*";
-  let statusDesc = "Bisa create panel sekarang!";
+  let statusDesc = "¡Puedo crear un panel ahora!";
 
   if (jedaMs === 0) {
-    status = "⚡ *NO JEDA*";
-    statusDesc = "Jeda dinonaktifkan, bebas create!";
+    status = "⚡ *SIN INTERVALO*";
+    statusDesc = "¡La pausa está desactivada, libre de crear!";
   } else if (remaining > 0) {
     status = "🕕 *COOLDOWN*";
-    statusDesc = `Tunggu ${formatTime(remaining)} lagi`;
+    statusDesc = `Espera ${formatTime(remaining)} de nuevo`;
   }
 
-  let text = `⏱️ *sᴛᴀᴛᴜs ᴊᴇᴅᴀ ᴘᴀɴᴇʟ*\n\n`;
+  let text = `⏱️ *ESTADO DEL INTERVALO DEL PANEL*
+
+`;
   text += `╭┈┈⬡「 📊 *sᴛᴀᴛᴜs* 」\n`;
   text += `┃ ${status}\n`;
   text += `┃ ${statusDesc}\n`;
   text += `╰┈┈⬡\n\n`;
 
   text += `╭┈┈⬡「 ⚙️ *ᴋᴏɴꜰɪɢ* 」\n`;
-  text += `┃ ◦ Jeda: *${jedaMs === 0 ? "OFF" : formatTime(jedaMs)}*\n`;
-  text += `┃ ◦ Default: *5 menit*\n`;
+  text += `┃ ◦ Intervalo: *${jedaMs === 0 ? "OFF" : formatTime(jedaMs)}*\n`;
+  text += `┃ ◦ Por defecto: *5 minutos*
+`;
 
   if (lastUsed > 0) {
     const lastUsedTime = timeHelper.fromTimestamp(lastUsed, "HH:mm:ss");
@@ -77,7 +80,7 @@ function handler(m, { sock }) {
   }
 
   if (remaining > 0) {
-    text += `┃ ◦ Sisa: *${formatTime(remaining)}*\n`;
+    text += `┃ ◦ Restante: *${formatTime(remaining)}*\n`;
   }
 
   text += `╰┈┈⬡\n\n`;

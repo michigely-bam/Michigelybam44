@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['cocoknama', 'matchname'],
     category: 'primbon',
     description: "Comprobación para nombres de coincidencia",
-    usage: ".nombre del par de coincidencias",
+    usage: ".kecocokannamapasangan <nombre1> <nombre2>",
     example: '.kecocokannamapasangan putu keyla',
     isOwner: false,
     isPremium: false,
@@ -18,11 +18,11 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     if (m.args.length < 2) {
-        return m.reply(`💕 *ᴋᴇᴄᴏᴄᴏᴋᴀɴ ɴᴀᴍᴀ*
+        return m.reply(`💕 *coincidencia del nombre*
 
 > Formato: nombre 1 nombre 2
 
-\`Contoh: ${m.prefix}kecocokannamapasangan putu keyla\``)
+\`Ejemplo: ${m.prefix}kecocokannamapasangan putu keyla\``)
     }
     
     const [nama1, nama2] = m.args
@@ -35,17 +35,19 @@ async function handler(m, { sock }) {
         
         if (!data?.status || !data?.data) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > No se pudo analyse`)
         }
         
         const result = data.data
-        const response = `💕 *ᴋᴇᴄᴏᴄᴏᴋᴀɴ ɴᴀᴍᴀ ᴘᴀsᴀɴɢᴀɴ*\n\n` +
+        const response = `💕 *coincidencia del nombre de pareja*
+
+` +
             `> 👤 ${result.nama_anda}\n` +
             `> 💑 ${result.nama_pasangan}\n\n` +
-            `✅ *ꜱɪꜱɪ ᴘᴏꜱɪᴛɪꜰ:*\n${result.sisi_positif}\n\n` +
-            `❌ *ꜱɪꜱɪ ɴᴇɢᴀᴛɪꜰ:*\n${result.sisi_negatif}\n\n` +
+            `✅ *ASPECTO POSITIVO:*\n${result.sisi_positif}\n\n` +
+            `❌ *ASPECTO NEGATIVO:*\n${result.sisi_negatif}\n\n` +
             `> _${result.catatan}_`
         
         m.react('✅')

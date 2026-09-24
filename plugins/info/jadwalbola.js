@@ -18,7 +18,7 @@ const pluginConfig = {
   isEnabled: true,
 };
 
-const NEOXR_APIKEY = config.APIkey?.neoxr || "Milik-Bot-OurinMD";
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD";
 
 const LEAGUE_EMOJI = {
   "liga inggris": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
@@ -83,7 +83,7 @@ async function handler(m, { sock }) {
     const saluranId = config.saluran?.id || "120363400911374213@newsletter";
     const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
-    let text = `⚽ *ᴊᴀᴅᴡᴀʟ ᴘᴇʀᴛᴀɴᴅɪɴɢᴀɴ*\n\n`;
+    let text = `⚽ *CALENDARIO DE PARTIDOS*\n\n`;
     if (filter) text += `> Filter: \`${filter}\`\n\n`;
 
     for (const [date, games] of Object.entries(grouped)) {
@@ -98,7 +98,7 @@ async function handler(m, { sock }) {
       }
     }
 
-    text += `Total: *${matches.length}* pertandingan`;
+    text += `Total: *${matches.length}* partidos`;
 
     m.react("✅");
 

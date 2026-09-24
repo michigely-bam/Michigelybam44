@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'tofigure3',
     alias: ['figurine3', 'tofigure3', 'bandai3', 'actionfigure3'],
     category: 'ai',
-    description: 'Ubah foto menjadi action figure/figurine koleksi',
-    usage: ".tofigure 3 (reply / enviar imágenes)",
+    description: "Conversión de la foto a la acción figura/figurine de la colección",
+    usage: ".tofigure3 (responde o envía una imagen)",
     example: '.tofigure3',
     isOwner: false,
     isPremium: true,
@@ -29,8 +29,10 @@ async function handler(m, { sock }) {
     
     if (!isImage) {
         return m.reply(
-            `🎭 *ᴛᴏ ꜰɪɢᴜʀ 3*\n\n` +
-            `> Kirim/reply gambar untuk diubah ke figurine/action figure\n\n` +
+            `🎭 *FIGURA 3D*\n\n` +
+            `> Enviar/Responde imágenes para convertirlas en figurine/action figure
+
+` +
             `\`${m.prefix}tofigure3\``
         )
     }

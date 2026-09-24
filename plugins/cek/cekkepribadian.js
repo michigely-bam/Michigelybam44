@@ -22,7 +22,7 @@ const personalities = [
     { type: 'INFJ', title: 'The Advocate', desc: "Idolistas, sabias y empáticas" },
     { type: 'INFP', title: 'The Mediator', desc: "Creativo, idealista, leal" },
     { type: 'ENFJ', title: 'The Protagonist', desc: "Carismático, inspirador, cariñoso" },
-    { type: 'ENFP', title: 'The Campaigner', desc: "Antusias, creativas y sociales" },
+    { type: 'ENFP', title: 'The Campaigner', desc: "Entusiasta, creativo/a y sociable" },
     { type: 'ISTJ', title: 'The Logistician', desc: "Responsable, práctico y meticuloso" },
     { type: 'ISFJ', title: 'The Defender', desc: "Préstamo, apoyo y religión" },
     { type: 'ESTJ', title: 'The Executive', desc: "Organizado, firme y tradicional" },
@@ -38,14 +38,13 @@ async function handler(m) {
 
         const p = personalities[Math.floor(Math.random() * personalities.length)]
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu nivel de personalidad *${p.type} - ${p.title}*
-\`\`\`${p.desc}\`\`\`` : `Usted quiere comprobar la personalidad @${mentioned.split('@')[0]} yak? 
-    
-Kepribadian dia adalah *${p.type} - ${p.title}*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu personalidad es *${p.type} - ${p.title}*.
 \`\`\`${p.desc}\`\`\``
-    
+        : `Personalidad de @${mentioned.split('@')[0]}: *${p.type} - ${p.title}*.
+\`\`\`${p.desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

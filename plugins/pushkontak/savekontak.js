@@ -12,7 +12,7 @@ const pluginConfig = {
   alias: ["svkontak", "savecontact"],
   category: "pushkontak",
   description: "Guardar todos los contactos de grupo a archivos VCF",
-  usage: ".savekontak <namakontak>",
+  usage: ".savekontak <nombre_contacto>",
   example: ".savekontak CustomerList",
   isOwner: true,
   isPremium: false,
@@ -29,18 +29,22 @@ async function handler(m, { sock }) {
 
   if (groupMode !== "pushkontak" && groupMode !== "all") {
     return m.reply(
-      `❌ *ᴍᴏᴅᴇ ᴛɪᴅᴀᴋ sᴇsᴜᴀɪ*\n\n> Aktifkan mode pushkontak terlebih dahulu\n\n\`${m.prefix}botmode pushkontak\``,
+      `❌ *modo no es adecuado*
+
+> Activar el modo Pushcontack primero
+
+\`${m.prefix}botmode pushkontak\``,
     );
   }
 
   const namaKontak = m.text?.trim();
   if (!namaKontak) {
     return m.reply(
-      `📥 *sᴀᴠᴇ ᴋᴏɴᴛᴀᴋ*
+      `📥 *GUARDAR CONTACTO*
 
 > Escriba nombre para contacto
 
-\`Contoh: ${m.prefix}savekontak CustomerList\``,
+\`Ejemplo: ${m.prefix}savekontak CustomerList\``,
     );
   }
 
@@ -69,7 +73,7 @@ async function handler(m, { sock }) {
 
     if (participants.length === 0) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > No hay contactos para salvar`);
     }
@@ -93,7 +97,7 @@ async function handler(m, { sock }) {
       const contacts = batch.map((vcard) => ({ vcard }));
 
       await sock.sendMessage(m.chat, {
-        // kalau mau ke private tinggal m.chat ganti ke m.sender
+        // Si quieres ir a privado, quédate en m.chat y cambia a m.sender.
         contacts: {
           displayName: `${namaKontak} (${batch.length})`,
           contacts,
@@ -109,7 +113,9 @@ async function handler(m, { sock }) {
 
     if (m.chat !== m.sender) {
       await m.reply(
-        `✅ *ᴋᴏɴᴛᴀᴋ ᴅɪsɪᴍᴘᴀɴ*\n\n> ${participants.length} contacto con éxito en dappetyn
+        `✅ *CONTACTO GUARDADO*
+
+> ${participants.length} contacto con éxito en dappetyn
 del Grupo: \`${metadata.subject}\``,
       );
     }

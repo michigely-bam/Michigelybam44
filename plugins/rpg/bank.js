@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['atm', 'nabung', 'deposit', 'tarik', 'withdraw'],
     category: 'rpg',
     description: "Sistema bancario para ahorrar dinero seguro de ser robado",
-    usage: '.bank <deposit/withdraw> <jumlah>',
+    usage: '.bank <deposit/withdraw> <cantidad>',
     example: '.bank deposit 10000',
     isOwner: false,
     isPremium: false,
@@ -82,8 +82,10 @@ async function handler(m, { sock }) {
     let txt = `🏦 *ʙᴀɴᴋ sʏsᴛᴇᴍ*\n\n`
     txt += `> 💰 Cash: Rp ${currentBalance.toLocaleString('id-ID')}\n`
     txt += `> 🏦 Bank: Rp ${currentBank.toLocaleString('id-ID')}\n\n`
-    txt += `> Gunakan: \`.bank deposit <jumlah>\`\n`
-    txt += `> Gunakan: \`.bank withdraw <jumlah>\`\n`
+    txt += `> Utilice: \`.bank deposit <cantidad>\`
+`
+    txt += `> Utilice: \`.bank withdraw <cantidad>\`
+`
     txt += `> Consejo: Use 'all' para todo el dinero.`
     
     await m.reply(txt)

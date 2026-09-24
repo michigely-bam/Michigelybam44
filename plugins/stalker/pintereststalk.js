@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'pintereststalk',
     alias: ['pinstalk', 'stalkpin'],
     category: 'stalker',
-    description: 'Stalk akun Pinterest',
+    description: "Estancamiento de cuentas de Pinterest",
     usage: '.pintereststalk <username>',
     example: '.pintereststalk shiroko',
     isOwner: false,
@@ -24,7 +24,7 @@ async function handler(m, { sock }) {
 
 > Insertar Pinterest nombre de usuario
 
-\`Contoh: ${m.prefix}pintereststalk shiroko\``)
+\`Ejemplo: ${m.prefix}pintereststalk shiroko\``)
     }
     
     m.react('🔍')
@@ -44,7 +44,7 @@ async function handler(m, { sock }) {
         
         const caption = `📌 *ᴘɪɴᴛᴇʀᴇsᴛ sᴛᴀʟᴋ*\n\n` +
             `👤 *Username:* ${u.username}\n` +
-            `📛 *Nama:* ${u.full_name}\n\n` +
+            `📛 *Nombre:* ${u.full_name}\n\n` +
             `📍 *Pins:* ${s.pins}\n` +
             `👥 *Followers:* ${s.followers}\n` +
             `👤 *Following:* ${s.following}\n` +

@@ -5,8 +5,8 @@ const pluginConfig = {
     name: ['fakecall', 'fakecallwa'],
     alias: [],
     category: 'canvas',
-    description: 'Membuat gambar fake call WhatsApp',
-    usage: ".finge todo < nombre",
+    description: "Haciendo imágenes de falsas llamadas WhatsApp",
+    usage: ".fakecall <nombre>",
     example: '.fakecall Zann | 19.00',
     isOwner: false,
     isPremium: false,
@@ -42,10 +42,10 @@ async function handler(m, { sock }) {
     
     if (!text || !text.includes('|')) {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-            `> \`${m.prefix}fakecall <nama> | <durasi>\`\n\n` +
-            `> Contoh: \`${m.prefix}fakecall Marin | 19.00\`\n\n` +
-            `💡 *Tips:* Reply gambar untuk custom avatar`
+            `⚠️ *MODO DE USO*\n\n` +
+            `> \`${m.prefix}fakecall <nombre> | <duración>\`\n\n` +
+            `> Ejemplo: \`${m.prefix}fakecall Marin | 19.00\`\n\n` +
+            `💡 *Consejos:* Responder a las imágenes para avatares personalizados`
         )
     }
     

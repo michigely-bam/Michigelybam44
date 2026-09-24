@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['malas', 'lazy'],
     category: 'cek',
     description: "Mira lo perezoso que eres.",
-    usage: ".checklazy   nombre",
+    usage: ".cekmalas [@usuario]",
     example: '.cekmalas Budi',
     isOwner: false,
     isPremium: false,
@@ -20,25 +20,24 @@ async function handler(m) {
                     
     let desc = ''
     if (percent >= 90) {
-        desc = 'SUPER MALAS! Raja rebahan! 🛏️'
+        desc = "¡SÚPER PEREZOSO/A! ¡Rey o reina del sofá! 🛏️"
     } else if (percent >= 70) {
-        desc = 'Malas banget! 😴'
+        desc = "¡Muy perezoso/a! 😴"
     } else if (percent >= 50) {
-        desc = 'Lumayan malas 🥱'
+        desc = "Bastante perezoso/a 🥱"
     } else if (percent >= 30) {
-        desc = 'Sedikit malas 😊'
+        desc = "Un poco perezoso/a 😊"
     } else {
-        desc = 'Rajin banget! 💪'
+        desc = "¡Muy trabajador/a! 💪"
     }
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu nivel de pereza *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de pereza @${mentioned.split('@')[0]} yak? 
-    
-Tingkat kemalasan dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de pereza es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de pereza de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

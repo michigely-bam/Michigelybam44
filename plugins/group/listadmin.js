@@ -25,7 +25,7 @@ async function handler(m, { sock }) {
         const admins = participants.filter(p => p.admin)
 
         if (admins.length === 0) {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*
+            await m.reply(`❌ *falló*
 
 > No hay administración en este grupo.`)
             return

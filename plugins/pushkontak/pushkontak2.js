@@ -12,8 +12,8 @@ const pluginConfig = {
   alias: ["puskontak2", "push2"],
   category: "pushkontak",
   description: "Empuje el mensaje con un nombre de contacto a todos los miembros del grupo",
-  usage: ".pushkonta2 Identificar el mensaje x124; Identificado namakhanc2",
-  example: ".pushkontak2 Halo!|TokoBaru",
+  usage: '.pushkontak2 <mensaje>|<nombre_contacto>',
+  example: '.pushkontak2 ¡Hola!|TiendaNueva',
   isOwner: true,
   isPremium: false,
   isGroup: true,
@@ -29,32 +29,36 @@ async function handler(m, { sock }) {
 
   if (groupMode !== "pushkontak" && groupMode !== "all") {
     return m.reply(
-      `❌ *ᴍᴏᴅᴇ ᴛɪᴅᴀᴋ sᴇsᴜᴀɪ*\n\n> Aktifkan mode pushkontak terlebih dahulu\n\n\`${m.prefix}botmode pushkontak\``,
+      `❌ *modo no es adecuado*
+
+> Activar el modo Pushcontack primero
+
+\`${m.prefix}botmode pushkontak\``,
     );
   }
 
   const input = m.text?.trim();
   if (!input || !input.includes("|")) {
     return m.reply(
-      `📢 *ᴘᴜsʜ ᴋᴏɴᴛᴀᴋ 2*
+      `📢 *ENVÍO A CONTACTOS 2*
 
-> Formato: mensaje x124; nombre
+> Formato: mensaje | nombre del contacto
 
-\`Contoh: ${m.prefix}pushkontak2 Halo semuanya!|TokoBaru\``,
+\`Ejemplo: ${m.prefix}pushkontak2 ¡Hola a todos!|TiendaNueva\``,
     );
   }
 
   const [text, namaKontak] = input.split("|").map((s) => s.trim());
 
   if (!text || !namaKontak) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*
+    return m.reply(`❌ *falló*
 
-> Formato inválido. Uso: mensaje Dz124; namacatorial`);
+> Formato inválido. Usa: mensaje | nombre del contacto`);
   }
 
   if (global.statuspush) {
     return m.reply(
-      `❌ *ɢᴀɢᴀʟ*
+      `❌ *falló*
 
 > El contacto está funcionando. Tipo \`${m.prefix}stoppush\` Parar.`,
     );
@@ -85,7 +89,7 @@ async function handler(m, { sock }) {
 
     if (participants.length === 0) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > Ningún miembro puede ser enviado`);
     }
@@ -93,14 +97,16 @@ async function handler(m, { sock }) {
     const jedaPush = db.setting("jedaPush") || 5000;
 
     await m.reply(
-      `📢 *ᴘᴜsʜ ᴋᴏɴᴛᴀᴋ 2*\n\n` +
+      `📢 *ENVÍO A CONTACTOS 2*
+
+` +
         `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-        `┃ 📝 ᴘᴇsᴀɴ: \`${text.substring(0, 50)}${text.length > 50 ? "..." : ""}\`\n` +
-        `┃ 👤 ɴᴀᴍᴀ: \`${namaKontak}\`\n` +
+        `┃ 📝 mensaje: \`${text.substring(0, 50)}${text.length > 50 ? "..." : ""}\`\n` +
+        `┃ 👤 NOMBRE: \`${namaKontak}\`\n` +
         `┃ 👥 ᴛᴀʀɢᴇᴛ: \`${participants.length}\` member\n` +
-        `┃ ⏱️ ᴊᴇᴅᴀ: \`${jedaPush}ms\`\n` +
+        `┃ ⏱️ INTERVALO: \`${jedaPush}ms\`\n` +
         `╰┈┈⬡\n\n` +
-        `> Memulai push dengan kontak...`,
+        `> Empieza a empujar con el contacto...`,
     );
 
     global.statuspush = true;
@@ -122,9 +128,9 @@ async function handler(m, { sock }) {
         delete global.statuspush;
 
         await m.reply(
-          `⏹️ *ᴘᴜsʜ ᴅɪʜᴇɴᴛɪᴋᴀɴ*\n\n` +
-            `> ✅ Berhasil: \`${successCount}\`\n` +
-            `> ❌ Gagal: \`${failedCount}\``,
+          `⏹️ *ᴘᴜsʜ DETENIDO*\n\n` +
+            `> ✅ Correcto: \`${successCount}\`\n` +
+            `> ❌ Falló: \`${failedCount}\``,
         );
         return;
       }
@@ -166,10 +172,12 @@ END:VCARD`;
 
     m.react("✅");
     await m.reply(
-      `✅ *ᴘᴜsʜ sᴇʟᴇsᴀɪ*\n\n` +
-        `╭┈┈⬡「 📊 *ʜᴀsɪʟ* 」\n` +
-        `┃ ✅ ʙᴇʀʜᴀsɪʟ: \`${successCount}\`\n` +
-        `┃ ❌ ɢᴀɢᴀʟ: \`${failedCount}\`\n` +
+      `✅ *push terminado*
+
+` +
+        `╭┈┈⬡「 📊 *RESULTADO* 」\n` +
+        `┃ ✅ correcto: \`${successCount}\`\n` +
+        `┃ ❌ ERROR: \`${failedCount}\`\n` +
         `┃ 📊 ᴛᴏᴛᴀʟ: \`${participants.length}\`\n` +
         `╰┈┈⬡`,
     );

@@ -43,11 +43,12 @@ async function handler(m, { sock }) {
     
     if (!data) {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+            `⚠️ *MODO DE USO*\n\n` +
             `> \`${m.prefix}qrcustom <url/text>\`\n\n` +
-            `*Contoh:*\n` +
+            `*Ejemplo:*
+` +
             `> \`${m.prefix}qrcustom https://wa.me/628xxx\`\n\n` +
-            `💡 Reply gambar untuk custom logo di tengah QR`
+            `💡 Responder a la imagen para el logotipo de personalizado en el centro QR`
         )
     }
     

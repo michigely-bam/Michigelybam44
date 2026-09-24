@@ -7,7 +7,7 @@ const pluginConfig = {
     alias: ['editproduct'],
     category: 'store',
     description: "✏️ Editar los productos de la tienda (sólo chat privado)",
-    usage: ".producto de edición < número de contacto > campo",
+    usage: '.editproduk <número> <campo> <valor>',
     example: '.editproduk 1 harga 30000',
     isOwner: true,
     isPremium: false,
@@ -36,9 +36,13 @@ async function uploadToCatbox(buffer, filename = 'file.jpg') {
 async function handler(m, { sock }) {
     if (m.isGroup) {
         return m.reply(
-            `🚫 *Akses Ditolak*\n\n` +
-            `Untuk menjaga privasi 🛡️, pengeditan produk hanya dapat dilakukan di *private chat*.\n\n` +
-            `Silakan chat bot secara langsung 📱`
+            `🚫 *Debido de acceso*
+
+` +
+            `Para mantener la privacidad 🛡️, la edición de productos solo se puede hacer en el chat privado **.
+
+` +
+            `Por favor chatear bot en vivo 📱`
         )
     }
 
@@ -48,7 +52,7 @@ async function handler(m, { sock }) {
     if (products.length === 0) {
         return m.reply(`📭 *Aún no hay producto.*
 
-Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
+Añadir el producto primero: \`${m.prefix}addproduk\` ➕`)
     }
 
     const text = m.text?.trim() || ''
@@ -56,26 +60,42 @@ Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
 
     if (!match) {
         return m.reply(
-            `✏️ *EDIT PRODUK*\n\n` +
-            `📋 Format: \`${m.prefix}editproduk <nomor> <field> <nilai>\`\n\n` +
-            `📌 *Field yang bisa diedit:*\n` +
-            `• *nama* 🏷️ — Nama produk\n` +
-            `• *harga* 💰 — Harga jual (angka)\n` +
-            `• *diskon* 🏷️ — Harga asli/coret (angka, 0 untuk hapus)\n` +
-            `• *stok* 📊 — Jumlah stok atau \`unlimited\`\n` +
-            `• *tipe* 🔑📦 — \`digital\` atau \`fisik\`\n` +
-            `• *deskripsi* 📝 — Deskripsi produk\n` +
-            `• *detail* 🔒 — Info rahasia (dikirim setelah beli)\n` +
-            `• *gambar* 🖼️ — Upload gambar baru (reply gambar)\n` +
-            `• *video* 🎬 — Upload video baru (reply video)\n\n` +
-            `📝 *Contoh:*\n` +
+            `✏️ *EDIT PRODUCTO*
+
+` +
+            `📋 Formato: \`${m.prefix}editproduk <número> <campo> <valor>\`\n\n` +
+            `📌 *Field que se puede editar:*
+` +
+            `• *nama* 🏷️ — Nombre del producto
+` +
+            `• *harga* 💰 — Precio de venta (número)
+` +
+            `• *diskon* 🏷️ — Precio original tachado (número, 0 para eliminar)
+` +
+            `• *stok* 📊 — La cantidad de existencias o \`unlimited\` (ilimitadas)
+` +
+            `• *tipe* 🔑📦 — \`digital\` o \`fisik\`
+` +
+            `• *deskripsi* 📝 — Descripción del producto
+` +
+            `• *detail* 🔒 — Información secreta (enviada después de la compra)
+` +
+            `• *gambar* 🖼️ — Subir nuevas imágenes (Responde imagen)
+` +
+            `• *video* 🎬 — Subir un video nuevo (responde a un video)
+
+` +
+            `📝 *Ejemplo:*\n` +
             `\`${m.prefix}editproduk 1 harga 30000\`\n` +
             `\`${m.prefix}editproduk 1 diskon 40000\`\n` +
             `\`${m.prefix}editproduk 1 tipe fisik\`\n` +
             `\`${m.prefix}editproduk 1 nama Netflix Premium\`\n` +
-            `\`${m.prefix}editproduk 1 deskripsi Akun sharing 1 bulan\`\n` +
-            `\`${m.prefix}editproduk 1 gambar\` (reply gambar 🖼️)\n\n` +
-            `🏷️ _Harga diskon akan ditampilkan sebagai ~~harga asli~~ di katalog_`
+            `\`${m.prefix}editproduk 1 deskripsi Cuenta compartida durante 1 mes\`
+` +
+            `\`${m.prefix}editproduk 1 imagen \` (Responde imagen 🖼️)
+
+` +
+            `🏷️ _El precio de descuento se mostrará como ~~el precio original~~ en el catálogo_`
         )
     }
 
@@ -86,20 +106,20 @@ Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
     if (idx < 0 || idx >= products.length) {
         return m.reply(`❌ *Número de producto no válido.*
 
-Rentang: 1-${products.length} 📋`)
+Rango: 1-${products.length} 📋`)
     }
 
     const product = products[idx]
 
     switch (field) {
         case 'nama': {
-            if (!value || value.length < 2) return m.reply(`❌ *Nama terlalu pendek.* Minimal 2 karakter 🏷️`)
+            if (!value || value.length < 2) return m.reply(`❌ *Los nombres son demasiado cortos.* Un mínimo de 2 caracteres 🏷️`)
             product.name = value
             break
         }
         case 'harga': {
             const price = parseInt(value)
-            if (isNaN(price) || price < 1000) return m.reply(`❌ *Harga tidak valid.* Minimal Rp 1.000 💰`)
+            if (isNaN(price) || price < 1000) return m.reply(`❌ *El precio no es válido.* Mínimo de Rp 1.000 💰`)
             product.price = price
             break
         }
@@ -108,27 +128,34 @@ Rentang: 1-${products.length} 📋`)
             if (isNaN(origPrice) || origPrice === 0) {
                 product.originalPrice = null
             } else {
-                if (origPrice <= product.price) return m.reply(`❌ *Harga diskon harus lebih besar dari harga jual.*\n\nHarga jual saat ini: Rp ${product.price.toLocaleString('id-ID')} 💰`)
+                if (origPrice <= product.price) return m.reply(`❌ *El precio de descuento debe ser mayor que el precio de venta.*
+
+Precio de venta actual: Rp ${product.price.toLocaleString('id-ID')} 💰`)
                 product.originalPrice = origPrice
             }
             break
         }
         case 'stok': {
             product.stock = value.toLowerCase() === 'unlimited' ? -1 : parseInt(value)
-            if (isNaN(product.stock)) return m.reply(`❌ *Stok tidak valid.* Gunakan angka atau \`unlimited\` 📊`)
+            if (isNaN(product.stock)) return m.reply(`❌ *Las existencias no son válidas.* Usa un número o \`unlimited\` 📊`)
             break
         }
         case 'tipe': {
             const newType = value.toLowerCase()
             if (newType !== 'digital' && newType !== 'fisik') {
-                return m.reply(`❌ *Tipe tidak valid.* Gunakan \`digital\` 🔑 atau \`fisik\` 📦`)
+                return m.reply(`❌ *Tipo no es válido.* Utilice \`digital\` 🔑 o \`fisik\` 📦`)
             }
             if (newType === 'fisik' && product.type === 'digital' && product.stockItems?.length > 0) {
                 return m.reply(
-                    `⚠️ *Tidak bisa mengubah ke Fisik*\n\n` +
-                    `Produk ini memiliki *${product.stockItems.length}* data akun 🔑\n` +
-                    `Hapus semua stock items terlebih dahulu sebelum mengubah tipe ke Fisik.\n\n` +
-                    `🗑️ Hapus semua: \`${m.prefix}editproduk ${idx + 1} stok 0\``
+                    `⚠️ *No se puede cambiar a Física*
+
+` +
+                    `Este producto tiene *${product.stockItems.length}*datos de cuentas 🔑
+` +
+                    `Elimine todos los artículos de stock antes de cambiar el tipo a físico.
+
+` +
+                    `🗑️ Eliminar todo: \`${m.prefix}editproduk ${idx + 1} stok 0\``
                 )
             }
             product.type = newType
@@ -146,55 +173,64 @@ Rentang: 1-${products.length} 📋`)
         case 'gambar': {
             const hasMedia = m.quoted?.isMedia && (m.quoted?.isImage || m.quoted?.type === 'imageMessage')
             const isDirectImage = m.isImage
-            if (!hasMedia && !isDirectImage) return m.reply(`🖼️ *Reply atau kirim gambar baru.*\n\nKirim gambar lalu reply dengan command ini.`)
-            await m.reply(`⏳ _Mengunggah gambar..._`)
+            if (!hasMedia && !isDirectImage) return m.reply(`🖼️ *Responde o envíe una nueva imagen.*
+
+Envía una imagen y responde con este comando.`)
+            await m.reply(`⏳ _Subiendo la imagen..._`)
             try {
                 const buffer = hasMedia ? await m.quoted.download() : await m.download()
                 if (buffer) {
                     const url = await uploadToCatbox(buffer, 'image.jpg')
                     if (url) product.image = url
-                    else return m.reply(`❌ *Gagal mengunggah gambar.* Coba lagi nanti 🖼️`)
+                    else return m.reply(`❌ *Fallo en subir las imágenes.* Prueba más tarde 🖼️`)
                 }
             } catch {
-                return m.reply(`❌ *Gagal mengunggah gambar.* Coba lagi nanti 🖼️`)
+                return m.reply(`❌ *Fallo en subir las imágenes.* Prueba más tarde 🖼️`)
             }
             break
         }
         case 'video': {
             const hasMedia = m.quoted?.isMedia && (m.quoted?.isVideo || m.quoted?.type === 'videoMessage')
             const isDirectVideo = m.isVideo
-            if (!hasMedia && !isDirectVideo) return m.reply(`🎬 *Reply atau kirim video baru.*\n\nKirim video lalu reply dengan command ini.`)
-            await m.reply(`⏳ _Mengunggah video..._`)
+            if (!hasMedia && !isDirectVideo) return m.reply(`🎬 *Responde o envíe un nuevo video.*
+
+Envíe el video y responda con este comando.`)
+            await m.reply(`⏳ _Subiendo el video..._`)
             try {
                 const buffer = hasMedia ? await m.quoted.download() : await m.download()
                 if (buffer) {
                     const url = await uploadToCatbox(buffer, 'video.mp4')
                     if (url) product.video = url
-                    else return m.reply(`❌ *Gagal mengunggah video.* Coba lagi nanti 🎬`)
+                    else return m.reply(`❌ *Fallo en subir el video.* Trate de hacerlo más tarde 🎬`)
                 }
             } catch {
-                return m.reply(`❌ *Gagal mengunggah video.* Coba lagi nanti 🎬`)
+                return m.reply(`❌ *Fallo en subir el video.* Trate de hacerlo más tarde 🎬`)
             }
             break
         }
         default:
-            return m.reply(`❌ *Field tidak dikenali.*\n\nGunakan: nama, harga, diskon, stok, tipe, deskripsi, detail, gambar, video 📋`)
+            return m.reply(`❌ *El campo es desconocido.*
+
+Utiliza estos campos: nama, harga, diskon, stok, tipe, deskripsi, detail, gambar, video 📋`)
     }
 
     db.setting('storeProducts', products)
     await m.react('✅')
 
     const typeIcon = product.type === 'fisik' ? '📦' : '🔑'
-    const typeLabel = product.type === 'fisik' ? 'Fisik' : 'Digital'
+    const typeLabel = product.type === 'fisik' ? "Físico" : 'Digital'
 
-    let reply = `✅ *PRODUK DIPERBARUI*\n\n`
-    reply += `🏷️ Nama: *${product.name}*\n`
-    reply += `💰 Harga: *Rp ${product.price.toLocaleString('id-ID')}*`
+    let reply = `✅ *PRODUCTO ACTUALIZADO*
+
+`
+    reply += `🏷️ Nombre: *${product.name}*\n`
+    reply += `💰 Precio: *Rp ${product.price.toLocaleString('id-ID')}*`
     if (product.originalPrice) reply += ` ~~Rp ${product.originalPrice.toLocaleString('id-ID')}~~`
     reply += `\n`
-    reply += `${typeIcon} Tipe: *${typeLabel}*\n`
-    reply += `📊 Stok: *${product.stock === -1 ? '♾️ Unlimited' : product.stock}*\n`
-    if (field === 'gambar') reply += `🖼️ Gambar: ✅\n`
+    reply += `${typeIcon} Tipo: *${typeLabel}*\n`
+    reply += `📊 Existencias: *${product.stock === -1 ? '♾️ Ilimitadas' : product.stock}*\n`
+    if (field === 'gambar') reply += `🖼️ Imagen: ✅
+`
     if (field === 'video') reply += `🎬 Video: ✅\n`
     reply += `
 👀 _Ver cambios: \`${m.prefix}listproduk\`_`

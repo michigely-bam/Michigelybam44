@@ -28,7 +28,8 @@ async function handler(m, { sock }) {
         return m.reply(
             `🎲 *ᴅɪᴄᴇ ɢᴀᴍᴇ*\n\n` +
             `╭┈┈⬡「 📋 *ᴜsᴀɢᴇ* 」\n` +
-            `┃ > Tebak angka 1-6!\n` +
+            `¡Adivina los números 1 a 6!
+` +
             `┃ > \`.dice 6 5000\`\n` +
             `╰┈┈┈┈┈┈┈┈⬡`
         )
@@ -43,15 +44,17 @@ async function handler(m, { sock }) {
     
     if ((user.koin || 0) < bet) {
         return m.reply(
-            `❌ *sᴀʟᴅᴏ ᴛɪᴅᴀᴋ ᴄᴜᴋᴜᴘ*\n\n` +
-            `> Koin kamu: Rp ${(user.koin || 0).toLocaleString('id-ID')}\n` +
-            `> Butuh: Rp ${bet.toLocaleString('id-ID')}`
+            `❌ *saldo no es suficiente*
+
+` +
+            `> Tus monedas: Rp ${(user.koin || 0).toLocaleString('id-ID')}\n` +
+            `> Necesidad: Rp ${bet.toLocaleString('id-ID')}`
         )
     }
     
     user.koin -= bet
     
-    await sock.sendMessage(m.chat, { text: `🎲 *ᴍᴇʟᴇᴍᴘᴀʀ ᴅᴀᴅᴜ...*`, contextInfo: getRpgContextInfo('🎲 DICE', 'Rolling!') }, { quoted: m })
+    await sock.sendMessage(m.chat, { text: `🎲 *LANZANDO EL DADO...*`, contextInfo: getRpgContextInfo('🎲 DICE', 'Rolling!') }, { quoted: m })
     await new Promise(r => setTimeout(r, 1500))
     
     const result = Math.floor(Math.random() * 6) + 1
@@ -60,16 +63,16 @@ async function handler(m, { sock }) {
     const isWin = guess === result
     
     let txt = `🎲 *ᴅɪᴄᴇ ɢᴀᴍᴇ*\n\n`
-    txt += `> ${diceEmoji} Hasil: *${result}*\n`
-    txt += `> 🎯 Tebakan: *${guess}*\n\n`
+    txt += `> ${diceEmoji} Resultado: *${result}*\n`
+    txt += `> 🎯 Predicción: *${guess}*\n\n`
     
     if (isWin) {
         const winnings = bet * 5
         user.koin = (user.koin || 0) + winnings
-        txt += `✅ *ᴋᴀᴍᴜ ᴍᴇɴᴀɴɢ!*\n`
+        txt += `✅ *GANASTE!*\n`
         txt += `> 💰 Win: *+Rp ${winnings.toLocaleString('id-ID')}* (5x)`
     } else {
-        txt += `❌ *ᴋᴀᴍᴜ ᴋᴀʟᴀʜ!*\n`
+        txt += `❌ *PERDISTE!*\n`
         txt += `> 💸 Lost: *-Rp ${bet.toLocaleString('id-ID')}*`
     }
     

@@ -4,7 +4,7 @@ const pluginConfig = {
     alias: ['delcmdsticker', 'removesticker', 'unsticker'],
     category: 'group',
     description: "Eliminar el comando sticker",
-    usage: '.delstickercmd <command> atau reply sticker',
+    usage: ".delstickercmd <command> o sticker de respuesta",
     example: '.delstickercmd menu',
     isOwner: false,
     isPremium: false,
@@ -24,13 +24,14 @@ async function handler(m, { sock }) {
         if (existingCmds.length === 0) {
             return m.reply(
                 `🖼️ *sᴛɪᴄᴋᴇʀ ᴄᴏᴍᴍᴀɴᴅs*\n\n` +
-                `> Tidak ada sticker command yang terdaftar.\n` +
-                `> Tambahkan dengan \`.addcmdsticker\``
+                `> No hay comandos de sticker registrados.
+` +
+                `> Agrega con \`.addcmdsticker\``
             )
         }
         
         let txt = `🖼️ *sᴛɪᴄᴋᴇʀ ᴄᴏᴍᴍᴀɴᴅs*\n\n`
-        txt += `╭┈┈⬡「 📋 *ᴅᴀꜰᴛᴀʀ* 」\n`
+        txt += `╭┈┈⬡「 📋 *LISTA* 」\n`
         
         for (const cmd of existingCmds) {
             txt += `┃ 🖼️ → \`.${cmd.command}\`\n`
@@ -40,7 +41,7 @@ async function handler(m, { sock }) {
         txt += `*Suprímase con:*
 `
         txt += `> \`.delstickercmd <command>\`\n`
-        txt += `> atau reply sticker + \`.delstickercmd\``
+        txt += `> o sticker de respuesta + \`.delstickercmd\``
         
         return m.reply(txt)
     }
@@ -69,8 +70,10 @@ async function handler(m, { sock }) {
             }
         } else {
             return m.reply(
-                `❌ Sticker command \`${cleanCmd}\` tidak ditemukan!\n\n` +
-                `> Lihat daftar dengan \`.delstickercmd\``
+                `❌ Sticker command \`${cleanCmd}¡\` no encontrado!
+
+` +
+                `> Vea la lista con \`.delstickercmd\``
             )
         }
     }
@@ -78,14 +81,19 @@ async function handler(m, { sock }) {
     if (deleted) {
         await m.react('✅')
         await m.reply(
-            `✅ *sᴛɪᴄᴋᴇʀ ᴄᴏᴍᴍᴀɴᴅ ᴅɪʜᴀᴘᴜs*\n\n` +
-            `> 🗑️ \`${deletedCmd}\` telah dihapus.`
+            `✅ *el comando de pegatinas se eliminó*
+
+` +
+            `> 🗑️ \`${deletedCmd}Se ha eliminado.`
         )
     } else {
         await m.reply(
-            `❌ Gagal menghapus!\n\n` +
-            `> Reply sticker yang ingin dihapus, atau\n` +
-            `> Ketik nama command: \`.delstickercmd menu\``
+            `❌ ¡No se ha eliminado!
+
+` +
+            `> Responda a las stickers que desees eliminar, o
+` +
+            `> Escribe el nombre del comando: \`.delstickercmd menu\``
         )
     }
 }

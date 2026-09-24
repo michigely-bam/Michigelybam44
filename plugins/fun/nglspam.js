@@ -4,9 +4,9 @@ const pluginConfig = {
     name: ['nglspam'],
     alias: ['spamngl'],
     category: 'tools',
-    description: 'Generate gambar NGL',
-    usage: ".nnlspam  spanombre de usuario >er spawning 124; <",
-    example: ".nnlspam  spanombre de usuario >er spawning 124; <",
+    description: "Generar imágenes NGL",
+    usage: '.nglspam <usuario>|<mensaje>|<cantidad>',
+    example: '.nglspam Zann|Hola|33',
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -21,9 +21,9 @@ async function handler(m, { sock }) {
     
     if (!text) {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-            `> \`${m.prefix}spamngl <username>|<pesan>|<jumlah>\`\n\n` +
-            `> Contoh: \`${m.prefix}spamngl Zann|Haii|33\``
+            `⚠️ *MODO DE USO*\n\n` +
+            `> \`${m.prefix}spamngl <usuario>|<mensaje>|<cantidad>\`\n\n` +
+            `> Ejemplo: \`${m.prefix}spamngl Zann|Haii|33\``
         )
     }
     
@@ -35,7 +35,7 @@ async function handler(m, { sock }) {
         if(data.status){
             await m.reply('✅ Success spam ngl')
         }else{
-            await m.reply('❌ Failed spam ngl')
+            await m.reply('❌ No se pudieron enviar los mensajes NGL.')
         }
         
         m.react('✅')

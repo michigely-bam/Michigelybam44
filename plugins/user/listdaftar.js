@@ -114,7 +114,7 @@ const pluginConfig = {
   category: "user",
   description:
     "Ver lista de usuarios ya listados con filtros y paginación",
-  usage: ".lista [página 1] [búsqueda] [nombre de búsqueda] [tipo más bajo]",
+  usage: ".listdaftar [página] [búsqueda] [orden]",
   example: ".listdaftar search zann sort terbaru page 2",
   isOwner: true,
   isPremium: false,
@@ -164,10 +164,12 @@ async function handler(m, { sock }) {
     startIndex + PAGE_SIZE,
   );
 
-  let text = `📋 *ᴅᴀꜰᴛᴀʀ ᴜsᴇʀ ᴛᴇʀᴅᴀꜰᴛᴀʀ*\n\n`;
+  let text = `📋 *lista de usuarios registrados*
+
+`;
   text += `> Resultados totales: *${registeredUsers.length}* user\n`;
-  text += `> Halaman: *${page}/${totalPages}*\n`;
-  text += `> Urut: *${options.sort === "terbaru" ? "Terbaru" : "Default"}*\n`;
+  text += `> Página: *${page}/${totalPages}*\n`;
+  text += `> Orden: *${options.sort === "terbaru" ? "Más recientes" : "Default"}*\n`;
   if (options.search) {
     text += `> Search: *${options.search}*\n`;
   }
@@ -184,12 +186,13 @@ async function handler(m, { sock }) {
     const registeredAt = formatDateTime(
       user.lastRegisteredAt || user.registeredAt,
     );
-    text += `${listNumber}. ${genderEmoji} *${user.regName || "Unknown"}*\n`;
-    text += `   > @${user.jid} | ${user.regAge || "?"} tahun | ${registeredAt}\n`;
+    text += `${listNumber}. ${genderEmoji} *${user.regName || "Desconocido"}*\n`;
+    text += `   > @${user.jid} | ${user.regAge || "?"} años | ${registeredAt}\n`;
   });
 
   if (totalPages > 1) {
-    text += `\n> Gunakan \`${m.prefix}listdaftar page ${page + 1 > totalPages ? totalPages : page + 1}\` para otra página`;
+    text += `
+> Usa \`${m.prefix}listdaftar page ${page + 1 > totalPages ? totalPages : page + 1}\` para otra página`;
   }
 
   const mentions = displayUsers.map((u) => u.jid + "@s.whatsapp.net");

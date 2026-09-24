@@ -19,7 +19,7 @@ const pluginConfig = {
   isEnabled: true,
 };
 
-const NEOXR_APIKEY = config.APIkey?.neoxr || "Milik-Bot-OurinMD";
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD";
 
 async function handler(m, { sock }) {
   const db = getDatabase();
@@ -29,10 +29,11 @@ async function handler(m, { sock }) {
   if (!text) {
     return m.reply(
       `📱 *ᴀɴᴅʀᴏɪᴅ1 sᴇᴀʀᴄʜ*\n\n` +
-        `╭┈┈⬡「 📋 *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ* 」\n` +
-        `┃ 🔍 \`${m.prefix}android1 <query>\` - Cari APK\n` +
+        `╭┈┈⬡「 📋 *MODO DE USO* 」\n` +
+        `┃ 🔍 \`${m.prefix}android1 <query>\` - Busca el APK
+` +
         `╰┈┈⬡\n\n` +
-        `> Contoh:\n` +
+        `> Ejemplo:\n` +
         `\`${m.prefix}android1 Subway Surfer\``,
     );
   }

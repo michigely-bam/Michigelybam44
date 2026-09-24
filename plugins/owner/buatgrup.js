@@ -3,8 +3,8 @@ const pluginConfig = {
     alias: [],
     category: 'owner',
     description: "Crear un nuevo grupo",
-    usage: ".Crear un grupo < nombre √≥ x124; √Īo número 1, número 2,...",
-    example: ".Crear un nuevo grupo de 124; 628xx, 628yyy",
+    usage: '.buatgrup <nombre>|<número1,número2,...>',
+    example: '.buatgrup Grupo nuevo|628xxx,628yyy',
     isOwner: true,
     cooldown: 5,
     energi: 0,
@@ -17,12 +17,12 @@ async function handler(m, { sock }) {
 
     if (pipeIdx === -1) {
         return m.reply(
-            '👥 *ʙᴜᴀᴛ ɢʀᴜᴘ ʙᴀʀᴜ*\n\n' +
+            '👥 *CREAR GRUPO NUEVO*\n\n' +
             '> `.buatgrup Nama Grup|628xxx,628yyy`\n\n' +
-            '• Gunakan `|` untuk memisahkan nama dan peserta\n' +
-            '• Pisahkan nomor peserta dengan koma\n' +
-            '• Bot otomatis menjadi admin\n\n' +
-            '📝 Contoh:\n' +
+            "• Utilice `|` para separar nombres y participantes\n" +
+            "• Separar el número de participantes con una coma\n" +
+            "• El bot se convierte automáticamente en administrador\n\n" +
+            '📝 Ejemplo:\n' +
             '> `.buatgrup Tim Alpha|628123,628456`'
         )
     }
@@ -48,11 +48,15 @@ async function handler(m, { sock }) {
         const group = await sock.groupCreate(name, participants)
         await m.react('✅')
         return m.reply(
-            `👥 *ɢʀᴜᴘ ᴅɪʙᴜᴀᴛ*\n\n` +
-            `> Nama: ${name}\n` +
+            `👥 *GRUPO CREADO*
+
+` +
+            `> Nombre: ${name}\n` +
             `> ID: ${group.id}\n` +
-            `> Peserta: ${participants.length} orang\n\n` +
-            `_Bot otomatis menjadi admin_`
+            `> Participantes: ${participants.length} personas
+
+` +
+            `_El bot se convierte automáticamente en administrador_`
         )
     } catch (err) {
         return m.reply(`❌ No se pudo create group: ${err.message}`)

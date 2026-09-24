@@ -22,7 +22,9 @@ async function handler(m, { sock }) {
 
   if (!user?.isRegistered) {
     return m.reply(
-      `❌ Kamu belum terdaftar!\n\n` + `> Daftar dengan \`${m.prefix}daftar\``,
+      `❌ ¡No estás registrado!
+
+` + `> Regístrate con \`${m.prefix}daftar\``,
     );
   }
 
@@ -44,9 +46,13 @@ async function handler(m, { sock }) {
     m.chat,
     {
       text:
-        `✅ *ᴜɴʀᴇɢɪsᴛᴇʀ ʙᴇʀʜᴀsɪʟ!*\n\n` +
-        `Data pendaftaran kamu sudah dihapus.\n\n` +
-        `> Untuk daftar ulang: \`${m.prefix}daftar\``,
+        `✅ ¡El registro ha funcionado!
+
+` +
+        `Sus datos de registro han sido eliminados.
+
+` +
+        `> Para la lista de nuevo: \`${m.prefix}daftar\``,
       contextInfo: {
         forwardingScore: 9999,
         isForwarded: true,

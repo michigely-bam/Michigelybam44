@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'tocermin',
     alias: ['mirror', 'tomirror'],
     category: 'ai',
-    description: 'Ubah foto menjadi efek cermin (mirror reflection)',
+    description: "Convertir las fotos en reflejo de espejo",
     usage: ".tomirror (reply / enviar imágenes)",
     example: '.tocermin',
     isOwner: false,
@@ -28,8 +28,10 @@ async function handler(m, { sock }) {
     
     if (!isImage) {
         return m.reply(
-            `🪞 *ᴛᴏ ᴄᴇʀᴍɪɴ*\n\n` +
-            `> Kirim/reply gambar untuk efek cermin\n\n` +
+            `🪞 *EFECTO ESPEJO*\n\n` +
+            `> Enviar/Responde imágenes para el efecto espejo
+
+` +
             `\`${m.prefix}tocermin\``
         )
     }

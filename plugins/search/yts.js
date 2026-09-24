@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'yts',
     alias: ['ytsearch', 'youtubesearch'],
     category: 'search',
-    description: 'Cari video di YouTube',
+    description: "Busca videos en YouTube",
     usage: '.yts <query>',
     example: '.yts neffex grateful',
     isOwner: false,
@@ -21,9 +21,9 @@ async function handler(m, { sock }) {
     
     if (!query) {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+            `⚠️ *MODO DE USO*\n\n` +
             `> \`${m.prefix}yts <query>\`\n\n` +
-            `> Contoh:\n` +
+            `> Ejemplo:\n` +
             `> \`${m.prefix}yts neffex grateful\``
         )
     }
@@ -41,7 +41,7 @@ async function handler(m, { sock }) {
         
         videos.forEach((v, i) => {
             txt += `*${i + 1}.* ${v.title}\n`
-            txt += `   ├ 👤 ${v.author?.name || 'Unknown'}\n`
+            txt += `   ├ 👤 ${v.author?.name || 'Desconocido'}\n`
             txt += `   ├ ⏱️ ${v.timestamp || '-'}\n`
             txt += `   ├ 👁️ ${v.views || 0} views\n`
             txt += `   └ 🔗 ${v.url}\n\n`

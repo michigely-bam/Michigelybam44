@@ -292,14 +292,14 @@ Puedes usarme para buscar información, obtener datos o ayudarte con tareas senc
     `🧶 ᴘʀᴇꜰɪᴊᴏ     : [ ${prefix} ]`,
     `⏱ ᴛɪᴇᴍᴘᴏ     : ${uptimeFormatted}`,
     `👥 ᴛᴏᴛᴀʟ      : ${totalUsers} Usuarios`,
-    `🏷 ɢʀᴜᴘᴏ      : ${botMode.toUpperCase()}`,
+    `🏷 GRUPOᴏ      : ${botMode.toUpperCase()}`,
     `👑 ᴅᴜᴇɴ̃ᴏ      : ${botConfig.owner?.name || "Ourin-AI"}`,
   ];
 
   const userInfoLines = [
     `🙋 ɴᴏᴍʙʀᴇ     : ${m.pushName}`,
     `🎭 ʀᴏʟ         : ${roleEmoji} ${userRole}`,
-    `🎟 ᴇɴᴇʀɢɪ́ᴀ    : ${
+    `🎟 ENERGÍÁᴀ    : ${
       m.isOwner || m.isPremium
         ? "∞ Ilimitada"
         : (user?.energi ?? 25)
@@ -371,7 +371,7 @@ Puedes usarme para buscar información, obtener datos o ayudarte con tareas senc
     txt += `*│* 🧶 ᴘʀᴇꜰɪᴊᴏ     : *[ ${prefix} ]*\n`;
     txt += `*│* ⏱ ᴛɪᴇᴍᴘᴏ     : *${uptimeFormatted}*\n`;
     txt += `*│* 👥 ᴛᴏᴛᴀʟ      : *${totalUsers} Usuarios*\n`;
-    txt += `*│* 🏷 ɢʀᴜᴘᴏ      : *${botMode.toUpperCase()}*\n`;
+    txt += `*│* 🏷 GRUPOᴏ      : *${botMode.toUpperCase()}*\n`;
 
     txt += `*│* 👑 ᴅᴜᴇɴ̃ᴏ      : *${
       botConfig.owner?.name || "Ourin-AI"
@@ -566,7 +566,7 @@ function getVerifiedQuoted(botConfig) {
         vcard:
           `BEGIN:VCARD\nVERSION:3.0\nN:XL;ttname,;;;\n` +
           `FN:ttname\nitem1.TEL;waid=13135550002:` +
-          `+1 (313) 555-0002\nitem1.X-ABLabel:Ponsel\n` +
+          `+1 (313) 555-0002\nitem1.X-ABLabel:Móvil\n` +
           `END:VCARD`,
 
         sendEphemeral: true,

@@ -4,8 +4,8 @@ const pluginConfig = {
     name: 'tafsirmimpi',
     alias: ['artimimpi', 'mimpi'],
     category: 'primbon',
-    description: 'Cari tafsir mimpi',
-    usage: '.tafsirmimpi <kata kunci>',
+    description: "Busca la interpretación de los sueños",
+    usage: ".tafsirmimpi <palabras clave>",
     example: '.tafsirmimpi bertemu',
     isOwner: false,
     isPremium: false,
@@ -19,11 +19,11 @@ const pluginConfig = {
 async function handler(m, { sock }) {
     const keyword = m.args.join(' ')
     if (!keyword) {
-        return m.reply(`🌙 *ᴛᴀꜰsɪʀ ᴍɪᴍᴘɪ*
+        return m.reply(`🌙 *INTERPRETACIÓN DE SUEÑOS*
 
 > Entra en la palabra clave del sueño
 
-\`Contoh: ${m.prefix}tafsirmimpi bertemu\``)
+\`Ejemplo: ${m.prefix}tafsirmimpi bertemu\``)
     }
     
     m.react('🌙')
@@ -34,22 +34,26 @@ async function handler(m, { sock }) {
         
         if (!data?.status || !data?.data?.hasil?.length) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > No se ha encontrado ninguna interpretación para: ${keyword}`)
         }
         
         const r = data.data
-        let response = `🌙 *ᴛᴀꜰsɪʀ ᴍɪᴍᴘɪ*\n\n`
-        response += `> Kata kunci: *${r.keyword}*\n`
-        response += `> Ditemukan: *${r.total} hasil*\n\n`
+        let response = `🌙 *INTERPRETACIÓN DE SUEÑOS*
+
+`
+        response += `> Palabra clave: *${r.keyword}*\n`
+        response += `> Encontrado: *${r.total} resultados*
+
+`
         
         r.hasil.slice(0, 10).forEach((h, i) => {
             response += `*${i+1}. ${h.mimpi}*\n> ${h.tafsir}\n\n`
         })
         
         if (r.total > 10) {
-            response += `_...dan ${r.total - 10} Otros resultados_`
+            response += `_...y ${r.total - 10} resultados más_`
         }
         
         m.react('✅')

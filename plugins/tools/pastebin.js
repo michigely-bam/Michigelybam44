@@ -26,17 +26,20 @@ async function handler(m, { sock }) {
     if (!text) {
         return m.reply(
             `📋 *ᴘᴀsᴛᴇʙɪɴ ᴜᴘʟᴏᴀᴅ*\n\n` +
-            `Kirim teks untuk di-upload ke Pastebin.\n\n` +
-            `*Cara pakai:*\n` +
+            `Envía un mensaje de texto a Pastebin.
+
+` +
+            `*Modo de uso:*
+` +
             `• \`${m.prefix}pastebin <text>\`\n` +
-            `• Reply teks dengan \`${m.prefix}pastebin\`\n\n` +
-            `> Contoh: \`${m.prefix}pastebin console.log("Hello")\``
+            `• Responder al texto con \`${m.prefix}pastebin\`\n\n` +
+            `> Ejemplo: \`${m.prefix}pastebin console.log("Hello")\``
         )
     }
     
     const api_dev_key = 'h9WMT2Mn9QW-qDhvUSc-KObqAYcjI0he'
     const api_paste_code = text.trim()
-    const api_paste_name = `Paste dari ${m.pushName || 'User'} - ${new Date().toLocaleDateString('id-ID')}`
+    const api_paste_name = `Pegar desde ${m.pushName || 'User'} - ${new Date().toLocaleDateString('id-ID')}`
     
     const data = new URLSearchParams({
         api_dev_key,
@@ -55,17 +58,19 @@ async function handler(m, { sock }) {
         const url = res.data
         
         if (url.startsWith('Bad API request')) {
-            return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> ${url}`)
+            return m.reply(`❌ *ERROR*\n\n> ${url}`)
         }
         
         await sock.sendMessage(m.chat, {
-            text: `✅ *ᴘᴀsᴛᴇʙɪɴ ʙᴇʀʜᴀsɪʟ*\n\n` +
+            text: `✅ *el pastebin fue exitoso*
+
+` +
                 `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-                `┃ 📝 ᴊᴜᴅᴜʟ: *${api_paste_name}*\n` +
-                `┃ 📊 ᴜᴋᴜʀᴀɴ: *${text.length} chars*\n` +
+                `┃ 📝 TÍTULO: *${api_paste_name}*\n` +
+                `┃ 📊 TAMAÑO: *${text.length} chars*\n` +
                 `┃ 🔗 ʟɪɴᴋ: ${url}\n` +
                 `╰┈┈⬡\n\n` +
-                `> Paste akan expired sesuai pengaturan Pastebin.`,
+                `> El paste caducará según la configuración de Pastebin.`,
             contextInfo: {
                 externalAdReply: {
                     title: 'Pastebin Upload',

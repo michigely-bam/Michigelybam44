@@ -64,7 +64,7 @@ async function handler(m, { sock }) {
 
   if (!category) {
     return m.reply(
-      `🎭 *MELOLO DRAMA*\n\n> Contoh:\n\`${m.prefix}melolo fantasy\``,
+      `🎭 *MELOLO DRAMA*\n\n> Ejemplo:\n\`${m.prefix}melolo fantasy\``,
     );
   }
 
@@ -89,7 +89,7 @@ async function handler(m, { sock }) {
     caption += `🌿 *Category:* ${category}\n`;
     caption += `📦 *Total:* ${items.length}\n`;
     caption += `💳 *Cost:* ${result?.usage?.cost ?? "-"}\n`;
-    caption += `🔋 *Sisa Credit:* ${result?.usage?.remaining ?? "-"}\n\n`;
+    caption += `🔋 *Crédito restante:* ${result?.usage?.remaining ?? "-"}\n\n`;
 
     items.forEach((item, index) => {
       caption += `*${index + 1}.* ${trimText(item.title, 70)}\n`;

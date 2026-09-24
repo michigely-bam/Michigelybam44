@@ -4,7 +4,7 @@ games.register('riddle', {
     alias: ['rd', 'tebaktebak', 'riddles'],
     emoji: '❓',
     title: 'RIDDLE',
-    description: 'Riddle/tebak-tebakan'
+    description: 'Adivinanzas'
 })
 
 const { config: pluginConfig, handler, answerHandler } = games.createPlugin('riddle')

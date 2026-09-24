@@ -5,7 +5,7 @@ const pluginConfig = {
   alias: ["delproduk", "delproduct", "deleteproduk"],
   category: "store",
   description: "🗑️ Quitar el producto de la tienda",
-  usage: ".Eliminar el producto  Delete número",
+  usage: ".hapusproduk <número>",
   example: ".hapusproduk 1",
   isOwner: true,
   isPremium: false,
@@ -33,7 +33,7 @@ Añadir el producto primero con \`${m.prefix}addproduk\` ➕`,
   if (isNaN(idx) || idx < 0 || idx >= products.length) {
     let txt = `🗑️ *Seleccione el producto eliminado*
 
-Ketik \`${m.prefix}Eliminar el producto  Delete número\`
+Escribe \`${m.prefix}Eliminar el producto  Delete número\`
 
 `;
     for (let i = 0; i < products.length; i++) {
@@ -43,8 +43,8 @@ Ketik \`${m.prefix}Eliminar el producto  Delete número\`
         p.type === "fisik"
           ? p.stock === -1
             ? "♾️"
-            : `${p.stock} pcs`
-          : `${p.stockItems?.length || 0} akun`;
+            : `${p.stock} unidades`
+          : `${p.stockItems?.length || 0} cuenta`;
       txt += `${typeIcon} *${i + 1}.* ${p.name} — Rp ${p.price.toLocaleString("id-ID")} (${stockDisplay})\n`;
     }
     return m.reply(txt);
@@ -57,11 +57,13 @@ Ketik \`${m.prefix}Eliminar el producto  Delete número\`
 
   await m.react("✅");
   return m.reply(
-    `🗑️ *PRODUK DIHAPUS*\n\n` +
-      `${typeIcon} Nama: *${deleted.name}*\n` +
-      `💰 Harga: *Rp ${deleted.price.toLocaleString("id-ID")}*\n` +
-      `📊 Stok terhapus: *${deleted.type === "fisik" ? deleted.stock + " pcs" : (deleted.stockItems?.length || 0) + " akun"}*\n\n` +
-      `⚠️ _Produk telah dihapus secara permanen dan tidak dapat dikembalikan._`,
+    `🗑️ *PRODUCTOS ELIMINADOS*
+
+` +
+      `${typeIcon} Nombre: *${deleted.name}*\n` +
+      `💰 Precio: *Rp ${deleted.price.toLocaleString("id-ID")}*\n` +
+      `📊 Existencias eliminadas: *${deleted.type === "fisik" ? deleted.stock + " unidades" : (deleted.stockItems?.length || 0) + " cuentas"}*\n\n` +
+      `⚠️ _Los productos han sido eliminados permanentemente y no pueden ser devueltos._`,
   );
 }
 

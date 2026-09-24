@@ -21,8 +21,10 @@ async function handler(m, { sock }) {
   if (!prompt) {
     return m.reply(
       `🍌 *OURIN BANANA SUPER 2*\n\n` +
-        `> Buat gambar dengan AI\n\n` +
-        `\`Contoh: ${m.prefix}ourinbanana2 make a cat\``,
+        `> Haz una imagen con AI
+
+` +
+        `\`Ejemplo: ${m.prefix}ourinbanana2 make a cat\``,
     );
   }
 

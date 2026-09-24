@@ -30,7 +30,7 @@ try {
   if (fs.existsSync(thumbPath)) thumbRpg = fs.readFileSync(thumbPath);
 } catch (e) {}
 
-function getContextInfo(title = "🗑️ *ᴍᴜʟᴜɴɢ*", body = "Mengumpulkan barang") {
+function getContextInfo(title = "🗑️ *ᴍᴜʟᴜɴɢ*", body = "Recogiendo objetos") {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
@@ -70,24 +70,27 @@ async function handler(m, { sock }) {
 
   if (user.rpg.stamina < staminaCost) {
     return m.reply(
-      `⚡ *sᴛᴀᴍɪɴᴀ ʜᴀʙɪs*\n\n` +
-        `> Butuh ${staminaCost} stamina untuk memulung\n` +
-        `> Stamina kamu: ${user.rpg.stamina}`,
+      `⚡ *RESISTENCIA AGOTADA*
+
+` +
+        `> Necesita ${staminaCost} stamina para rodar
+` +
+        `> Tu resistencia: ${user.rpg.stamina}`,
     );
   }
 
   user.rpg.stamina -= staminaCost;
 
   await m.react("🕕");
-  await m.reply(`🗑️ *sᴇᴅᴀɴɢ ᴍᴇᴍᴜʟᴜɴɢ...*`);
+  await m.reply(`🗑️ *RECOGIENDO CHATARRA...*`);
   await new Promise((r) => setTimeout(r, 2000));
 
   const drops = [
-    { item: "botol", name: "🍶 Botol", min: 1, max: 10 },
-    { item: "kaleng", name: "🥫 Kaleng", min: 1, max: 8 },
-    { item: "kardus", name: "📦 Kardus", min: 1, max: 5 },
-    { item: "sampah", name: "🗑️ Sampah", min: 1, max: 15 },
-    { item: "koran", name: "📰 Koran", min: 0, max: 3 },
+    { item: "botellas", name: "🍶 Botella", min: 1, max: 10 },
+    { item: "kaleng", name: "🥫 Lata", min: 1, max: 8 },
+    { item: "kardus", name: "📦 Cartón", min: 1, max: 5 },
+    { item: "sampah", name: "🗑️ Basura", min: 1, max: 15 },
+    { item: "koran", name: "📰 Periódico", min: 0, max: 3 },
   ];
 
   let results = [];
@@ -112,13 +115,15 @@ async function handler(m, { sock }) {
 
   await m.react("✅");
 
-  let txt = `🗑️ *ᴍᴜʟᴜɴɢ sᴇʟᴇsᴀɪ*\n\n`;
-  txt += `╭┈┈⬡「 📦 *ʜᴀsɪʟ* 」\n`;
+  let txt = `🗑️ *el despliegue terminado*
+
+`;
+  txt += `╭┈┈⬡「 📦 *RESULTADO* 」\n`;
   for (const r of results) {
     txt += `┃ ${r.name}: *+${r.qty}*\n`;
   }
   txt += `┃ ─────────\n`;
-  txt += `┃ 💵 Jual: *+Rp ${moneyEarned.toLocaleString("id-ID")}*\n`;
+  txt += `┃ 💵 Venta: *+Rp ${moneyEarned.toLocaleString("id-ID")}*\n`;
   txt += `┃ 🚄 Exp: *+${expGain}*\n`;
   txt += `┃ ⚡ Stamina: *-${staminaCost}*\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡`;

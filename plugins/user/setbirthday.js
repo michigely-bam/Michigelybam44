@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'setbirthday',
     alias: ['setbday', 'setultah', 'settgl'],
     category: 'user',
-    description: 'Set tanggal ulang tahun',
+    description: "Configurar fecha de cumpleaños",
     usage: '.setbirthday <DD-MM>',
     example: '.setbirthday 25-12',
     isOwner: false,
@@ -35,7 +35,8 @@ async function handler(m) {
         text += `╭┈┈⬡「 📋 *ғᴏʀᴍᴀᴛ* 」\n`
         text += `┃ ${m.prefix}setbirthday DD-MM\n`
         text += `╰┈┈┈┈┈┈┈┈⬡\n\n`
-        text += `*Contoh:*\n`
+        text += `*Ejemplo:*
+`
         text += `> ${m.prefix}setbirthday 25-12\n`
         text += `> ${m.prefix}setbirthday 01-01`
         
@@ -48,7 +49,7 @@ async function handler(m) {
     if (!match) {
         return m.reply(`❌ Formato malformado! Uso: DD-MM
 
-> Contoh: ${m.prefix}setbirthday 25-12`)
+> Ejemplo: ${m.prefix}setbirthday 25-12`)
     }
     
     const day = parseInt(match[1])
@@ -71,16 +72,17 @@ async function handler(m) {
     
     await db.save()
     
-    const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
+    const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
     
     await m.reply(
         `✅ *ʙɪʀᴛʜᴅᴀʏ ᴅɪsɪᴍᴘᴀɴ!*\n\n` +
         `╭┈┈⬡「 🎂 *ᴅᴇᴛᴀɪʟ* 」\n` +
-        `┃ 📅 Tanggal: *${day} ${months[month - 1]}*\n` +
+        `┃ 📅 Fecha: *${day} ${months[month - 1]}*\n` +
         `┃ 👤 User: @${cleanJid}\n` +
         `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-        `> Bot akan mengucapkan selamat\n` +
-        `> ulang tahun di hari spesialmu! 🎉`,
+        `el bot saludarán
+` +
+        `¡> cumpleaños en su día especial! 🎉`,
         { mentions: [userJid] }
     )
 }

@@ -27,15 +27,17 @@ async function handler(m, { sock }) {
         return m.reply(
             `❌ *ɪɴᴠᴀʟɪᴅ ʙᴇᴛ*\n\n` +
             `> Minimal bet Rp 1.000!\n` +
-            `> Contoh: \`.slot 5000\``
+            `> Ejemplo: \`.slot 5000\``
         )
     }
     
     if ((user.koin || 0) < bet) {
         return m.reply(
-            `❌ *sᴀʟᴅᴏ ᴛɪᴅᴀᴋ ᴄᴜᴋᴜᴘ*\n\n` +
-            `> Koin kamu: Rp ${(user.koin || 0).toLocaleString('id-ID')}\n` +
-            `> Butuh: Rp ${bet.toLocaleString('id-ID')}`
+            `❌ *saldo no es suficiente*
+
+` +
+            `> Tus monedas: Rp ${(user.koin || 0).toLocaleString('id-ID')}\n` +
+            `> Necesidad: Rp ${bet.toLocaleString('id-ID')}`
         )
     }
     
@@ -90,7 +92,8 @@ async function handler(m, { sock }) {
         txt += `> ${winText}\n`
         txt += `> 💰 Win: *+Rp ${winnings.toLocaleString('id-ID')}*`
     } else {
-        txt += `> 😢 Kalah!\n`
+        txt += `> 😢 ¡Perdiste!
+`
         txt += `> 💸 Lost: *-Rp ${bet.toLocaleString('id-ID')}*`
     }
     

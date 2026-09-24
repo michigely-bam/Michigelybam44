@@ -3,8 +3,8 @@ import { games } from '../../src/lib/ourin-games.js'
 games.register('kataacak', {
     alias: ['ka', 'acakkata'],
     emoji: '🔤',
-    title: 'KATA ACAK',
-    description: 'Susun huruf acak'
+    title: "PALABRA ALEATORIA",
+    description: "Ordena las letras mezcladas"
 })
 
 const { config: pluginConfig, handler, answerHandler } = games.createPlugin('kataacak')

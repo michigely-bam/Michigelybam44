@@ -3,8 +3,8 @@ import { games } from '../../src/lib/ourin-games.js'
 games.register('tebakjkt48', {
     alias: ['jkt48', 'jkt'],
     emoji: '🎀',
-    title: 'TEBAK JKT48',
-    description: 'Tebak member JKT48',
+    title: "ADIVINA EL MIEMBRO DE JKT48",
+    description: "Adivina el miembro de JKT48",
     hasImage: true
 })
 

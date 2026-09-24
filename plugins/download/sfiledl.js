@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'sfiledl',
     alias: ['sfile', 'sfiledownload'],
     category: 'download',
-    description: 'Download file dari Sfile.mobi',
+    description: "Descarga el archivo de Sfile.mobi",
     usage: '.sfiledl <url>',
     example: '.sfiledl https://sfile.mobi/xxx',
     isOwner: false,
@@ -22,14 +22,14 @@ async function handler(m, { sock }) {
 
     if (!url) {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+            `⚠️ *MODO DE USO*\n\n` +
             `> \`${m.prefix}sfiledl <url_sfile>\`\n\n` +
-            `> Contoh: \`${m.prefix}sfiledl https://sfile.mobi/xxxxx\``
+            `> Ejemplo: \`${m.prefix}sfiledl https://sfile.mobi/xxxxx\``
         )
     }
 
     if (!url.includes('sfile.mobi') && !url.includes('sfile.co')) {
-        return m.reply(`❌ URL harus dari sfile.mobi atau sfile.co!`)
+        return m.reply(`❌ ¡La URL debe ser de sfile.mobi o sfile.co!`)
     }
 
     m.react('🕕')

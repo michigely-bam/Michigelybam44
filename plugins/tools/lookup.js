@@ -62,9 +62,9 @@ async function handler(m, { sock }) {
 
   if (!domain) {
     return m.reply(
-      `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+      `⚠️ *MODO DE USO*\n\n` +
         `> \`${m.prefix}lookup <domain>\`\n\n` +
-        `> Contoh:\n` +
+        `> Ejemplo:\n` +
         `> \`${m.prefix}lookup google.com\``,
     );
   }
@@ -74,11 +74,13 @@ async function handler(m, { sock }) {
   if (
     !/^[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]?(\.[a-zA-Z]{2,})+$/.test(domain)
   ) {
-    return m.reply(`❌ *ғᴏʀᴍᴀᴛ ᴛɪᴅᴀᴋ ᴠᴀʟɪᴅ*\n\n> Contoh: \`google.com\``);
+    return m.reply(`❌ *formato no es válido*
+
+> Ejemplo: \`google.com\``);
   }
 
   await m.react("🕕");
-  await m.reply(`🕕 *ᴍᴇɴᴄᴀʀɪ ɪɴꜰᴏ ᴅᴏᴍᴀɪɴ...*`);
+  await m.reply(`🕕 *BUSCANDO INFORMACIÓN DEL DOMINIO...*`);
 
   try {
     const [dnsRes, whoisRes] = await Promise.allSettled([
@@ -95,7 +97,7 @@ async function handler(m, { sock }) {
 
     if (!dnsData && !whoisData) {
       await m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > Incapaz de procesar el dominio`);
     }

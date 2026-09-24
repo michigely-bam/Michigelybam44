@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: [],
     category: 'owner',
     description: "Eliminar el canal / nuevo",
-    usage: '.hapussaluran <id_saluran>',
+    usage: '.hapussaluran <id_canal>',
     example: '.hapussaluran 120363xxx@newsletter',
     isOwner: true,
     cooldown: 5,
@@ -17,11 +17,11 @@ async function handler(m, { sock }) {
 
     if (!targetJid) {
         return m.reply(
-            '🗑️ *ʜᴀᴘᴜs sᴀʟᴜʀᴀɴ*\n\n' +
-            '> `.hapussaluran <id_saluran>` — Hapus saluran\n\n' +
-            '📝 Contoh:\n' +
+            "🗑️ *borrar el canal*\n\n" +
+            "> `.hapussaluran <id_canal>` — Eliminar el canal\n\n" +
+            '📝 Ejemplo:\n' +
             '> `.hapussaluran 120363xxx@newsletter`\n\n' +
-            '⚠️ Saluran akan dihapus secara permanen'
+            "⚠️ Los canales se eliminarán permanentemente"
         )
     }
 

@@ -35,15 +35,16 @@ async function handler(m, { sock }) {
     
     if (!video) {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-            `> Kirim *video* atau *balas video* lalu ketik:\n` +
+            `⚠️ *MODO DE USO*\n\n` +
+            `> Envíe *video* o *contesta el video* y escriba:
+` +
             `> \`${m.prefix}ptvch\``
         )
     }
     
     const channelId = config.saluran?.id || '120363404849776664@newsletter'
     
-    await m.reply(`🕕 *ᴍᴇɴɢɪʀɪᴍ ᴘᴛᴠ ᴋᴇ ᴄʜᴀɴɴᴇʟ...*`)
+    await m.reply(`🕕 *ENVIANDO PTV AL CANAL...*`)
     
     try {
         await sock.sendMessage(channelId, {
@@ -54,7 +55,7 @@ async function handler(m, { sock }) {
         })
         
         await m.react('✅')
-        return m.reply(`✅ *sᴜᴋsᴇs*
+        return m.reply(`✅ *COMPLETADO*
 
 > Video enviado con éxito para canalizar como PTV.`)
         

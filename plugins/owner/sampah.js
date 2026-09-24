@@ -45,7 +45,7 @@ async function handler(m) {
         await m.react('✅')
         await m.reply(
             `🗑️ *TEMP CLEANED!*\n\n` +
-            `> Total file/folder dihapus: *${deleted}*`
+            `> Total archivos/folder fueron eliminados: *${deleted}*`
         )
 
     } catch (error) {

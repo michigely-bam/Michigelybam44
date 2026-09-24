@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'ganti-ourin-v7.jpg',
     alias: ['gantiourinv7', 'setourinv7'],
     category: 'owner',
-    description: 'Ganti gambar ourin-v7.jpg',
-    usage: ".reemplazar -ourin -v7.jpg (reply / enviar imagen)",
+    description: "Cambiar las imágenes ourin-v7.jpg",
+    usage: ".gantiourinv7 (responde o envía una imagen)",
     example: '.ganti-ourin-v7.jpg',
     isOwner: true,
     isPremium: false,
@@ -19,7 +19,7 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
-    if (!isImage) return m.reply(`🖼️ *ɢᴀɴᴛɪ OURIN-V7.JPG*
+    if (!isImage) return m.reply(`🖼️ *reemplazado por OURIN-V7.JPG*
 
 > Enviar / respuesta imágenes para reemplazar
 > File: assets/images/ourin-v7.jpg`)
@@ -28,7 +28,9 @@ async function handler(m, { sock }) {
         if (!buffer) return m.reply("❌ No se pudo download image")
         const targetPath = path.join(process.cwd(), 'assets', 'images', 'ourin-v7.jpg')
         fs.writeFileSync(targetPath, buffer)
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*\n\n> Gambar ourin-v7.jpg telah diganti`)
+        m.reply(`✅ *correcto*
+
+La imagen ourin-v7.jpg ha sido cambiada`)
     } catch (error) {
         await m.reply(te(m.prefix, m.command, m.pushName))
     }

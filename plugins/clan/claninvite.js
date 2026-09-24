@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'claninvite',
     alias: ['inviteclan'],
     category: 'clan',
-    description: "Invitar &quot; agregue directamente el usuario al clan",
+    description: 'Invitar y agregar directamente a un usuario al clan',
     usage: '.claninvite @user',
     example: '.claninvite @user',
     isOwner: false,
@@ -29,8 +29,10 @@ async function handler(m) {
     if (!target) {
         return m.reply(
             `📨 *CLAN INVITE*\n\n` +
-            `Tag atau reply user yang mau diundang\n\n` +
-            `Contoh: *.claninvite @user*`
+            `Tag o respuesta de los usuarios que deseen ser invitados
+
+` +
+            `Ejemplo: *.claninvite @user*`
         )
     }
 
@@ -48,7 +50,7 @@ async function handler(m) {
 
     await m.reply(
         `${emblem} *INVITED!*\n\n` +
-        `@${target.split('@')[0]} bergabung ke *${clan.name}*\n` +
+        `@${target.split('@')[0]} se unió a *${clan.name}*\n` +
         `Members: ${clan.members.length}/50`,
         { mentions: [m.sender, target] }
     )

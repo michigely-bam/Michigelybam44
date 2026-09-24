@@ -18,7 +18,7 @@ const pluginConfig = {
 
 function formatCountdown(data) {
     if (data.status === 'expired') return '🚫 EXPIRED (left)'
-    if (data.isLifetime) return '♾️ Permanent'
+    if (data.isLifetime) return '♾️ Permanente'
     const diff = data.expiredAt - Date.now()
     if (diff <= 0) return '❌ EXPIRED'
     const days = Math.floor(diff / 86400000)
@@ -50,10 +50,14 @@ function handler(m) {
 
     if (groupIds.length === 0) {
         return m.reply(
-            `📋 *DAFTAR SEWA*\n\n` +
-            `Status: *${db.db.data.sewa.enabled ? '✅ AKTIF' : '❌ NONAKTIF'}*\n` +
-            `Belum ada grup terdaftar\n\n` +
-            `Tambah dengan: *${m.prefix}addsewa <link> <durasi>*`
+            `📋 *LISTA DE ALQUILERES*
+
+` +
+            `Estado: *${db.db.data.sewa.enabled ? "✅ ACTIVO" : "❌ INACTIVO"}*\n` +
+            `No hay ningún grupo registrado.
+
+` +
+            `Agregar con: *${m.prefix}addsewa <enlace> <duración>*`
         )
     }
 
@@ -68,11 +72,11 @@ function handler(m) {
     const active = sorted.filter(id => sewaGroups[id].isLifetime || sewaGroups[id].expiredAt > Date.now())
     const expired = sorted.filter(id => !sewaGroups[id].isLifetime && sewaGroups[id].expiredAt <= Date.now())
 
-    let text = `📋 *LÍNEA RENTA*
+    let text = `📋 *LISTA DE ALQUILERES*
 
 `
-    text += `Status sistem: *${db.db.data.sewa.enabled ? '✅ AKTIF' : '❌ NONAKTIF'}*\n`
-    text += `Total: *${groupIds.length}* grup (${active.length} aktif, ${expired.length} expired)\n\n`
+    text += `Estado del sistema: *${db.db.data.sewa.enabled ? "✅ ACTIVO" : "❌ INACTIVO"}*\n`
+    text += `Total: *${groupIds.length}* grupos (${active.length} activos, ${expired.length} vencidos)\n\n`
 
     for (let i = 0; i < sorted.length; i++) {
         const gid = sorted[i]
@@ -81,14 +85,16 @@ function handler(m) {
         const countdown = formatCountdown(data)
         const addedDate = data.addedAt ? timeHelper.fromTimestamp(data.addedAt, 'DD/MM/YYYY') : '-'
 
-        text += `${status} *${i + 1}. ${data.name || 'Unknown'}*\n`
+        text += `${status} *${i + 1}. ${data.name || 'Desconocido'}*\n`
         text += `   ID: ${gid.split('@')[0]}\n`
-        text += `   Sisa: ${countdown}\n`
-        text += `   Ditambah: ${addedDate}\n\n`
+        text += `   Restante: ${countdown}\n`
+        text += `   Añadido: ${addedDate}\n\n`
     }
 
-    text += `*AKSI:*\n`
-    text += `• *${m.prefix}renewsewa <id> <durasi>* — Perpanjang\n`
+    text += `*ACCIONES:*
+`
+    text += `• *${m.prefix}renewsewa <id> <duración>* — Extender
+`
     text += `• *${m.prefix}delsewa <id>* - Quitar de la lista blanca`
 
     return m.reply(text)

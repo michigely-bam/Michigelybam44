@@ -49,14 +49,14 @@ async function handler(m, { sock }) {
         }
 
         const sholatIcon = sholatEnabled ? '✅' : '❌';
-        text += `${sholatIcon} *Sholat Scheduler*\n`;
+        text += `${sholatIcon} *Programador de oraciones*\n`;
         text += `   └ Key: \`sholat\`\n`;
         text += `   └ Notificación del tiempo de oración (hora de la realidad)
 `;
 
         if (sholatEnabled) {
-            const kotaSetting = db.setting('autoSholatKota') || { id: '1301', nama: 'KOTA JAKARTA' };
-            text += `   └ Lokasi: ${kotaSetting.nama}\n`;
+            const kotaSetting = db.setting('autoSholatKota') || { id: '1301', nama: "CIUDAD DE YAKARTA" };
+            text += `   └ Ubicación: ${kotaSetting.nama}\n`;
 
             try {
                 const { schedule } = await getTodaySchedule(kotaSetting.id);
@@ -89,12 +89,12 @@ async function handler(m, { sock }) {
 
         text += `\n`;
         text += `━━━━━━━━━━━━━━━━━━━\n`;
-        text += `✅ Aktif: ${status.summary.totalActive + (sholatEnabled ? 1 : 0)}\n`;
-        text += `❌ Nonaktif: ${status.summary.totalInactive + (!sholatEnabled ? 1 : 0)}\n\n`;
+        text += `✅ Activo: ${status.summary.totalActive + (sholatEnabled ? 1 : 0)}\n`;
+        text += `❌ Inactivo: ${status.summary.totalInactive + (!sholatEnabled ? 1 : 0)}\n\n`;
 
-        text += `> Gunakan \`.stopschedule <key>\` Parar
+        text += `> Usa \`.stopschedule <key>\` para detener
 `;
-        text += `> Gunakan \`.startschedule <key>\` para empezar`;
+        text += `> Usa \`.startschedule <key>\` para iniciar`;
 
         await m.reply(text);
     } catch (error) {

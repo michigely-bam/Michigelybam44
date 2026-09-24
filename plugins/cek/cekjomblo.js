@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekjomblo',
     alias: ['jomblo', 'single'],
     category: 'cek',
-    description: "Comprueba tus niveles de conmutación.",
-    usage: ".ckjsingle - Nombre",
+    description: "Comprueba tu nivel de soltería.",
+    usage: ".cekjomblo [@usuario]",
     example: '.cekjomblo Budi',
     isOwner: false,
     isPremium: false,
@@ -19,20 +19,19 @@ async function handler(m) {
     const mentioned = m.mentionedJid[0] || m.sender
                     
     let desc = ''
-    if (percent >= 90) desc = 'Jomblo abadi! Single is happiness~ 💔😎'
-    else if (percent >= 70) desc = 'Strong independent person! 💪'
-    else if (percent >= 50) desc = 'MasihPDKT mode ON 😍'
+    if (percent >= 90) desc = "¡Soltero/a para siempre! La soltería es felicidad~ 💔😎"
+    else if (percent >= 70) desc = '¡Persona fuerte e independiente! 💪'
+    else if (percent >= 50) desc = 'Aún estás conociendo a alguien 😍'
     else if (percent >= 30) desc = "Alguien está enamorado de él.~ 👀"
-    else desc = 'Soon taken! 💕'
+    else desc = '¡Pronto dejarás la soltería! 💕'
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-El nivel de tu complacencia *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de obscenidad @${mentioned.split('@')[0]} yak? 
-    
-Tingkat kejombloan dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de soltería es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de soltería de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

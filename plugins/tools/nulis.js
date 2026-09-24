@@ -9,8 +9,8 @@ const pluginConfig = {
   name: "nulis",
   alias: ["tulis", "write"],
   category: "tools",
-  description: "Generate tulisan tangan di kertas",
-  usage: ".nulis <teks>",
+  description: "Generar texto manuscrito en papel",
+  usage: ".nulis <texto>",
   example: ".Escribir Te amo para siempre",
   isOwner: false,
   isPremium: false,
@@ -32,7 +32,7 @@ try {
 } catch (e) {}
 const fontPath = path.join(process.cwd(), "assets", "fonts", "Zahraaa.ttf");
 let _fontRegistered = false;
-function getContextInfo(title = "📝 *ɴᴜʟɪs*", body = "Tulisan tangan") {
+function getContextInfo(title = "📝 *ɴᴜʟɪs*", body = "Texto manuscrito") {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
   const contextInfo = {
@@ -77,14 +77,16 @@ async function handler(m, { sock }) {
   const text = m.args?.join(" ");
   if (!text) {
     return m.reply(
-      `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-        `> \`${m.prefix}nulis <teks>\`\n\n` +
-        `> Contoh:\n` +
-        `> \`${m.prefix}nulis Aku cinta kamu selamanya\``,
+      `⚠️ *MODO DE USO*\n\n` +
+        `> \`${m.prefix}nulis <texto>\`\n\n` +
+        `> Ejemplo:\n` +
+        `> \`${m.prefix}nulis Te amaré por siempre\``,
     );
   }
   if (text.length > 500) {
-    return m.reply(`❌ *ᴛᴇᴋs ᴛᴇʀʟᴀʟᴜ ᴘᴀɴᴊᴀɴɢ*\n\n> Maksimal 500 karakter`);
+    return m.reply(`❌ *texto demasiado largo*
+
+> Un máximo de 500 caracteres`);
   }
   const inputPath = path.join(
     process.cwd(),
@@ -94,13 +96,15 @@ async function handler(m, { sock }) {
   );
   if (!fs.existsSync(inputPath)) {
     return m.reply(
-      `❌ *ᴛᴇᴍᴘʟᴀᴛᴇ ᴛɪᴅᴀᴋ ᴀᴅᴀ*
+      `❌ *template no existe*
 
 > File \`assets/kertas/magernulis1.jpg\` no encontrado`,
     );
   }
   await m.react("🕕");
-  await m.reply(`🕕 *ᴍᴇᴍᴘʀᴏsᴇs...*\n\n> Membuat tulisan tangan...`);
+  await m.reply(`🕕 *PROCESANDO...*
+
+> Generando texto manuscrito...`);
   try {
     const { createCanvas, loadImage, GlobalFonts } = _canvas;
     if (!_fontRegistered && fs.existsSync(fontPath)) {
@@ -135,7 +139,9 @@ async function handler(m, { sock }) {
       m.chat,
       {
         image: buffer,
-        caption: `✅ *ᴛᴜʟɪsᴀɴ ᴛᴀɴɢᴀɴ*\n\n> Hatihati ketahuan! 📖`,
+        caption: `✅ *TEXTO MANUSCRITO*
+
+> ¡Cuidado, que no te descubran! 📖`,
         contextInfo: getContextInfo(),
       },
       { quoted: m },

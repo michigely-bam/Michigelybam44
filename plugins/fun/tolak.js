@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "tolak",
   alias: ["reject", "no", "gaktau"],
   category: "fun",
-  description: "Menolak tembakan dari seseorang",
+  description: "Rechazar el disparo de alguien",
   usage: ".tolak @tag",
   example: ".tolak @628xxx",
   isOwner: false,
@@ -32,15 +32,15 @@ try {
 const rejectionQuotes = [
   "Sé paciente, ¡el mejor vendrá! 🌟",
   "Ni siquiera una coincidencia significa que no hay nadie. 💪",
-  "Move on! Banyak ikan di laut! 🐟",
+  "Move on! ¡Hay muchos peces en el mar! 🐟",
   "Sé paciente, el amor verdadero vendrá 💕",
   "¡No pierdas el corazón, sigue luchando! 🔥",
-  "Penolakan adalah awal dari keberhasilan 💪",
+  "El rechazo es el comienzo del éxito 💪",
   "¡Todavía hay muchas oportunidades ahí fuera! ✨",
   "¡Seguro que hay más para ti! 🌈",
 ];
 
-function getContextInfo(title = "💔 *ᴛᴏʟᴀᴋ*", body = "Rejected!") {
+function getContextInfo(title = "💔 *RECHAZAR*", body = "Rejected!") {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
@@ -92,20 +92,20 @@ async function handler(m, { sock }) {
 
   if (!shooterJid) {
     return m.reply(
-      `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-        `> Reply pesan tembakan + \`${m.prefix}tolak\`\n` +
-        `> Atau \`${m.prefix}tolak @tag\``,
+      `⚠️ *MODO DE USO*\n\n` +
+        `> Responder el mensaje de disparos + \`${m.prefix}tolak\`\n` +
+        `> O \`${m.prefix}tolak @tag\``,
     );
   }
 
   if (shooterJid === m.sender) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*
+    return m.reply(`❌ *falló*
 
 > ¡No puedes resistirte!`);
   }
 
   if (shooterJid === m.botNumber) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*
+    return m.reply(`❌ *falló*
 
 > ¡Bot no tiene corazón para negarse!`);
   }
@@ -121,8 +121,8 @@ async function handler(m, { sock }) {
     shooterData.fun.tembakTarget !== m.sender
   ) {
     return m.reply(
-      `❌ *ᴛɪᴅᴀᴋ ᴍᴇɴᴇᴍʙᴀᴋ*\n\n` +
-        `> @${shooterJid.split("@")[0]} tidak sedang menembakmu`,
+      `❌ *NADIE SE TE ESTÁ DECLARANDO*\n\n` +
+        `> @${shooterJid.split("@")[0]} no te está proponiendo ser pareja`,
       { mentions: [shooterJid] },
     );
   }
@@ -146,13 +146,15 @@ async function handler(m, { sock }) {
     rejectionQuotes[Math.floor(Math.random() * rejectionQuotes.length)];
 
   await m.react("💔");
-  const ctx = getContextInfo("💔 *ᴅɪᴛᴏʟᴀᴋ*", "Move on!");
+  const ctx = getContextInfo("💔 *ᴅɪRECHAZAR*", "Move on!");
   ctx.mentionedJid = [m.sender, shooterJid];
 
   await m.reply(
-    `💔 *WADUHH, YANG SABAR YAK* @${shooterJid.split("@")[0]}\n\n` +
-      `@${m.sender.split("@")[0]} menolak @${shooterJid.split("@")[0]} sebagai pacarnya\n\n` +
-      `Sabar ya, masih banyak yang lain! 😢`,
+    `💔 *OH, QUE EL PACIENTE YA* @${shooterJid.split("@")[0]}\n\n` +
+      `@${m.sender.split("@")[0]} rechazó a @${shooterJid.split("@")[0]} como su pareja
+
+` +
+      `¡Tenga paciencia, hay más! 😢`,
     { mentions: [m.sender, shooterJid] },
   );
 }

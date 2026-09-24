@@ -26,7 +26,7 @@ async function handler(m, { sock }) {
             pendingReset.delete(m.sender)
             return m.reply(`❌ No hay solicitud de reinicio activado.
 
-> Ketik \`${m.prefix}hapusdata\` terlebih dahulu`)
+> Escribe \`${m.prefix}hapusdata\` primero`)
         }
 
         pendingReset.delete(m.sender)
@@ -39,11 +39,13 @@ async function handler(m, { sock }) {
 
         await sock.sendMessage(m.chat, {
             text:
-                `🗑️ *ᴅᴀᴛᴀ ᴅɪʀᴇsᴇᴛ*\n\n` +
-                `> 📁 File direset: *${result.resetCount}/${result.total}*\n` +
+                `🗑️ *ᴅᴀᴛᴀ RESTABLECIDO*\n\n` +
+                `> 📁 Archivos reiniciados: *${result.resetCount}/${result.total}*\n` +
                 `> 💾 Backup: \`${result.backupFolder}/\`\n\n` +
-                `Semua data telah dikembalikan ke default.\n\n` +
-                `> ⚠️ Restart bot untuk memastikan data tersinkronisasi`
+                `Todos los datos han sido devueltos por defecto.
+
+` +
+                `> ⚠️ Reiniciar el bot para asegurarse de que los datos están sincronizados`
         }, { quoted: m })
         return
     }
@@ -55,7 +57,7 @@ async function handler(m, { sock }) {
         { key: 'groups', label: '👥 Groups' },
         { key: 'settings', label: '⚙️ Settings' },
         { key: 'stats', label: '📊 Stats' },
-        { key: 'sewa', label: '🏪 Sewa' },
+        { key: 'sewa', label: "🏪 Alquiler" },
         { key: 'premium', label: '⭐ Premium' },
         { key: 'owner', label: '👑 Owner' },
         { key: 'partner', label: '🤝 Partner' },
@@ -79,8 +81,10 @@ async function handler(m, { sock }) {
 
     pendingReset.set(m.sender, Date.now())
 
-    let txt = `⚠️ *ᴘᴇʀɪɴɢᴀᴛᴀɴ — ʜᴀᴘᴜs ᴅᴀᴛᴀ*\n\n`
-    txt += `Esta acción eliminará *SEMUA* siguientes datos:
+    let txt = `⚠️ *advertencia — eliminar datos*
+
+`
+    txt += `Esta acción eliminará *Todos los siguientes datos:
 
 `
 
@@ -92,7 +96,7 @@ async function handler(m, { sock }) {
     txt += `> 💾 Autosave copia de seguridad creada antes de reiniciar
 
 `
-    txt += `Ketik \`${m.prefix}hapusdata ya\` En 60 segundos para proceder.`
+    txt += `Escribe \`${m.prefix}hapusdata ya\` En 60 segundos para proceder.`
 
     await sock.sendMessage(m.chat, {
         text: txt,

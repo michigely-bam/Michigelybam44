@@ -22,8 +22,10 @@ async function handler(m) {
     
     if (!global.absensi[chatId]) {
         return m.reply(
-            `❌ *ᴛɪᴅᴀᴋ ᴀᴅᴀ ᴀʙsᴇɴ*\n\n` +
-            `> Tidak ada sesi absen di grup ini!`
+            `❌ *no hay asistencia*
+
+` +
+            `> ¡No hay una sesión de asistencia activa en este grupo!`
         )
     }
     
@@ -33,11 +35,14 @@ async function handler(m) {
     delete global.absensi[chatId]
     
     await m.reply(
-        `✅ *ABSEN DITUTUP!*\n\n` +
-        `Penyebab?\n` +
+        `✅ ¡EL ABSENCIO ESTÁ CERRADO!
+
+` +
+        `¿Motivo?
+` +
         `📝 ${absen.keterangan}\n` +
-        `👥 Total hadir: ${totalPeserta}\n\n` +
-        `Sesi absen telah dihapus.`
+        `👥 Total de asistentes: ${totalPeserta}\n\n` +
+        `La sesión de asistencia ha sido cancelada.`
     )
 }
 

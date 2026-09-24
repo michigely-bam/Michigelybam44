@@ -3,14 +3,14 @@ import config from '../../config.js'
 import { downloadContentFromMessage } from 'ourin'
 import FormData from 'form-data'
 import te from '../../src/lib/ourin-error.js'
-const NEOXR_APIKEY = config.APIkey?.neoxr || 'Milik-Bot-OurinMD'
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD"
 
 const pluginConfig = {
     name: 'animeapaini',
     alias: ['whatanime', 'animesearch', 'sauceanime', 'searchanime'],
     category: 'search',
-    description: 'Identifikasi anime dari gambar/screenshot',
-    usage: '.animeapaini (reply gambar)',
+    description: "Identificación del anime de las imágenes/screenshot",
+    usage: ".animeapaini (respuesta a la imagen)",
     example: '.animeapaini',
     isOwner: false,
     isPremium: false,
@@ -53,7 +53,7 @@ async function handler(m, { sock }) {
     }
     
     if (m.isVideo || m.quoted?.isVideo) {
-        return m.reply(`❌ *ᴛɪᴅᴀᴋ ᴅɪᴅᴜᴋᴜɴɢ*
+        return m.reply(`❌ *no se apoya*
 
 > Solo la imagen / captura de pantalla soportada
 > El vídeo no puede ser procesado
@@ -63,12 +63,14 @@ async function handler(m, { sock }) {
     
     if (!imageMsg && !imageBuffer) {
         return m.reply(
-            `🔍 *ᴀɴɪᴍᴇ ᴀᴘᴀ ɪɴɪ?*\n\n` +
-            `> Kirim gambar dengan caption:\n` +
+            `🔍 *¿QUÉ ANIME ES??*\n\n` +
+            `> Envía una imagen con la descripción:
+` +
             `> \`${m.prefix}animeapaini\`\n\n` +
-            `> Atau reply gambar dengan:\n` +
+            `> O responder a la imagen con:
+` +
             `> \`${m.prefix}animeapaini\`\n\n` +
-            `⚠️ *Catatan:* Video tidak didukung, hanya gambar/screenshot`
+            `⚠️ *Nota:* El video no es soportado, sólo las imágenes/screenshot`
         )
     }
     
@@ -113,10 +115,10 @@ async function handler(m, { sock }) {
             return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
         }
         
-        const filename = d.filename || 'Unknown'
-        const animeName = filename.replace(/\[.*?\]/g, '').replace(/\(.*?\)/g, '').replace(/\.mp4|\.mkv|\.avi/gi, '').trim() || 'Unknown Anime'
+        const filename = d.filename || 'Desconocido'
+        const animeName = filename.replace(/\[.*?\]/g, '').replace(/\(.*?\)/g, '').replace(/\.mp4|\.mkv|\.avi/gi, '').trim() || 'Anime desconocido'
         
-        const caption = `🔍 *ᴀɴɪᴍᴇ ᴀᴘᴀ ɪɴɪ?*\n\n` +
+        const caption = `🔍 *¿QUÉ ANIME ES??*\n\n` +
             `🎬 *Anime:* ${animeName}\n` +
             `📺 *Episode:* ${d.episode || 'Movie/OVA'}\n` +
             `🆔 *AniList ID:* ${d.anilist || '-'}\n\n` +

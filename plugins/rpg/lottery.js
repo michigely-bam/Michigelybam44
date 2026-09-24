@@ -17,17 +17,17 @@ const pluginConfig = {
 }
 
 const GACHA_POOL = [
-    { item: 'trash', name: '🗑️ Sampah', chance: 30, rarity: 'common' },
-    { item: 'wood', name: '🪵 Kayu', chance: 20, qty: [3, 8], rarity: 'common' },
-    { item: 'iron', name: '🔩 Besi', chance: 15, qty: [2, 5], rarity: 'common' },
-    { item: 'gold', name: '🪙 Emas', chance: 10, qty: [1, 3], rarity: 'uncommon' },
+    { item: 'trash', name: '🗑️ Basura', chance: 30, rarity: 'common' },
+    { item: 'wood', name: '🪵 Madera', chance: 20, qty: [3, 8], rarity: 'common' },
+    { item: 'iron', name: '🔩 Hierro', chance: 15, qty: [2, 5], rarity: 'common' },
+    { item: 'gold', name: '🪙 Oro', chance: 10, qty: [1, 3], rarity: 'uncommon' },
     { item: 'potion', name: '🧪 Potion', chance: 8, qty: [1, 3], rarity: 'uncommon' },
-    { item: 'diamond', name: '💎 Berlian', chance: 5, qty: [1, 2], rarity: 'rare' },
+    { item: 'diamond', name: '💎 Diamante', chance: 5, qty: [1, 2], rarity: 'rare' },
     { item: 'goldchest', name: '🎁 Gold Chest', chance: 3, qty: [1, 1], rarity: 'rare' },
     { item: 'diamondchest', name: '💎 Diamond Chest', chance: 1.5, qty: [1, 1], rarity: 'epic' },
     { item: 'mysterybox', name: '🎲 Mystery Box', chance: 0.8, qty: [1, 1], rarity: 'epic' },
-    { item: 'goldsword', name: '🗡️ Pedang Emas', chance: 0.3, qty: [1, 1], rarity: 'legendary' },
-    { item: 'diamondarmor', name: '💎 Armor Berlian', chance: 0.2, qty: [1, 1], rarity: 'legendary' },
+    { item: 'goldsword', name: '🗡️ Espada de oro', chance: 0.3, qty: [1, 1], rarity: 'legendary' },
+    { item: 'diamondarmor', name: '💎 Armadura de diamante', chance: 0.2, qty: [1, 1], rarity: 'legendary' },
     { item: 'divinecore', name: '⚡ Divine Core', chance: 0.1, qty: [1, 1], rarity: 'mythic' }
 ]
 
@@ -56,9 +56,9 @@ async function handler(m, { sock }) {
     if ((user.koin || 0) < totalCost) {
         return m.reply(
             `🎰 *ʟᴏᴛᴛᴇʀʏ ɢᴀᴄʜᴀ*\n\n` +
-            `> Harga: ${GACHA_COST.toLocaleString()}/pull\n` +
+            `> Precio: ${GACHA_COST.toLocaleString()}/pull\n` +
             `> Total: ${totalCost.toLocaleString()} (${pulls}x)\n\n` +
-            `❌ Balance kurang! Kamu punya: ${(user.koin || 0).toLocaleString()}`
+            `¡❌ Saldo insuficiente! Tienes: ${(user.koin || 0).toLocaleString()}`
         )
     }
     

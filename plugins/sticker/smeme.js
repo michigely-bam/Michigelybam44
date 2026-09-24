@@ -13,9 +13,9 @@ const pluginConfig = {
   name: "smeme",
   alias: ["memesticker", "memes"],
   category: "sticker",
-  description: "Membuat sticker meme dari gambar",
+  description: "Haciendo stickers meme de las imágenes",
   usage: ".smeme <top>|<bottom>",
-  example: ".Cuando tenías 124 años, te olvidaste",
+  example: '.smeme Cuando tienes hambre|Pero olvidaste cocinar',
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -35,13 +35,13 @@ async function handler(m, { sock }) {
 
 > Responder o enviar una imagen / pegatina con descripción
 
-\`Contoh: ${m.prefix}smeme Top|Bottom\``,
+\`Ejemplo: ${m.prefix}smeme Top|Bottom\``,
     );
   }
   const input = m.args.join(" ");
   if (!input || !input.includes("|")) {
     return m.reply(
-      `😂 *ᴍᴇᴍᴇ sᴛɪᴄᴋᴇʀ*\n\n> Format: top|bottom\n\n\`Contoh: ${m.prefix}Cuando tenías 124 años, te olvidaste\``,
+      `😂 *ᴍᴇᴍᴇ sᴛɪᴄᴋᴇʀ*\n\n> Formato: top|bottom\n\n\`Ejemplo: ${m.prefix}smeme Cuando tienes hambre|Pero olvidaste cocinar\``,
     );
   }
   const [top, bottom] = input.split("|").map((s) => s.trim());
@@ -55,7 +55,7 @@ async function handler(m, { sock }) {
     }
     if (!mediaBuffer) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > No se pudo download media`);
     }
@@ -71,7 +71,7 @@ async function handler(m, { sock }) {
         .png()
         .toBuffer();
     } catch (e) {
-      console.log("[SMEME] Sharp resize failed:", e.message);
+      console.log("[SMEME] Falló el cambio de tamaño con Sharp:", e.message);
       imageBuffer = mediaBuffer;
     }
     const form = new FormData();
@@ -93,7 +93,7 @@ async function handler(m, { sock }) {
         imageUrl = uploadRes.data.path;
       }
     } catch (e) {
-      console.log("[SMEME] Termai failed:", e.response?.data || e.message, "Trying telegraph...");
+      console.log("[SMEME] Termai falló:", e.response?.data || e.message, "Probando Telegraph...");
     }
     if (!imageUrl) {
       try {
@@ -114,12 +114,12 @@ async function handler(m, { sock }) {
           imageUrl = "https://telegra.ph" + telegraphRes.data[0].src;
         }
       } catch (e) {
-        console.log("[SMEME] Telegraph failed:", e.message);
+        console.log("[SMEME] Telegraph falló:", e.message);
       }
     }
     if (!imageUrl) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > Fallado para subir la imagen, inténtelo más tarde`);
     }

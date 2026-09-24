@@ -17,12 +17,12 @@ const pluginConfig = {
 }
 
 const TARGETS = [
-    { name: '👨‍🌾 Petani', difficulty: 1, minGold: 50, maxGold: 150, catchChance: 10 },
-    { name: '👨‍💼 Pedagang', difficulty: 2, minGold: 100, maxGold: 300, catchChance: 20 },
-    { name: '🧙‍♂️ Penyihir', difficulty: 3, minGold: 200, maxGold: 500, catchChance: 30 },
-    { name: '⚔️ Ksatria', difficulty: 4, minGold: 300, maxGold: 800, catchChance: 40 },
-    { name: '👑 Bangsawan', difficulty: 5, minGold: 500, maxGold: 1500, catchChance: 50 },
-    { name: '🏰 Raja', difficulty: 6, minGold: 1000, maxGold: 3000, catchChance: 60 }
+    { name: '👨‍🌾 Agricultor', difficulty: 1, minGold: 50, maxGold: 150, catchChance: 10 },
+    { name: '👨‍💼 Comerciante', difficulty: 2, minGold: 100, maxGold: 300, catchChance: 20 },
+    { name: '🧙‍♂️ Hechicero', difficulty: 3, minGold: 200, maxGold: 500, catchChance: 30 },
+    { name: '⚔️ Caballero', difficulty: 4, minGold: 300, maxGold: 800, catchChance: 40 },
+    { name: '👑 Noble', difficulty: 5, minGold: 500, maxGold: 1500, catchChance: 50 },
+    { name: '🏰 Rey', difficulty: 6, minGold: 1000, maxGold: 3000, catchChance: 60 }
 ]
 
 async function handler(m, { sock }) {
@@ -37,9 +37,11 @@ async function handler(m, { sock }) {
     
     if (user.rpg.stamina < staminaCost) {
         return m.reply(
-            `⚡ *sᴛᴀᴍɪɴᴀ ᴋᴜʀᴀɴɢ*\n\n` +
-            `> Butuh: ${staminaCost}\n` +
-            `> Punya: ${user.rpg.stamina}`
+            `⚡ *RESISTENCIA INSUFICIENTE*
+
+` +
+            `> Necesita: ${staminaCost}\n` +
+            `> Tiene: ${user.rpg.stamina}`
         )
     }
     
@@ -56,7 +58,7 @@ async function handler(m, { sock }) {
     const target = availableTargets[Math.floor(Math.random() * availableTargets.length)]
     
     await m.react('🥷')
-    await m.reply(`🥷 *ᴍᴇɴᴄᴜʀɪ ᴅᴀʀɪ ${target.name}...*`)
+    await m.reply(`🥷 *ROBANDO A ${target.name}...*`)
     await new Promise(r => setTimeout(r, 2000))
     
     const luckBonus = (user.rpg.luck || 5) * 2
@@ -74,14 +76,16 @@ async function handler(m, { sock }) {
         
         await m.react('💀')
         return m.reply(
-            `💀 *ᴋᴇᴛᴀʜᴜᴀɴ!*\n\n` +
-            `> ${target.name} menangkapmu!\n\n` +
+            `💀 *DESCUBIERTO!*\n\n` +
+            `> ${target.name} ¡te atraparon!
+
+` +
             `╭┈┈⬡「 💔 *ᴘᴇɴᴀʟᴛʏ* 」\n` +
             `┃ 💸 Gold: *-${goldLoss.toLocaleString()}*\n` +
             `┃ ❤️ HP: *-${healthLoss}*\n` +
             `┃ ⚡ Stamina: *-${staminaCost}*\n` +
             `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-            `💡 *Tips:* Tingkatkan luck untuk mengurangi chance tertangkap!`
+            `¡💡 *Consejos:* ¡Aumenta la suerte para reducir las posibilidades de ser atrapado!`
         )
     }
     
@@ -104,8 +108,10 @@ async function handler(m, { sock }) {
     
     await m.react('💰')
     return m.reply(
-        `🥷 *ᴍᴇɴᴄᴜʀɪ ʙᴇʀʜᴀsɪʟ!*\n\n` +
-        `> Berhasil mencuri dari ${target.name}!\n\n` +
+        `🥷 ¡El robo fue un éxito!
+
+` +
+        `> logró robar de ${target.name}!\n\n` +
         `╭┈┈⬡「 💰 *ʀᴇᴡᴀʀᴅ* 」\n` +
         `┃ 💵 Gold: *+${goldStolen.toLocaleString()}*\n` +
         `┃ ✨ EXP: *+${expReward}*${bonusText}\n` +

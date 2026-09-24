@@ -4,7 +4,7 @@ const pluginConfig = {
     alias: ['createclan', 'guildcreate'],
     category: 'clan',
     description: "Crear un nuevo clan",
-    usage: ".clancrear te nombre",
+    usage: ".clancreate <nombre>",
     example: '.clancreate DragonSlayer',
     isOwner: false,
     isPremium: false,
@@ -40,15 +40,19 @@ async function handler(m) {
     if (!clanName) {
         return m.reply(
             `⚔️ *CREATE CLAN*\n\n` +
-            `Buat clan dan kumpulkan member!\n\n` +
-            `Biaya: *Rp ${CLAN_CREATE_COST.toLocaleString('id-ID')}*\n` +
-            `Max nama: *${MAX_CLAN_NAME} karakter*\n\n` +
-            `Contoh: *.clancreate DragonSlayer*`
+            `¡Crea un clan y reúne a los miembros!
+
+` +
+            `Costo: Rp ${CLAN_CREATE_COST.toLocaleString('id-ID')}*\n` +
+            `Max nombre: *${MAX_CLAN_NAME} carácter*
+
+` +
+            `Ejemplo: *.clancreate DragonSlayer*`
         )
     }
 
     if (clanName.length > MAX_CLAN_NAME) {
-        return m.reply(`❌ Nombre del clan máximo ${MAX_CLAN_NAME} karakter`)
+        return m.reply(`❌ Nombre del clan máximo ${MAX_CLAN_NAME} carácter`)
     }
 
     if (!/^[a-zA-Z0-9\s]+$/.test(clanName)) {
@@ -64,14 +68,16 @@ Sal primero: *.clanleave*`)
 
     const existingClan = Object.values(db.db.data.clans).find(c => c.name.toLowerCase() === clanName.toLowerCase())
     if (existingClan) {
-        return m.reply(`❌ Nama *${clanName}* ya utilizado`)
+        return m.reply(`❌ Nombre *${clanName}* ya utilizado`)
     }
 
     if ((user.koin || 0) < CLAN_CREATE_COST) {
         return m.reply(
-            `❌ Koin tidak cukup\n\n` +
-            `Butuh: *Rp ${CLAN_CREATE_COST.toLocaleString('id-ID')}*\n` +
-            `Punya: *Rp ${(user.koin || 0).toLocaleString('id-ID')}*`
+            `❌ Las monedas no son suficientes.
+
+` +
+            `Necesidad: Rp ${CLAN_CREATE_COST.toLocaleString('id-ID')}*\n` +
+            `Tiene: Rp ${(user.koin || 0).toLocaleString('id-ID')}*`
         )
     }
 
@@ -103,8 +109,9 @@ Sal primero: *.clanleave*`)
         `Leader: @${m.sender.split('@')[0]}\n` +
         `Status: Open · 1/50 members\n\n` +
         `_-Rp ${CLAN_CREATE_COST.toLocaleString('id-ID')}_\n\n` +
-        `Invite teman: *.claninvite @user*\n` +
-        `Atau share ID: *${clanId}*`,
+        `Invitar a un amigo: *.claninvite @user*
+` +
+        `O compartir ID: *${clanId}*`,
         { mentions: [m.sender] }
     )
 }

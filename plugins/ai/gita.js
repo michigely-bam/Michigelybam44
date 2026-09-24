@@ -6,8 +6,8 @@ const pluginConfig = {
     alias: ['gitagpt', 'bhagavadgita'],
     category: 'ai',
     description: "Chat con Gita GPT (Bhagavad Gita IA)",
-    usage: '.gita <pertanyaan>',
-    example: '.gita What is dharma?',
+    usage: '.gita <pregunta>',
+    example: '.gita ¿Qué es el dharma?',
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -24,7 +24,7 @@ async function handler(m, { sock }) {
 
 > Introduzca la pregunta
 
-\`Contoh: ${m.prefix}gita What is dharma?\``)
+\`Ejemplo: ${m.prefix}gita ¿Qué es el dharma?\``)
     }
     
     m.react('🕕')

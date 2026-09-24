@@ -18,7 +18,7 @@ const pluginConfig = {
   isEnabled: true,
 };
 
-const NEOXR_APIKEY = config.APIkey?.neoxr || "Milik-Bot-OurinMD";
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD";
 
 async function handler(m, { sock }) {
   const text = m.text?.trim();
@@ -26,8 +26,10 @@ async function handler(m, { sock }) {
   if (!text) {
     return m.reply(
       `📱 *ᴀᴘᴋ ᴍᴏᴅ sᴇᴀʀᴄʜ*\n\n` +
-        `> Cari APK MOD Premium\n\n` +
-        `> Contoh:\n` +
+        `> Busque el APK MOD Premium
+
+` +
+        `> Ejemplo:\n` +
         `\`${m.prefix}apkmod vpn\``,
     );
   }
@@ -95,7 +97,7 @@ async function handler(m, { sock }) {
             }),
           },
         ],
-        footer: "Pilihlah",
+        footer: "Elige",
       },
     );
   } catch (err) {

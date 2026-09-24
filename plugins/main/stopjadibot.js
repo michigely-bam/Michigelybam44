@@ -31,8 +31,8 @@ async function handler(m, { sock }) {
 
     if (!isJadibotActive(sender)) {
         return m.reply(
-            `❌ *ᴋᴀᴍᴜ ᴛɪᴅᴀᴋ ᴀᴅᴀʟᴀʜ ᴊᴀᴅɪʙᴏᴛ*\n\n` +
-            `> Ketik \`${m.prefix}jadibot\` untuk menjadi bot`
+            `❌ *NO ERES ᴊᴀᴅɪʙᴏᴛ*\n\n` +
+            `> Escribe \`${m.prefix}jadibot\` para ser un bot`
         )
     }
 
@@ -46,11 +46,13 @@ async function handler(m, { sock }) {
         await m.react('✅')
 
         await m.reply(
-            `🛑 *ᴊᴀᴅɪʙᴏᴛ ᴅɪʜᴇɴᴛɪᴋᴀɴ*\n\n` +
-            `> 📱 Nomor: *@${sender.split('@')[0]}*\n` +
+            `🛑 *ᴊᴀᴅɪʙᴏᴛ DETENIDO*\n\n` +
+            `> 📱 Número: *@${sender.split('@')[0]}*\n` +
             `> ⏱️ Uptime: *${uptime}*\n` +
-            `> 💾 Session: *Tersimpan*\n\n` +
-            `Ketik \`${m.prefix}jadibot\` untuk mengaktifkan kembali.`,
+            `> 💾 Sesión: *Guardada*
+
+` +
+            `Escribe \`${m.prefix}jadibot\` para activar de nuevo.`,
             { mentions: [sender] }
         )
     } catch (e) {

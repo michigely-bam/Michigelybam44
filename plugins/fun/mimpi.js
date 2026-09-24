@@ -8,7 +8,7 @@ const pluginConfig = {
     alias: ['dream', 'dreamworld'],
     category: 'fun',
     description: "Explora el mundo de tus sueños por nombre",
-    usage: ".sueño  dream nombre >",
+    usage: ".mimpi <nombre>",
     example: '.mimpi Keisya',
     isOwner: false,
     isPremium: false,
@@ -23,48 +23,48 @@ const DREAM_LEVELS = ['Lucid ✨', 'Mystic 🌟', 'Ethereal 💫', 'Divine 🌙'
 const DREAM_QUALITIES = ['Peaceful 😌', 'Adventure 🚀', 'Mystical 🔮', 'Prophecy 📖', 'Epic 🗺️']
 
 const ELEMENTS = [
-    '🌊 Lautan Kristal Bercahaya',
-    '🌈 Pelangi Mengambang',
-    '🌺 Taman Melayang',
-    '⭐ Konstelasi Hidup',
-    '🌙 Bulan Kembar',
-    '🏰 Kastil Awan',
-    '🌋 Gunung Prisma',
-    '🎭 Theater Bayangan'
+    "🌊 Océano de cristal resplandeciente",
+    "🌈 Arcoíris flotante",
+    "🌺 Jardín flotante",
+    "⭐ Constelación viviente",
+    "🌙 Lunas gemelas",
+    "🏰 Castillo de nubes",
+    "🌋 Montaña prismática",
+    "🎭 Teatro de sombras"
 ]
 
 const EVENTS = [
-    '🦋 Kupu-kupu membawa pesan rahasia',
-    '🎭 Topeng menari sendiri',
-    '🌊 Hujan bintang jatuh ke laut',
-    '🎪 Parade makhluk ajaib',
-    '🌺 Bunga bernyanyi lagu kuno',
-    '🎨 Lukisan menjadi hidup',
-    '🎵 Musik terlihat sebagai warna',
-    '⚡ Petir membentuk tangga ke langit'
+    "🦋 Las tortugas llevan mensajes secretos",
+    "🎭 Una máscara baila sola",
+    "🌊 La lluvia de las estrellas cae al mar",
+    "🎪 Desfile de criaturas mágicas",
+    "🌺 Flores que cantan melodías antiguas",
+    "🎨 Una pintura cobra vida",
+    "🎵 La música se ve como un color",
+    "⚡ Los relámpagos forman escaleras hacia el cielo"
 ]
 
 const ENCOUNTERS = [
-    '🐉 Naga Pelangi Bijaksana',
-    '🧙‍♂️ Penyihir Bintang',
-    '🦊 Rubah Spirit Sembilan Ekor',
-    '🧝‍♀️ Peri Pembawa Mimpi',
-    '🦁 Singa Kristal',
-    '🐋 Paus Terbang Mistis',
+    "🐉 Dragón arcoíris sabio",
+    "🧙‍♂️ Hechicero estelar",
+    "🦊 Zorro espiritual de nueve colas",
+    "🧝‍♀️ Hada portadora de sueños",
+    "🦁 León de cristal",
+    "🐋 Ballena voladora mística",
     "🦅 Tiempo Fénix",
-    '🐢 Kura-kura Pembawa Dunia',
-    '🦄 Unicorn Dimensi'
+    "🐢 Tortuga que carga el mundo",
+    "🦄 Unicornio dimensional"
 ]
 
 const POWERS = [
     "✨ Control de tiempo",
     "🌊 Hablando con Elemento",
     '🎭 Shapeshifting',
-    '🌈 Manipulasi Realitas',
-    '👁️ Penglihatan Masa Depan',
-    '🎪 Teleportasi Dimensi',
-    '🌙 Penyembuhan Spiritual',
-    '⚡ Energi Kosmik'
+    "🌈 Manipulación de la realidad",
+    "👁️ Visión del futuro",
+    "🎪 Teletransportación dimensional",
+    "🌙 Sanación espiritual",
+    "⚡ Energía Kosmik"
 ]
 
 const MESSAGES = [
@@ -103,7 +103,7 @@ async function handler(m, { sock }) {
     let name = args.join(' ') || m.pushName || m.sender.split('@')[0]
     
     await m.react('🌙')
-    await m.reply('🌙 *Memasuki alam mimpi...*')
+    await m.reply("🌙 *Entrando al mundo de los sueños...*")
     await new Promise(r => setTimeout(r, 1500))
     
     const dream = generateDream(name)

@@ -10,7 +10,7 @@ const pluginConfig = {
     alias: allAliases,
     category: 'panel',
     description: "Listar todos los administradores de panel (v1-v5)",
-    usage: '.listadminv1 atau .listadminv2',
+    usage: ".listadminv1 o .listadminv2",
     example: '.listadminv1',
     isOwner: false,
     isPremium: false,
@@ -63,9 +63,11 @@ async function handler(m, { sock }) {
     if (!hasFullAccess(m.sender, serverVersion, m.isOwner)) {
         const userRole = getUserRole(m.sender, serverVersion)
         return m.reply(
-            `❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n` +
-            `> Kamu tidak punya akses ke *${serverLabel}*\n` +
-            `> Role kamu: *${userRole || 'Tidak ada'}*`
+            `❌ *se rechazó el acceso*
+
+` +
+            `No tienes acceso a *${serverLabel}*\n` +
+            `> Tu rol: *${userRole || "No hay"}*`
         )
     }
     
@@ -74,11 +76,11 @@ async function handler(m, { sock }) {
     
     if (missingConfig.length > 0) {
         const available = getAvailableServers(pteroConfig)
-        let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`
+        let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} SIN CONFIGURAR*\n\n`
         if (available.length > 0) {
             txt += `> Servidor disponible: *${available.join(', ')}*`
         } else {
-            txt += `> Isi di \`config.js\` bagian \`pterodactyl.server1\``
+            txt += `> Contenido en la sección \`config.js\` \`pterodactyl.server1\``
         }
         return m.reply(txt)
     }
@@ -96,12 +98,12 @@ async function handler(m, { sock }) {
         const admins = users.filter(u => u.attributes.root_admin)
         
         if (admins.length === 0) {
-            return m.reply(`📋 *ᴅᴀꜰᴛᴀʀ ᴀᴅᴍɪɴ [${serverLabel}]*
+            return m.reply(`📋 *LISTA DE ADMINISTRADORES [${serverLabel}]*
 
 > No hay administrador registrado.`)
         }
         
-        let txt = `📋 *ᴅᴀꜰᴛᴀʀ ᴀᴅᴍɪɴ [${serverLabel}]*\n\n`
+        let txt = `📋 *LISTA DE ADMINISTRADORES [${serverLabel}]*\n\n`
         txt += `> Total: *${admins.length}* admin\n\n`
         
         admins.forEach((u, i) => {

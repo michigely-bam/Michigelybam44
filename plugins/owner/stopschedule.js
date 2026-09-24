@@ -7,7 +7,7 @@ const pluginConfig = {
     alias: ['stopscheduler', 'schedstop', 'pauseschedule'],
     category: 'owner',
     description: "Detenga a un determinado programador o todo",
-    usage: ".stopschedule - Nombre Az 124; all ",
+    usage: '.stopschedule <nombre|all>',
     example: '.stopschedule sholat',
     isOwner: true,
     isPremium: false,
@@ -25,18 +25,18 @@ async function handler(m, { sock, args }) {
         if (!target) {
             const helpText = `🛑 *sᴛᴏᴘ sᴄʜᴇᴅᴜʟᴇʀ*
 
-*Usage:*
-\`.stopschedule\`
+*Uso:*
+\`.stopschedule <nombre|all>\`
 
-*Available schedulers:*
-• \`limitreset\` - Daily Limit Reset
-• \`groupschedule\` - Group Schedule
-• \`sewa\` - Sewa Checker
-• \`messages\` - Scheduled Messages
-• \`sholat\` - Sholat Scheduler
-• \`all\` - Todo el schedler.
+*Programadores disponibles:*
+• \`limitreset\` - Reinicio diario del límite
+• \`groupschedule\` - Horarios de grupos
+• \`sewa\` - Comprobación de alquileres
+• \`messages\` - Mensajes programados
+• \`sholat\` - Horarios de oración
+• \`all\` - Todos los programadores
 
-*Example:*
+*Ejemplos:*
 \`.stopschedule sholat\`
 \`.stopschedule all\``;
             
@@ -49,19 +49,19 @@ async function handler(m, { sock, args }) {
             const wasEnabled = db.setting('autoSholat');
             
             if (!wasEnabled) {
-                await m.reply(`ℹ*El programador de oración está en un estado no activo*`);
+                await m.reply(`ℹ️ El programador de horarios de oración ya está detenido.`);
                 return;
             }
             
             stopSholatScheduler();
             db.setting('autoSholat', false);
             
-            await m.reply(`🛑 *sᴄʜᴇᴅᴜʟᴇʀ ᴅɪʜᴇɴᴛɪᴋᴀɴ*
+            await m.reply(`🛑 *PROGRAMADOR DETENIDO*
 
-> Scheduler: *Sholat Scheduler*
-> Status: ❌ Dihentikan
+> Programador: *Horarios de oración*
+> Estado: ❌ Detenido
 
-_Gunakan \`.startschedule sholat\` para reactivar_`);
+_Usa \`.startschedule sholat\` para reactivarlo._`);
             return;
         }
         
@@ -74,16 +74,16 @@ _Gunakan \`.startschedule sholat\` para reactivar_`);
         const result = stopSchedulerByName(target);
         
         if (result.stopped) {
-            await m.reply(`🛑 *sᴄʜᴇᴅᴜʟᴇʀ ᴅɪʜᴇɴᴛɪᴋᴀɴ*
+            await m.reply(`🛑 *PROGRAMADOR DETENIDO*
 
-> Scheduler: *${result.name}*
-> Status: ❌ Dihentikan
+> Programador: *${result.name}*
+> Estado: ❌ Detenido
 
-_Gunakan \`.startschedule ${target}\` para reactivar_`);
+_Usa \`.startschedule ${target}\` para reactivar_`);
         } else {
-            await m.reply(`❌ No se ha encontrado ni ha sido discapacitado
+            await m.reply(`❌ El programador no existe o ya está detenido.
 
-Gunakan \`.stopschedule\` para ver la lista del programador`);
+Usa \`.stopschedule\` para ver la lista de programadores.`);
         }
     } catch (error) {
         console.error('[StopSchedule Error]', error);

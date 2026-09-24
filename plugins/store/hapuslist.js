@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['dellist', 'deletelist'],
     category: 'store',
     description: "🗑️ Eliminar la información de la tienda",
-    usage: ".Borrar la lista",
+    usage: ".hapuslist <número>",
     example: '.hapuslist 1',
     isOwner: true,
     isPremium: false,
@@ -23,7 +23,7 @@ async function handler(m, { sock }) {
     if (lists.length === 0) {
         return m.reply(`📭 *Aún no hay información.*
 
-Tambahkan informasi terlebih dahulu: \`${m.prefix}addlist\` ➕`)
+Añade información primero: \`${m.prefix}addlist\` ➕`)
     }
 
     const idx = parseInt(m.text?.trim()) - 1
@@ -31,7 +31,7 @@ Tambahkan informasi terlebih dahulu: \`${m.prefix}addlist\` ➕`)
     if (isNaN(idx) || idx < 0 || idx >= lists.length) {
         let txt = `🗑️ *Seleccionar información suprimida*
 
-Ketik \`${m.prefix}Borrar la lista\`
+Escribe \`${m.prefix}Borrar la lista\`
 
 `
         for (let i = 0; i < lists.length; i++) {
@@ -47,9 +47,11 @@ Ketik \`${m.prefix}Borrar la lista\`
 
     await m.react('✅')
     return m.reply(
-        `🗑️ *INFORMASI DIHAPUS*\n\n` +
-        `🏷️ Nama: *${deleted.name}*\n\n` +
-        `⚠️ _Informasi telah dihapus secara permanen dan tidak dapat dikembalikan._`
+        `🗑️ *SE BORRÓ LA INFORMACIÓN*
+
+` +
+        `🏷️ Nombre: *${deleted.name}*\n\n` +
+        `⚠️ _La información se ha borrado permanentemente y no se puede devolver._`
     )
 }
 

@@ -8,7 +8,7 @@ const pluginConfig = {
   name: "math",
   alias: ["latex", "rumus"],
   category: "canvas",
-  description: "Render rumus matematika (LaTeX) jadi gambar",
+  description: "Render una fórmula matemática (LaTeX) como una imagen",
   usage: ".math <latex>",
   example: ".math E = mc^2 | \\frac{a}{b}",
   isOwner: false,
@@ -25,8 +25,10 @@ async function handler(m, { sock }) {
 
   if (!input) {
     return m.reply(
-      `*RENDER MATEMATIKA*\n\n` +
-        `Contoh:\n` +
+      `*REPRESENTAR FÓRMULA MATEMÁTICA*
+
+` +
+        `Ejemplo:\n` +
         `• ${m.prefix}math E = mc^2\n` +
         `• ${m.prefix}math \\frac{a}{b}\n` +
         `• ${m.prefix}math E = mc^2 | \\frac{a}{b}`,
@@ -36,7 +38,7 @@ async function handler(m, { sock }) {
   m.react("🕕");
 
   try {
-    // 🔥 support multi rumus pakai "|"
+    // 🔥 soporte multi fórmula de uso de "la verdad"
     const expressions = input
       .split("|")
       .map((v) => v.trim())
@@ -53,7 +55,7 @@ async function handler(m, { sock }) {
       {
         text: "📐 " + input,
         expressions,
-        headerText: "Rumus Matematika",
+        headerText: "Fórmula matemática",
         footer: "Powered by Ourin",
       },
       renderLatexToPng,

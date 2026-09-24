@@ -26,10 +26,10 @@ async function handler(m, { sock }) {
         if (groups.length === 0) {
             return m.reply(`❌ La bota aún no está en ningún grupo.`)
         }
-        let listText = `📋 *LIGHT GRUPP &amp; JPM BLACKLIST*
+        let listText = `📋 *LISTA NEGRA DE GRUPOS Y JPM*
 
 `
-        listText += `A continuación *${groups.length} grup* El que fue seguido por el bot ${config.bot?.name}\n`
+        listText += `A continuación *${groups.length} grupo*El que fue seguido por el bot ${config.bot?.name}\n`
         listText += `Tanda *(🚫)* significa que el grupo está en lista negra.
 
 `
@@ -38,11 +38,14 @@ async function handler(m, { sock }) {
             const icon = isBlacklisted ? ' 🚫' : ''
             listText += `*${i + 1}.* ${groups[i].subject}${icon}\n`
         }
-        listText += `\n*CARA BLACKLIST / UN-BLACKLIST:*\n`
+        listText += `
+*MODO BLACKLIST / UN-BLACKLIST:*
+`
         listText += `Tipo comando seguido por número de grupo para cambiar (puede ser más de uno, separado por espacio).
 
 `
-        listText += `*Contoh:*\n`
+        listText += `*Ejemplo:*
+`
         listText += `> \`${m.prefix}bljpm 2 3 7\``
         return m.reply(listText)
     }
@@ -55,10 +58,10 @@ async function handler(m, { sock }) {
             const targetGroup = groups[index]
             if (blacklist.includes(targetGroup.id)) {
                 blacklist = blacklist.filter(jid => jid !== targetGroup.id)
-                toggled.push(`*${num}.* ${targetGroup.subject} ✅ *(Di-Unblacklist)*`)
+                toggled.push(`*${num}.* ${targetGroup.subject} ✅ *(Eliminado de la lista negra)*`)
             } else {
                 blacklist.push(targetGroup.id)
-                toggled.push(`*${num}.* ${targetGroup.subject} 🚫 ~(Di-Blacklist)~`)
+                toggled.push(`*${num}.* ${targetGroup.subject} 🚫 ~(En la lista negra)~`)
             }
         }
     }
@@ -66,13 +69,13 @@ async function handler(m, { sock }) {
     if (toggled.length === 0) {
         return m.reply(`❌ No hay número de grupo válido.
 
-Ketik *${m.prefix}bljpm* para ver la lista de números.`)
+Escribe *${m.prefix}bljpm* para ver la lista de números.`)
     }
 
     db.setting('jpmBlacklist', blacklist)
     m.react('✅')
 
-    return m.reply(`📢 *STATUS JPM DIPERBARUI:*\n\n${toggled.join('\n')}`)
+    return m.reply(`📢 *ESTADO DE JPM ACTUALIZADO:*\n\n${toggled.join('\n')}`)
 }
 
 export { pluginConfig as config, handler }

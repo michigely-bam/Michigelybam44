@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'apakah',
     alias: ['apa'],
     category: 'fun',
-    description: 'Tanya bot apakah sesuatu',
-    usage: '.apakah <pertanyaan>',
+    description: "Pregúntale al bot si algo es cierto",
+    usage: '.apakah <pregunta>',
     example: ".¿Puedo ser rico?",
     isOwner: false,
     isPremium: false,
@@ -15,25 +15,25 @@ const pluginConfig = {
 };
 
 const answers = [
-    'Ya, tentu saja!',
+    "¡Sí, por supuesto!",
     "No, no lo creo.",
     "Tal vez, intente de nuevo más tarde.",
-    'Hmm... aku rasa iya.',
+    "Mmm... creo que sí.",
     "Lo dudo, pero podría ser.",
-    'Pasti! 100%!',
+    "¡Seguro! ¡100 %!",
     "De ninguna manera.",
     "Podría ser, ¿quién sabe?",
-    'Menurutku sih iya.',
-    'Wah, kayaknya nggak deh.',
+    "Creo que sí.",
+    "Vaya, parece que no.",
     "Claro, ¿por qué no?",
     "No lo sé, pregúntame otra cosa.",
-    'Ya ampun, pasti lah!',
+    "¡Claro que sí!",
     "No lo creo.",
-    'Aku yakin iya!',
-    'Nggak mungkin banget.',
+    "¡Estoy seguro/a de que sí!",
+    "Es muy improbable.",
     "Tal vez, pero no tengas esperanzas.",
-    'Iya dong!',
-    'Nggak, maaf ya.',
+    "¡Claro que sí!",
+    "No, lo siento.",
     "¡Puedo!"
 ];
 
@@ -41,11 +41,11 @@ async function handler(m) {
     const text = m.text?.trim();
     
     if (!text) {
-        return m.reply(`❓ *ᴀᴘᴀᴋᴀʜ*
+        return m.reply(`❓ *¿SERÁ?*
 
-> ¡Póngase en una pregunta!
+> ¡Haz una pregunta!
 
-*Contoh:*
+*Ejemplo:*
 > .¿Puedo ser rico?`);
     }
     

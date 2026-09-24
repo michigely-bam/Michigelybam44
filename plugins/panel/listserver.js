@@ -11,7 +11,7 @@ const pluginConfig = {
     alias: allAliases,
     category: 'panel',
     description: "Listar todos los servidores en el panel (v1-v5)",
-    usage: '.listserverv1 atau .listserverv2',
+    usage: ".listserverv1 o .listserverv2",
     example: '.listserverv1',
     isOwner: false,
     isPremium: false,
@@ -56,7 +56,7 @@ function getAvailableServers(pteroConfig) {
 }
 
 function formatBytes(bytes) {
-    if (bytes === 0) return 'Unlimited'
+    if (bytes === 0) return 'Ilimitado'
     const mb = bytes
     if (mb >= 1000) return `${(mb / 1000).toFixed(1)} GB`
     return `${mb} MB`
@@ -98,9 +98,11 @@ async function handler(m, { sock }) {
     if (!hasFullAccess(m.sender, serverVersion, m.isOwner)) {
         const userRole = getUserRole(m.sender, serverVersion)
         return m.reply(
-            `❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n` +
-            `> Kamu tidak punya akses ke *${serverLabel}*\n` +
-            `> Role kamu: *${userRole || 'Tidak ada'}*`
+            `❌ *se rechazó el acceso*
+
+` +
+            `No tienes acceso a *${serverLabel}*\n` +
+            `> Tu rol: *${userRole || "No hay"}*`
         )
     }
     
@@ -109,12 +111,12 @@ async function handler(m, { sock }) {
     
     if (missingConfig.length > 0) {
         const available = getAvailableServers(pteroConfig)
-        let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`
+        let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} SIN CONFIGURAR*\n\n`
         if (available.length > 0) {
             txt += `> Servidor disponible: *${available.join(', ')}*\n`
-            txt += `> Contoh: \`${m.prefix}listserver${available[0]}\``
+            txt += `> Ejemplo: \`${m.prefix}listserver${available[0]}\``
         } else {
-            txt += `> Isi config pterodactyl di \`config.js\``
+            txt += `> Contenido de config pterodactyl en \`config.js\``
         }
         return m.reply(txt)
     }
@@ -125,12 +127,12 @@ async function handler(m, { sock }) {
         const servers = await fetchAllServers(serverConfig)
         
         if (servers.length === 0) {
-            return m.reply(`📋 *ᴅᴀꜰᴛᴀʀ sᴇʀᴠᴇʀ [${serverLabel}]*
+            return m.reply(`📋 *lista de servidores [${serverLabel}]*
 
 > No hay servidores registrados.`)
         }
         
-        let txt = `📋 *ᴅᴀꜰᴛᴀʀ sᴇʀᴠᴇʀ [${serverLabel}]*\n\n`
+        let txt = `📋 *lista de servidores [${serverLabel}]*\n\n`
         txt += `> Total: *${servers.length}* server\n\n`
         
         servers.slice(0, 20).forEach((s, i) => {
@@ -139,16 +141,18 @@ async function handler(m, { sock }) {
             txt += `${i + 1}. *${attr.name}*\n`
             txt += `   ├ ID: \`${attr.id}\`\n`
             txt += `   ├ RAM: \`${formatBytes(limits.memory)}\`\n`
-            txt += `   └ CPU: \`${limits.cpu === 0 ? 'Unlimited' : limits.cpu + '%'}\`\n`
+            txt += `   └ CPU: \`${limits.cpu === 0 ? 'Ilimitada' : limits.cpu + '%'}\`\n`
         })
         
         if (servers.length > 20) {
-            txt += `\n> ... dan ${servers.length - 20} server lainnya`
+            txt += `\n> ...y ${servers.length - 20} servidores más`
         }
         
         const available = getAvailableServers(pteroConfig)
         if (available.length > 1) {
-            txt += `\n\n> Server lain: *${available.filter(s => s !== serverVersion).join(', ')}*`
+            txt += `
+
+Otros servidores: *${available.filter(s => s !== serverVersion).join(', ')}*`
         }
         
         return m.reply(txt)

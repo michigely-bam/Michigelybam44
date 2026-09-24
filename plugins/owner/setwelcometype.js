@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'setwelcometype',
     alias: ['welcometype', 'welcomevariant', 'welcomestyle'],
     category: 'owner',
-    description: 'Mengatur variant tampilan welcome message',
+    description: "Configura la variante visual del mensaje de bienvenida",
     usage: '.setwelcometype',
     example: '.setwelcometype',
     isOwner: true,
@@ -32,7 +32,7 @@ async function handler(m, { sock, db }) {
         db.setting('welcomeType', id)
         await db.save()
         await m.reply(
-            `✅ Welcome type diubah ke *V${id}*\n` +
+            `✅ El tipo de bienvenida fue cambiado a *V${id}*\n` +
             `*${VARIANTS[id].name}*\n` +
             `_${VARIANTS[id].desc}_`
         )
@@ -49,7 +49,7 @@ async function handler(m, { sock, db }) {
             })
         })
     }
-    await sock.sendButton(m.chat, fs.readFileSync('./assets/images/ourin.jpg'), `🥗 *TIPE WELCOME*
+    await sock.sendButton(m.chat, fs.readFileSync('./assets/images/ourin.jpg'), `🥗 *TIPO DE BIENVENIDA*
 Tipo actual es la versión *${current}*\n_${VARIANTS[current].name}_
 
 Por favor seleccione la variante de bienvenida:`, m, { buttons })

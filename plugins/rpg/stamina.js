@@ -7,7 +7,7 @@ const pluginConfig = {
   alias: ["energy", "cekstamina"],
   category: "rpg",
   description: "Verificación y restauración de la resistencia",
-  usage: ".stamina / .stamina isi",
+  usage: ".stamina / .stamina contenido",
   example: ".stamina",
   isOwner: false,
   isPremium: false,
@@ -29,7 +29,7 @@ try {
   if (fs.existsSync(thumbPath)) thumbRpg = fs.readFileSync(thumbPath);
 } catch (e) {}
 
-function getContextInfo(title = "⚡ *sᴛᴀᴍɪɴᴀ*", body = "Energi") {
+function getContextInfo(title = "⚡ *RESISTENCIA*", body = "Energía") {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
@@ -78,15 +78,17 @@ async function handler(m, { sock }) {
     const potionCost = 5000;
 
     if (user.rpg.stamina >= user.rpg.maxStamina) {
-      return m.reply(`⚡ *sᴛᴀᴍɪɴᴀ ᴘᴇɴᴜʜ*
+      return m.reply(`⚡ *sᴛᴀᴍɪɴᴀ LLENO*
 
 > ¡Tu resistencia está llena!`);
     }
 
     if ((user.koin || 0) < potionCost) {
       return m.reply(
-        `❌ *sᴀʟᴅᴏ ᴛɪᴅᴀᴋ ᴄᴜᴋᴜᴘ*\n\n` +
-          `> Biaya: Rp ${potionCost.toLocaleString("id-ID")}\n` +
+        `❌ *saldo no es suficiente*
+
+` +
+          `> Costo: Rp. ${potionCost.toLocaleString("id-ID")}\n` +
           `> Saldo: Rp ${(user.koin || 0).toLocaleString("id-ID")}`,
       );
     }
@@ -105,8 +107,8 @@ async function handler(m, { sock }) {
           `⚡ *sᴛᴀᴍɪɴᴀ ᴅɪɪsɪ*\n\n` +
           `╭┈┈⬡「 💊 *ʀᴇsᴛᴏʀᴇ* 」\n` +
           `┃ ⚡ Stamina: *+${restored}*\n` +
-          `┃ 💵 Biaya: *-Rp ${potionCost.toLocaleString("id-ID")}*\n` +
-          `┃ 📊 Sekarang: *${user.rpg.stamina}/${user.rpg.maxStamina}*\n` +
+          `┃ 💵 El costo: *-Rp ${potionCost.toLocaleString("id-ID")}*\n` +
+          `┃ 📊 Ahora: *${user.rpg.stamina}/${user.rpg.maxStamina}*\n` +
           `╰┈┈┈┈┈┈┈┈⬡`,
         contextInfo: getContextInfo(),
       },
@@ -121,7 +123,8 @@ async function handler(m, { sock }) {
   txt += `┃ ⚡ Stamina: *${user.rpg.stamina}/${user.rpg.maxStamina}*\n`;
   txt += `┃ 📊 [${staminaBar}]\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
-  txt += `> Isi stamina: \`${m.prefix}stamina isi\` (Rp 5.000)\n`;
+  txt += `El contenido de la resistencia: \`${m.prefix}stamina contenido (Rp 5.000)
+`;
   txt += `> Resistencia recuperada automática cada hora`;
 
   await sock.sendMessage(

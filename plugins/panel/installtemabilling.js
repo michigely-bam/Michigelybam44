@@ -65,7 +65,8 @@ function handler(m) {
 
     if (!text) {
         return m.reply(
-            `╭┈┈⬡「 🎨 *ɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ ʙɪʟʟɪɴɢ* 」\n┃ ㊗ ᴜsᴀɢᴇ: \`${m.prefix}installtemabilling <ip>|<password>\`\n╰┈┈⬡\n\n> \`Contoh: ${m.prefix}installtemabilling 192.168.1.1|secretpass\``
+            `╭┈┈⬡「 🎨 *ɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ ʙɪʟʟɪɴɢ* 」
+┃ ㊗ USO: \`${m.prefix}installtemabilling <ip>|<password>\`\n╰┈┈⬡\n\n> \`Ejemplo: ${m.prefix}installtemabilling 192.168.1.1|secretpass\``
         )
     }
 
@@ -91,10 +92,10 @@ function handler(m) {
 
     conn.on('ready', async () => {
         try {
-            await m.reply(`🕕 *[1/3] ɪɴsᴛᴀʟʟ ᴅᴇᴘᴇɴᴅᴇɴᴄɪᴇs...*\n\n> Menginstall Node.js, Yarn, Composer...`)
+            await m.reply(`🕕 *[1/3] INSTALANDO DEPENDENCIAS...*\n\n> Instalando Node.js, Yarn y Composer...`)
             await execSSH(conn, DEPS_CMD)
 
-            await m.reply(`🕕 *[2/3] ɪɴsᴛᴀʟʟ ᴛᴇᴍᴀ...*\n\n> Mendownload & install tema Billing...`)
+            await m.reply(`🕕 *[2/3] INSTALANDO TEMA...*\n\n> Descargando e instalando el tema Billing...`)
             await execSSHInteractive(conn, THEME_CMD, [
                 { trigger: "TOKEN ACCESS", value: 'skyzodev' },
                 { trigger: "Introduzca la opción", value: '1' },
@@ -106,7 +107,7 @@ function handler(m) {
 
             m.react('✅')
             await m.reply(
-                `╭┈┈⬡「 ✅ *ᴛᴇᴍᴀ ʙɪʟʟɪɴɢ* 」\n┃ ㊗ sᴛᴀᴛᴜs: *Terinstall*\n┃ ㊗ ɪᴘ: ${ipvps}
+                `╭┈┈⬡「 ✅ *TEMA BILLING* 」\n┃ ㊗ ᴇsᴛᴀᴅᴏ: *Instalado*\n┃ ㊗ ɪᴘ: ${ipvps}
 ╰┈┈⬡
 
 > _Billing + dependientes tema instalado con éxito!_`

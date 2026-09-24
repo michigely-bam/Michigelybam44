@@ -9,8 +9,8 @@ const pluginConfig = {
   alias: ["fstory4", "igstory4", "albumstory"],
   category: "canvas",
   description: "Fake Instagram historia con 2 imágenes diferentes",
-  usage: ".factoriy4 - Nombre identificado",
-  example: ".fakestory4 Misaki (reply album/2 gambar)",
+  usage: ".fakestory4 <nombre>",
+  example: ".fakestory4 Misaki (Responde album/2 imagen)",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -215,10 +215,12 @@ async function handler(m, { sock }) {
       m.react("❌");
       return m.reply(
         `📷 *ꜰᴀᴋᴇ sᴛᴏʀʏ 4*\n\n` +
-          `> Kirim/reply 1-2 gambar!\n\n` +
-          `> Format: \`${m.prefix}fakestory4 <nama>\`\n` +
-          `> Contoh: \`${m.prefix}fakestory4 Misaki\`\n\n` +
-          `> Tips: Kirim gambar + reply gambar lain untuk 2 gambar berbeda`,
+          `¡> Envía o responde a 1 o 2 imágenes!
+
+` +
+          `> Formato: \`${m.prefix}fakestory4 <nombre>\`\n` +
+          `> Ejemplo: \`${m.prefix}fakestory4 Misaki\`\n\n` +
+          `> Consejos: Enviar imágenes + responder otras imágenes para 2 imágenes diferentes`,
       );
     }
     const resultBuffer = await createFakeStory(

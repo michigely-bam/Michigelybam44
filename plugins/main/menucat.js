@@ -14,7 +14,7 @@ const pluginConfig = {
   alias: ["mc", "category", "cat"],
   category: "main",
   description: "Mostrar comandos en una categoría específica",
-  usage: ".menucat <kategori>",
+  usage: ".menucat <categoría>",
   example: ".menucat tools",
   isOwner: false,
   isPremium: false,
@@ -70,7 +70,7 @@ function getContextInfo() {
       serverMessageId: 127,
     },
     externalAdReply: {
-      title: `Kategori Menu`,
+      title: `Menú de categorías`,
       body: botName,
       sourceUrl: config.saluran?.link || "",
       mediaType: 1,
@@ -111,7 +111,7 @@ async function handler(m, { sock, db }) {
         serverMessageId: 127,
       },
       externalAdReply: {
-        title: title || "Kategori Menu",
+        title: title || "Menú de categorías",
         body: body || botName,
         sourceUrl: saluranLink,
         mediaType: 1,
@@ -140,8 +140,8 @@ async function handler(m, { sock, db }) {
       }
     } catch (e) {}
     const excludeCategories = modeExcludeMap[botMode] || modeExcludeMap.md;
-    let txt = `📂 *${toMonoUpperBold("ITAR TATEGORY")}*\n\n`;
-    txt += `> Ketik \`${prefix}menucat <kategori>\`\n\n`;
+    let txt = `📂 *${toMonoUpperBold("LISTA DE CATEGORÍAS")}*\n\n`;
+    txt += `> Escribe \`${prefix}menucat <categoría>\`\n\n`;
     const categoryOrder = [
       "owner",
       "main",
@@ -185,7 +185,8 @@ async function handler(m, { sock, db }) {
         (casesByCategory[cat] || []).length;
       return total > 0;
     });
-    txt += `╭─〔 📋 *KATEGORI* 〕───⬣\n`;
+    txt += `╭─〔 📋 *CATEGORÍAS* 〕───⬣
+`;
     for (const cat of visibleCats) {
       const pluginCmds = commandsByCategory[cat] || [];
       const caseCmds = casesByCategory[cat] || [];
@@ -194,7 +195,7 @@ async function handler(m, { sock, db }) {
       txt += ` │ ${emoji} ${cat.toUpperCase()} │ \`${totalCmds}\` cmds\n`;
     }
     txt += `╰───────⬣\n\n`;
-    txt += `_Contoh: \`${prefix}menucat tools\`_`;
+    txt += `_Ejemplo: \`${prefix}menucat tools\`_`;
     try {
       switch (menucatVariant) {
         case 1:
@@ -205,8 +206,8 @@ async function handler(m, { sock, db }) {
             {
               text: txt,
               contextInfo: buildFullContextInfo(
-                "Daftar Kategori",
-                `${visibleCats.length} kategori tersedia`,
+                "Lista de categorías",
+                `${visibleCats.length} Categorías disponibles`,
               ),
             },
             { quoted: m },
@@ -219,8 +220,8 @@ async function handler(m, { sock, db }) {
                 image: imageBuffer,
                 caption: txt,
                 contextInfo: buildFullContextInfo(
-                  "Daftar Kategori",
-                  `${visibleCats.length} kategori tersedia`,
+                  "Lista de categorías",
+                  `${visibleCats.length} Categorías disponibles`,
                 ),
               },
               { quoted: m },
@@ -231,8 +232,8 @@ async function handler(m, { sock, db }) {
             {
               text: txt,
               contextInfo: buildFullContextInfo(
-                "Daftar Kategori",
-                `${visibleCats.length} kategori tersedia`,
+                "Lista de categorías",
+                `${visibleCats.length} Categorías disponibles`,
               ),
             },
             { quoted: m },
@@ -253,14 +254,14 @@ async function handler(m, { sock, db }) {
             {
               name: "single_select",
               buttonParamsJson: JSON.stringify({
-                title: "📂 ᴘɪʟɪʜ ᴋᴀᴛᴇɢᴏʀɪ",
-                sections: [{ title: "📋 PILIH KATEGORI", rows: catRows }],
+                title: "📂 ELEGIR CATEGORÍA",
+                sections: [{ title: "📋 SELECCIONE LA CATEGORÍA", rows: catRows }],
               }),
             },
             {
               name: "quick_reply",
               buttonParamsJson: JSON.stringify({
-                display_text: "🏠 ᴋᴇᴍʙᴀʟɪ ᴋᴇ ᴍᴇɴᴜ",
+                display_text: "🏠 VOLVER AL MENÚ",
                 id: `${prefix}menu`,
               }),
             },
@@ -285,8 +286,8 @@ async function handler(m, { sock, db }) {
                         }),
                       header:
                         proto.Message.InteractiveMessage.Header.fromObject({
-                          title: "📂 Daftar Kategori",
-                          subtitle: `${visibleCats.length} kategori`,
+                          title: "📂 Lista de categorías",
+                          subtitle: `${visibleCats.length} categorías`,
                           hasMediaAttachment: false,
                         }),
                       nativeFlowMessage:
@@ -296,8 +297,8 @@ async function handler(m, { sock, db }) {
                           },
                         ),
                       contextInfo: buildFullContextInfo(
-                        "Daftar Kategori",
-                        `${visibleCats.length} kategori tersedia`,
+                        "Lista de categorías",
+                        `${visibleCats.length} Categorías disponibles`,
                       ),
                     }),
                 },
@@ -315,8 +316,8 @@ async function handler(m, { sock, db }) {
             {
               text: txt,
               contextInfo: buildFullContextInfo(
-                "Daftar Kategori",
-                `${visibleCats.length} kategori tersedia`,
+                "Lista de categorías",
+                `${visibleCats.length} Categorías disponibles`,
               ),
             },
             { quoted: m },
@@ -340,10 +341,10 @@ async function handler(m, { sock, db }) {
   const matchedCat = allCategories.find((c) => c.toLowerCase() === categoryArg);
   if (!matchedCat) {
     return m.reply(
-      `❌ *- ¿Qué?*
+      `❌ *CATEGORÍA DESCONOCIDA*
 
-> Kategori \`${categoryArg}\` Nada.
-> Ketik \`${prefix}menucat\` para la lista de categorías.`,
+> La categoría \`${categoryArg}\` no existe.
+> Escribe \`${prefix}menucat\` para la lista de categorías.`,
     );
   }
   if (matchedCat === "owner" && !m.isOwner) {
@@ -356,7 +357,9 @@ async function handler(m, { sock, db }) {
   const allCommands = [...pluginCommands, ...caseCommands];
   if (allCommands.length === 0) {
     return m.reply(
-      `❌ *KOSONG*\n\n> Kategori \`${matchedCat}\` no tiene orden.`,
+      `❌ *VACÍO*
+
+> La categoría \`${matchedCat}\` no tiene comandos.`,
     );
   }
   const emoji = CATEGORY_EMOJIS[matchedCat] || "📁";
@@ -435,21 +438,21 @@ async function handler(m, { sock, db }) {
           ...sections.map((sec) => ({
             name: "single_select",
             buttonParamsJson: JSON.stringify({
-              title: `${emoji} ᴘɪʟɪʜ ᴄᴏᴍᴍᴀɴᴅ`,
+              title: `${emoji} ELEGIR COMANDO`,
               sections: [sec],
             }),
           })),
           {
             name: "quick_reply",
             buttonParamsJson: JSON.stringify({
-              display_text: "📂 ᴋᴇᴍʙᴀʟɪ ᴋᴇ ᴋᴀᴛᴇɢᴏʀɪ",
+              display_text: "📂 VOLVER A CATEGORÍAS",
               id: `${prefix}menucat`,
             }),
           },
           {
             name: "quick_reply",
             buttonParamsJson: JSON.stringify({
-              display_text: "🏠 ᴋᴇᴍʙᴀʟɪ ᴋᴇ ᴍᴇɴᴜ",
+              display_text: "🏠 VOLVER AL MENÚ",
               id: `${prefix}menu`,
             }),
           },

@@ -11,8 +11,8 @@ const pluginConfig = {
   name: "ocr",
   alias: ["totext", "imagetotext", "readtext"],
   category: "tools",
-  description: "Extract teks dari gambar (Offline/Local)",
-  usage: ".ocr (reply gambar)",
+  description: "Extraer el texto de las imágenes (Offline/Local)",
+  usage: ".ocr (respuesta a la imagen)",
   example: ".ocr",
   isOwner: false,
   isPremium: false,
@@ -60,14 +60,17 @@ async function handler(m, { sock }) {
   const isImage = m.isImage || (m.quoted && m.quoted.type === "imageMessage");
   if (!isImage) {
     return m.reply(
-      `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-        `> Reply gambar dengan \`${m.prefix}ocr\`\n\n` +
-        `> Media yang didukung:\n` +
+      `⚠️ *MODO DE USO*\n\n` +
+        `> Responder a la imagen con \`${m.prefix}ocr\`\n\n` +
+        `> Medios compatibles:
+` +
         `> JPG, PNG, GIF, WEBP`,
     );
   }
   await m.react("🕕");
-  await m.reply(`🕕 *ᴍᴇᴍᴘʀᴏsᴇs...*\n\n> Mengekstrak teks dari gambar...`);
+  await m.reply(`🕕 *PROCESANDO...*
+
+> Extraer texto de una imagen...`);
   try {
     let buffer;
     if (m.quoted && m.quoted.isMedia) {
@@ -77,7 +80,7 @@ async function handler(m, { sock }) {
     }
     if (!buffer || buffer.length === 0) {
       await m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > Incapaz de descargar la imagen`);
     }
@@ -89,7 +92,7 @@ async function handler(m, { sock }) {
     if (!extractedText || extractedText.length === 0) {
       await m.react("❌");
       return m.reply(
-        `❌ *ᴛɪᴅᴀᴋ ᴀᴅᴀ ᴛᴇᴋs*
+        `❌ *no hay texto*
 
 > Ningún texto detectado en la imagen`,
       );
@@ -97,13 +100,14 @@ async function handler(m, { sock }) {
     await m.react("✅");
     const responseText =
       `📖 *ᴏᴄʀ ʀᴇsᴜʟᴛ*\n\n` +
-      `╭┈┈⬡「 📝 *ᴛᴇᴋs* 」\n` +
+      `╭┈┈⬡「 📝 *TEXTO* 」
+` +
       `${extractedText
         .split("\n")
         .map((l) => `┃ ${l}`)
         .join("\n")}\n` +
       `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-      `> Total: ${extractedText.length} karakter`;
+      `> Total: ${extractedText.length} carácter`;
     await sock.sendMessage(
       m.chat,
       {

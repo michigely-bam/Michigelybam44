@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['sisaumur', 'umur'],
     category: 'cek',
     description: "Mira el resto de tu vida.",
-    usage: ".cexisaur Identificar nombre",
+    usage: ".ceksisaumur [@usuario]",
     example: '.ceksisaumur Budi',
     isOwner: false,
     isPremium: false,
@@ -25,23 +25,22 @@ async function handler(m) {
     
     let desc = ''
     if (tahun > 80) {
-        desc = 'Panjang umur banget! 🎉'
+        desc = "¡Qué larga vida! 🎉"
     } else if (tahun > 60) {
-        desc = 'Lumayan panjang~ ✨'
+        desc = "Bastante larga~ ✨"
     } else if (tahun > 40) {
-        desc = 'Cukup lah ya 😊'
+        desc = "Ya es suficiente 😊"
     } else {
-        desc = 'Jaga kesehatan ya! 🙏'
+        desc = "¡Cuida tu salud! 🙏"
     }
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-El resto de tu vida. *${tahun} Tahun ${bulan} Bulan ${hari} Hari*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar los niveles de bienestar @${mentioned.split('@')[0]} yak? 
-    
-Sisa umur dia sebesar *${tahun} Tahun ${bulan} Bulan ${hari} Hari*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu tiempo de vida restante estimado es de *${tahun} años, ${bulan} meses y ${hari} días*.
 \`\`\`${desc}\`\`\``
-    
+        : `Tiempo de vida restante estimado de @${mentioned.split('@')[0]}: *${tahun} años, ${bulan} meses y ${hari} días*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

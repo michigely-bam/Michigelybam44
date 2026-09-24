@@ -27,14 +27,16 @@ function handler(m, { sock }) {
     if (!args || args === 'status') {
         return m.reply(
             `🔗 *ᴀᴜᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ*\n\n` +
-            `> Status: ${current ? '✅ Aktif' : '❌ Nonaktif'}\n\n` +
+            `> Status: ${current ? "✅ Activo" : "❌ Inactivo"}\n\n` +
             `*Platform Support:*\n` +
             `> TikTok, Instagram, Facebook\n` +
             `> YouTube, Twitter/X\n` +
             `> Telegram, Discord\n\n` +
-            `*Penggunaan:*\n` +
-            `> \`${m.prefix}autodl on\` - Aktifkan\n` +
-            `> \`${m.prefix}autodl off\` - Nonaktifkan`
+            `*Uso:*
+` +
+            `> \`${m.prefix}autodl on\` - Activa
+` +
+            `> \`${m.prefix}autodl off\` - Desactivación`
         )
     }
     
@@ -42,8 +44,9 @@ function handler(m, { sock }) {
         db.setGroup(m.chat, { ...groupData, autodl: true })
         m.react('✅')
         return m.reply(
-            `✅ *ᴀᴜᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ᴀᴋᴛɪꜰ*\n\n` +
-            `> Kirim link sosmed dan bot akan auto download!\n` +
+            `✅ *DESCARGA AUTOMÁTICA ACTIVADA*\n\n` +
+            `¡Envía un enlace redes sociales y el bot se descargará automáticamente!
+` +
             `> Support: TikTok, IG, FB, YouTube, Twitter/X`
         )
     }
@@ -51,10 +54,12 @@ function handler(m, { sock }) {
     if (args === 'off') {
         db.setGroup(m.chat, { ...groupData, autodl: false })
         m.react('❌')
-        return m.reply(`❌ *ᴀᴜᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ɴᴏɴᴀᴋᴛɪꜰ*`)
+        return m.reply(`❌ *DESCARGA AUTOMÁTICA DESACTIVADA*`)
     }
     
-    return m.reply(`❌ *ᴀʀɢᴜᴍᴇɴ ᴛɪᴅᴀᴋ ᴠᴀʟɪᴅ*\n\n> Gunakan: \`on\` atau \`off\``)
+    return m.reply(`❌ *el argumento no es válido*
+
+> Utilice: \`on\` o \`off\``)
 }
 
 export { pluginConfig as config, handler }

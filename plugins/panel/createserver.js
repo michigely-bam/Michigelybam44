@@ -34,7 +34,7 @@ const pluginConfig = {
   alias: ["unlimited"],
   category: "panel",
   description: "Crear servidor de panel con especificación de RAM (v1-v5)",
-  usage: ".1gbv1 username atau .1gbv2 username,628xxx",
+  usage: ".1gbv1 nombre de usuario o .1gbv2 nombre de usuario 628xxx",
   example: ".2gbv1 myserver,628xxx",
   isOwner: false,
   isPremium: false,
@@ -131,10 +131,12 @@ async function handler(m, { sock }) {
   if (!gcSellerAccess && !hasAccessToServer(m.sender, serverVersion, m.isOwner)) {
     const userRole = getUserRole(m.sender, serverVersion);
     return m.reply(
-      `❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n` +
-        `> Kamu tidak punya akses ke *${serverVersion.toUpperCase()}*\n` +
-        `> Role kamu di ${serverVersion.toUpperCase()}: *${userRole || "Tidak ada"}*\n\n` +
-        `> Hubungi admin untuk mendapat akses.`,
+      `❌ *se rechazó el acceso*
+
+` +
+        `No tienes acceso a *${serverVersion.toUpperCase()}*\n` +
+        `> Tu rol en ${serverVersion.toUpperCase()}: *${userRole || "No hay"}*\n\n` +
+        `Contacte al administrador para obtener acceso.`,
     );
   }
 
@@ -148,12 +150,12 @@ async function handler(m, { sock }) {
 
   if (missingConfig.length > 0) {
     const available = getAvailableServers(pteroConfig);
-    let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverVersion.toUpperCase()} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`;
+    let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverVersion.toUpperCase()} SIN CONFIGURAR*\n\n`;
     if (available.length > 0) {
       txt += `> Servidor disponible: *${available.join(", ")}*\n`;
-      txt += `> Contoh: \`${m.prefix}${ram}${available[0]} username\``;
+      txt += `> Ejemplo: \`${m.prefix}${ram}${available[0]} username\``;
     } else {
-      txt += `> Isi config pterodactyl di \`config.js\``;
+      txt += `> Contenido de config pterodactyl en \`config.js\``;
     }
     return m.reply(txt);
   }
@@ -175,13 +177,15 @@ async function handler(m, { sock }) {
     const available = getAvailableServers(pteroConfig);
     const userRole = getUserRole(m.sender, serverVersion) || "Guest";
     return m.reply(
-      `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+      `⚠️ *MODO DE USO*\n\n` +
         `> \`${m.prefix}${m.command} username\`\n` +
         `> \`${m.prefix}${m.command} username,628xxx\`\n` +
-        `> Reply/tag pesan user\n\n` +
+        `> Respuesta/tag mensaje de usuario
+
+` +
         `> Server: *${serverVersion.toUpperCase()}*\n` +
-        `> Role kamu: *${capitalize(userRole)}*\n` +
-        `> Server tersedia: *${available.join(", ") || "none"}*`,
+        `> Tu rol: *${capitalize(userRole)}*\n` +
+        `> Servidores disponibles: *${available.join(", ") || "none"}*`,
     );
   }
 
@@ -209,7 +213,7 @@ async function handler(m, { sock }) {
     const [onWa] = await sock.onWhatsApp(targetUser.split("@")[0]);
     if (!onWa?.exists) {
       return m.reply(
-        `❌ Nomor \`${targetUser.split("@")[0]}\` ¡No está registrado en WhatsApp!`,
+        `❌ Número \`${targetUser.split("@")[0]}\` ¡No está registrado en WhatsApp!`,
       );
     }
   } catch (e) {
@@ -226,7 +230,7 @@ async function handler(m, { sock }) {
   const password = username + crypto.randomBytes(3).toString("hex");
   const serverLabel = serverVersion.toUpperCase();
 
-  await m.reply(`🕕 Membuat panel *${serverLabel}* untuk \`${targetUser.split("@")[0]}\`...`);
+  await m.reply(`🕕 Creando el panel *${serverLabel}* para \`${targetUser.split("@")[0]}\`...`);
 
   try {
     let userRes;
@@ -317,7 +321,7 @@ async function handler(m, { sock }) {
 
     const server = serverRes.data.attributes;
 
-    const ramLabel = specs.ram === 0 ? "Unlimited" : `${specs.ram / 1000} GB`;
+    const ramLabel = specs.ram === 0 ? "Ilimitada" : `${specs.ram / 1000} GB`;
 
     let detailTxt = `✅ *PANEL MAKES PANEL*
 

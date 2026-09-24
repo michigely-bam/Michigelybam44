@@ -63,9 +63,9 @@ const pluginConfig = {
     name: 'fakebankjago',
     alias: ['fakebankjago'],
     category: 'canvas',
-    description: 'Membuat gambar chat iPhone style',
+    description: "Crear imágenes de chat de estilo iPhone",
     usage: '.fakebankjago <text>',
-    example: '.fakebankjago Hai cantik',
+    example: ".fakebankjago Hola, bonita",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -82,7 +82,7 @@ async function handler(m, { sock }) {
 
 > Escriba texto para chat
 
-\`Contoh: ${m.prefix}fakebank Zann,10000\``)
+\`Ejemplo: ${m.prefix}fakebank Zann,10000\``)
     }
     if(isNaN(nominal)) return m.reply(`*Por favor, ingrese al NUMBER*`)
     m.react('🕕')
@@ -91,11 +91,11 @@ async function handler(m, { sock }) {
         const saldo = Number(nominal.replace(/[^0-9]/g, '')).toLocaleString('id-ID')
         const hour = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta', hour: '2-digit', hour12: false })
         const h = Number(hour)
-        let waktu = 'Malam'
-        if (h >= 4 && h < 11) waktu = 'Pagi'
-        else if (h >= 11 && h < 15) waktu = 'Siang'
-        else if (h >= 15 && h < 18) waktu = 'Sore'
-        const fake = await generateImage(saldo, `Selamat ${waktu}, ${nama}`)
+        let waktu = "Noche"
+        if (h >= 4 && h < 11) waktu = "Mañana"
+        else if (h >= 11 && h < 15) waktu = "Tarde"
+        else if (h >= 15 && h < 18) waktu = 'Atardecer'
+        const fake = await generateImage(saldo, `Feliz ${waktu}, ${nama}`)
         await sock.sendMedia(m.chat, fake, null, m, {
             type: 'image',
         })

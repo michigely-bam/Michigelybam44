@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['try'],
     category: 'fun',
     description: "Preguntemos algo en el bot.",
-    usage: ".tratar de hacer una pregunta",
+    usage: ".coba <pregunta>",
     example: ".Adivina lo que estaba pensando.",
     isOwner: false,
     isPremium: false,
@@ -41,11 +41,11 @@ async function handler(m) {
     const text = m.text?.trim();
     
     if (!text) {
-        return m.reply(`🎯 *ᴄᴏʙᴀ*
+        return m.reply(`🎯 *intento*
 
 > ¡Pon algo!
 
-*Contoh:*
+*Ejemplo:*
 > .Adivina lo que estaba pensando.`);
     }
     

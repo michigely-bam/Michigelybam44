@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'exp',
     alias: ['cekexp', 'myexp', 'xp'],
     category: 'user',
-    description: 'Cek exp user',
+    description: "Consulta la experiencia de un usuario",
     usage: '.exp [@user]',
     example: '.exp',
     isOwner: false,
@@ -28,7 +28,7 @@ async function handler(m, { sock }) {
     const db = getDatabase()
     
     let targetJid = m.sender
-    let targetName = m.pushName || 'Kamu'
+    let targetName = m.pushName || "Tú"
     
     if (m.quoted) {
         targetJid = m.quoted.sender

@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'brathd',
     alias: ['brathdsticker', 'brathds'],
     category: 'sticker',
-    description: 'Membuat sticker brat HD',
+    description: "Crear un sticker Brat en HD",
     usage: '.brathd <text>',
     example: '.brathd hello world',
     isOwner: false,
@@ -26,7 +26,7 @@ async function handler(m, { sock }) {
 
 > Escriba texto
 
-\`Contoh: ${m.prefix}brathd hello world\``)
+\`Ejemplo: ${m.prefix}brathd hello world\``)
     }
     
     m.react('🕕')

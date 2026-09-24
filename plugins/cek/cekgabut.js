@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekgabut',
     alias: ['gabut', 'bored'],
     category: 'cek',
-    description: "Comprueba tu nivel de violencia.",
-    usage: ".ccgabit Identificar nombre",
+    description: "Comprueba tu nivel de aburrimiento.",
+    usage: ".cekgabut [@usuario]",
     example: '.cekgabut Budi',
     isOwner: false,
     isPremium: false,
@@ -19,20 +19,19 @@ async function handler(m) {
     const mentioned = m.mentionedJid[0] || m.sender
                     
     let desc = ''
-    if (percent >= 90) desc = 'GABUT LEVEL MAX! Main bot aja~ 🥱'
-    else if (percent >= 70) desc = 'Gabut parah nih! 😴'
-    else if (percent >= 50) desc = 'Lumayan gabut 😅'
-    else if (percent >= 30) desc = 'Agak sibuk dikit 📝'
-    else desc = 'Sibuk banget! Produktif! 💼'
+    if (percent >= 90) desc = "¡ABURRIMIENTO MÁXIMO! Mejor juega con el bot~ 🥱"
+    else if (percent >= 70) desc = "¡Muy aburrido/a! 😴"
+    else if (percent >= 50) desc = "Bastante aburrido/a 😅"
+    else if (percent >= 30) desc = "Está un poco ocupado/a 📝"
+    else desc = "¡Muy ocupado/a y productivo/a! 💼"
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu nivel de emoción. *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de emoción @${mentioned.split('@')[0]} yak? 
-    
-Tingkat kegabutan dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de aburrimiento es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de aburrimiento de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

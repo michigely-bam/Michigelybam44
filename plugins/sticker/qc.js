@@ -6,8 +6,8 @@ const pluginConfig = {
     alias: ['qcstc', 'stcqc', 'qcstic', 'qcstick', 'quotesticker'],
     category: 'sticker',
     description: "Crear una pegatina de chat de color personalizado",
-    usage: '.qc <warna> <text>',
-    example: '.qc pink Hai semuanya!',
+    usage: '.qc <color> <texto>',
+    example: ".qc pink ¡Hola a todos!",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -83,12 +83,14 @@ async function handler(m, { sock }) {
         const colorList = Object.keys(COLORS).join(', ')
         return m.reply(
             `💬 *ǫᴜᴏᴛᴇ sᴛɪᴄᴋᴇʀ*\n\n` +
-            `╭┈┈⬡「 📋 *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ* 」\n` +
-            `┃ ◦ \`${m.prefix}qc <warna> <text>\`\n` +
-            `┃ ◦ Reply pesan + \`${m.prefix}qc <warna>\`\n` +
+            `╭┈┈⬡「 📋 *MODO DE USO* 」\n` +
+            `┃ ◦ \`${m.prefix}qc <color> <texto>\`\n` +
+            `┃ ◦ Responde a un mensaje con \`${m.prefix}qc <color>\`\n` +
             `╰┈┈⬡\n\n` +
-            `> Contoh: \`${m.prefix}qc pink Hai semuanya!\`\n\n` +
-            `╭┈┈⬡「 🎨 *ᴡᴀʀɴᴀ* 」\n` +
+            `> Ejemplo: \`${m.prefix}qc pink ¡Hola a todos!\`
+
+` +
+            `╭┈┈⬡「 🎨 *COLOR* 」\n` +
             `┃ ${colorList}\n` +
             `╰┈┈⬡`
         )
@@ -98,7 +100,9 @@ async function handler(m, { sock }) {
     const backgroundColor = COLORS[color]
     
     if (!backgroundColor) {
-        return m.reply(`❌ *ᴇʀʀᴏʀ*\n\n> Warna \`${color}\` ¡No lo encontraron!
+        return m.reply(`❌ *ᴇʀʀᴏʀ*
+
+> El color \`${color}\` ¡No lo encontraron!
 > Use uno de los colores disponibles.`)
     }
     

@@ -17,7 +17,7 @@ const pluginConfig = {
   isEnabled: true,
 };
 
-const NEOXR_APIKEY = config.APIkey?.neoxr || "Milik-Bot-OurinMD";
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD";
 
 async function handler(m, { sock }) {
   const args = m.args || [];
@@ -25,7 +25,7 @@ async function handler(m, { sock }) {
   const query = args.slice(1).join(" ");
 
   if (!no || !query) {
-    return m.reply(`❌ Format: \`${m.prefix}apkmod-get <no> <query>\``);
+    return m.reply(`❌ Formato: \`${m.prefix}apkmod-get <no> <query>\``);
   }
 
   m.react("🕕");

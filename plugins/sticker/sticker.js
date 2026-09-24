@@ -119,14 +119,21 @@ async function handler(m, { sock, config: botConfig }) {
     if (!isImage && !isVideo) {
         await m.reply(
             `🖼️ *sᴛɪᴄᴋᴇʀ ᴍᴀᴋᴇʀ*\n\n` +
-            `Kirim/reply gambar atau video dengan caption:\n` +
+            `Envíe/Responde imágenes o videos con la descripción:
+` +
             `\`${m.prefix}s\`\n\n` +
-            `*ᴏᴘsɪ:*\n` +
-            `> \`--crop\` - Crop jadi kotak\n` +
-            `> \`--resize WxH\` - Resize ke ukuran\n` +
-            `> \`--circle\` - Bentuk lingkaran\n` +
-            `> \`--rounded\` - Sudut melengkung\n\n` +
-            `*ᴄᴏɴᴛᴏʜ:*\n` +
+            `*OPCIONES:*
+` +
+            `> \`--crop\` - Recortar en formato cuadrado
+` +
+            `> \`--resize WxH\` - Redimensionarse a tamaño
+` +
+            `> \`--circle\` - Forma circular
+` +
+            `> \`--rounded\` - Esquinas redondeadas
+
+` +
+            `*EJEMPLO:*\n` +
             `> \`${m.prefix}s --crop\`\n` +
             `> \`${m.prefix}s --resize 256x256\`\n` +
             `> \`${m.prefix}s --circle\`\n` +
@@ -167,7 +174,9 @@ async function handler(m, { sock, config: botConfig }) {
                 const duration = parseFloat(stdout.trim())
                 
                 if (duration > 10) {
-                    await m.reply(`❌ Video terlalu panjang!\n\n> Durasi: ${duration.toFixed(1)} detik
+                    await m.reply(`❌ ¡El video es demasiado largo!
+
+> Duración: ${duration.toFixed(1)} segundos
 > Máximo: 10 segundos`)
                     await m.react('☢')
                     if (fs.existsSync(tempVideo)) fs.unlinkSync(tempVideo)

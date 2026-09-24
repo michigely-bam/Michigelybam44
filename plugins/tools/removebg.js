@@ -7,7 +7,7 @@ const pluginConfig = {
     alias: ['rmbg', 'nobg', 'hapusbg'],
     category: 'tools',
     description: "Eliminación de fondo de imagen",
-    usage: '.removebg (reply gambar)',
+    usage: ".removebg (respuesta a la imagen)",
     example: '.removebg',
     isOwner: false,
     isPremium: false,
@@ -22,7 +22,7 @@ async function handler(m, { sock }) {
     try {
         const isImage = m.isImage || (m.quoted && m.quoted.isImage);
         if (!isImage) {
-            return await m.reply("❌ *ɢᴀᴍʙᴀʀ ᴅɪʙᴜᴛᴜʜᴋᴀɴ*\n\n> Responder o enviar una imagen con descripción .removebg");
+            return await m.reply("❌ *imágenes necesarios*\n\n> Responder o enviar una imagen con descripción .removebg");
         }
         
         await m.react('🕕')
@@ -45,7 +45,7 @@ async function handler(m, { sock }) {
         
         await sock.sendMessage(m.chat, {
             image: result,
-            caption: `✅ *ʙᴀᴄᴋɢʀᴏᴜɴᴅ ᴅɪʜᴀᴘᴜs*
+            caption: `✅ *fondo eliminado*
 
 > Imagen de fondo eliminada con éxito`
         }, { quoted: m });

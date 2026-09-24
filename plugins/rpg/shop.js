@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['beli', 'jual', 'toko', 'store', 'buy', 'sell'],
     category: 'rpg',
     description: "Comprar y vender artículos RPG",
-    usage: '.shop <buy/sell> <item> <jumlah>',
+    usage: '.shop <buy/sell> <artículo> <cantidad>',
     example: '.shop buy potion 1',
     isOwner: false,
     isPremium: false,
@@ -26,19 +26,19 @@ const ITEMS = {
     mythic: { price: 50000, type: 'buyable', name: '🎁 Mythic Crate' },
     legendary: { price: 200000, type: 'buyable', name: '💎 Legendary Crate' },
     
-    rock: { price: 20, type: 'sellable', name: '🪨 Batu' },
-    coal: { price: 50, type: 'sellable', name: '⚫ Batubara' },
-    iron: { price: 200, type: 'sellable', name: '⛓️ Besi' },
-    gold: { price: 1000, type: 'sellable', name: '🥇 Emas' },
-    diamond: { price: 5000, type: 'sellable', name: '💠 Berlian' },
+    rock: { price: 20, type: 'sellable', name: '🪨 Piedra' },
+    coal: { price: 50, type: 'sellable', name: '⚫ Carbón' },
+    iron: { price: 200, type: 'sellable', name: '⛓️ Hierro' },
+    gold: { price: 1000, type: 'sellable', name: '🥇 Oro' },
+    diamond: { price: 5000, type: 'sellable', name: '💠 Diamante' },
     emerald: { price: 10000, type: 'sellable', name: '💚 Emerald' },
     
-    trash: { price: 10, type: 'sellable', name: '🗑️ Sampah' },
-    fish: { price: 100, type: 'sellable', name: '🐟 Ikan' },
-    prawn: { price: 200, type: 'sellable', name: '🦐 Udang' },
-    octopus: { price: 500, type: 'sellable', name: '🐙 Gurita' },
-    shark: { price: 2000, type: 'sellable', name: '🦈 Hiu' },
-    whale: { price: 10000, type: 'sellable', name: '🐳 Paus' }
+    trash: { price: 10, type: 'sellable', name: '🗑️ Basura' },
+    fish: { price: 100, type: 'sellable', name: "🐟 Pez" },
+    prawn: { price: 200, type: 'sellable', name: '🦐 Camarón' },
+    octopus: { price: 500, type: 'sellable', name: '🐙 Pulpo' },
+    shark: { price: 2000, type: 'sellable', name: '🦈 Tiburón' },
+    whale: { price: 10000, type: 'sellable', name: '🐳 Ballena' }
 }
 
 async function handler(m, { sock }) {
@@ -51,8 +51,8 @@ async function handler(m, { sock }) {
     if (!action || (action !== 'buy' && action !== 'sell')) {
         let txt = `🛒 *ʀᴘɢ sʜᴏᴘ*\n\n`
         txt += `╭┈┈⬡「 📋 *ᴜsᴀɢᴇ* 」\n`
-        txt += `┃ > \`.shop buy <item> <jumlah>\`\n`
-        txt += `┃ > \`.shop sell <item> <jumlah>\`\n`
+        txt += `┃ > \`.shop buy <artículo> <cantidad>\`\n`
+        txt += `┃ > \`.shop sell <artículo> <cantidad>\`\n`
         txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`
         
         txt += `╭┈┈⬡「 🛍️ *ʙᴜʏ ʟɪsᴛ* 」\n`
@@ -80,8 +80,9 @@ async function handler(m, { sock }) {
     if (!itemKey || !ITEMS[itemKey]) {
         return m.reply(
             `❌ *ɪᴛᴇᴍ ɴᴏᴛ ꜰᴏᴜɴᴅ*\n\n` +
-            `> Item tidak ditemukan!\n` +
-            `> Cek list: \`.shop\``
+            `¡Los artículos no se han encontrado!
+` +
+            `> Ver lista: \`.shop\``
         )
     }
     
@@ -89,7 +90,7 @@ async function handler(m, { sock }) {
     
     if (action === 'buy') {
         if (item.type !== 'buyable') {
-            return m.reply(`❌ *ᴛɪᴅᴀᴋ ʙɪsᴀ ᴅɪʙᴇʟɪ*
+            return m.reply(`❌ *no se puede comprar*
 
 > ¡Este artículo no se puede comprar!`)
         }
@@ -97,9 +98,11 @@ async function handler(m, { sock }) {
         const totalCost = item.price * amount
         if ((user.koin || 0) < totalCost) {
             return m.reply(
-                `❌ *sᴀʟᴅᴏ ᴛɪᴅᴀᴋ ᴄᴜᴋᴜᴘ*\n\n` +
-                `> Koin kamu: Rp ${(user.koin || 0).toLocaleString('id-ID')}\n` +
-                `> Butuh: Rp ${totalCost.toLocaleString('id-ID')}`
+                `❌ *saldo no es suficiente*
+
+` +
+                `> Tus monedas: Rp ${(user.koin || 0).toLocaleString('id-ID')}\n` +
+                `> Necesidad: Rp ${totalCost.toLocaleString('id-ID')}`
             )
         }
         
@@ -115,12 +118,14 @@ async function handler(m, { sock }) {
         db.db.data.users[cleanJid].inventory[itemKey] = (db.db.data.users[cleanJid].inventory[itemKey] || 0) + amount
         
         await db.save()
-        return m.reply(`✅ *ʙᴇʀʜᴀsɪʟ ᴍᴇᴍʙᴇʟɪ*\n\n> 🛒 Item: *${amount}x ${item.name}*\n> 💸 Total: Rp ${totalCost.toLocaleString('id-ID')}`)
+        return m.reply(`✅ *logró comprar*
+
+> 🛒 Item: *${amount}x ${item.name}*\n> 💸 Total: Rp ${totalCost.toLocaleString('id-ID')}`)
     }
     
     if (action === 'sell') {
         if (item.type !== 'sellable') {
-            return m.reply(`❌ *ᴛɪᴅᴀᴋ ʙɪsᴀ ᴅɪᴊᴜᴀʟ*
+            return m.reply(`❌ *no se puede vender*
 
 > ¡Este artículo no se puede vender!`)
         }
@@ -135,9 +140,11 @@ async function handler(m, { sock }) {
         
         if (userStock < amount) {
             return m.reply(
-                `❌ *sᴛᴏᴋ ᴛɪᴅᴀᴋ ᴄᴜᴋᴜᴘ*\n\n` +
-                `> Stok ${item.name} kamu: ${userStock}\n` +
-                `> Butuh: ${amount}`
+                `❌ *existencias no es suficiente*
+
+` +
+                `> Existencias ${item.name} tú: ${userStock}\n` +
+                `> Necesita: ${amount}`
             )
         }
         
@@ -150,7 +157,9 @@ async function handler(m, { sock }) {
         db.db.data.users[cleanJid].koin = (db.db.data.users[cleanJid].koin || 0) + totalProfit
         
         await db.save()
-        return m.reply(`✅ *ʙᴇʀʜᴀsɪʟ ᴍᴇɴᴊᴜᴀʟ*\n\n> 📦 Item: *${amount}x ${item.name}*\n> 💰 Total: Rp ${totalProfit.toLocaleString('id-ID')}`)
+        return m.reply(`✅ *logró vender*
+
+> 📦 Item: *${amount}x ${item.name}*\n> 💰 Total: Rp ${totalProfit.toLocaleString('id-ID')}`)
     }
 }
 

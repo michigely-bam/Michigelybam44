@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['setnamaowner', 'setnameowner'],
     category: 'owner',
     description: "Rename owner at config.js",
-    usage: ".propietario del nombre de sustituto < nombre nuevo",
+    usage: ".ganti-namaowner <nombre_nuevo>",
     example: '.ganti-namaowner Zann',
     isOwner: true,
     isPremium: false,
@@ -21,9 +21,12 @@ async function handler(m, { sock, config }) {
     const newName = m.args.join(' ')
     
     if (!newName) {
-        return m.reply(`👤 *ɢᴀɴᴛɪ ɴᴀᴍᴀ ᴏᴡɴᴇʀ*
+        return m.reply(`👤 *cambiar el nombre del propietario*
 
-> Nombre actual: *${config.owner?.name || '-'}*\n\n*Penggunaan:*\n\`${m.prefix}ganti-namaowner Nuevo nombre\``)
+> Nombre actual: *${config.owner?.name || '-'}*
+
+*Uso:*
+\`${m.prefix}ganti-namaowner Nuevo nombre\``)
     }
     
     try {
@@ -39,7 +42,7 @@ async function handler(m, { sock, config }) {
         
         config.owner.name = newName
         
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*
+        m.reply(`✅ *correcto*
 
 > Nombre del propietario reemplazado a: *${newName}*`)
         

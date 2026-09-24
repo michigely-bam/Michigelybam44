@@ -46,8 +46,11 @@ async function handler(m, { sock }) {
   if (!name) {
     return m.reply(
       `🗑️ *DEL PLUGIN*\n\n` +
-        `Hapus plugin berdasarkan nama\n\n` +
-        `*Contoh:*\n` +
+        `Eliminar el plugin por nombre
+
+` +
+        `*Ejemplo:*
+` +
         `\`${m.prefix}delplugin bliblidl\``,
     );
   }
@@ -60,7 +63,9 @@ async function handler(m, { sock }) {
 
     if (!found) {
       await m.react("❌");
-      return m.reply(`❌ *GAGAL*\n\nPlugin \`${name}\` no encontrado`);
+      return m.reply(`❌ *FALLÓ*
+
+Plugin \`${name}\` no encontrado`);
     }
 
     let unloadResult = { success: false };
@@ -72,13 +77,15 @@ async function handler(m, { sock }) {
 
     await m.react("✅");
     return m.reply(
-      `✅ *PLUGIN DIHAPUS*\n\n` +
+      `✅ *EL PLUGIN FUE ELIMINADO*
+
+` +
         `╭─〔 *DETAIL* 〕───⬣\n` +
         `│ File: \`${found.file}\`\n` +
         `│ Folder: \`${found.folder}\`\n` +
-        `│ Unload: ${unloadResult.success ? "✅ Sukses" : "⚠️ Pending"}\n` +
+        `│ Unload: ${unloadResult.success ? "✅ Completado" : "⚠️ Pending"}\n` +
         `╰───────⬣\n\n` +
-        `Plugin sudah dihapus dan tidak aktif!`,
+        `¡El plugin ha sido eliminado y está inactivo!`,
     );
   } catch (error) {
     await m.react("☢");

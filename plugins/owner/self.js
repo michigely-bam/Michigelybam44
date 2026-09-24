@@ -1,7 +1,7 @@
 import config from '../../config.js'
 /**
  * @file plugins/owner/self.js
- * @description Plugin untuk mengaktifkan mode self (hanya owner & bot)
+ *@description Plugin para activar el modo self (solo propietario & bot)
  */
 import { getDatabase } from '../../src/lib/ourin-database.js'
 import te from '../../src/lib/ourin-error.js'
@@ -9,7 +9,7 @@ const pluginConfig = {
     name: 'self',
     alias: ['selfmode', 'private-mode'],
     category: 'owner',
-    description: "Habilitar automodo (sólo propietario &quot; bot puede acceder)",
+    description: 'Activar el modo privado (solo el propietario y el propio bot tienen acceso)',
     usage: '.self',
     example: '.self',
     isOwner: true,
@@ -22,13 +22,13 @@ const pluginConfig = {
 };
 
 /**
- * Handler untuk command self
+ *Handler para el autocomando
  */
 async function handler(m, { sock }) {
     try {
         const isRealOwner = validateOwner(m);
         if (!isRealOwner) {
-            return await m.reply("🚫 *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n> ¡Sólo el propietario puede cambiar el modo robot!");
+            return await m.reply("🚫 *se rechazó el acceso*\n\n> ¡Sólo el propietario puede cambiar el modo robot!");
         }
         const currentMode = config.mode;
         if (currentMode === 'self') {
@@ -38,11 +38,16 @@ async function handler(m, { sock }) {
         const db = getDatabase();
         db.setting('botMode', 'self');
         
-        const responseText = `🔒 *ᴍᴏᴅᴇ sᴇʟꜰ ᴀᴋᴛɪꜰ*\n\n` +
-            `> Bot sekarang hanya merespon:\n` +
+        const responseText = `🔒 *modo autoactivo*
+
+` +
+            `Los bots ahora sólo responden:
+` +
             `> • Owner bot\n` +
-            `> • Bot sendiri (fromMe)\n\n` +
-            `_Gunakan .public untuk membuka akses_`;
+            `> • El propio bot (fromMe)
+
+` +
+            `_Usa .public para abrir el acceso_`;
         await m.reply(responseText);
         console.log(`[Mode] Changed to SELF by ${m.pushName} (${m.sender})`);
     } catch (error) {
@@ -52,7 +57,7 @@ async function handler(m, { sock }) {
 }
 
 /**
- * Validasi owner dengan multiple checks
+ * Validar al propietario con varias comprobaciones
  */
 function validateOwner(m) {
     if (!m.isOwner) return false;

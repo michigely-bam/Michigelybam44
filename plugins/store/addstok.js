@@ -5,8 +5,7 @@ const pluginConfig = {
   alias: ["addstock", "importstok", "importstock"],
   category: "store",
   description: "📦 Añadir artículo de stock al producto (sólo chat privado)",
-  usage:
-    ".addstock − número_produk>|<detail> atau .addstok No. No.",
+  usage: ".addstok <número_producto>|<detalle> o .addstok <número_producto> <cantidad>",
   example: ".addstok 1|Email: user@mail.com;;Password: pass123",
   isOwner: true,
   isPremium: false,
@@ -20,9 +19,13 @@ const pluginConfig = {
 async function handler(m, { sock }) {
   if (m.isGroup) {
     return m.reply(
-      `🚫 *Akses Ditolak*\n\n` +
-        `Untuk menjaga privasi data stok 🛡️, penambahan stok hanya dapat dilakukan di *private chat*.\n\n` +
-        `Silakan chat bot secara langsung 📱`,
+      `🚫 *Debido de acceso*
+
+` +
+        `Para mantener la privacidad de los datos de existencias 🛡️, la adición de existencias solo se puede hacer en el chat privado **.
+
+` +
+        `Por favor chatear bot en vivo 📱`,
     );
   }
 
@@ -33,7 +36,7 @@ async function handler(m, { sock }) {
     return m.reply(
       `📭 *Aún no hay producto.*
 
-Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`,
+Añadir el producto primero: \`${m.prefix}addproduk\` ➕`,
     );
   }
 
@@ -53,21 +56,31 @@ Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`,
           db.setting("storeProducts", products);
           await m.react("✅");
           return m.reply(
-            `📦 *STOK FISIK DITAMBAHKAN*\n\n` +
-              `🏷️ Produk: *${product.name}*\n` +
-              `➕ Ditambahkan: *${addCount} pcs*\n` +
-              `📊 Total stok: *${product.stock} pcs*\n\n` +
-              `_Tambah lagi: \`${m.prefix}addstok ${productNo + 1} <jumlah>\`_`,
+            `📦 *EXISTENCIAS FÍSICO AÑADIDO*
+
+` +
+              `🏷️ Producto: *${product.name}*\n` +
+              `➕ Añadido: *${addCount} unidades*\n` +
+              `📊 Total de existencias: *${product.stock} unidades*\n\n` +
+              `_Además:${m.prefix}addstok ${productNo + 1} <cantidad`,
           );
         }
 
         return m.reply(
-          `📦 *TAMBAH STOK FISIK*\n\n` +
-            `Produk *${product.name}* bertipe **Fisik** 📦\n\n` +
-            `Format: \`${m.prefix}addstok ${productNo + 1} <jumlah>\`\n\n` +
-            `📝 *Contoh:*\n` +
-            `\`${m.prefix}addstok ${productNo + 1} 8\` — Tambah 8 pcs\n\n` +
-            `Stok saat ini: *${product.stock === -1 ? "♾️ Unlimited" : product.stock + " pcs"}*`,
+          `📦 *SE AÑADE EL EXISTENCIAS FÍSICO*
+
+` +
+            `El producto *${product.name}* es de tipo **Físico** 📦
+
+` +
+            `Formato: \`${m.prefix}addstok ${productNo + 1} <cantidad>\`
+
+` +
+            `📝 *Ejemplo:*\n` +
+            `\`${m.prefix}addstok ${productNo + 1} 8\` — Añadir 8 unidades
+
+` +
+            `Existencias actuales: *${product.stock === -1 ? "♾️ Ilimitadas" : product.stock + " unidades"}*`,
         );
       }
 
@@ -122,7 +135,7 @@ Asegúrese de que los archivos no están vacíos y descargados 📄`,
             return m.reply(`❌ *El archivo no contiene datos válidos.* 📄`);
           if (lines.length > 1000)
             return m.reply(
-              `❌ *Terlalu banyak item.* Maksimal 1.000 per import 📄`,
+              `❌ *Demasiados artículos.* Un máximo de 1.000 por importación 📄`,
             );
 
           if (!product.stockItems) product.stockItems = [];
@@ -152,33 +165,53 @@ Asegúrese de que los archivos no están vacíos y descargados 📄`,
           db.setting("storeProducts", products);
           await m.react("✅");
           return m.reply(
-            `✅ *IMPORT STOK SELESAI*\n\n` +
-              `🏷️ Produk: *${product.name}*\n` +
-              `➕ Ditambahkan: *${added}* akun 🔑\n` +
-              (skipped > 0 ? `⏭️ Duplikat dilewati: *${skipped}*\n` : "") +
-              `\n📊 Total stok: *${product.stockItems.length}* akun\n\n` +
-              `_Lihat daftar stok: \`${m.prefix}liststok ${productNo + 1}\`_`,
+            `✅ *LA IMPORTACIÓN DE EXISTENCIAS TERMINADA*
+
+` +
+              `🏷️ Producto: *${product.name}*\n` +
+              `➕ Añadido: *${added}* cuenta 🔑
+` +
+              (skipped > 0 ? `⏭️ Duplicados omitidos: *${skipped}*\n` : "") +
+              `
+📊 Total de las existencias: *${product.stockItems.length}* cuenta
+
+` +
+              `_Véase la lista de existencias: \`${m.prefix}liststok ${productNo + 1}\`_`,
           );
         }
       }
     }
 
     return m.reply(
-      `📦 *TAMBAH STOK*\n\n` +
-        `🔑 *Produk Digital* — Tambah data akun/key:\n` +
-        `\`${m.prefix}addstok <nomor_produk>|<detail>\`\n\n` +
-        `📄 *Import dari file .txt:*\n` +
-        `\`${m.prefix}addstok <nomor_produk>\` (reply file .txt)\n\n` +
-        `📦 *Produk Fisik* — Tambah jumlah stok:\n` +
-        `\`${m.prefix}addstok <nomor_produk> <jumlah>\`\n\n` +
-        `📝 *Contoh digital:*\n` +
+      `📦 *SE AÑADE EL EXISTENCIAS*
+
+` +
+        `🔑 *Productos Digitales* — Agrega datos de cuentas/key:
+` +
+        `\`${m.prefix}addstok <número_producto>|<detalle>\`\n\n` +
+        `📄 *Importación de los archivos .txt:*
+` +
+        `\`${m.prefix}addstok <número_producto>\` (responde con un archivo .txt)
+
+` +
+        `📦 *Productos físicos* — Aumenta el número de existencias:
+` +
+        `\`${m.prefix}addstok <número_producto> <cantidad>\`\n\n` +
+        `📝 *Ejemplo digital:*\n` +
         `\`${m.prefix}addstok 1|Email: user@mail.com;;Password: pass123\`\n\n` +
-        `📝 *Contoh fisik:*\n` +
-        `\`${m.prefix}addstok 2 8\` — Tambah 8 pcs untuk produk #2\n\n` +
-        `• Gunakan \`;;\` untuk baris baru dalam detail 🔑\n` +
-        `• Setiap baris di file .txt = 1 stok item 📄\n` +
-        `• Maksimal 1.000 item per import 📊\n\n` +
-        `_Data stok digital bersifat rahasia 🔒 dan hanya dikirim ke pembeli setelah pembayaran dikonfirmasi_`,
+        `📝 *Ejemplo de producto físico:*
+` +
+        `\`${m.prefix}addstok 2 8\` — Agrega 8 unidades al producto #2
+
+` +
+        `• Utilice \`;;\` para nuevas líneas en detalle 🔑
+` +
+        `• Cada línea en el archivo .txt = 1 existencias de elementos 📄
+` +
+        `• Máximo de 1.000 artículos por importación 📊
+
+` +
+        `_Los datos de las existencias digitales son confidenciales 🔒 y solo se envían a los compradores después de que se confirme el pago_`,
     );
   }
 
@@ -202,25 +235,31 @@ Ver lista de productos: \`${m.prefix}liststok\` 📋`,
     const addCount = parseInt(detail);
     if (isNaN(addCount) || addCount <= 0) {
       return m.reply(
-        `📦 *Produk ini bertipe Fisik*\n\n` +
-          `Gunakan format: \`${m.prefix}addstok ${productNo + 1} <jumlah>\`\n\n` +
-          `📝 Contoh: \`${m.prefix}addstok ${productNo + 1} 8\` — Tambah 8 pcs`,
+        `📦 *Este producto es de tipo Físico*
+
+` +
+          `Utilice el formato: \`${m.prefix}addstok ${productNo + 1} <cantidad>\`
+
+` +
+          `📝 Ejemplo: \`${m.prefix}addstok ${productNo + 1} 8\` — Añadir 8 unidades`,
       );
     }
     product.stock = (product.stock === -1 ? 0 : product.stock) + addCount;
     db.setting("storeProducts", products);
     await m.react("✅");
     return m.reply(
-      `📦 *STOK FISIK DITAMBAHKAN*\n\n` +
-        `🏷️ Produk: *${product.name}*\n` +
-        `➕ Ditambahkan: *${addCount} pcs*\n` +
-        `📊 Total stok: *${product.stock} pcs*`,
+      `📦 *EXISTENCIAS FÍSICO AÑADIDO*
+
+` +
+        `🏷️ Producto: *${product.name}*\n` +
+        `➕ Añadido: *${addCount} unidades*\n` +
+        `📊 Total de existencias: *${product.stock} unidades*`,
     );
   }
 
   if (!detail || detail.length < 3) {
     return m.reply(
-      `❌ *Detail stok terlalu pendek.*
+      `❌ *Los detalles del existencias son demasiado cortos.*
 
 Se requieren 3 caracteres mínimos para utilizar datos de stock 🔑`,
     );
@@ -247,10 +286,14 @@ El mismo artículo en el mismo detalle ya está listado en el producto *${produc
 
   await m.react("✅");
   return m.reply(
-    `✅ *STOK DITAMBAHKAN*\n\n` +
-      `🏷️ Produk: *${product.name}*\n` +
-      `🔑 Total stok saat ini: *${product.stockItems.length}* akun\n\n` +
-      `_Tambah lagi: \`${m.prefix}addstok ${productNo + 1}|<detail>\`_`,
+    `✅ *EXISTENCIAS SE AÑADIÓ*
+
+` +
+      `🏷️ Producto: *${product.name}*\n` +
+      `🔑 Total de las existencias actuales: *${product.stockItems.length}* cuenta
+
+` +
+      `_Además:${m.prefix}addstok ${productNo + 1}|<detail>\`_`,
   );
 }
 

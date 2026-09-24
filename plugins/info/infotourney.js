@@ -7,7 +7,7 @@ const pluginConfig = {
   name: "infotourney",
   alias: ["tourney", "turnamen", "mltourney"],
   category: "info",
-  description: "Info turnamen Mobile Legends terbaru",
+  description: "Información de los torneos más recientes de Mobile Legends",
   usage: ".infotourney",
   example: ".infotourney",
   isOwner: false,
@@ -79,8 +79,12 @@ async function handler(m, { sock }) {
     const saluranId = config.saluran?.id || "120363400911374213@newsletter";
     const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
-    let text = `🏆 *ɪɴꜰᴏ ᴛᴜʀɴᴀᴍᴇɴ ᴍᴏʙɪʟᴇ ʟᴇɢᴇɴᴅs*\n\n`;
-    text += `> 5 Turnamen Terbaru\n\n`;
+    let text = `🏆 *TORNEOS DE MOBILE LEGENDS*
+
+`;
+    text += `> Los 5 torneos más recientes
+
+`;
 
     for (let i = 0; i < tournaments.length; i++) {
       const t = tournaments[i];

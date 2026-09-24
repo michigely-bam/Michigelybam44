@@ -9,8 +9,8 @@ const pluginConfig = {
   alias: ["fstory2", "igstory2"],
   category: "canvas",
   description: "Fake Instagram historia con 1 imagen completa",
-  usage: ".falsificación2 Identificar el nombre",
-  example: ".fakestory2 Misaki (reply gambar)",
+  usage: ".fakestory2 <nombre>",
+  example: ".fakestory2 Misaki (respuesta a la imagen)",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -180,9 +180,11 @@ async function handler(m, { sock }) {
       m.react("❌");
       return m.reply(
         `📷 *ꜰᴀᴋᴇ sᴛᴏʀʏ 2*\n\n` +
-          `> Reply gambar!\n\n` +
-          `> Format: \`${m.prefix}fakestory2 <nama>\`\n` +
-          `> Contoh: \`${m.prefix}fakestory2 Misaki\``,
+          `¡Responda a la imagen!
+
+` +
+          `> Formato: \`${m.prefix}fakestory2 <nombre>\`\n` +
+          `> Ejemplo: \`${m.prefix}fakestory2 Misaki\``,
       );
     }
     let imageBuffer;
@@ -193,7 +195,7 @@ async function handler(m, { sock }) {
     }
     if (!imageBuffer) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > No se puede descargar imagen`);
     }

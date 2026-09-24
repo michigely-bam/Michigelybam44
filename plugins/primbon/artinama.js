@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['namameaning', 'artinamaku'],
     category: 'primbon',
     description: "Compruebe el significado de nombres por primbon",
-    usage: ".artinama &gt; nombre &gt;",
+    usage: '.artinama <nombre>',
     example: '.artinama putu',
     isOwner: false,
     isPremium: false,
@@ -19,11 +19,11 @@ const pluginConfig = {
 async function handler(m, { sock }) {
     const nama = m.args.join(' ')
     if (!nama) {
-        return m.reply(`📛 *ᴀʀᴛɪ ɴᴀᴍᴀ*
+        return m.reply(`📛 *significado del nombre*
 
 > Nombre
 
-\`Contoh: ${m.prefix}artinama putu\``)
+\`Ejemplo: ${m.prefix}artinama putu\``)
     }
     
     m.react('📛')
@@ -34,14 +34,14 @@ async function handler(m, { sock }) {
         
         if (!data?.status || !data?.data) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > No podía analizar el nombre.`)
         }
         
         const result = data.data
-        const response = `📛 *ᴀʀᴛɪ ɴᴀᴍᴀ*\n\n` +
-            `> Nama: *${result.nama}*\n\n` +
+        const response = `📛 *SIGNIFICADO DEL NOMBRE*\n\n` +
+            `> Nombre: *${result.nama}*\n\n` +
             `${result.arti}\n\n` +
             `> _${result.catatan}_`
         

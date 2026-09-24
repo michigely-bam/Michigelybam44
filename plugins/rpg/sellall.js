@@ -43,7 +43,7 @@ async function handler(m, { sock }) {
     }
     
     if (soldItems.length === 0) {
-        return m.reply(`❌ *ᴛɪᴅᴀᴋ ᴀᴅᴀ ɪᴛᴇᴍ*
+        return m.reply(`❌ *no hay artículos*
 
 > ¡No se pueden vender artículos!`)
     }
@@ -52,13 +52,14 @@ async function handler(m, { sock }) {
     
     db.save()
     
-    let txt = `💰 *sᴇʟʟ ᴀʟʟ sᴜᴋsᴇs*\n\n`
-    txt += `╭┈┈⬡「 📦 *ɪᴛᴇᴍ ᴛᴇʀᴊᴜᴀʟ* 」\n`
+    let txt = `💰 *sᴇʟʟ ᴀʟʟ COMPLETADO*\n\n`
+    txt += `╭┈┈⬡「 📦 *ARTÍCULOS VENDIDOS* 」\n`
     for (const s of soldItems.slice(0, 10)) {
         txt += `┃ ${s.item}: ${s.qty}x = Rp ${s.earned.toLocaleString('id-ID')}\n`
     }
     if (soldItems.length > 10) {
-        txt += `┃ ... dan ${soldItems.length - 10} item lainnya\n`
+        txt += `┃ ...y ${soldItems.length - 10} objetos más
+`
     }
     txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`
     txt += `> 💵 Total: *Rp ${totalEarned.toLocaleString('id-ID')}*`

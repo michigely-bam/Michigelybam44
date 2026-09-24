@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'sulap',
     alias: ['magic', 'magictrick'],
     category: 'fun',
-    description: 'Pertunjukan sulap - kick member secara dramatis',
+    description: "Espectáculo de magia: expulsar a un miembro de forma dramática",
     usage: '.sulap',
     example: '.sulap',
     isOwner: false,
@@ -21,7 +21,7 @@ if (!global.sulapSessions) global.sulapSessions = new Map()
 const successLines = [
     "💨 *POOF!* ¡Y... se ha ido!",
     "🌟 ¡La magia está funcionando!~",
-    '✨ Absen dulu ya, ditunggu berikutnya!',
+    "✨ ¡Registra tu asistencia primero; espera al siguiente turno!",
     "🎪 ¡Se acabó el show! 👏"
 ]
 
@@ -32,9 +32,13 @@ function sleep(ms) {
 async function handler(m, { sock }) {
     await m.react('🎩')
 
-    const sent = await m.reply(`🎩✨ *ᴘᴇʀᴛᴜɴᴊᴜᴋᴀɴ sᴜʟᴀᴘ*\n\n` +
-            `Siapa yang ingin dihilangkan?\n\n` +
-            `> Reply pesan ini + mention orangnya`)
+    const sent = await m.reply(`🎩✨ *ESPECTÁCULO DE MAGIA*
+
+` +
+            `¿A quién quieres hacer desaparecer?
+
+` +
+            `> Responder a este mensaje + mencionar a la persona`)
 
     global.sulapSessions.set(sent.key.id, {
         admin: m.sender,
@@ -66,7 +70,7 @@ async function replyHandler(m, sock) {
     }
 
     if (!targetJid) {
-        await sock.sendMessage(m.chat, { text: '❌ Mention orangnya dong!' }, { quoted: m })
+        await sock.sendMessage(m.chat, { text: "❌ ¡Menciona a la persona!" }, { quoted: m })
         return true
     }
 
@@ -98,12 +102,12 @@ async function replyHandler(m, sock) {
         }
 
         if (['admin', 'superadmin'].includes(target.admin)) {
-            await sock.sendMessage(m.chat, { text: '🛡️ Admin kebal terhadap sihir!' })
+            await sock.sendMessage(m.chat, { text: "🛡️ ¡Los administradores son inmunes a la magia!" })
             return true
         }
 
         await sock.sendMessage(m.chat, {
-            text: `🪄 *Bersiaplah @${targetNumber}...* ✨`,
+            text: `🪄 *Prepárate, @${targetNumber}...* ✨`,
             mentions: [targetJid]
         })
 
@@ -114,9 +118,10 @@ async function replyHandler(m, sock) {
         const line = successLines[Math.floor(Math.random() * successLines.length)]
         await sock.sendMessage(m.chat, {
             text: `${line}\n\n` +
-                `🎯 @${targetNumber} telah menghilang!\n` +
-                `🎩 Pesulap: @${senderNumber}\n\n` +
-                `> _Pertunjukan selesai~_ ✨`,
+                `🎯 @${targetNumber} ¡ha desaparecido!
+` +
+                `🎩 Mago: @${senderNumber}\n\n` +
+                `> _El espectáculo terminó~_✨`,
             mentions: [targetJid, m.sender]
         })
 

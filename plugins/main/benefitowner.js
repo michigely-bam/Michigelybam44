@@ -30,27 +30,30 @@ async function handler(m, { sock }) {
     const totalCommands = commandList.length
     
     const message = 
-        `👑 *ᴀᴘᴀ ɪᴛᴜ ᴏᴡɴᴇʀ?*\n\n` +
-        `Owner adalah *pemilik bot* yang memiliki akses penuh ke semua fitur dan kontrol sistem.\n\n` +
-        `╭┈┈⬡「 🔐 *ᴋᴇɪꜱᴛɪᴍᴇᴡᴀᴀɴ ᴏᴡɴᴇʀ* 」\n` +
-        `┃ ✦ \`\`\`Akses semua command tanpa batasan\`\`\`\n` +
-        `┃ ✦ \`\`\`Limit tidak terbatas (-1)\`\`\`\n` +
-        `┃ ✦ \`\`\`Bypass semua cooldown\`\`\`\n` +
-        `┃ ✦ \`\`\`Kontrol penuh sistem bot\`\`\`\n` +
-        `┃ ✦ \`\`\`Manajemen user & group\`\`\`\n` +
-        `┃ ✦ \`\`\`Akses panel & server\`\`\`\n` +
+        `👑 *¿QUÉ ES EL PROPIETARIO?*\n\n` +
+        `Owner es el *propietario del bot* que tiene acceso completo a todas las características y controles del sistema.
+
+` +
+        `╭┈┈⬡「 🔐 *VENTAJAS DEL PROPIETARIO* 」\n` +
+        `┃ ✦ \`\`\`Acceso a todos los comandos sin restricciones\`\`\`\n` +
+        `┃ ✦ \`\`\`Límite ilimitado (-1)\`\`\`\n` +
+        `┃ ✦ \`\`\`Sin tiempos de espera\`\`\`\n` +
+        `┃ ✦ \`\`\`Control completo del sistema del bot\`\`\`\n` +
+        `┃ ✦ \`\`\`Gestión de usuarios y grupos\`\`\`\n` +
+        `┃ ✦ \`\`\`Acceso al panel y a los servidores\`\`\`\n` +
         `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-        `╭┈┈⬡「 ⚙️ *ᴄᴀʀᴀ ᴋᴇʀᴊᴀ* 」\n` +
-        `┃ \`Owner ditambahkan melalui:\`\n` +
-        `┃ • \`\`\`${config.command?.prefix || '.'}addowner <nomor>\`\`\`\n` +
-        `┃ • Atau langsung di config.js\n` +
+        `╭┈┈⬡「 ⚙️ *CÓMO FUNCIONA* 」\n` +
+        `┃ \`El propietario se añade mediante:\`\n` +
+        `┃ • \`\`\`${config.command?.prefix || '.'}addowner <número>\`\`\`\n` +
+        `┃ • O directamente en config.js
+` +
         `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-        `╭┈┈⬡「 📋 *ᴅᴀꜰᴛᴀʀ ᴄᴏᴍᴍᴀɴᴅ ᴏᴡɴᴇʀ* 」\n` +
-        `┃ \`Total: ${totalCommands} command\`\n` +
+        `╭┈┈⬡「 📋 *COMANDOS DEL PROPIETARIO* 」\n` +
+        `┃ \`Total: ${totalCommands} comandos\`\n` +
         `┃\n` +
         commandList.map(cmd => `┃ ${cmd}`).join('\n') +
         `\n╰┈┈┈┈┈┈┈┈⬡\n\n` +
-        `> Hubungi owner untuk mendapatkan akses!`
+        `¡Conoce al propietario para obtener acceso!`
     
     await m.reply(message)
 }

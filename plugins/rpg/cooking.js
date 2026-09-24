@@ -17,12 +17,12 @@ const pluginConfig = {
 }
 
 const RECIPES = {
-    bread: { name: '🍞 Roti', materials: { wheat: 2 }, effect: { stamina: 10, health: 5 }, exp: 30 },
-    friedrice: { name: '🍚 Nasi Goreng', materials: { rice: 2, egg: 1 }, effect: { stamina: 25, health: 15 }, exp: 60 },
+    bread: { name: '🍞 Pan', materials: { wheat: 2 }, effect: { stamina: 10, health: 5 }, exp: 30 },
+    friedrice: { name: '🍚 Arroz frito', materials: { rice: 2, egg: 1 }, effect: { stamina: 25, health: 15 }, exp: 60 },
     steak: { name: '🥩 Steak', materials: { meat: 2, herb: 1 }, effect: { stamina: 40, health: 30 }, exp: 100 },
-    soup: { name: '🍲 Sup', materials: { carrot: 2, potato: 2, meat: 1 }, effect: { stamina: 35, health: 40 }, exp: 90 },
+    soup: { name: '🍲 Sopa', materials: { carrot: 2, potato: 2, meat: 1 }, effect: { stamina: 35, health: 40 }, exp: 90 },
     sushi: { name: '🍣 Sushi', materials: { fish: 3, rice: 2 }, effect: { stamina: 30, health: 25 }, exp: 80 },
-    cake: { name: '🍰 Kue', materials: { wheat: 3, egg: 2, strawberry: 2 }, effect: { stamina: 50, health: 20 }, exp: 120 },
+    cake: { name: '🍰 Pastel', materials: { wheat: 3, egg: 2, strawberry: 2 }, effect: { stamina: 50, health: 20 }, exp: 120 },
     ramen: { name: '🍜 Ramen', materials: { wheat: 2, egg: 1, meat: 1, herb: 1 }, effect: { stamina: 45, health: 35 }, exp: 110 },
     pizza: { name: '🍕 Pizza', materials: { wheat: 3, tomato: 2, meat: 2 }, effect: { stamina: 60, health: 30 }, exp: 140 },
     smoothie: { name: '🥤 Smoothie', materials: { strawberry: 3, watermelon: 1 }, effect: { stamina: 30, mana: 20 }, exp: 70 },
@@ -40,18 +40,21 @@ async function handler(m, { sock }) {
     const recipeName = args[0]?.toLowerCase()
     
     if (!recipeName) {
-        let txt = `👨‍🍳 *ᴄᴏᴏᴋɪɴɢ - ᴍᴀsᴀᴋ*\n\n`
+        let txt = `👨‍🍳 *COCINA — PREPARAR*
+
+`
         txt += `> ¡Cocine comida para recuperar los Stats!
 
 `
-        txt += `╭┈┈⬡「 📜 *ʀᴇsᴇᴘ* 」\n`
+        txt += `╭┈┈⬡「 📜 *RECETA* 」
+`
         
         for (const [key, recipe] of Object.entries(RECIPES)) {
             const mats = Object.entries(recipe.materials).map(([m, qty]) => `${qty}x ${m}`).join(', ')
             const effects = Object.entries(recipe.effect).map(([e, v]) => `+${v} ${e}`).join(', ')
             txt += `┃ ${recipe.name}\n`
-            txt += `┃ 📦 Bahan: ${mats}\n`
-            txt += `┃ 💫 Efek: ${effects}\n`
+            txt += `┃ 📦 Materiales: ${mats}\n`
+            txt += `┃ 💫 Efecto: ${effects}\n`
             txt += `┃ → \`${key}\`\n┃\n`
         }
         txt += `╰┈┈┈┈┈┈┈┈⬡`
@@ -63,7 +66,7 @@ async function handler(m, { sock }) {
     if (!recipe) {
         return m.reply(`❌ ¡La prescripción no se encuentra!
 
-> Ketik \`${m.prefix}cooking\` para ver la lista.`)
+> Escribe \`${m.prefix}cooking\` para ver la lista.`)
     }
     
     const missingMaterials = []
@@ -76,14 +79,14 @@ async function handler(m, { sock }) {
     
     if (missingMaterials.length > 0) {
         return m.reply(
-            `❌ *ʙᴀʜᴀɴ ᴋᴜʀᴀɴɢ*\n\n` +
-            `> Untuk membuat ${recipe.name}:\n\n` +
+            `❌ *FALTAN MATERIALES*\n\n` +
+            `> Para hacer ${recipe.name}:\n\n` +
             missingMaterials.map(m => `> ❌ ${m}`).join('\n')
         )
     }
     
     await m.react('👨‍🍳')
-    await m.reply(`👨‍🍳 *ᴍᴇᴍᴀsᴀᴋ ${recipe.name.toUpperCase()}...*`)
+    await m.reply(`👨‍🍳 *COCINANDO ${recipe.name.toUpperCase()}...*`)
     await new Promise(r => setTimeout(r, 2000))
     
     for (const [material, needed] of Object.entries(recipe.materials)) {
@@ -114,13 +117,15 @@ async function handler(m, { sock }) {
     const effectTexts = Object.entries(recipe.effect).map(([e, v]) => `${e}: +${v}`).join('\n┃ ')
     
     return m.reply(
-        `✅ *ᴍᴀsᴀᴋ ʙᴇʀʜᴀsɪʟ*\n\n` +
-        `╭┈┈⬡「 🍽️ *ʜᴀsɪʟ* 」\n` +
-        `┃ 🍳 Makanan: *${recipe.name}*\n` +
+        `✅ *el cocinero fue exitoso*
+
+` +
+        `╭┈┈⬡「 🍽️ *RESULTADO* 」\n` +
+        `┃ 🍳 Comida: *${recipe.name}*\n` +
         `┃ ${effectTexts}\n` +
         `┃ ✨ EXP: *+${recipe.exp}*\n` +
         `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-        `> Langsung dimakan dan stats dipulihkan!`
+        `> ¡Se consume al instante y recupera las estadísticas!`
     )
 }
 

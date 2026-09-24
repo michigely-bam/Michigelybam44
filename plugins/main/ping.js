@@ -658,7 +658,7 @@ async function handler(m, { sock }) {
       v8Version: process.versions.v8,
       uptimeBot: fmtUp(process.uptime()),
       uptimeServer: fmtUp(os.uptime()),
-      cpuModel: cpus[0]?.model?.trim() || "Unknown",
+      cpuModel: cpus[0]?.model?.trim() || "Desconocido",
       cpuSpeed: cpus[0]?.speed || 0,
       cpuCores: cpus.length,
       cpuLoad: cpuPct,

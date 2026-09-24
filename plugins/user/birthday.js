@@ -25,16 +25,18 @@ async function handler(m, { sock }) {
     if (!user?.birthday) {
         if (target === m.sender) {
             return m.reply(
-                `❌ Kamu belum set birthday!\n\n` +
-                `> Gunakan: ${m.prefix}setbirthday DD-MM\n` +
-                `> Contoh: ${m.prefix}setbirthday 25-12`
+                `❌ ¡No tienes cumpleaños fijados!
+
+` +
+                `> Usa: ${m.prefix}setbirthday DD-MM\n` +
+                `> Ejemplo: ${m.prefix}setbirthday 25-12`
             )
         }
         return m.reply(`❌ ¡El usuario aún no ha fijado el cumpleaños!`)
     }
     
     const [day, month] = user.birthday.split('-').map(Number)
-    const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
+    const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
     
     const now = new Date()
     const currentYear = now.getFullYear()
@@ -68,7 +70,7 @@ async function handler(m, { sock }) {
         text += `\n\n🎊 *HAPPY BIRTHDAY!* 🎊\n`
         text += `> Viva y viva mucho tiempo.
 `
-        text += `> sukses selalu! 🎉🎂`
+        text += `> ¡Que siempre tengas éxito! 🎉🎂`
     }
     
     await m.reply(text, { mentions: [target] })

@@ -47,7 +47,7 @@ async function handler(m, { sock, command, args }) {
     if (!linodeToken) {
         return m.reply(`❌ Linode API Token no configurado!
 
-Tambahkan di config.js:
+Añadir en config.js:
 \`\`\`
 APIkey: {
   linode: 'YOUR_LINODE_TOKEN'
@@ -63,7 +63,7 @@ APIkey: {
             if (!label) {
                 return m.reply(`❌ ¡Introdúzcase la etiqueta para VPS!
 
-Contoh: ${m.prefix}${cmd} myserver`)
+Ejemplo: ${m.prefix}${cmd} myserver`)
             }
             
             const spec = LINODE_TYPES[cmd]
@@ -113,7 +113,9 @@ Contoh: ${m.prefix}${cmd} myserver`)
             const linodeInfo = await infoRes.json()
             const ipAddress = linodeInfo.ipv4?.[0] || 'Pending'
             
-            const msg = `✅ *ʟɪɴᴏᴅᴇ ${spec.label} ʙᴇʀʜᴀsɪʟ ᴅɪʙᴜᴀᴛ*\n\n` +
+            const msg = `✅ *ʟɪɴᴏᴅᴇ ${spec.label} se hizo con éxito*
+
+` +
                 `> 🆔 ID: \`${linodeId}\`\n` +
                 `> 🏷️ Label: \`${label}\`\n` +
                 `> 🌐 IP: \`${ipAddress}\`\n` +
@@ -142,12 +144,14 @@ Contoh: ${m.prefix}${cmd} myserver`)
             if (!res.ok) throw new Error("No se pudo get Linode list")
             
             if (!data.data || data.data.length === 0) {
-                return m.reply(`📋 *ᴅᴀғᴛᴀʀ ʟɪɴᴏᴅᴇ*
+                return m.reply(`📋 *lista de linodes*
 
 > No hay VPS activa.`)
             }
             
-            let msg = `📋 *ᴅᴀғᴛᴀʀ ʟɪɴᴏᴅᴇ ᴠᴘs*\n\n`
+            let msg = `📋 *lista de linodes vps*
+
+`
             data.data.forEach((l, i) => {
                 msg += `*${i + 1}. ${l.label}*\n`
                 msg += `> ID: \`${l.id}\`\n`
@@ -164,7 +168,7 @@ Contoh: ${m.prefix}${cmd} myserver`)
             const linodeId = args[0]
             if (!linodeId) return m.reply(`❌ ¡Introdúzcase el ID de Linode!
 
-Contoh: ${m.prefix}onlinode 12345`)
+Ejemplo: ${m.prefix}onlinode 12345`)
             
             m.react('🔌')
             
@@ -190,7 +194,7 @@ Contoh: ${m.prefix}onlinode 12345`)
             const linodeId = args[0]
             if (!linodeId) return m.reply(`❌ ¡Introdúzcase el ID de Linode!
 
-Contoh: ${m.prefix}offlinode 12345`)
+Ejemplo: ${m.prefix}offlinode 12345`)
             
             m.react('🔌')
             
@@ -216,7 +220,7 @@ Contoh: ${m.prefix}offlinode 12345`)
             const linodeId = args[0]
             if (!linodeId) return m.reply(`❌ ¡Introdúzcase el ID de Linode!
 
-Contoh: ${m.prefix}rebootlinode 12345`)
+Ejemplo: ${m.prefix}rebootlinode 12345`)
             
             m.react('🔄')
             
@@ -243,7 +247,7 @@ Contoh: ${m.prefix}rebootlinode 12345`)
             const image = args[1] || 'linode/ubuntu20.04'
             if (!linodeId) return m.reply(`❌ ¡Introdúzcase el ID de Linode!
 
-Contoh: ${m.prefix}rebuildlinode 12345 linode/ubuntu20.04`)
+Ejemplo: ${m.prefix}rebuildlinode 12345 linode/ubuntu20.04`)
             
             const rootPass = randomKarakter(4) + randomNomor(3)
             
@@ -277,7 +281,7 @@ Contoh: ${m.prefix}rebuildlinode 12345 linode/ubuntu20.04`)
             const linodeId = args[0]
             if (!linodeId) return m.reply(`❌ ¡Introdúzcase el ID de Linode!
 
-Contoh: ${m.prefix}delinode 12345`)
+Ejemplo: ${m.prefix}delinode 12345`)
             
             m.react('🗑️')
             
@@ -317,7 +321,9 @@ Contoh: ${m.prefix}delinode 12345`)
             const balance = (data.koin || 0) / 100
             const credit = (data.credit_remaining || 0) / 100
             
-            const msg = `💰 *sᴀʟᴅᴏ ᴀᴋᴜɴ ʟɪɴᴏᴅᴇ*\n\n` +
+            const msg = `💰 *saldo de la cuenta de linode*
+
+` +
                 `> 💵 Balance: $${balance.toFixed(2)}\n` +
                 `> 🎁 Credit: $${credit.toFixed(2)}`
             
@@ -342,7 +348,7 @@ Contoh: ${m.prefix}delinode 12345`)
             if (!res.ok) throw new Error("Fallado para obtener datos")
             
             const total = data.data?.length || 0
-            await m.reply(`📊 *ᴛᴏᴛᴀʟ ʟɪɴᴏᴅᴇ ᴀᴋᴛɪғ*\n\n> ${total} VPS`)
+            await m.reply(`📊 *TOTAL DE LINODES ACTIVOS*\n\n> ${total} VPS`)
             m.react('✅')
             return
         }
@@ -351,7 +357,7 @@ Contoh: ${m.prefix}delinode 12345`)
             const linodeId = args[0]
             if (!linodeId) return m.reply(`❌ ¡Introdúzcase el ID de Linode!
 
-Contoh: ${m.prefix}cekvpslinode 12345`)
+Ejemplo: ${m.prefix}cekvpslinode 12345`)
             
             m.react('🔍')
             
@@ -382,17 +388,24 @@ Contoh: ${m.prefix}cekvpslinode 12345`)
         
         await m.reply(
             `☁️ *ʟɪɴᴏᴅᴇ ᴄᴏᴍᴍᴀɴᴅs*\n\n` +
-            `> .linode2gb <label> - Buat VPS 2GB\n` +
-            `> .linode4gb <label> - Buat VPS 4GB\n` +
-            `> .linode8gb <label> - Buat VPS 8GB\n` +
-            `> .linode16gb <label> - Buat VPS 16GB\n` +
-            `> .listlinode - Daftar VPS\n` +
+            `> .linode2gb <label> - Hacer VPS 2GB
+` +
+            `> .linode4gb <label> - Hacer VPS 4GB
+` +
+            `> .linode8gb <label> - Hacer VPS 8GB
+` +
+            `> .linode16gb <label> - Hacer VPS 16GB
+` +
+            `> .listlinode - Lista VPS
+` +
             `> .onlinode <id> - Hidupkan VPS\n` +
             `> .offlinode <id> - Matikan VPS\n` +
             `> .rebootlinode <id> - Restart VPS\n` +
             `> .rebuildlinode <id> <image> - Rebuild\n` +
-            `> .delinode <id> - Hapus VPS\n` +
-            `> .saldolinode - Cek saldo\n` +
+            `> .delinode <id> - Eliminación VPS
+` +
+            `> .saldolinode - Chequear el saldo
+` +
             `> .sisalinode - Total VPS\n` +
             `> .cekvpslinode <id> - Detail VPS`
         )

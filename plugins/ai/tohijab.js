@@ -7,7 +7,7 @@ const pluginConfig = {
     alias: ['hijab', 'hijabstyle', 'addhijab'],
     category: 'ai',
     description: "Añadir hijab a la imagen",
-    usage: '.tohijab (reply gambar)',
+    usage: ".tohijab (respuesta a la imagen)",
     example: '.tohijab',
     isOwner: false,
     isPremium: false,

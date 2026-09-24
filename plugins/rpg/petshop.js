@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'petshop',
     alias: ['tokopet', 'buypet', 'belipet'],
     category: 'rpg',
-    description: 'Beli pet dari toko',
+    description: "Compra mascotas en la tienda",
     usage: '.petshop <buy> <pet>',
     example: '.petshop buy cat',
     isOwner: false,
@@ -16,11 +16,11 @@ const pluginConfig = {
 }
 
 const PETS_FOR_SALE = {
-    cat: { name: '🐱 Kucing', price: 5000, desc: "Altura alta, medio de ataque" },
-    dog: { name: '🐕 Anjing', price: 6000, desc: 'Attack tinggi, defense bagus' },
-    bird: { name: '🐦 Burung', price: 4500, desc: 'Luck sangat tinggi' },
-    fish: { name: '🐟 Ikan', price: 3000, desc: 'Murah, luck tinggi' },
-    rabbit: { name: '🐰 Kelinci', price: 5500, desc: "Equilibrio todos los puntos" }
+    cat: { name: "🐱 Gato", price: 5000, desc: "Altura alta, medio de ataque" },
+    dog: { name: "🐕 Perro", price: 6000, desc: "Ataque alto y buena defensa" },
+    bird: { name: "🐦 Ave", price: 4500, desc: "La suerte es muy alta." },
+    fish: { name: "🐟 Pez", price: 3000, desc: "Barato y con mucha suerte" },
+    rabbit: { name: "🐰 Conejo", price: 5500, desc: "Equilibrio todos los puntos" }
 }
 
 function handler(m) {
@@ -43,7 +43,7 @@ function handler(m) {
         
         for (const [key, pet] of Object.entries(PETS_FOR_SALE)) {
             txt += `┃ ${pet.name}\n`
-            txt += `┃ 💰 Harga: ${pet.price.toLocaleString()}\n`
+            txt += `┃ 💰 Precio: ${pet.price.toLocaleString()}\n`
             txt += `┃ 📝 ${pet.desc}\n`
             txt += `┃ → \`${m.prefix}petshop buy ${key}\`\n┃\n`
         }
@@ -57,7 +57,7 @@ function handler(m) {
         if (!petKey) {
             return m.reply(`❌ ¡Elija una mascota!
 
-> Contoh: \`${m.prefix}petshop buy cat\``)
+> Ejemplo: \`${m.prefix}petshop buy cat\``)
         }
         
         if (user.rpg.pet) {
@@ -71,8 +71,8 @@ function handler(m) {
         
         if ((user.koin || 0) < petToBuy.price) {
             return m.reply(
-                `❌ *ʙᴀʟᴀɴᴄᴇ ᴋᴜʀᴀɴɢ*\n\n` +
-                `> Harga: ${petToBuy.price.toLocaleString()}\n` +
+                `❌ *SALDO INSUFICIENTE*\n\n` +
+                `> Precio: ${petToBuy.price.toLocaleString()}\n` +
                 `> Balance: ${(user.koin || 0).toLocaleString()}`
             )
         }
@@ -93,11 +93,11 @@ function handler(m) {
         return m.reply(
             `🎉 *ᴘᴇᴛ ᴅɪʙᴇʟɪ!*\n\n` +
             `╭┈┈⬡「 🐾 *ɴᴇᴡ ᴘᴇᴛ* 」\n` +
-            `┃ 🏷️ Nama: *${user.rpg.pet.name}*\n` +
-            `┃ 🐾 Jenis: *${petToBuy.name}*\n` +
-            `┃ 💰 Harga: *-${petToBuy.price.toLocaleString()}*\n` +
+            `┃ 🏷️ Nombre: *${user.rpg.pet.name}*\n` +
+            `┃ 🐾 Tipo: *${petToBuy.name}*\n` +
+            `┃ 💰 Precio: *-${petToBuy.price.toLocaleString()}*\n` +
             `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-            `> Gunakan \`${m.prefix}pet\` untuk melihat status pet!`
+            `> Usa \`${m.prefix}pet\` para ver el estado de tu mascota!`
         )
     }
 }

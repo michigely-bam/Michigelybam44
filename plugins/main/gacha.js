@@ -147,7 +147,7 @@ async function handler(m, { sock }) {
     case "balance":
       db.updateKoin(m.sender, reward.amount);
       typeEmoji = "💰";
-      rewardText = `+${reward.amount.toLocaleString()} Koin`;
+      rewardText = `+${reward.amount.toLocaleString()} Monedas`;
       break;
     case "exp":
       if (!user.rpg) user.rpg = {};
@@ -158,12 +158,12 @@ async function handler(m, { sock }) {
     case "energi":
       db.updateEnergi(m.sender, reward.amount);
       typeEmoji = "⚡";
-      rewardText = `+${reward.amount} Energi`;
+      rewardText = `+${reward.amount} Energía`;
       break;
     case "jackpot":
       db.updateKoin(m.sender, reward.amount);
       typeEmoji = "💎";
-      rewardText = `+${reward.amount.toLocaleString()} Koin`;
+      rewardText = `+${reward.amount.toLocaleString()} Monedas`;
       break;
   }
 
@@ -183,7 +183,7 @@ async function handler(m, { sock }) {
   }
 
   text += `*Rarity:* ${rarityColors[reward.rarity]}\n`;
-  text += `*Hadiah:* ${typeEmoji} ${rewardText}\n\n`;
+  text += `*Premio:* ${typeEmoji} ${rewardText}\n\n`;
   text += `_Enfriamiento: 5 minutos_`;
 
   await m.reply(text);

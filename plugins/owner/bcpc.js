@@ -42,19 +42,25 @@ async function handler(m, { sock }) {
     const jeda = db.setting("jedaBcpc") || 5000;
     return m.reply(
       `📱 *BROADCAST PRIVATE CHAT*\n\n` +
-        `Jeda: ${jeda}ms (${(jeda / 1000).toFixed(1)}s)\n\n` +
-        `*PENGGUNAAN:*\n` +
-        `• \`${m.prefix}bcpc <pesan>\` — Kirim ke semua kontak\n` +
-        `• \`${m.prefix}bcpc (reply media)\` — Kirim dengan media\n\n` +
-        `⚠️ *Peringatan:* Bot akan mengirim pesan ke semua kontak yang tersimpan!\n\n` +
-        `ℹ️ *Note:* Kontak hanya terdeteksi jika mereka sudah pernah mengirim pesan ke bot. Kontak yang hanya disimpan tapi belum pernah chat tidak akan muncul.`,
+        `Intervalo: ${jeda}ms (${(jeda / 1000).toFixed(1)}s)\n\n` +
+        `*USO:*
+` +
+        `• \`${m.prefix}bcpc <mensaje>\` — Envía a todos los contactos
+` +
+        `• \`${m.prefix}bcpc (Responde media)\` — Enviar con los medios
+
+` +
+        `¡⚠️ *Advertencia:* Los bots enviarán mensajes a todos los contactos almacenados!
+
+` +
+        `ℹ️ *Nota:* Los contactos solo se detectan si ya han enviado mensajes al bot. Los contactos que sólo se guardaron pero nunca el chat no aparecerá.`,
     );
   }
 
   if (global.statusBcpc) {
     return m.reply(
       `❌ Broadcast privado está corriendo.
-Ketik \`${m.prefix}stopbcpc\` Parar.`,
+Escribe \`${m.prefix}stopbcpc\` Parar.`,
     );
   }
 
@@ -131,13 +137,15 @@ Ketik \`${m.prefix}stopbcpc\` Parar.`,
         text:
           `📱 *ʙʀᴏᴀᴅᴄᴀsᴛ ᴘʀɪᴠᴀᴛᴇ*\n\n` +
           `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-          `┃ 📝 ᴘᴇsᴀɴ: \`${input.substring(0, 50)}${input.length > 50 ? "..." : ""}\`\n` +
-          `┃ 📷 ᴍᴇᴅɪᴀ: \`${mediaBuffer ? mediaType : "Tidak"}\`\n` +
-          `┃ 👥 ᴛᴀʀɢᴇᴛ: \`${filtered.length}\` kontak\n` +
-          `┃ ⏱️ ᴊᴇᴅᴀ: \`${jeda}ms\`\n` +
-          `┃ 📊 ᴇsᴛɪᴍᴀsɪ: \`${Math.ceil((filtered.length * jeda) / 60000)} menit\`\n` +
+          `┃ 📝 mensaje: \`${input.substring(0, 50)}${input.length > 50 ? "..." : ""}\`\n` +
+          `┃ 📷 ᴍᴇᴅɪᴀ: \`${mediaBuffer ? mediaType : "No"}\`\n` +
+          `┃ 👥 ᴛᴀʀɢᴇᴛ: \`${filtered.length}\` contactos
+` +
+          `┃ ⏱️ INTERVALO: \`${jeda}ms\`\n` +
+          `┃ 📊 ESTIMACIÓN: \`${Math.ceil((filtered.length * jeda) / 60000)} minutos\`
+` +
           `╰┈┈⬡\n\n` +
-          `> Memulai broadcast...`,
+          `> Iniciando la difusión...`,
         contextInfo: ctx,
       },
       { quoted: m },
@@ -175,10 +183,12 @@ Ketik \`${m.prefix}stopbcpc\` Parar.`,
       m.chat,
       {
         text:
-          `✅ *ʙʀᴏᴀᴅᴄᴀsᴛ ᴘʀɪᴠᴀᴛᴇ sᴇʟᴇsᴀɪ*\n\n` +
-          `╭┈┈⬡「 📊 *ʜᴀsɪʟ* 」\n` +
-          `┃ ✅ ʙᴇʀʜᴀsɪʟ: \`${success}\`\n` +
-          `┃ ❌ ɢᴀɢᴀʟ: \`${failed}\`\n` +
+          `✅ *broadcast privado terminado*
+
+` +
+          `╭┈┈⬡「 📊 *RESULTADO* 」\n` +
+          `┃ ✅ correcto: \`${success}\`\n` +
+          `┃ ❌ ERROR: \`${failed}\`\n` +
           `┃ 📊 ᴛᴏᴛᴀʟ: \`${filtered.length}\`\n` +
           `╰┈┈⬡`,
         contextInfo: ctx,
@@ -188,7 +198,7 @@ Ketik \`${m.prefix}stopbcpc\` Parar.`,
   } catch (e) {
     delete global.statusBcpc;
     m.react("❌");
-    m.reply("Gagal: " + e.message);
+    m.reply("Falló: " + e.message);
   }
 }
 

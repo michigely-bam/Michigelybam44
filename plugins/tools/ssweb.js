@@ -34,8 +34,10 @@ async function handler(m, { sock }) {
   if (!text) {
     return m.reply(
       `📸 *sᴄʀᴇᴇɴsʜᴏᴛ ᴡᴇʙ*\n\n` +
-        `> Screenshot halaman website\n\n` +
-        `> *Contoh:*\n` +
+        `> Captura de la página web
+
+` +
+        `> *Ejemplo:*\n` +
         `> ${m.prefix}ssweb https://google.com\n` +
         `> ${m.prefix}ss https://github.com --mobile`,
     );

@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekoverpower',
     alias: ['overpower', 'op'],
     category: 'cek',
-    description: "Comprueba tus niveles de potencia.",
-    usage: ".ccoverpower < nombre",
+    description: "Comprueba tu nivel de poder.",
+    usage: ".cekoverpower [@usuario]",
     example: '.cekoverpower Budi',
     isOwner: false,
     isPremium: false,
@@ -19,20 +19,19 @@ async function handler(m) {
     const mentioned = m.mentionedJid[0] || m.sender
                     
     let desc = ''
-    if (percent >= 90) desc = 'OVERPOWER BANGET! LEGEND! 👑🔥'
-    else if (percent >= 70) desc = 'Kuat banget nih! 💪'
-    else if (percent >= 50) desc = 'Lumayan strong~ 😎'
-    else if (percent >= 30) desc = 'Biasa aja sih 🤔'
+    if (percent >= 90) desc = "¡PODER DESCOMUNAL! ¡LEYENDA! 👑🔥"
+    else if (percent >= 70) desc = "¡Muy fuerte! 💪"
+    else if (percent >= 50) desc = "Bastante fuerte~ 😎"
+    else if (percent >= 30) desc = "Normalito/a 🤔"
     else desc = "Todavía necesita practicar 📝"
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu tasa de exceso. *${percent}%*
-\`\`\`${desc}\`\`\`` : `Quieres revisar el nivel de exceso.${mentioned.split('@')[0]} yak? 
-    
-Tingkat keoverpoweran dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de poder es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de poder de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

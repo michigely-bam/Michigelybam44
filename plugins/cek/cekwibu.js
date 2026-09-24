@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekwibu',
     alias: ['wibu', 'weeb'],
     category: 'cek',
-    description: "Mira cuántos años tienes.",
-    usage: ".ckwmumum",
+    description: "Comprueba qué tan otaku eres.",
+    usage: ".cekwibu [@usuario]",
     example: '.cekwibu Budi',
     isOwner: false,
     isPremium: false,
@@ -20,25 +20,24 @@ async function handler(m) {
                     
     let desc = ''
     if (percent >= 90) {
-        desc = 'WIBU SEJATI! Ara ara~ 🎌'
+        desc = "¡OTAKU DE VERDAD! Ara ara~ 🎌"
     } else if (percent >= 70) {
-        desc = 'Wibu parah! Kimochi~ 😍'
+        desc = "¡Otaku extremo/a! Kimochi~ 😍"
     } else if (percent >= 50) {
-        desc = 'Lumayan wibu 🌸'
+        desc = "Bastante otaku 🌸"
     } else if (percent >= 30) {
-        desc = 'Sedikit wibu 😊'
+        desc = "Un poco otaku 😊"
     } else {
-        desc = "¡No es ingenio, normal! 😎"
+        desc = "Nada otaku; completamente normal 😎"
     }
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu tasa de maternidad *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar la tasa de maternidad @${mentioned.split('@')[0]} yak? 
-    
-Tingkat kewibuan dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de afición otaku es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de afición otaku de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

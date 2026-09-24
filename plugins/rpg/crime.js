@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'crime',
     alias: ['steal', 'curi'],
     category: 'rpg',
-    description: 'Mencuri uang (berisiko tertangkap + denda)',
+    description: "Robar dinero (riesgo de captura + multa)",
     usage: '.crime',
     example: '.crime',
     isOwner: false,
@@ -24,7 +24,7 @@ async function handler(m, { sock }) {
     
     if (!user.rpg) user.rpg = {}
     
-    await m.reply('🦹 *sᴇᴅᴀɴɢ ᴍᴇɴᴄᴜʀɪ...*')
+    await m.reply("🦹 *ROBANDO...*")
     await new Promise(r => setTimeout(r, 2000))
     
     const successRate = 0.5
@@ -39,10 +39,10 @@ async function handler(m, { sock }) {
         
         db.save()
         
-        let txt = `✅ *ᴄʀɪᴍᴇ sᴜᴋsᴇs*\n\n`
+        let txt = `✅ *ᴄʀɪᴍᴇ COMPLETADO*\n\n`
         txt += `> 🦹 ¡Lo robaste!
 `
-        txt += `> 💰 Hasil: *+Rp ${stolen.toLocaleString('id-ID')}*\n`
+        txt += `> 💰 Resultado: *+Rp ${stolen.toLocaleString('id-ID')}*\n`
         txt += `> 🚄 Exp: *+${expGain}*`
         
         await m.reply(txt)
@@ -55,11 +55,11 @@ async function handler(m, { sock }) {
         
         db.save()
         
-        let txt = `❌ *ᴄʀɪᴍᴇ ɢᴀɢᴀʟ*\n\n`
+        let txt = `❌ *ᴄʀɪᴍᴇ ERROR*\n\n`
         txt += `> 🚔 ¡Te atraparon la policía!
 `
-        txt += `> 💸 Denda: *-Rp ${actualFine.toLocaleString('id-ID')}*\n`
-        txt += `> ❤️ Health: *-15* (dipukuli)`
+        txt += `> 💸 Multa: *-Rp ${actualFine.toLocaleString('id-ID')}*\n`
+        txt += `> ❤️ Salud: *-15* (recibiste una paliza)`
         
         await m.reply(txt)
     }

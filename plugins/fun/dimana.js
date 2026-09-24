@@ -2,9 +2,9 @@ const pluginConfig = {
     name: 'dimana',
     alias: ['where', 'mana'],
     category: 'fun',
-    description: 'Tanya bot dimana sesuatu',
-    usage: '.dimana <pertanyaan>',
-    example: '.dimana jodohku berada?',
+    description: "Pregúntale al bot dónde está algo",
+    usage: '.dimana <pregunta>',
+    example: ".dimana ¿dónde está mi alma gemela?",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -15,25 +15,25 @@ const pluginConfig = {
 };
 
 const answers = [
-    'Di dekatmu!',
-    'Jauh di sana.',
+    '¡Cerca de ti!',
+    "Muy lejos.",
     "En un lugar que no esperabas.",
-    'Di hatimu.',
-    'Di sekitar sini.',
+    'En tu corazón.',
+    "Por aquí cerca.",
     "Prueba la habitación.",
-    'Di luar sana, menunggumu.',
+    "Allá afuera, esperándote.",
     "En el mismo lugar que tú.",
     "En algún lugar hermoso.",
-    'Di balik pintu.',
-    'Di sebelah kirimu.',
-    'Di depan matamu!',
-    'Jauh banget, di luar negeri mungkin?',
+    "Detrás de la puerta.",
+    'A tu izquierda.',
+    "¡Frente a tus ojos!",
+    "Muy lejos, ¿quizá en el extranjero?",
     "En un lugar de recuerdos.",
-    'Di mana-mana!',
-    'Di dunia maya.',
-    'Di alam mimpi.',
-    'Di tempat rahasia.',
-    'Hmm, susah dijelaskan lokasinya.',
+    '¡En todas partes!',
+    'En el mundo virtual.',
+    'En el mundo de los sueños.',
+    "En un lugar secreto.",
+    "Mmm, su ubicación es difícil de explicar.",
     "En un lugar que te hará feliz."
 ];
 
@@ -43,10 +43,10 @@ async function handler(m) {
     if (!text) {
         return m.reply(`📍 *ᴅɪᴍᴀɴᴀ*
 
-> ¡Póngase en una pregunta!
+> ¡Haz una pregunta!
 
-*Contoh:*
-> .dimana jodohku berada?`);
+*Ejemplo:*
+> .dimana ¿dónde está mi alma gemela?`);
     }
     
     const answer = answers[Math.floor(Math.random() * answers.length)];

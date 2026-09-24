@@ -30,7 +30,7 @@ try {
   if (fs.existsSync(thumbPath)) thumbRpg = fs.readFileSync(thumbPath);
 } catch (e) {}
 
-function getContextInfo(title = "🏍️ *ɴɢᴏᴊᴇᴋ*", body = "Ojek Online") {
+function getContextInfo(title = "🏍️ *ɴɢᴏᴊᴇᴋ*", body = "Mototaxi en línea") {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
@@ -69,9 +69,12 @@ async function handler(m, { sock }) {
 
   if (user.rpg.stamina < staminaCost) {
     return m.reply(
-      `⚡ *sᴛᴀᴍɪɴᴀ ʜᴀʙɪs*\n\n` +
-        `> Butuh ${staminaCost} stamina untuk ngojek\n` +
-        `> Stamina kamu: ${user.rpg.stamina}`,
+      `⚡ *RESISTENCIA AGOTADA*
+
+` +
+        `> Necesita ${staminaCost} stamina para burlarse
+` +
+        `> Tu resistencia: ${user.rpg.stamina}`,
     );
   }
 
@@ -94,7 +97,9 @@ async function handler(m, { sock }) {
     Math.random() > 0.7 ? Math.floor(Math.random() * 5000) + 1000 : 0;
   const totalEarning = earning + tips;
 
-  await m.reply(`🏍️ *sᴇᴅᴀɴɢ ɴɢᴏᴊᴇᴋ...*\n\n> ${order.type} - ${order.distance}`);
+  await m.reply(`🏍️ *TRABAJANDO COMO MOTOTAXI...*
+
+> ${order.type} - ${order.distance}`);
   await new Promise((r) => setTimeout(r, 2500));
 
   user.koin = (user.koin || 0) + totalEarning;
@@ -106,14 +111,16 @@ async function handler(m, { sock }) {
 
   await m.react("✅");
 
-  let txt = `🏍️ *ɴɢᴏᴊᴇᴋ sᴇʟᴇsᴀɪ*\n\n`;
+  let txt = `🏍️ *proyecto terminado*
+
+`;
   txt += `╭┈┈⬡「 📋 *ᴏʀᴅᴇʀ* 」\n`;
-  txt += `┃ 📱 Tipe: ${order.type}\n`;
-  txt += `┃ 📍 Jarak: ${order.distance}\n`;
+  txt += `┃ 📱 Tipo: ${order.type}\n`;
+  txt += `┃ 📍 Distancia: ${order.distance}\n`;
   txt += `┃ ─────────\n`;
-  txt += `┃ 💵 Tarif: *+Rp ${earning.toLocaleString("id-ID")}*\n`;
+  txt += `┃ 💵 Tarifa: *+Rp ${earning.toLocaleString("id-ID")}*\n`;
   if (tips > 0) {
-    txt += `┃ 🎁 Tips: *+Rp ${tips.toLocaleString("id-ID")}*\n`;
+    txt += `┃ 🎁 Consejos: *+Rp ${tips.toLocaleString("id-ID")}*\n`;
   }
   txt += `┃ 🚄 Exp: *+${expGain}*\n`;
   txt += `┃ ⚡ Stamina: *-${staminaCost}*\n`;

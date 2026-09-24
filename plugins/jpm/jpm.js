@@ -17,7 +17,7 @@ const pluginConfig = {
   category: "jpm",
   description: "Enviar mensajes a todos los grupos (JPM)",
   usage: ".jpm   mensaje de contacto",
-  example: ".jpm Halo semuanya!",
+  example: ".jpm ¡Hola a todos!",
   isOwner: true,
   isPremium: false,
   isGroup: false,
@@ -62,7 +62,7 @@ async function handler(m, { sock }) {
     const groupMode = getGroupMode(m.chat, db);
     if (groupMode !== "md" && groupMode !== "all") {
       return m.reply(
-        `❌ *ᴍᴏᴅᴇ ᴛɪᴅᴀᴋ sᴇsᴜᴀɪ*
+        `❌ *modo no es adecuado*
 
 > JPM sólo está disponible en modo MD
 
@@ -74,24 +74,38 @@ async function handler(m, { sock }) {
   const text = m.fullArgs?.trim() || m.text?.trim();
   if (!text) {
     return m.reply(
-      `📢 *JPM (JASA PESAN MASSAL)*\n\n` +
-        `Sistem broadcast otomatis ke seluruh grup yang terdaftar.\n\n` +
-        `*PENGGUNAAN:*\n` +
-        `• *${m.prefix}jpm <pesan>* — Mengirim JPM teks biasa\n` +
-        `• *${m.prefix}jpm (reply foto/video)* — Mengirim JPM dengan media\n\n` +
-        `*FITUR LAIN:*\n` +
-        `• *${m.prefix}jpmht* — JPM dengan mode Hidetag (tag semua member)\n` +
-        `• *${m.prefix}autojpm* — Auto JPM dengan interval otomatis\n` +
-        `• *${m.prefix}setdelayjpm* — Mengatur jeda pengiriman per grup\n` +
-        `• *${m.prefix}stopjpm* — Menghentikan proses JPM yang sedang berjalan\n\n` +
-        `*CONTOH:*\n` +
-        `> \`${m.prefix}jpm Halo semuanya! Ini pesan otomatis dari owner.\``,
+      `📢 *JPM (SERVICIO DE MENSAJERÍA MASIVA)*
+
+` +
+        `Sistema de transmisión automática a todo el grupo registrado.
+
+` +
+        `*USO:*
+` +
+        `• *${m.prefix}jpm <mensaje>* — Enviar una difusión de texto
+` +
+        `• *${m.prefix}jpm (Responde foto/video)* — Enviar JPM con los medios
+
+` +
+        `*OTRAS CARACTERÍSTICAS:*
+` +
+        `• *${m.prefix}jpmht* — JPM con modo Hidetag (tag todos los miembros)
+` +
+        `• *${m.prefix}autojpm* — Auto JPM con intervalos automáticos
+` +
+        `• *${m.prefix}setdelayjpm* — Arreglar las pausas de envío por grupo
+` +
+        `• *${m.prefix}stopjpm* — Detener el proceso JPM en curso
+
+` +
+        `*EJEMPLO:*\n` +
+        `> \`${m.prefix}jpm ¡Hola a todos! Este es un mensaje automático del propietario.\``,
     );
   }
 
   if (global.statusjpm) {
     return m.reply(
-      `❌ *ɢᴀɢᴀʟ*
+      `❌ *falló*
 
 > JPM corriendo. \`${m.prefix}stopjpm\` Parar.`,
     );
@@ -128,7 +142,7 @@ async function handler(m, { sock }) {
     if (groupIds.length === 0) {
       m.react("❌");
       return m.reply(
-        `❌ *ɢᴀɢᴀʟ*
+        `❌ *falló*
 
 > No se encontró ningún grupo${blacklistedCount > 0 ? ` (${blacklistedCount} grupo sobre -lista negra` : ""}`,
       );
@@ -142,13 +156,15 @@ async function handler(m, { sock }) {
         text:
           `📢 *ᴊᴘᴍ*\n\n` +
           `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-          `┃ 📝 ᴘᴇsᴀɴ: \`${text.substring(0, 50)}${text.length > 50 ? "..." : ""}\`\n` +
-          `┃ 📷 ᴍᴇᴅɪᴀ: \`${mediaBuffer ? mediaType : "Tidak"}\`\n` +
-          `┃ 👥 ᴛᴀʀɢᴇᴛ: \`${groupIds.length}\` grup\n` +
-          `┃ ⏱️ ᴊᴇᴅᴀ: \`${jedaJpm}ms\`\n` +
-          `┃ 📊 ᴇsᴛɪᴍᴀsɪ: \`${Math.ceil((groupIds.length * jedaJpm) / 60000)} menit\`\n` +
+          `┃ 📝 mensaje: \`${text.substring(0, 50)}${text.length > 50 ? "..." : ""}\`\n` +
+          `┃ 📷 ᴍᴇᴅɪᴀ: \`${mediaBuffer ? mediaType : "No"}\`\n` +
+          `┃ 👥 ᴛᴀʀɢᴇᴛ: \`${groupIds.length}\` grupo
+` +
+          `┃ ⏱️ INTERVALO: \`${jedaJpm}ms\`\n` +
+          `┃ 📊 ESTIMACIÓN: \`${Math.ceil((groupIds.length * jedaJpm) / 60000)} minutos\`
+` +
           `╰┈┈⬡\n\n` +
-          `> Memulai JPM ke semua grup...`,
+          `> Comienza con JPM a todos los grupos...`,
         contextInfo: getContextInfo("📢 ᴊᴘᴍ", "Sending..."),
       },
       { quoted: m },
@@ -169,13 +185,13 @@ async function handler(m, { sock }) {
           m.chat,
           {
             text:
-              `⏹️ *ᴊᴘᴍ ᴅɪʜᴇɴᴛɪᴋᴀɴ*\n\n` +
+              `⏹️ *ᴊᴘᴍ DETENIDO*\n\n` +
               `╭┈┈⬡「 📊 *sᴛᴀᴛᴜs* 」\n` +
-              `┃ ✅ ʙᴇʀʜᴀsɪʟ: \`${successCount}\`\n` +
-              `┃ ❌ ɢᴀɢᴀʟ: \`${failedCount}\`\n` +
-              `┃ ⏸️ sɪsᴀ: \`${groupIds.length - successCount - failedCount}\`\n` +
+              `┃ ✅ correcto: \`${successCount}\`\n` +
+              `┃ ❌ ERROR: \`${failedCount}\`\n` +
+              `┃ ⏸️ restante: \`${groupIds.length - successCount - failedCount}\`\n` +
               `╰┈┈⬡`,
-            contextInfo: getContextInfo("⏹️ ᴅɪʜᴇɴᴛɪᴋᴀɴ"),
+            contextInfo: getContextInfo("⏹️ DETENIDO"),
           },
           { quoted: m },
         );
@@ -214,14 +230,16 @@ async function handler(m, { sock }) {
       m.chat,
       {
         text:
-          `✅ *ᴊᴘᴍ sᴇʟᴇsᴀɪ*\n\n` +
-          `╭┈┈⬡「 📊 *ʜᴀsɪʟ* 」\n` +
-          `┃ ✅ ʙᴇʀʜᴀsɪʟ: \`${successCount}\`\n` +
-          `┃ ❌ ɢᴀɢᴀʟ: \`${failedCount}\`\n` +
+          `✅ *jpm terminado*
+
+` +
+          `╭┈┈⬡「 📊 *RESULTADO* 」\n` +
+          `┃ ✅ correcto: \`${successCount}\`\n` +
+          `┃ ❌ ERROR: \`${failedCount}\`\n` +
           `┃ 📊 ᴛᴏᴛᴀʟ: \`${groupIds.length}\`\n` +
           `╰┈┈⬡`,
         contextInfo: getContextInfo(
-          "✅ sᴇʟᴇsᴀɪ",
+          "✅ terminado",
           `${successCount}/${groupIds.length}`,
         ),
       },

@@ -37,7 +37,9 @@ async function handler(m, { sock }) {
     if (!text) {
         return m.reply(
             `── .✦ 𝗖𝗘𝗞 𝗜𝗗 𝗖𝗛𝗔𝗡𝗡𝗘𝗟 ✦. ── 𝜗ৎ\n\n` +
-            `> Masukkan link channel WhatsApp\n\n` +
+            `> Ingrese el enlace de canal de WhatsApp
+
+` +
             `> \`${m.prefix}cekidch https://whatsapp.com/channel/xxxxx\``
         )
     }
@@ -60,7 +62,7 @@ async function handler(m, { sock }) {
 > Canal no encontrado.☘︎ ݁˖`)
         }
 
-        const chName = metadata.name || 'Unknown'
+        const chName = metadata.name || 'Desconocido'
         const chId = metadata.id
         const chSubs = metadata.subscribers ?? metadata.subscribers_count ?? 0
         const chDesc = metadata.description || '—'
@@ -73,12 +75,12 @@ async function handler(m, { sock }) {
         const infoText =
             `── .✦ 𝗖𝗛𝗔𝗡𝗡𝗘𝗟 𝗜𝗡𝗙𝗢 ✦. ──\n\n` +
             `╭─〔 *${chName}* 〕───⬣\n` +
-            `│  ✦ ɴᴀᴍᴀ       : *${chName}*\n` +
+            `│  ✦ NOMBRE       : *${chName}*\n` +
             `│  ✦ ɪᴅ            : \`${chId}\`\n` +
             `│  ✦ sᴜʙsᴄʀɪʙᴇʀ : *${formatSubs(chSubs)}*\n` +
             `│  ✦ sᴛᴀᴛᴜs     : *${chVerified}*\n` +
-            `│  ✦ ᴅɪʙᴜᴀᴛ      : *${chCreated}*\n` +
-            `│  ✦ ᴅᴇsᴋʀɪᴘsɪ  : ${descPreview}\n` +
+            `│  ✦ CREADO      : *${chCreated}*\n` +
+            `│  ✦ descripción  : ${descPreview}\n` +
             `╰──────────────⬣`
 
         const buttons = [

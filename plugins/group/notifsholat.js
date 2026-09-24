@@ -23,42 +23,53 @@ function handler(m, { sock, db }) {
     const args = m.args[0]?.toLowerCase();
     const group = db.getGroup(m.chat) || {};
     const globalDb = getDatabase();
-    const kotaSetting = globalDb.setting('autoSholatKota') || { nama: 'KOTA JAKARTA' };
+    const kotaSetting = globalDb.setting('autoSholatKota') || { nama: "CIUDAD DE YAKARTA" };
 
     if (!['on', 'off'].includes(args)) {
         const isGlobalActive = globalDb.setting('autoSholat') || false;
-        const statusGlobal = isGlobalActive ? '✅ AKTIF' : '❌ NONAKTIF';
-        const statusGrup = group.notifSholat !== false ? '✅ AKTIF' : '❌ NONAKTIF';
+        const statusGlobal = isGlobalActive ? "✅ ACTIVO" : "❌ INACTIVO";
+        const statusGrup = group.notifSholat !== false ? "✅ ACTIVO" : "❌ INACTIVO";
         
         return m.reply(
-            `🕌 *PENGINGAT WAKTU SHOLAT*\n\n` +
-            `Status Global: *${statusGlobal}* (Dari Owner)\n` +
-            `Status Grup: *${statusGrup}*\n` +
-            `Lokasi: *${kotaSetting.nama}*\n\n` +
-            `*PENGATURAN GRUP:*\n` +
-            `• *${m.prefix}notifsholat on* — Aktifkan notif di grup ini\n` +
-            `• *${m.prefix}notifsholat off* — Nonaktifkan notif di grup ini\n\n` +
-            `*CARA KERJA:*\n` +
-            `1. Mengirimkan mp3 adzan & gambar jadwal saat masuk waktu sholat\n` +
-            `2. Mengikuti jadwal real-time dari myquran.com\n` +
-            `3. Jika Status Global NONAKTIF, grup tidak akan dikirim adzan meskipun Status Grup AKTIF.\n` +
-            `4. Jika grup merasa terganggu, admin dapat mematikan khusus untuk grup ini.`
+            `🕌 *RECORDATORIO DEL TIEMPO DE LA ORACIÓN*
+
+` +
+            `Status Global: *${statusGlobal}*(De su propietario)
+` +
+            `Estatus de grupo: *${statusGrup}*\n` +
+            `Ubicación: *${kotaSetting.nama}*\n\n` +
+            `*AJUSTES DE GRUPO:*
+` +
+            `• *${m.prefix}notifsholat on* — Activar notificaciones en este grupo
+` +
+            `• *${m.prefix}notifsholat off* — Desactiva los avisos en este grupo
+
+` +
+            `*CÓMO FUNCIONA:*
+` +
+            `1. Envíe mp3 llamada a la oración & imágenes del calendario al entrar a la hora de la oración
+` +
+            `2. Seguir el calendario en tiempo real de myquran.com
+` +
+            `3. Si el estado global está INACTIVO, el grupo no recibirá la llamada a la oración aunque el estado del grupo esté ACTIVO.
+` +
+            `4. Si el grupo se siente perturbado, el administrador puede desactivar específicamente para este grupo.`
         );
     }
 
     if (args === 'on') {
         group.notifSholat = true;
         db.setGroup(m.chat, group);
-        return m.reply(`✅ *ɴᴏᴛɪꜰ sʜᴏʟᴀᴛ ᴅɪᴀᴋᴛɪꜰᴋᴀɴ*
+        return m.reply(`✅ *RECORDATORIOS DE ORACIÓN ACTIVADOS*
 
 > Este grupo recibirá un recordatorio de tiempo de oración
-> Lokasi: ${kotaSetting.nama}`);
+> Ubicación: ${kotaSetting.nama}`);
     }
 
     if (args === 'off') {
         group.notifSholat = false;
         db.setGroup(m.chat, group);
-        return m.reply(`❌ *ɴᴏᴛɪꜰ sʜᴏʟᴀᴛ ᴅɪɴᴏɴᴀᴋᴛɪꜰᴋᴀɴ*`);
+        return m.reply(`❌ *notificación de oración desactivada*`);
     }
 }
 

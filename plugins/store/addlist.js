@@ -7,8 +7,8 @@ const pluginConfig = {
     alias: ['addinfo'],
     category: 'store',
     description: "➕ Añada nueva información de la tienda (sólo chat privado)",
-    usage: ".addlist > nombre >ol; > content ",
-    example: ".addlist &quot; set of 124; 1. Las compras no pueden ser canceladas; 2. Warrants 7 days",
+    usage: '.addlist <nombre>|<contenido>',
+    example: '.addlist Condiciones|1. Las compras no se pueden cancelar;;2. Garantía de 7 días',
     isOwner: true,
     isPremium: false,
     isGroup: false,
@@ -36,10 +36,15 @@ async function uploadToCatbox(buffer, filename = 'file.jpg') {
 async function handler(m, { sock }) {
     if (m.isGroup) {
         return m.reply(
-            `🚫 *Akses Ditolak*\n\n` +
-            `Untuk menjaga keamanan data 🛡️, penambahan informasi hanya dapat dilakukan di *private chat*.\n\n` +
-            `Silakan chat bot secara langsung 📱, lalu ketik:\n` +
-            `\`${m.prefix}addlist <nama>|<isi>\``
+            `🚫 *Debido de acceso*
+
+` +
+            `Para mantener la seguridad de los datos 🛡️, la adición de información solo puede hacerse en el chat privado **.
+
+` +
+            `Por favor ingrese el bot de chat en directo 📱, y escriba:
+` +
+            `\`${m.prefix}addlist <nombre>|<contenido>\``
         )
     }
 
@@ -49,19 +54,29 @@ async function handler(m, { sock }) {
 
     if (pipeIdx === -1) {
         return m.reply(
-            `➕ *TAMBAH INFORMASI TOKO*\n\n` +
-            `📋 Format:\n` +
-            `\`${m.prefix}addlist <nama>|<isi>\`\n\n` +
-            `📌 *Parameter:*\n` +
-            `• *nama* — Judul informasi (min. 2 karakter)\n` +
-            `• *isi* — Konten informasi (gunakan \`;;\` untuk baris baru)\n\n` +
-            `📝 *Contoh:*\n` +
-            `\`${m.prefix}addlist Syarat & Ketentuan|1. Pembelian tidak bisa dibatalkan;;2. Garansi 7 hari;;3. Hubungi admin untuk klaim\`\n` +
-            `\`${m.prefix}addlist Cara Order|1. Ketik .listproduk;;2. Pilih produk;;3. Ketik .beli <nomor>\`\n\n` +
-            `🖼️ *Tips:*\n` +
-            `• Kirim gambar/video terlebih dahulu, lalu reply media tersebut dengan command di atas untuk menambahkan media 📸\n` +
-            `• Gunakan \`;;\` untuk membuat baris baru dalam isi informasi ✍️\n` +
-            `• Informasi ini bisa dilihat semua orang melalui \`${m.prefix}list\` 👥`
+            `➕ *ADICIÓN DE INFORMACIÓN DE LA TIENDA*
+
+` +
+            `📋 Formato:\n` +
+            `\`${m.prefix}addlist <nombre>|<contenido>\`\n\n` +
+            `📌 *Parámetros:*\n` +
+            `• *nama* — Título de información (min. 2 caracteres)
+` +
+            `• *isi* — Contenido de información (usar \`;;\` para nuevas líneas)
+
+` +
+            `📝 *Ejemplo:*\n` +
+            `\`${m.prefix}addlist Términos y condiciones|1. La compra no puede ser cancelada; 2. 7 días de garantía; 3. Ponte en contacto con el administrador para las reclamaciones
+` +
+            `\`${m.prefix}addlist Cómo comprar|1. Escribe .listproduk;;2. Elige un producto;;3. Escribe .beli <número>\`
+
+` +
+            `🖼️ *Consejos:*\n` +
+            `• Enviar una imagen/video primero, y luego responder a los medios con el comando arriba para agregar los medios 📸
+` +
+            `• Utilice \`;;\` para crear nuevas líneas en el contenido de información ✍️
+` +
+            `• Esta información se puede ver a todos a través de \`${m.prefix}list\` 👥`
         )
     }
 
@@ -71,10 +86,12 @@ async function handler(m, { sock }) {
     if (!name || name.length < 2) {
         return m.reply(`❌ *El nombre es demasiado corto.*
 
-Minimal 2 karakter diperlukan agar mudah dikenali 📝`)
+Se requieren al menos 2 caracteres para ser fácilmente reconocibles 📝`)
     }
     if (!content || content.length < 3) {
-        return m.reply(`❌ *Isi informasi terlalu pendek.*\n\nMinimal 3 karakter diperlukan ✍️`)
+        return m.reply(`❌ *El contenido de la información es demasiado corto.*
+
+Se requiere un mínimo de 3 caracteres ✍️`)
     }
 
     let imageUrl = null
@@ -84,7 +101,7 @@ Minimal 2 karakter diperlukan agar mudah dikenali 📝`)
     const isDirectMedia = m.isMedia && (m.isImage || m.isVideo)
 
     if (hasQuotedMedia || isDirectMedia) {
-        await m.reply(`⏳ _Mengunggah media..._`)
+        await m.reply(`⏳ _Subiendo archivos..._`)
         try {
             const buffer = hasQuotedMedia ? await m.quoted.download() : await m.download()
             if (buffer) {
@@ -117,11 +134,15 @@ Minimal 2 karakter diperlukan agar mudah dikenali 📝`)
 
     await m.react('✅')
 
-    let reply = `✅ *INFORMASI DITAMBAHKAN*\n\n`
-    reply += `🏷️ Nama: *${name}*\n`
-    if (imageUrl) reply += `🖼️ Media: ✅ Gambar\n`
+    let reply = `✅ *INFORMACIÓN AÑADIDA*
+
+`
+    reply += `🏷️ Nombre: *${name}*\n`
+    if (imageUrl) reply += `🖼️ Medios de comunicación: ✅ imágenes
+`
     if (videoUrl) reply += `🎬 Media: ✅ Video\n`
-    reply += `📝 Isi:\n${content}\n\n`
+    reply += `📝 Contenido:
+${content}\n\n`
     reply += `📋 _Ver lista: \`${m.prefix}list\`_\n`
     reply += `✏️ _Edit: \`${m.prefix}editlist ${lists.length}\`_`
 

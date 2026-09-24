@@ -6,8 +6,8 @@ const pluginConfig = {
     alias: ['h2', 'ht2'],
     category: 'group',
     description: "Hidetag con estilismo falso",
-    usage: ".Ojear texto > o responder mensaje",
-    example: '.h2 Pengumuman penting!',
+    usage: ".hidetag2 <texto> o responde a un mensaje",
+    example: ".h2 ¡Anuncio importante!",
     isOwner: false,
     isPremium: false,
     isGroup: true,
@@ -26,7 +26,7 @@ async function handler(m, { sock }) {
         return m.reply(
             `📢 *HIDETAG 2*\n\n` +
             `• \`${m.prefix}h2 <text>\`\n` +
-            `• Reply pesan + \`${m.prefix}h2\``
+            `• Responder a los mensajes + \`${m.prefix}h2\``
         )
     }
     try {

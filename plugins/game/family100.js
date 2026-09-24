@@ -28,7 +28,9 @@ async function handler(m, { sock }) {
             const answered = session.answered || [];
             const total = session.question.jawaban.length;
             
-            let text = `⚠️ *Eh ada game jalan nih!*\n\n`;
+            let text = `⚠️ *¡Ya hay una partida en curso!*
+
+`;
             text += `📋 *${session.question.soal}*\n\n`;
             text += `La respuesta es adivinar (${answered.length}/${total})\n`;
             answered.forEach((ans, i) => {
@@ -37,7 +39,8 @@ async function handler(m, { sock }) {
             for (let i = answered.length; i < total; i++) {
                 text += `${i + 1}. ❓ ???\n`;
             }
-            text += `\n⏱️ Sisa: *${formatRemainingTime(remaining)}*`;
+            text += `
+⏱️ Restante: *${formatRemainingTime(remaining)}*`;
             await m.reply(text);
             return;
         }
@@ -53,12 +56,14 @@ async function handler(m, { sock }) {
     
     let text = `📊 *FAMILY 100*\n\n`;
     text += `📋 *${question.soal}*\n\n`;
-    text += `Jawaban (0/${total})\n`;
+    text += `Respuesta 0/${total})\n`;
     for (let i = 0; i < total; i++) {
         text += `${i + 1}. ❓ ???\n`;
     }
-    text += `\n⏱️ Waktu: *120 detik*\n`;
-    text += `🎁 Un regalo por respuesta: *EXP + Koin (random)*
+    text += `
+⏱️ El tiempo: *120 segundos*
+`;
+    text += `🎁 Un regalo por respuesta: *EXP + Coina (random)*
 
 `;
     text += `_Escribe tu respuesta directamente o contesta "renunciar"_`;
@@ -77,7 +82,7 @@ async function handler(m, { sock }) {
         let timeoutText = `⏱️ *Bueno, es tarde, ¡se acabó el tiempo!*
 
 `;
-        timeoutText += `Tertebak: *${answered.length}/${question.jawaban.length}*\n\n`;
+        timeoutText += `Adivinadas: *${answered.length}/${question.jawaban.length}*\n\n`;
         if (remaining.length > 0) {
             timeoutText += `respuestas restantes:
 `;
@@ -104,8 +109,10 @@ async function answerHandler(m, sock) {
         const answered = session.answered || [];
         const remaining = session.question.jawaban.filter(j => !answered.includes(j.toLowerCase()));
         
-        let text = `🏳️ *Yahhh nyerah deh...*\n\n`;
-        text += `Tertebak: *${answered.length}/${session.question.jawaban.length}*\n\n`;
+        let text = `🏳️ *Bueno, me rindo...*
+
+`;
+        text += `Adivinadas: *${answered.length}/${session.question.jawaban.length}*\n\n`;
         if (remaining.length > 0) {
             text += `respuestas restantes:
 `;
@@ -123,7 +130,7 @@ async function answerHandler(m, sock) {
     const answered = session.answered || [];
     
     if (answered.includes(userAnswer)) {
-        await m.reply(`⚠️ Jawaban "${userAnswer}" ¡Es predecible!`);
+        await m.reply(`⚠️ Respuesta "${userAnswer}" ¡Es predecible!`);
         return true;
     }
     
@@ -163,14 +170,16 @@ async function answerHandler(m, sock) {
                     text += `${i + 1}. ✅ ${ans} - @${who?.split('@')[0] || '?'}\n`;
                 });
                 text += `
-🎊 Felicitaciones ${uniqueParticipants.length} pemenang!`;
+🎊 ¡Felicidades! Ganaron ${uniqueParticipants.length} participantes.`;
                 
                 await m.reply(text, { mentions: uniqueParticipants });
                 return true;
             }
             
             const total = session.question.jawaban.length;
-            let text = `✅ @${m.sender.split('@')[0]} (+${answerReward.exp} EXP, +${answerReward.koin} Koin)\n\n`;
+            let text = `✅ @${m.sender.split('@')[0]} (+${answerReward.exp} EXP, +${answerReward.koin} Monedas)
+
+`;
             text += `📋 *${session.question.soal}*\n\n`;
             session.question.jawaban.forEach((ans, i) => {
                 const isAnswered = session.answered.includes(ans.toLowerCase());
@@ -180,7 +189,8 @@ async function answerHandler(m, sock) {
                     text += `${i + 1}. ❓ ???\n`;
                 }
             });
-            text += `\nSisa ${total - session.answered.length} ¡Responde otra vez!`;
+            text += `
+Restante ${total - session.answered.length} ¡Responde otra vez!`;
             
             await m.reply(text, { mentions: [m.sender] });
             return true;

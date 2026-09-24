@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'ganti-ourin-games.jpg',
     alias: ['gantigames', 'setouringames'],
     category: 'owner',
-    description: 'Ganti gambar ourin-games.jpg (thumbnail games)',
-    usage: ".Swap -ourin -games.jpg (reply / enviar imagen)",
+    description: "Cambiar las imágenes ourin-games.jpg",
+    usage: ".gantigames (responde o envía una imagen)",
     example: '.ganti-ourin-games.jpg',
     isOwner: true,
     isPremium: false,
@@ -21,7 +21,7 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
     
     if (!isImage) {
-        return m.reply(`🖼️ *ɢᴀɴᴛɪ ᴏᴜʀɪɴ-ɢᴀᴍᴇs.ᴊᴘɢ*
+        return m.reply(`🖼️ *reemplazando ourin-games.jpg*
 
 > Enviar / respuesta imágenes para reemplazar
 > File: assets/images/ourin-games.jpg`)
@@ -48,7 +48,9 @@ async function handler(m, { sock }) {
         
         fs.writeFileSync(targetPath, buffer)
         
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*\n\n> Gambar ourin-games.jpg telah diganti`)
+        m.reply(`✅ *correcto*
+
+Las imágenes ourin-games.jpg han sido reemplazadas`)
         
     } catch (error) {
         await m.reply(te(m.prefix, m.command, m.pushName))

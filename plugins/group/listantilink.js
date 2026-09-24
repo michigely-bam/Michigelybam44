@@ -31,7 +31,7 @@ function handler(m) {
     const groupData = db.getGroup(m.chat) || {}
     const customList = groupData.antilinkList || []
     
-    let txt = `🔗 *ᴅᴀꜰᴛᴀʀ ᴀɴᴛɪʟɪɴᴋ*\n\n`
+    let txt = `🔗 *LISTA DE ENLACES BLOQUEADOS*\n\n`
     
     txt += `╭┈┈⬡「 📌 *ᴅᴇꜰᴀᴜʟᴛ* 」\n`
     DEFAULT_BLOCKED_LINKS.forEach((l, i) => {

@@ -25,7 +25,7 @@ function handler(m, { sock }) {
     if (!group.mute) return m.reply("❌ El grupo no está siendo mudo.")
 
     db.setGroup(m.chat, { ...group, mute: false })
-    m.reply(`✅ Grup *${groupName}* exitosamente unmute por @${m.sender.split('@')[0]}
+    m.reply(`✅ Grupo *${groupName}* exitosamente unmute por @${m.sender.split('@')[0]}
 
 Todos los miembros ahora pueden enviar un mensaje.`, { mentions: [m.sender] })
 }

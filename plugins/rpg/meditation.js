@@ -31,16 +31,20 @@ async function handler(m) {
     
     if (currentStamina >= maxStamina && currentHealth >= maxHealth && currentMana >= maxMana) {
         return m.reply(
-            `💤 *sᴜᴅᴀʜ ꜰᴜʟʟ*\n\n` +
+            `💤 *ya está lleno*
+
+` +
             `> ⚡ Stamina: ${currentStamina}/${maxStamina}\n` +
             `> ❤️ Health: ${currentHealth}/${maxHealth}\n` +
-            `> 💙 Mana: ${currentMana}/${maxMana}\n\n` +
-            `💡 Kamu sudah dalam kondisi prima!`
+            `> 💙 Maná: ${currentMana}/${maxMana}\n\n` +
+            `💡 ¡Estás en perfecto estado!`
         )
     }
     
     await m.react('💤')
-    await m.reply(`💤 *ʙᴇʀɪsᴛɪʀᴀʜᴀᴛ...*\n\n> Memulihkan energi...`)
+    await m.reply(`💤 *DESCANSANDO...*
+
+> Recuperando energía...`)
     await new Promise(r => setTimeout(r, 3000))
     
     const staminaRecovered = Math.min(maxStamina - currentStamina, 40 + Math.floor(Math.random() * 20))
@@ -55,13 +59,15 @@ async function handler(m) {
     
     await m.react('✨')
     return m.reply(
-        `✨ *ɪsᴛɪʀᴀʜᴀᴛ sᴇʟᴇsᴀɪ!*\n\n` +
-        `╭┈┈⬡「 💖 *ᴘᴜʟɪʜ* 」\n` +
+        `✨ ¡El descanso está terminado!
+
+` +
+        `╭┈┈⬡「 💖 *RECUPERACIÓN* 」\n` +
         `┃ ⚡ Stamina: *+${staminaRecovered}* (${user.rpg.stamina}/${maxStamina})\n` +
         `┃ ❤️ Health: *+${healthRecovered}* (${user.rpg.health}/${maxHealth})\n` +
-        `┃ 💙 Mana: *+${manaRecovered}* (${user.rpg.mana}/${maxMana})\n` +
+        `┃ 💙 Maná: *+${manaRecovered}* (${user.rpg.mana}/${maxMana})\n` +
         `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-        `> Kamu merasa lebih segar! 🌟`
+        `¡Te sientes más fresco! 🌟`
     )
 }
 

@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'ganti-ourin.jpg',
     alias: ['gantiourin', 'setourin'],
     category: 'owner',
-    description: 'Ganti gambar ourin.jpg (thumbnail menu)',
-    usage: ".reemplazar -ourin.jpg (reply / enviar imagen)",
+    description: "Cambiar la imagen ourin.jpg",
+    usage: ".gantiourin (responde o envía una imagen)",
     example: '.ganti-ourin.jpg',
     isOwner: true,
     isPremium: false,
@@ -21,7 +21,7 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
     
     if (!isImage) {
-        return m.reply(`🖼️ *ɢᴀɴᴛɪ ᴏᴜʀɪɴ.ᴊᴘɢ*
+        return m.reply(`🖼️ *reemplazado por ourin.jpg*
 
 > Enviar / respuesta imágenes para reemplazar
 > File: assets/images/ourin.jpg`)
@@ -48,9 +48,9 @@ async function handler(m, { sock }) {
         
         fs.writeFileSync(targetPath, buffer)
         
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*
+        m.reply(`✅ *correcto*
 
-> Gambar ourin.jpg telah diganti
+La imagen de ourin.jpg ha sido cambiada
 > Reinicie el bot para ver cambios`)
         
     } catch (error) {

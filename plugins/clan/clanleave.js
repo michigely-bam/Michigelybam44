@@ -32,9 +32,12 @@ async function handler(m) {
     if (clan.leader === m.sender) {
         if (clan.members.length > 1) {
             return m.reply(
-                `❌ Kamu adalah leader!\n\n` +
-                `Transfer dulu: *.clantransfer @user*\n` +
-                `Atau kick semua member terlebih dahulu`
+                `❌ ¡Usted es el líder!
+
+` +
+                `Primero transfiere el clan: *.clantransfer @user*
+` +
+                `O patear a todos los miembros primero.`
             )
         }
         delete db.db.data.clans[user.clanId]
@@ -42,7 +45,7 @@ async function handler(m) {
         db.save()
 
         const emblem = clan.emblem || '🏰'
-        return m.reply(`${emblem} Clan *${clan.name}* telah dibubarkan`)
+        return m.reply(`${emblem} Clan *${clan.name}* fue disuelto`)
     }
 
     clan.members = clan.members.filter(jid => jid !== m.sender)

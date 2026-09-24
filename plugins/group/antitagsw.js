@@ -27,12 +27,14 @@ async function handler(m, { sock, db }) {
 
         await m.reply(
             `📢 *ᴀɴᴛɪᴛᴀɢsᴡ sᴇᴛᴛɪɴɢs*\n\n` +
-            `> Status: *${status === 'on' ? '✅ Aktif' : '❌ Nonaktif'}*\n\n` +
-            `> Fitur ini menghapus pesan tag status\n` +
+            `> Status: *${status === 'on' ? "✅ Activo" : "❌ Inactivo"}*\n\n` +
+            `> Esta característica elimina los mensajes de etiqueta de estado
+` +
             `> (groupStatusMentionMessage)\n\n` +
-            `\`\`\`━━━ ᴘɪʟɪʜᴀɴ ━━━\`\`\`\n` +
-            `> \`${m.prefix}antitagsw on\` → Aktifkan\n` +
-            `> \`${m.prefix}antitagsw off\` → Nonaktifkan`
+            `\`\`\`━━━ OPCIONES ━━━\`\`\`\n` +
+            `> \`${m.prefix}antitagsw on\` → Activa
+` +
+            `> \`${m.prefix}antitagsw off\` → Desactiva`
         )
         return
     }
@@ -40,9 +42,12 @@ async function handler(m, { sock, db }) {
     if (action === 'on') {
         db.setGroup(groupId, { ...group, antitagsw: 'on' })
         await m.reply(
-            `✅ *ᴀɴᴛɪᴛᴀɢsᴡ ᴀᴋᴛɪꜰ*\n\n` +
-            `> Anti tag status berhasil diaktifkan!\n` +
-            `> Pesan tag status akan dihapus otomatis.`
+            `✅ *antitagsw activo*
+
+` +
+            `¡Anti-etiqueta de estado ha sido activada!
+` +
+            `El mensaje de la etiqueta de estado se eliminará automáticamente.`
         )
         return
     }
@@ -50,15 +55,17 @@ async function handler(m, { sock, db }) {
     if (action === 'off') {
         db.setGroup(groupId, { ...group, antitagsw: 'off' })
         await m.reply(
-            `❌ *ᴀɴᴛɪᴛᴀɢsᴡ ɴᴏɴᴀᴋᴛɪꜰ*\n\n` +
-            `> Anti tag status berhasil dinonaktifkan.`
+            `❌ *antitagsw inactivo*
+
+` +
+            `El antietiqueta de estado se ha desactivado con éxito.`
         )
         return
     }
 
     await m.reply(
-        `❌ *ᴘɪʟɪʜᴀɴ ᴛɪᴅᴀᴋ ᴠᴀʟɪᴅ*\n\n` +
-        `> Gunakan: on atau off`
+        `❌ *OPCIÓN NO VÁLIDA*\n\n` +
+        `> Utilice: en o fuera`
     )
 }
 

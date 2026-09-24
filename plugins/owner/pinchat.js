@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: [],
     category: 'owner',
     description: 'Pin/unpin chat',
-    usage: ".pinchat  No de contacto / réplica .pinchat abierto , número de contacto",
+    usage: '.pinchat <número/respuesta> / .pinchat open <número>',
     example: '.pinchat 628xxx',
     isOwner: true,
     cooldown: 3,
@@ -39,7 +39,7 @@ async function handler(m, { sock }) {
         return m.reply(
             '📌 *ᴘɪɴ ᴄʜᴀᴛ*\n\n' +
             '> `.pinchat 628xxx` — Pin chat\n' +
-            '> `.pinchat` (di private chat) — Pin chat ini\n' +
+            "> `.pinchat` (en chat privado) — Fijar este chat\n" +
             '> `.pinchat buka 628xxx` — Unpin chat'
         )
     }
@@ -51,10 +51,12 @@ async function handler(m, { sock }) {
         return m.reply(
             pin
                 ? `📌 *ᴄʜᴀᴛ ᴅɪᴘɪɴ*\n\n> Target: ${target}`
-                : `📍 *ᴘɪɴ ᴅɪʜᴀᴘᴜs*\n\n> Target: ${target}`
+                : `📍 *pines eliminados*
+
+> Target: ${target}`
         )
     } catch (err) {
-        return m.reply(`❌ Gagal: ${err.message}`)
+        return m.reply(`❌ Falló: ${err.message}`)
     }
 }
 

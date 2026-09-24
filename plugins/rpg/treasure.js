@@ -84,7 +84,8 @@ async function handler(m, { sock }) {
             txt += `> • Daily/Weekly\n`
             txt += `> • Shop`
         } else {
-            txt += `╭┈┈⬡「 📦 *ᴄʜᴇsᴛ ᴋᴀᴍᴜ* 」\n`
+            txt += `╭┈┈⬡「 📦 *TU COFRE* 」
+`
             for (const [key, chest] of availableChests) {
                 txt += `┃ ${chest.name}: *${user.inventory[key]}*\n`
                 txt += `┃ → \`${m.prefix}treasure ${key}\`\n┃\n`
@@ -107,7 +108,7 @@ async function handler(m, { sock }) {
     if (user.inventory[chestType] <= 0) delete user.inventory[chestType]
     
     await m.react('🎁')
-    await m.reply(`🔓 *ᴍᴇᴍʙᴜᴋᴀ ${chest.name.toUpperCase()}...*`)
+    await m.reply(`🔓 *ABRIENDO ${chest.name.toUpperCase()}...*`)
     await new Promise(r => setTimeout(r, 2000))
     
     const goldReward = Math.floor(Math.random() * (chest.maxGold - chest.minGold)) + chest.minGold

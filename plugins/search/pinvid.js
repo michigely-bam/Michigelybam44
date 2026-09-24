@@ -12,7 +12,7 @@ import {
 import config from "../../config.js";
 import te from "../../src/lib/ourin-error.js";
 const execAsync = promisify(exec);
-const NEOXR_APIKEY = config.APIkey?.neoxr || "Milik-Bot-OurinMD";
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD";
 
 const pluginConfig = {
   name: "pinvid",
@@ -42,7 +42,9 @@ async function handler(m, { sock }) {
   if (!query) {
     return m.reply(
       `📌 *ᴘɪɴᴛᴇʀᴇsᴛ ᴠɪᴅᴇᴏ sᴇᴀʀᴄʜ*\n\n` +
-        `> Masukkan query pencarian\n\n` +
+        `> Ingrese una consulta de búsqueda
+
+` +
         `\`${m.prefix}pinvid anime\``,
     );
   }
@@ -125,7 +127,7 @@ async function handler(m, { sock }) {
         }
       } catch (vidErr) {
         console.log(
-          `[PinVid] Failed to process video ${i + 1}:`,
+          `[PinVid] No se pudo procesar el video ${i + 1}:`,
           vidErr.message,
         );
       }
@@ -180,7 +182,7 @@ async function handler(m, { sock }) {
       m.react("✅");
     } catch (albumErr) {
       console.log(
-        "[PinVid] Album message failed, sending individually:",
+        "[PinVid] Falló el mensaje del álbum; enviando cada archivo por separado:",
         albumErr.message,
       );
 

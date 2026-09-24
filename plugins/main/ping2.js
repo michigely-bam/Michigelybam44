@@ -107,7 +107,7 @@ async function handler(m, { sock }) {
 
         const tableData = [
             ['WA Roundtrip', `${waRoundtrip} ms`],
-            ['Kecepatan Respon bot mu', `${totalExec} ms`],
+            ["Velocidad de respuesta de tu bot", `${totalExec} ms`],
             ['Status', 'Online'],
             ['Hostname', os.hostname()],
             ['Platform', `${os.platform()} ${os.arch()}`],

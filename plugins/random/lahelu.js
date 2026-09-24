@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'lahelu',
     alias: ['randommeme'],
     category: 'random',
-    description: 'Random gambar lahelu',
+    description: "Imagen aleatoria de Lahelu",
     usage: '.lahelu',
     example: '.lahelu',
     isOwner: false,

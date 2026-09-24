@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "maling",
   alias: ["copet", "pickpocket"],
   category: "rpg",
-  description: "Mencopet orang (lebih berisiko dari crime)",
+  description: "Robar carteras a personas (más arriesgado que cometer un delito))",
   usage: ".maling",
   example: ".maling",
   isOwner: false,
@@ -26,16 +26,17 @@ async function handler(m, { sock }) {
 
   if (user.rpg.health < 40) {
     return m.reply(
-      `❌ *ʜᴇᴀʟᴛʜ ᴛᴇʀʟᴀʟᴜ ʀᴇɴᴅᴀʜ*\n\n` +
-        `> Minimal 40 HP untuk maling!\n` +
-        `> Health kamu: ${user.rpg.health} HP`,
+      `❌ *SALUD DEMASIADO BAJA*\n\n` +
+        `> ¡Necesitas al menos 40 HP para robar!
+` +
+        `> Tu salud: ${user.rpg.health} HP`,
     );
   }
 
   await sock.sendMessage(
     m.chat,
     {
-      text: "🦹 *sᴇᴅᴀɴɢ ᴍᴇɴᴄᴏᴘᴇᴛ...*",
+      text: "🦹 *ROBANDO CARTERAS...*",
       contextInfo: getRpgContextInfo("🦹 MALING", "Picking!"),
     },
     { quoted: m },
@@ -76,7 +77,7 @@ async function handler(m, { sock }) {
       type: "police",
       fine: 25000,
       health: 10,
-      msg: "Ditangkap polisi!",
+      msg: "¡La policía te atrapó!",
     },
     {
       success: false,
@@ -106,25 +107,28 @@ async function handler(m, { sock }) {
     user.koin = (user.koin || 0) + outcome.money;
     await addExpWithLevelCheck(sock, m, db, user, outcome.exp);
 
-    txt = `✅ *ᴍᴀʟɪɴɢ sᴜᴋsᴇs*\n\n`;
+    txt = `✅ *ROBAR COMPLETADO*\n\n`;
     txt += `> ${outcome.msg}\n`;
-    txt += `> 💰 Dapat: *+Rp ${outcome.money.toLocaleString("id-ID")}*\n`;
+    txt += `> 💰 Puede: *+Rp ${outcome.money.toLocaleString("id-ID")}*\n`;
     txt += `> 🚄 Exp: *+${outcome.exp}*`;
   } else {
     const actualFine = Math.min(outcome.fine, user.koin || 0);
     user.koin = Math.max(0, (user.koin || 0) - actualFine);
     user.rpg.health = Math.max(0, user.rpg.health - outcome.health);
 
-    txt = `❌ *ᴍᴀʟɪɴɢ ɢᴀɢᴀʟ*\n\n`;
+    txt = `❌ *ROBAR ERROR*\n\n`;
     txt += `> ${outcome.msg}\n`;
     if (outcome.fine > 0)
-      txt += `> 💸 Denda: *-Rp ${actualFine.toLocaleString("id-ID")}*\n`;
+      txt += `> 💸 Multa: *-Rp ${actualFine.toLocaleString("id-ID")}*\n`;
     if (outcome.health > 0) txt += `> ❤️ Health: *-${outcome.health}*`;
 
     if (user.rpg.health <= 0) {
       user.rpg.health = 0;
       user.exp = Math.floor((user.exp || 0) / 2);
-      txt += `\n\n💀 *ᴋᴀᴍᴜ ᴍᴀᴛɪ*\n> Exp berkurang 50%!`;
+      txt += `
+
+💀 Tú estás muerto.
+> ¡La EXP se redujo un 50 %!`;
     }
   }
 

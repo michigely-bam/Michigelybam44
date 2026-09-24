@@ -30,21 +30,21 @@ async function handler(m, { sock }) {
     const token = config.digitalocean?.token
     
     if (!token) {
-        return m.reply(`⚠️ *ᴅɪɢɪᴛᴀʟᴏᴄᴇᴀɴ ʙᴇʟᴜᴍ ᴅɪsᴇᴛᴜᴘ*`)
+        return m.reply(`⚠️ *DigitalOcean aún no está configurado*`)
     }
     
     if (!hasAccess(m.sender, m.isOwner)) {
-        return m.reply(`❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*`)
+        return m.reply(`❌ *se rechazó el acceso*`)
     }
     
     const dropletId = m.text?.trim()
     if (!dropletId) {
-        return m.reply(`⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n> \`${m.prefix}${m.command} <droplet_id>\``)
+        return m.reply(`⚠️ *MODO DE USO*\n\n> \`${m.prefix}${m.command} <droplet_id>\``)
     }
     
     const actions = {
-        'turnon': { type: 'power_on', emoji: '🟢', text: 'menghidupkan' },
-        'turnoff': { type: 'power_off', emoji: '🔴', text: 'mematikan' },
+        'turnon': { type: 'power_on', emoji: '🟢', text: "encender" },
+        'turnoff': { type: 'power_off', emoji: '🔴', text: "apagar" },
         'restartvps': { type: 'reboot', emoji: '🔄', text: 'merestart' },
         'rebootvps': { type: 'reboot', emoji: '🔄', text: 'merestart' }
     }
@@ -54,7 +54,7 @@ async function handler(m, { sock }) {
         return m.reply(`❌ Acción no reconocida.`)
     }
     
-    await m.reply(`${action.emoji} *sᴇᴅᴀɴɢ ${action.text.toUpperCase()} ᴠᴘs...*\n\n> ID: \`${dropletId}\``)
+    await m.reply(`${action.emoji} *PROCESANDO ${action.text.toUpperCase()} ᴠᴘs...*\n\n> ID: \`${dropletId}\``)
     
     try {
         const response = await axios.post(
@@ -71,7 +71,9 @@ async function handler(m, { sock }) {
         const actionResult = response.data.action
         
         m.react('✅')
-        await m.reply(`✅ *ᴀᴋsɪ ʙᴇʀʜᴀsɪʟ*\n\n> ${action.emoji} VPS está siendo...${action.text}\n> Status: ${actionResult.status}`)
+        await m.reply(`✅ *la acción fue exitosa*
+
+> ${action.emoji} VPS está siendo...${action.text}\n> Status: ${actionResult.status}`)
         
     } catch (err) {
         return m.reply(te(m.prefix, m.command, m.pushName))

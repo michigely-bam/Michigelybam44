@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['sial', 'apes'],
     category: 'cek',
     description: "Mira lo desafortunado que eres.",
-    usage: ".cckal < nombre",
+    usage: ".ceksial [@usuario]",
     example: '.ceksial Budi',
     isOwner: false,
     isPremium: false,
@@ -20,25 +20,24 @@ async function handler(m) {
                     
     let desc = ''
     if (percent >= 90) {
-        desc = 'SIAL BANGET! Mending di rumah aja! 😭'
+        desc = "¡MUY MALA SUERTE! Mejor quédate en casa 😭"
     } else if (percent >= 70) {
-        desc = "Estoy muy caliente.~ 😢"
+        desc = "¡La mala suerte te persigue! 😢"
     } else if (percent >= 50) {
-        desc = 'Lumayan sial 😓'
+        desc = "Bastante mala suerte 😓"
     } else if (percent >= 30) {
-        desc = 'Sedikit sial 😕'
+        desc = "Un poco desafortunado/a 😕"
     } else {
-        desc = 'Gak sial, hoki dong! 🍀'
+        desc = "¡No tienes mala suerte; tienes fortuna! 🍀"
     }
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu nivel de mala suerte. *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar los niveles desafortunados @${mentioned.split('@')[0]} yak? 
-    
-Tingkat kesialan dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de mala suerte es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de mala suerte de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

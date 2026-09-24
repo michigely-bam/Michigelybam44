@@ -28,7 +28,8 @@ async function handler(m, { sock }) {
         return m.reply(
             `⚔️ *ᴅᴜᴇʟ ᴘᴠᴘ*\n\n` +
             `╭┈┈⬡「 📋 *ᴜsᴀɢᴇ* 」\n` +
-            `┃ > Tag lawan duel!\n` +
+            `┃ > ¡Menciona al rival del duelo!
+` +
             `┃ > \`.duel @user 5000\`\n` +
             `╰┈┈┈┈┈┈┈┈⬡`
         )
@@ -49,16 +50,18 @@ async function handler(m, { sock }) {
     
     if ((player1.koin || 0) < bet) {
         return m.reply(
-            `❌ *sᴀʟᴅᴏ ᴛɪᴅᴀᴋ ᴄᴜᴋᴜᴘ*\n\n` +
-            `> Koin kamu: Rp ${(player1.koin || 0).toLocaleString('id-ID')}\n` +
-            `> Butuh: Rp ${bet.toLocaleString('id-ID')}`
+            `❌ *saldo no es suficiente*
+
+` +
+            `> Tus monedas: Rp ${(player1.koin || 0).toLocaleString('id-ID')}\n` +
+            `> Necesidad: Rp ${bet.toLocaleString('id-ID')}`
         )
     }
     
     if ((player2.koin || 0) < bet) {
         return m.reply(
-            `❌ *ʟᴀᴡᴀɴ ᴛɪᴅᴀᴋ ᴄᴜᴋᴜᴘ*\n\n` +
-            `> Balance lawan tidak cukup untuk bet!`
+            `❌ *RIVAL NO VÁLIDO*\n\n` +
+            `¡> El equilibrio oponente no es suficiente para apostar!`
         )
     }
     
@@ -70,13 +73,14 @@ async function handler(m, { sock }) {
     
     if (player1.rpg.health < 30) {
         return m.reply(
-            `❌ *ʜᴇᴀʟᴛʜ ᴛᴇʀʟᴀʟᴜ ʀᴇɴᴅᴀʜ*\n\n` +
-            `> Minimal 30 HP untuk duel!\n` +
-            `> Health kamu: ${player1.rpg.health} HP`
+            `❌ *SALUD DEMASIADO BAJA*\n\n` +
+            `> ¡Necesitas al menos 30 HP para batirte en duelo!
+` +
+            `> Tu salud: ${player1.rpg.health} HP`
         )
     }
     
-    await sock.sendMessage(m.chat, { text: `⚔️ *ᴅᴜᴇʟ ᴅɪᴍᴜʟᴀɪ*\n\n> @${m.sender.split('@')[0]} vs @${target.split('@')[0]}\n> 💰 Bet: Rp ${bet.toLocaleString('id-ID')}`, contextInfo: getRpgContextInfo('⚔️ DUEL', 'Fight!') }, { quoted: m })
+    await sock.sendMessage(m.chat, { text: `⚔️ *ᴅᴜᴇʟ INICIADO*\n\n> @${m.sender.split('@')[0]} vs @${target.split('@')[0]}\n> 💰 Bet: Rp ${bet.toLocaleString('id-ID')}`, contextInfo: getRpgContextInfo('⚔️ DUEL', 'Fight!') }, { quoted: m })
     
     await new Promise(r => setTimeout(r, 2000))
     
@@ -97,10 +101,10 @@ async function handler(m, { sock }) {
     
     db.save()
     
-    let txt = `⚔️ *ʜᴀsɪʟ ᴅᴜᴇʟ*\n\n`
-    txt += `🏆 Pemenang: @${winner.split('@')[0]}\n`
-    txt += `💀 Kalah: @${loser.split('@')[0]}\n\n`
-    txt += `> 💰 Hadiah: Rp ${bet.toLocaleString('id-ID')}\n`
+    let txt = `⚔️ *RESULTADO ᴅᴜᴇʟ*\n\n`
+    txt += `🏆 Ganador: @${winner.split('@')[0]}\n`
+    txt += `💀 Perdedor: @${loser.split('@')[0]}\n\n`
+    txt += `💰 Premio: Rp. ${bet.toLocaleString('id-ID')}\n`
     txt += `> 🚄 Exp: +${expGain} (winner)`
     
     await sock.sendMessage(m.chat, { text: txt, contextInfo: getRpgContextInfo('⚔️ DUEL', 'Result!') }, { quoted: m })

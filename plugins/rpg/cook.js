@@ -17,9 +17,9 @@ const pluginConfig = {
 }
 
 const RECIPES = {
-    fish_soup: { name: '🍲 Sup Ikan', materials: { fish: 2 }, heal: 30 },
-    grilled_meat: { name: '🍖 Daging Panggang', materials: { rabbit: 1, wood: 1 }, heal: 40 },
-    apple_pie: { name: '🥧 Pie Apel', materials: { apple: 3 }, heal: 25 },
+    fish_soup: { name: '🍲 Sopa de pescado', materials: { fish: 2 }, heal: 30 },
+    grilled_meat: { name: '🍖 Carne asada', materials: { rabbit: 1, wood: 1 }, heal: 40 },
+    apple_pie: { name: '🥧 Tarta de manzana', materials: { apple: 3 }, heal: 25 },
     steak: { name: '🥩 Steak', materials: { boar: 1, coal: 1 }, heal: 60 }
 }
 
@@ -53,11 +53,14 @@ async function handler(m, { sock }) {
     }
     
     if (!cooked) {
-        let txt = `🍳 *ᴄᴏᴏᴋ - ʀᴇsᴇᴘ*\n\n`
+        let txt = `🍳 *COCINAR — RECETAS*
+
+`
         for (const [key, recipe] of Object.entries(RECIPES)) {
             txt += `╭┈┈⬡「 ${recipe.name} 」\n`
             txt += `┃ ❤️ Heal: +${recipe.heal}\n`
-            txt += `┃ 📦 Bahan:\n`
+            txt += `┃ 📦 Materiales:
+`
             for (const [mat, qty] of Object.entries(recipe.materials)) {
                 const has = user.inventory[mat] || 0
                 txt += `┃   ${has >= qty ? '✅' : '❌'} ${mat}: ${has}/${qty}\n`
@@ -76,8 +79,8 @@ async function handler(m, { sock }) {
     
     db.save()
     
-    let txt = `🍳 *ᴄᴏᴏᴋ sᴜᴋsᴇs*\n\n`
-    txt += `> 🍽️ Membuat: ${cooked.name}\n`
+    let txt = `🍳 *ᴄᴏᴏᴋ COMPLETADO*\n\n`
+    txt += `> 🍽️ Preparando: ${cooked.name}\n`
     txt += `> ❤️ Health: ${oldHealth} → *${user.rpg.health}*`
     
     await m.reply(txt)

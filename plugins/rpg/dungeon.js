@@ -17,11 +17,11 @@ const pluginConfig = {
 }
 
 const DUNGEONS = [
-    { name: '🌲 Hutan Gelap', difficulty: 1, monsters: ['Goblin', 'Slime', 'Wolf'], minReward: 100, maxReward: 300 },
-    { name: '🏰 Kastil Tua', difficulty: 2, monsters: ['Skeleton', 'Zombie', 'Ghost'], minReward: 200, maxReward: 500 },
-    { name: '🌋 Gunung Api', difficulty: 3, monsters: ['Fire Elemental', 'Magma Golem', 'Dragon Whelp'], minReward: 400, maxReward: 800 },
-    { name: '🧊 Gua Es', difficulty: 4, monsters: ['Ice Golem', 'Frost Giant', 'Yeti'], minReward: 600, maxReward: 1200 },
-    { name: '👹 Neraka', difficulty: 5, monsters: ['Demon', 'Succubus', 'Devil Lord'], minReward: 1000, maxReward: 2500 }
+    { name: "🌲 Bosque oscuro", difficulty: 1, monsters: ['Goblin', 'Slime', 'Wolf'], minReward: 100, maxReward: 300 },
+    { name: "🏰 Castillo antiguo", difficulty: 2, monsters: ['Skeleton', 'Zombie', 'Ghost'], minReward: 200, maxReward: 500 },
+    { name: '🌋 Volcán', difficulty: 3, monsters: ['Fire Elemental', 'Magma Golem', 'Dragon Whelp'], minReward: 400, maxReward: 800 },
+    { name: '🧊 Cueva de hielo', difficulty: 4, monsters: ['Ice Golem', 'Frost Giant', 'Yeti'], minReward: 600, maxReward: 1200 },
+    { name: '👹 Infierno', difficulty: 5, monsters: ['Demon', 'Succubus', 'Devil Lord'], minReward: 1000, maxReward: 2500 }
 ]
 
 const LOOT_TABLE = [
@@ -46,10 +46,13 @@ async function handler(m, { sock }) {
     
     if (user.rpg.stamina < staminaCost) {
         return m.reply(
-            `⚡ *sᴛᴀᴍɪɴᴀ ʜᴀʙɪs*\n\n` +
-            `> Butuh ${staminaCost} stamina untuk dungeon.\n` +
-            `> Stamina kamu: ${user.rpg.stamina}\n\n` +
-            `💡 *Tips:* Gunakan \`${m.prefix}rest\` atau makan makanan`
+            `⚡ *RESISTENCIA AGOTADA*
+
+` +
+            `> Necesita ${staminaCost} stamina para el calabozo.
+` +
+            `> Tu resistencia: ${user.rpg.stamina}\n\n` +
+            `💡 *Consejos:* Utilice \`${m.prefix}rest\` o comer comida`
         )
     }
     
@@ -66,10 +69,10 @@ async function handler(m, { sock }) {
     user.rpg.stamina -= staminaCost
     
     await m.react('⚔️')
-    await m.reply(`🚪 *ᴍᴀsᴜᴋ ${dungeon.name.toUpperCase()}...*\n\n> Stamina: -${staminaCost}`)
+    await m.reply(`🚪 *ENTRANDO EN ${dungeon.name.toUpperCase()}...*\n\n> Stamina: -${staminaCost}`)
     await new Promise(r => setTimeout(r, 1500))
     
-    await m.reply(`👹 *ᴍᴇɴᴇᴍᴜᴋᴀɴ* ${monster}!
+    await m.reply(`👹 *ENCONTRASTE* ${monster}!
 
 > Prepárense para luchar...`)
     await new Promise(r => setTimeout(r, 2000))
@@ -97,8 +100,8 @@ async function handler(m, { sock }) {
         user.koin = (user.koin || 0) + goldReward
         await addExpWithLevelCheck(sock, m, db, user, expReward)
         
-        txt = `🎉 *ᴋᴇᴍᴇɴᴀɴɢᴀɴ!*\n\n`
-        txt += `> Con éxito derrotado ${monster} di ${dungeon.name}!\n\n`
+        txt = `🎉 *VICTORIA!*\n\n`
+        txt += `> ¡Derrotaste a ${monster} en ${dungeon.name}!\n\n`
         txt += `╭┈┈⬡「 🎁 *ʀᴇᴡᴀʀᴅ* 」\n`
         txt += `┃ ✨ EXP: *+${expReward}*\n`
         txt += `┃ 💰 Gold: *+${goldReward.toLocaleString()}*\n`
@@ -113,13 +116,13 @@ async function handler(m, { sock }) {
         user.koin = Math.max(0, (user.koin || 0) - goldLoss)
         user.rpg.health = Math.max(10, (user.rpg.health || 100) - 30)
         
-        txt = `💀 *ᴋᴇᴋᴀʟᴀʜᴀɴ!*\n\n`
-        txt += `> Dikalahkan oleh ${monster}...\n\n`
+        txt = `💀 *DERROTA!*\n\n`
+        txt += `> Derrotado por ${monster}...\n\n`
         txt += `╭┈┈⬡「 💔 *ᴘᴇɴᴀʟᴛʏ* 」\n`
         txt += `┃ 💸 Gold: *-${goldLoss.toLocaleString()}*\n`
         txt += `┃ ❤️ HP: *-30*\n`
         txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`
-        txt += `💡 *Tips:* Aumento de los niveles y el equipo`
+        txt += `💡 *Consejos:* Aumento de los niveles y el equipo`
         
         await m.react('💀')
     }

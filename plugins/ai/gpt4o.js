@@ -5,8 +5,8 @@ const pluginConfig = {
   alias: ["gpt4"],
   category: "ai",
   description: "Chat con GPT-4o",
-  usage: ".gpt4o <pertanyaan>",
-  example: ".gpt4o Hai apa kabar?",
+  usage: ".gpt4o <pregunta>",
+  example: ".gpt4o ¡Hola! ¿Cómo estás?",
   isOwner: false,
   isPremium: false,
   isGroup: false,
@@ -24,7 +24,7 @@ async function handler(m, { sock }) {
 
 > Introduzca la pregunta
 
-\`Contoh: ${m.prefix}gpt4o Hai apa kabar?\``,
+\`Ejemplo: ${m.prefix}gpt4o ¡Hola! ¿Cómo estás?\``,
     );
   }
 

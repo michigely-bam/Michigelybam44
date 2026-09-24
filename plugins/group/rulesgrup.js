@@ -18,18 +18,18 @@ const pluginConfig = {
   isEnabled: true,
 };
 
-const DEFAULT_GROUP_RULES = `📜 *ᴀᴛᴜʀᴀɴ ɢʀᴜᴘ*
+const DEFAULT_GROUP_RULES = `📜 *REGLAS DEL GRUPO*
 
-┃ 1️⃣ Dilarang spam/flood chat
-┃ 2️⃣ Dilarang promosi tanpa izin
-┃ 3️⃣ Dilarang konten SARA/Porn
-┃ 4️⃣ Hormati sesama member
-┃ Usar un lenguaje educado
-┃ 6️⃣ Dilarang share link tanpa izin
-┃ 7️⃣ Patuhi instruksi admin
-┃ 8️⃣ No toxic & bullying
+┃ 1️⃣ Prohibido hacer spam o inundar el chat
+┃ 2️⃣ Prohibido promocionar sin permiso
+┃ 3️⃣ Prohibido el contenido discriminatorio o pornográfico
+┃ 4️⃣ Respeta a los demás miembros
+┃ 5️⃣ Usa un lenguaje respetuoso
+┃ 6️⃣ No compartas enlaces sin permiso
+┃ 7️⃣ Sigue las instrucciones de los administradores
+┃ 8️⃣ Prohibido el acoso y el lenguaje tóxico
 
-_Mau langgar? Siap-siap di Kick!_`;
+_¿Quieres incumplirlas? ¡Prepárate para ser expulsado!_`;
 
 async function handler(m, { sock, config: botConfig }) {
   const db = getDatabase();

@@ -48,7 +48,7 @@ async function uploadToCatbox(buffer, filename) {
   if (!res.ok) throw new Error("Catbox falló");
   const url = await res.text();
   if (!url.startsWith("http")) throw new Error("Invalid response");
-  return { host: "Catbox", url, expires: "Permanent" };
+  return { host: "Catbox", url, expires: "Permanente" };
 }
 
 async function uploadToLitterbox(buffer, filename) {
@@ -73,7 +73,7 @@ async function uploadToLitterbox(buffer, filename) {
   if (!res.ok) throw new Error("Litterbox falló");
   const url = await res.text();
   if (!url.startsWith("http")) throw new Error("Invalid response");
-  return { host: "Litterbox", url, expires: "72 jam" };
+  return { host: "Litterbox", url, expires: "72 horas" };
 }
 
 async function uploadTo0x0_alt(buffer, filename) {
@@ -102,7 +102,7 @@ async function uploadTo0x0_alt(buffer, filename) {
     url = url;
   }
 
-  return { host: "Uguu", url, expires: "60 menit" };
+  return { host: "Uguu", url, expires: "60 minutos." };
 }
 
 async function uploadToGofile(buffer, filename) {
@@ -130,7 +130,7 @@ async function uploadToGofile(buffer, filename) {
   if (!res.ok) throw new Error("La subida de Google no ha fallado.");
   const data = await res.json();
   if (!data?.data?.downloadPage) throw new Error("Invalid response");
-  return { host: "Gofile", url: data.data.downloadPage, expires: "Permanent" };
+  return { host: "Gofile", url: data.data.downloadPage, expires: "Permanente" };
 }
 
 async function uploadToQuax(buffer, filename) {
@@ -154,7 +154,7 @@ async function uploadToQuax(buffer, filename) {
     throw new Error("Invalid response");
   }
 
-  return { host: "Qu.ax", url: data.files[0].url, expires: "Permanent" };
+  return { host: "Qu.ax", url: data.files[0].url, expires: "Permanente" };
 }
 
 async function uploadToYpnk(buffer, filename) {
@@ -184,7 +184,7 @@ async function uploadToYpnk(buffer, filename) {
   return {
     host: "YPNK",
     url: `https://cdn.ypnk.biz.id${data.files[0].url}`,
-    expires: "Unknown",
+    expires: "Desconocido",
   };
 }
 
@@ -203,11 +203,11 @@ async function uploadToPutIcu(buffer, filename) {
   const data = await res.json();
 
   if (data?.direct_url) {
-    return { host: "Put.icu", url: data.direct_url, expires: "1 hari" };
+    return { host: "Put.icu", url: data.direct_url, expires: "Un día" };
   }
 
   if (data?.url) {
-    return { host: "Put.icu", url: data.url, expires: "1 hari" };
+    return { host: "Put.icu", url: data.url, expires: "Un día" };
   }
 
   throw new Error("Invalid response");
@@ -232,7 +232,7 @@ async function uploadToTermai(buffer) {
     throw new Error("Invalid response");
   }
 
-  return { host: "Termai", url: data.path, expires: "Unknown" };
+  return { host: "Termai", url: data.path, expires: "Desconocido" };
 }
 
 const UPLOADERS = [
@@ -273,7 +273,7 @@ async function handler(m, { sock }) {
   if (m.quoted?.message) {
     const type = getContentType(m.quoted.message);
     if (!type || type === "conversation" || type === "extendedTextMessage") {
-      return m.reply("⚠️ Reply media (gambar/video/audio/file)!");
+      return m.reply("⚠️ ¡Responda a los medios (imagen/video/audio/file)!");
     }
 
     try {
@@ -291,7 +291,7 @@ async function handler(m, { sock }) {
   } else if (m.message) {
     const type = getContentType(m.message);
     if (!type || type === "conversation" || type === "extendedTextMessage") {
-      return m.reply("⚠️ Enviar medios + leyenda `.tourl` atau reply media");
+      return m.reply("⚠️ Enviar medios + leyenda `.tourl` o respuesta de medios");
     }
 
     try {
@@ -330,7 +330,7 @@ async function handler(m, { sock }) {
     m.react("❌");
     return m.reply(`❌ ¡Todas las cargas fallaron!
 
-> Failed: ${failed.join(", ")}`);
+> Fallaron: ${failed.join(", ")}`);
   }
 
   let text = `*UPLOADER*
@@ -339,9 +339,9 @@ async function handler(m, { sock }) {
   const links = [];
 
   results.forEach((r, i) => {
-    const status = r.expires === "Permanent" ? "∞ Non-Expired" : r.expires;
+    const status = r.expires === "Permanente" ? "∞ Sin vencimiento" : r.expires;
     text += `${i + 1} *${r.host}*
-⏳ *Finales en:* ${status}\n🔗 Linknya: {{IE_${i}}}link disini{{/IE_${i}}}\n\n`;
+⏳ *Vence en:* ${status}\n🔗 Enlace: {{IE_${i}}}enlace aquí{{/IE_${i}}}\n\n`;
     links.push({
       url: r.url,
       displayName: config.bot.name,
@@ -351,11 +351,11 @@ async function handler(m, { sock }) {
   });
 
   if (failed.length > 0) {
-    text += `❌ Gagal: ${failed.join(", ")}`;
+    text += `❌ Falló: ${failed.join(", ")}`;
   }
 
   await sock.sendLinkV2(m.chat, text, links, m, {
-    footer: `✨ *Selesai!*`,
+    footer: `✨ *Terminado!*`,
   });
 
   m.react("✅");

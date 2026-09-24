@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'toaudio',
     alias: ['tomp3', 'videotoaudio', 'extractaudio'],
     category: 'tools',
-    description: 'Mengubah video/voice note menjadi audio MP3',
+    description: "Convertir el vídeo/voice nota en audio MP3",
     usage: '.toaudio (reply/caption video/vn)',
     example: '.toaudio',
     isOwner: false,
@@ -59,24 +59,32 @@ async function handler(m, { sock }) {
     
     if (!mediaSource) {
         await m.reply(
-            `❌ *ɢᴀɢᴀʟ*\n\n` +
-            `> Tidak ada video/voice note yang terdeteksi!\n\n` +
-            `*Cara penggunaan:*\n` +
-            `> 1. Kirim video + caption \`${m.prefix}toaudio\`\n` +
-            `> 2. Reply video/VN dengan \`${m.prefix}toaudio\``
+            `❌ *ERROR*\n\n` +
+            `> ¡No se detectó ningún video ni nota de voz!
+
+` +
+            `*Modo de uso:*
+` +
+            `> 1. Envíe el vídeo + la captura \`${m.prefix}toaudio\`\n` +
+            `> 2. Responder el video/VN con \`${m.prefix}toaudio\``
         )
         return
     }
     if (!isVideo && !isPtt) {
         await m.reply(
-            `⚠️ *sᴜᴅᴀʜ ᴀᴜᴅɪᴏ*\n\n` +
-            `> Media ini sudah dalam format audio.\n` +
-            `> Gunakan \`${m.prefix}tovn\` jika ingin mengubah ke voice note.`
+            `⚠️ *después de audio*
+
+` +
+            `Estos medios ya están en formato de audio.
+` +
+            `> Usa \`${m.prefix}Usa \`tovn\` si quieres convertirlo en una nota de voz.`
         )
         return
     }
 
-    await m.reply(`🕕 *ᴍᴇᴍᴘʀᴏsᴇs...*\n\n> Mengekstrak audio dari media...`)
+    await m.reply(`🕕 *PROCESANDO...*
+
+> Extraer el audio de los medios...`)
 
     const tempDir = path.join(process.cwd(), 'temp')
     if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true })
@@ -90,9 +98,10 @@ async function handler(m, { sock }) {
 
         if (!buffer || buffer.length === 0) {
             await m.reply(
-                `❌ *ɢᴀɢᴀʟ*\n\n` +
-                `> Tidak dapat mengunduh media.\n` +
-                `> Media mungkin sudah tidak tersedia.`
+                `❌ *ERROR*\n\n` +
+                `> No se pudieron descargar los archivos multimedia.
+` +
+                `Los medios de comunicación pueden no estar disponibles.`
             )
             return
         }
@@ -103,9 +112,12 @@ async function handler(m, { sock }) {
 
         if (!fs.existsSync(outputPath)) {
             await m.reply(
-                `❌ *ᴋᴏɴᴠᴇʀsɪ ɢᴀɢᴀʟ*\n\n` +
-                `> Gagal mengekstrak audio dari media.\n` +
-                `> Pastikan ffmpeg terinstall dengan benar.`
+                `❌ *la conversión fracasó*
+
+` +
+                `> Incapacidad para extraer audio de los medios.
+` +
+                `> Asegúrese de que el ffmpeg esté instalado correctamente.`
             )
             return
         }
@@ -119,7 +131,8 @@ async function handler(m, { sock }) {
     } catch (error) {
         await m.reply(
             `❌ *ᴇʀʀᴏʀ*\n\n` +
-            `> Terjadi kesalahan saat memproses.\n` +
+            `Ha ocurrido un error en el procesamiento.
+` +
             `> _${error.message}_`
         )
     } finally {

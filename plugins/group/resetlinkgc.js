@@ -24,9 +24,9 @@ async function handler(m, { sock }) {
         await sock.groupRevokeInvite(m.chat)
         
         m.react('✅')
-        m.reply(`✅ *ʟɪɴᴋ ɢʀᴜᴘ ᴅɪʀᴇsᴇᴛ*
+        m.reply(`✅ *el enlace del grupo se rediseñó*
 Los enlaces de grupo antiguo están fuera de orden.
-Gunakan \`${m.prefix}linkgc\` para conseguir un nuevo enlace.`)
+Usa \`${m.prefix}linkgc\` para conseguir un nuevo enlace.`)
         
     } catch (err) {
         m.react('☢')

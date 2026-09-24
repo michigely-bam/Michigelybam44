@@ -29,24 +29,27 @@ async function handler(m, { sock }) {
     
     if (user.rpg.stamina < staminaCost) {
         return m.reply(
-            `⚡ *sᴛᴀᴍɪɴᴀ ʜᴀʙɪs*\n\n` +
-            `> Butuh ${staminaCost} stamina untuk berburu.\n` +
-            `> Stamina kamu: ${user.rpg.stamina}`
+            `⚡ *RESISTENCIA AGOTADA*
+
+` +
+            `> Necesita ${staminaCost} stamina para la caza.
+` +
+            `> Tu resistencia: ${user.rpg.stamina}`
         )
     }
     
     user.rpg.stamina -= staminaCost
     
-    await m.reply('🏹 *sᴇᴅᴀɴɢ ʙᴇʀʙᴜʀᴜ...*')
+    await m.reply("🏹 *CAZANDO...*")
     await new Promise(r => setTimeout(r, 2500))
     
     const animals = [
-        { name: '🐰 Kelinci', item: 'rabbit', chance: 50, exp: 100 },
-        { name: '🦌 Rusa', item: 'deer', chance: 30, exp: 200 },
-        { name: '🐗 Babi Hutan', item: 'boar', chance: 20, exp: 300 },
-        { name: '🐻 Beruang', item: 'bear', chance: 10, exp: 500 },
-        { name: '🦁 Singa', item: 'lion', chance: 5, exp: 800 },
-        { name: '🐉 Naga', item: 'dragon', chance: 1, exp: 2000 }
+        { name: "🐰 Conejo", item: 'rabbit', chance: 50, exp: 100 },
+        { name: '🦌 Ciervo', item: 'deer', chance: 30, exp: 200 },
+        { name: '🐗 Jabalí', item: 'boar', chance: 20, exp: 300 },
+        { name: '🐻 Oso', item: 'bear', chance: 10, exp: 500 },
+        { name: "🦁 León", item: 'lion', chance: 5, exp: 800 },
+        { name: "🐉 Dragón", item: 'dragon', chance: 1, exp: 2000 }
     ]
     
     const rand = Math.random() * 100
@@ -68,8 +71,10 @@ async function handler(m, { sock }) {
     
     db.save()
     
-    let txt = `🏹 *ʜᴜɴᴛɪɴɢ sᴇʟᴇsᴀɪ*\n\n`
-    txt += `╭┈┈⬡「 🎯 *ʜᴀsɪʟ* 」\n`
+    let txt = `🏹 *la caza terminó*
+
+`
+    txt += `╭┈┈⬡「 🎯 *RESULTADO* 」\n`
     txt += `┃ ${caught.name}: *+1*\n`
     txt += `┃ 🚄 Exp: *+${caught.exp}*\n`
     txt += `┃ ⚡ Stamina: *-${staminaCost}*\n`

@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "spotify",
   alias: ["spotifysearch", "spsearch"],
   category: "search",
-  description: "Cari lagu di Spotify",
+  description: "Busca canciones en Spotify",
   usage: ".spotify <query>",
   example: ".spotify neffex grateful",
   isOwner: false,
@@ -22,9 +22,9 @@ async function handler(m) {
 
   if (!query) {
     return m.reply(
-      `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+      `⚠️ *MODO DE USO*\n\n` +
         `> \`${m.prefix}spotify <query>\`\n\n` +
-        `> Contoh:\n` +
+        `> Ejemplo:\n` +
         `> \`${m.prefix}spotify neffex grateful\``,
     );
   }
@@ -35,7 +35,7 @@ async function handler(m) {
     );
     const results = res.data;
     if (!results.status) {
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > No se han encontrado resultados *${query}*`);
     }
@@ -51,7 +51,7 @@ async function handler(m) {
       txt += `   ├ ${t.url}\n\n`;
     });
 
-    txt += `> 💡 Download: \`${m.prefix}spdl <url>\` atau \`${m.prefix}spotplay ${query}\``;
+    txt += `> 💡 Descargar: \`${m.prefix}spdl <url>\` o \`${m.prefix}spotplay ${query}\``;
 
     return m.reply(txt.trim());
   } catch (err) {

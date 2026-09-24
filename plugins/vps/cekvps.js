@@ -6,7 +6,7 @@ const pluginConfig = {
   name: ["cekvps", "cekdroplet", "vpsstatus", "infovps"],
   alias: [],
   category: "vps",
-  description: "Cek detail VPS DigitalOcean",
+  description: "Consulta los detalles de un VPS de DigitalOcean",
   usage: ".cekvps <id>",
   example: ".cekvps 123456789",
   isOwner: false,
@@ -33,16 +33,16 @@ async function handler(m, { sock }) {
   const token = config.digitalocean?.token;
 
   if (!token) {
-    return m.reply(`⚠️ *ᴅɪɢɪᴛᴀʟᴏᴄᴇᴀɴ ʙᴇʟᴜᴍ ᴅɪsᴇᴛᴜᴘ*`);
+    return m.reply(`⚠️ *DigitalOcean aún no está configurado*`);
   }
 
   if (!hasAccess(m.sender, m.isOwner)) {
-    return m.reply(`❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*`);
+    return m.reply(`❌ *se rechazó el acceso*`);
   }
 
   const dropletId = m.text?.trim();
   if (!dropletId) {
-    return m.reply(`⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n> \`${m.prefix}cekvps <droplet_id>\``);
+    return m.reply(`⚠️ *MODO DE USO*\n\n> \`${m.prefix}cekvps <droplet_id>\``);
   }
 
   try {

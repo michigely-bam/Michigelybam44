@@ -3,8 +3,8 @@ const pluginConfig = {
     name: 'cekpacar',
     alias: ['pacar', 'pasangan', 'gebetan'],
     category: 'fun',
-    description: 'Cek status hubungan seseorang',
-    usage: '.cekpacar atau .cekpacar @tag',
+    description: "Consultar el estado sentimental de alguien",
+    usage: ".cekpacar o .cekpacar @tag",
     example: '.cekpacar',
     isOwner: false,
     isPremium: false,
@@ -37,12 +37,15 @@ async function handler(m, { sock }) {
     const userData = db.getUser(targetJid) || {}
     
     if (!userData.fun?.pasangan) {
-        const nama = isOther ? `@${targetJid.split('@')[0]}` : 'Kamu'
+        const nama = isOther ? `@${targetJid.split('@')[0]}` : "Tú"
         await m.react('💔')
         return m.reply(
-            `💔 *sᴛᴀᴛᴜs ʜᴜʙᴜɴɢᴀɴ*\n\n` +
-            `*${nama}* tidak punya pasangan.\n` +
-            `TIP: Cari pasangan dulu dengan \`${m.prefix}tembak @tag\``,
+            `💔 *ESTADO DE LA RELACIÓN*
+
+` +
+            `*${nama}* no tiene pareja.
+` +
+            `TIP: Busque una pareja primero con \`${m.prefix}tembak @tag\``,
             { mentions: isOther ? [targetJid] : [] }
         )
     }
@@ -50,21 +53,25 @@ async function handler(m, { sock }) {
     const partnerJid = userData.fun.pasangan
     const partnerData = db.getUser(partnerJid) || {}
     const isMutual = partnerData.fun?.pasangan === targetJid
-    const nama = isOther ? `@${targetJid.split('@')[0]}` : 'Kamu'
+    const nama = isOther ? `@${targetJid.split('@')[0]}` : "Tú"
     if (isMutual) {
         await m.react('💕')
         await m.reply(
-            `💕 *sᴛᴀᴛᴜs ʜᴜʙᴜɴɢᴀɴ*\n\n` +
-            `*${nama}* sedang pacaran dengan @${partnerJid.split('@')[0]}! 🥳`,
+            `💕 *ESTADO DE LA RELACIÓN*
+
+` +
+            `*${nama}*está saliendo con @${partnerJid.split('@')[0]}! 🥳`,
             { mentions: [targetJid, partnerJid] }
         )
     } else {
         await m.react('💭')
         await m.reply(
-            `💭 *sᴛᴀᴛᴜs ʜᴜʙᴜɴɢᴀɴ*\n\n` +
-            `*${nama}* lagi pdkt sama @${partnerJid.split('@')[0]}\n` +
-            `Status: *Digantung* 😅\n\n` +
-            `Menunggu jawaban...`,
+            `💭 *ESTADO DE LA RELACIÓN*
+
+` +
+            `*${nama}*más pdkt igual @${partnerJid.split('@')[0]}\n` +
+            `Estado: *En espera* 😅\n\n` +
+            `Esperando una respuesta...`,
             { mentions: [targetJid, partnerJid] }
         )
     }

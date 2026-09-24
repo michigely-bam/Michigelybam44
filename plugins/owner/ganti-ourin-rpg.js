@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'ganti-ourin-rpg.jpg',
     alias: ['gantirpg', 'setourinrpg'],
     category: 'owner',
-    description: 'Ganti gambar ourin-rpg.jpg (thumbnail rpg)',
-    usage: ".reemplazar -ourin -rpg.jpg (reply / enviar imagen)",
+    description: "Cambiar las imágenes ourin-rpg.jpg",
+    usage: ".gantirpg (responde o envía una imagen)",
     example: '.ganti-ourin-rpg.jpg',
     isOwner: true,
     isPremium: false,
@@ -21,7 +21,7 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
     
     if (!isImage) {
-        return m.reply(`🖼️ *ɢᴀɴᴛɪ ᴏᴜʀɪɴ-ʀᴘɢ.ᴊᴘɢ*
+        return m.reply(`🖼️ *reemplazado por ourin-rpg.jpg*
 
 > Enviar / respuesta imágenes para reemplazar
 > File: assets/images/ourin-rpg.jpg`)
@@ -48,7 +48,9 @@ async function handler(m, { sock }) {
         
         fs.writeFileSync(targetPath, buffer)
         
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*\n\n> Gambar ourin-rpg.jpg telah diganti`)
+        m.reply(`✅ *correcto*
+
+Las imágenes ourin-rpg.jpg han sido reemplazadas`)
         
     } catch (error) {
         await m.reply(te(m.prefix, m.command, m.pushName))

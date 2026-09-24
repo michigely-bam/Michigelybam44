@@ -38,9 +38,12 @@ async function handler(m) {
 
     if (!clanId) {
         return m.reply(
-            `❌ Kamu belum punya clan\n\n` +
-            `Buat: *.clancreate <nama>*\n` +
-            `Gabung: *.clanjoin <id>*`
+            `❌ No tienes clan.
+
+` +
+            `Crear: *.clancreate <nombre>*
+` +
+            `Unirse: *.clanjoin <id>*`
         )
     }
 
@@ -67,10 +70,10 @@ async function handler(m) {
         `┌ 👑 Leader · @${clan.leader.split('@')[0]}\n` +
         `├ 👥 Members · ${clan.members.length}/50\n` +
         `├ 🔓 Status · ${clan.isOpen ? 'Open' : 'Closed'}\n` +
-        `└ 📅 Dibuat · ${new Date(clan.createdAt).toLocaleDateString('id-ID')}\n\n` +
+        `└ 📅 Se hizo · ${new Date(clan.createdAt).toLocaleDateString('id-ID')}\n\n` +
         `⚔️ *War Stats*\n` +
         `${clan.wins || 0}W · ${clan.losses || 0}L · ${winRate}% WR\n\n` +
-        `_${clan.description || 'Belum ada deskripsi'}_\n\n` +
+        `_${clan.description || "No hay ninguna descripción."}_\n\n` +
         `ID: \`${clan.id}\``,
         { mentions: [clan.leader] }
     )

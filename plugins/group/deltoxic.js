@@ -4,8 +4,8 @@ const pluginConfig = {
     alias: ['hapustoxic', 'remtoxic', 'removetoxic'],
     category: 'group',
     description: "Eliminar la palabra tóxica de la lista",
-    usage: '.deltoxic <kata>',
-    example: '.deltoxic kata_kasar',
+    usage: '.deltoxic <palabra>',
+    example: ".deltoxic palabras_casar",
     isOwner: false,
     isPremium: false,
     isGroup: true,
@@ -23,8 +23,10 @@ async function handler(m, { sock }) {
     if (!word) {
         return m.reply(
             `🗑️ *ᴅᴇʟ ᴛᴏxɪᴄ*\n\n` +
-            `> Gunakan: \`.deltoxic <kata>\`\n\n` +
-            `\`Contoh: ${m.prefix}deltoxic katakasar\``
+            `> Utilice: \`.deltoxic <palabra>\`
+
+` +
+            `\`Ejemplo: ${m.prefix}deltoxic katakasar\``
         )
     }
     
@@ -34,7 +36,9 @@ async function handler(m, { sock }) {
     const index = toxicWords.indexOf(word)
     
     if (index === -1) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Kata \`${word}\` no está en la lista`)
+        return m.reply(`❌ *falló*
+
+> Palabra \`${word}\` no está en la lista`)
     }
     
     toxicWords.splice(index, 1)
@@ -43,10 +47,13 @@ async function handler(m, { sock }) {
     m.react('✅')
     
     await m.reply(
-        `✅ *ᴋᴀᴛᴀ ᴛᴏxɪᴄ ᴅɪʜᴀᴘᴜs*\n\n` +
+        `✅ *la palabra tóxica fue eliminada*
+
+` +
         `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-        `┃ 📝 ᴋᴀᴛᴀ: \`${word}\`\n` +
-        `┃ 📊 sɪsᴀ: \`${toxicWords.length}\` kata\n` +
+        `┃ 📝 PALABRA: \`${word}\`\n` +
+        `┃ 📊 restante: \`${toxicWords.length}\` palabra
+` +
         `╰┈┈⬡`
     )
 }

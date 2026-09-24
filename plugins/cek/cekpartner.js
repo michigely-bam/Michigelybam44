@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'cekpartner',
     alias: ['partnerinfo'],
     category: 'cek',
-    description: 'Cek detail status partner user',
+    description: "Consultar los detalles del estado de socio de un usuario",
     usage: '.cekpartner @user',
     example: '.cekpartner',
     isOwner: false,
@@ -49,16 +49,19 @@ async function handler(m) {
     const totalDays = info.addedAt ? Math.ceil((info.expired - info.addedAt) / (1000 * 60 * 60 * 24)) : '?'
     const user = db.getUser(jid)
 
-    let txt = `🤝 *DETAIL PARTNER*\n\n`
+    let txt = `🤝 *DETALLES DEL SOCIO*
+
+`
     txt += `👤 User: @${targetNumber}\n`
-    txt += `📛 Nama: *${info.name || 'Unknown'}*\n`
-    txt += `📅 Mulai: *${info.addedAt ? formatDate(info.addedAt) : 'Unknown'}*\n`
+    txt += `📛 Nombre: *${info.name || 'Desconocido'}*\n`
+    txt += `📅 Inicio: *${info.addedAt ? formatDate(info.addedAt) : 'Desconocido'}*\n`
     txt += `⏳ Expired: *${formatDate(info.expired)}*\n`
-    txt += `🗓️ Durasi: *${totalDays} hari*\n`
-    txt += `📊 Sisa: *${remaining > 0 ? remaining + ' hari' : '⚠️ Expired'}*\n`
+    txt += `🗓️ Duración: *${totalDays} días*
+`
+    txt += `📊 Restante: *${remaining > 0 ? remaining + " días" : '⚠️ Expired'}*\n`
     if (user) {
-        txt += `⚡ Energi: *${user.energi === -1 ? '∞' : (user.energi ?? 0)}*\n`
-        txt += `💰 Koin: *${user.koin === -1 ? '∞' : (user.koin ?? 0).toLocaleString('id-ID')}*\n`
+        txt += `⚡ Energía: *${user.energi === -1 ? '∞' : (user.energi ?? 0)}*\n`
+        txt += `💰 Monedas: *${user.koin === -1 ? '∞' : (user.koin ?? 0).toLocaleString('id-ID')}*\n`
     }
 
     await m.reply(txt, { mentions: [jid] })

@@ -25,9 +25,11 @@ async function handler(m) {
     if (!clanId) {
         return m.reply(
             `🏰 *JOIN CLAN*\n\n` +
-            `Masukkan ID clan!\n\n` +
-            `Contoh: *.clanjoin clan_123456*\n` +
-            `Cek ID: *.clanleaderboard*`
+            `¡Introduce el ID del clan!
+
+` +
+            `Ejemplo: *.clanjoin clan_123456*\n` +
+            `Consultar ID: *.clanleaderboard*`
         )
     }
 
@@ -53,10 +55,10 @@ Sal primero: *.clanleave*`)
 
     await m.reply(
         `${emblem} *WELCOME!*\n\n` +
-        `@${m.sender.split('@')[0]} bergabung ke *${clan.name}*\n\n` +
+        `@${m.sender.split('@')[0]} se unió a *${clan.name}*\n\n` +
         `Leader: @${clan.leader.split('@')[0]}\n` +
         `Members: ${clan.members.length}/${MAX_MEMBERS}\n\n` +
-        `Lihat info: *.claninfo*`,
+        `Véase la información: *.claninfo*`,
         { mentions: [m.sender, clan.leader] }
     )
 }

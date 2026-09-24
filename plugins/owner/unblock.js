@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: [],
     category: 'owner',
     description: "Desbloquear el número de WhatsApp",
-    usage: ".desbloqueo < número / respuesta / mención >",
+    usage: ".unblock <número/respuesta/mención>",
     example: '.unblock 628xxx',
     isOwner: true,
     cooldown: 5,
@@ -30,11 +30,11 @@ async function handler(m, { sock }) {
 
     if (!targetJid) {
         return m.reply(
-            '⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n' +
-            '> `.unblock 628xxx` — Unblock via nomor\n' +
-            '> `.unblock` (reply pesan) — Unblock pengirim\n' +
-            '> `.unblock @mention` — Unblock yang di-mention\n' +
-            '> `.unblock` (di private chat) — Unblock user ini'
+            '⚠️ *MODO DE USO*\n\n' +
+            "> `.unblock 628xxx` — Desbloquear a través del número\n" +
+            "> `.unblock` (responde a un mensaje) — Desbloquear al remitente\n" +
+            "> `.unblock @mention` — Unblock mencionado\n" +
+            "> `.unblock` (en chat privado) — Desbloquear a este usuario"
         )
     }
 
@@ -42,7 +42,7 @@ async function handler(m, { sock }) {
         await sock.updateBlockStatus(targetJid, 'unblock')
         await m.react('✅')
         return m.reply(
-            `✅ *ɴᴏᴍᴏʀ ᴅɪ-ᴜɴʙʟᴏᴄᴋ*\n\n` +
+            `✅ *NÚMERO DESBLOQUEADO*\n\n` +
             `> Target: @${targetJid.split('@')[0]}`,
             { mentions: [targetJid] }
         )

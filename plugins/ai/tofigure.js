@@ -7,7 +7,7 @@ const pluginConfig = {
     alias: ['figure', 'figurestyle'],
     category: 'ai',
     description: "Convertir imágenes en Figura / Estilo de acción",
-    usage: '.tofigure (reply gambar)',
+    usage: ".tofigure (respuesta a la imagen)",
     example: '.tofigure',
     isOwner: false,
     isPremium: false,

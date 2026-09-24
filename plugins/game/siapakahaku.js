@@ -3,8 +3,8 @@ import { games } from '../../src/lib/ourin-games.js'
 games.register('siapakahaku', {
     alias: ['siapa', 'whoami'],
     emoji: '🎭',
-    title: 'SIAPAKAH AKU',
-    description: 'Tebak dari deskripsi'
+    title: "¿QUIÉN SOY YO?",
+    description: "Adivina a partir de la descripción"
 })
 
 const { config: pluginConfig, handler, answerHandler } = games.createPlugin('siapakahaku')

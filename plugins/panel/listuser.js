@@ -13,7 +13,7 @@ const pluginConfig = {
     alias: allAliases,
     category: 'panel',
     description: "Listar todos los usuarios en el panel (v1-v5)",
-    usage: '.listuserv1 atau .listuserv2',
+    usage: ".listuserv1 o .listuserv2",
     example: '.listuserv1',
     isOwner: false,
     isPremium: false,
@@ -66,9 +66,11 @@ async function handler(m, { sock }) {
     if (!hasFullAccess(m.sender, serverVersion, m.isOwner)) {
         const userRole = getUserRole(m.sender, serverVersion)
         return m.reply(
-            `❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n` +
-            `> Kamu tidak punya akses ke *${serverLabel}*\n` +
-            `> Role kamu: *${userRole || 'Tidak ada'}*`
+            `❌ *se rechazó el acceso*
+
+` +
+            `No tienes acceso a *${serverLabel}*\n` +
+            `> Tu rol: *${userRole || "No hay"}*`
         )
     }
     
@@ -77,12 +79,12 @@ async function handler(m, { sock }) {
     
     if (missingConfig.length > 0) {
         const available = getAvailableServers(pteroConfig)
-        let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} ʙᴇʟᴜᴍ ᴋᴏɴꜰɪɢ*\n\n`
+        let txt = `⚠️ *sᴇʀᴠᴇʀ ${serverLabel} SIN CONFIGURAR*\n\n`
         if (available.length > 0) {
             txt += `> Servidor disponible: *${available.join(', ')}*\n`
-            txt += `> Contoh: \`${m.prefix}listuser${available[0]}\``
+            txt += `> Ejemplo: \`${m.prefix}listuser${available[0]}\``
         } else {
-            txt += `> Isi config pterodactyl di \`config.js\``
+            txt += `> Contenido de config pterodactyl en \`config.js\``
         }
         return m.reply(txt)
     }
@@ -99,12 +101,12 @@ async function handler(m, { sock }) {
         const users = res.data.data || []
         
         if (users.length === 0) {
-            return m.reply(`📋 *ᴅᴀꜰᴛᴀʀ ᴜsᴇʀ [${serverLabel}]*
+            return m.reply(`📋 *lista de usuarios [${serverLabel}]*
 
 > No hay usuarios registrados.`)
         }
         
-        let txt = `📋 *ᴅᴀꜰᴛᴀʀ ᴜsᴇʀ [${serverLabel}]*\n\n`
+        let txt = `📋 *lista de usuarios [${serverLabel}]*\n\n`
         txt += `> Total: *${users.length}* user\n\n`
         
         users.slice(0, 20).forEach((u, i) => {
@@ -116,12 +118,14 @@ async function handler(m, { sock }) {
         })
         
         if (users.length > 20) {
-            txt += `\n> ... dan ${users.length - 20} user lainnya`
+            txt += `\n> ...y ${users.length - 20} usuarios más`
         }
         
         const available = getAvailableServers(pteroConfig)
         if (available.length > 1) {
-            txt += `\n\n> Server lain: *${available.filter(s => s !== serverVersion).join(', ')}*`
+            txt += `
+
+Otros servidores: *${available.filter(s => s !== serverVersion).join(', ')}*`
         }
         
         return m.reply(txt)

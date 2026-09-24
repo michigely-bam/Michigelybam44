@@ -4,9 +4,9 @@ const pluginConfig = {
     name: 'absen',
     alias: ['hadir', 'present'],
     category: 'group',
-    description: 'Tandai kehadiran di sesi absen',
-    usage: '.absen',
-    example: '.absen',
+    description: "Marca la asistencia en la sesión de registro",
+    usage: ".absen",
+    example: ".absen",
     isOwner: false,
     isPremium: false,
     isGroup: true,
@@ -20,10 +20,15 @@ async function handler(m, { sock }) {
     const chatId = m.chat
     if (!global.absensi[chatId]) {
         return m.reply(
-            `❌ *ᴛɪᴅᴀᴋ ᴀᴅᴀ ᴀʙsᴇɴ*\n\n` +
-            `> Belum ada sesi absen di grup ini!\n\n` +
-            `> Admin dapat memulai dengan\n` +
-            `> *.mulaiabsen [keterangan]*`
+            `❌ *no hay asistencia*
+
+` +
+            `¡No hay sesiones de asistencia en este grupo!
+
+` +
+            `Los administradores pueden comenzar con
+` +
+            `> *.mulaiabsen [descripción]*`
         )
     }
     const absen = global.absensi[chatId]
@@ -36,16 +41,18 @@ async function handler(m, { sock }) {
     const list = absen.peserta
         .map((jid, i) => `┃ ${i + 1}. @${jid.split('@')[0]}`)
         .join('\n')
-    await m.reply(`✅ *MANTAP, @${m.sender.split('@')[0]} HADIRR*\n` +
-            `TUJUAN ABSEN: ${absen.keterangan}\n` +
-            `╭┈┈⬡「 📋 INFO LAIN 」\n` +
+    await m.reply(`✅ *¡GENIAL, @${m.sender.split('@')[0]} HADIRR*\n` +
+            `FINALIDADES DE ASISTENCIA: ${absen.keterangan}\n` +
+            `╭┈┈⬡「 📋 OTRA INFORMACIÓN 」
+` +
             `┃ 📅 ${dateStr}\n` +
             `┃ 👥 Total: ${absen.peserta.length}\n` +
-            `├┈┈⬡「 📝 *ᴅᴀғᴛᴀʀ ʜᴀᴅɪʀ* 」\n` +
+            `├┈┈⬡「 📝 *LISTA DE ASISTENCIA* 」\n` +
             `${list}\n` +
             `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-            `> _Ketik *${m.prefix}absen* untuk hadir_\n` +
-            `> _Ketik *${m.prefix}cekabsen* untuk melihat daftar_`,
+            `> Escribe *${m.prefix}asistencia*para asistir_
+` +
+            `> Escribe *${m.prefix}cekabsen*para ver la lista_`,
             { mentions: absen.peserta })
 }
 export { pluginConfig as config, handler }

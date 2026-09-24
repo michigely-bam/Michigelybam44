@@ -4,7 +4,7 @@ const pluginConfig = {
   name: "spotifydl",
   alias: ["spdl", "spotify-dl", "spotdl"],
   category: "download",
-  description: "Download lagu dari Spotify",
+  description: "Descarga canciones de Spotify",
   usage: ".spdl <url>",
   example: ".spdl https://open.spotify.com/track/xxx",
   cooldown: 15,
@@ -23,7 +23,7 @@ async function handler(m, { sock }) {
   if (!url)
     return m.reply(
       `🎵 *sᴘᴏᴛɪꜰʏ ᴅᴏᴡɴʟᴏᴀᴅ*\n\n` +
-        `╭┈┈⬡「 📋 *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ* 」\n` +
+        `╭┈┈⬡「 📋 *MODO DE USO* 」\n` +
         `┃ \`${m.prefix}spdl <url>\`\n` +
         `╰┈┈⬡`,
     );

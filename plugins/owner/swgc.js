@@ -80,7 +80,7 @@ const pluginConfig = {
   alias: ["statusgrup", "swgroup", "groupstory", "toswgc"],
   category: "owner",
   description: "Estado del grupo de correos / Historia a grupo seleccionado (verde transfronterizo)",
-  usage: ".swgc <teks> atau reply media",
+  usage: ".swgc <texto> o respuesta multimedia",
   example: ".¡Hola a todos!",
   isOwner: true,
   isPremium: false,
@@ -113,7 +113,7 @@ async function handler(m, { sock, db }) {
     }
 
     try {
-      let groupName = "Grup";
+      let groupName = "Grupo";
       try {
         const meta = await sock.groupMetadata(targetGroupId);
         groupName = meta.subject;
@@ -156,9 +156,9 @@ async function handler(m, { sock, db }) {
       }
 
       const mediaType = pendingData.rawContent.text
-        ? "Teks"
+        ? "Texto"
         : pendingData.rawContent.image
-          ? "Gambar"
+          ? "Imagen"
           : pendingData.rawContent.video
             ? "Video"
             : pendingData.rawContent.audio
@@ -179,7 +179,8 @@ async function handler(m, { sock, db }) {
       }
     } catch (error) {
       await m.reply(
-        `❌ *ᴇʀʀᴏʀ*\n\n` + `> Gagal posting story.\n` + `> _${error.message}_`,
+        `❌ *ᴇʀʀᴏʀ*\n\n` + `El fracaso en publicar la historia.
+` + `> _${error.message}_`,
       );
     }
     return;
@@ -262,10 +263,11 @@ async function handler(m, { sock, db }) {
     rawContent.backgroundColor = "#128C7E";
   } else {
     await m.reply(
-      `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-        `> \`${m.prefix}swgc teks\` - Story teks\n` +
-        `> Reply gambar/video/audio + \`${m.prefix}swgc\`\n` +
-        `> Kirim gambar/video + caption \`${m.prefix}swgc\``,
+      `⚠️ *MODO DE USO*\n\n` +
+        `> \`${m.prefix}swgc texto\` - Estado de texto
+` +
+        `> Responde a una imagen, video o audio + \`${m.prefix}swgc\`\n` +
+        `> Envía imágenes/video + descripción \`${m.prefix}swgc\``,
     );
     return;
   }
@@ -288,16 +290,16 @@ async function handler(m, { sock, db }) {
     }
 
     const groupRows = groupList.map(([id, meta]) => ({
-      title: meta.subject || "Unknown Group",
+      title: meta.subject || "Grupo desconocido",
       description: id,
       id: `${m.prefix}swgc --confirm ${id}`,
     }));
 
     const prefix = m.prefix || ".";
     const mediaType = rawContent.text
-      ? "Teks"
+      ? "Texto"
       : rawContent.image
-        ? "Gambar"
+        ? "Imagen"
         : rawContent.video
           ? "Video"
           : rawContent.audio
@@ -311,10 +313,12 @@ async function handler(m, { sock, db }) {
 
     await sock.sendMessage(m.chat, {
       text:
-        `📋 *ᴘɪʟɪʜ ɢʀᴜᴘ ᴜɴᴛᴜᴋ ᴘᴏsᴛ sᴛᴏʀʏ*\n\n` +
+        `📋 *seleccionar el grupo para el post story*
+
+` +
         `> Media: *${mediaType}*\n` +
-        `> Total Grup: *${groupList.length}*\n\n` +
-        `_Pilih grup dari daftar di bawah:_`,
+        `> Total Grupo: *${groupList.length}*\n\n` +
+        `_Elegir grupos de la lista de abajo:_`,
       contextInfo: {
         isForwarded: true,
         forwardingScore: 999,
@@ -325,7 +329,7 @@ async function handler(m, { sock, db }) {
         externalAdReply: thumbnail
           ? {
               title: botConfig.bot?.name || "Ourin MD",
-              body: "SW GRUP",
+              body: "EN GRUPO",
               thumbnail: thumbnail,
               sourceUrl: botConfig.saluran?.link || "",
               mediaType: 1,
@@ -350,7 +354,7 @@ async function handler(m, { sock, db }) {
         {
           name: "quick_reply",
           buttonParamsJson: JSON.stringify({
-            display_text: "❌ Batal",
+            display_text: "❌ Cancelar",
             id: `${prefix}cancelswgc`,
           }),
         },
@@ -359,7 +363,8 @@ async function handler(m, { sock, db }) {
   } catch (error) {
     await m.reply(
       `❌ *ᴇʀʀᴏʀ*\n\n` +
-        `> Gagal mengambil daftar grup.\n` +
+        `No conseguimos la lista de grupos.
+` +
         `> _${error.message}_`,
     );
     if (tempFile && fs.existsSync(tempFile)) {

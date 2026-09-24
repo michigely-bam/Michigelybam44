@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['kaya', 'rich'],
     category: 'cek',
     description: "Mira lo rico que eres.",
-    usage: ".ckkaya   nombre",
+    usage: ".cekkaya [@usuario]",
     example: '.cekkaya Budi',
     isOwner: false,
     isPremium: false,
@@ -21,30 +21,29 @@ async function handler(m) {
     let desc = ''
     let emoji = ''
     if (percent >= 90) {
-        desc = 'Sultan! Crazy rich! 💎'
+        desc = '¡Magnate! ¡Riqueza extrema! 💎'
         emoji = '👑'
     } else if (percent >= 70) {
-        desc = 'Tajir melintir! 💰'
+        desc = "¡Riquísimo/a! 💰"
         emoji = '💎'
     } else if (percent >= 50) {
-        desc = 'Lumayan berada 💵'
+        desc = "Tiene una situación económica bastante buena 💵"
         emoji = '💰'
     } else if (percent >= 30) {
         desc = "Es suficiente para la vida. 😊"
         emoji = '💵'
     } else {
-        desc = 'Semangat nabung! 🙏'
+        desc = "¡Ánimo con el ahorro! 🙏"
         emoji = '🪙'
     }
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu nivel de riqueza *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de riqueza @${mentioned.split('@')[0]} yak? 
-    
-Tingkat kekayaan dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de riqueza es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de riqueza de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

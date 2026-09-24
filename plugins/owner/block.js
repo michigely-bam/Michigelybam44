@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: [],
     category: 'owner',
     description: "Número de bloque WhatsApp",
-    usage: ".bloques Número de contacto / respuesta / mención",
+    usage: ".block <número/respuesta/mención>",
     example: '.block 628xxx',
     isOwner: true,
     cooldown: 5,
@@ -30,11 +30,11 @@ async function handler(m, { sock }) {
 
     if (!targetJid) {
         return m.reply(
-            '⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n' +
-            '> `.block 628xxx` — Blokir via nomor\n' +
-            '> `.block` (reply pesan) — Blokir pengirim\n' +
-            '> `.block @mention` — Blokir yang di-mention\n' +
-            '> `.block` (di private chat) — Blokir user ini'
+            '⚠️ *MODO DE USO*\n\n' +
+            "> `.block 628xxx` — Bloquear a través del número\n" +
+            "> `.block` (respondiendo a los mensajes) — Bloquear el remitente\n" +
+            "> `.block @mention` — Bloques mencionados\n" +
+            "> `.block` (en el chat privado) — Bloquear este usuario"
         )
     }
 
@@ -47,9 +47,9 @@ async function handler(m, { sock }) {
         await sock.updateBlockStatus(targetJid, 'block')
         await m.react('🚫')
         return m.reply(
-            `🚫 *ɴᴏᴍᴏʀ ᴅɪʙʟᴏᴋɪʀ*\n\n` +
+            `🚫 *NÚMERO BLOQUEADO*\n\n` +
             `> Target: @${targetJid.split('@')[0]}\n` +
-            `> Gunakan \`.unblock\` untuk membuka blokir`,
+            `> Utilice \`.unblock\` para abrir el bloqueo`,
             { mentions: [targetJid] }
         )
     } catch (err) {

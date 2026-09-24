@@ -4,7 +4,7 @@ const pluginConfig = {
     alias: ['asmaul', 'husna', '99names'],
     category: 'religi',
     description: "99 El nombre de Allah (Asmaul Husna)",
-    usage: ".asmaulhunna [número / nombre]",
+    usage: ".asmaulhusna [número/nombre]",
     example: '.asmaulhusna 1\n.asmaulhusna ar rahman',
     isOwner: false,
     isPremium: false,
@@ -42,8 +42,10 @@ async function handler(m) {
         }
         
         text += `\`\`\`\n`;
-        text += `> Halaman 1/3\n\n`;
-        text += `_Gunakan .asmaulhusna [número] para más detalles_`;
+        text += `> Página 1/3
+
+`;
+        text += `_Usa .asmaulhusna [número] para ver más detalles_`;
         
         await m.reply(text);
         return;
@@ -58,12 +60,12 @@ async function handler(m) {
     
     let text = `☪️ *ASMAUL HUSNA*\n\n`;
     text += `\`\`\``;
-    text += `📍 Nomor : ${name.index}\n`;
+    text += `📍 Número : ${name.index}\n`;
     text += `🔤 Latin : ${name.latin}\n`;
     text += `📜 Arab  : ${name.arabic}`;
     text += `\`\`\`\n\n`;
-    text += `> 🇮🇩 Arti (ID): ${name.translation_id}\n`;
-    text += `> 🇬🇧 Arti (EN): ${name.translation_en}`;
+    text += `> 🇮🇩 Significado (ID): ${name.translation_id}\n`;
+    text += `> 🇬🇧 Significado (EN): ${name.translation_en}`;
     
     await m.reply(text);
 }

@@ -1,5 +1,5 @@
 /**
- * Soul Match / Belahan Jiwa - Fun compatibility checker
+ * Alma gemela: comprobador divertido de compatibilidad
  * Ported from RTXZY-MD-pro
  */
 
@@ -8,8 +8,8 @@ const pluginConfig = {
     alias: [],
     category: 'fun',
     description: "Revisa un fósforo con alguien.",
-    usage: ".nombre del alma gemela 1.",
-    example: '.soulmatch Raiden|Mei',
+    usage: ".soulmatch <nombre1> <nombre2>",
+    example: ".soulmatch Raiden|Mayo",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -19,12 +19,12 @@ const pluginConfig = {
     isEnabled: true
 }
 
-const ELEMENTS = ['Api 🔥', 'Air 💧', 'Tanah 🌍', 'Angin 🌪️', 'Petir ⚡', 'Es ❄️', 'Cahaya ✨', 'Bayangan 🌑']
-const ZODIAC = ['♈ Aries', '♉ Taurus', '♊ Gemini', '♋ Cancer', '♌ Leo', '♍ Virgo', 
+const ELEMENTS = ['Api 🔥', 'Air 💧', "Tierra 🌍", "Viento 🌪️", "Rayo ⚡", 'Es ❄️', "Luz ✨", "Sombra 🌑"]
+const ZODIAC = ['♈ Aries', '♉ Taurus', '♊ Gemini', '♋ Cancer', '♌ Leo', '♍ Virgo',
                '♎ Libra', '♏ Scorpio', '♐ Sagittarius', '♑ Capricorn', '♒ Aquarius', '♓ Pisces']
 const SOUL_TYPES = [
-    "Pemimpin Yang Berani", "Penyeimbang Bijaksana", "Kreator Ekspresif", "Pembangun Solid", 
-    "Petualang Bebas", "Pelindung Setia", "Pemikir Mistis", "Penakluk Kuat", "Humanitarian Murni"
+    "Un líder valiente", "Equilibrio sabio", "Creador expresivo", "Constructor sólido",
+    "Aventurero libre", "Protector fiel", "Pensador místico", "Conquistador fuerte", "Humanitario puro"
 ]
 
 function generateSoulData(name, seed) {
@@ -37,12 +37,12 @@ function generateSoulData(name, seed) {
 }
 
 function getMatchDescription(score) {
-    if (score >= 90) return "💫 Takdir Sejati"
-    if (score >= 80) return "✨ Harmoni Sempurna"
-    if (score >= 70) return "🌟 Koneksi Kuat"
-    if (score >= 60) return "⭐ Potensi Bagus"
-    if (score >= 50) return "🌙 Perlu Perjuangan"
-    return "🌑 Tantangan Berat"
+    if (score >= 90) return "💫 Destino verdadero"
+    if (score >= 80) return "✨ Armonía perfecta"
+    if (score >= 70) return "🌟 Conexión fuerte"
+    if (score >= 60) return "⭐ Buen potencial"
+    if (score >= 50) return "🌙 Requiere esfuerzo"
+    return "🌑 Desafío difícil"
 }
 
 function getReading(score) {
@@ -59,33 +59,36 @@ function getReading(score) {
 async function handler(m, { sock }) {
     const args = m.args || []
     const text = args.join(' ')
-    
+
     if (!text || !text.includes('|')) {
         return m.reply(
             `💫 *sᴏᴜʟ ᴍᴀᴛᴄʜ*\n\n` +
-            `> Cek kecocokan jiwa 2 orang!\n\n` +
-            `*Format:*\n` +
+            `> ¡Comprueba la compatibilidad de dos almas!
+
+` +
+            `*Formato:*\n` +
             `> \`.soulmatch nama1|nama2\`\n\n` +
-            `*Contoh:*\n` +
-            `> \`.soulmatch Raiden|Mei\``
+            `*Ejemplo:*
+` +
+            `> \`.soulmatch Raiden|Mayo\``
         )
     }
-    
+
     const [nama1, nama2] = text.split('|').map(n => n.trim())
-    
+
     if (!nama1 || !nama2) {
         return m.reply(`❌ Introduzca 2 nombres en formato: \`${m.prefix}nombre del alma gemela 1.\``)
     }
-    
+
     await m.react('🕕')
-    
+
     const seed1 = Date.now() % 100
     const seed2 = (Date.now() + 50) % 100
     const soul1 = generateSoulData(nama1, seed1)
     const soul2 = generateSoulData(nama2, seed2)
     const combined = nama1.toLowerCase() + nama2.toLowerCase()
     const baseScore = Array.from(combined).reduce((a, c) => a + c.charCodeAt(0), 0)
-    const compatibility = (baseScore % 51) + 50 
+    const compatibility = (baseScore % 51) + 50
     let txt = `╭═══❯ *💫 SOUL MATCH* ❮═══\n`
     txt += `│\n`
     txt += `│ 👤 *${nama1}*\n`

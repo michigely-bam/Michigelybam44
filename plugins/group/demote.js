@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'demote',
     alias: ['unadmin', 'turunkan'],
     category: 'group',
-    description: 'Turunkan admin menjadi member biasa',
+    description: "Reducir al administrador a un miembro normal.",
     usage: '.demote @user',
     example: '.demote @user',
     isOwner: false,
@@ -29,9 +29,10 @@ async function handler(m, { sock }) {
 
     if (!target) {
         await m.reply(
-            `❌ *ᴛᴀʀɢᴇᴛ ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n` +
-            `> Reply pesan user atau mention!\n` +
-            `> Contoh: \`${m.prefix}demote @user\``
+            `❌ *ᴛᴀʀɢᴇᴛ NO ENCONTRADO*\n\n` +
+            `> ¡Responda a los mensajes de usuario o mención!
+` +
+            `> Ejemplo: \`${m.prefix}demote @user\``
         )
         return
     }
@@ -41,21 +42,21 @@ async function handler(m, { sock }) {
         const participant = groupMeta.participants.find(p => getParticipantJid(p) === target)
 
         if (!participant) {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*
+            await m.reply(`❌ *falló*
 
 > ¡Usuario no encontrado en grupo!`)
             return
         }
 
         if (!participant.admin) {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*
+            await m.reply(`❌ *falló*
 
 > ¡El usuario no es un administrador!`)
             return
         }
 
         if (participant.admin === 'superadmin') {
-            await m.reply(`❌ *ɢᴀɢᴀʟ*
+            await m.reply(`❌ *falló*
 
 > ¡No puede demoler el grupo de dueños!`)
             return

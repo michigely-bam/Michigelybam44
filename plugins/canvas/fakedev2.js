@@ -10,8 +10,8 @@ const pluginConfig = {
   name: "fakedev2",
   alias: [],
   category: "canvas",
-  description: "Membuat fake developer profile card",
-  usage: ".fakedev2 < nombre √ (reply / enviar fotos)",
+  description: "Crear una tarjeta de perfil de desarrollador falsa",
+  usage: '.fakedev2 <nombre> (responde o envía una foto)',
   example: ".fakedev2 Misaki",
   isOwner: false,
   isPremium: false,
@@ -27,10 +27,12 @@ async function handler(m, { sock }) {
   if (!name) {
     return m.reply(
       `🎮 *ꜰᴀᴋᴇ ᴅᴇᴠᴇʟᴏᴘᴇʀ 2*\n\n` +
-        `> Masukkan nama untuk profile\n\n` +
-        `*ᴄᴀʀᴀ ᴘᴀᴋᴀɪ:*\n` +
-        `> 1. Kirim foto + caption \`${m.prefix}fakedev2 <nama>\`\n` +
-        `> 2. Reply foto dengan \`${m.prefix}fakedev2 <nama>\``,
+        `> Ingrese un nombre para el perfil
+
+` +
+        `*MODO DE USO:*\n` +
+        `> 1. Envía una foto con el texto \`${m.prefix}fakedev2 <nombre>\`\n` +
+        `> 2. Responde a la foto con \`${m.prefix}fakedev2 <nombre>\``,
     );
   }
   let buffer = null;

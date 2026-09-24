@@ -30,48 +30,51 @@ function handler(m) {
             `🎣 *ᴀɴᴛɪᴘʜɪsɪɴɢ*\n\n` +
             `> Status: *${status.toUpperCase()}*\n` +
             `> Mode: *${mode.toUpperCase()}*\n\n` +
-            `> Deteksi pesan phising seperti klik link, verifikasi akun, login palsu, shortener mencurigakan, URL IP, punycode, dan pola sejenis.\n\n` +
+            `> Detección de mensajes de phishing como clic en un enlace, verificación de cuenta, login falso, abreviador sospechoso, URL IP, punycode, y patrones similares.
+
+` +
             `> \`${m.prefix}antiphising on\`\n` +
             `> \`${m.prefix}antiphising off\`\n` +
-            `> \`${m.prefix}antiphising metode kick\`\n` +
-            `> \`${m.prefix}antiphising metode remove\``
+            `> \`${m.prefix}antiphising método kick\`
+` +
+            `> \`${m.prefix}antiphising método remove\``
         )
     }
 
     if (option === 'on') {
         db.setGroup(m.chat, { antiphising: 'on' })
-        return m.reply('✅ *AntiPhising diaktifkan*')
+        return m.reply('✅ *AntiPhising activado*')
     }
 
     if (option === 'off') {
         db.setGroup(m.chat, { antiphising: 'off' })
-        return m.reply('❌ *AntiPhising dinonaktifkan*')
+        return m.reply("❌ *AntiPhising se ha desactivado*")
     }
 
     if (option.startsWith('metode')) {
         const method = m.args?.[1]?.toLowerCase()
         if (method === 'kick') {
             db.setGroup(m.chat, { antiphising: 'on', antiphisingMode: 'kick' })
-            return m.reply('✅ *AntiPhising mode KICK diaktifkan*')
+            return m.reply('✅ *AntiPhising en modo KICK activado*')
         }
         if (method === 'remove' || method === 'delete') {
             db.setGroup(m.chat, { antiphising: 'on', antiphisingMode: 'remove' })
-            return m.reply('✅ *AntiPhising mode DELETE diaktifkan*')
+            return m.reply('✅ *AntiPhising en modo DELETE activado*')
         }
-        return m.reply("❌ ¡Método inválido! `kick` atau `remove`")
+        return m.reply("❌ ¡Método inválido! `kick` o `remove`")
     }
 
     if (option === 'kick') {
         db.setGroup(m.chat, { antiphising: 'on', antiphisingMode: 'kick' })
-        return m.reply('✅ *AntiPhising mode KICK diaktifkan*')
+        return m.reply('✅ *AntiPhising en modo KICK activado*')
     }
 
     if (option === 'remove' || option === 'delete') {
         db.setGroup(m.chat, { antiphising: 'on', antiphisingMode: 'remove' })
-        return m.reply('✅ *AntiPhising mode DELETE diaktifkan*')
+        return m.reply('✅ *AntiPhising en modo DELETE activado*')
     }
 
-    return m.reply("❌ Opción inválida! Uso: `on`, `off`, `metode kick`, `metode remove`")
+    return m.reply("❌ Opción inválida! Uso: `on`, `off`, `método kick`, `método remove`")
 }
 
 export { pluginConfig as config, handler }

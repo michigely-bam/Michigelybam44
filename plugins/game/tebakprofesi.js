@@ -3,7 +3,7 @@ import { games } from '../../src/lib/ourin-games.js'
 games.register('tebakprofesi', {
     alias: ['tp', 'guessjob'],
     emoji: '👨‍💼',
-    title: 'TEBAK PROFESI',
+    title: "ADIVINA LA PROFESIÓN",
     description: "Adivina el nombre de la profesión"
 })
 

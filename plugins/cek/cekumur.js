@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['umur', 'age'],
     category: 'cek',
     description: "Revisa tu edad mental.",
-    usage: ".cluck   nombre",
+    usage: ".cekumur [@usuario]",
     example: '.cekumur Budi',
     isOwner: false,
     isPremium: false,
@@ -19,19 +19,18 @@ async function handler(m) {
     const mentioned = m.mentionedJid[0] || m.sender
                     
     let desc = ''
-    if (percent >= 60) desc = 'Bijaksana seperti orang tua! 🧓'
-    else if (percent >= 40) desc = "Adulto y maduración~ 🧑"
-    else if (percent >= 20) desc = 'Jiwa muda! 🧒'
-    else desc = "Aún como un niño.~ 👶"
+    if (percent >= 60) desc = "¡Sabio/a como una persona mayor! 🧓"
+    else if (percent >= 40) desc = "Maduro/a y responsable~ 🧑"
+    else if (percent >= 20) desc = "¡Alma joven! 🧒"
+    else desc = "Aún tienes alma de niño/a~ 👶"
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu nivel de nacimiento. *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel general @${mentioned.split('@')[0]} yak? 
-    
-Tingkat keumuran dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu edad mental estimada es de *${percent} años*.
 \`\`\`${desc}\`\`\``
-    
+        : `Edad mental estimada de @${mentioned.split('@')[0]}: *${percent} años*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

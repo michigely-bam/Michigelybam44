@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'bratvermeil',
     alias: ['bratv', 'bratnime'],
     category: 'sticker',
-    description: 'Membuat sticker brat versi Vermeil',
+    description: "Crear un sticker Brat versión Vermeil",
     usage: '.bratvermeil <text>',
     example: ".Bratvermeil No olvides comer",
     isOwner: false,
@@ -23,8 +23,10 @@ async function handler(m, { sock }) {
     if (!text) {
         return m.reply(
             `👿 *ʙʀᴀᴛ ᴠᴇʀᴍᴇɪʟ*\n\n` +
-            `> Masukkan teks untuk dijadikan sticker.\n\n` +
-            `> Contoh: \`${m.prefix}bratvermeil Jangan lupa makan\``
+            `Introduce el texto para que sea un pegatín.
+
+` +
+            `> Ejemplo: \`${m.prefix}bratvermeil No olvides comer\``
         )
     }
     

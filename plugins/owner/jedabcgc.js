@@ -5,7 +5,7 @@ const pluginConfig = {
   alias: ['delaybcgc', 'setjedabcgc'],
   category: 'owner',
   description: "Establecer una pausa de grupo de difusión",
-  usage: ".jadabcgc se realizó tiempo √≥ (ejemplo: 5s, 2m, 1h)",
+  usage: '.jedabcgc <tiempo>',
   isOwner: true,
   isPremium: false,
   isGroup: false,
@@ -31,10 +31,10 @@ function parseDelay(input) {
 }
 
 function formatDelay(ms) {
-  if (ms >= 86400000) return `${(ms / 86400000).toFixed(0)} hari`
-  if (ms >= 3600000) return `${(ms / 3600000).toFixed(0)} jam`
-  if (ms >= 60000) return `${(ms / 60000).toFixed(0)} menit`
-  return `${(ms / 1000).toFixed(0)} detik`
+  if (ms >= 86400000) return `${(ms / 86400000).toFixed(0)} días`
+  if (ms >= 3600000) return `${(ms / 3600000).toFixed(0)} horas`
+  if (ms >= 60000) return `${(ms / 60000).toFixed(0)} minutos`
+  return `${(ms / 1000).toFixed(0)} segundos`
 }
 
 async function handler(m) {
@@ -44,16 +44,27 @@ async function handler(m) {
 
   if (!input) {
     return m.reply(
-      `⏱️ *JEDA BROADCAST GRUP*\n\n` +
-      `Jeda saat ini: *${formatDelay(current)}* (${current}ms)\n\n` +
-      `*CARA PAKAI:*\n` +
-      `> \`${m.prefix}jedabcgc <angka><satuan>\`\n\n` +
-      `*SATUAN:*\n` +
-      `• \`s\` — detik\n• \`m\` — menit\n• \`h\` — jam\n• \`d\` — hari\n\n` +
-      `*CONTOH:*\n` +
-      `> \`${m.prefix}jedabcgc 5s\` → 5 detik\n` +
-      `> \`${m.prefix}jedabcgc 2m\` → 2 menit\n` +
-      `> \`${m.prefix}jedabcgc 1h\` → 1 jam`
+      `⏱️ *INTERVALO DE DIFUSIÓN GRUPAL*
+
+` +
+      `Huelga actual: *${formatDelay(current)}* (${current}ms)\n\n` +
+      `*MODO DE USO:*
+` +
+      `> \`${m.prefix}jedabcgc <número><unidad>\`\n\n` +
+      `*UNIDADES:*
+` +
+      `• \`s\` — segundos
+• \`m\` — minutos
+• \`h\` — horas
+• \`d\` — días
+
+` +
+      `*EJEMPLO:*\n` +
+      `> \`${m.prefix}jedabcgc 5s\` → 5 segundos
+` +
+      `> \`${m.prefix}jedabcgc 2m\` → 2 minutos
+` +
+      `> \`${m.prefix}jedabcgc 1h\` → 1 hora`
     )
   }
 
@@ -66,9 +77,11 @@ async function handler(m) {
   db.setting('jedaBcgc', ms)
 
   return m.reply(
-    `✅ *Jeda broadcast grup diubah*\n\n` +
-    `Sebelumnya: *${formatDelay(prev)}*\n` +
-    `Sekarang: *${formatDelay(ms)}*`
+    `✅ *La pausa de transmisión del grupo fue modificada*
+
+` +
+    `Anteriormente: *${formatDelay(prev)}*\n` +
+    `Ahora: *${formatDelay(ms)}*`
   )
 }
 

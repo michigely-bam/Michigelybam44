@@ -57,7 +57,7 @@ class BluArchive {
       throw new Error(
         `Character "${name}" No se encuentra.
 
-> Mungkin maksud: ${suggestions.join(", ") || "ninguno"}`,
+> Quizás quisiste decir: ${suggestions.join(", ") || "ninguno"}`,
       );
     }
 
@@ -82,8 +82,10 @@ async function handler(m, { sock }) {
   if (!name) {
     return m.reply(
       `🎮 *ʙʟᴜᴇ ᴀʀᴄʜɪᴠᴇ ᴄʜᴀʀᴀᴄᴛᴇʀ*\n\n` +
-        `> Lihat info character Blue Archive\n\n` +
-        `> *Contoh:*\n` +
+        `> Vea la información de carácter del Archivo Azul
+
+` +
+        `> *Ejemplo:*\n` +
         `> ${m.prefix}bluearchive-char shiroko\n` +
         `> ${m.prefix}bachar hoshino\n` +
         `> ${m.prefix}ba aru`,

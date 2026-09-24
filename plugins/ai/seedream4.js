@@ -5,7 +5,7 @@ const pluginConfig = {
   alias: ["editimg"],
   category: "ai",
   description: "Editar la imagen con IA utilizando prompt",
-  usage: ".nanobanana <prompt>",
+  usage: ".seedream <prompt>",
   example: ".nanobanana make it anime style",
   isOwner: false,
   isPremium: false,
@@ -30,7 +30,7 @@ async function uploadTmpfiles(buffer) {
 
   const data = await res.json();
   if (!data?.status || !data?.path)
-    throw new Error("Upload gagal: " + JSON.stringify(data));
+    throw new Error("Descarga fallida: " + JSON.stringify(data));
 
   return data.path;
 }
@@ -40,9 +40,11 @@ async function handler(m, { sock }) {
   if (!prompt) {
     return m.reply(
       `🍌 *SEE DREAM 4*\n\n` +
-        `> Edit gambar dengan AI\n\n` +
-        `\`Contoh: ${m.prefix}seedream4 make it anime style\`\n\n` +
-        `> Reply atau kirim gambar dengan caption`,
+        `> Editar imágenes con AI
+
+` +
+        `\`Ejemplo: ${m.prefix}seedream4 make it anime style\`\n\n` +
+        `> Responda o envíe una imagen con la descripción`,
     );
   }
 
@@ -66,7 +68,7 @@ async function handler(m, { sock }) {
 
     if (!mediaBuffer || !Buffer.isBuffer(mediaBuffer)) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > No se pudo download image`);
     }
@@ -87,7 +89,7 @@ async function handler(m, { sock }) {
 
     if (!data.status) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > Incapaz de editar la imagen`);
     }
@@ -101,7 +103,7 @@ async function handler(m, { sock }) {
     console.log(error?.response?.data || error.message);
     m.react("❌");
     m.reply(`🍀 *Waduhh, parece que hay un pinchazo.*
-Pruebe de nuevo más tarde, por favor no Spam, o pruebe otra opción: ${m.prefix}ourinbanana ${m.text} ( reply gambar )`);
+Pruebe de nuevo más tarde, por favor no Spam, o pruebe otra opción: ${m.prefix}ourinbanana ${m.text} (respuesta a la imagen)`);
   }
 }
 

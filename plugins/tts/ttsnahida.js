@@ -39,7 +39,9 @@ async function handler(m, { sock }) {
     const text = m.text?.trim()
     
     if (!text) {
-        return m.reply(`🎤 *ɴᴀʜɪᴅᴀ ᴛᴛs*\n\n> Gunakan: \`${m.prefix}ttsnahida <text>\``)
+        return m.reply(`🎤 *ɴᴀʜɪᴅᴀ ᴛᴛs*
+
+> Usa: \`${m.prefix}ttsnahida <text>\``)
     }
     
     m.react('🌿')
@@ -50,7 +52,7 @@ async function handler(m, { sock }) {
         const voice = res.data?.result?.find(v => v.nahida && !v.error)
         if (!voice) {
             m.react('❌')
-            return m.reply(`❌ Error de voz de Nahida. \`${m.prefix}ttsgoku\` atau \`${m.prefix}ttsnami\``)
+            return m.reply(`❌ Error de voz de Nahida. Prueba \`${m.prefix}ttsgoku\` o \`${m.prefix}ttsnami\``)
         }
         
         const tempDir = path.join(process.cwd(), 'temp')

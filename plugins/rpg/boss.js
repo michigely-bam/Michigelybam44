@@ -39,10 +39,10 @@ async function handler(m, { sock }) {
     if (availableBosses.length === 0) {
         const lowestBoss = BOSSES.reduce((a, b) => a.minLevel < b.minLevel ? a : b)
         return m.reply(
-            `❌ *ʟᴇᴠᴇʟ ᴛᴇʀʟᴀʟᴜ ʀᴇɴᴅᴀʜ*\n\n` +
-            `> Level kamu: ${userLevel}\n` +
+            `❌ *NIVEL DEMASIADO BAJO*\n\n` +
+            `> Tu nivel: ${userLevel}\n` +
             `> Minimal level: ${lowestBoss.minLevel}\n\n` +
-            `💡 *Tips:* Farming EXP dari dungeon, fishing, mining, dll`
+            `💡 *Consejos:* Agricultura EXP de las mazmorras, pesca, minería, etc.`
         )
     }
     
@@ -51,9 +51,12 @@ async function handler(m, { sock }) {
     
     if (user.rpg.stamina < staminaCost) {
         return m.reply(
-            `⚡ *sᴛᴀᴍɪɴᴀ ʜᴀʙɪs*\n\n` +
-            `> Butuh ${staminaCost} stamina untuk boss fight.\n` +
-            `> Stamina kamu: ${user.rpg.stamina}`
+            `⚡ *RESISTENCIA AGOTADA*
+
+` +
+            `> Necesita ${staminaCost} resistencia para luchar contra el jefe.
+` +
+            `> Tu resistencia: ${user.rpg.stamina}`
         )
     }
     
@@ -62,7 +65,9 @@ async function handler(m, { sock }) {
     const boss = availableBosses[Math.floor(Math.random() * availableBosses.length)]
     
     await m.react('⚔️')
-    await m.reply(`👹 *ʙᴏss ᴍᴜɴᴄᴜʟ!*\n\n${boss.name}\n\n> ❤️ HP: ${boss.hp}\n> ⚔️ ATK: ${boss.attack}`)
+    await m.reply(`👹 *¡APARECIÓ UN JEFE!*
+
+${boss.name}\n\n> ❤️ HP: ${boss.hp}\n> ⚔️ ATK: ${boss.attack}`)
     await new Promise(r => setTimeout(r, 2000))
     
     const userAttack = (user.rpg.attack || 10) + userLevel * 3
@@ -83,7 +88,7 @@ async function handler(m, { sock }) {
         bossHp -= finalPlayerDmg
         
         if (critChance > 0.9) {
-            battleLog.push(`💥 *CRITICAL!* Kamu: -${finalPlayerDmg} HP`)
+            battleLog.push(`💥 ¡Crítico! Usted: -${finalPlayerDmg} HP`)
         } else {
             battleLog.push(`⚔️ Ataque:${finalPlayerDmg} HP`)
         }
@@ -92,10 +97,10 @@ async function handler(m, { sock }) {
         
         const bossDmg = Math.max(10, boss.attack - userDefense + Math.floor(Math.random() * 15))
         userHp -= bossDmg
-        battleLog.push(`👹 Boss menyerang: -${bossDmg} HP`)
+        battleLog.push(`👹 El jefe ataca: -${bossDmg} HP`)
     }
     
-    await m.reply(`⚔️ *ᴘᴇʀᴛᴀʀᴜɴɢᴀɴ...*\n\n${battleLog.slice(-6).map(l => `> ${l}`).join('\n')}`)
+    await m.reply(`⚔️ *COMBATE...*\n\n${battleLog.slice(-6).map(l => `> ${l}`).join('\n')}`)
     await new Promise(r => setTimeout(r, 1500))
     
     const isWin = bossHp <= 0
@@ -119,14 +124,16 @@ async function handler(m, { sock }) {
         }
         
         txt = `🏆 *ʙᴏss ᴅɪᴋᴀʟᴀʜᴋᴀɴ!*\n\n`
-        txt += `> ${boss.name} telah dikalahkan!\n\n`
+        txt += `> ${boss.name} ¡fue derrotado!
+
+`
         txt += `╭┈┈⬡「 🎁 *ʀᴇᴡᴀʀᴅ* 」\n`
         txt += `┃ ✨ EXP: *+${expReward.toLocaleString()}*\n`
         txt += `┃ 💰 Gold: *+${goldReward.toLocaleString()}*\n`
         if (droppedItems.length > 0) {
             txt += `┃ 📦 Loot: *${droppedItems.join(', ')}*\n`
         }
-        txt += `┃ ❤️ HP tersisa: *${Math.max(0, userHp)}/${userMaxHp}*\n`
+        txt += `┃ ❤️ HP restante: *${Math.max(0, userHp)}/${userMaxHp}*\n`
         txt += `╰┈┈┈┈┈┈┈┈⬡`
         
         await m.react('🏆')
@@ -135,13 +142,17 @@ async function handler(m, { sock }) {
         user.koin = Math.max(0, (user.koin || 0) - goldLoss)
         user.rpg.health = Math.max(1, (user.rpg.health || 100) - 50)
         
-        txt = `💀 *ᴋᴀʟᴀʜ ᴅᴀʀɪ ʙᴏss*\n\n`
-        txt += `> ${boss.name} terlalu kuat!\n\n`
+        txt = `💀 *perdida del jefe*
+
+`
+        txt += `> ${boss.name} ¡es demasiado fuerte!
+
+`
         txt += `╭┈┈⬡「 💔 *ᴘᴇɴᴀʟᴛʏ* 」\n`
         txt += `┃ 💸 Gold: *-${goldLoss.toLocaleString()}*\n`
         txt += `┃ ❤️ HP: *-50*\n`
         txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`
-        txt += `💡 *Tips:* ¡Equipos de nivel y actualización!`
+        txt += `💡 *Consejos:* ¡Equipos de nivel y actualización!`
         
         await m.react('💀')
     }

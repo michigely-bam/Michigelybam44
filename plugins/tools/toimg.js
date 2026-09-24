@@ -2,7 +2,7 @@ const pluginConfig = {
     name: 'toimg',
     alias: ['toimage', 'stickertoimage', 'stimg'],
     category: 'tools',
-    description: 'Mengubah sticker menjadi gambar',
+    description: "Convirtiendo las stickers en imágenes",
     usage: '.toimg (reply/caption sticker)',
     example: '.toimg',
     isOwner: false,
@@ -37,11 +37,14 @@ async function handler(m, { sock }) {
     
     if (!mediaSource) {
         await m.reply(
-            `❌ *ɢᴀɢᴀʟ*\n\n` +
-            `> Tidak ada sticker yang terdeteksi!\n\n` +
-            `*Cara penggunaan:*\n` +
-            `> 1. Kirim sticker + caption \`${m.prefix}toimg\`\n` +
-            `> 2. Reply sticker dengan \`${m.prefix}toimg\``
+            `❌ *ERROR*\n\n` +
+            `> ¡No se detectó ningún sticker!
+
+` +
+            `*Modo de uso:*
+` +
+            `> 1. Envía un sticker + una captura \`${m.prefix}toimg\`\n` +
+            `> 2. Responda el sticker con \`${m.prefix}toimg\``
         )
         return
     }
@@ -53,9 +56,12 @@ async function handler(m, { sock }) {
 
     if (isAnimated) {
         await m.reply(
-            `⚠️ *sᴛɪᴄᴋᴇʀ ᴀɴɪᴍᴀsɪ*\n\n` +
-            `> Sticker ini adalah sticker animasi (GIF).\n` +
-            `> Gunakan \`${m.prefix}tovideo\` untuk mengubahnya.`
+            `⚠️ *STICKER ANIMADO*
+
+` +
+            `> Este sticker es animado (GIF).
+` +
+            `> Usa \`${m.prefix}tovideo\` para cambiarlo.`
         )
         return
     }
@@ -67,18 +73,20 @@ async function handler(m, { sock }) {
 
         if (!buffer || buffer.length === 0) {
             await m.reply(
-                `❌ *ɢᴀɢᴀʟ*\n\n` +
-                `> Tidak dapat mengunduh sticker.\n` +
-                `> Sticker mungkin sudah tidak tersedia.`
+                `❌ *ERROR*\n\n` +
+                `> No se pudo descargar el sticker.
+` +
+                `> Es posible que el sticker ya no esté disponible.`
             )
             return
         }
 
         if (buffer.length < 100) {
             await m.reply(
-                `❌ *ꜰɪʟᴇ ᴋᴏʀᴜᴘ*\n\n` +
-                `> File sticker tidak valid atau rusak.\n` +
-                `> Coba kirim ulang stickernya.`
+                `❌ *ARCHIVO DAÑADO*\n\n` +
+                `Los ficheros de archivo no son válidos o están dañados.
+` +
+                `> Intenta enviar el sticker de nuevo.`
             )
             return
         }
@@ -90,7 +98,8 @@ async function handler(m, { sock }) {
     } catch (error) {
         await m.reply(
             `❌ *ᴇʀʀᴏʀ*\n\n` +
-            `> Terjadi kesalahan saat memproses.\n` +
+            `Ha ocurrido un error en el procesamiento.
+` +
             `> _${error.message}_`
         )
     }

@@ -16,8 +16,8 @@ const pluginConfig = {
   alias: ["updatejpm", "broadcastupdate", "shareupdate"],
   category: "jpm",
   description: "Enviar actualizaciones / cambio a todos los grupos",
-  usage: ".jpmupdate <versi> | <changelog>",
-  example: ".jpmupdate v2.0 -- 124; nuevas características:\\ n-Quiz Batalla",
+  usage: ".jpmupdate <versión> | <cambios>",
+  example: ".jpmupdate v2.0 | Nuevas funciones:\\n- Batalla de preguntas",
   isOwner: true,
   isPremium: false,
   isGroup: false,
@@ -32,7 +32,7 @@ async function handler(m, { sock }) {
 
   if (global.statusjpm) {
     return m.reply(
-      `❌ *ɢᴀɢᴀʟ*
+      `❌ *falló*
 
 > JPM corriendo. \`${m.prefix}stopjpm\` Parar.`,
     );
@@ -42,13 +42,16 @@ async function handler(m, { sock }) {
 
   if (!input) {
     return m.reply(
-      `📢 *JPM UPDATE (PENGUMUMAN)*\n\n` +
-        `Kirim informasi update / changelog ke seluruh grup!\n\n` +
-        `*FORMAT PENGGUNAAN:*\n` +
-        `• \`.jpmupdate <versi> | <isi changelog>\`\n\n` +
-        `*CONTOH:*\n` +
-        `> \`.jpmupdate v3.0 | ✨ Fitur Baru:\\n- JPM Hidetag\\n- Sistem AFK Baru\\n- Perbaikan bug system\`\n\n` +
-        `_(Note: Gunakan \\n untuk membuat baris baru/enter)_`,
+      `📢 *ANUNCIO DE ACTUALIZACIÓN*\n\n` +
+        `¡Envía información actualizada/changelog a todo el grupo!
+
+` +
+        `*FORMATO DE USO:*
+` +
+        `• \`.jpmupdate <versión> | <lista de cambios>\`\n\n` +
+        `*EJEMPLO:*\n` +
+        `> \`.jpmupdate v3.0 | ✨ Funciones nuevas:\\n- Difusión con mención oculta\\n- Nuevo sistema de ausencia\\n- Correcciones de errores\`\n\n` +
+        `Nota: Use \\n para crear nuevas líneas/enter)_`,
     );
   }
 
@@ -80,7 +83,7 @@ async function handler(m, { sock }) {
     if (groupIds.length === 0) {
       await m.react("❌");
       return m.reply(
-        `❌ *ɢᴀɢᴀʟ*
+        `❌ *falló*
 
 > No se encontró ningún grupo${blacklistedCount > 0 ? ` (${blacklistedCount} grupo sobre -lista negra` : ""}`,
       );
@@ -95,22 +98,25 @@ async function handler(m, { sock }) {
 
     const updateMessage =
       `🚀 *UPDATE !! | ${version}*\n\n` +
-      `📅 *Tanggal:* ${dateStr}\n\n` +
+      `📅 *Fecha:* ${dateStr}\n\n` +
       `*CHANGELOG:*\n` +
       `${changelog}\n\n` +
-      `*CATATAN TERBARU:*\n` +
-      `> 💡 Ketik *${m.prefix}menu* untuk mengeksplorasi fitur-fitur ini.\n` +
-      `> 📢 _Terima kasih telah menggunakan ${botName}_`;
+      `*NOTAS:*\n` +
+      `> 💡 Escribe *${m.prefix}menu*para explorar estas características.
+` +
+      `📢 Gracias por el uso. ${botName}_`;
 
     await m.reply(
       `📢 *ᴊᴘᴍ ᴜᴘᴅᴀᴛᴇ*\n\n` +
         `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-        `┃ 🏷️ ᴠᴇʀsɪ: \`${version}\`\n` +
-        `┃ 👥 ᴛᴀʀɢᴇᴛ: \`${groupIds.length}\` grup\n` +
-        `┃ ⏱️ ᴊᴇᴅᴀ: \`${jedaJpm}ms\`\n` +
-        `┃ 📊 ᴇsᴛɪᴍᴀsɪ: \`${Math.ceil((groupIds.length * jedaJpm) / 60000)} menit\`\n` +
+        `┃ 🏷️ VERSIÓN: \`${version}\`\n` +
+        `┃ 👥 ᴛᴀʀɢᴇᴛ: \`${groupIds.length}\` grupo
+` +
+        `┃ ⏱️ INTERVALO: \`${jedaJpm}ms\`\n` +
+        `┃ 📊 ESTIMACIÓN: \`${Math.ceil((groupIds.length * jedaJpm) / 60000)} minutos\`
+` +
         `╰┈┈⬡\n\n` +
-        `> Memulai broadcast update...`,
+        `> Iniciando la difusión de la actualización...`,
     );
 
     global.statusjpm = true;
@@ -123,10 +129,10 @@ async function handler(m, { sock }) {
         delete global.statusjpm;
 
         await m.reply(
-          `⏹️ *ᴊᴘᴍ ᴜᴘᴅᴀᴛᴇ ᴅɪʜᴇɴᴛɪᴋᴀɴ*\n\n` +
-            `> ✅ Berhasil: \`${successCount}\`\n` +
-            `> ❌ Gagal: \`${failedCount}\`\n` +
-            `> ⏸️ Sisa: \`${groupIds.length - successCount - failedCount}\``,
+          `⏹️ *ᴊᴘᴍ ᴜᴘᴅᴀᴛᴇ DETENIDO*\n\n` +
+            `> ✅ Correcto: \`${successCount}\`\n` +
+            `> ❌ Falló: \`${failedCount}\`\n` +
+            `> ⏸️ Restante: \`${groupIds.length - successCount - failedCount}\``,
         );
         return;
       }
@@ -144,8 +150,8 @@ async function handler(m, { sock }) {
             },
             externalAdReply: cachedThumb
               ? {
-                  title: `📢 PENGUMUMAN UPDATE`,
-                  body: `Versi Sistem: ${version}`,
+                  title: `📢 ANUNCIO DE ACTUALIZACIÓN`,
+                  body: `Versión del sistema: ${version}`,
                   thumbnail: cachedThumb,
                   sourceUrl: config.saluran?.link || "",
                   mediaType: 1,
@@ -167,10 +173,12 @@ async function handler(m, { sock }) {
 
     await m.react("✅");
     await m.reply(
-      `✅ *ᴊᴘᴍ ᴜᴘᴅᴀᴛᴇ sᴇʟᴇsᴀɪ!*\n\n` +
+      `✅ ¡La actualización está terminada!
+
+` +
         `╭┈┈⬡「 📊 *ʀᴇsᴜʟᴛ* 」\n` +
-        `┃ ✅ Sukses: ${successCount}\n` +
-        `┃ ❌ Gagal: ${failedCount}\n` +
+        `┃ ✅ Completado: ${successCount}\n` +
+        `┃ ❌ Falló: ${failedCount}\n` +
         `┃ 📊 Total: ${groupIds.length}\n` +
         `╰┈┈┈┈┈┈┈┈⬡`,
     );

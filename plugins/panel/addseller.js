@@ -8,8 +8,8 @@ const pluginConfig = {
     name: 'addseller',
     alias: ['addreseller', 'delseller', 'delreseller', 'listseller', 'listreseller'],
     category: 'panel',
-    description: 'Kelola seller/reseller panel',
-    usage: '.addseller @user atau .delseller @user',
+    description: "Gestiona vendedores y revendedores del panel",
+    usage: ".addseller @user o .delseller @user",
     example: '.addseller @user',
     isOwner: false,
     isPremium: false,
@@ -59,7 +59,7 @@ function saveConfig() {
         fs.writeFileSync(configPath, content, 'utf8')
         return true
     } catch (e) {
-        console.error('[Panel] Failed to save config:', e.message)
+        console.error('[Panel] No se pudo guardar la configuración:', e.message)
         return false
     }
 }
@@ -70,7 +70,7 @@ function handler(m, { sock }) {
     const pteroConfig = config.pterodactyl
     
     if (!hasAccess(m.sender, m.isOwner, pteroConfig)) {
-        return m.reply(`❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*
+        return m.reply(`❌ *se rechazó el acceso*
 
 > Esta característica es sólo para el Propietario o Panel de Propietario.`)
     }
@@ -89,12 +89,14 @@ function handler(m, { sock }) {
     
     if (isList) {
         if (pteroConfig.sellers.length === 0) {
-            return m.reply(`📋 *ᴅᴀꜰᴛᴀʀ sᴇʟʟᴇʀ/ʀᴇsᴇʟʟᴇʀ*
+            return m.reply(`📋 *lista de vendedores/reseller*
 
 > Todavía no hay vendedores registrados.`)
         }
         
-        let txt = `📋 *ᴅᴀꜰᴛᴀʀ sᴇʟʟᴇʀ/ʀᴇsᴇʟʟᴇʀ*\n\n`
+        let txt = `📋 *lista de vendedores/reseller*
+
+`
         txt += `> Total: *${pteroConfig.sellers.length}* seller\n\n`
         pteroConfig.sellers.forEach((s, i) => {
             txt += `${i + 1}. \`${s}\`\n`
@@ -117,10 +119,10 @@ function handler(m, { sock }) {
     
     if (!targetUser) {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+            `⚠️ *MODO DE USO*\n\n` +
             `> \`${m.prefix}${cmd} @user\`\n` +
             `> \`${m.prefix}${cmd} 628xxx\`\n` +
-            `> Reply pesan user`
+            `> Responder a los mensajes del usuario`
         )
     }
     
@@ -142,11 +144,14 @@ function handler(m, { sock }) {
         if (saveConfig()) {
             m.react('✅')
             return m.reply(
-                `✅ *sᴇʟʟᴇʀ ᴅɪᴛᴀᴍʙᴀʜᴋᴀɴ*\n\n` +
+                `✅ *vendedor añadido*
+
+` +
                 `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-                `┃ 📱 ɴᴏᴍᴏʀ: \`${targetUser}\`\n` +
+                `┃ 📱 NÚMERO: \`${targetUser}\`\n` +
                 `┃ 🏷️ sᴛᴀᴛᴜs: \`Seller/Reseller\`\n` +
-                `┃ 🔓 ᴀᴋsᴇs: \`Create Server (1gb-10gb v1-v3)\`\n` +
+                `┃ 🔓 acceso: \`Create Server (1gb-10gb v1-v3)\`
+` +
                 `┃ 📊 ᴛᴏᴛᴀʟ: \`${pteroConfig.sellers.length}\` seller\n` +
                 `╰┈┈⬡${roleChanged}`
             )
@@ -166,8 +171,10 @@ function handler(m, { sock }) {
         if (saveConfig()) {
             m.react('✅')
             return m.reply(
-                `✅ *sᴇʟʟᴇʀ ᴅɪʜᴀᴘᴜs*\n\n` +
-                `> Nomor: \`${targetUser}\`\n` +
+                `✅ *vendedor eliminado*
+
+` +
+                `> Número: \`${targetUser}\`\n` +
                 `> Total: *${pteroConfig.sellers.length}* seller`
             )
         } else {

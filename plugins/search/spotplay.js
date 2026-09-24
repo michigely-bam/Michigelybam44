@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "spotplay",
   alias: ["splay", "sp"],
   category: "search",
-  description: "Putar musik dari Spotify",
+  description: "Juegue música de Spotify",
   usage: ".spotplay <query>",
   example: ".spotplay neffex grateful",
   cooldown: 20,
@@ -16,7 +16,7 @@ const pluginConfig = {
 async function handler(m, { sock }) {
   const query = m.text?.trim();
   if (!query)
-    return m.reply(`⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n> \`${m.prefix}spotplay <query>\``);
+    return m.reply(`⚠️ *MODO DE USO*\n\n> \`${m.prefix}spotplay <query>\``);
 
   m.react("🕕");
 

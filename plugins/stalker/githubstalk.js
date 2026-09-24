@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'githubstalk',
     alias: ['ghstalk', 'stalkgh'],
     category: 'stalker',
-    description: 'Stalk akun GitHub',
+    description: "Estancamiento de la cuenta de GitHub",
     usage: '.githubstalk <username>',
     example: '.githubstalk torvalds',
     isOwner: false,
@@ -24,7 +24,7 @@ async function handler(m, { sock }) {
 
 > Introduzca el nombre de usuario GitHub
 
-\`Contoh: ${m.prefix}githubstalk torvalds\``)
+\`Ejemplo: ${m.prefix}githubstalk torvalds\``)
     }
     
     m.react('🔍')
@@ -43,7 +43,7 @@ async function handler(m, { sock }) {
         
         const caption = `🐙 *ɢɪᴛʜᴜʙ sᴛᴀʟᴋ*\n\n` +
             `👤 *Username:* ${d.username}\n` +
-            `📛 *Nama:* ${d.nickname || '-'}\n` +
+            `📛 *Nombre:* ${d.nickname || '-'}\n` +
             `🏢 *Company:* ${d.company || '-'}\n` +
             `📍 *Location:* ${d.location || '-'}\n\n` +
             `📦 *Public Repos:* ${d.public_repo}\n` +

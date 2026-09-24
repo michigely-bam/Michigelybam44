@@ -3,8 +3,8 @@ import { games } from '../../src/lib/ourin-games.js'
 games.register('tebakkimia', {
     alias: ['kimia', 'chemistry', 'unsur'],
     emoji: '🧪',
-    title: 'TEBAK KIMIA',
-    description: 'Tebak unsur kimia',
+    title: "ADIVINA EL ELEMENTO QUÍMICO",
+    description: "Adivina el elemento químico",
     questionField: 'unsur',
     answerField: 'lambang'
 })

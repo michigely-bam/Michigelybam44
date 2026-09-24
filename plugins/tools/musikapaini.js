@@ -11,7 +11,7 @@ const pluginConfig = {
   name: "musikapaini",
   alias: ["whatmusic", "shazam", "recognizemusic", "mai"],
   category: "tools",
-  description: "Identifikasi lagu dari audio",
+  description: "Identificar una canción a partir del audio",
   usage: ".musikapaini (reply audio)",
   example: ".musikapaini",
   cooldown: 20,
@@ -105,27 +105,32 @@ async function handler(m, { sock }) {
 
   if (!audioBuffer) {
     return m.reply(
-      `🎵 *ᴍᴜsɪᴋ ᴀᴘᴀ ɪɴɪ?*\n\n` +
-        `> Identifikasi lagu dari audio\n\n` +
-        `*Cara pakai:*\n` +
-        `> Reply audio dengan \`${m.prefix}musikapaini\`\n` +
-        `> Atau kirim audio + caption command`,
+      `🎵 ¿Qué tipo de música es esta?
+
+` +
+        `> Identificar una canción a partir del audio
+
+` +
+        `*Modo de uso:*
+` +
+        `> Responder audio con \`${m.prefix}musikapaini\`\n` +
+        `> O envíe el comando de audio + captura`,
     );
   }
 
   m.react("🎵");
 
   try {
-    await m.reply("🕕 *ᴍᴇɴɢᴜᴘʟᴏᴀᴅ...*\n\n> Mengupload audio...");
+    await m.reply("🕕 *SUBIENDO...*\n\n> Subiendo el audio...");
 
     const audioUrl = await uploadTo0x0(audioBuffer, filename);
 
-    await m.reply("🔍 *ᴍᴇɴɢɪᴅᴇɴᴛɪꜰɪᴋᴀsɪ...*\n\n> Buscando información de la canción...");
+    await m.reply("🔍 *IDENTIFICANDO...*\n\n> Buscando información de la canción...");
 
     const data = await ourinApi.neoxr.whatMusic(
       {
         url: audioUrl,
-        apikey: config.APIkey?.neoxr || "Milik-Bot-OurinMD",
+        apikey: config.APIkey?.neoxr || "Propiedad de Bot-OurinMD",
       },
       {
         timeout: 60000,
@@ -134,13 +139,13 @@ async function handler(m, { sock }) {
 
     if (!data?.status || !data?.data) {
       m.react("❌");
-      return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> Error desconocido de la canción o API");
+      return m.reply("❌ *falló*\n\n> Error desconocido de la canción o API");
     }
 
     const music = data.data;
     const links = music.links || {};
 
-    let text = `🎵 *ʟᴀɢᴜ ᴅɪᴛᴇᴍᴜᴋᴀɴ!*\n\n`;
+    let text = `🎵 *CANCIÓN ENCONTRADA!*\n\n`;
     text += `╭┈┈⬡「 📋 *ɪɴꜰᴏ* 」\n`;
     text += `┃ 🎶 Title: ${music.title || "-"}\n`;
     text += `┃ 👤 Artist: ${music.artist || "-"}\n`;

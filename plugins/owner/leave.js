@@ -48,7 +48,7 @@ async function handler(m, { sock }) {
     const inviteCode = await extractInviteCode(input);
 
     if (!inviteCode) {
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > Enlace de invitación inválido`);
     }
@@ -56,27 +56,28 @@ async function handler(m, { sock }) {
     try {
       const groupInfo = await sock.groupGetInviteInfo(inviteCode);
       targetGroupJid = groupInfo.id;
-      groupName = groupInfo.subject || "Unknown";
+      groupName = groupInfo.subject || "Desconocido";
     } catch (error) {
       return m.reply(
-        `❌ *ɢᴀɢᴀʟ*
+        `❌ *falló*
 
 > No se puede recuperar información del grupo desde el enlace`,
       );
     }
   } else {
     return m.reply(
-      `🚪 *ʟᴇᴀᴠᴇ ɢʀᴜᴘ*\n\n` +
-        `╭┈┈⬡「 📋 *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ* 」\n` +
-        `┃ ◦ Di grup: \`.leave\`\n` +
+      `🚪 *SALIR DEL GRUPO*\n\n` +
+        `╭┈┈⬡「 📋 *MODO DE USO* 」\n` +
+        `┃ ◦ En el grupo: \`.leave\`
+` +
         `┃ ◦ Via link: \`.leave <link>\`\n` +
         `╰┈┈⬡\n\n` +
-        `\`Contoh: ${m.prefix}leave https://chat.whatsapp.com/xxx\``,
+        `\`Ejemplo: ${m.prefix}leave https://chat.whatsapp.com/xxx\``,
     );
   }
 
   if (!targetGroupJid) {
-    return m.reply(`❌ *ɢᴀɢᴀʟ*
+    return m.reply(`❌ *falló*
 
 > Grupo no encontrado`);
   }
@@ -93,8 +94,9 @@ async function handler(m, { sock }) {
       await sock.sendMessage(m.chat, {
         text:
           `👋 *ɢᴏᴏᴅʙʏᴇ*\n\n` +
-          `> Bot akan keluar dari grup ini.\n` +
-          `> Terima kasih sudah menggunakan bot!`,
+          `el bot saldrán de este grupo.
+` +
+          `> ¡Gracias por usar el bot!`,
         contextInfo: {
           forwardingScore: 9999,
           isForwarded: true,
@@ -114,7 +116,9 @@ async function handler(m, { sock }) {
     if (!m.isGroup || targetGroupJid !== m.chat) {
       await m.react("✅");
       await m.reply(
-        `✅ *ʙᴇʀʜᴀsɪʟ ᴋᴇʟᴜᴀʀ*\n\n` + `> Bot telah keluar dari: *${groupName}*`,
+        `✅ *logró salir*
+
+` + `> Bot ha salido de: *${groupName}*`,
       );
     }
   } catch (error) {

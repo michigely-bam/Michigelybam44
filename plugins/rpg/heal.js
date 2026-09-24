@@ -30,7 +30,7 @@ async function handler(m, { sock }) {
         return m.reply(`✅ ¡La salud y la resistencia están llenas!`)
     }
     
-    await m.reply('💤 *sᴇᴅᴀɴɢ ɪsᴛɪʀᴀʜᴀᴛ...*')
+    await m.reply("💤 *DESCANSANDO...*")
     await new Promise(r => setTimeout(r, 3000))
     
     const healthRecover = 30
@@ -42,7 +42,9 @@ async function handler(m, { sock }) {
     user.rpg.health = Math.min(user.rpg.health + healthRecover, user.rpg.maxHealth)
     user.rpg.stamina = Math.min(user.rpg.stamina + staminaRecover, user.rpg.maxStamina)
     
-    let txt = `💚 *ʜᴇᴀʟ sᴇʟᴇsᴀɪ*\n\n`
+    let txt = `💚 *heal terminado*
+
+`
     txt += `╭┈┈⬡「 ✨ *ʀᴇᴄᴏᴠᴇʀʏ* 」\n`
     txt += `┃ ❤️ Health: ${oldHealth} → *${user.rpg.health}*\n`
     txt += `┃ ⚡ Stamina: ${oldStamina} → *${user.rpg.stamina}*\n`

@@ -24,21 +24,31 @@ async function handler(m, { sock }) {
     return m.reply(
       `📝 *sᴇᴛ ᴡᴇʟᴄᴏᴍᴇ*\n\n` +
         `╭┈┈⬡「 📋 *ᴘʟᴀᴄᴇʜᴏʟᴅᴇʀ* 」\n` +
-        `┃ ◦ \`{user}\` - Nama member\n` +
-        `┃ ◦ \`{number}\` - Nomor member\n` +
-        `┃ ◦ \`{group}\` - Nama grup\n` +
-        `┃ ◦ \`{desc}\` - Deskripsi grup\n` +
-        `┃ ◦ \`{count}\` - Jumlah member\n` +
-        `┃ ◦ \`{owner}\` - Nama owner grup\n` +
-        `┃ ◦ \`{date}\` - Tanggal (DD/MM/YYYY)\n` +
-        `┃ ◦ \`{time}\` - Waktu (HH:mm WIB)\n` +
-        `┃ ◦ \`{day}\` - Hari (Senin, Selasa, dll)\n` +
-        `┃ ◦ \`{bot}\` - Nama bot\n` +
+        `┃ ◦ \`{user}\` - Nombre de miembro
+` +
+        `┃ ◦ \`{number}\` - Número miembro
+` +
+        `┃ ◦ \`{group}\` - Nombre del grupo
+` +
+        `┃ ◦ \`{desc}\` - Descripción del grupo
+` +
+        `┃ ◦ \`{count}\` - Número de miembros
+` +
+        `┃ ◦ \`{owner}\` - Nombre del propietario del grupo
+` +
+        `┃ ◦ \`{date}\` - Fecha (DD/MM/AAAA)
+` +
+        `┃ ◦ \`{time}\` - Tiempo (HH:mm WIB)
+` +
+        `┃ ◦ \`{day}\` - Días (el lunes, martes, etc.)
+` +
+        `┃ ◦ \`{bot}\` - Nombre del bot
+` +
         `┃ ◦ \`{prefix}\` - Prefix bot\n` +
         `╰┈┈⬡\n\n` +
-        `\`Contoh:\`\n` +
+        `\`Ejemplo:\`\n` +
         `\`${m.prefix}setwelcome Halo {user}! 👋\`\n` +
-        `\`Selamat datang di {group} pada {day}, {date}\``,
+        `\`Bienvenido a {group}. Hoy es {day}, {date}\``,
     );
   }
 
@@ -48,7 +58,8 @@ async function handler(m, { sock }) {
   m.react("✅");
 
   await m.reply(
-    `✅ Bienvenida con éxito *${text}*\nMau reset? ketik ${m.prefix}resetwelcome`,
+    `✅ Bienvenida con éxito *${text}*
+¿Quieres restablecerlo? Escribe ${m.prefix}resetwelcome`,
   );
 }
 

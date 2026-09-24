@@ -17,31 +17,31 @@ const pluginConfig = {
     isEnabled: true
 }
 
-const DEFAULT_INTRO = `halo kak @user 🖐
+const DEFAULT_INTRO = `Hola, @user 🖐
 
-Kenalan dulu yukk
-- Nama : 
-- Umur : 
-- Asal : 
-- Hobi : 
-- Status : 
+Vamos a conocernos
+- Nombre:
+- Edad:
+- Lugar:
+- Aficiones:
+- Estado:
 
-Que tengas una buena estadía. @group
+Que tengas una buena estadía en @group.
 
 > Para el propietario:
-sustitución de intro incorporado por .setintro <text>`
+Sustituye la presentación integrada con .setintro <text>`
  function parsePlaceholders(text, m, groupMeta) {
     const now = moment().tz('Asia/Jakarta')
     const dateStr = now.format('D MMMM YYYY')
     const timeStr = now.format('HH:mm')
-    
+
     return text
         .replace(/@user/gi, `@${m.sender.split('@')[0]}`)
         .replace(/@group/gi, groupMeta?.subject || 'Grup')
         .replace(/@count/gi, groupMeta?.participants?.length || '0')
         .replace(/@date/gi, dateStr)
         .replace(/@time/gi, timeStr)
-        .replace(/@desc/gi, groupMeta?.desc || 'Tidak ada deskripsi')
+        .replace(/@desc/gi, groupMeta?.desc || 'Sin descripción')
         .replace(/@botname/gi, config.bot?.name || 'Ourin-AI')
 }
 
@@ -49,10 +49,10 @@ async function handler(m, { sock }) {
     const db = getDatabase()
     const groupData = db.getGroup(m.chat) || db.setGroup(m.chat)
     const groupMeta = m.groupMetadata
-    
+
     const introText = groupData.intro || DEFAULT_INTRO
     const parsed = parsePlaceholders(introText, m, groupMeta)
-    
+
     await m.reply(parsed, { mentions: [m.sender] })
 }
 

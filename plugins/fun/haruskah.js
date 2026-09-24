@@ -2,9 +2,9 @@ const pluginConfig = {
     name: 'haruskah',
     alias: ['harus', 'should'],
     category: 'fun',
-    description: 'Tanya bot haruskah sesuatu',
-    usage: '.haruskah <pertanyaan>',
-    example: '.haruskah aku menyatakan cinta?',
+    description: "Pregúntale al bot si debes hacer algo",
+    usage: '.haruskah <pregunta>',
+    example: ".haruskah ¿debería declarar mi amor?",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -15,25 +15,25 @@ const pluginConfig = {
 };
 
 const answers = [
-    'Ya, harus!',
+    "¡Sí, debes hacerlo!",
     "No, estoy bien.",
     "Lo que tú digas.",
     "¡Tienes que hacerlo, no lo dudes!",
-    'Nggak harus juga.',
-    'Kalau menurutmu perlu, lakukan!',
-    'Pikir dulu baik-baik.',
-    'Harus! Sekarang!',
+    "No es obligatorio.",
+    "Si crees que es necesario, ¡hazlo!",
+    "Piénsalo bien primero.",
+    '¡Debes hacerlo ahora!',
     "No, espera un minuto.",
-    'Harus, tapi hati-hati.',
-    'Nggak harus, tapi boleh.',
-    'Wajib!',
-    'Hmm, skip aja deh.',
+    "Debes hacerlo, pero ten cuidado.",
+    "No tienes que hacerlo, pero puedes.",
+    '¡Es obligatorio!',
+    "Mmm, mejor déjalo pasar.",
     "Hazlo cuando estés seguro.",
-    'Harus, demi masa depanmu!',
-    'Nggak harus, santai aja.',
-    'Go for it!',
+    "¡Debes hacerlo por tu futuro!",
+    "No tienes que hacerlo; relájate.",
+    '¡Hazlo!',
     "No te apresures, piensa de nuevo.",
-    'Tentu harus!',
+    "¡Por supuesto que debes hacerlo!",
     "Mira la situación primero."
 ];
 
@@ -41,12 +41,12 @@ async function handler(m) {
     const text = m.text?.trim();
     
     if (!text) {
-        return m.reply(`⚖️ *ʜᴀʀᴜsᴋᴀʜ*
+        return m.reply(`⚖️ *¿DEBERÍA?*
 
-> ¡Póngase en una pregunta!
+> ¡Haz una pregunta!
 
-*Contoh:*
-> .haruskah aku menyatakan cinta?`);
+*Ejemplo:*
+> .haruskah ¿debería declarar mi amor?`);
     }
     
     const answer = answers[Math.floor(Math.random() * answers.length)];

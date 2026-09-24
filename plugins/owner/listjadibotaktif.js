@@ -31,14 +31,14 @@ async function handler(m, { sock }) {
         return m.reply(`❌ No hay jabots activos en este momento`)
     }
 
-    let txt = `🟢 *ᴊᴀᴅɪʙᴏᴛ ᴀᴋᴛɪꜰ*\n\n`
+    let txt = `🟢 *JADIBOT ACTIVO*\n\n`
     txt += `> 📊 Total: *${active.length}* activo bot
 
 `
 
     active.forEach((s, i) => {
         const uptime = formatUptime(Date.now() - s.startedAt)
-        const owner = s.ownerJid?.split('@')[0] || 'Unknown'
+        const owner = s.ownerJid?.split('@')[0] || 'Desconocido'
         txt += `*${i + 1}.* 🟢 @${s.id}\n`
         txt += `   ⏱️ *${uptime}* — 👤 @${owner}\n\n`
     })

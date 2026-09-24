@@ -20,9 +20,11 @@ async function handler(m, { sock }) {
   if (!prompt) {
     return m.reply(
       `🍌 *OURIN BANANA SUPER*\n\n` +
-        `> Edit gambar dengan AI\n\n` +
-        `\`Contoh: ${m.prefix}ourinbanana make it anime style\`\n\n` +
-        `> Reply atau kirim gambar dengan caption`,
+        `> Editar imágenes con AI
+
+` +
+        `\`Ejemplo: ${m.prefix}ourinbanana make it anime style\`\n\n` +
+        `> Responda o envíe una imagen con la descripción`,
     );
   }
 
@@ -47,7 +49,7 @@ async function handler(m, { sock }) {
 
     if (!mediaBuffer || !Buffer.isBuffer(mediaBuffer)) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > No se pudo download image`);
     }

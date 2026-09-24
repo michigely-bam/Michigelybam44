@@ -3,8 +3,8 @@ const pluginConfig = {
     alias: ['voting', 'vote', 'survei'],
     category: 'group',
     description: "Crear votación / votación en grupo",
-    usage: '.poll <pertanyaan> | <opsi1>, <opsi2>, ...',
-    example: '.poll Makan apa? | Nasi Goreng, Mie Ayam, Bakso',
+    usage: '.poll <pregunta> | <opción1>, <opción2>, ...',
+    example: ".poll ¿Qué comemos? | Arroz frito, Fideos con pollo, Albóndigas",
     isOwner: false,
     isPremium: false,
     isGroup: true,
@@ -19,15 +19,23 @@ async function handler(m, { sock }) {
     
     if (!text || text.trim() === '') {
         await m.reply(
-            `⚠️ *ᴠᴀʟɪᴅᴀsɪ ɢᴀɢᴀʟ*\n\n` +
-            `> Format tidak valid!\n\n` +
-            `*Format:*\n` +
-            `> \`.poll pertanyaan | opsi1, opsi2\`\n\n` +
-            `*Contoh:*\n` +
-            `> \`.poll Makan siang apa? | Nasi Goreng, Mie Ayam\`\n\n` +
-            `*Opsi tambahan:*\n` +
-            `> \`.poll multi | pertanyaan | opsi1, opsi2, opsi3, dst\`\n` +
-            `> (untuk pilihan ganda)`
+            `⚠️ *validación fallida*
+
+` +
+            `¡El formato no es válido!
+
+` +
+            `*Formato:*\n` +
+            `> \`.poll pregunta | opción1, opción2\`\n\n` +
+            `*Ejemplo:*
+` +
+            `> \`.poll ¿Qué comemos para el almuerzo? | Arroz frito, Fideos con pollo\`
+
+` +
+            `*Opciones adicionales:*
+` +
+            `> \`.poll multi | pregunta | opción1, opción2, opción3, etc.\`\n` +
+            `> (para opciones dobles)`
         );
         return;
     }
@@ -42,8 +50,10 @@ async function handler(m, { sock }) {
     
     if (parts.length < 2) {
         await m.reply(
-            `⚠️ *ᴠᴀʟɪᴅᴀsɪ ɢᴀɢᴀʟ*\n\n` +
-            `> Format: \`pertanyaan | opsi1, opsi2, ...\``
+            `⚠️ *validación fallida*
+
+` +
+            `> Formato: \`pregunta | opción1, opción2, ...\``
         );
         return;
     }
@@ -53,31 +63,38 @@ async function handler(m, { sock }) {
     
     if (options.length < 2) {
         await m.reply(
-            `⚠️ *ᴠᴀʟɪᴅᴀsɪ ɢᴀɢᴀʟ*\n\n` +
-            `> Minimal 2 opsi pilihan!`
+            `⚠️ *validación fallida*
+
+` +
+            `> ¡Elige al menos 2 opciones!`
         );
         return;
     }
     
     if (options.length > 12) {
         await m.reply(
-            `⚠️ *ᴠᴀʟɪᴅᴀsɪ ɢᴀɢᴀʟ*\n\n` +
-            `> Maksimal 12 opsi pilihan!`
+            `⚠️ *validación fallida*
+
+` +
+            `> ¡Puedes elegir un máximo de 12 opciones!`
         );
         return;
     }
     
     if (question.length > 255) {
         await m.reply(
-            `⚠️ *ᴠᴀʟɪᴅᴀsɪ ɢᴀɢᴀʟ*\n\n` +
-            `> Pertanyaan terlalu panjang!\n` +
-            `> Maksimal 255 karakter.`
+            `⚠️ *validación fallida*
+
+` +
+            `¡Las preguntas son demasiado largas!
+` +
+            `Un máximo de 255 caracteres.`
         );
         return;
     }
     
     try {
-        const pollMsg = `✅ Success membuat poll`;
+        const pollMsg = `✅ Encuesta creada correctamente`;
         
         await m.reply(pollMsg, { mentions: [m.sender] });
         
@@ -92,7 +109,8 @@ async function handler(m, { sock }) {
     } catch (error) {
         await m.reply(
             `❌ *ᴇʀʀᴏʀ*\n\n` +
-            `> Gagal membuat poll.\n` +
+            `> Fallo de las encuestas.
+` +
             `> _${error.message}_`
         );
     }

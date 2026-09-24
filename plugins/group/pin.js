@@ -19,15 +19,21 @@ const pluginConfig = {
 async function handler(m, { sock, args }) {
     if (!m.quoted || !m.quoted.key || !m.quoted.key.id) {
         await m.reply(
-            `⚠️ *ᴠᴀʟɪᴅᴀsɪ ɢᴀɢᴀʟ*\n\n` +
-            `> Reply pesan yang ingin di-pin!\n\n` +
-            `*Cara penggunaan:*\n` +
-            `> Reply pesan → ketik \`.pin\`\n` +
-            `> Optional: \`.pin 24\` (pin 24 jam)`
+            `⚠️ *validación fallida*
+
+` +
+            `¡Responda a los mensajes que quieres pinar!
+
+` +
+            `*Modo de uso:*
+` +
+            `> Responda a los mensajes → escriba \`.pin\`
+` +
+            `> Opcional: \`.pin 24\` (fijar durante 24 horas)`
         );
         return;
     }
-    
+
     let duration = 86400;
     if (args && args.length > 0 && args[0]) {
         const hours = parseInt(args[0]);
@@ -35,7 +41,7 @@ async function handler(m, { sock, args }) {
             duration = hours * 3600;
         }
     }
-    
+
     try {
         const pinKey = {
             remoteJid: m.chat,
@@ -43,24 +49,25 @@ async function handler(m, { sock, args }) {
             id: m.quoted.key.id,
             participant: m.quoted.key.participant || m.quoted.sender
         };
-        
+
         await sock.sendMessage(m.chat, {
             pin: pinKey,
             type: 1,
             time: duration
         });
-        
-        const durationText = duration >= 86400 
-            ? `${Math.floor(duration / 86400)} hari` 
-            : `${Math.floor(duration / 3600)} jam`;
-        
+
+        const durationText = duration >= 86400
+            ? `${Math.floor(duration / 86400)} días`
+            : `${Math.floor(duration / 3600)} horas`;
+
         const successMsg = `✅ El éxito marca este mensaje`;
         await m.reply(successMsg, { mentions: [m.sender] })
-        
+
     } catch (error) {
         await m.reply(
             `❌ *ᴇʀʀᴏʀ*\n\n` +
-            `> Gagal mem-pin pesan.\n` +
+            `Falla de pinar el mensaje.
+` +
             `> _${error.message}_`
         );
     }

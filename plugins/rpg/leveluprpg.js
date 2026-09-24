@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'leveluprpg',
     alias: ['lvluprpg', 'rpglevelup'],
     category: 'rpg',
-    description: 'Toggle notifikasi level up RPG',
+    description: "Activa o desactiva las notificaciones de subida de nivel RPG",
     usage: '.leveluprpg <on/off>',
     example: '.leveluprpg on',
     isOwner: false,
@@ -30,7 +30,7 @@ function handler(m, { sock }) {
         return m.reply(
             `✅ *ʀᴘɢ ʟᴇᴠᴇʟ ᴜᴘ ɴᴏᴛɪꜰ*\n\n` +
             `> Status: *ON* ✅\n` +
-            `> Kamu akan menerima notifikasi RPG saat naik level!`
+            `> ¡Recibirás una notificación de RPG cuando subas de nivel!`
         )
     }
     
@@ -40,17 +40,19 @@ function handler(m, { sock }) {
         return m.reply(
             `❌ *ʀᴘɢ ʟᴇᴠᴇʟ ᴜᴘ ɴᴏᴛɪꜰ*\n\n` +
             `> Status: *OFF* ❌\n` +
-            `> Notifikasi RPG level up dinonaktifkan.`
+            `Se ha desactivado la notificación RPG level up.`
         )
     }
     
     const status = user.settings.rpgLevelupNotif !== false ? 'ON ✅' : 'OFF ❌'
     return m.reply(
         `🔔 *ʀᴘɢ ʟᴇᴠᴇʟ ᴜᴘ ɴᴏᴛɪꜰ*\n\n` +
-        `> Status saat ini: *${status}*\n\n` +
+        `> Estado actual: *${status}*\n\n` +
         `╭┈┈⬡「 📋 *ᴜsᴀɢᴇ* 」\n` +
-        `┃ > \`.leveluprpg on\` - Aktifkan\n` +
-        `┃ > \`.leveluprpg off\` - Nonaktifkan\n` +
+        `┃ > \`.leveluprpg on\` - Activa
+` +
+        `┃ > \`.leveluprpg off\` - Desactiva
+` +
         `╰┈┈┈┈┈┈┈┈⬡`
     )
 }

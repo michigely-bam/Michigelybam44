@@ -80,7 +80,7 @@ async function generateNSFW(prompt, options = {}) {
     }
     
     if (!imageUrl) {
-        throw new Error('Timeout atau limit tercapai')
+        throw new Error("El tiempo o límite alcanzado")
     }
     
     return imageUrl
@@ -92,9 +92,13 @@ async function handler(m, { sock }) {
     if (!prompt) {
         return m.reply(
             `🔞 *ᴀɪ ɴsꜰᴡ ɢᴇɴᴇʀᴀᴛᴏʀ*\n\n` +
-            `> Generate gambar AI (18+)\n\n` +
-            `⚠️ *Hanya untuk 18+ dan Private Chat*\n\n` +
-            `> *Contoh:*\n` +
+            `> Generar imágenes AI (18+)
+
+` +
+            `⚠️ *Sólo para 18+ y Chat Privado*
+
+` +
+            `> *Ejemplo:*\n` +
             `> ${m.prefix}ainsfw beautiful anime girl`
         )
     }

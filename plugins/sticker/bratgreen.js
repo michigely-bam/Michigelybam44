@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'bratgreen',
     alias: ['brat2'],
     category: 'sticker',
-    description: 'Membuat sticker brat ijo',
+    description: "Crear un sticker Brat verde",
     usage: '.brat2 <text>',
     example: ".Cerebros.",
     isOwner: false,
@@ -24,7 +24,7 @@ async function handler(m, { sock }) {
 
 > Escriba texto
 
-\`Contoh: ${m.prefix}Bratgreen Hola a todos\``)
+\`Ejemplo: ${m.prefix}Bratgreen Hola a todos\``)
     }
     
     m.react('🕕')

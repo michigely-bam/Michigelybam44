@@ -23,10 +23,10 @@ function parseTime(str) {
 }
 
 function formatDuration(ms) {
-  if (ms < 60000) return `${Math.floor(ms / 1000)} detik`;
-  if (ms < 3600000) return `${Math.floor(ms / 60000)} menit`;
-  if (ms < 86400000) return `${Math.floor(ms / 3600000)} jam`;
-  return `${Math.floor(ms / 86400000)} hari`;
+  if (ms < 60000) return `${Math.floor(ms / 1000)} segundos`;
+  if (ms < 3600000) return `${Math.floor(ms / 60000)} minutos`;
+  if (ms < 86400000) return `${Math.floor(ms / 3600000)} horas`;
+  return `${Math.floor(ms / 86400000)} días`;
 }
 
 function getCtx() {
@@ -74,7 +74,8 @@ async function handleSession(m, sock) {
     session.step = "q2";
 
     await m.reply(
-      `✅ Detail tersimpan!\n┃ 🎁 ${title}\n┃ ⏱️ ${formatDuration(duration)}\n┃ 👥 ${winners} pemenang
+      `✅ ¡Detalles guardados!
+┃ 🎁 ${title}\n┃ ⏱️ ${formatDuration(duration)}\n┃ 👥 ${winners} ganador
 
 _Lista de grupos de recuperación ..._`,
     );
@@ -119,7 +120,7 @@ _Lista de grupos de recuperación ..._`,
       await sock.sendButton(
         m.chat,
         null,
-        "🎁 *GIVEAWAY CREATOR*\n\nPertanyaan 2/3:\n¿Quieres huir en este grupo o en cualquier otro grupo?",
+        "🎁 *GIVEAWAY CREATOR*\n\nPregunta 2/3:\n¿Quieres huir en este grupo o en cualquier otro grupo?",
         m,
         { buttons, footer: "Seleccionar grupo para el sorteo" },
       );
@@ -140,7 +141,7 @@ _Lista de grupos de recuperación ..._`,
     session.prizeName = prizeName;
     session.prizeDetails = detailParts.join(" | ");
 
-    await m.reply("✅ Detail hadiah tersimpan! Membuat giveaway...");
+    await m.reply("✅ ¡Detalles del premio guardados! Creando el sorteo...");
 
     await createGiveaway(session, sock, m);
     createSessions.delete(m.sender);
@@ -158,9 +159,9 @@ async function askPrizeDetails(m, sock, session) {
       {
         text:
           "🎁 *GIVEAWAY CREATOR*\n\n" +
-          "Pertanyaan 3/3:\nBerikan detail hadiah dengan format:\n" +
-          "nama hadiah | detail hadiah\n\n" +
-          "Contoh: Premium Account | Email: xxx@gmail.com | Password: xxx",
+          "Pregunta 3/3:\nIndica los detalles del premio con este formato:\n" +
+          "nombre del regalo detalles del regalo\n\n" +
+          "Ejemplo: Premium Account | Email: xxx@gmail.com | Password: xxx",
         contextInfo: getCtx(),
       },
       { quoted: m },
@@ -206,13 +207,13 @@ async function createGiveaway(session, sock, m) {
     "🎉 *G I V E A W A Y*\n\n" +
     `╭┈┈⬡「 📋 *ɪɴꜰᴏ* 」\n` +
     `┃ 🎁 ᴛɪᴛʟᴇ: *${giveaway.title}*\n` +
-    `┃ 🏆 ʜᴀᴅɪᴀʜ: *${giveaway.prizeName}*\n` +
-    `┃ 👥 ᴘᴇᴍᴇɴᴀɴɢ: ${giveaway.winners}\n` +
-    `┃ ⏰ ʙᴇʀᴀᴋʜɪʀ: ${endTimeFormatted}\n` +
-    `┃ ⏱️ ᴅᴜʀᴀsɪ: ${remaining}\n` +
+    `┃ 🏆 PREMIO: *${giveaway.prizeName}*\n` +
+    `┃ 👥 GANADOR: ${giveaway.winners}\n` +
+    `┃ ⏰ FINALIZADO: ${endTimeFormatted}\n` +
+    `┃ ⏱️ DURACIÓN: ${remaining}\n` +
     `┃ 🆔 ɪᴅ: \`${giveawayId}\`\n` +
     `╰┈┈⬡\n\n` +
-    `> Klik tombol *Join* untuk ikut giveaway!`;
+    `¡> Haga clic en el botón *Join* para participar en el giveaway!`;
 
   const joinButton = [
     {
@@ -269,11 +270,16 @@ async function endGiveaway(giveawayId, sock, db) {
 
     await sock.sendMessage(giveaway.chatId, {
       text:
-        `😔 *GIVEAWAY BERAKHIR*\n\n` +
-        `Giveaway *${giveaway.title}* berakhir tanpa peserta.\n\n` +
+        `😔 *SORTEO FINALIZADO*
+
+` +
+        `Giveaway *${giveaway.title}*terminó sin participantes.
+
+` +
         `╭┈┈⬡「 📋 *ɪɴꜰᴏ* 」\n` +
         `┃ 🆔 ɪᴅ: \`${giveawayId}\`\n` +
-        `┃ 👥 ᴘᴇsᴇʀᴛᴀ: 0\n` +
+        `┃ 👥 PARTICIPANTES: 0
+` +
         `╰┈┈⬡`,
       contextInfo: getCtx(),
     });
@@ -298,7 +304,7 @@ async function endGiveaway(giveawayId, sock, db) {
       fromMe: false,
     },
     message: {
-      conversation: "Yeyy gané",
+      conversation: "¡Sí, gané!",
     },
   };
 
@@ -306,17 +312,19 @@ async function endGiveaway(giveawayId, sock, db) {
     giveaway.chatId,
     {
       text:
-        `🎊 *GIVEAWAY BERAKHIR!*\n\n` +
-        `╭┈┈⬡「 🏆 *ᴘᴇᴍᴇɴᴀɴɢ* 」\n` +
+        `🎊 *¡SORTEO FINALIZADO!*
+
+` +
+        `╭┈┈⬡「 🏆 *GANADOR* 」\n` +
         `${winnerText}\n` +
         `╰┈┈⬡\n\n` +
         `╭┈┈⬡「 📋 *ɪɴꜰᴏ* 」\n` +
         `┃ 🎁 ᴛɪᴛʟᴇ: *${giveaway.title}*\n` +
-        `┃ 🏆 ʜᴀᴅɪᴀʜ: *${giveaway.prizeName}*\n` +
+        `┃ 🏆 PREMIO: *${giveaway.prizeName}*\n` +
         `┃ 🆔 ɪᴅ: \`${giveawayId}\`\n` +
-        `┃ 👥 ᴘᴇsᴇʀᴛᴀ: ${giveaway.participants.length}\n` +
+        `┃ 👥 PARTICIPANTES: ${giveaway.participants.length}\n` +
         `╰┈┈⬡\n\n` +
-        `> Hadiah dikirim ke private chat pemenang!`,
+        `¡> Premios enviados al chat privado ganador!`,
       contextInfo: { ...getCtx(), mentionedJid: giveaway.winnerList },
     },
     { quoted: fakeQuoted },
@@ -332,7 +340,7 @@ async function endGiveaway(giveawayId, sock, db) {
           fromMe: false,
         },
         message: {
-          conversation: "Yeyy gané",
+          conversation: "¡Sí, gané!",
         },
       };
       const ctx = getCtx();
@@ -341,17 +349,21 @@ async function endGiveaway(giveawayId, sock, db) {
         winnerJid,
         {
           text:
-            `🎉 *sᴇʟᴀᴍᴀᴛ!*\n\n` +
-            `> Kamu memenangkan giveaway!\n\n` +
+            `🎉 *¡FELICIDADES!*
+
+` +
+            `¡Vinciste el giveaway!
+
+` +
             `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
             `┃ 🎁 ᴛɪᴛʟᴇ: \`${giveaway.title}\`\n` +
-            `┃ 🏆 ʜᴀᴅɪᴀʜ: *${giveaway.prizeName}*\n` +
+            `┃ 🏆 PREMIO: *${giveaway.prizeName}*\n` +
             `┃ 🆔 ɪᴅ: \`${giveawayId}\`\n` +
             `╰┈┈⬡\n\n` +
-            `╭┈┈⬡「 🎁 *ᴅᴇᴛᴀɪʟ ʜᴀᴅɪᴀʜ* 」\n` +
-            `${giveaway.prizeDetails || "Hubungi admin untuk detail"}\n` +
+            `╭┈┈⬡「 🎁 *DETALLES DEL PREMIO* 」\n` +
+            `${giveaway.prizeDetails || "Póngase en contacto con el administrador para más detalles"}\n` +
             `╰┈┈⬡\n\n` +
-            `> _Ini informasi resmi dari bot._`,
+            `Esta es la información oficial del bot.`,
           contextInfo: ctx,
         },
         { quoted: winnerFakeQuoted },
@@ -426,11 +438,11 @@ async function handler(m, { sock }) {
 
     await m.reply(
       "🎁 *GIVEAWAY CREATOR*\n\n" +
-        "Pertanyaan 1/3:\nBerikan detail giveaway dengan format:\n" +
-        "nama | durasi | jumlah pemenang\n\n" +
-        "Contoh: Premium Account | 5m | 1\n" +
-        "Durasi: 30s, 5m, 1h, 1d\n\n" +
-        "> Bot akan diam jika format salah",
+        "Pregunta 1/3:\nIndica los detalles del sorteo con este formato:\n" +
+        "Nombre de duración número de ganadores\n\n" +
+        "Ejemplo: Premium Account | 5m | 1\n" +
+        "Duración: 30 s, 5 min, 1 h, 1 d\n\n" +
+        "> El bot se detiene si el formato es incorrecto",
     );
     return;
   }
@@ -468,7 +480,7 @@ async function handler(m, { sock }) {
 
     await m.react("✅");
     await m.reply(
-      `✅ @${m.sender.split("@")[0]} fontcolor = "# FFFF00" éxito únete a dar!${giveaway.participants.length} peserta)`,
+      `✅ @${m.sender.split("@")[0]} fontcolor = "# FFFF00" éxito únete a dar!${giveaway.participants.length} participantes)`,
     );
     return;
   }
@@ -484,17 +496,18 @@ async function handler(m, { sock }) {
 
     let text = "📋 *GIVEAWAY LIGHT*\n\n";
     if (active.length > 0) {
-      text += "🟢 *Aktif:*\n";
+      text += "🟢 *Activo:*\n";
       for (const g of active) {
         const endFmt = timeHelper.fromTimestamp(g.endTime, "DD/MM/YYYY HH:mm");
-        text += `┃ 🆔 \`${g.giveawayId}\` — ${g.title} (${g.participants.length} peserta, berakhir ${endFmt})\n`;
+        text += `┃ 🆔 \`${g.giveawayId}\` — ${g.title} (${g.participants.length} participantes; finaliza ${endFmt})\n`;
       }
       text += "\n";
     }
     if (ended.length > 0) {
-      text += "🔴 *Berakhir:*\n";
+      text += "🔴 *Finaliza:*\n";
       for (const g of ended.slice(-5)) {
-        text += `┃ 🆔 \`${g.giveawayId}\` — ${g.title} (${g.winnerList?.length || 0} pemenang)\n`;
+        text += `┃ 🆔 \`${g.giveawayId}\` — ${g.title} (${g.winnerList?.length || 0} ganador)
+`;
       }
     }
 
@@ -505,7 +518,7 @@ async function handler(m, { sock }) {
   if (deleteCmds.includes(cmd)) {
     if (!m.isAdmin && !m.isOwner) return m.reply("⚠️ ¡Sólo admin!");
     const giveawayId = args[0];
-    if (!giveawayId) return m.reply(`⚠️ Format: ${prefix}${cmd} GA-XXXXXX`);
+    if (!giveawayId) return m.reply(`⚠️ Formato: ${prefix}${cmd} GA-XXXXXX`);
 
     const giveaways = db.setting("giveaways") || {};
     if (!giveaways[giveawayId]) return m.reply("⚠️ ¡No se ha encontrado a nadie!");
@@ -519,7 +532,7 @@ async function handler(m, { sock }) {
   if (rerollCmds.includes(cmd)) {
     if (!m.isAdmin && !m.isOwner) return m.reply("⚠️ ¡Sólo admin!");
     const giveawayId = args[0];
-    if (!giveawayId) return m.reply(`⚠️ Format: ${prefix}${cmd} GA-XXXXXX`);
+    if (!giveawayId) return m.reply(`⚠️ Formato: ${prefix}${cmd} GA-XXXXXX`);
 
     const giveaways = db.setting("giveaways") || {};
     const giveaway = giveaways[giveawayId];
@@ -543,12 +556,12 @@ async function handler(m, { sock }) {
     await sock.sendMessage(giveaway.chatId, {
       text:
         `🔄 *GIVEAWAY REROLL!*\n\n` +
-        `╭┈┈⬡「 🏆 *ᴘᴇᴍᴇɴᴀɴɢ ʙᴀʀᴜ* 」\n` +
+        `╭┈┈⬡「 🏆 *NUEVO GANADOR* 」\n` +
         `${winnerText}\n` +
         `╰┈┈⬡\n\n` +
         `╭┈┈⬡「 📋 *ɪɴꜰᴏ* 」\n` +
         `┃ 🎁 ᴛɪᴛʟᴇ: *${giveaway.title}*\n` +
-        `┃ 🏆 ʜᴀᴅɪᴀʜ: *${giveaway.prizeName}*\n` +
+        `┃ 🏆 PREMIO: *${giveaway.prizeName}*\n` +
         `┃ 🆔 ɪᴅ: \`${giveawayId}\`\n` +
         `╰┈┈⬡`,
       contextInfo: { ...getCtx(), mentionedJid: giveaway.winnerList },
@@ -560,17 +573,21 @@ async function handler(m, { sock }) {
         ctx.mentionedJid = [winnerJid];
         await sock.sendMessage(winnerJid, {
           text:
-            `🎉 *sᴇʟᴀᴍᴀᴛ!*\n\n` +
-            `> Kamu memenangkan giveaway (reroll)!\n\n` +
+            `🎉 *¡FELICIDADES!*
+
+` +
+            `¡Has ganado el giveaway!
+
+` +
             `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
             `┃ 🎁 ᴛɪᴛʟᴇ: \`${giveaway.title}\`\n` +
-            `┃ 🏆 ʜᴀᴅɪᴀʜ: *${giveaway.prizeName}*\n` +
+            `┃ 🏆 PREMIO: *${giveaway.prizeName}*\n` +
             `┃ 🆔 ɪᴅ: \`${giveawayId}\`\n` +
             `╰┈┈⬡\n\n` +
-            `╭┈┈⬡「 🎁 *ᴅᴇᴛᴀɪʟ ʜᴀᴅɪᴀʜ* 」\n` +
-            `${giveaway.prizeDetails || "Hubungi admin untuk detail"}\n` +
+            `╭┈┈⬡「 🎁 *DETALLES DEL PREMIO* 」\n` +
+            `${giveaway.prizeDetails || "Póngase en contacto con el administrador para más detalles"}\n` +
             `╰┈┈⬡\n\n` +
-            `> _Ini informasi resmi dari bot._`,
+            `Esta es la información oficial del bot.`,
           contextInfo: ctx,
         });
       } catch (e) {}
@@ -581,10 +598,15 @@ async function handler(m, { sock }) {
   if (cmd === "giveaway") {
     await m.reply(
       "🎁 *GIVEAWAY MENU*\n\n" +
-        `┃ ${prefix}giveawaycreate — Buat giveaway\n` +
-        `┃ ${prefix}giveawaylist — Lihat daftar\n` +
-        `┃ ${prefix}giveawaydelete — Hapus giveaway\n` +
-        `┃ ${prefix}giveawayreroll — Reroll pemenang\n\n` +
+        `┃ ${prefix}Giveawaycreate — Hacer un regalo
+` +
+        `┃ ${prefix}Giveawaylist — Ver la lista
+` +
+        `┃ ${prefix}Giveawaydelete — Eliminar el giveaway
+` +
+        `┃ ${prefix}giveawayreroll — Volver a sortear al ganador
+
+` +
         `> Alias: ga, gacreate, galist, gadelete, gareroll`,
     );
     return;

@@ -4,8 +4,8 @@ const pluginConfig = {
     name: 'ramalanjodoh',
     alias: ['jodoh', 'cekjodoh'],
     category: 'primbon',
-    description: 'Ramalan jodoh berdasarkan primbon Jawa',
-    usage: ".Rahljandohaname 1 tgl1 bln1 thn",
+    description: "Predicción de pareja según el primbon javanés",
+    usage: ".ramalanjodoh <nombre1> <día1> <mes1> <año1> <nombre2> <día2> <mes2> <año2>",
     example: '.ramalanjodoh putu 16 11 2007 keyla 1 1 2008',
     isOwner: false,
     isPremium: false,
@@ -18,12 +18,12 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     if (m.args.length < 8) {
-        return m.reply(`💑 *ʀᴀᴍᴀʟᴀɴ ᴊᴏᴅᴏʜ*
+        return m.reply(`💑 *PREDICCIÓN DE PAREJA*
 
-> Format:
+> Formato:
 rama1 tgl1 bln1 thn1 nombre 2 tgl2 bl2 thn2
 
-\`Contoh:
+\`Ejemplo:
 ${m.prefix}ramalanjodoh putu 16 11 2007 keyla 1 1 2008\``)
     }
     
@@ -37,16 +37,16 @@ ${m.prefix}ramalanjodoh putu 16 11 2007 keyla 1 1 2008\``)
         
         if (!data?.status || !data?.data?.result) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > No se había previsto`)
         }
         
         const r = data.data.result
-        let response = `💑 *ʀᴀᴍᴀʟᴀɴ ᴊᴏᴅᴏʜ*\n\n`
+        let response = `💑 *PREDICCIÓN DE PAREJA*\n\n`
         response += `👤 *${r.orang_pertama.nama}*\n> ${r.orang_pertama.tanggal_lahir}\n\n`
         response += `👤 *${r.orang_kedua.nama}*\n> ${r.orang_kedua.tanggal_lahir}\n\n`
-        response += `📜 *ʜᴀꜱɪʟ ʀᴀᴍᴀʟᴀɴ:*\n`
+        response += `📜 *RESULTADO DE LA PREDICCIÓN:*\n`
         
         r.hasil_ramalan.forEach((h, i) => {
             response += `${i+1}. ${h}\n\n`

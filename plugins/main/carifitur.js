@@ -110,7 +110,7 @@ async function loadAllPlugins() {
       listallplugin: ["lplugin", "pluginlist", "allplugin"],
     };
     const caseDescriptions = {
-      cping: "Cek ping case system",
+      cping: "Consulta el estado y la latencia del sistema",
       listallcase: "Ver lista de todos los comandos de caso",
       listallplugin: "Ver lista de todos los comandos de plugin",
     };
@@ -139,11 +139,11 @@ async function handler(m, { sock }) {
   const keyword = m.text;
   if (!keyword) {
     return m.reply(
-      `🔍 *ᴄᴀʀɪ ꜰɪᴛᴜʀ*\n\n` +
-        `╭┈┈⬡「 📋 *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ* 」\n` +
+      `🔍 *BUSCAR FUNCIÓN*\n\n` +
+        `╭┈┈⬡「 📋 *MODO DE USO* 」\n` +
         `┃ \`${m.prefix}carifitur <keyword>\`\n` +
         `╰┈┈⬡\n\n` +
-        `> Contoh:\n` +
+        `> Ejemplo:\n` +
         `\`${m.prefix}carifitur sticker\`\n` +
         `\`${m.prefix}carifitur download\`\n` +
         `\`${m.prefix}carifitur game\``,
@@ -164,7 +164,7 @@ async function handler(m, { sock }) {
           matchScore,
           getSimilarity(plugin.name, keyword) * 1.2,
         );
-        matchReason = "nama";
+        matchReason = "nombre";
       }
       for (const alias of plugin.alias) {
         if (matchesKeyword(alias, keyword)) {
@@ -182,7 +182,7 @@ async function handler(m, { sock }) {
           matchScore,
           getSimilarity(plugin.description, keyword) * 0.8,
         );
-        matchReason = matchReason || "deskripsi";
+        matchReason = matchReason || "descripción";
       }
       if (matchesKeyword(plugin.category, keyword)) {
         isMatch = true;
@@ -200,15 +200,16 @@ async function handler(m, { sock }) {
     if (matches.length === 0) {
       m.react("❌");
       return m.reply(
-        `🔍 *ʜᴀsɪʟ ᴘᴇɴᴄᴀʀɪᴀɴ*
+        `🔍 *RESULTADO BÚSQUEDA*
 
 > No hay características con la palabra clave encontrada \`${keyword}\``,
       );
     }
     const saluranId = config.saluran?.id || "120363400911374213@newsletter";
     const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
-    let text = `🔍 *ʜᴀsɪʟ ᴘᴇɴᴄᴀʀɪᴀɴ: "${keyword}"*\n`;
-    text += `> Ditemukan *${matches.length}* fitur\n`;
+    let text = `🔍 *RESULTADO BÚSQUEDA: "${keyword}"*\n`;
+    text += `> Encontrado *${matches.length}* función
+`;
     text += `> Seleccione un comando a continuación:
 
 `;
@@ -219,9 +220,9 @@ async function handler(m, { sock }) {
       if (p.isPremium) badges.push("💎");
       if (p.isOwner) badges.push("👑");
       text += `*${i + 1}. ${m.prefix}${p.name}* ${badges.join("")}\n`;
-      text += `📁 Kategori: \`${p.category}\`\n`;
+      text += `📁 Categoría: \`${p.category}\`\n`;
       text += `📝 ${p.description.slice(0, 50)}${p.description.length > 50 ? "..." : ""}\n`;
-      if (p.usage) text += `💡 Usage: \`${p.usage}\`\n`;
+      if (p.usage) text += `💡 Uso: \`${p.usage}\`\n`;
       if (p.cooldown > 0) text += `⏱️ Cooldown: ${p.cooldown}s\n`;
       text += `\n`;
     }

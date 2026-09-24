@@ -7,7 +7,7 @@ const pluginConfig = {
   name: "daily",
   alias: ["harian", "claim"],
   category: "rpg",
-  description: "Klaim hadiah harian",
+  description: "Reclamaciones de regalos diarios",
   usage: ".daily",
   example: ".daily",
   isOwner: false,
@@ -30,7 +30,7 @@ try {
   if (fs.existsSync(thumbPath)) thumbRpg = fs.readFileSync(thumbPath);
 } catch (e) {}
 
-function getContextInfo(title = "🎁 *ᴅᴀɪʟʏ*", body = "Hadiah Harian") {
+function getContextInfo(title = "🎁 *ᴅᴀɪʟʏ*", body = "Premio diario") {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
@@ -62,7 +62,7 @@ function msToTime(duration) {
   const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
   const minutes = Math.floor((duration / (1000 * 60)) % 60);
   const seconds = Math.floor((duration / 1000) % 60);
-  return `${hours} jam ${minutes} menit ${seconds} detik`;
+  return `${hours} horas ${minutes} minutos ${seconds} segundos`;
 }
 
 async function handler(m, { sock }) {
@@ -79,9 +79,12 @@ async function handler(m, { sock }) {
   if (now - lastClaim < COOLDOWN) {
     const remaining = COOLDOWN - (now - lastClaim);
     return m.reply(
-      `⏰ *sᴜᴅᴀʜ ᴋʟᴀɪᴍ*\n\n` +
-        `> Kamu sudah klaim hadiah harian hari ini\n` +
-        `> Kembali dalam: *${msToTime(remaining)}*`,
+      `⏰ *después de la reclamación*
+
+` +
+        `Has reclamado el regalo diario hoy.
+` +
+        `Volver a la interior: *${msToTime(remaining)}*`,
     );
   }
 
@@ -99,10 +102,10 @@ async function handler(m, { sock }) {
   await m.react("🎁");
 
   let txt = `🎁 *ᴅᴀɪʟʏ ʀᴇᴡᴀʀᴅ*\n\n`;
-  txt += `╭┈┈⬡「 🎊 *ʜᴀᴅɪᴀʜ* 」\n`;
+  txt += `╭┈┈⬡「 🎊 *PREMIO* 」\n`;
   txt += `┃ 💵 Money: *+Rp ${moneyReward.toLocaleString("id-ID")}*\n`;
   txt += `┃ 🚄 Exp: *+${expReward}*\n`;
-  txt += `┃ ⚡ Energi: *+${energiReward}*\n`;
+  txt += `┃ ⚡ Energía: *+${energiReward}*\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
   txt += `> ${isPremium ? "✨ Premium Bonus!" : "Actualizar a Premium para más recompensa!"}`;
 

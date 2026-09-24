@@ -24,15 +24,18 @@ function handler(m, { sock }) {
     
     if (args.length < 2) {
         return m.reply(
-            `⏱️ *sᴇᴛ ᴊᴇᴅᴀ*\n\n` +
-            `╭┈┈⬡「 📋 *sᴇᴛᴛɪɴɢ sᴀᴀᴛ ɪɴɪ* 」\n` +
-            `┃ 📤 ᴊᴇᴅᴀ ᴘᴜsʜ: \`${currentJedaPush}ms\`\n` +
-            `┃ 📢 ᴊᴇᴅᴀ ᴊᴘᴍ: \`${currentJedaJpm}ms\`\n` +
+            `⏱️ *CONFIGURAR INTERVALO*
+
+` +
+            `╭┈┈⬡「 📋 *CONFIGURACIÓN ACTUAL* 」
+` +
+            `┃ 📤 INTERVALO DE ENVÍO: \`${currentJedaPush}ms\`\n` +
+            `┃ 📢 INTERVALO DE JPM: \`${currentJedaJpm}ms\`\n` +
             `╰┈┈⬡\n\n` +
-            `*ᴄᴀʀᴀ ᴘᴀᴋᴀɪ:*\n` +
+            `*MODO DE USO:*\n` +
             `> \`${m.prefix}setjeda push 5000\`\n` +
             `> \`${m.prefix}setjeda jpm 6000\`\n\n` +
-            `> _1 detik = 1000ms_`
+            `> _1 segundo = 1000ms_`
         )
     }
     
@@ -40,17 +43,19 @@ function handler(m, { sock }) {
     const value = parseInt(args[1])
     
     if (!['push', 'jpm'].includes(target)) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Pilihan: \`push\` atau \`jpm\``)
+        return m.reply(`❌ *falló*
+
+> Opciones: \`push\` o \`jpm\``)
     }
     
     if (isNaN(value) || value < 1000) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*
+        return m.reply(`❌ *falló*
 
 > Ingrese el número mínimo 1000 (1 segundo)`)
     }
     
     if (value > 60000) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*
+        return m.reply(`❌ *falló*
 
 > Máximo 60000 (1 minuto)`)
     }
@@ -58,13 +63,17 @@ function handler(m, { sock }) {
     if (target === 'push') {
         db.setting('jedaPush', value)
         m.react('✅')
-        return m.reply(`✅ *ᴊᴇᴅᴀ ᴘᴜsʜ ᴅɪᴜʙᴀʜ*\n\n> Jeda: \`${value}ms\` (${value/1000} detik)`)
+        return m.reply(`✅ *Intervalo de envío actualizado*
+
+> Intervalo: \`${value}ms\` (${value/1000} segundos)`)
     }
     
     if (target === 'jpm') {
         db.setting('jedaJpm', value)
         m.react('✅')
-        return m.reply(`✅ *ᴊᴇᴅᴀ ᴊᴘᴍ ᴅɪᴜʙᴀʜ*\n\n> Jeda: \`${value}ms\` (${value/1000} detik)`)
+        return m.reply(`✅ *Intervalo de difusión actualizado*
+
+> Intervalo: \`${value}ms\` (${value/1000} segundos)`)
     }
 }
 

@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'tooilpainting',
     alias: ['oilpainting', 'tooil', 'oil'],
     category: 'ai',
-    description: 'Ubah foto menjadi gaya lukisan minyak (oil painting)',
+    description: "Convertir las fotos en el estilo de la pintura al óleo",
     usage: ".tooilpainting (reply / enviar imagen)",
     example: '.tooilpainting',
     isOwner: false,
@@ -27,7 +27,9 @@ async function handler(m, { sock }) {
     if (!isImage) {
         return m.reply(
             `🖼️ *ᴛᴏ ᴏɪʟ ᴘᴀɪɴᴛɪɴɢ*\n\n` +
-            `> Kirim/reply gambar untuk diubah ke gaya lukisan minyak\n\n` +
+            `> Envíe/Responde imágenes para convertirlas en un estilo de pintura de aceite
+
+` +
             `\`${m.prefix}tooilpainting\``
         )
     }

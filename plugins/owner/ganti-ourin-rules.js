@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'ganti-ourin-rules.jpg',
     alias: ['gantirules', 'setourinrules'],
     category: 'owner',
-    description: 'Ganti gambar ourin-rules.jpg (thumbnail rules)',
-    usage: ".Swap -ourin -rules .jpg (reply / enviar imagen)",
+    description: "Cambiar las imágenes ourin-rules.",
+    usage: ".gantirules (responde o envía una imagen)",
     example: '.ganti-ourin-rules.jpg',
     isOwner: true,
     isPremium: false,
@@ -21,7 +21,7 @@ async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
     
     if (!isImage) {
-        return m.reply(`🖼️ *ɢᴀɴᴛɪ ᴏᴜʀɪɴ-ʀᴜʟᴇs.ᴊᴘɢ*
+        return m.reply(`🖼️ *sustituye ourin-rules.jpg*
 
 > Enviar / respuesta imágenes para reemplazar
 > File: assets/images/ourin-rules.jpg`)
@@ -48,7 +48,9 @@ async function handler(m, { sock }) {
         
         fs.writeFileSync(targetPath, buffer)
         
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*\n\n> Gambar ourin-rules.jpg telah diganti`)
+        m.reply(`✅ *correcto*
+
+La imagen ourin-rules.jpg ha sido cambiada`)
         
     } catch (error) {
         await m.reply(te(m.prefix, m.command, m.pushName))

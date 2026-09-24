@@ -23,9 +23,9 @@ async function handler(m, { sock }) {
         return m.reply(`❌ No hay sesión por lo que la bota se salva`)
     }
 
-    let txt = `🤖 *ᴅᴀꜰᴛᴀʀ ᴊᴀᴅɪʙᴏᴛ*\n\n`
+    let txt = `🤖 *LISTA DE JADIBOTS*\n\n`
     txt += `> 📊 Total: *${sessions.length}* session\n`
-    txt += `> 🟢 Aktif: *${active.length}*\n`
+    txt += `> 🟢 Activo: *${active.length}*\n`
     txt += `> ⚫ Offline: *${sessions.length - active.length}*\n\n`
 
     sessions.forEach((s, i) => {

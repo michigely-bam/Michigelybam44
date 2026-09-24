@@ -7,7 +7,7 @@ const pluginConfig = {
     alias: ['ghibli', 'ghiblistyle'],
     category: 'ai',
     description: "Convertir imágenes en estilo Ghibli",
-    usage: '.toghibli (reply gambar)',
+    usage: ".toghibli (respuesta a la imagen)",
     example: '.toghibli',
     isOwner: false,
     isPremium: false,

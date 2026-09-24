@@ -29,7 +29,9 @@ function convertToOpus(inputPath, outputPath) {
 
 async function handler(m, { sock }) {
     const text = m.text?.trim()
-    if (!text) return m.reply(`🐭 *ᴍɪᴄᴋᴇʏ ᴍᴏᴜsᴇ ᴛᴛs*\n\n> Gunakan: \`${m.prefix}ttsmickey <text>\``)
+    if (!text) return m.reply(`🐭 *ᴍɪᴄᴋᴇʏ ᴍᴏᴜsᴇ ᴛᴛs*
+
+> Usa: \`${m.prefix}ttsmickey <text>\``)
     
     m.react('🐭')
     

@@ -14,7 +14,7 @@ const pluginConfig = {
   alias: ["ssweb3", "ss3", "screenshot3", "screenshotweb3"],
   category: "tools",
   description: "Captura de pantalla web en 3 versiones (desktop, móvil, tablet)",
-  usage: ".sswab- 3 resultados",
+  usage: ".ssweb3 <url>",
   example: ".ssweeb- 3 resultados https://google.com",
   isOwner: false,
   isPremium: false,
@@ -30,11 +30,13 @@ async function handler(m, { sock }) {
 
   if (!url) {
     return m.reply(
-      `📸 *sᴄʀᴇᴇɴsʜᴏᴛ ᴡᴇʙ 3 ᴠᴇʀsɪ*\n\n` +
-        `╭┈┈⬡「 📋 *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ* 」\n` +
+      `📸 *CAPTURA WEB EN 3 VERSIONES*
+
+` +
+        `╭┈┈⬡「 📋 *MODO DE USO* 」\n` +
         `┃ \`${m.prefix}ssweb-3hasil <url>\`\n` +
         `╰┈┈⬡\n\n` +
-        `> Contoh:\n` +
+        `> Ejemplo:\n` +
         `\`${m.prefix}ssweb-3hasil https://google.com\``,
     );
   }
@@ -84,7 +86,7 @@ async function handler(m, { sock }) {
               `╰┈┈⬡`,
           };
         } catch (e) {
-          console.log(`[SSWeb3] Failed to download ${device}:`, e.message);
+          console.log(`[SSWeb3] No se pudo descargar ${device}:`, e.message);
           return null;
         }
       },
@@ -148,7 +150,7 @@ async function handler(m, { sock }) {
       m.react("✅");
     } catch (albumErr) {
       console.log(
-        "[SSWeb3] Album failed, sending individually:",
+        "[SSWeb3] Falló el álbum; enviando cada archivo por separado:",
         albumErr.message,
       );
 

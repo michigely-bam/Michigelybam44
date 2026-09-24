@@ -89,7 +89,7 @@ const pluginConfig = {
     name: ['tiktok', 'tt', 'ttmp4'],
     alias: ['tiktokdl', 'ttdown'],
     category: 'download',
-    description: 'Download video/slide TikTok tanpa watermark',
+    description: "Descargar videos o carruseles de TikTok sin marca de agua",
     usage: '.tiktok <url>',
     example: '.tiktok https://vt.tiktok.com/xxx',
     isOwner: false,
@@ -107,7 +107,7 @@ async function handler(m, { sock }) {
     const command = m?.command
     if (!text) {
         m.react('❌')
-        return m.reply(`📌 Contoh: *${prefix + command} https://vt.tiktok.com/...*`)
+        return m.reply(`📌 Ejemplo: *${prefix + command} https://vt.tiktok.com/...*`)
     }
     m.react('🕕')
     try {
@@ -134,7 +134,7 @@ async function handler(m, { sock }) {
     } catch (e) {
         console.error(e)
         m.react('❌')
-        m.reply('Coba lagi nanti, atau bisa coba ' + m.prefix + 'tt2')
+        m.reply("Inténtalo más tarde. " + m.prefix + 'tt2')
     }
 }
 

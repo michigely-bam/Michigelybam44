@@ -5,8 +5,8 @@ const pluginConfig = {
   alias: ["confession", "menfess", "anonim"],
   category: "fun",
   description: "Enviar un mensaje anónimo a alguien",
-  usage: ".Número confesado Az 124; mensaje",
-  example: ".Confesses 6281234567890 Hola, me gustas!",
+  usage: '.confess <número>|<mensaje>',
+  example: '.confess 6281234567890|Hola, me gustas',
   isOwner: false,
   isPremium: true,
   isGroup: false,
@@ -24,15 +24,18 @@ async function handler(m, { sock }) {
   if (!input || !input.includes("|")) {
     return m.reply(
       `💌 *ᴀɴᴏɴʏᴍᴏᴜs ᴄᴏɴꜰᴇss*\n\n` +
-        `> Kirim pesan anonim ke seseorang!\n\n` +
-        `╭┈┈⬡「 📋 *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ* 」\n` +
-        `┃ Format:\n` +
-        `┃ \`${m.prefix}confess nomor|pesan\`\n` +
+        `¡Envía mensajes anónimos a alguien!
+
+` +
+        `╭┈┈⬡「 📋 *MODO DE USO* 」\n` +
+        `┃ Formato:\n` +
+        `┃ \`${m.prefix}confess número|mensaje\`\n` +
         `┃\n` +
-        `┃ Contoh:\n` +
-        `┃ \`${m.prefix}confess 6281234567890|Hai kamu!\`\n` +
+        `┃ Ejemplo:\n` +
+        `┃ \`${m.prefix}confess 6281234567890|¡Hola!\`
+` +
         `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-        `> ⚠️ Identitasmu akan dirahasiakan!`,
+        `> ⚠️ ¡Tu identidad permanecerá oculta!`,
     );
   }
 
@@ -43,7 +46,7 @@ async function handler(m, { sock }) {
     return m.reply(
       `❌ ¡Formato equivocado!
 
-> Gunakan: \`${m.prefix}Número confesado Az 124; mensaje\``,
+> Usa: \`${m.prefix}confess <número>|<mensaje>\``,
     );
   }
 
@@ -68,7 +71,7 @@ async function handler(m, { sock }) {
     const [onWa] = await sock.onWhatsApp(targetNumber);
     if (!onWa?.exists) {
       return m.reply(
-        `❌ Nomor \`${targetNumber}\` ¡No está registrado en WhatsApp!`,
+        `❌ Número \`${targetNumber}\` ¡No está registrado en WhatsApp!`,
       );
     }
   } catch (e) {}
@@ -82,12 +85,17 @@ async function handler(m, { sock }) {
   }
 
   const confessText =
-    `💌 *ᴀᴅᴀ ᴘᴇsᴀɴ ᴅᴀʀɪ sᴇsᴇᴏʀᴀɴɢ ɴɪᴄʜʜ*\n\n` +
-    `「 📨 *ᴘᴇsᴀɴ: ᴅᴀʀɪ sᴇsᴇᴏʀᴀɴɢ* 」\n` +
-    ` 💕 *ɪsɪ ᴘᴇsᴀɴ:*\n` +
+    `💌 *hay un mensaje de alguien nichh*
+
+` +
+    `" 📨 *mensaje: de alguien* "
+` +
+    ` 💕 *con mensaje:*
+` +
     `\`\`\`${message}\`\`\`\n` +
-    `> 🔒 _Identitas pengirim dirahasiakan_\n` +
-    `> 💬 _Reply pesan ini untuk membalas!_`;
+    `> 🔒 _La identidad del remitente permanecerá oculta_
+` +
+    `💬 ¡Responda a este mensaje para responder!`;
 
   try {
     const sentMsg = await sock.sendMessage(targetJid, {
@@ -113,10 +121,14 @@ async function handler(m, { sock }) {
     );
 
     await m.reply(
-      `✅ *ᴄᴏɴꜰᴇss ᴛᴇʀᴋɪʀɪᴍ!*\n\n` +
-        `> Pesan dikirim ke: \`${targetNumber}\`\n` +
-        `> Identitasmu terjaga aman! 🔒\n\n` +
-        `> 💬 Jika dia membalas, balasannya akan dikirim ke sini!`,
+      `✅ *¡CONFESIÓN ENVIADA!*
+
+` +
+        `> Mensajes enviados a: \`${targetNumber}\`\n` +
+        `> ¡Tu identidad está protegida! 🔒
+
+` +
+        `💬 ¡Si él responde, su respuesta será enviada aquí!`,
     );
   } catch (error) {
     m.reply(te(m.prefix, m.command, m.pushName));
@@ -141,11 +153,15 @@ async function replyHandler(m, { sock }) {
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
   const replyText =
-    `💌 *ʙᴀʟᴀsᴀɴ ᴅᴀʀɪ ᴏʀᴀɴɢ ʏᴀɴɢ ᴋᴀᴍᴜ ᴄᴏɴꜰᴇss!*\n\n` +
-    `「 📨 *ʙᴀʟᴀsᴀɴ* 」\n` +
-    ` 💕 *ɪsɪ ᴘᴇsᴀɴ:*\n` +
+    `💌 ¡La retribución de quien confesasteis!
+
+` +
+    `「 📨 *RESPUESTA* 」
+` +
+    ` 💕 *con mensaje:*
+` +
     `\`\`\`${replyMessage}\`\`\`\n` +
-    `> 🔒 _Identitas tetap dirahasiakan_`;
+    `> 🔒 _La identidad permanece oculta_`;
 
   try {
     await sock.sendMessage(confessInfo.senderChat, {
@@ -162,7 +178,7 @@ async function replyHandler(m, { sock }) {
     });
 
     await sock.sendMessage(m.chat, {
-      text: `✅ Balasanmu telah terkirim secara anonim!`,
+      text: `✅ ¡Tu respuesta ha sido enviada de forma anónima!`,
     });
 
     global.confessData.delete(quotedId);

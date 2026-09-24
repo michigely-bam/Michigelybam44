@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['vercel'],
     category: 'owner',
     description: "HTML Deploy to Vercel (reply code / file)",
-    usage: '.deploy <namawebsite>',
+    usage: '.deploy <nombre_sitio_web>',
     example: '.deploy mysite',
     isOwner: true,
     isPremium: false,
@@ -23,9 +23,9 @@ async function handler(m, { sock }) {
 `🚀 *DEPLOY*
 
 > Introduzca el nombre del sitio web
-> Reply kode HTML atau file .html
+> Responder el código HTML o el archivo .html
 
-Contoh:
+Ejemplo:
 .deploy mysite`
         )
     }
@@ -35,7 +35,7 @@ Contoh:
 `❌ *HTML NO FOUND*
 
 > Texto de la respuesta que contiene HTML
-> atau reply file .html`
+> o el archivo de respuesta .html`
         )
     }
 
@@ -60,19 +60,19 @@ Contoh:
         } else {
             m.react('❌')
             return m.reply(
-`❌ *FORMAT UNUSED*
+`❌ *FORMATO NO VÁLIDO*
 
-> Reply teks HTML
-> atau file .html`
+> Responde con texto HTML
+> o el archivo .html`
             )
         }
 
         if (!/<html|<!doctype html|<head|<body/i.test(htmlContent)) {
             m.react('❌')
             return m.reply(
-`❌ *NUMBER HTML VALID*
+`❌ *HTML NO VÁLIDO*
 
-> Pastikan berisi struktur HTML`
+> Asegúrate de que contenga una estructura HTML`
             )
         }
 
@@ -123,7 +123,7 @@ Contoh:
                 domains.find(d => d.name.endsWith('.vercel.app'))?.name ||
                 domain
         } catch {
-            // fallback tetap ke default domain
+            // fallback se mantiene en el dominio predeterminado
         }
 
         m.react('✅')
@@ -131,7 +131,7 @@ Contoh:
         await m.reply(
 `╭──「 *DEPLOY SUCCESS* 」
 │
-│ 🌐 Nama     : ${name}
+│ 🌐 Nombre     : ${name}
 │ ☁️ Platform : Vercel
 │ 📄 Type     : Static HTML
 │ ⚙️ Status   : Building
@@ -151,7 +151,7 @@ Contoh:
             error.message
 
         m.reply(
-`╭──「 *DEPLOY FAILED* 」
+`╭──「 *EL DESPLIEGUE FALLÓ* 」
 │
 │ ❌ ${err}
 │

@@ -10,7 +10,7 @@ const pluginConfig = {
     alias: ['stt', 'speechtotext', 'transcribe'],
     category: 'tools',
     description: "Convierte la nota de voz / audio en texto (Speech-to-Text)",
-    usage: '.transkrip (reply voice note)',
+    usage: '.transkrip (responde a una nota de voz)',
     example: '.transkrip',
     isOwner: false,
     isPremium: false,
@@ -50,18 +50,23 @@ async function handler(m, { sock }) {
     const isAudio = quoted.type === 'audioMessage' || /audio/.test(quoted.mimetype || '');
     if (!isAudio) {
         return m.reply(
-            `🎤 *ᴛʀᴀɴsᴋʀɪᴘ*\n\n` +
-            `> Reply voice note atau audio untuk mengonversi ke teks\n` +
-            `> Contoh: reply VN → ketik \`${m.prefix}transkrip\``
+            `🎤 *TRANSCRIPCIÓN*
+
+` +
+            `> Responder notas de voz o audio para convertirlas en texto
+` +
+            `> Ejemplo: respuesta VN → escribir \`${m.prefix}transkrip\``
         );
     }
     const groqKey = config.APIkey?.groq;
     if (!groqKey) {
         return m.reply(
-            `❌ *ɢᴀɢᴀʟ*\n\n` +
-            `> API Key Groq belum diatur\n` +
-            `> Set di config.js → APIkey.groq\n` +
-            `> Gratis di https://console.groq.com`
+            `❌ *ERROR*\n\n` +
+            `> La clave API de Groq no está configurada
+` +
+            `> Configúralo en config.js → APIkey.groq
+` +
+            `> Consíguela gratis en https://console.groq.com`
         );
     }
     m.react('🎤');
@@ -85,21 +90,24 @@ async function handler(m, { sock }) {
         }
         const duration = Math.ceil(buffer.length / 4000);
         await m.reply(
-            `🎤 *ᴛʀᴀɴsᴋʀɪᴘ*\n\n` +
-            `╭┈┈⬡「 📝 *ʜᴀsɪʟ* 」\n` +
+            `🎤 *TRANSCRIPCIÓN*
+
+` +
+            `╭┈┈⬡「 📝 *RESULTADO* 」\n` +
             `┃\n` +
             `┃ ${text}\n` +
             `┃\n` +
             `╰┈┈⬡\n\n` +
             `> 🤖 Model: Whisper Large V3\n` +
-            `> 🌐 Bahasa: Indonesia\n` +
-            `> 📊 Ukuran: ~${(buffer.length / 1024).toFixed(1)} KB`
+            `> 🌐 Idioma: indonesio
+` +
+            `> 📊 Tamaño: ~${(buffer.length / 1024).toFixed(1)} KB`
         );
         m.react('✅');
     } catch (error) {
         m.react('❌');
         if (error.response?.status === 401) {
-            return m.reply('❌ API Key Groq invalid. Cek config.js → APIkey.groq');
+            return m.reply("❌ La clave de Groq no es válida. Revisa config.js → APIkey.groq");
         }
         if (error.response?.status === 429) {
             return m.reply("❌ - Inténtalo de nuevo más tarde.");

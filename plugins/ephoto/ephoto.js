@@ -118,9 +118,11 @@ async function handler(m, { sock }) {
         const effectList = Object.keys(EFFECT_URLS).map(e => `• \`${m.prefix}${e}\``).join('\n')
         return m.reply(
             `🎨 *ᴇᴘʜᴏᴛᴏ ᴇꜰꜰᴇᴄᴛs*\n\n` +
-            `> Buat efek text keren!\n\n` +
-            `╭┈┈⬡「 📋 *ᴅᴀꜰᴛᴀʀ ᴇꜰᴇᴋ* 」\n${effectList}\n╰┈┈┈┈┈┈┈┈⬡\n\n` +
-            `> *Contoh:* ${m.prefix}glitchtext Ourin-AI`
+            `¡Hacer un efecto de texto genial!
+
+` +
+            `╭┈┈⬡「 📋 *LISTA DE EFECTOS* 」\n${effectList}\n╰┈┈┈┈┈┈┈┈⬡\n\n` +
+            `> *Ejemplo:* ${m.prefix}glitchtext Ourin-AI`
         )
     }
     
@@ -128,7 +130,7 @@ async function handler(m, { sock }) {
         return m.reply(`❌ *ᴇʀʀᴏʀ*
 
 > ¡Entra el texto!
-> *Contoh:* ${m.prefix}${command} Ourin-AI`)
+> *Ejemplo:* ${m.prefix}${command} Ourin-AI`)
     }
     
     const effectUrl = EFFECT_URLS[command]

@@ -55,41 +55,51 @@ async function handler(m, { sock }) {
 
   if (input.toLowerCase() === 'on') {
     db.setting('bcgcEnabled', true)
-    return m.reply("✅ Grupo de radiodifusión *diaktifkan*")
+    return m.reply("✅ Difusión a grupos *activada*")
   }
 
   if (input.toLowerCase() === 'off') {
     db.setting('bcgcEnabled', false)
-    return m.reply("✅ Grupo de radiodifusión *dinonaktifkan*")
+    return m.reply("✅ Grupo de radiodifusión *desactivado*")
   }
 
   if (!input) {
     const enabled = db.setting('bcgcEnabled')
     const jeda = db.setting('jedaBcgc') || 5000
     return m.reply(
-      `📢 *BROADCAST GRUP*\n\n` +
-      `Status: ${enabled ? '✅ Aktif' : '❌ Nonaktif'}\n` +
-      `Jeda: ${jeda}ms (${(jeda / 1000).toFixed(1)}s)\n\n` +
-      `*PENGGUNAAN:*\n` +
-      `• \`${m.prefix}bcgc on\` — Aktifkan\n` +
-      `• \`${m.prefix}bcgc off\` — Nonaktifkan\n` +
-      `• \`${m.prefix}bcgc <pesan>\` — Kirim broadcast\n` +
-      `• \`${m.prefix}bcgc (reply media)\` — Kirim dengan media\n\n` +
-      `*JEDA:*\n` +
-      `• \`${m.prefix}jedabcgc 5s\` — Set jeda 5 detik\n` +
-      `• \`${m.prefix}jedabcgc 2m\` — Set jeda 2 menit`
+      `📢 *BROADCAST GRUPO*
+
+` +
+      `Status: ${enabled ? "✅ Activo" : "❌ Inactivo"}\n` +
+      `Intervalo: ${jeda}ms (${(jeda / 1000).toFixed(1)}s)\n\n` +
+      `*USO:*
+` +
+      `• \`${m.prefix}bcgc on\` — Activar
+` +
+      `• \`${m.prefix}bcgc off\` — Desactiva
+` +
+      `• \`${m.prefix}bcgc <mensaje>\` — Enviar una transmisión
+` +
+      `• \`${m.prefix}bcgc (Responde media)\` — Enviar con los medios
+
+` +
+      `*INTERVALO:*
+` +
+      `• \`${m.prefix}jedabcgc 5s\` — Establezca una pausa de 5 segundos
+` +
+      `• \`${m.prefix}jedabcgc 2m\` — Establece una pausa de 2 minutos`
     )
   }
 
   if (global.statusBcgc) {
     return m.reply(`❌ El grupo de radiodifusión está funcionando.
-Ketik \`${m.prefix}stopbcgc\` Parar.`)
+Escribe \`${m.prefix}stopbcgc\` Parar.`)
   }
 
   const enabled = db.setting('bcgcEnabled')
   if (!enabled) {
     return m.reply(`❌ El grupo de radiodifusión no ha sido activado.
-Ketik \`${m.prefix}bcgc on\` dulu.`)
+Escribe \`${m.prefix}Usa \`bcgc on\` primero.`)
   }
 
   m.react('📢')
@@ -121,15 +131,19 @@ Ketik \`${m.prefix}bcgc on\` dulu.`)
 
     await sock.sendMessage(m.chat, {
       text:
-        `📢 *ʙʀᴏᴀᴅᴄᴀsᴛ ɢʀᴜᴘ*\n\n` +
+        `📢 *broadcast grupo*
+
+` +
         `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-        `┃ 📝 ᴘᴇsᴀɴ: \`${input.substring(0, 50)}${input.length > 50 ? '...' : ''}\`\n` +
-        `┃ 📷 ᴍᴇᴅɪᴀ: \`${mediaBuffer ? mediaType : 'Tidak'}\`\n` +
-        `┃ 👥 ᴛᴀʀɢᴇᴛ: \`${groupIds.length}\` grup\n` +
-        `┃ ⏱️ ᴊᴇᴅᴀ: \`${jeda}ms\`\n` +
-        `┃ 📊 ᴇsᴛɪᴍᴀsɪ: \`${Math.ceil((groupIds.length * jeda) / 60000)} menit\`\n` +
+        `┃ 📝 mensaje: \`${input.substring(0, 50)}${input.length > 50 ? '...' : ''}\`\n` +
+        `┃ 📷 ᴍᴇᴅɪᴀ: \`${mediaBuffer ? mediaType : "No"}\`\n` +
+        `┃ 👥 ᴛᴀʀɢᴇᴛ: \`${groupIds.length}\` grupo
+` +
+        `┃ ⏱️ INTERVALO: \`${jeda}ms\`\n` +
+        `┃ 📊 ESTIMACIÓN: \`${Math.ceil((groupIds.length * jeda) / 60000)} minutos\`
+` +
         `╰┈┈⬡\n\n` +
-        `> Memulai broadcast...`,
+        `> Iniciando la difusión...`,
       contextInfo: ctx
     }, { quoted: m })
 
@@ -163,10 +177,12 @@ Ketik \`${m.prefix}bcgc on\` dulu.`)
 
     await sock.sendMessage(m.chat, {
       text:
-        `✅ *ʙʀᴏᴀᴅᴄᴀsᴛ sᴇʟᴇsᴀɪ*\n\n` +
-        `╭┈┈⬡「 📊 *ʜᴀsɪʟ* 」\n` +
-        `┃ ✅ ʙᴇʀʜᴀsɪʟ: \`${success}\`\n` +
-        `┃ ❌ ɢᴀɢᴀʟ: \`${failed}\`\n` +
+        `✅ *broadcast terminado*
+
+` +
+        `╭┈┈⬡「 📊 *RESULTADO* 」\n` +
+        `┃ ✅ correcto: \`${success}\`\n` +
+        `┃ ❌ ERROR: \`${failed}\`\n` +
         `┃ 📊 ᴛᴏᴛᴀʟ: \`${groupIds.length}\`\n` +
         `╰┈┈⬡`,
       contextInfo: ctx
@@ -174,7 +190,7 @@ Ketik \`${m.prefix}bcgc on\` dulu.`)
   } catch (e) {
     delete global.statusBcgc
     m.react('❌')
-    m.reply('Gagal: ' + e.message)
+    m.reply("Falló: " + e.message)
   }
 }
 

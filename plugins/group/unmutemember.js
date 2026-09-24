@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'unmutemember',
     alias: ['unmutmember', 'unsilentmember', 'unbisukanmember', 'listmutemember', 'listmute'],
     category: 'group',
-    description: 'Membuka mute member tertentu',
-    usage: '.unmutemember <@tag/reply/nomor>',
+    description: "Quitar el silencio a un miembro específico",
+    usage: ".unmutemember <@mención/reply/número>",
     example: '.unmutemember @user',
     isOwner: false,
     isPremium: false,
@@ -45,17 +45,20 @@ async function handler(m, { sock }) {
 
     if (m.command === 'listmutemember' || m.command === 'listmute') {
         if (mutedMembers.length === 0) {
-            return m.reply(`🔇 *LIST MUTED MEMBERS*
+            return m.reply(`🔇 *MIEMBROS SILENCIADOS*
 
-> No modificado miembro de este grupo`)
+> No hay miembros silenciados en este grupo.`)
         }
 
-        let txt = `🔇 *LIST MUTED MEMBERS*\n\n╭┈┈⬡「 📋 *ᴅᴀꜰᴛᴀʀ* 」\n`
+        let txt = `🔇 *MIEMBROS SILENCIADOS*
+
+╭┈┈⬡「 📋 *LISTA* 」
+`
         mutedMembers.forEach((jid, i) => {
             const num = jid.replace(/@.+/g, '')
             txt += `┃ ${i + 1}. @${num}\n`
         })
-        txt += `╰┈┈⬡\n\n> Total: \`${mutedMembers.length}\` member dimute`
+        txt += `╰┈┈⬡\n\n> Total: \`${mutedMembers.length}\` miembros silenciados`
 
         return m.reply(txt, { mentions: mutedMembers })
     }
@@ -64,12 +67,12 @@ async function handler(m, { sock }) {
 
     if (!targetJid) {
         return m.reply(
-            `🔊 *UNMUTE MEMBER*\n\n` +
-            `> Membuka mute member tertentu\n\n` +
-            `\`Contoh:\`\n` +
+            `🔊 *QUITAR SILENCIO*\n\n` +
+            `> Quita el silencio a un miembro específico.\n\n` +
+            `\`Ejemplo:\`\n` +
             `> ${m.prefix}unmutemember @user\n` +
             `> ${m.prefix}unmutemember 6281234567890\n` +
-            `> Reply pesan member + ${m.prefix}unmutemember`
+            `> Responde al mensaje del miembro con ${m.prefix}unmutemember`
         )
     }
 
@@ -81,7 +84,9 @@ async function handler(m, { sock }) {
     })
 
     if (index === -1) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Member @${targetNumber} no se está reprimiendo`, { mentions: [targetJid] })
+        return m.reply(`❌ *Error*
+
+> El miembro @${targetNumber} no está silenciado.`, { mentions: [targetJid] })
     }
 
     mutedMembers.splice(index, 1)
@@ -89,11 +94,11 @@ async function handler(m, { sock }) {
 
     m.react('🔊')
     await m.reply(
-        `🔊 *MEMBER DIUNMUTE*\n\n` +
+        `🔊 *SILENCIO RETIRADO*\n\n` +
         `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
         `┃ 👤 ᴍᴇᴍʙᴇʀ: @${targetNumber}\n` +
-        `┃ 🔊 sᴛᴀᴛᴜs: \`Unmuted\`\n` +
-        `┃ 📊 sɪsᴀ ᴍᴜᴛᴇ: \`${mutedMembers.length}\` ᴍᴇᴍʙᴇʀ\n` +
+        `┃ 🔊 ᴇsᴛᴀᴅᴏ: \`Sin silencio\`\n` +
+        `┃ 📊 ʀᴇsᴛᴀɴ: \`${mutedMembers.length}\` miembros silenciados\n` +
         `╰┈┈⬡`,
         { mentions: [targetJid] }
     )

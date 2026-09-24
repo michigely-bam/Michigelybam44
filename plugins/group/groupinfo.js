@@ -60,12 +60,14 @@ async function handler(m, { sock, db }) {
 
         const isOpen = groupMeta.announce === false || !groupMeta.announce
 
-        let text = `👥 *INFO GRUP*\n\n`
-        text += `Nama: *${groupMeta.subject}*\n`
+        let text = `👥 *INFO GRUPO*
+
+`
+        text += `Nombre: *${groupMeta.subject}*\n`
         text += `ID: ${m.chat}\n`
         text += `Owner: ${ownerDisplay}\n`
-        text += `Dibuat: ${createdDate}\n`
-        text += `Status: ${isOpen ? '🔓 Terbuka' : '🔒 Tertutup'}\n\n`
+        text += `Está hecho: ${createdDate}\n`
+        text += `Status: ${isOpen ? "🔓 Abierto" : "🔒 Cerrado"}\n\n`
 
         text += `📊 *MEMBER*\n`
         text += `Total: ${participants.length}\n`
@@ -82,7 +84,8 @@ async function handler(m, { sock, db }) {
         text += `AutoSticker: ${featureStatus(group.autosticker)}\n`
         text += `AutoMedia: ${featureStatus(group.automedia)}\n\n`
 
-        text += `🛡️ *PROTEKSI*\n`
+        text += `🛡️ *PROTECCIÓN*
+`
         text += `AntiLink: ${featureStatus(group.antilink)}\n`
         text += `AntiBot: ${featureStatus(group.antibot)}\n`
         text += `AntiSpam: ${featureStatus(group.antispam)}\n`
@@ -94,7 +97,10 @@ async function handler(m, { sock, db }) {
         text += `AntiDocument: ${featureStatus(group.antidocument)}`
 
         if (groupMeta.desc) {
-            text += `\n\n📝 *DESKRIPSI*\n${groupMeta.desc}`
+            text += `
+
+📝 *DESCRIPCIÓN*
+${groupMeta.desc}`
         }
 
         const mentions = ownerJid && !ownerJid.includes(':') ? [ownerJid] : []

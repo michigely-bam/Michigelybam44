@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'energi',
     alias: ['cekenergi', 'myenergi', 'energy', 'limit', 'ceklimit'],
     category: 'user',
-    description: 'Cek energi user',
+    description: "Consulta la energía de un usuario",
     usage: '.energi [@user]',
     example: '.energi',
     isOwner: false,
@@ -17,7 +17,7 @@ const pluginConfig = {
 }
 
 function formatNumber(num) {
-    if (num === -1) return '∞ Unlimited'
+    if (num === -1) return '∞ Ilimitada'
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 }
 
@@ -25,7 +25,7 @@ async function handler(m, { sock }) {
     const db = getDatabase()
     
     let targetJid = m.sender
-    let targetName = m.pushName || 'Kamu'
+    let targetName = m.pushName || "Tú"
     
     if (m.quoted) {
         targetJid = m.quoted.sender
@@ -58,19 +58,22 @@ async function handler(m, { sock }) {
     let userStatus = 'Free'
     if (isOwner) userStatus = 'Owner'
     else if (user.isPremium) userStatus = 'Premium'
-    if (!energiEnabled) userStatus += ' (Energi OFF)'
+    if (!energiEnabled) userStatus += " (Energía OFF)"
     
-    let text = `*〔 ⚡ ENERGI INFO 〕*\n\n`
+    let text = `*〔 ⚡ INFORMACIÓN DE ENERGÍA 〕*
+
+`
 
 text += `*〔 👤 User 〕* ${targetName}\n`
-text += `*〔 ⚡ Energi 〕* ${energiDisplay}\n`
+text += `*〔 ⚡ Energía 〕* ${energiDisplay}\n`
 text += `*〔 💎 Status 〕* ${userStatus}\n\n`
     
     if (!energiEnabled) {
         text += `🔌 El sistema de energía está deshabilitado - todo el comando es gratuito`
     } else if (isSelf && !isUnlimited && finalEnergi < 10) {
-        text += `⚠️ Energi hampir habis!\n`
-        text += `Gunakan \`.buyenergi\` para comprar`
+        text += `⚠️ ¡La energía está a punto de agotarse!
+`
+        text += `Usa \`.buyenergi\` para comprar`
     } else if (isUnlimited) {
         text += `✨ Energía ilimitada activada!`
     }

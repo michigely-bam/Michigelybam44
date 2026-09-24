@@ -52,13 +52,13 @@ async function handler(m, { sock, db }) {
         const openTime = group.scheduleOpen || null;
         const closeTime = group.scheduleClose || null;
         
-        let scheduleInfo = `⏰ *ᴊᴀᴅᴡᴀʟ ɢʀᴜᴘ*
+        let scheduleInfo = `⏰ *cuadro de grupo*
 
 「 📋 *sᴛᴀᴛᴜs* 」
 🔓 ᴏᴘᴇɴ: *${openTime || "Inactivo"}*
 🔒 ᴄʟᴏsᴇ: *${closeTime || "Inactivo"}*
 
-*Cara Penggunaan:*
+*Modo de uso:*
 \`.jadwalgroup open 06:00\`
 \`.jadwalgroup close 22:00\`
 \`.Grupo de promoción eliminar abierto\`
@@ -73,9 +73,12 @@ async function handler(m, { sock, db }) {
         
         if (type !== 'open' && type !== 'close') {
             await m.reply(
-                `⚠️ *ᴠᴀʟɪᴅᴀsɪ ɢᴀɢᴀʟ*\n\n` +
-                `> Gunakan: \`.jadwalgroup hapus open\`\n` +
-                `> atau: \`.jadwalgroup hapus close\``
+                `⚠️ *validación fallida*
+
+` +
+                `> Utilice: \`.jadwalgroup hapus open\`
+` +
+                `> o: \`.jadwalgroup hapus close\``
             );
             return;
         }
@@ -87,16 +90,20 @@ async function handler(m, { sock, db }) {
             db.setGroup(m.chat, group);
             
             await m.reply(
-                `✅ *ʙᴇʀʜᴀsɪʟ*\n\n` +
-                `> Jadwal *buka grup* otomatis telah dihapus.`
+                `✅ *correcto*
+
+` +
+                `> Se han eliminado los horarios *abiertos de grupos* automáticamente.`
             );
         } else {
             delete group.scheduleClose;
             db.setGroup(m.chat, group);
             
             await m.reply(
-                `✅ *ʙᴇʀʜᴀsɪʟ*\n\n` +
-                `> Jadwal *tutup grup* otomatis telah dihapus.`
+                `✅ *correcto*
+
+` +
+                `> El calendario *de cierre automático del grupo* ha sido eliminado.`
             );
         }
         return;
@@ -104,9 +111,13 @@ async function handler(m, { sock, db }) {
     
     if (action !== 'open' && action !== 'close') {
         await m.reply(
-            `⚠️ *ᴠᴀʟɪᴅᴀsɪ ɢᴀɢᴀʟ*\n\n` +
-            `> Action harus \`open\` atau \`close\`!\n\n` +
-            `> *Contoh:*\n` +
+            `⚠️ *validación fallida*
+
+` +
+            `¡La acción debe ser \`open\` o \`close\`!
+
+` +
+            `> *Ejemplo:*\n` +
             `> \`.jadwalgroup open 06:00\`\n` +
             `> \`.jadwalgroup close 22:00\``
         );
@@ -115,10 +126,14 @@ async function handler(m, { sock, db }) {
     
     if (!time) {
         await m.reply(
-            `⚠️ *ᴠᴀʟɪᴅᴀsɪ ɢᴀɢᴀʟ*\n\n` +
-            `> Waktu harus diisi!\n\n` +
-            `> *Format:* \`HH:MM\` (24 jam)\n` +
-            `> *Contoh:* \`.jadwalgroup ${action} 08:00\``
+            `⚠️ *validación fallida*
+
+` +
+            `¡El tiempo debe llenarse!
+
+` +
+            `> *Formato:* \`HH:MM\` (24 horas)\n` +
+            `> *Ejemplo:* \`.jadwalgroup ${action} 08:00\``
         );
         return;
     }
@@ -126,10 +141,14 @@ async function handler(m, { sock, db }) {
     const parsed = parseTime(time);
     if (!parsed) {
         await m.reply(
-            `⚠️ *ᴠᴀʟɪᴅᴀsɪ ɢᴀɢᴀʟ*\n\n` +
-            `> Format waktu tidak valid!\n\n` +
-            `> *Format:* \`HH:MM\` (24 jam)\n` +
-            `> *Contoh:* \`06:00\`, \`22:30\`, \`08:15\``
+            `⚠️ *validación fallida*
+
+` +
+            `¡El formato de tiempo no es válido!
+
+` +
+            `> *Formato:* \`HH:MM\` (24 horas)\n` +
+            `> *Ejemplo:* \`06:00\`, \`22:30\`, \`08:15\``
         );
         return;
     }
@@ -145,18 +164,18 @@ async function handler(m, { sock, db }) {
     
     db.setGroup(m.chat, group);
     
-    const actionText = action === 'open' ? 'BUKA' : 'TUTUP';
+    const actionText = action === 'open' ? "ABRIR" : "CERRAR";
     const emoji = action === 'open' ? '🔓' : '🔒';
     
-    const successMsg = `✅ *ᴊᴀᴅᴡᴀʟ ᴅɪsɪᴍᴘᴀɴ*
+    const successMsg = `✅ *el calendario se guarda*
 
 ╭┈┈⬡「 ⏰ *sᴇᴛᴛɪɴɢ* 」
-┃ ㊗ ${emoji} ᴀᴋsɪ: *${actionText}*
-┃ ㊗ ⏱️ ᴡᴀᴋᴛᴜ: *${formattedTime} WIB*
-┃ ㊗ 📡 sᴛᴀᴛᴜs: *🟢 Aktif*
+┃ ㊗ ${emoji} ACCIÓN: *${actionText}*
+┃ ㊗ ⏱️ HORA: *${formattedTime} WIB*
+┃ 祝 📡 estado: *🟢 activo*
 ╰┈┈⬡
 
-> _El grupo automáticamente ${action === 'open' ? 'dibuka' : 'ditutup'}_
+> _El grupo se ${action === 'open' ? 'abrirá' : 'cerrará'} automáticamente._
 > _Todos los días en el reloj *${formattedTime}* WIB._`;
     
     await m.reply(successMsg);

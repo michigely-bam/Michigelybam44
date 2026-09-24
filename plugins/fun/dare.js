@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'dare',
     alias: ['dareq', 'tantang'],
     category: 'fun',
-    description: 'Random tantangan dare',
+    description: "Retos aleatorios",
     usage: '.dare',
     example: '.dare',
     isOwner: false,

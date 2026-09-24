@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'cekprem',
     alias: ['cekpremium', 'preminfo'],
     category: 'cek',
-    description: 'Cek detail status premium user',
+    description: "Consulta el estado premium del usuario",
     usage: '.cekprem @user',
     example: '.cekprem',
     isOwner: false,
@@ -55,24 +55,26 @@ async function handler(m) {
     txt += `👤 User: @${targetNumber}\n`
 
     if (isConfigOwner) {
-        txt += `🏷️ Role: *👑 Owner (Permanent)*\n`
+        txt += `🏷️ Rol: *👑 Propietario (permanente)*
+`
     } else if (typeof premData === 'string' || !premData?.expired) {
-        txt += `🏷️ Role: *💎 Premium (Permanent)*\n`
+        txt += `🏷️ Rol: *💎 Prémium (Permanente)*\n`
     } else {
         const remaining = Math.ceil((premData.expired - now) / (1000 * 60 * 60 * 24))
         const totalDays = premData.addedAt ? Math.ceil((premData.expired - premData.addedAt) / (1000 * 60 * 60 * 24)) : '?'
-        txt += `📛 Nama: *${premData.name || 'Unknown'}*\n`
-        txt += `📅 Mulai: *${premData.addedAt ? formatDate(premData.addedAt) : 'Unknown'}*\n`
+        txt += `📛 Nombre: *${premData.name || 'Desconocido'}*\n`
+        txt += `📅 Inicio: *${premData.addedAt ? formatDate(premData.addedAt) : 'Desconocido'}*\n`
         txt += `⏳ Expired: *${formatDate(premData.expired)}*\n`
-        txt += `🗓️ Durasi: *${totalDays} hari*\n`
-        txt += `📊 Sisa: *${remaining > 0 ? remaining + ' hari' : '⚠️ Expired'}*\n`
+        txt += `🗓️ Duración: *${totalDays} días*
+`
+        txt += `📊 Restante: *${remaining > 0 ? remaining + " días" : '⚠️ Expired'}*\n`
     }
 
     if (user) {
-        txt += `⚡ Energi: *${user.energi === -1 ? '∞' : (user.energi ?? 0)}*\n`
-        txt += `💰 Koin: *${user.koin === -1 ? '∞' : (user.koin ?? 0).toLocaleString('id-ID')}*\n`
+        txt += `⚡ Energía: *${user.energi === -1 ? '∞' : (user.energi ?? 0)}*\n`
+        txt += `💰 Monedas: *${user.koin === -1 ? '∞' : (user.koin ?? 0).toLocaleString('id-ID')}*\n`
         txt += `⭐ Exp: *${(user.exp ?? 0).toLocaleString('id-ID')}*\n`
-        txt += `📊 Level: *${user.level ?? 1}*\n`
+        txt += `📊 Nivel: *${user.level ?? 1}*\n`
     }
 
     await m.reply(txt, { mentions: [jid] })

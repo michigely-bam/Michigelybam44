@@ -7,8 +7,8 @@ const pluginConfig = {
     alias: ['mathgpt', 'math', 'mathsolver'],
     category: 'ai',
     description: "IA para resolver problemas de matemáticas",
-    usage: '.matematika <soal> atau reply gambar soal',
-    example: '.matematika 2+2 berapa?',
+    usage: ".matematika <problema> o responde a una imagen con la pregunta",
+    example: ".matematika ¿cuánto es 2+2?",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -26,7 +26,7 @@ async function handler(m, { sock }) {
 
 > Poner en un problema de matemáticas
 
-\`Contoh: ${m.prefix}matematika 2+2 berapa?\``)
+\`Ejemplo: ${m.prefix}matematika ¿cuánto es 2+2?\``)
     }
     
     m.react('🕕')

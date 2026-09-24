@@ -33,11 +33,15 @@ async function handler(m, { sock }) {
         const names = stopped.map(id => `@${id}`).join(', ')
 
         await sock.sendMessage(m.chat, {
-            text: `🛑 *sᴇᴍᴜᴀ ᴊᴀᴅɪʙᴏᴛ ᴅɪʜᴇɴᴛɪᴋᴀɴ*\n\n` +
+            text: `🛑 *todo el trabajo fue interrumpido*
+
+` +
                 `> 📊 Total: *${stopped.length}* jadibot\n` +
-                `> 💾 Session: *Tersimpan*\n\n` +
-                `Dihentikan: ${names}\n\n` +
-                `> Semua session disimpan dan bisa diaktifkan ulang.`,
+                `> 💾 Sesión: *Guardada*
+
+` +
+                `Detenidos: ${names}\n\n` +
+                `Todas las sesiones se guardan y se pueden reactivar.`,
             mentions: stopped.map(id => id + '@s.whatsapp.net')
         }, { quoted: m })
     } catch (error) {

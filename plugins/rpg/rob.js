@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'rob',
     alias: ['rampok', 'mug'],
     category: 'rpg',
-    description: 'Rampok uang player lain (berisiko)',
+    description: "Robar el dinero de otros jugadores.",
     usage: '.rob @user',
     example: '.rob @user',
     isOwner: false,
@@ -26,7 +26,8 @@ async function handler(m, { sock }) {
         return m.reply(
             `🦹 *ʀᴏʙ*\n\n` +
             `╭┈┈⬡「 📋 *ᴜsᴀɢᴇ* 」\n` +
-            `┃ > Tag target yang mau dirampok!\n` +
+            `¡Marca el objetivo que quiere ser robado!
+` +
             `┃ > \`.rob @user\`\n` +
             `╰┈┈┈┈┈┈┈┈⬡`
         )
@@ -48,7 +49,7 @@ async function handler(m, { sock }) {
     }
     
     if ((victim.koin || 0) < 1000) {
-        return m.reply(`❌ *ᴛᴀʀɢᴇᴛ ᴍɪsᴋɪɴ*
+        return m.reply(`❌ *OBJETIVO DEMASIADO POBRE*
 
 > ¡El objetivo es demasiado pobre para ser robado!`)
     }
@@ -58,13 +59,14 @@ async function handler(m, { sock }) {
     
     if (robber.rpg.health < 30) {
         return m.reply(
-            `❌ *ʜᴇᴀʟᴛʜ ᴛᴇʀʟᴀʟᴜ ʀᴇɴᴅᴀʜ*\n\n` +
-            `> Minimal 30 HP untuk merampok!\n` +
-            `> Health kamu: ${robber.rpg.health} HP`
+            `❌ *SALUD DEMASIADO BAJA*\n\n` +
+            `> ¡Necesitas al menos 30 HP para asaltar!
+` +
+            `> Tu salud: ${robber.rpg.health} HP`
         )
     }
     
-    await sock.sendMessage(m.chat, { text: `🦹 *sᴇᴅᴀɴɢ ᴍᴇʀᴀᴍᴘᴏᴋ...*`, contextInfo: getRpgContextInfo('🦹 ROB', 'Robbing!') }, { quoted: m })
+    await sock.sendMessage(m.chat, { text: `🦹 *ASALTANDO...*`, contextInfo: getRpgContextInfo('🦹 ROB', 'Robbing!') }, { quoted: m })
     await new Promise(r => setTimeout(r, 2500))
     
     const successRate = 0.4
@@ -82,9 +84,9 @@ async function handler(m, { sock }) {
         
         db.save()
         
-        let txt = `✅ *ʀᴏʙ sᴜᴋsᴇs*\n\n`
+        let txt = `✅ *ʀᴏʙ COMPLETADO*\n\n`
         txt += `> 🦹 Te las arreglaste para robar @${target.split('@')[0]}!\n`
-        txt += `> 💰 Curian: *+Rp ${stolen.toLocaleString('id-ID')}*\n`
+        txt += `> 💰 Botín: *+Rp ${stolen.toLocaleString('id-ID')}*\n`
         txt += `> 🚄 Exp: *+${expGain}*`
         
         await m.reply(txt, { mentions: [target] })
@@ -98,10 +100,10 @@ async function handler(m, { sock }) {
         
         db.save()
         
-        let txt = `❌ *ʀᴏʙ ɢᴀɢᴀʟ*\n\n`
+        let txt = `❌ *ʀᴏʙ ERROR*\n\n`
         txt += `> 🚨 ¡Te atraparon y te golpearon!
 `
-        txt += `> 💸 Denda: *-Rp ${actualFine.toLocaleString('id-ID')}*\n`
+        txt += `> 💸 Multa: *-Rp ${actualFine.toLocaleString('id-ID')}*\n`
         txt += `> ❤️ Health: *-${healthLoss}*`
         
         await m.reply(txt)

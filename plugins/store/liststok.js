@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['liststock', 'stok', 'stock'],
     category: 'store',
     description: "📋 Ver la lista de productos de stock",
-    usage: ".liststock − número_produk>",
+    usage: '.liststok <número_producto>',
     example: '.liststok 1',
     isOwner: true,
     isPremium: false,
@@ -23,13 +23,13 @@ async function handler(m, { sock }) {
     if (products.length === 0) {
         return m.reply(`📭 *Aún no hay producto.*
 
-Tambahkan produk terlebih dahulu: \`${m.prefix}addproduk\` ➕`)
+Añadir el producto primero: \`${m.prefix}addproduk\` ➕`)
     }
 
     const idx = parseInt(m.text?.trim()) - 1
 
     if (isNaN(idx) || idx < 0 || idx >= products.length) {
-        let txt = `📋 *PRODUCCIÓN STOK LAND*
+        let txt = `📋 *PRODUCCIÓN DE EXISTENCIAS DE TIERRA*
 
 Seleccione un producto para ver el stock:
 
@@ -38,12 +38,13 @@ Seleccione un producto para ver el stock:
             const p = products[i]
             const typeIcon = p.type === 'fisik' ? '📦' : '🔑'
             const stockDisplay = p.type === 'fisik'
-                ? (p.stock === -1 ? '♾️' : `${p.stock} pcs`)
-                : `${p.stockItems?.length || 0} akun`
+                ? (p.stock === -1 ? '♾️' : `${p.stock} unidades`)
+                : `${p.stockItems?.length || 0} cuenta`
             const icon = (p.type === 'fisik' ? (p.stock > 0 || p.stock === -1) : (p.stockItems?.length > 0 || p.stock === -1)) ? '✅' : '⚠️'
             txt += `${typeIcon} *${i + 1}.* ${p.name} — ${stockDisplay} ${icon}\n`
         }
-        txt += `\nKetik \`${m.prefix}liststock - Número de contacto\` para ver los detalles del stock 📊`
+        txt += `
+Escribe \`${m.prefix}liststock - Número de contacto\` para ver los detalles del stock 📊`
         return m.reply(txt)
     }
 
@@ -52,13 +53,18 @@ Seleccione un producto para ver el stock:
 
     if (product.type === 'fisik') {
         return m.reply(
-            `📦 *STOK: ${product.name}*\n\n` +
-            `📊 Tipe: *Fisik*\n` +
-            `📦 Total: *${product.stock === -1 ? '♾️ Unlimited' : product.stock + ' pcs'}*\n\n` +
-            `*Kelola stok:*\n` +
-            `• Tambah: \`${m.prefix}addstok ${idx + 1} <jumlah>\`\n` +
-            `• Edit: \`${m.prefix}editproduk ${idx + 1} stok <jumlah>\`\n\n` +
-            `_Stok fisik diatur berdasarkan jumlah, bukan per-item_ 📦`
+            `📦 *EXISTENCIAS: ${product.name}*\n\n` +
+            `📊 Tipo: *Físico*
+` +
+            `📦 Total: *${product.stock === -1 ? '♾️ Ilimitadas' : product.stock + ' unidades'}*\n\n` +
+            `*Gestión de las existencias:*
+` +
+            `• Añadir: \`${m.prefix}addstok ${idx + 1} <cantidad>\`
+` +
+            `• Editar: \`${m.prefix}editproduk ${idx + 1} stok <cantidad>
+
+` +
+            `_El stock físico está organizado por cantidad, no por elemento_ 📦`
         )
     }
 
@@ -66,17 +72,22 @@ Seleccione un producto para ver el stock:
 
     if (stockItems.length === 0) {
         return m.reply(
-            `🔑 *Stok: ${product.name}*\n\n` +
-            `📭 Belum ada stok item yang ditambahkan.\n\n` +
-            `*Tambah stok:*\n` +
-            `• Manual: \`${m.prefix}addstok ${idx + 1}|<detail>\`\n` +
-            `• Import: \`${m.prefix}addstok ${idx + 1}\` (reply file .txt 📄)\n\n` +
-            `_Stok item bersifat rahasia 🔒 dan hanya dikirim ke pembeli setelah pembayaran dikonfirmasi_`
+            `🔑 *Existencias: ${product.name}*\n\n` +
+            `📭 No se han añadido artículos a las existencias.
+
+` +
+            `*Añadir existencias:*
+` +
+            `• Manual: \`${m.prefix}addstok ${idx + 1}|<detalle>\`\n` +
+            `• Importar: \`${m.prefix}addstok ${idx + 1}\` (responde con un archivo .txt 📄)\n\n` +
+            `_Estos artículos son confidenciales 🔒 y solo se envían al comprador después de que se confirme el pago_`
         )
     }
 
-    let txt = `🔑 *STOK: ${product.name}*\n\n`
-    txt += `📊 Total: *${stockItems.length}* akun\n\n`
+    let txt = `🔑 *EXISTENCIAS: ${product.name}*\n\n`
+    txt += `📊 Total: *${stockItems.length}* cuenta
+
+`
 
     const showItems = stockItems.slice(0, 30)
     for (let i = 0; i < showItems.length; i++) {
@@ -85,13 +96,18 @@ Seleccione un producto para ver el stock:
     }
 
     if (stockItems.length > 30) {
-        txt += `\n_dan ${stockItems.length - 30} item lainnya..._ 📋`
+        txt += `\n_y ${stockItems.length - 30} artículos más..._ 📋`
     }
 
-    txt += `\n\n🛠️ *Kelola stok:*\n`
-    txt += `🗑️ Hapus: \`${m.prefix}hapusstok ${idx + 1} <nomor_item>\`\n`
-    txt += `✏️ Edit: \`${m.prefix}editstok ${idx + 1} <nomor_item>|<detail_baru>\`\n`
-    txt += `➕ Tambah: \`${m.prefix}addstok ${idx + 1}|<detail>\``
+    txt += `
+
+🛠️ *Gestión de las existencias:*
+`
+    txt += `🗑️ Eliminar: \`${m.prefix}hapusstok ${idx + 1} <número_artículo>
+`
+    txt += `✏️ Editar: \`${m.prefix}editstok ${idx + 1} <número_artículo>|<detalle_nuevo>
+`
+    txt += `➕ Añadir: \`${m.prefix}addstok ${idx + 1}|<detalle>\``
 
     return m.reply(txt)
 }

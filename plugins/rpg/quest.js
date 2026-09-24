@@ -19,35 +19,35 @@ const pluginConfig = {
 const QUESTS = [
   {
     id: "mining5",
-    name: "Penambang Pemula",
+    name: "Minero principiante",
     desc: "Mining 5 kali",
     target: 5,
     reward: { money: 10000, exp: 1000 },
   },
   {
     id: "fishing5",
-    name: "Pemancing Handal",
+    name: "Pescador experto",
     desc: "Fishing 5 kali",
     target: 5,
     reward: { money: 8000, exp: 800 },
   },
   {
     id: "adventure3",
-    name: "Petualang Sejati",
+    name: "Aventurero auténtico",
     desc: "Adventure 3 kali",
     target: 3,
     reward: { money: 15000, exp: 1500 },
   },
   {
     id: "work10",
-    name: "Pekerja Keras",
+    name: "Trabajador incansable",
     desc: "Work 10 kali",
     target: 10,
     reward: { money: 20000, exp: 2000 },
   },
   {
     id: "hunt5",
-    name: "Pemburu Ulung",
+    name: "Cazador experto",
     desc: "Hunt 5 kali",
     target: 5,
     reward: { money: 12000, exp: 1200 },
@@ -83,13 +83,15 @@ async function handler(m, { sock }) {
 
     if (user.quest[questId].progress < quest.target) {
       return m.reply(
-        `❌ *ǫᴜᴇsᴛ ʙᴇʟᴜᴍ sᴇʟᴇsᴀɪ*\n\n` +
+        `❌ *quest no ha terminado*
+
+` +
           `> Progress: ${user.quest[questId].progress}/${quest.target}`,
       );
     }
 
     if (user.quest[questId].claimed) {
-      return m.reply(`❌ *sᴜᴅᴀʜ ᴅɪᴋʟᴀɪᴍ*
+      return m.reply(`❌ *ha sido reclamado*
 
 > ¡Esta búsqueda ha sido reclamada!`);
     }
@@ -114,7 +116,7 @@ async function handler(m, { sock }) {
     }
 
     if (user.quest[questId]) {
-      return m.reply(`❌ *sᴜᴅᴀʜ ᴅɪᴀᴍʙɪʟ*
+      return m.reply(`❌ *se ha tomado*
 
 > ¡Esta búsqueda ha sido tomada!`);
     }
@@ -130,10 +132,10 @@ async function handler(m, { sock }) {
 
   for (const quest of QUESTS) {
     const userQuest = user.quest[quest.id];
-    let status = "⬜ Belum diambil";
+    let status = "⬜ No se ha tomado";
     if (userQuest) {
       if (userQuest.claimed) {
-        status = "✅ Selesai";
+        status = "✅ Terminado";
       } else if (userQuest.progress >= quest.target) {
         status = "🎁 Se puede reclamar";
       } else {
@@ -148,7 +150,7 @@ async function handler(m, { sock }) {
     txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
   }
 
-  txt += `> Ambil: \`.quest take <id>\`\n`;
+  txt += `> Aceptar: \`.quest take <id>\`\n`;
   txt += `> Claim: \`.quest claim <id>\``;
 
   await m.reply(txt);

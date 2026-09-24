@@ -29,7 +29,9 @@ function convertToOpus(inputPath, outputPath) {
 
 async function handler(m, { sock }) {
     const text = m.text?.trim()
-    if (!text) return m.reply(`🎤 *ᴇᴍɪɴᴇᴍ ᴛᴛs*\n\n> Gunakan: \`${m.prefix}ttseminem <text>\``)
+    if (!text) return m.reply(`🎤 *ᴇᴍɪɴᴇᴍ ᴛᴛs*
+
+> Usa: \`${m.prefix}ttseminem <text>\``)
     
     m.react('🎤')
     

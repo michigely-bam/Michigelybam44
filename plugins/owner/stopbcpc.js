@@ -18,7 +18,7 @@ async function handler(m) {
     return m.reply("❌ No se está ejecutando ninguna transmisión privada.")
   }
   global.stopBcpc = true
-  return m.reply('⏹️ Menghentikan broadcast private...')
+  return m.reply("⏹️ Deteniendo la difusión privada...")
 }
 
 export { pluginConfig as config, handler }

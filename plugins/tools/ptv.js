@@ -34,13 +34,14 @@ async function handler(m, { sock }) {
     
     if (!video) {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-            `> Kirim *video* atau *balas video* lalu ketik:\n` +
+            `⚠️ *MODO DE USO*\n\n` +
+            `> Envíe *video* o *contesta el video* y escriba:
+` +
             `> \`${m.prefix}ptv\``
         )
     }
     
-    await m.reply(`🕕 *ᴍᴇᴍʙᴜᴀᴛ ᴘᴛᴠ...*`)
+    await m.reply(`🕕 *CREANDO PTV...*`)
     
     try {
         await sock.sendMessage(m.chat, {

@@ -19,20 +19,19 @@ async function handler(m) {
     const mentioned = m.mentionedJid[0] || m.sender
                     
     let desc = ''
-    if (percent >= 90) desc = 'Rumah adalah surga! Stay home~ 🏠'
-    else if (percent >= 70) desc = 'Social battery terbatas 🔋'
-    else if (percent >= 50) desc = 'Ambivert, balance~ ⚖️'
-    else if (percent >= 30) desc = 'Cukup social butterfly 🦋'
-    else desc = 'Extrovert mode ON! 🎉'
+    if (percent >= 90) desc = "¡El hogar es el paraíso! Quédate en casa~ 🏠"
+    else if (percent >= 70) desc = "Batería social limitada 🔋"
+    else if (percent >= 50) desc = 'Ambivertido/a y equilibrado/a~ ⚖️'
+    else if (percent >= 30) desc = "Es bastante sociable 🦋"
+    else desc = '¡Modo extrovertido activado! 🎉'
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tus niveles introvertidos. *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de introversión @${mentioned.split('@')[0]} yak? 
-    
-Tingkat keintrovertan dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de introversión es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de introversión de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

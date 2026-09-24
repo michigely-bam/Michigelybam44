@@ -10,7 +10,7 @@ const pluginConfig = {
     name: 'bratvid',
     alias: ['bratgif', 'bratvideo'],
     category: 'sticker',
-    description: 'Membuat sticker brat animated',
+    description: "Crear un sticker Brat animado",
     usage: '.bratvid <text>',
     example: ".Bratvid, bratvid",
     isOwner: false,
@@ -29,7 +29,7 @@ async function handler(m, { sock }) {
 
 > Escriba texto
 
-\`Contoh: ${m.prefix}Bratvid, bratvid\``)
+\`Ejemplo: ${m.prefix}Bratvid, bratvid\``)
     }
     
     m.react('🕕')
@@ -37,7 +37,7 @@ async function handler(m, { sock }) {
     try {
         const tempFile = path.join(os.tmpdir(), `brat-${Date.now()}.webp`)
         const url = await bratVid(text, {
-            outputFormat: 'mp4',
+            outputFormato: 'mp4',
         })
         await fs.promises.writeFile(tempFile, url)
         await sock.sendVideoAsSticker(m.chat, tempFile, m, {

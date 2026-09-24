@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "ptvsearch",
   alias: ["ptvs"],
   category: "search",
-  description: "Cari video TikTok",
+  description: "Busca los vídeos de TikTok",
   usage: ".ptvsearch <query>",
   example: ".ptvsearch jj epep",
   isOwner: false,
@@ -22,13 +22,13 @@ async function handler(m, { sock }) {
 
   if (!query) {
     return m.reply(
-      `╭┈┈⬡「 🎵 *ᴛɪᴋᴛᴏᴋ sᴇᴀʀᴄʜ* 」
+      `╭┈┈⬡「 🎵 *BÚSQUEDA EN TIKTOK* 」
 ┃
-┃ ㊗ ᴜsᴀɢᴇ: \`${m.prefix}ptvsearch <query>\`
+┃ ㊗ USO: \`${m.prefix}ptvsearch <query>\`
 ┃
 ╰┈┈⬡
 
-> \`Contoh: ${m.prefix}ptvsearch anime\``,
+> \`Ejemplo: ${m.prefix}ptvsearch anime\``,
     );
   }
 

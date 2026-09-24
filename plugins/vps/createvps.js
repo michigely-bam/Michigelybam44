@@ -51,11 +51,13 @@ async function handler(m, { sock }) {
     const token = doConfig.token
     
     if (!token) {
-        return m.reply(`⚠️ *ᴅɪɢɪᴛᴀʟᴏᴄᴇᴀɴ ʙᴇʟᴜᴍ ᴅɪsᴇᴛᴜᴘ*\n\n> Isi \`digitalocean.token\` di config.js`)
+        return m.reply(`⚠️ *DigitalOcean aún no está configurado*
+
+> Contenido \`digitalocean.token\` en config.js`)
     }
     
     if (!hasAccess(m.sender, m.isOwner)) {
-        return m.reply(`❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*
+        return m.reply(`❌ *se rechazó el acceso*
 
 > Esta característica es sólo para el propietario / vendedor.`)
     }
@@ -63,10 +65,11 @@ async function handler(m, { sock }) {
     const hostname = m.text?.trim()
     if (!hostname) {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+            `⚠️ *MODO DE USO*\n\n` +
             `> \`${m.prefix}${m.command} <hostname>\`\n\n` +
-            `> Contoh: \`${m.prefix}${m.command} myserver\`\n\n` +
-            `📦 *ᴘᴀᴋᴇᴛ ᴛᴇʀsᴇᴅɪᴀ:*\n` +
+            `> Ejemplo: \`${m.prefix}${m.command} myserver\`\n\n` +
+            `📦 *paquetes disponibles:*
+` +
             Object.entries(VPS_SPECS).map(([cmd, spec]) => 
                 `> \`${m.prefix}${cmd}\` - ${spec.ram} RAM, ${spec.cpu}`
             ).join('\n')
@@ -102,7 +105,9 @@ ssh_pwauth: True`,
         tags: ['ourin-bot']
     }
     
-    await m.reply(`🛠️ *ᴍᴇᴍʙᴜᴀᴛ ᴠᴘs...*\n\n> Hostname: \`${hostname}\`\n> Spec: ${spec.ram} RAM, ${spec.cpu}\n> Region: ${region}`)
+    await m.reply(`🛠️ *CREANDO VPS...*
+
+> Hostname: \`${hostname}\`\n> Spec: ${spec.ram} RAM, ${spec.cpu}\n> Region: ${region}`)
     
     try {
         const response = await axios.post('https://api.digitalocean.com/v2/droplets', dropletData, {
@@ -115,7 +120,9 @@ ssh_pwauth: True`,
         const droplet = response.data.droplet
         const dropletId = droplet.id
         
-        await m.reply(`🕕 *ᴍᴇɴᴜɴɢɢᴜ ᴠᴘs sɪᴀᴘ...*\n\n> ID: \`${dropletId}\`
+        await m.reply(`🕕 *Esperando a que el VPS esté listo...*
+
+> ID: \`${dropletId}\`
 > Estimación: 60 segundos`)
         
         await new Promise(resolve => setTimeout(resolve, 60000))
@@ -128,7 +135,9 @@ ssh_pwauth: True`,
         const ipv4 = dropletInfo.networks?.v4?.find(n => n.type === 'public')
         const ip = ipv4?.ip_address || "No disponible"
         
-        const detailTxt = `✅ *ᴠᴘs ʙᴇʀʜᴀsɪʟ ᴅɪʙᴜᴀᴛ*\n\n` +
+        const detailTxt = `✅ *vps fue creado con éxito*
+
+` +
             `╭─「 📋 *ᴅᴇᴛᴀɪʟ ᴠᴘs* 」\n` +
             `┃ 🆔 \`ɪᴅ\`: *${dropletId}*\n` +
             `┃ 🏷️ \`ʜᴏsᴛɴᴀᴍᴇ\`: *${hostname}*\n` +
@@ -142,10 +151,10 @@ ssh_pwauth: True`,
             `┃ 🌍 \`ʀᴇɢɪᴏɴ\`: *${region}*\n` +
             `┃ 💿 \`ᴏs\`: *Ubuntu 22.04*\n` +
             `╰───────────────\n\n` +
-            `> ⚠️ Simpan data ini baik-baik!`
+            `⚠️ ¡Guarde bien estos datos!`
         
         await sock.sendMessage(m.sender, { text: detailTxt })
-        await m.reply(`✅ *ᴠᴘs ʙᴇʀʜᴀsɪʟ ᴅɪʙᴜᴀᴛ*
+        await m.reply(`✅ *vps fue creado con éxito*
 
 > Datos enviados a chat privado.`)
         

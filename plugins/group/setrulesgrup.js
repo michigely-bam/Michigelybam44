@@ -5,7 +5,7 @@ const pluginConfig = {
     category: 'group',
     description: "Establecer reglas / reglas grupo personalizado (sólo amin)",
     usage: '.setrulesgrup <text>',
-    example: ".setrules grupo 1. No spam\n2. Hormati sesama",
+    example: ".setrules grupo 1. No spam\n2. Respeta a los demás",
     isOwner: false,
     isPremium: false,
     isGroup: true,
@@ -22,19 +22,26 @@ function handler(m) {
     
     if (!text) {
         return m.reply(
-            `📝 *sᴇᴛ ɢʀᴜᴘ ʀᴜʟᴇs*\n\n` +
-            `> Masukkan teks rules yang baru\n\n` +
-            `\`Contoh:\`\n` +
-            `\`${m.prefix}setrulesgrup 1. Jangan spam\\n2. Hormati sesama\``
+            `📝 *set grupo de reglas*
+
+` +
+            `> Ingrese el texto de las nuevas reglas
+
+` +
+            `\`Ejemplo:\`\n` +
+            `\`${m.prefix}setrulesgrup 1. No hagas spam\\n2. Respeta a los demás\``
         )
     }
     
     db.setGroup(m.chat, { groupRules: text })
     
     m.reply(
-        `✅ *ɢʀᴜᴘ ʀᴜʟᴇs ᴅɪᴜᴘᴅᴀᴛᴇ*\n\n` +
-        `Rules grup berhasil diubah!\n` +
-        `Ketik \`${m.prefix}rulesgrup\` untuk melihat.`
+        `✅ *grupos de reglas actualizados*
+
+` +
+        `¡Las reglas del grupo se actualizaron correctamente!
+` +
+        `Escribe \`${m.prefix}rulesgrup\` para ver.`
     )
 }
 

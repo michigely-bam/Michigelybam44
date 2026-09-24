@@ -21,7 +21,7 @@ async function handler(m, { sock }) {
     const groupData = db.getGroup(m.chat)
     
     if (!groupData?.welcomeMsg) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*
+        return m.reply(`❌ *falló*
 
 > Mensaje de bienvenida ya predeterminado`)
     }
@@ -30,7 +30,7 @@ async function handler(m, { sock }) {
     
     m.react('✅')
     
-    await m.reply(`✅ *ᴡᴇʟᴄᴏᴍᴇ ᴅɪʀᴇsᴇᴛ*
+    await m.reply(`✅ *ᴡᴇʟᴄᴏᴍᴇ RESTABLECIDO*
 
 > Volver al mensaje predeterminado`)
 }

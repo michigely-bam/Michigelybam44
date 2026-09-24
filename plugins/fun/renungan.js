@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'renungan',
     alias: ['motivasi', 'mutiara'],
     category: 'fun',
-    description: 'Random gambar renungan/motivasi',
+    description: "Imágenes aleatorias de la reflexión/motivasi",
     usage: '.renungan',
     example: '.renungan',
     isOwner: false,

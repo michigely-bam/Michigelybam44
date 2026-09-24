@@ -45,7 +45,7 @@ async function handler(m, { sock }) {
             txt += `${status} *${i + 1}.* @${s.id}\n`
         })
 
-        txt += `\n> Contoh: \`${m.prefix}stopdandeletejadibot @628xxx\``
+        txt += `\n> Ejemplo: \`${m.prefix}stopdandeletejadibot @628xxx\``
 
         return sock.sendMessage(m.chat, {
             text: txt,
@@ -69,11 +69,14 @@ async function handler(m, { sock }) {
         await m.react('✅')
 
         await sock.sendMessage(m.chat, {
-            text: `🗑️ *ᴊᴀᴅɪʙᴏᴛ ᴅɪʜᴀᴘᴜs*\n\n` +
-                `> 📱 Nomor: *@${id}*\n` +
+            text: `🗑️ *la situación fue eliminada*
+
+` +
+                `> 📱 Número: *@${id}*\n` +
                 `> 🗑️ Status: *Deleted*\n\n` +
-                `Session telah dihapus secara permanen.\n` +
-                `User perlu \`.jadibot\` ulang untuk membuat session baru.`,
+                `La sesión ha sido cancelada de forma permanente.
+` +
+                `El usuario necesita \`.jadibot\` de nuevo para crear una nueva sesión.`,
             mentions: [target]
         }, { quoted: m })
     } catch (error) {

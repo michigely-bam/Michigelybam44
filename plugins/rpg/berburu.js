@@ -30,7 +30,7 @@ try {
   if (fs.existsSync(thumbPath)) thumbRpg = fs.readFileSync(thumbPath);
 } catch (e) {}
 
-function getContextInfo(title = "🏹 *ʙᴇʀʙᴜʀᴜ*", body = "Resultados rápidos") {
+function getContextInfo(title = "🏹 *CACERÍA*", body = "Resultados rápidos") {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
@@ -70,21 +70,24 @@ async function handler(m, { sock }) {
 
   if (user.rpg.stamina < staminaCost) {
     return m.reply(
-      `⚡ *sᴛᴀᴍɪɴᴀ ʜᴀʙɪs*\n\n` +
-        `> Butuh ${staminaCost} stamina untuk berburu\n` +
-        `> Stamina kamu: ${user.rpg.stamina}`,
+      `⚡ *RESISTENCIA AGOTADA*
+
+` +
+        `> Necesita ${staminaCost} stamina para la caza
+` +
+        `> Tu resistencia: ${user.rpg.stamina}`,
     );
   }
 
   user.rpg.stamina -= staminaCost;
 
   await m.react("🏹");
-  await m.reply(`🏹 *sᴇᴅᴀɴɢ ʙᴇʀʙᴜʀᴜ...*`);
+  await m.reply(`🏹 *CAZANDO...*`);
   await new Promise((r) => setTimeout(r, 3000));
 
   const animals = [
     {
-      name: "🐰 Kelinci",
+      name: "🐰 Conejo",
       item: "daging_kelinci",
       chance: 80,
       min: 1,
@@ -93,7 +96,7 @@ async function handler(m, { sock }) {
       money: 500,
     },
     {
-      name: "🦌 Rusa",
+      name: "🦌 Ciervo",
       item: "daging_rusa",
       chance: 50,
       min: 1,
@@ -102,7 +105,7 @@ async function handler(m, { sock }) {
       money: 1500,
     },
     {
-      name: "🐗 Babi Hutan",
+      name: "🐗 Jabalí",
       item: "daging_babi",
       chance: 40,
       min: 1,
@@ -111,7 +114,7 @@ async function handler(m, { sock }) {
       money: 2000,
     },
     {
-      name: "🦊 Rubah",
+      name: "🦊 Zorro",
       item: "bulu_rubah",
       chance: 30,
       min: 1,
@@ -120,7 +123,7 @@ async function handler(m, { sock }) {
       money: 3000,
     },
     {
-      name: "🐻 Beruang",
+      name: "🐻 Oso",
       item: "cakar_beruang",
       chance: 15,
       min: 1,
@@ -129,7 +132,7 @@ async function handler(m, { sock }) {
       money: 10000,
     },
     {
-      name: "🦁 Singa",
+      name: "🦁 León",
       item: "taring_singa",
       chance: 5,
       min: 1,
@@ -145,8 +148,9 @@ async function handler(m, { sock }) {
     await m.react("😢");
     db.save();
     return m.reply(
-      `🏹 *ʙᴇʀʙᴜʀᴜ ɢᴀɢᴀʟ*\n\n` +
-        `> Kamu tidak mendapat buruan kali ini\n` +
+      `🏹 *CACERÍA ERROR*\n\n` +
+        `> No tienes caza esta vez
+` +
         `> Stamina: *-${staminaCost}*`,
     );
   }
@@ -171,13 +175,15 @@ async function handler(m, { sock }) {
 
   await m.react("✅");
 
-  let txt = `🏹 *ʙᴇʀʙᴜʀᴜ sᴇʟᴇsᴀɪ*\n\n`;
-  txt += `╭┈┈⬡「 🎯 *ʜᴀsɪʟ ʙᴜʀᴜᴀɴ* 」\n`;
+  let txt = `🏹 *se acabó la caza*
+
+`;
+  txt += `╭┈┈⬡「 🎯 *RESULTADO CAZA* 」\n`;
   for (const r of results) {
     txt += `┃ ${r.name}: *+${r.qty}*\n`;
   }
   txt += `┃ ─────────\n`;
-  txt += `┃ 💵 Jual: *+Rp ${totalMoney.toLocaleString("id-ID")}*\n`;
+  txt += `┃ 💵 Venta: *+Rp ${totalMoney.toLocaleString("id-ID")}*\n`;
   txt += `┃ 🚄 Exp: *+${totalExp}*\n`;
   txt += `┃ ⚡ Stamina: *-${staminaCost}*\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡`;

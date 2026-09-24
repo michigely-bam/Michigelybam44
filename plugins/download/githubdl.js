@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'githubdl',
     alias: ['gitdl', 'gitclone', 'repodownload'],
     category: 'download',
-    description: 'Download repository GitHub sebagai ZIP',
+    description: "Descargar un repositorio de GitHub como ZIP",
     usage: '.githubdl <user> <repo> <branch>',
     example: '.githubdl niceplugin NiceBot main',
     isOwner: false,
@@ -37,9 +37,9 @@ async function handler(m, { sock }) {
     
     if (!username) {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+            `⚠️ *MODO DE USO*\n\n` +
             `> \`${m.prefix}githubdl <user> <repo> <branch>\`\n\n` +
-            `> Contoh:\n` +
+            `> Ejemplo:\n` +
             `> \`${m.prefix}githubdl niceplugin NiceBot main\`\n` +
             `> \`${m.prefix}githubdl https://github.com/user/repo\``
         )
@@ -58,7 +58,7 @@ async function handler(m, { sock }) {
         
         if (!repoInfo.ok) {
             await m.react('❌')
-            return m.reply(`❌ *ʀᴇᴘᴏ ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n> \`${username}/${repo}\` ninguno`)
+            return m.reply(`❌ *ʀᴇᴘᴏ NO ENCONTRADO*\n\n> \`${username}/${repo}\` ninguno`)
         }
         
         const repoData = await repoInfo.json()
@@ -70,7 +70,9 @@ async function handler(m, { sock }) {
         const checkRes = await fetch(zipUrl, { method: 'HEAD' })
         if (!checkRes.ok) {
             await m.react('❌')
-            return m.reply(`❌ *ʙʀᴀɴᴄʜ ᴛɪᴅᴀᴋ ᴀᴅᴀ*\n\n> Branch \`${branch}\` no encontrado
+            return m.reply(`❌ *branche no existe*
+
+> Branch \`${branch}\` no encontrado
 > Default: \`${defaultBranch}\``)
         }
         

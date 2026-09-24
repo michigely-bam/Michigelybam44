@@ -22,14 +22,14 @@ async function handler(m, { sock }) {
     if (currentMode) {
         db.setting('onlyPc', false)
         await m.react('❌')
-        return m.reply(`❌ *ᴏɴʟʏ ᴘʀɪᴠᴀᴛᴇ ᴍᴏᴅᴇ ɴᴏɴᴀᴋᴛɪꜰ*
+        return m.reply(`❌ *only private mode inactivo*
 
 > Bot se puede acceder a cualquier lugar`)
     } else {
         db.setting('onlyPc', true)
         db.setting('onlyGc', false)
         await m.react('✅')
-        return m.reply(`✅ *ᴏɴʟʏ ᴘʀɪᴠᴀᴛᴇ ᴍᴏᴅᴇ ᴀᴋᴛɪꜰ*
+        return m.reply(`✅ *only private mode activado*
 
 > Bot sólo se puede acceder en chat privado!`)
     }

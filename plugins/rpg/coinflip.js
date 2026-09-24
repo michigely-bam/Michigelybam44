@@ -28,7 +28,8 @@ async function handler(m, { sock }) {
         return m.reply(
             `🪙 *ᴄᴏɪɴ ꜰʟɪᴘ*\n\n` +
             `╭┈┈⬡「 📋 *ᴜsᴀɢᴇ* 」\n` +
-            `┃ > Pilih heads (h) atau tails (t)\n` +
+            `┃ > Elige cara (h) o cruz (t)
+` +
             `┃ > \`.coinflip heads 5000\`\n` +
             `╰┈┈┈┈┈┈┈┈⬡`
         )
@@ -38,15 +39,17 @@ async function handler(m, { sock }) {
         return m.reply(
             `❌ *ɪɴᴠᴀʟɪᴅ ʙᴇᴛ*\n\n` +
             `> Minimal bet Rp 1.000!\n` +
-            `> Contoh: \`.coinflip heads 5000\``
+            `> Ejemplo: \`.coinflip heads 5000\``
         )
     }
     
     if ((user.koin || 0) < bet) {
         return m.reply(
-            `❌ *sᴀʟᴅᴏ ᴛɪᴅᴀᴋ ᴄᴜᴋᴜᴘ*\n\n` +
-            `> Koin kamu: Rp ${(user.koin || 0).toLocaleString('id-ID')}\n` +
-            `> Butuh: Rp ${bet.toLocaleString('id-ID')}`
+            `❌ *saldo no es suficiente*
+
+` +
+            `> Tus monedas: Rp ${(user.koin || 0).toLocaleString('id-ID')}\n` +
+            `> Necesidad: Rp ${bet.toLocaleString('id-ID')}`
         )
     }
     
@@ -62,16 +65,16 @@ async function handler(m, { sock }) {
     const isWin = userChoice === result
     
     let txt = `🪙 *ᴄᴏɪɴ ꜰʟɪᴘ*\n\n`
-    txt += `> ${emoji} Hasil: *${result.toUpperCase()}*\n`
-    txt += `> 🎯 Pilihanmu: *${userChoice.toUpperCase()}*\n\n`
+    txt += `> ${emoji} Resultado: *${result.toUpperCase()}*\n`
+    txt += `> 🎯 Tu elección: *${userChoice.toUpperCase()}*\n\n`
     
     if (isWin) {
         const winnings = bet * 2
         user.koin = (user.koin || 0) + winnings
-        txt += `✅ *ᴋᴀᴍᴜ ᴍᴇɴᴀɴɢ!*\n`
+        txt += `✅ *GANASTE!*\n`
         txt += `> 💰 Win: *+Rp ${winnings.toLocaleString('id-ID')}*`
     } else {
-        txt += `❌ *ᴋᴀᴍᴜ ᴋᴀʟᴀʜ!*\n`
+        txt += `❌ *PERDISTE!*\n`
         txt += `> 💸 Lost: *-Rp ${bet.toLocaleString('id-ID')}*`
     }
     

@@ -33,15 +33,15 @@ function parseTime(input) {
 }
 
 function formatTime(ms) {
-    if (ms <= 0) return 'Tanpa jeda'
+    if (ms <= 0) return "Sin espera"
     
     const seconds = Math.floor(ms / 1000)
     const minutes = Math.floor(seconds / 60)
     const hours = Math.floor(minutes / 60)
     
-    if (hours > 0) return `${hours} jam ${minutes % 60} menit`
-    if (minutes > 0) return `${minutes} menit ${seconds % 60} detik`
-    return `${seconds} detik`
+    if (hours > 0) return `${hours} horas ${minutes % 60} minutos`
+    if (minutes > 0) return `${minutes} minutos ${seconds % 60} segundos`
+    return `${seconds} segundos`
 }
 
 function handler(m, { sock }) {
@@ -53,18 +53,23 @@ function handler(m, { sock }) {
     if (!input) {
         const currentJeda = db.setting('panelCreateJeda') ?? DEFAULT_JEDA
         return m.reply(
-            `⏱️ *ᴊᴇᴅᴀ ᴘᴀɴᴇʟ ᴄʀᴇᴀᴛᴇ*\n\n` +
+            `⏱️ *INTERVALO DE CREACIÓN DE PANELES*\n\n` +
             `╭┈┈⬡「 📋 *ɪɴꜰᴏ* 」\n` +
-            `┃ ◦ Jeda saat ini: *${formatTime(currentJeda)}*\n` +
-            `┃ ◦ Default: *5 menit*\n` +
+            `┃ ◦ El retraso actual: *${formatTime(currentJeda)}*\n` +
+            `┃ ◦ Por defecto: *5 minutos*
+` +
             `╰┈┈⬡\n\n` +
-            `> Gunakan: \`${m.prefix}jedacreate <waktu>\`\n` +
-            `> Contoh: \`${m.prefix}jedacreate 5m\` (5 menit)\n` +
-            `> Untuk nonaktifkan: \`${m.prefix}jedacreate 0\`\n\n` +
-            `*Format waktu:*\n` +
-            `• \`30s\` = 30 detik\n` +
-            `• \`5m\` = 5 menit\n` +
-            `• \`1h\` = 1 jam`
+            `> Usa: \`${m.prefix}jedacreate <tiempo>\`\n` +
+            `> Ejemplo: \`${m.prefix}jedacreate 5m\` (5 minutos)
+` +
+            `> Para desactivar: \`${m.prefix}jedacreate 0\`\n\n` +
+            `*Formatos de tiempo:*
+` +
+            `• \`30s\` = 30 segundos
+` +
+            `• \`5m\` = 5 minutos
+` +
+            `• \`1h\` = 1 hora`
         )
     }
     
@@ -73,7 +78,7 @@ function handler(m, { sock }) {
     if (jedaMs === null) {
         return m.reply(`❌ ¡Formato de tiempo inválido!
 
-> Contoh: 30s, 5m, 1h`)
+> Ejemplo: 30s, 5m, 1h`)
     }
     
     db.setting('panelCreateJeda', jedaMs)
@@ -83,17 +88,19 @@ function handler(m, { sock }) {
     
     if (jedaMs === 0) {
         return m.reply(
-            `✅ *ᴊᴇᴅᴀ ᴅɪɴᴏɴᴀᴋᴛɪꜰᴋᴀɴ*\n\n` +
-            `> Panel create sekarang tanpa jeda`
+            `✅ *INTERVALO DESACTIVADO*\n\n` +
+            `> Panel crear ahora sin descanso`
         )
     }
     
     return m.reply(
-        `✅ *ᴊᴇᴅᴀ ᴅɪsᴇᴛ*\n\n` +
+        `✅ *INTERVALO CONFIGURADO*
+
+` +
         `╭┈┈⬡「 ⏱️ *ᴋᴏɴꜰɪɢ* 」\n` +
-        `┃ ◦ Jeda: *${formatTime(jedaMs)}*\n` +
+        `┃ ◦ Intervalo: *${formatTime(jedaMs)}*\n` +
         `╰┈┈⬡\n\n` +
-        `> Setelah panel dibuat, SEMUA user harus menunggu ${formatTime(jedaMs)} sebelum bisa create lagi.`
+        `> Una vez que se crea el panel, TODO el usuario debe esperar ${formatTime(jedaMs)} antes de poder crear más.`
     )
 }
 

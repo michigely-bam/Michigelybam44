@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'automedia',
     alias: ['automedi', 'am'],
     category: 'group',
-    description: 'Toggle auto media - otomatis jadikan sticker jadi gambar/video',
+    description: "Toggle auto media - automáticamente hace que los stickers sean imágenes/video",
     usage: '.automedia on/off',
     example: '.automedia on',
     isOwner: false,
@@ -25,15 +25,20 @@ async function handler(m, { sock }) {
     const arg = args[0]?.toLowerCase()
     
     if (!arg) {
-        const status = current ? '✅ Aktif' : '❌ Nonaktif'
+        const status = current ? "✅ Activo" : "❌ Inactivo"
         return m.reply(
             `🎬 *ᴀᴜᴛᴏᴍᴇᴅɪᴀ*\n\n` +
             `> Status: ${status}\n\n` +
-            `> Gunakan:\n` +
-            `> \`${m.prefix}automedia on\` - aktifkan\n` +
-            `> \`${m.prefix}automedia off\` - nonaktifkan\n\n` +
-            `> _Otomatis jadikan sticker jadi gambar_\n` +
-            `> Video gak jadi bang`
+            `> Usa:
+` +
+            `> \`${m.prefix}automedia on\` - activar
+` +
+            `> \`${m.prefix}automedia off\` - desactivar
+
+` +
+            `Automáticamente hace de los stickers una imagen.
+` +
+            `> El video no se pudo procesar`
         )
     }
     
@@ -64,7 +69,7 @@ async function handler(m, { sock }) {
 > ❌ ¡Se ha desactivado!`)
     }
     
-    return m.reply(`❌ Gunakan: \`${m.prefix}automedia on/off\``)
+    return m.reply(`❌ Usa: \`${m.prefix}automedia on/off\``)
 }
 
 async function autoMediaHandler(m, sock) {

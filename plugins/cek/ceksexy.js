@@ -20,25 +20,24 @@ async function handler(m) {
                     
     let desc = ''
     if (percent >= 90) {
-        desc = 'SEXY ABIS! 🔥🔥🔥'
+        desc = "¡SENSUALIDAD MÁXIMA! 🔥🔥🔥"
     } else if (percent >= 70) {
-        desc = 'Hot banget! 😏'
+        desc = "¡Muy sensual! 😏"
     } else if (percent >= 50) {
-        desc = 'Lumayan menggoda~ 😊'
+        desc = "Bastante seductor/a~ 😊"
     } else if (percent >= 30) {
-        desc = 'Biasa aja sih 🙂'
+        desc = "Normalito/a 🙂"
     } else {
-        desc = "Tal vez lindo no es sexy. 😅"
+        desc = "Quizá es lindo/a, pero no sensual 😅"
     }
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu nivel de sexo. *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de sexiness @${mentioned.split('@')[0]} yak? 
-    
-Tingkat kesexyan dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de sensualidad es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de sensualidad de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

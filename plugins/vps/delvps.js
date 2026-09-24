@@ -30,19 +30,21 @@ async function handler(m, { sock }) {
     const token = config.digitalocean?.token
     
     if (!token) {
-        return m.reply(`⚠️ *ᴅɪɢɪᴛᴀʟᴏᴄᴇᴀɴ ʙᴇʟᴜᴍ ᴅɪsᴇᴛᴜᴘ*`)
+        return m.reply(`⚠️ *DigitalOcean aún no está configurado*`)
     }
     
     if (!hasAccess(m.sender, m.isOwner)) {
-        return m.reply(`❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*`)
+        return m.reply(`❌ *se rechazó el acceso*`)
     }
     
     const dropletId = m.text?.trim()
     if (!dropletId) {
-        return m.reply(`⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n> \`${m.prefix}delvps <droplet_id>\`\n\n> Gunakan \`${m.prefix}listvps\` para ver la identificación`)
+        return m.reply(`⚠️ *MODO DE USO*\n\n> \`${m.prefix}delvps <droplet_id>\`
+
+> Usa \`${m.prefix}listvps\` para ver la identificación`)
     }
     
-    await m.reply(`🗑️ *ᴍᴇɴɢʜᴀᴘᴜs ᴠᴘs...*\n\n> ID: \`${dropletId}\``)
+    await m.reply(`🗑️ *ELIMINANDO ᴠᴘs...*\n\n> ID: \`${dropletId}\``)
     
     try {
         await axios.delete(`https://api.digitalocean.com/v2/droplets/${dropletId}`, {
@@ -50,7 +52,9 @@ async function handler(m, { sock }) {
         })
         
         m.react('✅')
-        await m.reply(`✅ *ᴠᴘs ʙᴇʀʜᴀsɪʟ ᴅɪʜᴀᴘᴜs*\n\n> ID: \`${dropletId}\``)
+        await m.reply(`✅ *vps fue eliminado con éxito*
+
+> ID: \`${dropletId}\``)
         
     } catch (err) {
         return m.reply(te(m.prefix, m.command, m.pushName))

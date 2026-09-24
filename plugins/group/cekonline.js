@@ -24,12 +24,14 @@ async function handler(m, { sock }) {
         
         if (participants.length === 0) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > No podría obtener datos de miembros del grupo`)
         }
         
-        await m.reply(`🔍 *ᴍᴇɴᴄᴀʀɪ ᴍᴇᴍʙᴇʀ ᴏɴʟɪɴᴇ...*\n\n> Menunggu response dari ${participants.length} member
+        await m.reply(`🔍 *BUSCANDO MIEMBROS EN LÍNEA...*
+
+> Esperando la respuesta de ${participants.length} member
 > Estimación: 5 a 10 segundos`)
         
         const presences = {}
@@ -64,9 +66,9 @@ async function handler(m, { sock }) {
         const onlineMembers = Object.keys(presences)
         const mentions = onlineMembers
         
-        let text = `📊 *ᴄᴇᴋ ᴏɴʟɪɴᴇ*\n\n`
-        text += `╭┈┈⬡「 📋 *ɪɴꜰᴏ ɢʀᴜᴘ* 」\n`
-        text += `┃ 👥 ɴᴀᴍᴀ: *${groupMetadata.subject}*\n`
+        let text = `📊 *COMPROBAR EN LÍNEA*\n\n`
+        text += `╭┈┈⬡「 📋 *ɪɴꜰᴏ GRUPO* 」\n`
+        text += `┃ 👥 NOMBRE: *${groupMetadata.subject}*\n`
         text += `┃ 👤 ᴛᴏᴛᴀʟ: \`${participants.length}\` member\n`
         text += `┃ 🟢 ᴏɴʟɪɴᴇ: \`${onlineMembers.length}\` member\n`
         text += `╰┈┈⬡\n\n`
@@ -74,14 +76,15 @@ async function handler(m, { sock }) {
         if (onlineMembers.length === 0) {
             text += `> _No hay miembros detectados en línea_
 `
-            text += `> _Pastikan member telah membuka WA_`
+            text += `> _Asegúrate de que el miembro haya abierto WhatsApp_`
         } else {
             text += `╭┈┈⬡「 🟢 *ᴍᴇᴍʙᴇʀ ᴏɴʟɪɴᴇ* 」\n`
             
             let count = 0
             for (const jid of onlineMembers) {
                 if (count >= 50) {
-                    text += `┃ ... dan ${onlineMembers.length - 50} member lainnya\n`
+                    text += `┃ ...y ${onlineMembers.length - 50} miembros más
+`
                     break
                 }
                 const number = jid.split('@')[0]
@@ -98,7 +101,7 @@ async function handler(m, { sock }) {
             }
             
             text += `╰┈┈⬡\n\n`
-            text += `> 🟢 Online | ⌨️ Mengetik | 🎤 Rekam Audio`
+            text += `> 🟢 En línea | ⌨️ Escribiendo | 🎤 Grabando audio`
         }
         
         m.react('✅')

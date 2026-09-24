@@ -20,10 +20,15 @@ async function handler(m, { sock }) {
   const chatId = m.chat;
   if (!global.absensi[chatId]) {
     return m.reply(
-      `❌ *ᴛɪᴅᴀᴋ ᴀᴅᴀ ᴀʙsᴇɴ*\n\n` +
-        `> Belum ada sesi absen di grup ini!\n\n` +
-        `> Admin dapat memulai dengan\n` +
-        `> *.mulaiabsen [keterangan]*`,
+      `❌ *no hay asistencia*
+
+` +
+        `¡No hay sesiones de asistencia en este grupo!
+
+` +
+        `Los administradores pueden comenzar con
+` +
+        `> *.mulaiabsen [descripción]*`,
     );
   }
   const absen = global.absensi[chatId];
@@ -40,16 +45,18 @@ async function handler(m, { sock }) {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
   await m.reply(
-    `📋 *DAFTAR YANG UDAH ABSEN*\n\n` +
+    `📋 *LISTA DE AUSENTES*
+
+` +
       `╭┈┈⬡「 📋 *INFO* 」\n` +
       `┃ 📝 ${absen.keterangan}\n` +
       `┃ 📅 ${dateStr}\n` +
-      `┃ ⏰ Dimulai: ${timeStr}\n` +
-      `┃ 👑 Dibuat: @${absen.createdBy.split("@")[0]}\n` +
-      `├┈┈⬡「 👥 *PESERTA (${absen.peserta.length})* 」\n` +
+      `┃ ⏰ Iniciado: ${timeStr}\n` +
+      `┃ 👑 Se hizo: @${absen.createdBy.split("@")[0]}\n` +
+      `├┈┈⬡「 👥 *PARTICIPANTES (${absen.peserta.length})* 」\n` +
       `${list}\n` +
       `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-      `Ketik *${m.prefix}absen* untuk hadir`,
+      `Escribe *${m.prefix}asistencia*para asistir`,
     { mentions: [...absen.peserta, absen.createdBy] },
   );
 }

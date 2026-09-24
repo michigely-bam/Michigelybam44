@@ -218,8 +218,9 @@ async function handler(m, { sock }) {
         const startTime = Date.now()
 
         await sock.sendMessage(m.chat, {
-            text: `✅ *ᴜᴘᴅᴀᴛᴇ sᴜᴋsᴇs!*\n\n` +
-                  `╭┈┈⬡「 📊 *ʀɪɴɢᴋᴀsᴀɴ* 」\n` +
+            text: `✅ *ᴜᴘᴅᴀᴛᴇ COMPLETADO!*\n\n` +
+                  `╭┈┈⬡「 📊 *RESUMEN* 」
+` +
                   `┃ 📄 Archivos modificados: \`${filesChanged.length}\`\n` +
                   `┃ ⏰ ${new Date().toLocaleTimeString('es-VE')}\n` +
                   `╰┈┈⬡\n\n` +

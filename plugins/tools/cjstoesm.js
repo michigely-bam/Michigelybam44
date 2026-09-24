@@ -11,7 +11,7 @@ const pluginConfig = {
     alias: ['cjs2esm', 'cjsconvert'],
     category: 'tools',
     description: "Convertir CommonJS en ESM (S Modules)",
-    usage: '.cjstoesm <reply kode>',
+    usage: '.cjstoesm <código respondido>',
     example: '.cjstoesm',
     isOwner: false,
     isPremium: false,
@@ -116,10 +116,13 @@ async function handler(m, { sock }) {
     if (!code) {
         return m.reply(
             `🔄 *ᴄᴊs ᴛᴏ ᴇsᴍ ᴄᴏɴᴠᴇʀᴛᴇʀ*\n\n` +
-            `> Convert CommonJS ke ES Modules\n\n` +
-            `> *Cara pakai:*\n` +
-            `> Reply kode CJS dengan ${m.prefix}cjstoesm\n\n` +
-            `> *Contoh CJS:*\n` +
+            `> Convertir CommonJS a módulos ES
+
+` +
+            `> *Modo de uso:*
+` +
+            `> Responda el código CJS con ${m.prefix}cjstoesm\n\n` +
+            `> *Ejemplo CJS:*\n` +
             `> \`const axios = require('axios')\`\n` +
             `> \`module.exports = handler\``
         )

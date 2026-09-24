@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'arena',
     alias: ['pvp', 'battle', 'fight'],
     category: 'rpg',
-    description: 'Bertarung di arena PvP',
+    description: "Combate en la arena PvP",
     usage: '.arena <@user>',
     example: '.arena @user',
     isOwner: false,
@@ -27,12 +27,14 @@ async function handler(m, { sock }) {
     if (!mentioned) {
         return m.reply(
             `⚔️ *ᴀʀᴇɴᴀ ᴘᴠᴘ*\n\n` +
-            `> Tantang player lain untuk duel!\n\n` +
-            `╭┈┈⬡「 📋 *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ* 」\n` +
+            `¡Desafía a otro jugador para un duelo!
+
+` +
+            `╭┈┈⬡「 📋 *MODO DE USO* 」\n` +
             `┃ ${m.prefix}arena @user\n` +
-            `┃ Reply pesan user + ${m.prefix}arena\n` +
+            `┃ Responder a los mensajes del usuario + ${m.prefix}arena\n` +
             `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-            `⚠️ *Risiko:* Kalah = -20% balance`
+            `⚠️ *Riesgo:* perder = -20 % del saldo`
         )
     }
     
@@ -56,7 +58,7 @@ async function handler(m, { sock }) {
     const oppDefense = (opponent.rpg.defense || 5) + (opponent.level || 1)
     
     await m.react('⚔️')
-    await m.reply(`⚔️ *ᴘᴇʀᴛᴀʀᴜɴɢᴀɴ ᴅɪᴍᴜʟᴀɪ...*\n\n> @${m.sender.split('@')[0]} vs @${mentioned.split('@')[0]}`, { mentions: [m.sender, mentioned] })
+    await m.reply(`⚔️ *COMBATE INICIADO...*\n\n> @${m.sender.split('@')[0]} vs @${mentioned.split('@')[0]}`, { mentions: [m.sender, mentioned] })
     await new Promise(r => setTimeout(r, 2000))
     
     let myHp = myHealth
@@ -75,15 +77,15 @@ async function handler(m, { sock }) {
         
         const oppDmg = Math.max(5, oppAttack - myDefense + Math.floor(Math.random() * 10))
         myHp -= oppDmg
-        battleLog.push(`💢 Lawan menyerang: *-${oppDmg} HP*`)
+        battleLog.push(`💢 El rival ataca: *-${oppDmg} HP*`)
     }
     
     const isWin = myHp > oppHp
     
-    let txt = `⚔️ *ʜᴀsɪʟ ᴘᴇʀᴛᴀʀᴜɴɢᴀɴ*\n\n`
+    let txt = `⚔️ *RESULTADO COMBATE*\n\n`
     txt += `╭┈┈⬡「 📊 *sᴛᴀᴛs* 」\n`
-    txt += `┃ 🧑 Kamu: ${Math.max(0, myHp)}/${myHealth} HP\n`
-    txt += `┃ 👤 Lawan: ${Math.max(0, oppHp)}/${oppHealth} HP\n`
+    txt += `┃ 🧑 Tú: ${Math.max(0, myHp)}/${myHealth} HP\n`
+    txt += `┃ 👤 Rival: ${Math.max(0, oppHp)}/${oppHealth} HP\n`
     txt += `┃ 🔄 Round: ${round}\n`
     txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`
     
@@ -100,7 +102,7 @@ async function handler(m, { sock }) {
         
         await addExpWithLevelCheck(sock, m, db, user, expReward)
         
-        txt += `🎉 *ᴋᴇᴍᴇɴᴀɴɢᴀɴ!*\n`
+        txt += `🎉 *VICTORIA!*\n`
         txt += `> ✨ EXP: +${expReward}\n`
         txt += `> 💰 Gold: +${goldReward.toLocaleString()}`
         
@@ -109,7 +111,7 @@ async function handler(m, { sock }) {
         const goldLoss = Math.floor((user.koin || 0) * 0.2)
         user.koin = Math.max(0, (user.koin || 0) - goldLoss)
         
-        txt += `💀 *ᴋᴇᴋᴀʟᴀʜᴀɴ!*\n`
+        txt += `💀 *DERROTA!*\n`
         txt += `> 💸 Gold: -${goldLoss.toLocaleString()}`
         
         await m.react('💀')

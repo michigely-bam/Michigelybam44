@@ -20,9 +20,10 @@ async function handler(m, { sock }) {
 
     if (!quoted) {
         await m.reply(
-            `❌ *ɢᴀɢᴀʟ*\n\n` +
-            `> Balas pesan 1x lihat dengan perintah ini!\n` +
-            `> Gunakan: \`${m.prefix}openvo\` (reply pesan 1x lihat)`
+            `❌ *ERROR*\n\n` +
+            `¡Responda el mensaje 1x y mira con este comando!
+` +
+            `> Usa: \`${m.prefix}openvo\` (respondiendo el mensaje 1x ver)`
         )
         return
     }
@@ -30,8 +31,10 @@ async function handler(m, { sock }) {
     const quotedMsg = quoted.message
     if (!quotedMsg) {
         await m.reply(
-            `❌ *ᴘᴇsᴀɴ ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n` +
-            `> Tidak dapat membaca pesan yang di-reply.`
+            `❌ *el mensaje no se encuentra*
+
+` +
+            `> No se pudo leer el mensaje respondido.`
         )
         return
     }
@@ -41,17 +44,18 @@ async function handler(m, { sock }) {
 
     if (!content) {
         await m.reply(
-            `❌ *ᴋᴏɴᴛᴇɴ ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n` +
-            `> Konten pesan tidak dapat dibaca.`
+            `❌ *CONTENIDO NO ENCONTRADO*\n\n` +
+            `El contenido del mensaje no se puede leer.`
         )
         return
     }
 
     if (!content.viewOnce) {
         await m.reply(
-            `❌ *ʙᴜᴋᴀɴ ᴠɪᴇᴡᴏɴᴄᴇ*\n\n` +
-            `> Pesan yang di-reply bukan pesan 1x lihat!\n` +
-            `> Balas pesan dengan ikon 1x lihat (👁️).`
+            `❌ *NO ES DE UNA SOLA VISTA*\n\n` +
+            `¡Los mensajes a los que se les responde no son mensajes de 1x!
+` +
+            `> Responder al mensaje con el icono 1x ver (👁️).`
         )
         return
     }
@@ -84,9 +88,10 @@ async function handler(m, { sock }) {
 
         if (!buffer || buffer.length < 100) {
             await m.reply(
-                `❌ *ɢᴀɢᴀʟ ᴍᴇɴɢᴜɴᴅᴜʜ*\n\n` +
-                `> Tidak dapat mengunduh media.\n` +
-                `> Media mungkin sudah kadaluarsa.`
+                `❌ *ERROR DE DESCARGA*\n\n` +
+                `> No se pudieron descargar los archivos multimedia.
+` +
+                `Los medios de comunicación pueden haber expirado.`
             )
             return
         }
@@ -111,7 +116,8 @@ async function handler(m, { sock }) {
     } catch (error) {
         await m.reply(
             `❌ *ᴇʀʀᴏʀ*\n\n` +
-            `> Gagal membuka pesan 1x lihat.\n` +
+            `> Fallo de abrir el mensaje 1x ver.
+` +
             `> _${error.message}_`
         )
     }

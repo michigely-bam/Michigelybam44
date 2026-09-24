@@ -26,23 +26,26 @@ async function handler(m, { sock }) {
 
   if (user.rpg.health < 30) {
     return m.reply(
-      `❌ *ʜᴇᴀʟᴛʜ ᴛᴇʀʟᴀʟᴜ ʀᴇɴᴅᴀʜ*\n\n` +
-        `> Minimal 30 HP untuk berpetualang!\n` +
-        `> Health kamu: ${user.rpg.health} HP`,
+      `❌ *SALUD DEMASIADO BAJA*\n\n` +
+        `> ¡Necesitas al menos 30 HP para aventurarte!
+` +
+        `> Tu salud: ${user.rpg.health} HP`,
     );
   }
 
   const locations = [
-    "🌲 Hutan Gelap",
-    "🏔️ Gunung Es",
-    "🏜️ Padang Pasir",
-    "🌋 Gunung Berapi",
-    "🏰 Kastil Tua",
-    "🌊 Pantai Misterius",
+    "🌲 Bosque oscuro",
+    "🏔️ Montaña helada",
+    "🏜️ Desierto",
+    "🌋 Volcán",
+    "🏰 Castillo antiguo",
+    "🌊 Playa misteriosa",
   ];
   const location = locations[Math.floor(Math.random() * locations.length)];
 
-  await m.reply(`⚔️ *ᴍᴇᴍᴜʟᴀɪ ᴘᴇᴛᴜᴀʟᴀɴɢᴀɴ*\n\n> Menuju ${location}...`);
+  await m.reply(`⚔️ *INICIANDO LA AVENTURA*
+
+> Destino: ${location}...`);
   await new Promise((r) => setTimeout(r, 2500));
 
   const isWin = Math.random() < 0.6;
@@ -56,7 +59,7 @@ async function handler(m, { sock }) {
 
     db.save();
 
-    let txt = `✅ *ᴘᴇᴛᴜᴀʟᴀɴɢᴀɴ sᴜᴋsᴇs*\n\n`;
+    let txt = `✅ *AVENTURA COMPLETADO*\n\n`;
     txt += `> 📍 ${location}\n\n`;
     txt += `╭┈┈⬡「 🎁 *ʀᴇᴡᴀʀᴅ* 」\n`;
     txt += `┃ 💰 Money: *+Rp ${moneyGain.toLocaleString("id-ID")}*\n`;
@@ -68,7 +71,7 @@ async function handler(m, { sock }) {
     const healthLoss = Math.floor(Math.random() * 30) + 10;
     user.rpg.health = Math.max(0, user.rpg.health - healthLoss);
 
-    let msg = `❌ *ᴘᴇᴛᴜᴀʟᴀɴɢᴀɴ ɢᴀɢᴀʟ*\n\n`;
+    let msg = `❌ *AVENTURA ERROR*\n\n`;
     msg += `> 📍 ${location}\n\n`;
     msg += `> ¡Fuiste atacado por un monstruo!
 `;
@@ -77,7 +80,10 @@ async function handler(m, { sock }) {
     if (user.rpg.health <= 0) {
       user.rpg.health = 0;
       user.exp = Math.floor((user.exp || 0) / 2);
-      msg += `\n\n💀 *ᴋᴀᴍᴜ ᴍᴀᴛɪ*\n> Exp berkurang 50%!`;
+      msg += `
+
+💀 Tú estás muerto.
+> ¡La EXP se redujo un 50 %!`;
     }
 
     db.save();

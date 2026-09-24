@@ -47,7 +47,7 @@ async function handler(m, { sock }) {
     const query = m.text?.trim()
 
     if (!query) {
-        return m.reply(`🧱 *MCPEDL SEARCH*\n\n> Contoh:\n\`${m.prefix}mcpe survival\``)
+        return m.reply(`🧱 *MCPEDL SEARCH*\n\n> Ejemplo:\n\`${m.prefix}mcpe survival\``)
     }
 
     m.react('🔍')

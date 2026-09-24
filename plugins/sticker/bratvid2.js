@@ -25,7 +25,7 @@ async function handler(m, { sock }) {
 
 > Escriba texto
 
-\`Contoh: ${m.prefix}bratvid2 hello world\``)
+\`Ejemplo: ${m.prefix}bratvid2 hello world\``)
     }
     
     m.react('🕕')

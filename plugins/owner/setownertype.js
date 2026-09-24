@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'setownertype',
     alias: ['ownertype', 'ownervariant', 'ownerstyle'],
     category: 'owner',
-    description: 'Mengatur variant tampilan owner message',
+    description: "Configura la variante visual del mensaje del propietario",
     usage: '.setownertype',
     example: '.setownertype',
     isOwner: true,
@@ -35,7 +35,7 @@ async function handler(m, { sock, db }) {
         await db.save()
         
         await m.reply(
-            `✅ Owner type diubah ke *V${id}*\n\n` +
+            `✅ El tipo de propietario fue cambiado a *V${id}*\n\n` +
             `> *${VARIANTS[id].name}*\n` +
             `> _${VARIANTS[id].desc}_`
         )

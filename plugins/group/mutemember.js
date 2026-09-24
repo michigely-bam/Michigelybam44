@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'mutemember',
     alias: ['mutmember', 'silentmember', 'bisukanmember'],
     category: 'group',
-    description: "Un inserto miembro específico (el mensaje se eliminará del bot)",
-    usage: '.mutemember <@tag/reply/nomor>',
+    description: "Silencia a un miembro específico (el bot eliminará sus mensajes)",
+    usage: ".mutemember <@mención/reply/número>",
     example: '.mutemember @user',
     isOwner: false,
     isPremium: false,
@@ -43,13 +43,13 @@ async function handler(m, { sock }) {
 
     if (!targetJid) {
         return m.reply(
-            `🔇 *MUTE MEMBER*\n\n` +
-            `> Bisukan member tertentu di grup ini\n` +
-            `> Pesan member yang dimute akan dihapus oleh bot\n\n` +
-            `\`Contoh:\`\n` +
+            `🔇 *SILENCIAR MIEMBRO*\n\n` +
+            `> Silencia a un miembro específico de este grupo.\n` +
+            `> El bot eliminará automáticamente sus mensajes.\n\n` +
+            `\`Ejemplo:\`\n` +
             `> ${m.prefix}mutemember @user\n` +
             `> ${m.prefix}mutemember 6281234567890\n` +
-            `> Reply pesan member + ${m.prefix}mutemember`
+            `> Responde al mensaje del miembro con ${m.prefix}mutemember`
         )
     }
 
@@ -61,9 +61,9 @@ async function handler(m, { sock }) {
             return pJid === targetNumber && (p.admin === 'admin' || p.admin === 'superadmin')
         })
         if (isTargetAdmin) {
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *Error*
 
-> No puede mute grupo admin`)
+> No puedes silenciar a un administrador del grupo.`)
         }
     }
 
@@ -77,7 +77,9 @@ async function handler(m, { sock }) {
     })
 
     if (alreadyMuted) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*\n\n> Member @${targetNumber} Está cerrado.`, { mentions: [targetJid] })
+        return m.reply(`❌ *Error*
+
+> El miembro @${targetNumber} ya está silenciado.`, { mentions: [targetJid] })
     }
 
     mutedMembers.push(targetJid)
@@ -85,14 +87,15 @@ async function handler(m, { sock }) {
 
     m.react('🔇')
     await m.reply(
-        `🔇 *MEMBER DIMUTE*\n\n` +
+        `🔇 *MIEMBRO SILENCIADO*\n\n` +
         `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
         `┃ 👤 ᴍᴇᴍʙᴇʀ: @${targetNumber}\n` +
-        `┃ 🔇 sᴛᴀᴛᴜs: \`Muted\`\n` +
-        `┃ 📊 ᴛᴏᴛᴀʟ ᴍᴜᴛᴇ: \`${mutedMembers.length}\` ᴍᴇᴍʙᴇʀ\n` +
+        `┃ 🔇 ᴇsᴛᴀᴅᴏ: \`Silenciado\`\n` +
+        `┃ 📊 ᴛᴏᴛᴀʟ: \`${mutedMembers.length}\` miembros silenciados\n` +
         `╰┈┈⬡\n\n` +
-        `> Semua pesan dari member ini akan dihapus otomatis\n` +
-        `> Gunakan \`${m.prefix}unmutemember\` untuk unmute`,
+        `> Todos los mensajes de este miembro se eliminarán automáticamente
+` +
+        `> Usa \`${m.prefix}unmutemember\` para quitarle el silencio.`,
         { mentions: [targetJid] }
     )
 }

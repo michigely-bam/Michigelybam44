@@ -24,7 +24,7 @@ async function handler(m, { sock }) {
 
 > Introduzca el nombre de usuario de YouTube
 
-\`Contoh: ${m.prefix}ytstalk mrbeast\``)
+\`Ejemplo: ${m.prefix}ytstalk mrbeast\``)
     }
     
     m.react('🔍')
@@ -50,7 +50,7 @@ async function handler(m, { sock }) {
             `🔗 ${c.channelUrl}\n\n`
         
         if (videos?.length > 0) {
-            caption += `📹 *ᴠɪᴅᴇᴏ ᴛᴇʀʙᴀʀᴜ:*\n`
+            caption += `📹 *VIDEO RECIENTE:*\n`
             videos.slice(0, 5).forEach((v, i) => {
                 caption += `${i+1}. ${v.title}\n   ⏱️ ${v.duration} | 👁️ ${v.viewCount}\n\n`
             })

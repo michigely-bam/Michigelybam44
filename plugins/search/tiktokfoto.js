@@ -56,7 +56,10 @@ async function handler(m, { sock }) {
     const query = m.text?.trim()
 
     if (!query) {
-        return m.reply(`📸 *TIKTOK FOTO SEARCH*\n\n> Contoh:\n\`${m.prefix}tiktokfoto cosplay\``)
+        return m.reply(`📸 *BÚSQUEDA DE FOTOS EN TIKTOK*
+
+> Ejemplo:
+\`${m.prefix}tiktokfoto cosplay\``)
     }
 
     m.react('🔍')
@@ -71,9 +74,9 @@ async function handler(m, { sock }) {
             return m.reply(`❌ No se encontraron fotos de Tickook para: ${query}`)
         }
 
-        let caption = '📸 *TIKTOK FOTO SEARCH*\n\n'
+        let caption = "📸 *BÚSQUEDA DE FOTOS EN TIKTOK*\n\n"
         caption += `🔎 *Query:* ${result.query || query}\n`
-        caption += `📌 *Judul:* ${trimText(post.title || post.description)}\n`
+        caption += `📌 *Título:* ${trimText(post.title || post.description)}\n`
         caption += `👤 *Author:* ${post.author?.nickname || '-'}\n`
         caption += `🌍 *Region:* ${post.region || '-'}\n`
         caption += `🖼️ *Foto:* ${post.image_count || images.length}\n`

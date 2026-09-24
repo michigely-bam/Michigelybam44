@@ -9,7 +9,7 @@ const pluginConfig = {
   alias: ["idgc", "idgrup", "groupid", "infogc", "groupinfo"],
   category: "group",
   description: "Consulta para la identificación y la información completa del grupo",
-  usage: ".ckidgc [enlace de grupo]",
+  usage: ".cekidgc [enlace_de_grupo]",
   example: ".cekidgc https://chat.whatsapp.com/xxxxx",
   isOwner: false,
   isPremium: false,
@@ -81,8 +81,11 @@ async function handler(m, { sock }) {
     } else {
       return m.reply(
         `── .✦ 𝗖𝗘𝗞 𝗜𝗗 𝗚𝗥𝗨𝗣 ✦. ── 𝜗ৎ\n\n` +
-          `> Gunakan di grup atau masukkan link grup\n\n` +
-          `> \`${m.prefix}cekidgc\` — di dalam grup\n` +
+          `> Utilizar en grupo o incluir enlaces de grupo
+
+` +
+          `> \`${m.prefix}cekidgc\` — en el grupo
+` +
           `> \`${m.prefix}cekidgc https://chat.whatsapp.com/xxx\``,
       );
     }
@@ -94,7 +97,7 @@ async function handler(m, { sock }) {
 > Incapaz de encontrar información de grupo.☘︎ ݁˖`);
     }
 
-    const groupName = groupMeta.subject || "Unknown";
+    const groupName = groupMeta.subject || "Desconocido";
     const participants = groupMeta.participants || [];
     const memberCount = participants.length || groupMeta.size || 0;
     const admins = participants.filter(
@@ -107,9 +110,9 @@ async function handler(m, { sock }) {
     const descPreview =
       groupDesc.length > 120 ? groupDesc.slice(0, 120) + "..." : groupDesc;
     const isRestrict = groupMeta.restrict ? "Admin Only" : "Todos los Miembros";
-    const isAnnounce = groupMeta.announce ? "Aktif" : "Nonaktif";
-    const isCommunity = groupMeta.isCommunity ? "✓ Ya" : "✘ Tidak";
-    const joinMode = groupMeta.joinApprovalMode ? "Perlu Approval" : "Bebas";
+    const isAnnounce = groupMeta.announce ? "Activo" : "Inactivo";
+    const isCommunity = groupMeta.isCommunity ? "✓ Ya" : "✘ No";
+    const joinMode = groupMeta.joinApprovalMode ? "Requiere aprobación" : "Libre";
 
     let ppBuffer = null;
     try {
@@ -132,17 +135,17 @@ async function handler(m, { sock }) {
     const infoText =
       `── .✦ 𝗚𝗥𝗢𝗨𝗣 𝗜𝗡𝗙𝗢 ✦. ── 𝜗ৎ\n\n` +
       `╭─〔 ${groupName} 〕───⬣\n` +
-      `│  ✦ ɴᴀᴍᴀ        : *${groupName}*\n` +
+      `│  ✦ NOMBRE        : *${groupName}*\n` +
       `│  ✦ ɪᴅ             : \`${groupJid}\`\n` +
       `│  ✦ ᴍᴇᴍʙᴇʀ     : *${memberCount}*\n` +
       `│  ✦ ᴀᴅᴍɪɴ        : *${adminCount}*\n` +
       `│  ✦ ᴏᴡɴᴇʀ       : @${groupOwner.replace(/@.+/g, "")}\n` +
-      `│  ✦ ᴅɪʙᴜᴀᴛ       : *${createdAt}*\n` +
-      `│  ✦ ᴋᴏᴍᴜɴɪᴛᴀs : *${isCommunity}*\n` +
+      `│  ✦ CREADO       : *${createdAt}*\n` +
+      `│  ✦ COMUNIDAD : *${isCommunity}*\n` +
       `│  ✦ ᴇᴅɪᴛ ɪɴꜰᴏ   : *${isRestrict}*\n` +
       `│  ✦ ᴀɴɴᴏᴜɴᴄᴇ : *${isAnnounce}*\n` +
       `│  ✦ ᴊᴏɪɴ ᴍᴏᴅᴇ  : *${joinMode}*\n` +
-      `│  ✦ ᴅᴇsᴋʀɪᴘsɪ  : ${descPreview}\n` +
+      `│  ✦ descripción  : ${descPreview}\n` +
       `╰──────────────⬣\n\n` +
       `.☘︎ ݁˖ © ${config.bot?.name || "Ourin-AI"}`;
 

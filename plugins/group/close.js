@@ -22,9 +22,12 @@ async function handler(m, { sock }) {
         
         if (groupMeta.announce) {
             await m.reply(
-                `⚠️ *ᴠᴀʟɪᴅᴀsɪ ɢᴀɢᴀʟ*\n\n` +
-                `> Grup sudah dalam keadaan \`tertutup\`.\n` +
-                `> Hanya admin yang bisa mengirim pesan.`
+                `⚠️ *validación fallida*
+
+` +
+                `> El grupo ya está \`cerrado\`.
+` +
+                `Sólo los administradores pueden enviar mensajes.`
             );
             return;
         }
@@ -40,7 +43,8 @@ async function handler(m, { sock }) {
     } catch (error) {
         await m.reply(
             `❌ *ᴇʀʀᴏʀ*\n\n` +
-            `> Gagal menutup grup.\n` +
+            `El fracaso en cerrar el grupo.
+` +
             `> _${error.message}_`
         );
     }

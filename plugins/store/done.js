@@ -7,7 +7,7 @@ const pluginConfig = {
   category: "store",
   description:
     "✅ Confirme la transacción completada y envíe los datos al comprador (replique el mensaje del comprador)",
-  usage: ".Número de_trx √≥ (mensaje del comprador)",
+  usage: ".done <número_transacción> (responde al mensaje del comprador)",
   example: ".done TRX-001",
   isOwner: true,
   isPremium: false,
@@ -28,17 +28,26 @@ async function handler(m, { sock }) {
 
   if (!trxId) {
     return m.reply(
-      `✅ *KONFIRMASI TRANSAKSI*\n\n` +
-        `📋 Format: \`${m.prefix}done <nomor_trx>\`\n\n` +
-        `📌 *Cara penggunaan:*\n` +
-        `1️⃣ Reply pesan dari pembeli (yang sudah membayar 💰)\n` +
-        `2️⃣ Ketik \`${m.prefix}done TRX-001\`\n\n` +
-        `🤖 Bot akan otomatis:\n` +
-        `• Mengirim data produk ke nomor pembeli 📤\n` +
-        `• Menandai transaksi sebagai selesai ✅\n` +
-        `• Mengirim notifikasi ke pembeli 🔔\n\n` +
-        `🧾 *Nomor transaksi* didapat ketika pembeli melakukan \`${m.prefix}beli <nomor_produk>\`\n\n` +
-        `⚠️ _Pastikan Anda sudah menerima bukti pembayaran sebelum konfirmasi_ 📸`,
+      `✅ *CONFIRMACIÓN DE LA TRANSACCIÓN*
+
+` +
+        `📋 Formato: \`${m.prefix}done <número_transacción>\`\n\n` +
+        `📌 *Modo de uso:*
+` +
+        `1️⃣ Respuesta a los mensajes de los compradores (que ya pagaron 💰)
+` +
+        `2️⃣ Escriba \`${m.prefix}done TRX-001\`\n\n` +
+        `🤖 El bot hará automáticamente lo siguiente:
+` +
+        `• Enviar los datos del producto al número de comprador 📤
+` +
+        `• Marcar las transacciones como completadas ✅
+` +
+        `• Enviar notificaciones a los compradores 🔔
+
+` +
+        `🧾 *Número de transacción* se obtiene cuando el comprador usa \`${m.prefix}beli <número_producto>\`\n\n` +
+        `⚠️ _Asegúrese de que ha recibido la prueba de pago antes de la confirmación_ 📸`,
     );
   }
 
@@ -50,7 +59,7 @@ async function handler(m, { sock }) {
     const pending = allTrx.filter((t) => t.status === "pending");
 
     if (pending.length > 0) {
-      let txt = `❌ *Transaksi \`${trxId}\` No se encuentra.*
+      let txt = `❌ *Transacción \`${trxId}\` No se encuentra.*
 
 `;
       txt += `⏳ *Transacciones pendientes actuales:*
@@ -61,7 +70,7 @@ async function handler(m, { sock }) {
         const time = new Date(t.createdAt).toLocaleString("id-ID", {
           timeZone: "Asia/Jakarta",
         });
-        txt += `• 🧾 \`${t.trxId}\` — ${typeIcon} ${t.productName} (${formatPrice(t.price)}) oleh ${t.buyerName}\n`;
+        txt += `• 🧾 \`${t.trxId}\` — ${typeIcon} ${t.productName} (${formatPrice(t.price)}) por ${t.buyerName}\n`;
         txt += `  🕐 _${time}_\n\n`;
       }
       txt += `📌 Responder mensaje el comprador y el tipo: \`${m.prefix}Número de_trx>\``;
@@ -69,20 +78,26 @@ async function handler(m, { sock }) {
     }
 
     return m.reply(
-      `❌ *Transaksi \`${trxId}\` tidak ditemukan.*\n\n` +
-        `📭 Tidak ada transaksi pending saat ini.\n\n` +
-        `_Pembeli dapat membuat pesanan dengan \`${m.prefix}beli <nomor_produk>\`_ 🛒`,
+      `❌ *Transacción \`${trxId}\` no encontrado.*
+
+` +
+        `📭 No hay transacciones pendientes en este momento.
+
+` +
+        `_El comprador puede hacer un pedido con \`${m.prefix}beli <número_producto>\`_ 🛒`,
     );
   }
 
   if (trx.status === "completed") {
     return m.reply(
-      `⚠️ *Transaksi sudah selesai.*\n\n` +
+      `⚠️ *La transacción ha sido concluida.*
+
+` +
         `🧾 TRX: \`${trxId}\`\n` +
-        `${trx.productType === "fisik" ? "📦" : "🔑"} Produk: *${trx.productName}*\n` +
-        `👤 Pembeli: ${trx.buyerName}\n` +
-        `✅ Selesai pada: ${new Date(trx.completedAt).toLocaleString("id-ID", { timeZone: "Asia/Jakarta" })}\n\n` +
-        `_Transaksi ini sudah dikonfirmasi sebelumnya_ 🔒`,
+        `${trx.productType === "fisik" ? "📦" : "🔑"} Producto: *${trx.productName}*\n` +
+        `👤 Compradores: ${trx.buyerName}\n` +
+        `✅ Terminó en: ${new Date(trx.completedAt).toLocaleString("id-ID", { timeZone: "Asia/Jakarta" })}\n\n` +
+        `_Esta transacción ha sido confirmada previamente_ 🔒`,
     );
   }
 
@@ -149,20 +164,25 @@ Esta transacción no tiene datos de comprador válidos 📱`,
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
   const typeIcon = trx.productType === "fisik" ? "📦" : "🔑";
-  const typeLabel = trx.productType === "fisik" ? "Fisik" : "Digital";
+  const typeLabel = trx.productType === "fisik" ? "Físico" : "Digital";
 
   let invoiceTxt = `🎉 *DEVICE TRANSLATICO*
 
 `;
-  invoiceTxt += `🕐 Waktu: \`${timeStr}\`\n`;
-  invoiceTxt += `✅ Status: *Berhasil*\n\n`;
-  invoiceTxt += `📦 *Detail Pesanan:*\n`;
-  invoiceTxt += `${typeIcon} Produk: *${trx.productName}*\n`;
-  invoiceTxt += `🏷️ Tipe: *${typeLabel}*\n`;
-  invoiceTxt += `💰 Harga: *${formatPrice(trx.price)}*\n\n`;
+  invoiceTxt += `🕐 Tiempo: \`${timeStr}\`\n`;
+  invoiceTxt += `✅ Estado: *Completado*
+
+`;
+  invoiceTxt += `📦 *Detalles del pedido:*
+`;
+  invoiceTxt += `${typeIcon} Producto: *${trx.productName}*\n`;
+  invoiceTxt += `🏷️ Tipo: *${typeLabel}*\n`;
+  invoiceTxt += `💰 Precio: *${formatPrice(trx.price)}*\n\n`;
 
   if (stockItemDetail) {
-    invoiceTxt += `🔑 *Data Produk:*\n\`\`\`\n${stockItemDetail}\n\`\`\`\n\n`;
+    invoiceTxt += `🔑 *Datos del producto:*
+\`\`\`
+${stockItemDetail}\n\`\`\`\n\n`;
     invoiceTxt += `⚠️ _Guarde los datos arriba correctamente. No comparta con nadie_ 🔒
 
 `;
@@ -172,7 +192,7 @@ Esta transacción no tiene datos de comprador válidos 📱`,
 `;
   }
 
-  invoiceTxt += `🙏 Terima kasih telah berbelanja! _Next order ya_ ✨`;
+  invoiceTxt += `🙏 ¡Gracias por tu compra! _Next order ya_ ✨`;
 
   try {
     await sock.sendMessage(buyerJid, {
@@ -188,11 +208,11 @@ Esta transacción no tiene datos de comprador válidos 📱`,
       },
     });
   } catch (e) {
-    console.error("[Done] Failed to send to buyer:", buyerJid, e.message);
+    console.error("[Done] No se pudo enviar el mensaje al comprador:", buyerJid, e.message);
     await m.reply(
       `❌ *Falló en enviar al comprador.*
 
-📱 Nomor: \`${buyerNum}\`
+📱 Número: \`${buyerNum}\`
 
 _Los posibles compradores no han guardado el número del bot. Envíe el siguiente manual de datos:_
 
@@ -205,16 +225,21 @@ ${invoiceTxt}`,
       const buyerMention = `@${buyerNum}`;
       await sock.sendMessage(trx.purchaseChat, {
         text:
-          `🎉 *Pesanan Selesai!*\n\n` +
-          `${buyerMention} pembelian kamu untuk *${trx.productName}* sudah dikonfirmasi ✅\n` +
-          `💰 Harga: *${formatPrice(trx.price)}*\n\n` +
-          `📦 Data produk sudah dikirim ke private chat kamu. Cek pesan dari bot ya! 📱\n\n` +
-          `🙏 Terima kasih telah berbelanja!`,
+          `🎉 ¡La orden está terminada!
+
+` +
+          `${buyerMention} su compra para *${trx.productName}*ya se ha confirmado ✅
+` +
+          `💰 Precio: *${formatPrice(trx.price)}*\n\n` +
+          `📦 Los datos del producto han sido enviados a su chat privado. ¡Echa un vistazo a los mensajes del bot! 📱
+
+` +
+          `🙏 ¡Gracias por tu compra!`,
         mentions: [buyerJid],
       });
     } catch (e) {
       console.error(
-        "[Done] Failed to notify group:",
+        "[Done] No se pudo notificar al grupo:",
         trx.purchaseChat,
         e.message,
       );
@@ -223,18 +248,20 @@ ${invoiceTxt}`,
 
   await m.react("✅");
 
-  let confirmTxt = `✅ *TRANSAKSI DIKONFIRMASI*\n\n`;
+  let confirmTxt = `✅ *TRANSACCIÓN CONFIRMADA*
+
+`;
   confirmTxt += `🧾 TRX: \`${trxId}\`\n`;
-  confirmTxt += `${typeIcon} Produk: *${trx.productName}*\n`;
-  confirmTxt += `👤 Pembeli: *${trx.buyerName}*\n`;
-  confirmTxt += `📱 Nomor: \`${buyerNum}\`\n`;
-  confirmTxt += `💰 Harga: *${formatPrice(trx.price)}*\n`;
+  confirmTxt += `${typeIcon} Producto: *${trx.productName}*\n`;
+  confirmTxt += `👤 Compradores: *${trx.buyerName}*\n`;
+  confirmTxt += `📱 Número: \`${buyerNum}\`\n`;
+  confirmTxt += `💰 Precio: *${formatPrice(trx.price)}*\n`;
   if (product) {
     const stockDisplay =
       product.type === "fisik"
-        ? `${product.stock === -1 ? "♾️ Unlimited" : product.stock + " pcs"}`
-        : `${product.stockItems?.length || 0} akun`;
-    confirmTxt += `📊 Sisa stok: *${stockDisplay}*\n`;
+        ? `${product.stock === -1 ? "♾️ Ilimitadas" : product.stock + " unidades"}`
+        : `${product.stockItems?.length || 0} cuenta`;
+    confirmTxt += `📊 Existencias restantes: *${stockDisplay}*\n`;
   }
   confirmTxt += `
 📤 _Los datos han sido enviados al número del comprador_ ✅`;

@@ -30,9 +30,11 @@ async function handler(m) {
     db.save()
     
     await m.reply(
-        `✅ *ɪɴᴛʀᴏ ᴅɪʀᴇsᴇᴛ!*\n` +
-        `Intro grup dikembalikan ke default.\n\n` +
-        `Ketik *${m.prefix}intro* untuk melihat hasilnya.`
+        `✅ *ɪɴᴛʀᴏ RESTABLECIDO!*\n` +
+        `Intro los grupos fueron devueltos a la configuración por defecto.
+
+` +
+        `Escribe *${m.prefix}intro*para ver los resultados.`
     )
 }
 

@@ -65,9 +65,9 @@ function buildCaption(result, usage, fallbackPrompt) {
     "",
     `> Model: ${result?.model || "-"}`,
     `> Mode: ${result?.mode || "-"}`,
-    `> Resolusi: ${result?.resolution || "-"}`,
+    `> Resolución: ${result?.resolution || "-"}`,
     `> Cost: ${usage?.cost ?? result?.cost_credits ?? "-"}`,
-    `> Sisa Credit: ${usage?.remaining ?? "-"}`,
+    `> Crédito restante: ${usage?.remaining ?? "-"}`,
     "",
     `> Prompt: ${result?.prompt || fallbackPrompt || "-"}`,
   ];
@@ -87,10 +87,15 @@ async function handler(m, { sock }) {
   if (!parsed.prompt) {
     return m.reply(
       `🎨 *FLUX PRO*\n\n` +
-        `> Buat atau edit gambar dengan AI\n\n` +
-        `\`Contoh text: ${m.prefix}flux-pro buat gambar anime --model=flux-dev --ratio=1:1\`\n` +
-        `\`Contoh edit: reply gambar + ${m.prefix}flux-pro ubah jadi anime --model=flux-dev --ratio=1:1\`\n\n` +
-        `> Kamu juga bisa pakai \`--url=https://...\``,
+        `> Crear o editar imágenes con AI
+
+` +
+        `\`Ejemplo text: ${m.prefix}flux-pro crea una imagen de anime --model=flux-dev --ratio=1:1\`
+` +
+        `\`Exemplo edit: respuesta a la imagen + ${m.prefix}flux-pro conviértelo en anime --model=flux-dev --ratio=1:1\`
+
+` +
+        `También puedes usar \`--url=https://...\``,
     );
   }
 

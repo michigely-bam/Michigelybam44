@@ -41,9 +41,11 @@ async function handler(m, { sock }) {
     
     if (birthdays.length === 0) {
         return m.reply(
-            `❌ *ᴛɪᴅᴀᴋ ᴀᴅᴀ ᴅᴀᴛᴀ*\n\n` +
-            `> Belum ada member yang set birthday\n\n` +
-            `> Gunakan: .setbirthday DD-MM`
+            `❌ *NO HAY DATOS*\n\n` +
+            `Ningún miembro ha fijado su cumpleaños.
+
+` +
+            `> Utilice: .setbirthday DD-MM`
         )
     }
     
@@ -58,10 +60,10 @@ async function handler(m, { sock }) {
         return a.day - b.day
     })
     
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
+    const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
     
     let text = `╭━━━━━━━━━━━━━━━━━╮\n`
-    text += `┃  🎂 *ᴅᴀғᴛᴀʀ ᴜʟᴛᴀʜ*\n`
+    text += `┃  🎂 *LISTA DE CUMPLEAÑOS*\n`
     text += `╰━━━━━━━━━━━━━━━━━╯\n\n`
     text += `╭┈┈⬡「 📋 *${birthdays.length} ᴍᴇᴍʙᴇʀ* 」\n`
     
@@ -75,7 +77,8 @@ async function handler(m, { sock }) {
     }
     
     if (birthdays.length > 15) {
-        text += `┃ ... dan ${birthdays.length - 15} lainnya\n`
+        text += `┃ ...y ${birthdays.length - 15} más
+`
     }
     
     text += `╰┈┈┈┈┈┈┈┈⬡\n\n`

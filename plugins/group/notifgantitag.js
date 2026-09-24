@@ -7,7 +7,7 @@ const pluginConfig = {
     name: 'notifgantitag',
     alias: ['notiflabel', 'notiftag', 'labeltag'],
     category: 'group',
-    description: 'Mengatur notifikasi perubahan label/tag member',
+    description: "Configura las notificaciones de cambios de etiqueta de miembros",
     usage: '.notifgantitag <on/off>',
     example: '.notifgantitag on',
     isGroup: true,
@@ -39,7 +39,7 @@ async function handler(m, { sock }) {
             m.react('✅')
             return m.reply(
                 `✅ *ɴᴏᴛɪꜰ ʟᴀʙᴇʟ ɢʟᴏʙᴀʟ ᴏɴ*\n\n` +
-                `> Notifikasi ganti label diaktifkan di *${count}* grup!`
+                `> Notificación de cambio de etiqueta activada en *${count}¡* grupo!`
             )
         } catch (err) {
             m.react('☢')
@@ -62,7 +62,7 @@ async function handler(m, { sock }) {
             m.react('✅')
             return m.reply(
                 `❌ *ɴᴏᴛɪꜰ ʟᴀʙᴇʟ ɢʟᴏʙᴀʟ ᴏꜰꜰ*\n\n` +
-                `> Notifikasi ganti label dinonaktifkan di *${count}* grup!`
+                `> Notificación de cambio de etiqueta desactivada en *${count}¡* grupo!`
             )
         } catch (err) {
             m.react('☢')
@@ -74,16 +74,21 @@ async function handler(m, { sock }) {
             return m.reply(
                 `⚠️ *ɴᴏᴛɪꜰ ʟᴀʙᴇʟ ᴀʟʀᴇᴀᴅʏ ᴀᴄᴛɪᴠᴇ*\n\n` +
                 `> Status: *✅ ON*\n` +
-                `> Notifikasi ganti label sudah aktif di grup ini.\n\n` +
-                `_Gunakan \`${m.prefix}notifgantitag off\` untuk menonaktifkan._`
+                `Las notificaciones de cambio de etiqueta ya están activas en este grupo.
+
+` +
+                `Usa \`${m.prefix}notifgantitag off\` para desactivar._`
             )
         }
         db.setGroup(m.chat, { notifLabelChange: true })
         return m.reply(
-            `✅ *ɴᴏᴛɪꜰ ʟᴀʙᴇʟ ᴀᴋᴛɪꜰ*\n\n` +
-            `> Notifikasi perubahan label member berhasil diaktifkan!\n` +
-            `> Bot akan memberitahu ketika ada member yang labelnya diganti.\n\n` +
-            `_Contoh: Admin menambahkan tag "VIP" ke member_`
+            `✅ *NOTIFICACIONES DE ETIQUETAS ACTIVADAS*\n\n` +
+            `¡Notificación de cambio de etiqueta de miembro ha sido activada!
+` +
+            `El bot se lo notificará cuando haya un miembro que haya sido etiquetado.
+
+` +
+            `_Exemplo: Admin añade la etiqueta "VIP" a los miembros_`
         )
     }
     if (sub === 'off') {
@@ -91,28 +96,35 @@ async function handler(m, { sock }) {
             return m.reply(
                 `⚠️ *ɴᴏᴛɪꜰ ʟᴀʙᴇʟ ᴀʟʀᴇᴀᴅʏ ɪɴᴀᴄᴛɪᴠᴇ*\n\n` +
                 `> Status: *❌ OFF*\n` +
-                `> Notifikasi ganti label sudah nonaktif di grup ini.\n\n` +
-                `_Gunakan \`${m.prefix}notifgantitag on\` untuk mengaktifkan._`
+                `Las notificaciones de cambio de etiqueta ya están inactivas en este grupo.
+
+` +
+                `Usa \`${m.prefix}notifgantitag on\` para activar._`
             )
         }
         db.setGroup(m.chat, { notifLabelChange: false })
         return m.reply(
-            `❌ *ɴᴏᴛɪꜰ ʟᴀʙᴇʟ ɴᴏɴᴀᴋᴛɪꜰ*\n\n` +
-            `> Notifikasi perubahan label member berhasil dinonaktifkan.`
+            `❌ *NOTIFICACIONES DE ETIQUETAS DESACTIVADAS*\n\n` +
+            `La notificación de cambio de etiqueta de miembro se ha desactivado con éxito.`
         )
     }
     m.reply(
-        `🏷️ *ɴᴏᴛɪꜰ ɢᴀɴᴛɪ ᴛᴀɢ/ʟᴀʙᴇʟ*\n\n` +
+        `🏷️ *NOTIFICACIÓN DE CAMBIO DE ETIQUETA*\n\n` +
         `> Status: *${currentStatus ? '✅ ON' : '❌ OFF'}*\n\n` +
-        `\`\`\`━━━ ᴘɪʟɪʜᴀɴ ━━━\`\`\`\n` +
-        `> \`${m.prefix}notifgantitag on\` → Aktifkan\n` +
-        `> \`${m.prefix}notifgantitag off\` → Nonaktifkan\n` +
+        `\`\`\`━━━ OPCIONES ━━━\`\`\`\n` +
+        `> \`${m.prefix}notifgantitag on\` → Activa
+` +
+        `> \`${m.prefix}notifgantitag off\` → Desactiva
+` +
         `> \`${m.prefix}notifgantitag on all\` → Global ON (owner)\n` +
         `> \`${m.prefix}notifgantitag off all\` → Global OFF (owner)\n\n` +
-        `> 📋 *Fitur ini akan memberitahu saat:*\n` +
-        `> • Admin menambahkan label ke member\n` +
-        `> • Admin menghapus label dari member\n` +
-        `> • Label member berubah`
+        `> 📋 *Esta función nos dirá cuándo:*
+` +
+        `> • Admin añade etiquetas a los miembros
+` +
+        `> • El administrador elimina los etiquetas de los miembros
+` +
+        `> • La etiqueta del miembro cambió`
     )
 }
 async function handleLabelChange(msg, sock) {
@@ -126,7 +138,7 @@ async function handleLabelChange(msg, sock) {
         const groupJid = msg.key.remoteJid
         if (!groupJid?.endsWith('@g.us')) return false
         const groupData = db.getGroup(groupJid) || {}
-        const participant = msg.key.participant || msg.participant || 'Unknown'
+        const participant = msg.key.participant || msg.participant || 'Desconocido'
         const label = memberLabel.label || ''
         if (groupData.antitoxic && label && label.trim()) {
             try {
@@ -161,7 +173,7 @@ async function handleLabelChange(msg, sock) {
         } catch {}
         let notifText = ''
         if (label && label.trim()) {
-            notifText = `🎉 @${participant.split('@')[0]} telah mengubah label menjadi *${label}*`
+            notifText = `🎉 @${participant.split('@')[0]} ha cambiado la etiqueta a *${label}*`
         } else {
             notifText = `🥗 @${participant.split('@')[0]} ha eliminado la etiqueta`
         }

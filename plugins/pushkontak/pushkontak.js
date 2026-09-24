@@ -14,8 +14,8 @@ const pluginConfig = {
   alias: ["puskontak", "push"],
   category: "pushkontak",
   description: "Empuje el mensaje a todos los grupos miembros + ahorro de auto contacto a VCF",
-  usage: ".pushcontact",
-  example: ".pushkontak Halo semuanya!",
+  usage: ".pushkontak <mensaje>",
+  example: ".pushkontak ¡Hola a todos!",
   isOwner: true,
   isPremium: false,
   isGroup: true,
@@ -55,24 +55,28 @@ async function handler(m, { sock }) {
 
   if (groupMode !== "pushkontak" && groupMode !== "all") {
     return m.reply(
-      `❌ *ᴍᴏᴅᴇ ᴛɪᴅᴀᴋ sᴇsᴜᴀɪ*\n\n> Aktifkan mode pushkontak terlebih dahulu\n\n\`${m.prefix}botmode pushkontak\``,
+      `❌ *modo no es adecuado*
+
+> Activar el modo Pushcontack primero
+
+\`${m.prefix}botmode pushkontak\``,
     );
   }
 
   const text = m.text?.trim();
   if (!text) {
     return m.reply(
-      `📢 *ᴘᴜsʜ ᴋᴏɴᴛᴀᴋ*
+      `📢 *ENVÍO A CONTACTOS*
 
 > Introduzca el mensaje que desea enviar
 
-\`Contoh: ${m.prefix}pushkontak Halo semuanya!\``,
+\`Ejemplo: ${m.prefix}pushkontak ¡Hola a todos!\``,
     );
   }
 
   if (global.statuspush) {
     return m.reply(
-      `❌ *ɢᴀɢᴀʟ*
+      `❌ *falló*
 
 > El contacto está funcionando. Tipo \`${m.prefix}stoppush\` Parar.`,
     );
@@ -103,7 +107,7 @@ async function handler(m, { sock }) {
 
     if (participants.length === 0) {
       m.react("❌");
-      return m.reply(`❌ *ɢᴀɢᴀʟ*
+      return m.reply(`❌ *falló*
 
 > Ningún miembro puede ser enviado`);
     }
@@ -111,15 +115,18 @@ async function handler(m, { sock }) {
     const jedaPush = db.setting("jedaPush") || 5000;
 
     await m.reply(
-      `📢 *ᴘᴜsʜ ᴋᴏɴᴛᴀᴋ*\n\n` +
+      `📢 *ENVÍO A CONTACTOS*
+
+` +
         `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-        `┃ 📝 ᴘᴇsᴀɴ: \`${text.substring(0, 50)}${text.length > 50 ? "..." : ""}\`\n` +
+        `┃ 📝 mensaje: \`${text.substring(0, 50)}${text.length > 50 ? "..." : ""}\`\n` +
         `┃ 👥 ᴛᴀʀɢᴇᴛ: \`${participants.length}\` member\n` +
-        `┃ ⏱️ ᴊᴇᴅᴀ: \`${jedaPush}ms\`\n` +
-        `┃ 📊 ᴇsᴛɪᴍᴀsɪ: \`${Math.ceil((participants.length * jedaPush) / 60000)} menit\`\n` +
-        `┃ 💾 ᴀᴜᴛᴏ-sᴀᴠᴇ: \`Aktif (VCF)\`\n` +
+        `┃ ⏱️ INTERVALO: \`${jedaPush}ms\`\n` +
+        `┃ 📊 ESTIMACIÓN: \`${Math.ceil((participants.length * jedaPush) / 60000)} minutos\`
+` +
+        `┃ 💾 GUARDADO AUTOMÁTICO: \`Activo (VCF)\`\n` +
         `╰┈┈⬡\n\n` +
-        `> Memulai push...`,
+        `> Iniciando el envío masivo...`,
     );
 
     global.statuspush = true;
@@ -133,10 +140,10 @@ async function handler(m, { sock }) {
         delete global.statuspush;
 
         await m.reply(
-          `⏹️ *ᴘᴜsʜ ᴅɪʜᴇɴᴛɪᴋᴀɴ*\n\n` +
-            `> ✅ Berhasil: \`${successCount}\`\n` +
-            `> ❌ Gagal: \`${failedCount}\`\n` +
-            `> ⏸️ Sisa: \`${participants.length - successCount - failedCount}\``,
+          `⏹️ *ᴘᴜsʜ DETENIDO*\n\n` +
+            `> ✅ Correcto: \`${successCount}\`\n` +
+            `> ❌ Falló: \`${failedCount}\`\n` +
+            `> ⏸️ Restante: \`${participants.length - successCount - failedCount}\``,
         );
 
         if (savedContacts.length > 0) {
@@ -167,12 +174,14 @@ async function handler(m, { sock }) {
 
     m.react("✅");
     await m.reply(
-      `✅ *ᴘᴜsʜ sᴇʟᴇsᴀɪ*\n\n` +
-        `╭┈┈⬡「 📊 *ʜᴀsɪʟ* 」\n` +
-        `┃ ✅ ʙᴇʀʜᴀsɪʟ: \`${successCount}\`\n` +
-        `┃ ❌ ɢᴀɢᴀʟ: \`${failedCount}\`\n` +
+      `✅ *push terminado*
+
+` +
+        `╭┈┈⬡「 📊 *RESULTADO* 」\n` +
+        `┃ ✅ correcto: \`${successCount}\`\n` +
+        `┃ ❌ ERROR: \`${failedCount}\`\n` +
         `┃ 📊 ᴛᴏᴛᴀʟ: \`${participants.length}\`\n` +
-        `┃ 💾 ᴋᴏɴᴛᴀᴋ: \`${savedContacts.length} disimpan\`\n` +
+        `┃ 💾 CONTACTOS: \`${savedContacts.length} guardados\`\n` +
         `╰┈┈⬡`,
     );
   } catch (error) {
@@ -193,9 +202,12 @@ async function sendVcfToOwner(sock, ownerJid, contacts, groupName) {
 
     await sock.sendMessage(ownerJid, {
       document: fs.readFileSync(vcfPath),
-      fileName: `Kontak_${groupName || "Group"}_${contacts.length}.vcf`,
+      fileName: `Contactos_${groupName || "Group"}_${contacts.length}.vcf`,
       mimetype: "text/vcard",
-      caption: `💾 *ᴀᴜᴛᴏ-sᴀᴠᴇ ᴋᴏɴᴛᴀᴋ*\n\n> Total: \`${contacts.length}\` kontak\n> Grup: \`${groupName || "Unknown"}\`
+      caption: `💾 *GUARDADO AUTOMÁTICO DE CONTACTOS*
+
+> Total: \`${contacts.length}\` contactos
+> Grupo: \`${groupName || "Desconocido"}\`
 
 > _Importe este archivo a su HP para guardar todos los contactos._`,
     });

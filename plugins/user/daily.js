@@ -4,7 +4,7 @@ const pluginConfig = {
   name: "daily",
   alias: ["claim", "harian", "bonus"],
   category: "user",
-  description: "Claim hadiah harian (Exp, Money, Potion)",
+  description: "Reclamación de premios diarios (Exp, Money, Potion)",
   usage: ".daily",
   example: ".daily",
   isOwner: false,
@@ -34,7 +34,7 @@ async function handler(m, { sock }) {
       `🕕 *ᴄᴏᴏʟᴅᴏᴡɴ*
 
 > Has reclamado hoy.
-> Tunggu: *${hours} jam ${minutes} menit* lagi.`,
+> Espera: *${hours} horas y ${minutes} minutos más.*`,
     );
   }
 
@@ -54,11 +54,11 @@ async function handler(m, { sock }) {
 
   const greeting = getTimeGreeting();
 
-  let txt = `🎉 *ᴅᴀɪʟʏ ᴄʟᴀɪᴍ sᴜᴋsᴇs*\n`;
+  let txt = `🎉 *ᴅᴀɪʟʏ ᴄʟᴀɪᴍ COMPLETADO*\n`;
   txt += `> ${greeting}, @${m.sender.split("@")[0]}\n\n`;
   txt += `╭┈┈⬡「 🎁 *ʀᴇᴡᴀʀᴅs* 」\n`;
   txt += `┃ 🚄 Exp: *+${expReward}*\n`;
-  txt += `┃ 💰 Koin: *+${moneyReward.toLocaleString("id-ID")}*\n`;
+  txt += `┃ 💰 Monedas: *+${moneyReward.toLocaleString("id-ID")}*\n`;
   txt += `┃ 🥤 Potion: *+${potionReward}*\n`;
   txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`;
   txt += `> ¡No olvides la reclamación mañana!`;

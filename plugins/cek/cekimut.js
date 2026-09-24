@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['imut', 'cute'],
     category: 'cek',
     description: "Mira lo lindo que eres.",
-    usage: ".moss , nombre de usuario",
+    usage: ".cekimut [@usuario]",
     example: '.cekimut Ani',
     isOwner: false,
     isPremium: false,
@@ -20,25 +20,24 @@ async function handler(m) {
                     
     let desc = ''
     if (percent >= 90) {
-        desc = 'IMUT BANGET! Kawaii~~ 🥺💕'
+        desc = "¡ADORABLE AL MÁXIMO! Kawaii~~ 🥺💕"
     } else if (percent >= 70) {
-        desc = 'Imutnya kebangetan! 😍'
+        desc = "¡Demasiado adorable! 😍"
     } else if (percent >= 50) {
-        desc = 'Lumayan imut~ 🌸'
+        desc = "Bastante adorable~ 🌸"
     } else if (percent >= 30) {
-        desc = 'Ada imutnya dikit 😊'
+        desc = "Tiene un toque adorable 😊"
     } else {
-        desc = "¿Tal vez genial no es lindo? 😎"
+        desc = "Quizá eres más genial que adorable 😎"
     }
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu nivel de imitación *${percent}%*
-\`\`\`${desc}\`\`\`` : `Usted quiere comprobar el nivel de la imitación @${mentioned.split('@')[0]} yak? 
-    
-Tingkat keimutan dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de ternura es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de ternura de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

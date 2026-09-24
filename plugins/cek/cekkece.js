@@ -2,8 +2,8 @@ const pluginConfig = {
     name: 'cekkece',
     alias: ['kece', 'cool'],
     category: 'cek',
-    description: "Mira lo cerca que estás.",
-    usage: ".Revisar",
+    description: "Comprueba cuánto estilo tienes.",
+    usage: ".cekkece [@usuario]",
     example: '.cekkece Budi',
     isOwner: false,
     isPremium: false,
@@ -20,25 +20,24 @@ async function handler(m) {
                     
     let desc = ''
     if (percent >= 90) {
-        desc = 'KECE BADAI! 😎🔥'
+        desc = "¡ESTILO IMPRESIONANTE! 😎🔥"
     } else if (percent >= 70) {
-        desc = 'Kece banget! ✨'
+        desc = "¡Con muchísimo estilo! ✨"
     } else if (percent >= 50) {
-        desc = 'Lumayan kece~ 👍'
+        desc = "Bastante elegante~ 👍"
     } else if (percent >= 30) {
-        desc = 'Sedikit kece 😊'
+        desc = "Un poco elegante 😊"
     } else {
-        desc = 'Biasa aja, tapi tetep keren! 🙂'
+        desc = "¡Es normal, pero sigue siendo genial! 🙂"
     }
     
-    let txt = mentioned === m.sender ? `Hai @${mentioned.split('@')[0]}
-    
-Tu nivel de decepción. *${percent}%*
-\`\`\`${desc}\`\`\`` : `Quieres comprobar el nivel de decepción${mentioned.split('@')[0]} yak? 
-    
-Tingkat kekecean dia sebesar *${percent}%*
+    let txt = mentioned === m.sender
+        ? `Hola @${mentioned.split('@')[0]}
+
+Tu nivel de estilo es del *${percent}%*.
 \`\`\`${desc}\`\`\``
-    
+        : `Nivel de estilo de @${mentioned.split('@')[0]}: *${percent}%*.
+\`\`\`${desc}\`\`\``
     await m.reply(txt, { mentions: [mentioned] })
 }
 

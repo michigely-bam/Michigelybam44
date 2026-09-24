@@ -3,7 +3,7 @@ const pluginConfig = {
     alias: ['setprofilegc', 'setppgroup', 'setppgrup'],
     category: 'group',
     description: "Cambiar fotos de perfil de grupo",
-    usage: '.setppgc (reply gambar)',
+    usage: ".setppgc (respuesta a la imagen)",
     example: '.setppgc',
     isOwner: false,
     isPremium: false,
@@ -35,9 +35,9 @@ async function handler(m, { sock }) {
     }
     if (!buffer) {
         await m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-            `> Reply gambar + \`${m.prefix}setppgc\`\n` +
-            `> Kirim gambar + caption \`${m.prefix}setppgc\``
+            `⚠️ *MODO DE USO*\n\n` +
+            `> Responder a la imagen + \`${m.prefix}setppgc\`\n` +
+            `> Envía imágenes + descripción \`${m.prefix}setppgc\``
         )
         return
     }
@@ -48,7 +48,8 @@ async function handler(m, { sock }) {
         )
     } catch (error) {
         await m.reply(
-            `❌ Gagal mengubah foto grup.\n` +
+            `❌ El fracaso en cambiar las fotos del grupo.
+` +
             `> _${error.message}_`
         )
     }

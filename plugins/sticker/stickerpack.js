@@ -95,8 +95,11 @@ async function handler(m, { sock }) {
   if (!query) {
     return m.reply(
       `── .✦ 𝗦𝗧𝗜𝗖𝗞𝗘𝗥 𝗣𝗔𝗖𝗞 ✦. ── 𝜗ৎ\n\n` +
-        `Cari dan kirim sticker pack!\n\n` +
-        `╭─〔 Cara Pakai 〕───⬣\n` +
+        `¡Busque y envíe un paquete de stickers!
+
+` +
+        `╭─〔 Modo de uso 〕───⬣
+` +
         `│  ✦ ${m.prefix}stickerpack <query>\n` +
         `╰──────────────⬣\n\n` +
         `*${m.prefix}stickerpack anime*\n` +
@@ -132,7 +135,9 @@ async function handler(m, { sock }) {
     }
 
     await m.reply(
-      `── .✦ ──\n\n> Mengunduh *${randPick.name}*\n> ${Math.min(detail.stickers.length, MAX_STICKERS)} sticker .☘︎ ݁˖`,
+      `── .✦ ──
+
+> Descargando *${randPick.name}*\n> ${Math.min(detail.stickers.length, MAX_STICKERS)} sticker .☘︎ ݁˖`,
     );
 
     const limited = detail.stickers.slice(0, MAX_STICKERS);
@@ -170,7 +175,7 @@ async function handler(m, { sock }) {
       });
       await m.react("✓");
     } catch (packErr) {
-      console.error("[StickerPack] Pack send failed:", packErr.message);
+      console.error("[StickerPack] Falló el envío del paquete:", packErr.message);
       await m.reply(
         `── .✦ ──
 
@@ -208,7 +213,7 @@ async function handler(m, { sock }) {
         await m.reply(
           `── .✦ ──
 
-> Enviado con éxito *${sent}* sticker dari *${packname}* .☘︎ ݁˖`,
+> Enviado con éxito *${sent}*sticker de*${packname}* .☘︎ ݁˖`,
         );
       } else {
         await m.react("✘");

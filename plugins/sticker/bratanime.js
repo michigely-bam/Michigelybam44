@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "bratanime",
   alias: ["animebrat"],
   category: "sticker",
-  description: "Membuat sticker brat anime",
+  description: "Crear un sticker Brat de anime",
   usage: ".bratanime <text>",
   example: ".Bratanime Hola a todos",
   isOwner: false,
@@ -25,7 +25,7 @@ async function handler(m, { sock }) {
 
 > Escriba texto
 
-\`Contoh: ${m.prefix}Bratanime Hola a todos\``,
+\`Ejemplo: ${m.prefix}Bratanime Hola a todos\``,
     );
   }
 

@@ -91,7 +91,7 @@ async function handler(m, { sock }) {
         ]
         
         const overviewText = `🏆 *LEADERBOARD OVERVIEW* 🏆\n\n` +
-            `_Pilih tombol di bawah untuk melihat ranking!_`
+            `¡Elige el botón de abajo para ver el ranking!`
             try {
                 await sock.sendButton(m.chat, fs.readFileSync(path.join(process.cwd(), 'assets', 'images', 'ourin.jpg')), overviewText, m, {
                     buttons: [
@@ -127,7 +127,7 @@ async function handler(m, { sock }) {
     let title, emoji, field, formatValue
     
     if (type === 'koin') {
-        title = 'TOP GLOBAL KOIN'
+        title = "TOP MONEDAS GLOBALES"
         emoji = '💰'
         field = 'koin'
         formatValue = (u) => `Rp ${formatNumber(u.koin)}`
@@ -137,10 +137,10 @@ async function handler(m, { sock }) {
         field = 'exp'
         formatValue = (u) => `Lv. ${u.level} (${formatNumber(u.exp)} XP)`
     } else if (type === 'energi') {
-        title = 'TOP GLOBAL ENERGI'
+        title = "CLASIFICACIÓN GLOBAL DE ENERGÍA"
         emoji = '⚡'
         field = 'energi'
-        formatValue = (u) => `${formatNumber(u.energi)} Energi`
+        formatValue = (u) => `${formatNumber(u.energi)} Energía`
     }
     
     users.sort((a, b) => b[field] - a[field])
@@ -172,7 +172,7 @@ async function handler(m, { sock }) {
     
     const myRankIndex = users.findIndex(u => u.jid === senderJid)
     if (myRankIndex !== -1) {
-        text += `> Su posición: *#${myRankIndex + 1}* dari *${formatNumber(users.length)}* user.`
+        text += `> Su posición: *#${myRankIndex + 1}* de *${formatNumber(users.length)}* user.`
     } else {
         text += `> No has estado en la base de datos.`
     }

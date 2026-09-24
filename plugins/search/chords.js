@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'chords',
     alias: ['chord', 'kunci', 'kuncigitar'],
     category: 'search',
-    description: 'Cari chord/kunci gitar lagu',
-    usage: '.chords <judul lagu>',
+    description: "Buscar acordes de guitarra de una canción",
+    usage: ".chords <titulo de canción>",
     example: '.chords komang',
     isOwner: false,
     isPremium: false,
@@ -17,7 +17,7 @@ const pluginConfig = {
     isEnabled: true
 }
 
-const NEOXR_APIKEY = config.APIkey?.neoxr || 'Milik-Bot-OurinMD'
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD"
 
 async function handler(m, { sock }) {
     const text = m.text?.trim()
@@ -25,10 +25,12 @@ async function handler(m, { sock }) {
     if (!text) {
         return m.reply(
             `🎸 *ᴄʜᴏʀᴅs sᴇᴀʀᴄʜ*\n\n` +
-            `> Cari chord/kunci gitar lagu\n\n` +
-            `> Contoh:\n` +
+            `> Busca un chord/kunci guitarra de la canción
+
+` +
+            `> Ejemplo:\n` +
             `\`${m.prefix}chords komang\`\n` +
-            `\`${m.prefix}chord perjalanan terindah\``
+            `\`${m.prefix}chord viaje hermoso\``
         )
     }
     

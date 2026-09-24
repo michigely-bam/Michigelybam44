@@ -19,7 +19,7 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
   if (!m.fullArgs) return m.reply(`Por favor, ingrese prompt.
-Contoh: ${m.prefix + m.command} car`)
+Ejemplo: ${m.prefix + m.command} car`)
 
   await m.react('⏳')
 

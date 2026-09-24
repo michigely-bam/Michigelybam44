@@ -7,7 +7,7 @@ const pluginConfig = {
         'gislam'
     ],
     category: 'religi',
-    description: "Un montón de características islámicas (Asmaul Husna, Oración de Niat, Surah, Oraciones, Artículos, Palabras de perlas)",
+    description: "Funciones islámicas: los bellos nombres de Alá, intención de la oración, suras, súplicas, artículos y frases de sabiduría",
     usage: ".islami - función seleccionada",
     isGroup: false,
     isBotAdmin: false,
@@ -37,7 +37,9 @@ async function handler(m, { sock }) {
                 let ye = jir.data
 
                 let tks = '☪️ *ASMAUL HUSNA*\n\n' + ye.map((item) => {
-                    return `Urutan: ${item.index}\nLatin: ${item.latin}\nArab: ${item.arabic}\nTerjemahan ID: ${item.translation_id}\nTerjemahan EN: ${item.translation_en}\n`
+                    return `Orden: ${item.index}\nLatin: ${item.latin}\nArab: ${item.arabic}
+Traducción al indonesio: ${item.translation_id}
+Traducción al inglés: ${item.translation_en}\n`
                 }).join('\n')
                 m.reply(tks)
             }
@@ -49,8 +51,11 @@ async function handler(m, { sock }) {
                 let niatSholat = jir
 
                 if (!text) {
-                    let daftarNiat = '📋 *DAFTAR NIAT SHOLAT*\n\n' + niatSholat.map((item) => `- ${item.name}`).join('\n')
-                    daftarNiat += `\n\n📌 Ketik \`${m.prefix}niatsholat [nama sholat]\` untuk melihat niat\nContoh: \`${m.prefix}niatsholat subuh\``
+                    let daftarNiat = "📋 *LISTA DE INTENCIONES DE ORACIÓN*\n\n" + niatSholat.map((item) => `- ${item.name}`).join('\n')
+                    daftarNiat += `
+
+📌 Escribe \`${m.prefix}niatsholat [nombre de la oración]\` para ver las intenciones
+Ejemplo: \`${m.prefix}niatsholat subuh\``
                     m.reply(daftarNiat)
                 } else {
                     let hasil = niatSholat.find((item) => item.name.toLowerCase().includes(text.toLowerCase()))
@@ -59,10 +64,10 @@ async function handler(m, { sock }) {
                         let tks = `🕋 *${hasil.name.toUpperCase()}*\n\n` +
                             `📄 Arab: ${hasil.arabic}\n` +
                             `🔤 Latin: ${hasil.latin}\n` +
-                            `🌍 Terjemahan: ${hasil.terjemahan}`
+                            `🌍 Traducción: ${hasil.terjemahan}`
                         m.reply(tks)
                     } else {
-                         m.reply('❌ Niat sholat yang kamu cari tidak ditemukan. Cek lagi nama sholatnya!')
+                         m.reply("❌ La oración que buscabas no se encuentra. ¡Revisa de nuevo el nombre de la oración!")
                     }
                 }
             }
@@ -70,28 +75,29 @@ async function handler(m, { sock }) {
 
             case 'surah': {
                 if (!text) {
-                    m.reply(`⚠️ Ketik nomor surahnya!\nContoh: \`${m.prefix}surah 1\` buat ambil ayat-ayat dari Al-Fatihah`)
+                    m.reply(`⚠️ ¡Ingrese el número de la sección!
+Ejemplo: \`${m.prefix}para tomar los versículos de Al-Fatihah.`)
                     return
                 }
 
-                m.reply('🕕 Sedang memuat surah...')
+                m.reply("🕕 Cargando la sura...")
                 let response = await fetchJson(`https://api.siputzx.my.id/api/s/surah?no=${text}`)
                 let data = response.data
                 if (data && data.length > 0) {
                     let surahText = data.map((ayat, index) =>
-                        `۝ Ayat ${ayat.no}:\n` +
+                        `۝ Versículo ${ayat.no}:\n` +
                         `${ayat.arab}\n` +
                         `${ayat.latin}\n` +
                         `_${ayat.indo}_`
                     ).join('\n\n')
 
                     if (surahText.length > 60000) {
-                         m.reply('❌ Surah terlalu panjang untuk dikirim via teks. Silakan cari ayat spesifik atau surah yang lebih pendek.')
+                         m.reply("❌ La sura es demasiado larga para enviarla como texto. Por favor busque un versículo específico o un capítulo más corto.")
                     } else {
                         m.reply(surahText)
                     }
                 } else {
-                    m.reply('❌ Gak ketemu, cek lagi nomor surahnya!')
+                    m.reply("❌ ¡No lo encontré, vuelve a comprobar el número del capítulo!")
                 }
             }
             break
@@ -102,50 +108,54 @@ async function handler(m, { sock }) {
                 let daftarDoa = jir
 
                 if (!text) {
-                    let listDoa = '🤲 *DAFTAR DOA*\n\n' + daftarDoa.map((item) => `- ${item.doa}`).join('\n')
-                     listDoa += `\n\n📌 Ketik \`${m.prefix}doa [nama doa]\` untuk melihat doa\nContoh: \`${m.prefix}doa doa sebelum tidur\``
+                    let listDoa = "🤲 *LISTA DE ORACIONES*\n\n" + daftarDoa.map((item) => `- ${item.doa}`).join('\n')
+                     listDoa += `
+
+📌 Escribe \`${m.prefix}oración [nombre de oración]\` para ver la oración
+Ejemplo: \`${m.prefix}oración de oración antes de dormir`
                     m.reply(listDoa)
                 } else {
                     let hasil = daftarDoa.find((item) => item.doa.toLowerCase().includes(text.toLowerCase()))
 
                     if (hasil) {
                         let tks = `🤲 *${hasil.doa.toUpperCase()}*\n\n` +
-                            `📄 Ayat: ${hasil.ayat}\n` +
+                            `📄 Versículo: ${hasil.ayat}\n` +
                             `🔤 Latin: ${hasil.latin}\n` +
-                            `🌍 Artinya: ${hasil.artinya}`
+                            `🌍 Significado: ${hasil.artinya}`
                         m.reply(tks)
                     } else {
-                         m.reply('❌ Doa yang kamu cari tidak ditemukan. Cek lagi nama doanya!')
+                         m.reply("❌ La oración que buscas no se encuentra. ¡Revisa de nuevo el nombre de la oración!")
                     }
                 }
             }
             break
 
             case 'gislam': {
-                if (!text) return m.reply(`❓ Mau cari artikel tentang apa?\nContoh: \`${m.prefix}gislam puasa\``)
+                if (!text) return m.reply(`❓ ¿Sobre qué quieres buscar un artículo?
+Ejemplo: \`${m.prefix}gislam puasa\``)
                 
                 try {
                     const response = await fetchJson(`https://artikel-islam.netlify.app/.netlify/functions/api/ms?page=1&s=${text}`)
                     if (response.success) {
                         const articles = response.data.data
-                        if (!articles || articles.length === 0) return m.reply('❌ Artikel tidak ditemukan.')
+                        if (!articles || articles.length === 0) return m.reply("❌ El artículo no fue encontrado.")
 
-                        let message = `📚 *HASIL PENCARIAN: ${text.toUpperCase()}*\nTotal: ${articles.length}\n\n`
+                        let message = `📚 *RESULTADOS DE LA BÚSQUEDA: ${text.toUpperCase()}*\nTotal: ${articles.length}\n\n`
                         articles.forEach((article, index) => {
                             message += `${index + 1}. *${article.title}*\n🔗 ${article.url}\n\n`
                         })
                         return m.reply(message)
                     } else {
-                        return m.reply('❌ Gagal mengambil data artikel.')
+                        return m.reply("❌ No se pudieron obtener los datos del artículo.")
                     }
                 } catch (error) {
-                    return m.reply('❌ Terjadi kesalahan saat mengambil data.')
+                    return m.reply("❌ Ocurrió un error al obtener los datos.")
                 }
             }
             break
         }
     } catch (e) {
-        console.error('Religi Plugin Error:', e)
+        console.error("Error del complemento religioso:", e)
         m.reply("❌ Ha habido un error en el sistema.")
     }
 }

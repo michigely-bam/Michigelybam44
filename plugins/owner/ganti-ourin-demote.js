@@ -5,8 +5,8 @@ const pluginConfig = {
     name: 'ganti-ourin-demote.jpg',
     alias: ['gantiourindemote', 'setourindemote'],
     category: 'owner',
-    description: 'Ganti gambar ourin-demote.jpg',
-    usage: ".reemplazar -ourin-demote.jpg (reply / enviar la imagen)",
+    description: "Cambiar las imágenes ourin-demote.",
+    usage: ".gantiourindemote (responde o envía una imagen)",
     example: '.ganti-ourin-demote.jpg',
     isOwner: true,
     isPremium: false,
@@ -19,7 +19,7 @@ const pluginConfig = {
 
 async function handler(m, { sock }) {
     const isImage = m.isImage || (m.quoted && m.quoted.type === 'imageMessage')
-    if (!isImage) return m.reply(`🖼️ *ɢᴀɴᴛɪ OURIN-DEMOTE.JPG*
+    if (!isImage) return m.reply(`🖼️ *reemplazo de OURIN-DEMOTE.JPG*
 
 > Enviar / respuesta imágenes para reemplazar
 > File: assets/images/ourin-demote.jpg`)
@@ -28,7 +28,9 @@ async function handler(m, { sock }) {
         if (!buffer) return m.reply("❌ No se pudo download image")
         const targetPath = path.join(process.cwd(), 'assets', 'images', 'ourin-demote.jpg')
         fs.writeFileSync(targetPath, buffer)
-        m.reply(`✅ *ʙᴇʀʜᴀsɪʟ*\n\n> Gambar ourin-demote.jpg telah diganti`)
+        m.reply(`✅ *correcto*
+
+Las imágenes ourin-demote.jpg han sido reemplazadas`)
     } catch (error) {
         await m.reply(te(m.prefix, m.command, m.pushName))
     }

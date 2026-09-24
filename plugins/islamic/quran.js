@@ -7,7 +7,7 @@ const pluginConfig = {
   alias: ["surah", "alquran", "bacaquran"],
   category: "islamic",
   description: "Lea Al-Quran por el nombre de la carta",
-  usage: ".cuarentena de nombre de correo",
+  usage: ".quran <nombre_de_sura>",
   example: ".quran al fatihah",
   isOwner: false,
   isPremium: false,
@@ -67,9 +67,11 @@ async function handler(m, { sock }) {
   if (!query) {
     return m.reply(
       `📖 *QURAN*\n\n` +
-        `> Masukkan nama surah\n\n` +
-        `\`Contoh: ${m.prefix}quran al fatihah\`\n` +
-        `\`Contoh: ${m.prefix}quran al baqarah\``,
+        `> Ingrese el nombre del capítulo
+
+` +
+        `\`Ejemplo: ${m.prefix}quran al fatihah\`\n` +
+        `\`Ejemplo: ${m.prefix}quran al baqarah\``,
     );
   }
 
@@ -80,7 +82,7 @@ async function handler(m, { sock }) {
 
     if (!data.ayat?.length) {
       m.react("❌");
-      return m.reply(`❌ Surah *${query}* no encontrado`);
+      return m.reply(`❌ La sura *${query}* no encontrado`);
     }
 
     let teks = `📖 *${data.surah}*\n${data.info}\n\n`;

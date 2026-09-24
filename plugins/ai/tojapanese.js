@@ -7,7 +7,7 @@ const pluginConfig = {
     alias: ['japanese', 'japanesestyle'],
     category: 'ai',
     description: "Convertir imágenes en estilo japonés",
-    usage: '.tojapanese (reply gambar)',
+    usage: ".tojapanese (respuesta a la imagen)",
     example: '.tojapanese',
     isOwner: false,
     isPremium: false,

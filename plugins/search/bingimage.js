@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "bingimage",
   alias: ["imagesearch", "carigambar", "bingimg"],
   category: "search",
-  description: "Cari artwork di Pixiv",
+  description: "Busca obras de arte en Pixiv",
   usage: ".carigambar <query>",
   example: ".carigambar rem",
   isOwner: false,
@@ -26,13 +26,13 @@ async function handler(m, { sock }) {
       return m.reply(
         `❌ *¡Introduzca la contraseña de búsqueda!*
 
-> Contoh: ${m.prefix}carigambar rem`,
+> Ejemplo: ${m.prefix}carigambar rem`,
       );
     }
 
     await m.react("🔍");
 
-    const apikey = config.APIkey?.neoxr || "Milik-Bot-OurinMD";
+    const apikey = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD";
     const data = await ourinApi.apiFaa.get(
       "/faa/google-image",
       {

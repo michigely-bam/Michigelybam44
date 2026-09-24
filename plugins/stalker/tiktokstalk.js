@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'tiktokstalk',
     alias: ['ttstalk', 'stalktt'],
     category: 'stalker',
-    description: 'Stalk akun TikTok',
+    description: "Detener las cuentas de TikTok",
     usage: '.tiktokstalk <username>',
     example: '.tiktokstalk mrbeast',
     isOwner: false,
@@ -33,7 +33,7 @@ async function handler(m, { sock }) {
 
 > Introduzca el nombre de usuario Tickook
 
-\`Contoh: ${m.prefix}tiktokstalk mrbeast\``)
+\`Ejemplo: ${m.prefix}tiktokstalk mrbeast\``)
     }
     
     m.react('🔍')
@@ -53,9 +53,9 @@ async function handler(m, { sock }) {
         
         const caption = `🎵 *ᴛɪᴋᴛᴏᴋ sᴛᴀʟᴋ*\n\n` +
             `👤 *Username:* @${u.uniqueId}\n` +
-            `📛 *Nama:* ${u.nickname}\n` +
-            `✅ *Verified:* ${u.verified ? 'Ya' : 'Tidak'}\n` +
-            `🔒 *Private:* ${u.privateAccount ? 'Ya' : 'Tidak'}\n\n` +
+            `📛 *Nombre:* ${u.nickname}\n` +
+            `✅ *Verified:* ${u.verified ? 'Ya' : "No"}\n` +
+            `🔒 *Private:* ${u.privateAccount ? 'Ya' : "No"}\n\n` +
             `👥 *Followers:* ${shortNum(s.followerCount)}\n` +
             `👤 *Following:* ${shortNum(s.followingCount)}\n` +
             `❤️ *Likes:* ${shortNum(s.heartCount)}\n` +

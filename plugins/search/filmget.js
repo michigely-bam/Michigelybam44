@@ -3,7 +3,7 @@ import config from "../../config.js";
 import path from "path";
 import fs from "fs";
 import te from "../../src/lib/ourin-error.js";
-const NEOXR_APIKEY = config.APIkey?.neoxr || "Milik-Bot-OurinMD";
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD";
 
 const pluginConfig = {
   name: "filmget",
@@ -30,10 +30,12 @@ async function handler(m, { sock }) {
   if (!url || !url.includes("neoxr.eu")) {
     return m.reply(
       `🎬 *ꜰɪʟᴍ ᴅᴇᴛᴀɪʟ*\n\n` +
-        `> Ambil detail film dari URL\n\n` +
-        `*Format:*\n` +
+        `> Tome los detalles de la película de URL
+
+` +
+        `*Formato:*\n` +
         `> \`${m.prefix}filmget <url>\`\n\n` +
-        `> Gunakan \`${m.prefix}film <judul>\` untuk cari film dulu`,
+        `> Usa \`${m.prefix}film <título>\` para buscar la película primero`,
     );
   }
 
@@ -45,7 +47,7 @@ async function handler(m, { sock }) {
 
     if (!data?.status || !data?.data) {
       m.react("❌");
-      return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> Película no encontrada");
+      return m.reply("❌ *falló*\n\n> Película no encontrada");
     }
 
     const film = data.data;

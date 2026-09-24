@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'owner',
     alias: ['creator', 'dev', 'developer'],
     category: 'main',
-    description: 'Menampilkan kontak owner bot',
+    description: "Muestra el contacto del propietario del bot",
     usage: '.owner',
     example: '.owner',
     isOwner: false,
@@ -59,7 +59,7 @@ Rules:
         await sock.sendMessage(m.chat, {
             text: `Hallo *${m.pushName}*
                 
-¿Quieres conocer al dueño de este bot yak?
+¿Quieres conocer al dueño de este bot ¿verdad?
 
 Bajo este es el dueño de nuestro bot: ${botName}`,
             title: 'Owner Info',
@@ -93,14 +93,14 @@ END:VCARD`
         const ownerText = `👑 *ᴏᴡɴᴇʀ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ*
 
 ╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」
-┃ ㊗ ɴᴀᴍᴀ: *${ownerName}*
+┃ ㊗ NOMBRE: *${ownerName}*
 ┃ ㊗ ʙᴏᴛ: *${botName}*
 ┃ ㊗ sᴛᴀᴛᴜs: *🟢 Online*
 ╰┈┈⬡
 
 > _Si hay alguna pregunta o obstáculos,_
 > _¡Por favor llame al dueño arriba!_
-> _📞 Contact card di bawah._`
+> _📞 Contact card abajo._`
         
         await m.reply(ownerText)
         

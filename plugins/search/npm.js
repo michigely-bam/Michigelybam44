@@ -6,7 +6,7 @@ const pluginConfig = {
   name: "npm",
   alias: ["npmsearch", "npmjs", "npmfind"],
   category: "search",
-  description: "Search package di NPM registry",
+  description: "Buscar un paquete en el registro de NPM",
   usage: ".npm <query>",
   example: ".npm axios",
   isOwner: false,
@@ -29,7 +29,7 @@ try {
   if (fs.existsSync(thumbPath)) thumbTools = fs.readFileSync(thumbPath);
 } catch (e) {}
 
-function getContextInfo(title = "📦 *ɴᴘᴍ sᴇᴀʀᴄʜ*", body = "Package registry") {
+function getContextInfo(title = "📦 *BÚSQUEDA EN NPM*", body = "Package registry") {
   const saluranId = config.saluran?.id || "120363400911374213@newsletter";
   const saluranName = config.saluran?.name || config.bot?.name || "Ourin-AI";
 
@@ -62,9 +62,9 @@ async function handler(m, { sock }) {
 
   if (!query) {
     return m.reply(
-      `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
+      `⚠️ *MODO DE USO*\n\n` +
         `> \`${m.prefix}npm <query>\`\n\n` +
-        `> Contoh:\n` +
+        `> Ejemplo:\n` +
         `> \`${m.prefix}npm axios\``,
     );
   }
@@ -80,11 +80,15 @@ async function handler(m, { sock }) {
     if (!data.objects || data.objects.length === 0) {
       await m.react("❌");
       return m.reply(
-        `❌ *ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n> Package "${query}" no encontrado`,
+        `❌ *no encontrado*
+
+> Package "${query}" no encontrado`,
       );
     }
 
-    let text = `📦 *ɴᴘᴍ sᴇᴀʀᴄʜ*\n\n`;
+    let text = `📦 *BÚSQUEDA EN NPM*
+
+`;
     text += `> Query: \`${query}\`\n`;
     text += `> Found: ${data.total} packages\n\n`;
 

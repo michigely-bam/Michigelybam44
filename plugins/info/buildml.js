@@ -25,7 +25,7 @@ async function handler(m, { sock }) {
 
 > Insertar nombre de personaje
 
-Contoh: ${m.prefix}buildml gusion`
+Ejemplo: ${m.prefix}buildml gusion`
     )
   }
 
@@ -45,10 +45,10 @@ Contoh: ${m.prefix}buildml gusion`
     const title = pickRandom.title
 
     const itemnya = pickRandom.items?.map(v => {
-      return `*ITEM NYA*
-🌿 \`Nama\`: ${v.name}
-🔮 \`Tipe\`: ${v.type}
-💵 \`Harga\`: ${v.price}
+      return `*OBJETO*
+🌿 \`Nombre\`: ${v.name}
+🔮 \`Tipo\`: ${v.type}
+💵 \`Precio\`: ${v.price}
 
 *STATS*
 🚧 \`Magic Power\`: ${v.stats?.magic_power || "-"}

@@ -22,14 +22,14 @@ async function handler(m, { sock }) {
     if (currentMode) {
         db.setting('onlyGc', false)
         await m.react('❌')
-        return m.reply(`❌ *ᴏɴʟʏ ɢʀᴏᴜᴘ ᴍᴏᴅᴇ ɴᴏɴᴀᴋᴛɪꜰ*
+        return m.reply(`❌ *only group mode inactivo*
 
 > Bot se puede acceder a cualquier lugar`)
     } else {
         db.setting('onlyGc', true)
         db.setting('onlyPc', false)
         await m.react('✅')
-        return m.reply(`✅ *ᴏɴʟʏ ɢʀᴏᴜᴘ ᴍᴏᴅᴇ ᴀᴋᴛɪꜰ*
+        return m.reply(`✅ *only group mode activo*
 
 > Bot es accesible en el grupo!`)
     }

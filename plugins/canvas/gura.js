@@ -6,7 +6,7 @@ const pluginConfig = {
     alias: ['gawr'],
     category: 'canvas',
     description: "Aplicar efecto Gawr Gura en la imagen",
-    usage: '.gura (reply/caption gambar)',
+    usage: ".gura (respuesta/descripción imagen)",
     example: '.gura',
     isOwner: false,
     isPremium: false,

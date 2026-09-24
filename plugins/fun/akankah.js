@@ -3,8 +3,8 @@ const pluginConfig = {
     alias: ['akan', 'will'],
     category: 'fun',
     description: "Pregúntele al bot que sucederá algo.",
-    usage: '.akankah <pertanyaan>',
-    example: '.akankah aku sukses?',
+    usage: '.akankah <pregunta>',
+    example: ".akankah ¿tendré éxito?",
     isOwner: false,
     isPremium: false,
     isGroup: false,
@@ -19,16 +19,16 @@ const answers = [
     "No, no lo creo.",
     "Tal vez lo haga, tal vez no lo haga.",
     "¡La voluntad de Dios está hecha!",
-    'Hmm, sulit diprediksi.',
-    'Pasti! Yakin saja!',
-    'Kayaknya nggak deh.',
+    'Mmm, es difícil de predecir.',
+    "¡Seguro! ¡Confía!",
+    "Parece que no.",
     "Ocurrirá si lo intentas.",
     "Un día, seguro.",
     "No, lo siento.",
     "¡Por supuesto que lo haré!",
-    'Hmm, aku ragu.',
+    "Mmm, tengo dudas.",
     "¡Confíe en el proceso!",
-    'Kemungkinannya kecil.',
+    "La probabilidad es baja.",
     "¡Lo hará, estoy seguro!",
     "No lo haré, sólo encontrar otro.",
     "Lo hará, pero lleva tiempo.",
@@ -41,12 +41,12 @@ async function handler(m) {
     const text = m.text?.trim();
     
     if (!text) {
-        return m.reply(`🔮 *ᴀᴋᴀɴᴋᴀʜ*
+        return m.reply(`🔮 *¿SERÁ?*
 
-> ¡Póngase en una pregunta!
+> ¡Haz una pregunta!
 
-*Contoh:*
-> .akankah aku sukses?`);
+*Ejemplo:*
+> .akankah ¿tendré éxito?`);
     }
     
     const answer = answers[Math.floor(Math.random() * answers.length)];

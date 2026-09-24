@@ -29,7 +29,7 @@ async function handler(m, { sock }) {
     const participants = groupMeta.participants || [];
 
     if (participants.length === 0) {
-      await m.reply(`❌ *ɢᴀɢᴀʟ*
+      await m.reply(`❌ *falló*
 
 > No hay miembros de este grupo.`);
       return;
@@ -40,7 +40,7 @@ async function handler(m, { sock }) {
     });
 
     if (targetParticipants.length === 0) {
-      await m.reply(`❌ *ɢᴀɢᴀʟ*
+      await m.reply(`❌ *falló*
 
 > No hay otro miembro que pueda ser etiquetado.`);
       return;
@@ -53,7 +53,7 @@ async function handler(m, { sock }) {
       .trim();
 
     await m.reply(
-      `*Pesan:* ${text}\n\n` +
+      `*Mensaje:* ${text}\n\n` +
         `\`\`\`━━━ ${targetParticipants.length} MEMBER TOTAL ━━━\`\`\`\n` +
         memberList,
       { mentions: mentions },

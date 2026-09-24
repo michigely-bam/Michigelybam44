@@ -6,7 +6,7 @@ const pluginConfig = {
     name: 'asupan',
     alias: ['asupanrandom'],
     category: 'asupan',
-    description: 'Random video asupan',
+    description: "Video aleatorio",
     usage: '.asupan',
     example: '.asupan',
     isOwner: false,

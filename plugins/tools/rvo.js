@@ -23,7 +23,7 @@ async function handler(m, { sock }) {
     return m.reply(
       `Responder, eche un vistazo a ello.
 
-\`Contoh: ${m.prefix}rvo\` (reply once view message)`,
+\`Ejemplo: ${m.prefix}rvo\` (reply once view message)`,
     );
   }
 
@@ -44,7 +44,7 @@ async function handler(m, { sock }) {
     const buffer = await quoted.download();
     if (!buffer) throw new Error("No se pudo download media");
 
-    const caption = originalCaption ? `\`Pesan :\`\n> ${originalCaption}` : "";
+    const caption = originalCaption ? `\`Mensaje:\`\n> ${originalCaption}` : "";
 
     if (quoted.isImage) {
       await sock.sendMessage(

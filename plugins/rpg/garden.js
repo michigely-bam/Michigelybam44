@@ -17,14 +17,14 @@ const pluginConfig = {
 }
 
 const CROPS = {
-    carrot: { name: '🥕 Wortel', growTime: 300000, exp: 50, sellPrice: 30, seedPrice: 10 },
-    tomato: { name: '🍅 Tomat', growTime: 600000, exp: 80, sellPrice: 50, seedPrice: 20 },
-    corn: { name: '🌽 Jagung', growTime: 900000, exp: 120, sellPrice: 80, seedPrice: 35 },
-    potato: { name: '🥔 Kentang', growTime: 1200000, exp: 150, sellPrice: 100, seedPrice: 45 },
-    strawberry: { name: '🍓 Stroberi', growTime: 1800000, exp: 200, sellPrice: 150, seedPrice: 60 },
-    watermelon: { name: '🍉 Semangka', growTime: 3600000, exp: 350, sellPrice: 300, seedPrice: 100 },
-    pumpkin: { name: '🎃 Labu', growTime: 7200000, exp: 500, sellPrice: 500, seedPrice: 150 },
-    herb: { name: '🌿 Herba', growTime: 1500000, exp: 180, sellPrice: 120, seedPrice: 50 }
+    carrot: { name: '🥕 Zanahoria', growTime: 300000, exp: 50, sellPrice: 30, seedPrice: 10 },
+    tomato: { name: '🍅 Tomate', growTime: 600000, exp: 80, sellPrice: 50, seedPrice: 20 },
+    corn: { name: '🌽 Maíz', growTime: 900000, exp: 120, sellPrice: 80, seedPrice: 35 },
+    potato: { name: '🥔 Papa', growTime: 1200000, exp: 150, sellPrice: 100, seedPrice: 45 },
+    strawberry: { name: '🍓 Fresa', growTime: 1800000, exp: 200, sellPrice: 150, seedPrice: 60 },
+    watermelon: { name: '🍉 Sandía', growTime: 3600000, exp: 350, sellPrice: 300, seedPrice: 100 },
+    pumpkin: { name: '🎃 Calabaza', growTime: 7200000, exp: 500, sellPrice: 500, seedPrice: 150 },
+    herb: { name: '🌿 Hierba', growTime: 1500000, exp: 180, sellPrice: 120, seedPrice: 50 }
 }
 
 function formatTime(ms) {
@@ -46,17 +46,17 @@ async function handler(m, { sock }) {
     const cropName = args[1]?.toLowerCase()
     
     if (!action || !['plant', 'harvest', 'status', 'buy'].includes(action)) {
-        let txt = `🌱 *ɢᴀʀᴅᴇɴ - ʙᴇʀᴋᴇʙᴜɴ*\n\n`
+        let txt = `🌱 *JARDÍN - CULTIVAR*\n\n`
         txt += `╭┈┈⬡「 📋 *ᴄᴏᴍᴍᴀɴᴅ* 」\n`
         txt += `┃ ${m.prefix}garden status\n`
         txt += `┃ ${m.prefix}garden plant <crop>\n`
         txt += `┃ ${m.prefix}garden harvest\n`
         txt += `┃ ${m.prefix}garden buy <crop> <qty>\n`
         txt += `╰┈┈┈┈┈┈┈┈⬡\n\n`
-        txt += `╭┈┈⬡「 🌾 *ᴛᴀɴᴀᴍᴀɴ* 」\n`
+        txt += `╭┈┈⬡「 🌾 *CULTIVOS* 」\n`
         for (const [key, crop] of Object.entries(CROPS)) {
             txt += `┃ ${crop.name} - ${formatTime(crop.growTime)}\n`
-            txt += `┃ 💰 Jual: ${crop.sellPrice} | 🌱 Seed: ${crop.seedPrice}\n`
+            txt += `┃ 💰 Venta: ${crop.sellPrice} | 🌱 Seed: ${crop.seedPrice}\n`
             txt += `┃ → \`${key}\`\n┃\n`
         }
         txt += `╰┈┈┈┈┈┈┈┈⬡`
@@ -65,12 +65,14 @@ async function handler(m, { sock }) {
     
     if (action === 'status') {
         const garden = user.rpg.garden
-        let txt = `🌱 *sᴛᴀᴛᴜs ᴋᴇʙᴜɴ*\n\n`
+        let txt = `🌱 *ESTADO DEL JARDÍN*
+
+`
         txt += `> Plot: ${garden.plots.length}/${garden.maxPlots}\n\n`
         
         if (garden.plots.length === 0) {
             txt += `> 🌾 El jardín está vacío.
-> Gunakan \`${m.prefix}garden plant <crop>\``
+> Usa \`${m.prefix}garden plant <crop>\``
         } else {
             txt += `╭┈┈⬡「 🌿 *ᴘʟᴏᴛs* 」\n`
             for (let i = 0; i < garden.plots.length; i++) {
@@ -81,7 +83,7 @@ async function handler(m, { sock }) {
                 const ready = remaining <= 0
                 
                 txt += `┃ Plot ${i + 1}: ${crop.name}\n`
-                txt += `┃ ${ready ? '✅ SIAP PANEN!' : `🕕 ${formatTime(remaining)}`}\n`
+                txt += `┃ ${ready ? "✅ ¡LISTO PARA COSECHAR!" : `🕕 ${formatTime(remaining)}`}\n`
                 txt += `┃\n`
             }
             txt += `╰┈┈┈┈┈┈┈┈⬡`
@@ -91,7 +93,9 @@ async function handler(m, { sock }) {
     
     if (action === 'buy') {
         if (!cropName) {
-            return m.reply(`❌ Tentukan tanaman!\n\n> Contoh: \`${m.prefix}garden buy carrot 5\``)
+            return m.reply(`❌ ¡Elige una planta!
+
+> Ejemplo: \`${m.prefix}garden buy carrot 5\``)
         }
         
         const crop = CROPS[cropName]
@@ -103,7 +107,7 @@ async function handler(m, { sock }) {
         const totalCost = crop.seedPrice * qty
         
         if ((user.koin || 0) < totalCost) {
-            return m.reply(`❌ Balance kurang! Butuh ${totalCost.toLocaleString()}`)
+            return m.reply(`¡❌ Saldo insuficiente! Necesita ${totalCost.toLocaleString()}`)
         }
         
         user.koin -= totalCost
@@ -112,7 +116,7 @@ async function handler(m, { sock }) {
         db.save()
         
         return m.reply(
-            `✅ *ʙᴇʟɪ ʙɪʙɪᴛ*\n\n` +
+            `✅ *COMPRAR SEMILLAS*\n\n` +
             `> 🌱 ${crop.name} Seed x${qty}\n` +
             `> 💰 -${totalCost.toLocaleString()}`
         )
@@ -120,7 +124,9 @@ async function handler(m, { sock }) {
     
     if (action === 'plant') {
         if (!cropName) {
-            return m.reply(`❌ Tentukan tanaman!\n\n> Contoh: \`${m.prefix}garden plant carrot\``)
+            return m.reply(`❌ ¡Elige una planta!
+
+> Ejemplo: \`${m.prefix}garden plant carrot\``)
         }
         
         const crop = CROPS[cropName]
@@ -129,12 +135,14 @@ async function handler(m, { sock }) {
         }
         
         if (user.rpg.garden.plots.length >= user.rpg.garden.maxPlots) {
-            return m.reply(`❌ Plot penuh! Panen dulu atau upgrade kebun.`)
+            return m.reply(`❌ ¡La parcela está llena! Cosecha primero o mejora el jardín.`)
         }
         
         const seedKey = `${cropName}seed`
         if ((user.inventory[seedKey] || 0) < 1) {
-            return m.reply(`❌ No hay semillas. ${crop.name}!\n\n> Beli: \`${m.prefix}garden buy ${cropName}\``)
+            return m.reply(`❌ No hay semillas. ${crop.name}!
+
+> Comprar: \`${m.prefix}garden buy ${cropName}\``)
         }
         
         user.inventory[seedKey]--
@@ -147,9 +155,12 @@ async function handler(m, { sock }) {
         db.save()
         
         return m.reply(
-            `🌱 *ᴛᴀɴᴀᴍ ʙᴇʀʜᴀsɪʟ*\n\n` +
-            `> ${crop.name} ditanam!\n` +
-            `> 🕕 Panen dalam ${formatTime(crop.growTime)}`
+            `🌱 *el cultivo fue exitoso*
+
+` +
+            `> ${crop.name} ¡plantado!
+` +
+            `> 🕕 La cosecha interior ${formatTime(crop.growTime)}`
         )
     }
     
@@ -185,8 +196,10 @@ async function handler(m, { sock }) {
         
         await m.react('✅')
         return m.reply(
-            `🌾 *ᴘᴀɴᴇɴ ʙᴇʀʜᴀsɪʟ*\n\n` +
-            `╭┈┈⬡「 📦 *ʜᴀsɪʟ* 」\n` +
+            `🌾 *la cosecha fue exitosa*
+
+` +
+            `╭┈┈⬡「 📦 *RESULTADO* 」\n` +
             harvestedItems.map(h => `┃ ${h}`).join('\n') + `\n` +
             `┃ ✨ EXP: +${totalExp}\n` +
             `╰┈┈┈┈┈┈┈┈⬡`

@@ -2,13 +2,13 @@ import axios from 'axios'
 import config from '../../config.js'
 import { f } from '../../src/lib/ourin-http.js'
 import te from '../../src/lib/ourin-error.js'
-const NEOXR_APIKEY = config.APIkey?.neoxr || 'Milik-Bot-OurinMD'
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD"
 
 const pluginConfig = {
     name: 'senja',
     alias: ['katacinta', 'romanticquotes'],
     category: 'fun',
-    description: 'Random kata-kata senja/romantis',
+    description: "Frases nocturnas y románticas aleatorias",
     usage: '.senja',
     example: '.senja',
     isOwner: false,

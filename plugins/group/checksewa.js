@@ -24,9 +24,9 @@ function formatCountdown(expiredAt) {
     const hours = Math.floor((diff % 86400000) / 3600000)
     const minutes = Math.floor((diff % 3600000) / 60000)
     let text = ''
-    if (days > 0) text += `${days} hari `
-    if (hours > 0) text += `${hours} jam `
-    if (minutes > 0 && days === 0) text += `${minutes} menit`
+    if (days > 0) text += `${days} días `
+    if (hours > 0) text += `${hours} horas `
+    if (minutes > 0 && days === 0) text += `${minutes} minutos`
     return { text: text.trim(), expired: false }
 }
 
@@ -57,11 +57,13 @@ Llame al propietario para la información de alquiler.`)
     if (sewaData.isLifetime) {
         m.react('♾️')
         return m.reply(
-            `♾️ *STATUS SEWA*\n\n` +
-            `Grup: *${groupName}*\n` +
-            `Status: *Permanent* ♾️\n` +
-            `Terdaftar sejak: *${addedDate}*\n\n` +
-            `Bot akan aktif selamanya di grup ini.`
+            `♾️ *ESTADO DEL ALQUILER*
+
+` +
+            `Grupo: *${groupName}*\n` +
+            `Estado: *Permanente* ♾️\n` +
+            `Registrado desde: *${addedDate}*\n\n` +
+            `el bot estarán activos para siempre en este grupo.`
         )
     }
 
@@ -70,10 +72,12 @@ Llame al propietario para la información de alquiler.`)
 
     if (countdown.expired) {
         return m.reply(
-            `❌ *SEWA EXPIRED*\n\n` +
-            `Grup: *${groupName}*\n` +
-            `Berakhir: *${expiredStr}*\n\n` +
-            `Hubungi owner bot untuk perpanjang sewa.`
+            `❌ *ALQUILER VENCIDO*
+
+` +
+            `Grupo: *${groupName}*\n` +
+            `Finaliza: *${expiredStr}*\n\n` +
+            `Póngase en contacto con el propietario del bot para extender el alquiler.`
         )
     }
 
@@ -81,11 +85,13 @@ Llame al propietario para la información de alquiler.`)
     const isAlmostExpired = diff <= 259200000
 
     m.react(isAlmostExpired ? '⚠️' : '⏱️')
-    let text = `⏱️ *STATUS SEWA*\n\n`
-    text += `Grup: *${groupName}*\n`
+    let text = `⏱️ *ESTADO DEL ALQUILER*
+
+`
+    text += `Grupo: *${groupName}*\n`
     text += `Tiempo restante: *${countdown.text}*\n`
-    text += `Berakhir: *${expiredStr}*\n`
-    text += `Terdaftar sejak: *${addedDate}*`
+    text += `Finaliza: *${expiredStr}*\n`
+    text += `Registrado desde: *${addedDate}*`
 
     if (isAlmostExpired) {
         text += `

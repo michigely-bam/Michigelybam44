@@ -6,8 +6,8 @@ const pluginConfig = {
     name: 'swm',
     alias: ['wm', 'stickerwm', 'stickermark', 'colong'],
     category: 'sticker',
-    description: "Reemplazar el nombre de paquete y el subastador en las pegatinas",
-    usage: '.swm <packname> atau .swm <packname>|<author>',
+    description: 'Cambiar el nombre del paquete y el autor del sticker',
+    usage: '.swm <packname> o .swm <packname>|<author>',
     example: '.swm BotName',
     isOwner: false,
     isPremium: false,
@@ -24,9 +24,10 @@ async function handler(m, { sock, config: botConfig }) {
     if (!quoted) {
         return m.reply(
             `🖼️ *sᴛɪᴄᴋᴇʀ ᴡᴀᴛᴇʀᴍᴀʀᴋ*\n\n` +
-            `> Reply sticker dengan caption:\n` +
+            `> Respuesta a la sticker con la descripción:
+` +
             `> \`${m.prefix}swm packname\`\n\n` +
-            `*ᴄᴏɴᴛᴏʜ:*\n` +
+            `*EJEMPLO:*\n` +
             `> \`${m.prefix}swm Ourin-AI\`\n` +
             `> \`${m.prefix}swm Ourin-AI|LuckyArchz\` _(packname + author)_`
         )
@@ -34,17 +35,19 @@ async function handler(m, { sock, config: botConfig }) {
     
     const isSticker = quoted.type === 'stickerMessage' || quoted.isSticker
     if (!isSticker) {
-        return m.reply(`❌ *ɢᴀɢᴀʟ*
+        return m.reply(`❌ *falló*
 
-> Responder órdenes pegatinas, no ${quoted.type?.replace('Message', '') || 'media lain'}`)
+> Responder órdenes pegatinas, no ${quoted.type?.replace('Message', '') || "otros medios"}`)
     }
     
     const input = m.text?.trim()
     if (!input) {
         return m.reply(
-            `❌ *ɢᴀɢᴀʟ*\n\n` +
-            `> Masukkan packname\n\n` +
-            `*ᴄᴏɴᴛᴏʜ:*\n` +
+            `❌ *ERROR*\n\n` +
+            `> Ingrese el nombre del paquete
+
+` +
+            `*EJEMPLO:*\n` +
             `> \`${m.prefix}swm Ourin-AI\`\n` +
             `> \`${m.prefix}swm Ourin-AI|LuckyArchz\` _(+ author)_`
         )
@@ -68,7 +71,7 @@ async function handler(m, { sock, config: botConfig }) {
         
         if (!buffer || buffer.length === 0) {
             m.react('❌')
-            return m.reply(`❌ *ɢᴀɢᴀʟ*
+            return m.reply(`❌ *falló*
 
 > No se pudo download stickers`)
         }

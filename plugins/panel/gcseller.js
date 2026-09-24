@@ -86,7 +86,7 @@ function handler(m) {
     if (!parsed) return m.reply("❌ Comando inválido.")
 
     if (!hasAccess(m.sender, m.isOwner)) {
-        return m.reply("❌ *ᴀᴋsᴇs ᴅɪᴛᴏʟᴀᴋ*\n\n> Esta característica es sólo para el Propietario o Panel de Propietario.")
+        return m.reply("❌ *se rechazó el acceso*\n\n> Esta característica es sólo para el Propietario o Panel de Propietario.")
     }
 
     const { action, version } = parsed
@@ -101,13 +101,14 @@ function handler(m) {
         saveGcSeller(version, m.chat)
         m.react('✅')
 
-        let txt = `✅ *ɢᴄ sᴇʟʟᴇʀ ${serverLabel} ᴅɪᴛᴀᴍʙᴀʜᴋᴀɴ*\n\n`
+        let txt = `✅ *ɢᴄ sᴇʟʟᴇʀ ${serverLabel} AÑADIDO*\n\n`
         txt += `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n`
         txt += `┃ 🖥️ sᴇʀᴠᴇʀ: \`${serverLabel}\`\n`
-        txt += `┃ 👥 ɢʀᴜᴘ: \`${m.groupName || m.chat}\`\n`
-        txt += `┃ 🔓 ᴀᴋsᴇs: \`1gb${version}\` - \`10gb${version}\`, \`unli${version}\`\n`
+        txt += `┃ 👥 GRUPO: \`${m.groupName || m.chat}\`\n`
+        txt += `┃ 🔓 acceso: \`1gb${version}\` - \`10gb${version}\`, \`unli${version}\`\n`
         if (current) {
-            txt += `┃ ⚠️ ᴘʀᴇᴠ: \`${current}\` (diganti)\n`
+            txt += `┃ ⚠️ ᴘʀᴇᴠ: \`${current}\` (substituido)
+`
         }
         txt += `╰┈┈⬡\n\n`
         txt += `> Todo miembro de este grupo ahora puede crear servidor ${serverLabel}.`
@@ -123,9 +124,9 @@ function handler(m) {
         saveGcSeller(version, null)
         m.react('✅')
         return m.reply(
-            `✅ *ɢᴄ sᴇʟʟᴇʀ ${serverLabel} ᴅɪʀᴇsᴇᴛ*\n\n` +
-            `> Grup: \`${current}\`\n` +
-            `> Server *${serverLabel}* tidak lagi terhubung ke grup manapun.`
+            `✅ *ɢᴄ sᴇʟʟᴇʀ ${serverLabel} RESTABLECIDO*\n\n` +
+            `> Grupo: \`${current}\`\n` +
+            `> Server *${serverLabel}* ya no está conectado a ningún grupo.`
         )
     }
 }

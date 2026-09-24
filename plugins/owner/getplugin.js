@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "getplugin",
   alias: ["gp", "getcode", "plugincode", "sourcecode"],
   category: "owner",
-  description: "Dapatkan source code plugin",
+  description: "Obtén el código fuente de un plugin",
   usage: ".getplugin − Nombre del plugin",
   example: ".getplugin menu",
   isOwner: true,
@@ -95,19 +95,20 @@ function getSimilarPlugins(name, pluginsDir) {
 
 async function handler(m, { sock }) {
   if (!config.isOwner(m.sender)) {
-    return m.reply("❌ *Owner Only!*");
+    return m.reply("❌ *Solo para el propietario.*");
   }
 
   const pluginName = m.args?.[0]?.trim();
 
   if (!pluginName) {
     return m.reply(
-      `📦 *ɢᴇᴛ ᴘʟᴜɢɪɴ*\n\n` +
-        `> Dapatkan source code plugin\n\n` +
-        `╭┈┈⬡「 📋 *ғᴏʀᴍᴀᴛ* 」\n` +
-        `┃ .getplugin <nama>\n` +
+      `📦 *OBTENER PLUGIN*\n\n` +
+        `> Obtén el código fuente de un plugin.\n\n` +
+        `╭┈┈⬡「 📋 *FORMATO* 」\n` +
+        `┃ .getplugin <nombre>\n` +
         `╰┈┈┈┈┈┈┈┈⬡\n\n` +
-        `*Contoh:*\n` +
+        `*Ejemplo:*
+` +
         `> .getplugin menu\n` +
         `> .getplugin sticker\n` +
         `> .getplugin game/tebakgambar`,
@@ -138,7 +139,7 @@ async function handler(m, { sock }) {
 
   if (!pluginInfo) {
     const similar = getSimilarPlugins(pluginName, pluginsDir);
-    let text = `❌ *ᴘʟᴜɢɪɴ ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n`;
+    let text = `❌ *ᴘʟᴜɢɪɴ NO ENCONTRADO*\n\n`;
     text += `> Plugin \`${pluginName}\` no encontrado
 
 `;
@@ -160,7 +161,9 @@ async function handler(m, { sock }) {
     title: `📦 *PLUGIN FOUND*`,
     language: "javascript",
     text:
-      `Hallo Ownerku ${m.pushName}, berikut ini adalah source code dari plugin yang kamu minta\n\n` +
+      `Hallo Ownerku ${m.pushName}, este es el código fuente del plugin que pediste
+
+` +
       `- 🌾 *Plugin:* \`${pluginInfo.file}\`\n` +
       `- 🍃 *Category:* \`${pluginInfo.category}\``,
     footer: `

@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'craft',
     alias: ['buat', 'create'],
     category: 'rpg',
-    description: 'Craft item dari materials',
+    description: "Craft artículos de materiales",
     usage: '.craft <item>',
     example: '.craft sword',
     isOwner: false,
@@ -104,7 +104,7 @@ Ver lista: \`.craft\``)
         }
     }
     
-    let txt = `🔨 *ᴄʀᴀꜰᴛ sᴜᴋsᴇs*\n\n`
+    let txt = `🔨 *ᴄʀᴀꜰᴛ COMPLETADO*\n\n`
     txt += `> ✅ Creado con éxito ${recipe.name} x${resultQty}!`
     
     if (recipe.bonus) {

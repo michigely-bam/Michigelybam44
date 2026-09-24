@@ -3,7 +3,7 @@ const pluginConfig = {
     name: 'guild',
     alias: ['clan', 'team', 'kelompok'],
     category: 'rpg',
-    description: 'Sistem guild/clan',
+    description: "Sistema de gremio/clan",
     usage: '.guild <create/join/leave/info>',
     example: '.guild create DragonSlayers',
     isOwner: false,
@@ -46,7 +46,7 @@ function handler(m, { sock }) {
         
         if (user.rpg.guildId) {
             const myGuild = guilds[user.rpg.guildId]
-            txt += `> 🏰 Sus invitados: *${myGuild?.name || 'Unknown'}*`
+            txt += `> 🏰 Tu gremio: *${myGuild?.name || 'Desconocido'}*`
         } else {
             txt += `> ⚠️ Aún no te has unido al gremio.`
         }
@@ -59,7 +59,7 @@ function handler(m, { sock }) {
             return m.reply(`❌ ¡No hay ningún gremio todavía! \`${m.prefix}guild create  gui nombre\``)
         }
         
-        let txt = `🏰 *ᴅᴀꜰᴛᴀʀ ɢᴜɪʟᴅ*\n\n`
+        let txt = `🏰 *LISTA DE GREMIOS*\n\n`
         txt += `╭┈┈⬡「 📋 *ɢᴜɪʟᴅs* 」\n`
         for (const g of guildList.slice(0, 10)) {
             txt += `┃ 🏰 *${g.name}*\n`
@@ -91,7 +91,7 @@ function handler(m, { sock }) {
         
         const createCost = 10000
         if ((user.koin || 0) < createCost) {
-            return m.reply(`❌ Butuh ${createCost.toLocaleString()} equilibrio para hacer el gremio!`)
+            return m.reply(`❌ Necesita ${createCost.toLocaleString()} equilibrio para hacer el gremio!`)
         }
         
         user.koin -= createCost
@@ -114,10 +114,11 @@ function handler(m, { sock }) {
         db.save()
         
         return m.reply(
-            `🎉 *ɢᴜɪʟᴅ ᴅɪʙᴜᴀᴛ!*\n\n` +
+            `🎉 *ɢᴜɪʟᴅ CREADO!*\n\n` +
             `╭┈┈⬡「 🏰 *ɪɴꜰᴏ* 」\n` +
-            `┃ 🏰 Nama: *${guildName}*\n` +
-            `┃ 👑 Leader: *Kamu*\n` +
+            `┃ 🏰 Nombre: *${guildName}*\n` +
+            `┃ 👑 Líder: *Usted*
+` +
             `┃ 💰 Cost: *-${createCost.toLocaleString()}*\n` +
             `╰┈┈┈┈┈┈┈┈⬡`
         )
@@ -131,7 +132,7 @@ function handler(m, { sock }) {
         if (!guildName) {
             return m.reply(`❌ ¡Configura un nombre de gremio!
 
-> Contoh: \`${m.prefix}guild join DragonSlayers\``)
+> Ejemplo: \`${m.prefix}guild join DragonSlayers\``)
         }
         
         const targetGuild = Object.values(guilds).find(g => g.name.toLowerCase() === guildName.toLowerCase())
@@ -149,8 +150,8 @@ function handler(m, { sock }) {
         db.save()
         
         return m.reply(
-            `✅ *ʙᴇʀɢᴀʙᴜɴɢ ɢᴜɪʟᴅ*\n\n` +
-            `> Selamat datang di *${targetGuild.name}*!`
+            `✅ *UNIRSE AL GREMIO*\n\n` +
+            `> Bienvenido a *${targetGuild.name}*!`
         )
     }
     
@@ -196,10 +197,10 @@ function handler(m, { sock }) {
         return m.reply(
             `🏰 *ɢᴜɪʟᴅ ɪɴꜰᴏ*\n\n` +
             `╭┈┈⬡「 📋 *ᴅᴇᴛᴀɪʟ* 」\n` +
-            `┃ 🏰 Nama: *${myGuild.name}*\n` +
+            `┃ 🏰 Nombre: *${myGuild.name}*\n` +
             `┃ 👑 Leader: *${myGuild.leader?.split('@')[0]}*\n` +
             `┃ 👥 Member: *${myGuild.members?.length || 0}/50*\n` +
-            `┃ 📊 Level: *${myGuild.level || 1}*\n` +
+            `┃ 📊 Nivel: *${myGuild.level || 1}*\n` +
             `┃ 💰 Treasury: *${(myGuild.treasury || 0).toLocaleString()}*\n` +
             `╰┈┈┈┈┈┈┈┈⬡`
         )
@@ -244,7 +245,7 @@ function handler(m, { sock }) {
         }
         
         if ((user.koin || 0) < amount) {
-            return m.reply(`❌ Balance kurang!`)
+            return m.reply(`¡❌ Saldo insuficiente!`)
         }
         
         user.koin -= amount
@@ -252,8 +253,11 @@ function handler(m, { sock }) {
         db.save()
         
         return m.reply(
-            `✅ *ᴅᴇᴘᴏsɪᴛ ʙᴇʀʜᴀsɪʟ*\n\n` +
-            `> 💰 +${amount.toLocaleString()} ke treasury guild\n` +
+            `✅ *depósito exitoso*
+
+` +
+            `> 💰 +${amount.toLocaleString()} a la guildada del tesoro
+` +
             `> 🏰 Total: ${myGuild.treasury.toLocaleString()}`
         )
     }

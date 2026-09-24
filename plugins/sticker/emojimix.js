@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'emojimix',
     alias: ['mixemoji', 'emix'],
     category: 'sticker',
-    description: 'Gabungkan 2 emoji menjadi 1',
+    description: "Combinar 2 emojis en uno",
     usage: '.emojimix <emoji1><emoji2>',
     example: '.emojimix 😂🔥',
     isOwner: false,
@@ -23,8 +23,10 @@ async function handler(m, { sock }) {
     if (!text) {
         return m.reply(
             `🎭 *ᴇᴍᴏᴊɪ ᴍɪx*\n\n` +
-            `> Gabungkan 2 emoji menjadi 1\n\n` +
-            `> Contoh: \`${m.prefix}emojimix 😂🔥\``
+            `> Combina 2 emojis en uno
+
+` +
+            `> Ejemplo: \`${m.prefix}emojimix 😂🔥\``
         )
     }
     
@@ -34,7 +36,7 @@ async function handler(m, { sock }) {
     if (!emojis || emojis.length < 2) {
         return m.reply(`❌ ¡Pon al menos 2 emojis!
 
-Contoh: ${m.prefix}emojimix 😂🔥`)
+Ejemplo: ${m.prefix}emojimix 😂🔥`)
     }
     
     const emoji1 = emojis[0]

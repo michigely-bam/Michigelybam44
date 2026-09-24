@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: [],
     category: 'tools',
     description: "Crear una imagen de código con una vista al estilo de carbono",
-    usage: '.carbon <kode>',
+    usage: '.carbon <código>',
     example: '.carbon console.log("Hello World")',
     isOwner: false,
     isPremium: false,
@@ -21,10 +21,12 @@ async function handler(m, { sock }) {
     
     if (!text) {
         return m.reply(
-            `⚠️ *ᴄᴀʀᴀ ᴘᴀᴋᴀɪ*\n\n` +
-            `> \`${m.prefix}carbon <kode>\`\n` +
-            `> Atau reply pesan berisi kode\n\n` +
-            `> Contoh: \`${m.prefix}carbon console.log("Hello")\``
+            `⚠️ *MODO DE USO*\n\n` +
+            `> \`${m.prefix}carbon <código>\`\n` +
+            `> O responder un mensaje con código
+
+` +
+            `> Ejemplo: \`${m.prefix}carbon console.log("Hello")\``
         )
     }
     

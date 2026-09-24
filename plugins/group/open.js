@@ -22,9 +22,12 @@ async function handler(m, { sock }) {
         
         if (!groupMeta.announce) {
             await m.reply(
-                `⚠️ *ᴠᴀʟɪᴅᴀsɪ ɢᴀɢᴀʟ*\n\n` +
-                `> Grup sudah dalam keadaan \`terbuka\`.\n` +
-                `> Semua member sudah bisa mengirim pesan.`
+                `⚠️ *validación fallida*
+
+` +
+                `> El grupo ya está \`abierto\`.
+` +
+                `Todos los miembros ya pueden enviar mensajes.`
             );
             return;
         }
@@ -41,7 +44,8 @@ _Ahora puedes enviar un mensaje._`;
     } catch (error) {
         await m.reply(
             `❌ *ᴇʀʀᴏʀ*\n\n` +
-            `> Gagal membuka grup.\n` +
+            `Falla de abrir el grupo.
+` +
             `> _${error.message}_`
         );
     }

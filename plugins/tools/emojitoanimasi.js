@@ -3,7 +3,7 @@ import config from "../../config.js";
 import path from "path";
 import fs from "fs";
 import te from "../../src/lib/ourin-error.js";
-const NEOXR_APIKEY = config.APIkey?.neoxr || "Milik-Bot-OurinMD";
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD";
 
 const pluginConfig = {
   name: "emojitoanimasi",
@@ -56,9 +56,14 @@ async function handler(m, { sock }) {
 
   if (!emoji) {
     return m.reply(
-      `🎭 *ᴇᴍᴏᴊɪ ᴛᴏ ᴀɴɪᴍᴀsɪ*\n\n` +
-        `> Konversi emoji ke sticker animasi\n\n` +
-        `*Contoh:*\n` +
+      `🎭 *EMOJI A ANIMACIÓN*
+
+` +
+        `> Conversión de emoji a stickers animadas
+
+` +
+        `*Ejemplo:*
+` +
         `> \`${m.prefix}emojitoanimasi 😳\``,
     );
   }
@@ -71,7 +76,7 @@ async function handler(m, { sock }) {
 
     if (!data?.status || !data?.data?.url) {
       m.react("❌");
-      return m.reply("❌ *ɢᴀɢᴀʟ*\n\n> Emoji no se encuentra o error de API");
+      return m.reply("❌ *falló*\n\n> Emoji no se encuentra o error de API");
     }
 
     const webpUrl = data.data.url;

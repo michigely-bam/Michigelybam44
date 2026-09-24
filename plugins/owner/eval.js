@@ -9,8 +9,8 @@ const pluginConfig = {
     name: 'eval',
     alias: ['$', 'ev', 'evaluate', '=>'],
     category: 'owner',
-    description: 'Jalankan kode JavaScript (Owner Only)',
-    usage: '=> <code> atau .$ <code>',
+    description: 'Ejecuta código JavaScript (solo propietario)',
+    usage: "=> <code> o .$ <code>",
     example: '=> m.chat',
     isOwner: true,
     isPremium: false,
@@ -33,8 +33,11 @@ async function handler(m, { sock, store }) {
     if (!code) {
         return m.reply(
             `⚙️ *ᴇᴠᴀʟ*\n\n` +
-            `> Masukkan kode JavaScript!\n\n` +
-            `*Contoh:*\n` +
+            `¡> Ingrese el código JavaScript!
+
+` +
+            `*Ejemplo:*
+` +
             `> .$ 1 + 1\n` +
             `> .$ m.chat\n` +
             `> .$ db.getUser(m.sender)`

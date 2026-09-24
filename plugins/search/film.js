@@ -3,14 +3,14 @@ import config from "../../config.js";
 import path from "path";
 import fs from "fs";
 import te from "../../src/lib/ourin-error.js";
-const NEOXR_APIKEY = config.APIkey?.neoxr || "Milik-Bot-OurinMD";
+const NEOXR_APIKEY = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD";
 
 const pluginConfig = {
   name: "film",
   alias: ["movie", "nonton", "lk21"],
   category: "search",
   description: "Encuentra películas y ver en línea",
-  usage: ".film <judul>",
+  usage: ".film <título>",
   example: ".film civil war",
   cooldown: 10,
   energi: 1,
@@ -61,10 +61,13 @@ async function handler(m, { sock }) {
   if (!query) {
     return m.reply(
       `🎬 *ꜰɪʟᴍ sᴇᴀʀᴄʜ*\n\n` +
-        `> Cari dan nonton film online\n\n` +
-        `*Format:*\n` +
-        `> \`${m.prefix}film <judul>\`\n\n` +
-        `*Contoh:*\n` +
+        `> Buscar y ver películas en línea
+
+` +
+        `*Formato:*\n` +
+        `> \`${m.prefix}film <título>\`\n\n` +
+        `*Ejemplo:*
+` +
         `> \`${m.prefix}film civil war\``,
     );
   }
@@ -78,7 +81,9 @@ async function handler(m, { sock }) {
     if (!data?.status || !data?.data?.length) {
       m.react("❌");
       return m.reply(
-        `❌ *ᴛɪᴅᴀᴋ ᴅɪᴛᴇᴍᴜᴋᴀɴ*\n\n> Film "${query}" no encontrado`,
+        `❌ *no encontrado*
+
+> Film "${query}" no encontrado`,
       );
     }
 
@@ -93,8 +98,8 @@ async function handler(m, { sock }) {
       filmSessions.delete(m.sender);
     }, 300000);
 
-    let text = `🎬 *ʜᴀsɪʟ ᴘᴇɴᴄᴀʀɪᴀɴ*\n\n`;
-    text += `> Ditemukan *${films.length}* película para "${query}"\n\n`;
+    let text = `🎬 *RESULTADO BÚSQUEDA*\n\n`;
+    text += `> Encontrado *${films.length}* película para "${query}"\n\n`;
 
     films.forEach((f, i) => {
       text += `*${i + 1}. ${f.title}*\n`;

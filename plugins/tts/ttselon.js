@@ -29,7 +29,9 @@ function convertToOpus(inputPath, outputPath) {
 
 async function handler(m, { sock }) {
     const text = m.text?.trim()
-    if (!text) return m.reply(`🚀 *ᴇʟᴏɴ ᴍᴜsᴋ ᴛᴛs*\n\n> Gunakan: \`${m.prefix}ttselon <text>\``)
+    if (!text) return m.reply(`🚀 *ᴇʟᴏɴ ᴍᴜsᴋ ᴛᴛs*
+
+> Usa: \`${m.prefix}ttselon <text>\``)
     
     m.react('🚀')
     

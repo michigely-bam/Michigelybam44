@@ -7,7 +7,7 @@ const pluginConfig = {
     alias: ['startscheduler', 'schedstart', 'resumeschedule'],
     category: 'owner',
     description: "Reinicie un agendador particular o todo",
-    usage: ".startchedule < nombre xen124; all ",
+    usage: '.startschedule <nombre|all>',
     example: '.startschedule sholat',
     isOwner: true,
     isPremium: false,
@@ -25,18 +25,18 @@ async function handler(m, { sock, args }) {
         if (!target) {
             const helpText = `▶️ *sᴛᴀʀᴛ sᴄʜᴇᴅᴜʟᴇʀ*
 
-*Usage:*
-\`.inicios de sesión Nombre\`
+*Uso:*
+\`.startschedule <nombre|all>\`
 
-*Available schedulers:*
-• \`limitreset\` - Daily Limit Reset
-• \`groupschedule\` - Group Schedule
-• \`sewa\` - Sewa Checker
-• \`messages\` - Scheduled Messages
-• \`sholat\` - Sholat Scheduler
-• \`all\` - Todo el schedler.
+*Programadores disponibles:*
+• \`limitreset\` - Reinicio diario del límite
+• \`groupschedule\` - Horarios de grupos
+• \`sewa\` - Comprobación de alquileres
+• \`messages\` - Mensajes programados
+• \`sholat\` - Horarios de oración
+• \`all\` - Todos los programadores
 
-*Example:*
+*Ejemplos:*
 \`.startschedule sholat\`
 \`.startschedule all\``;
             
@@ -49,19 +49,19 @@ async function handler(m, { sock, args }) {
             const wasEnabled = db.setting('autoSholat');
             
             if (wasEnabled) {
-                await m.reply(`ℹ# El programador de oración está en estado activo #`);
+                await m.reply(`ℹ️ El programador de horarios de oración ya está activo.`);
                 return;
             }
             
             initSholatScheduler(sock);
             db.setting('autoSholat', true);
             
-            await m.reply(`▶️ *sᴄʜᴇᴅᴜʟᴇʀ ᴅɪᴍᴜʟᴀɪ*
+            await m.reply(`▶️ *PROGRAMADOR INICIADO*
 
-> Scheduler: *Sholat Scheduler*
-> Status: ✅ Aktif
+> Programador: *Horarios de oración*
+> Estatus: ✅ Activo
 
-_La notificación de tiempo de presentación se enviará al grupo que activa esta función_`);
+_Las notificaciones de horarios de oración se enviarán al grupo que activó esta función._`);
             return;
         }
         
@@ -74,16 +74,16 @@ _La notificación de tiempo de presentación se enviará al grupo que activa est
         const result = startSchedulerByName(target, sock);
         
         if (result.started) {
-            await m.reply(`▶️ *sᴄʜᴇᴅᴜʟᴇʀ ᴅɪᴍᴜʟᴀɪ*
+            await m.reply(`▶️ *PROGRAMADOR INICIADO*
 
-> Scheduler: *${result.name}*
-> Status: ✅ Aktif
+> Programador: *${result.name}*
+> Estatus: ✅ Activo
 
-_El programador ha comenzado de nuevo_`);
+_El programador se ha iniciado de nuevo._`);
         } else {
-            await m.reply(`❌ El programador no se encuentra o ya está activo
+            await m.reply(`❌ El programador no existe o ya está activo.
 
-Gunakan \`.startschedule\` para ver la lista del programador`);
+Usa \`.startschedule\` para ver la lista de programadores.`);
         }
     } catch (error) {
         console.error('[StartSchedule Error]', error);

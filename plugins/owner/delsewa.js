@@ -5,7 +5,7 @@ const pluginConfig = {
     alias: ['sewadel', 'hapussewa', 'removesewa'],
     category: 'owner',
     description: "Quitar grupo de la lista blanca de alquiler",
-    usage: ".deltur - enlace / grupo id √",
+    usage: '.delsewa <link/id_grup>',
     example: '.delsewa https://chat.whatsapp.com/xxx',
     isOwner: true,
     isPremium: false,
@@ -43,13 +43,17 @@ async function handler(m, { sock }) {
     if (!input) {
         if (!m.isGroup) {
             return m.reply(
-                `📝 *HAPUS SEWA*\n\n` +
-                `Dari private: *${m.prefix}delsewa <link/id>*\n` +
-                `Dari grup: ketik *${m.prefix}delsewa* langsung di grup\n\n` +
-                `Contoh:\n` +
+                `📝 *ELIMINA EL ALQUILER*
+
+` +
+                `Desde el privado: *${m.prefix}delsewa <link/id>*\n` +
+                `Desde el grupo: entrada *${m.prefix}delsewa*directamente en el grupo
+
+` +
+                `Ejemplo:\n` +
                 `• ${m.prefix}delsewa https://chat.whatsapp.com/xxx\n` +
                 `• ${m.prefix}delsewa 120363xxx\n\n` +
-                `⚠️ Jika sewabot aktif, bot akan otomatis keluar dari grup yang dihapus`
+                `⚠️ Si se activa un arma, el bot se retirará automáticamente del grupo eliminado`
             )
         }
         groupId = m.chat
@@ -75,7 +79,7 @@ Ver lista: *${m.prefix}listsewa*`)
     await m.react('✅')
     await m.reply(`✅ *MANAS DE RENT*
 
-Grup: *${groupName}*\nID: ${groupId.split('@')[0]}`)
+Grupo: *${groupName}*\nID: ${groupId.split('@')[0]}`)
 
     if (db.db.data.sewa.enabled) {
         try {

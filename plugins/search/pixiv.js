@@ -5,7 +5,7 @@ const pluginConfig = {
   name: "pixiv",
   alias: ["pixivsearch", "caripixiv"],
   category: "search",
-  description: "Cari artwork di Pixiv",
+  description: "Busca obras de arte en Pixiv",
   usage: ".pixiv <query>",
   example: ".pixiv rem",
   isOwner: false,
@@ -25,13 +25,13 @@ async function handler(m, { sock }) {
       return m.reply(
         `❌ *¡Introduzca la contraseña de búsqueda!*
 
-> Contoh: .pixiv rem`,
+> Ejemplo: .pixiv rem`,
       );
     }
 
     await m.react("🔍");
 
-    const apikey = config.APIkey?.neoxr || "Milik-Bot-OurinMD";
+    const apikey = config.APIkey?.neoxr || "Propiedad de Bot-OurinMD";
     const url = `https://api.neoxr.eu/api/pixiv-search?q=${encodeURIComponent(query)}&apikey=${apikey}`;
 
     const response = await axios.get(url, { timeout: 30000 });
@@ -49,7 +49,7 @@ async function handler(m, { sock }) {
 
     let caption = `🎨 *ᴘɪxɪᴠ sᴇᴀʀᴄʜ*\n`;
     caption += `📝 *ᴋᴜᴇʀʏ:* ${query}\n`;
-    caption += `📊 *ʜᴀsɪʟ:* ${results.length} artwork\n\n`;
+    caption += `📊 *RESULTADO:* ${results.length} artwork\n\n`;
 
     results.forEach((art, i) => {
       const aiLabel = art.aiType === 2 ? " 🤖" : "";

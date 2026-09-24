@@ -4,7 +4,7 @@ const pluginConfig = {
     name: 'igstalk',
     alias: ['instagramstalk', 'stalking'],
     category: 'stalker',
-    description: 'Stalk akun Instagram',
+    description: "Detener las cuentas de Instagram",
     usage: '.igstalk <username>',
     example: '.igstalk cristiano',
     isOwner: false,
@@ -33,8 +33,10 @@ async function handler(m, { sock }) {
     if (!username) {
         return m.reply(
             `📸 *ɪɴsᴛᴀɢʀᴀᴍ sᴛᴀʟᴋ*\n\n` +
-            `> Masukkan username Instagram\n\n` +
-            `\`Contoh: ${m.prefix}igstalk cristiano\``
+            `> Ingrese el nombre de usuario de Instagram
+
+` +
+            `\`Ejemplo: ${m.prefix}igstalk cristiano\``
         )
     }
     
@@ -56,16 +58,16 @@ async function handler(m, { sock }) {
         const d = res.data
         if (!d?.username) {
             m.react('❌')
-            return m.reply(`❌ Akun *@${username}* no encontrado`)
+            return m.reply(`❌ Cuenta *@${username}* no encontrado`)
         }
         
         const caption = `📸 *ɪɴsᴛᴀɢʀᴀᴍ sᴛᴀʟᴋ*\n\n` +
             `👤 *Username:* ${d.username}\n` +
-            `📛 *Nama:* ${d.full_name || '-'}\n` +
-            `✅ *Verified:* ${d.is_verified ? 'Ya' : 'Tidak'}\n` +
-            `🔒 *Private:* ${d.is_private ? 'Ya' : 'Tidak'}\n\n` +
-            `👥 *Pengikut:* ${shortNum(d.follower_count)}\n` +
-            `👤 *Mengikuti:* ${shortNum(d.following_count)}\n` +
+            `📛 *Nombre:* ${d.full_name || '-'}\n` +
+            `✅ *Verified:* ${d.is_verified ? 'Ya' : "No"}\n` +
+            `🔒 *Private:* ${d.is_private ? 'Ya' : "No"}\n\n` +
+            `👥 *Seguidores:* ${shortNum(d.follower_count)}\n` +
+            `👤 *Siguiendo:* ${shortNum(d.following_count)}\n` +
             `📷 *Postingan:* ${shortNum(d.media_count)}\n\n` +
             `📝 *Bio:*\n${d.biography || '-'}\n\n` +
             `🔗 https://instagram.com/${d.username}`

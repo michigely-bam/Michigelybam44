@@ -29,24 +29,27 @@ async function handler(m, { sock }) {
 
   if (user.rpg.stamina < staminaCost) {
     return m.reply(
-      `⚡ *sᴛᴀᴍɪɴᴀ ʜᴀʙɪs*\n\n` +
-        `> Butuh ${staminaCost} stamina untuk memancing.\n` +
-        `> Stamina kamu: ${user.rpg.stamina}`,
+      `⚡ *RESISTENCIA AGOTADA*
+
+` +
+        `> Necesita ${staminaCost} stamina para la pesca.
+` +
+        `> Tu resistencia: ${user.rpg.stamina}`,
     );
   }
 
   user.rpg.stamina -= staminaCost;
 
-  await m.reply("🎣 *sᴇᴅᴀɴɢ ᴍᴇᴍᴀɴᴄɪɴɢ...*");
+  await m.reply("🎣 *PESCANDO...*");
   await new Promise((r) => setTimeout(r, 2000));
 
   const drops = [
-    { item: "trash", chance: 20, name: "🗑️ Sampah", exp: 10 },
-    { item: "fish", chance: 50, name: "🐟 Ikan", exp: 100 },
-    { item: "prawn", chance: 30, name: "🦐 Udang", exp: 150 },
-    { item: "octopus", chance: 15, name: "🐙 Gurita", exp: 300 },
-    { item: "shark", chance: 5, name: "🦈 Hiu", exp: 800 },
-    { item: "whale", chance: 1, name: "🐳 Paus", exp: 2000 },
+    { item: "trash", chance: 20, name: "🗑️ Basura", exp: 10 },
+    { item: "fish", chance: 50, name: "🐟 Pez", exp: 100 },
+    { item: "prawn", chance: 30, name: "🦐 Camarón", exp: 150 },
+    { item: "octopus", chance: 15, name: "🐙 Pulpo", exp: 300 },
+    { item: "shark", chance: 5, name: "🦈 Tiburón", exp: 800 },
+    { item: "whale", chance: 1, name: "🐳 Ballena", exp: 2000 },
   ];
 
   const rand = Math.random() * 100;
@@ -67,8 +70,10 @@ async function handler(m, { sock }) {
 
   db.save();
 
-  let txt = `🎣 *ꜰɪsʜɪɴɢ sᴇʟᴇsᴀɪ*\n\n`;
-  txt += `╭┈┈⬡「 📦 *ʜᴀsɪʟ* 」\n`;
+  let txt = `🎣 *la pesca terminada*
+
+`;
+  txt += `╭┈┈⬡「 📦 *RESULTADO* 」\n`;
   txt += `┃ ${caught.name}: *+${qty}*\n`;
   txt += `┃ 🚄 Exp: *+${expReward}*\n`;
   txt += `┃ ⚡ Stamina: *-${staminaCost}*\n`;

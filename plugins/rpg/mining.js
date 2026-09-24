@@ -5,7 +5,7 @@ const pluginConfig = {
     name: 'mining',
     alias: ['mine', 'tambang'],
     category: 'rpg',
-    description: "Bending para conseguir ores y gemas",
+    description: "Bending para conseguir mineraless y gemas",
     usage: '.mining',
     example: '.mining',
     isOwner: false,
@@ -29,23 +29,26 @@ async function handler(m, { sock }) {
     
     if (user.rpg.stamina < staminaCost) {
         return m.reply(
-            `⚡ *sᴛᴀᴍɪɴᴀ ʜᴀʙɪs*\n\n` +
-            `> Butuh ${staminaCost} stamina untuk mining.\n` +
-            `> Stamina kamu: ${user.rpg.stamina}`
+            `⚡ *RESISTENCIA AGOTADA*
+
+` +
+            `> Necesita ${staminaCost} stamina para la minería.
+` +
+            `> Tu resistencia: ${user.rpg.stamina}`
         )
     }
     
     user.rpg.stamina -= staminaCost
     
-    await m.reply('⛏️ *sᴇᴅᴀɴɢ ᴍᴇɴᴀᴍʙᴀɴɢ...*')
+    await m.reply("⛏️ *MINANDO...*")
     await new Promise(r => setTimeout(r, 2000))
     
     const drops = [
-        { item: 'rock', chance: 80, name: '🪨 Batu', min: 2, max: 5 },
-        { item: 'coal', chance: 50, name: '⚫ Batubara', min: 1, max: 3 },
-        { item: 'iron', chance: 30, name: '⛓️ Besi', min: 1, max: 2 },
-        { item: 'gold', chance: 15, name: '🥇 Emas', min: 1, max: 1 },
-        { item: 'diamond', chance: 5, name: '💠 Berlian', min: 1, max: 1 },
+        { item: 'rock', chance: 80, name: '🪨 Piedra', min: 2, max: 5 },
+        { item: 'coal', chance: 50, name: '⚫ Carbón', min: 1, max: 3 },
+        { item: 'iron', chance: 30, name: '⛓️ Hierro', min: 1, max: 2 },
+        { item: 'gold', chance: 15, name: '🥇 Oro', min: 1, max: 1 },
+        { item: 'diamond', chance: 5, name: '💠 Diamante', min: 1, max: 1 },
         { item: 'emerald', chance: 2, name: '💚 Emerald', min: 1, max: 1 }
     ]
     
@@ -60,7 +63,7 @@ async function handler(m, { sock }) {
     
     if (results.length === 0) {
         user.inventory['rock'] = (user.inventory['rock'] || 0) + 1
-        results.push({ name: '🪨 Batu', qty: 1 })
+        results.push({ name: '🪨 Piedra', qty: 1 })
     }
     
     const expGain = Math.floor(Math.random() * 500) + 100
@@ -68,8 +71,10 @@ async function handler(m, { sock }) {
     
     db.save()
     
-    let txt = `⛏️ *ᴍɪɴɪɴɢ sᴇʟᴇsᴀɪ*\n\n`
-    txt += `╭┈┈⬡「 📦 *ʜᴀsɪʟ* 」\n`
+    let txt = `⛏️ *mining terminado*
+
+`
+    txt += `╭┈┈⬡「 📦 *RESULTADO* 」\n`
     for (const r of results) {
         txt += `┃ ${r.name}: *+${r.qty}*\n`
     }

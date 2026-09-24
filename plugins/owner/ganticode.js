@@ -54,12 +54,19 @@ async function handler(m, { sock }) {
 
   if (!quoted) {
     return m.reply(
-      `🔄 *GANTI CODE*\n\n` +
-        `Reply code plugin baru dengan caption:\n` +
+      `🔄 *CAMBIO DE CÓDIGO*
+
+` +
+        `Responder el código del nuevo plugin con la descripción:
+` +
         `\`${m.prefix}ganticode\` - Auto detect\n` +
-        `\`${m.prefix}ganticode namafile\` - Custom nama\n` +
-        `\`${m.prefix}ganticode namafile folder\` - Custom nama + folder\n\n` +
-        `⚠️ *PERINGATAN:*\nCode lama akan di-backup sebelum diganti`,
+        `\`${m.prefix}ganticode namafile\` - Nombres personalizados
+` +
+        `\`${m.prefix}ganticode namafile folder\` - Nombres personalizados + carpetas
+
+` +
+        `⚠️ *ADVERTENCIA:*
+El código antiguo se hará una copia de seguridad antes de ser reemplazado.`,
     );
   }
 
@@ -72,14 +79,14 @@ async function handler(m, { sock }) {
     try {
       code = (await quoted.download()).toString();
     } catch (e) {
-      return m.reply(`❌ *GAGAL*
+      return m.reply(`❌ *FALLÓ*
 
 No se pudo download file`);
     }
   }
 
   if (!code || code.length < 50) {
-    return m.reply(`❌ *GAGAL*
+    return m.reply(`❌ *FALLÓ*
 
 Código demasiado corto o nulo`);
   }
@@ -88,7 +95,7 @@ Código demasiado corto o nulo`);
   const hasConfig = code.includes("pluginConfig") || code.includes("config");
   if (!hasExport || !hasConfig) {
     return m.reply(
-      `❌ *GAGAL*
+      `❌ *FALLÓ*
 
 El código no es un formato de plugin válido
 Debe haber exportación y config`,
@@ -103,17 +110,17 @@ Debe haber exportación y config`,
 
   if (!fileName) {
     return m.reply(
-      `❌ *GAGAL*
+      `❌ *FALLÓ*
 
 Incapaz de detectar el nombre del plugin
-Gunakan \`${m.prefix}ganticode <namafile>\``,
+Usa \`${m.prefix}ganticode <nombre_archivo>\``,
     );
   }
 
   fileName = fileName.toLowerCase().replace(/[^a-z0-9\-_]/g, "");
 
   if (!fileName) {
-    return m.reply(`❌ *GAGAL*
+    return m.reply(`❌ *FALLÓ*
 
 Nombre del archivo inválido`);
   }
@@ -171,7 +178,7 @@ Nombre del archivo inválido`);
     await m.react("✅");
 
     let replyText =
-      `✅ *CODE ${isNewFile ? "DITAMBAH" : "DIGANTI"}*\n\n` +
+      `✅ *CÓDIGO ${isNewFile ? "AÑADIDO" : "SUSTITUIDO"}*\n\n` +
       `╭─〔 *DETAIL* 〕───⬣\n` +
       `│ File: \`${fileName}.js\`\n` +
       `│ Folder: \`${targetFolder}\`\n` +
@@ -182,7 +189,7 @@ Nombre del archivo inválido`);
     }
 
     replyText +=
-      ` │ 🔄 Hot Reload: ${reloadResult.success ? "✅ Sukses" : "⚠️ Pending"}\n` +
+      ` │ 🔄 Hot Reload: ${reloadResult.success ? "✅ Completado" : "⚠️ Pending"}\n` +
       `╰───────⬣\n\n`;
 
     if (backupPath) {
