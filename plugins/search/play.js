@@ -1,10 +1,11 @@
 
- //nombre del complemento: Play
- // Autor del código: michigely bam 
 
 import yts from "yt-search";
 import axios from "axios";
 import ytdl, { fallbackToMp3Buffer } from "../../src/scraper/ytdl.js";
+
+const ALYA_API = "https://api.alyacore.xyz";
+const ALYA_KEY = "AURA-BOT-JERIELB";
 
 const EDWARD_API = "https://dv-edward.onrender.com/api";
 const EDWARD_KEY = "edward";
@@ -38,6 +39,49 @@ function safeFileName(name) {
 
 /**
  * API 1:
+ * Alya /dl/ytmp3v2
+ */
+async function getAlyaAudio(url, titleFallback) {
+  try {
+    const { data } = await axios.get(
+      `${ALYA_API}/dl/ytmp3v2?url=${encodeURIComponent(url)}&key=${ALYA_KEY}`,
+      {
+        timeout: 30000,
+        headers: {
+          "User-Agent": "AuraReedBot/2.0",
+        },
+      },
+    );
+
+    if (data?.status !== true || !data?.data?.dl) {
+      throw new Error("Alya no devolvió una URL de audio válida");
+    }
+
+    const audio = data.data;
+    const download = audio.dl;
+
+    if (!download || !/^https?:\/\//i.test(download)) {
+      throw new Error("Alya devolvió una URL inválida");
+    }
+
+    return {
+      download,
+      title: audio.title || titleFallback,
+      author: audio.author || "Desconocido",
+      thumbnail: audio.thumbnail || null,
+      duration: audio.duration,
+      quality: audio.quality,
+      videoId: audio.videoId,
+      source: "Alya API",
+    };
+  } catch (err) {
+    console.error("[PLAY] Alya API:", err.message);
+    return null;
+  }
+}
+
+/**
+ * API 2:
  * Nexray /downloader/v1/ytmp3
  */
 async function getNexrayV1(url) {
@@ -68,7 +112,7 @@ async function getNexrayV1(url) {
 }
 
 /**
- * API 2:
+ * API 3:
  * Nexray /downloader/ytmp3
  */
 async function getNexrayV2(url) {
@@ -99,7 +143,7 @@ async function getNexrayV2(url) {
 }
 
 /**
- * API 3:
+ * API 4:
  * Edward API
  */
 async function getEdwardAudio(url, titleFallback) {
@@ -136,7 +180,7 @@ async function getEdwardAudio(url, titleFallback) {
 }
 
 /**
- * Fallback original:
+ * Fallback 5:
  * ytdl.js
  */
 async function getYtdlFallback(url) {
@@ -160,22 +204,33 @@ async function getYtdlFallback(url) {
 }
 
 /**
- * Intenta todas las APIs en orden.
+ * Intenta todas las APIs en orden de prioridad.
+ *
+ * Prioridad:
+ * 1. Alya
+ * 2. Nexray V1
+ * 3. Nexray V2
+ * 4. Edward
+ * 5. ytdl.js
  */
 async function getPlayAudioDownload(url, titleFallback) {
-  // 1. Nexray V1
-  let audio = await getNexrayV1(url);
+  console.log("[PLAY] Probando Alya API...");
+  let audio = await getAlyaAudio(url, titleFallback);
   if (audio) return audio;
 
-  // 2. Nexray V2
+  console.log("[PLAY] Alya falló. Probando Nexray V1...");
+  audio = await getNexrayV1(url);
+  if (audio) return audio;
+
+  console.log("[PLAY] Nexray V1 falló. Probando Nexray V2...");
   audio = await getNexrayV2(url);
   if (audio) return audio;
 
-  // 3. Edward
+  console.log("[PLAY] Nexray V2 falló. Probando Edward...");
   audio = await getEdwardAudio(url, titleFallback);
   if (audio) return audio;
 
-  // 4. ytdl.js
+  console.log("[PLAY] Edward falló. Probando ytdl.js...");
   audio = await getYtdlFallback(url);
   if (audio) return audio;
 
@@ -217,8 +272,9 @@ async function handler(m, { sock, text }) {
         .substring(0, 150)
         .replace(/\n/g, " ");
 
-      info += `*Descripción:*
-_${desc}${video.description.length > 150 ? "..." : ""}_\n\n`;
+      info += `*Descripción:* _${desc}${
+        video.description.length > 150 ? "..." : ""
+      }_\n\n`;
     }
 
     info += `🔗 ${video.url}\n\n`;
@@ -240,7 +296,7 @@ _${desc}${video.description.length > 150 ? "..." : ""}_\n\n`;
       },
     );
 
-    // Intentar APIs
+    // Intentar APIs en orden
     const audio = await getPlayAudioDownload(
       video.url,
       video.title,
@@ -250,7 +306,9 @@ _${desc}${video.description.length > 150 ? "..." : ""}_\n\n`;
 
     // Si viene de ytdl.js
     if (audio.isFallback) {
-      const mp3Buffer = await fallbackToMp3Buffer(audio.download);
+      const mp3Buffer = await fallbackToMp3Buffer(
+        audio.download,
+      );
 
       await sock.sendMessage(
         m.chat,
@@ -267,11 +325,13 @@ _${desc}${video.description.length > 150 ? "..." : ""}_\n\n`;
         },
       );
     } else {
-      // Nexray / Edward
+      // Alya / Nexray / Edward
       await sock.sendMedia(
         m.chat,
         audio.download,
-        `${safeFileName(audio.title || video.title || "audio")}.mp3`,
+        `${safeFileName(
+          audio.title || video.title || "audio",
+        )}.mp3`,
         m,
         {
           type: "audio",
